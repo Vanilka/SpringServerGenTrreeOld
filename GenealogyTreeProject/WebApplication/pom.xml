@@ -34,5 +34,10 @@
   		<artifactId>javax.servlet-api</artifactId>
   		<version>4.0.0-b01</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.genealogytree</groupId>
+  		<artifactId>DatabaseManager</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>
