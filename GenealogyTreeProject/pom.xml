@@ -9,5 +9,6 @@
   	<module>com.genealogytree.WebApplication-0.0.1-SNAPSHOT</module>
   	<module>com.genealogytree.Domain-0.0.1-SNAPSHOT</module>
   	<module>com.genealogytree.Service-0.0.1-SNAPSHOT</module>
+  	<module>com.genealogytree.DatabaseManager-0.0.1-SNAPSHOT</module>
   </modules>
 </project>
