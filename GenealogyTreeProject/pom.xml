@@ -6,9 +6,9 @@
   <packaging>pom</packaging>
   <name>Genealogy Tree Project</name>
   <modules>
-  	<module>com.genealogytree.WebApplication-0.0.1-SNAPSHOT</module>
-  	<module>com.genealogytree.Domain-0.0.1-SNAPSHOT</module>
-  	<module>com.genealogytree.Service-0.0.1-SNAPSHOT</module>
-  	<module>com.genealogytree.DatabaseManager-0.0.1-SNAPSHOT</module>
+  	<module>DatabaseManager</module>
+  	<module>Domain</module>
+  	<module>Service</module>
+  	<module>WebApplication</module>
   </modules>
 </project>
