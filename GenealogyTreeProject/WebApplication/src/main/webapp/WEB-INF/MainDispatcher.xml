@@ -8,8 +8,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context.xsd">
- 
-	<context:component-scan base-package="com.crunchify.controller" />
+ 	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.genealogytree" />
  
 	<bean id="mainRequestDispatcher"
 		class="com.genealogytree.webapplication.MainRequestDispatcher">
