@@ -16,8 +16,8 @@ public class UserServiceImpl implements UserService {
 	UserRepository repository;
 	
 	public GT_User addUser(GT_User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repository.save(user);
+		
 	}
 
 }
