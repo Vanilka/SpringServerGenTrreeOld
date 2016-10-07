@@ -36,7 +36,7 @@
   	</dependency>
   	<dependency>
   		<groupId>com.genealogytree</groupId>
-  		<artifactId>DatabaseManager</artifactId>
+  		<artifactId>Service</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>

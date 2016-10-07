@@ -11,10 +11,14 @@
   	<module>Service</module>
   	<module>WebApplication</module>
 <<<<<<< HEAD
+<<<<<<< HEAD
   	<module>
   		com.genealogytree.DataBaseRepository-0.0.1-SNAPSHOT
   	</module>
 =======
 >>>>>>> parent of 4423ea6... add dependencies
+=======
+  	<module>DataBaseRepository</module>
+>>>>>>> 4423ea6e119bff0587f4752423d00cf749073137
   </modules>
 </project>
