@@ -6,11 +6,4 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>DataBaseRepository</artifactId>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.genealogytree</groupId>
-  		<artifactId>DatabaseManager</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
 </project>
