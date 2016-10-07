@@ -4,17 +4,13 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
         <dependent-module archiveName="Service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.genealogytree.Service-0.0.1-SNAPSHOT/com.genealogytree.Service-0.0.1-SNAPSHOT">
-=======
-        <dependent-module archiveName="Service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Service/Service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="DataBaseRepository-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.genealogytree.DataBaseRepository-0.0.1-SNAPSHOT/com.genealogytree.DataBaseRepository-0.0.1-SNAPSHOT">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="DatabaseManager-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/DatabaseManager/DatabaseManager">
->>>>>>> 4423ea6e119bff0587f4752423d00cf749073137
+        <dependent-module archiveName="DatabaseManager-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.genealogytree.DatabaseManager-0.0.1-SNAPSHOT/com.genealogytree.DatabaseManager-0.0.1-SNAPSHOT">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="WebApplication"/>
