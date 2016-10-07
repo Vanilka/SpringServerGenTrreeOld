@@ -10,5 +10,8 @@
   	<module>Domain</module>
   	<module>Service</module>
   	<module>WebApplication</module>
+  	<module>
+  		com.genealogytree.DataBaseRepository-0.0.1-SNAPSHOT
+  	</module>
   </modules>
 </project>
