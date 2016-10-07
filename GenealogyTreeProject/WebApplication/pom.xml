@@ -6,7 +6,6 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>WebApplication</artifactId>
-  <packaging>war</packaging>
   <name>Genealogy Tree Web Application</name>
   <dependencies>
   	<dependency>
@@ -40,4 +39,5 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+  <packaging>war</packaging>
 </project>
