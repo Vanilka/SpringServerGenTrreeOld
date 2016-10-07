@@ -10,5 +10,6 @@
   	<module>Domain</module>
   	<module>Service</module>
   	<module>WebApplication</module>
+  	<module>DataBaseRepository</module>
   </modules>
 </project>
