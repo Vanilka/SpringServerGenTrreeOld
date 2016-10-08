@@ -1,6 +1,4 @@
-package com.genealogytree.webapplication;
-
-import java.util.List;
+package com.genealogytree.webapplication.dispatchers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,20 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.service.UserService;
-import com.genealogytree.service.implementation.UserServiceImpl;
-
 
 @RestController
 @ComponentScan("com.genealogytree")
-@RequestMapping("/")
-public class MainRequestDispatcher {
+@RequestMapping("/user")
+public class requestUserMapper {
 	
-
-
-	@RequestMapping(value = "", method= RequestMethod.GET)
-	public ResponseEntity<String> getStartPage() {
+	@Autowired
+	UserService userService;
+	
+	@RequestMapping(value = "add", method= RequestMethod.POST)
+	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser) {
+		GT_User addesUser = this.userService.addUser(newUser);
+		return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "update", method= RequestMethod.POST)
+	public ResponseEntity<String> addUser(@RequestBody String s) {
 		
-		return new ResponseEntity<String>("Hallo World", HttpStatus.OK);
+		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 
 }
