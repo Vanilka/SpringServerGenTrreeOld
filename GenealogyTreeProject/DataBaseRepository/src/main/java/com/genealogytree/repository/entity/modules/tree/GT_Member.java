@@ -21,6 +21,9 @@ public class GT_Member {
 	@Column(nullable=false)
 	private String age;
 
+	@Column
+	private String sex;
+	
 	public Long getId() {
 		return id;
 	}
