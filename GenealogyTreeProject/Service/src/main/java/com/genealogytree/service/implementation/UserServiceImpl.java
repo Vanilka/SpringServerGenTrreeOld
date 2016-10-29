@@ -26,6 +26,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<GT_User> getAllUsers() {
+		
+		List<GT_User> list = repository.findAll();
+		
+		return list;
+	}
 
 	public GT_User findUserById(Long id) {
 		// TODO Auto-generated method stub
@@ -35,6 +42,12 @@ public class UserServiceImpl implements UserService {
 	public List<GT_User> findAllUsersByName(String sample) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public GT_User findUserByLogin(String login) {
+		// TODO Auto-generated method stub
+		GT_User user = repository.findByLogin(login);
+		return user;
 	}
 
 }

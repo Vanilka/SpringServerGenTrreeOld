@@ -34,7 +34,7 @@ public class DatabaseConfig {
 	      return em;
 	}
 	
-	@Bean
+	@Bean(name = "dataSource")
 	   public DataSource dataSource(){
 	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	      dataSource.setDriverClassName("oracle.jdbc.OracleDriver");

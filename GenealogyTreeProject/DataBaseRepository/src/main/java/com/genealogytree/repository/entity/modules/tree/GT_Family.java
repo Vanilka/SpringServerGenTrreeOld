@@ -7,11 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 
 @Entity
 public class GT_Family {
+	
+	@Version
+	private Long version;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -19,10 +23,7 @@ public class GT_Family {
 	
 	@Column
 	private String name;
-	
-	@ManyToOne
-	@JoinColumn(nullable=false )
-	private GT_User owner;
+
 
 	public Long getId() {
 		return id;
@@ -40,13 +41,16 @@ public class GT_Family {
 		this.name = name;
 	}
 
-	public GT_User getOwner() {
-		return owner;
+
+
+	public Long getVersion() {
+		return version;
 	}
 
-	public void setOwner(GT_User owner) {
-		this.owner = owner;
+	public void setVersion(Long version) {
+		this.version = version;
 	}
+	
 	
 	
 

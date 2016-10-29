@@ -13,13 +13,13 @@ public class GT_Relations {
 	@Id
 	private Long id;
 	
-	@Column
-	@ManyToOne	
-	private GT_Member simLeft;
-	
-	@Column
-	@ManyToOne
-	private GT_Member simRight;
+//	//@Column
+//	//@ManyToOne	
+//	private GT_Member simLeft;
+//	
+//	//@Column
+//	//@ManyToOne
+//	private GT_Member simRight;
 	
 	private String relationType;
 	
@@ -33,21 +33,21 @@ public class GT_Relations {
 		this.id = id;
 	}
 
-	public GT_Member getSimLeft() {
-		return simLeft;
-	}
-
-	public void setSimLeft(GT_Member simLeft) {
-		this.simLeft = simLeft;
-	}
-
-	public GT_Member getSimRight() {
-		return simRight;
-	}
-
-	public void setSimRight(GT_Member simRight) {
-		this.simRight = simRight;
-	}
+//	public GT_Member getSimLeft() {
+//		return simLeft;
+//	}
+//
+//	public void setSimLeft(GT_Member simLeft) {
+//		this.simLeft = simLeft;
+//	}
+//
+//	public GT_Member getSimRight() {
+//		return simRight;
+//	}
+//
+//	public void setSimRight(GT_Member simRight) {
+//		this.simRight = simRight;
+//	}
 
 	public String getRelationType() {
 		return relationType;
