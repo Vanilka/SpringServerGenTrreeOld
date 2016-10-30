@@ -68,6 +68,11 @@
   		<artifactId>spring-security-core</artifactId>
   		<version>4.1.3.RELEASE</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.genealogytree</groupId>
+  		<artifactId>ExceptionManager</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
   <packaging>war</packaging>
 </project>

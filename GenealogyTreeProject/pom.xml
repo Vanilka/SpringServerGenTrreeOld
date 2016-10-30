@@ -12,5 +12,6 @@
   	<module>WebApplication</module>
   	<module>DataBaseRepository</module>
 
+  	<module>com.genealogytree.ExceptionManager-0.0.1-SNAPSHOT</module>
   </modules>
 </project>

@@ -2,9 +2,11 @@ package com.genealogytree.webapplication.dispatchers;
 
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +25,14 @@ public class requestUserMapper {
 	UserService userService;
 	
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser) {
+	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser)  throws ConstraintViolationException{
+		
 		GT_User addesUser = this.userService.addUser(newUser);
 		return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseEntity<String> addUser(@RequestBody String s) {
-		
 		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
 	
