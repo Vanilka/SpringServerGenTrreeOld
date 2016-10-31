@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.genealogytree.ExceptionManager.config.Causes;
+import com.genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.service.UserService;
 
@@ -20,24 +22,28 @@ import com.genealogytree.service.UserService;
 @ComponentScan("com.genealogytree")
 @RequestMapping("/user")
 public class requestUserMapper {
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser)  throws ConstraintViolationException{
-		
-		GT_User addesUser = this.userService.addUser(newUser);
-		return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
+	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser) throws NotUniqueUserLoginException, Exception {
+
+		if (this.userService.exist(newUser.getLogin())) {
+			throw new NotUniqueUserLoginException(Causes.USER_ALREADY_EXIST.toString());
+		} else {
+			GT_User addesUser = this.userService.addUser(newUser);
+			return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
+		}
 	}
-	
+
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseEntity<String> addUser(@RequestBody String s) {
 		return new ResponseEntity<String>(s, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity <List<GT_User>> getAllUsers() {
+	public ResponseEntity<List<GT_User>> getAllUsers() {
 		List<GT_User> list = this.userService.getAllUsers();
 		return new ResponseEntity<List<GT_User>>(list, HttpStatus.OK);
 	}

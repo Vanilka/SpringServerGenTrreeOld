@@ -50,4 +50,9 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	
+	public boolean exist(String login) {		
+		return this.repository.exist(login);
+	}
+
 }

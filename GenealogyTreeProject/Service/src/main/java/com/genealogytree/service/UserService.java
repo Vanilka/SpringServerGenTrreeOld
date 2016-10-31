@@ -12,6 +12,7 @@ public interface UserService {
 		public GT_User findUserByLogin(String login);
 		public List<GT_User> findAllUsersByName(String sample);
 		public List<GT_User> getAllUsers();
+		public boolean exist(String login);
 	
 
 }
