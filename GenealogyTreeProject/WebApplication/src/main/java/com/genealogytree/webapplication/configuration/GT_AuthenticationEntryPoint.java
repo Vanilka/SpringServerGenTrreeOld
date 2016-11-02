@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.genealogytree.ExceptionManager.config.Causes;
+import com.genealogytree.ExceptionManager.exception.ExceptionBean;
  
 @Configuration
 public class GT_AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
@@ -20,9 +24,9 @@ public class GT_AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 	        //Authentication failed, send error response.
 	        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	        response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
-	     
+	        ObjectMapper mapper = new ObjectMapper();
 	        PrintWriter writer = response.getWriter();
-	        writer.println("HTTP Status 401 : " + authException.getMessage());
+	        writer.println(mapper.writeValueAsString(new ExceptionBean(Causes.UNAUTHORIZED)));
 	    }
 	     
 	    @Override

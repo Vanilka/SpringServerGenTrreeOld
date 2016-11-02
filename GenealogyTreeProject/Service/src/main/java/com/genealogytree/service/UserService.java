@@ -13,6 +13,6 @@ public interface UserService {
 		public List<GT_User> findAllUsersByName(String sample);
 		public List<GT_User> getAllUsers();
 		public boolean exist(String login);
-	
+		public GT_User getUser(String login, String pass);
 
 }

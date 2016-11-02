@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.genealogytree.repository.UserRepository;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.service.UserService;
 
 @Service
+@Transactional
 @ComponentScan("com.genealogytree")
 public class UserServiceImpl implements UserService {
 
@@ -27,6 +29,11 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 	
+	public GT_User getUser(String login, String pass) {
+		return this.repository.findByLoginAndPassword(login, pass);
+		
+	}
+	
 	public List<GT_User> getAllUsers() {
 		
 		List<GT_User> list = repository.findAll();
@@ -35,8 +42,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public GT_User findUserById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		//
+		return this.repository.findOne(id);
 	}
 
 	public List<GT_User> findAllUsersByName(String sample) {

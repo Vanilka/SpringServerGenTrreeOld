@@ -24,6 +24,4 @@
 		id="mainRequestDispatcher"
 		class="com.genealogytree.webapplication.MainRequestDispatcher">
 	</bean>
-
-
 </beans>

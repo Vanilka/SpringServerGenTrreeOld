@@ -1,9 +1,16 @@
 package com.genealogytree.repository.entity.modules.administration;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,33 +19,55 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.usertype.UserCollectionType;
+
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
 
+
 @Entity
-@Table(name="Users")
-public class GT_User {
+@Table(name = "Users")
+public class GT_User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4000453169268602110L;
+
 	@Version
 	private Long version;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable=false, unique=true)
+
+	@Column(nullable = false, unique = true)
 	private String login;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String email;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String password;
-	
-	
-//	@OneToMany(mappedBy="owner")
-//	private List<GT_Family> projectList;
+
+//	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)  
+//	private List<GT_Family> projectList = new ArrayList<GT_Family>();
 	
 	private String role;
 
+	public GT_User() {
+		super();
+	}
+	public GT_User(Long id) {
+		super();
+		this.id = id;
+	}
+	public GT_User(Long id, String login, String password) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.password = password;
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -62,15 +91,6 @@ public class GT_User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-//
-//	public List<GT_Family> getProjectList() {
-//		return projectList;
-//	}
-//
-//	public void setProjectList(List<GT_Family> projectList) {
-//		this.projectList = projectList;
-//	}
-	
 
 	public Long getVersion() {
 		return version;
@@ -87,7 +107,16 @@ public class GT_User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
+//	public List<GT_Family> getProjectList() {
+//		return projectList;
+//	}
+//
+//	public void setProjectList(List<GT_Family> projectList) {
+//		this.projectList = projectList;
+//	}
+
+
+	
+	
 }

@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .authorizeRequests()
 	    .antMatchers("/").permitAll()
 	    .antMatchers("/user/add").permitAll()
+	    .antMatchers("/user/login").permitAll()
 	    .antMatchers("/user/**").authenticated()
 	    .and().httpBasic().realmName(REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
 	    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

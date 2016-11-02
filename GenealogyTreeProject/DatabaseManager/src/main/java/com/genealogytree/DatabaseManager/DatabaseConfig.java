@@ -19,52 +19,47 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 public class DatabaseConfig {
-	
-	
+
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-	      em.setDataSource(dataSource());
-	      em.setPackagesToScan(new String[] { "com.genealogytree" });
-	 
-	      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-	      em.setJpaVendorAdapter(vendorAdapter);
-	      em.setJpaProperties(additionalProperties());
-	 
-	      return em;
-	}
-	
-	@Bean(name = "dataSource")
-	   public DataSource dataSource(){
-	      DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	      dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
-	      dataSource.setUrl("jdbc:oracle:thin:@//192.168.56.101:1521/ArbreGenDB");
-	      dataSource.setUsername( "SpringAdmin" );
-	      dataSource.setPassword( "haslo" );
-	      return dataSource;
-	   }
-	 
-	   @Bean
-	   public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-	      JpaTransactionManager transactionManager = new JpaTransactionManager();
-	      transactionManager.setEntityManagerFactory(emf);
-	 
-	      return transactionManager;
-	   }
-	 
-	   @Bean
-	   public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-	      return new PersistenceExceptionTranslationPostProcessor();
-	   }
-	 
-	   Properties additionalProperties() {
-	      Properties properties = new Properties();
-	      properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
-	      return properties;
-	   }
-	
-	
-	
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "com.genealogytree" });
 
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
+
+		return em;
+	}
+
+	@Bean(name = "dataSource")
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("oracle.jdbc.OracleDriver");
+		dataSource.setUrl("jdbc:oracle:thin:@//192.168.56.101:1521/ArbreGenDB");
+		dataSource.setUsername("SpringAdmin");
+		dataSource.setPassword("haslo");
+		return dataSource;
+	}
+
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+
+		return transactionManager;
+	}
+
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
+		return properties;
+	}
 }

@@ -28,13 +28,22 @@ public class requestUserMapper {
 
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser) throws NotUniqueUserLoginException, Exception {
-
 		if (this.userService.exist(newUser.getLogin())) {
 			throw new NotUniqueUserLoginException(Causes.USER_ALREADY_EXIST.toString());
 		} else {
 			GT_User addesUser = this.userService.addUser(newUser);
 			return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
 		}
+	}
+	
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public ResponseEntity<GT_User> login(@RequestBody GT_User temp) throws Exception{
+		GT_User user = this.userService.getUser(temp.getLogin(), temp.getPassword());
+		if(user == null) {
+			System.out.println("Nie udalo sie... nie ma takiego usera");
+			throw new Exception("No nie... nie ma mnie");
+		}
+		return new ResponseEntity<GT_User>(user, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.POST)

@@ -2,8 +2,8 @@ package com.genealogytree.ExceptionManager.config;
 
 public enum Causes {
 	ANOTHER_CAUSE(0,"Another Error"),
-	USER_ALREADY_EXIST(300,"Sorry, but user with this login exist already");
-	
+	USER_ALREADY_EXIST(300,"Sorry, but user with this login exist already"),
+	UNAUTHORIZED(401, "Required full authorization");
 	private int code;
 	private String cause;
 	

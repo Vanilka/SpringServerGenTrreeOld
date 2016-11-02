@@ -19,7 +19,6 @@ public class UserAdvice {
 
 	@ExceptionHandler(NotUniqueUserLoginException.class)
 	public ResponseEntity<ExceptionBean> handleAlreadyFound(NotUniqueUserLoginException e) {
-		System.out.println("this is me : " + Causes.USER_ALREADY_EXIST.toString());
 		ExceptionBean exception = new ExceptionBean(Causes.USER_ALREADY_EXIST);
 		return new ResponseEntity<ExceptionBean>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
