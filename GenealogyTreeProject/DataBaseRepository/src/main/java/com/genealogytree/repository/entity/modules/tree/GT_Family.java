@@ -18,12 +18,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
+import javax.transaction.UserTransaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.genealogytree.repository.UserRepository;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 
 @Entity
 @Table(name = "Family")
-public class GT_Family  implements Serializable{
+public class GT_Family implements Serializable {
 
 	/**
 	 * 
@@ -39,15 +43,21 @@ public class GT_Family  implements Serializable{
 
 	@Column(nullable = false)
 	private String name;
+	
 
-	@ManyToOne(optional=false, fetch=FetchType.LAZY, cascade={ CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name="owner_id", nullable=false)
+	@ManyToOne(optional=false)
+	@JoinColumn(name = "ownerID", nullable = false)
 	private GT_User owner;
 
 	public GT_Family() {
 		super();
 	}
-	
+
+	public GT_Family(String name, GT_User owner) {
+		this.name = name;
+		this.owner = owner;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -79,12 +89,15 @@ public class GT_Family  implements Serializable{
 	public void setOwner(GT_User owner) {
 		this.owner = owner;
 	}
-	
+
 	public Long getOwnerId() {
 		return this.owner.getId();
 	}
-	
+
 	public void setOwnerById(Long id) {
 		this.owner = new GT_User(id);
 	}
+
+
+
 }

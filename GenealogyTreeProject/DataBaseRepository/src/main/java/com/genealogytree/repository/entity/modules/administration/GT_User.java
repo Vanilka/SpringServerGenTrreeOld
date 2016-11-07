@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import org.hibernate.usertype.UserCollectionType;
@@ -47,9 +48,6 @@ public class GT_User implements Serializable {
 
 	@Column(nullable = false)
 	private String password;
-
-//	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)  
-//	private List<GT_Family> projectList = new ArrayList<GT_Family>();
 	
 	private String role;
 
@@ -108,13 +106,7 @@ public class GT_User implements Serializable {
 		this.password = password;
 	}
 
-//	public List<GT_Family> getProjectList() {
-//		return projectList;
-//	}
-//
-//	public void setProjectList(List<GT_Family> projectList) {
-//		this.projectList = projectList;
-//	}
+
 
 
 	

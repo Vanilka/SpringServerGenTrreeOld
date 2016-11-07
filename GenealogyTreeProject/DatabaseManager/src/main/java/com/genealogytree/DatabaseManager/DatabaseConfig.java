@@ -60,6 +60,8 @@ public class DatabaseConfig {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle12cDialect");
+		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.use_sql_comments", "true");
 		return properties;
 	}
 }
