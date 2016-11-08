@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataBaseRepository.iml" filepath="$PROJECT_DIR$/DataBaseRepository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DatabaseManager.iml" filepath="$PROJECT_DIR$/DatabaseManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Domain.iml" filepath="$PROJECT_DIR$/Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExceptionManager.iml" filepath="$PROJECT_DIR$/ExceptionManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GenealogyTreeProject.iml" filepath="$PROJECT_DIR$/GenealogyTreeProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Service.iml" filepath="$PROJECT_DIR$/Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WebApplication.iml" filepath="$PROJECT_DIR$/WebApplication.iml" />
+    </modules>
+  </component>
+</project>
