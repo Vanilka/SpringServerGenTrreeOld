@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="400" minWidth="300" prefHeight="400" prefWidth="300" styleClass="logonFXForm, logonCommon" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.application.fxmlcontrollers.LogonFormController">
+    <stylesheets>
+        <URL value="@../styles/application_logon.css" />
+    </stylesheets>
+    <children>
+        <JFXPasswordField fx:id="fieldPassword" focusColor="#81d136" layoutX="38.0" layoutY="133.0" maxWidth="224.0" minWidth="224.0" prefHeight="48.0" prefWidth="224.0" promptText="%logon_form_password" styleClass="cretentialFIeld" unFocusColor="#253930">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXPasswordField>
+        <JFXTextField fx:id="fieldLogin" focusColor="#81d136" layoutX="38.0" layoutY="54.0" maxWidth="224.0" minWidth="224.0" prefHeight="48.0" prefWidth="224.0" promptText="%logon_form_login" styleClass="cretentialFIeld" unFocusColor="#253930">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXTextField>
+        <JFXButton fx:id="buttonConnect" buttonType="RAISED" onAction="#login"   graphicTextGap="8.0" layoutX="61.0" layoutY="224.0" prefHeight="48.0" prefWidth="178.0" ripplerFill="#7cce35" styleClass="jfxButton" text="%logon_form_connect" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </JFXButton>
+        <Hyperlink fx:id="linkRegister"  onAction="#openRegisterForm" layoutX="38.0" layoutY="305.0" prefHeight="25.0" prefWidth="250.0" styleClass="linkHelpLogon" text="%logon_form_register_link" />
+        <Hyperlink fx:id="linkForgetPassword" layoutX="38.0" layoutY="340.0" prefHeight="25.0" prefWidth="250.0" styleClass="linkHelpLogon" text="%logon_form_forgot_password" />
+      
+    </children>
+</AnchorPane>

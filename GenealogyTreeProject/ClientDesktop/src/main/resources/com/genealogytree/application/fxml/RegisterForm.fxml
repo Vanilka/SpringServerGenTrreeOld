@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane
+	id="registerForm"
+	fx:id="registerForm"
+	maxHeight="458.0"
+	prefHeight="458.0"
+	prefWidth="400.0"
+	styleClass="logonCommon"
+	xmlns="http://javafx.com/javafx/8.0.65"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.genealogytree.application.fxmlcontrollers.RegisterFormController">
+	<stylesheets>
+		<URL value="@../styles/application_logon.css" />
+	</stylesheets>
+	<children>
+		<JFXButton
+			id="buttonRegister"
+			fx:id="buttonRegister"
+			buttonType="RAISED"
+			layoutX="56.0"
+			layoutY="385.0"
+			onAction="#submitRegister"
+			prefHeight="55.0"
+			prefWidth="301.0"
+			ripplerFill="#95ce46"
+			text="CREATE ACCOUNT">
+			<font>
+				<Font
+					name="System Bold"
+					size="15.0" />
+			</font>
+		</JFXButton>
+		<JFXTextField
+			fx:id="mailBox"
+			focusColor="#95ce46"
+			labelFloat="true"
+			layoutX="98.0"
+			layoutY="47.0"
+			maxWidth="217.0"
+			minWidth="208.0"
+			prefHeight="44.0"
+			prefWidth="217.0"
+			promptText="Mail Box" />
+		<JFXTextField
+			fx:id="loginField"
+			focusColor="#95ce46"
+			labelFloat="true"
+			layoutX="98.0"
+			layoutY="124.0"
+			maxWidth="217.0"
+			minWidth="217.0"
+			prefHeight="44.0"
+			prefWidth="217.0"
+			promptText="Login" />
+		<JFXPasswordField
+			fx:id="passwordField"
+			focusColor="#95ce46"
+			labelFloat="true"
+			layoutX="98.0"
+			layoutY="212.0"
+			maxWidth="217.0"
+			minWidth="208.0"
+			prefHeight="44.0"
+			prefWidth="217.0"
+			promptText="Password" />
+		<Hyperlink
+			layoutX="268.0"
+			layoutY="455.0"
+			onAction="#returnLogon"
+			prefHeight="31.0"
+			prefWidth="95.0"
+			styleClass="linkHelpLogon"
+			text="Return -&gt;"
+			textAlignment="RIGHT" />
+		<JFXPasswordField
+			fx:id="passwordConfirmField"
+			focusColor="#95ce46"
+			labelFloat="true"
+			layoutX="98.0"
+			layoutY="290.0"
+			maxWidth="217.0"
+			minWidth="208.0"
+			prefHeight="44.0"
+			prefWidth="217.0"
+			promptText="Confirm Password" />
+	</children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="gt_client_desktop.jnlp">
+  <information>
+    <title>gt-client-desktop</title>
+    <vendor>Unknown</vendor>
+    <description>gt-client-desktop</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="gt_client_desktop.jar" size="173298" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="400" main-class="com.genealogytree.GenealogyTree"  name="gt-client-desktop" />
+  <update check="background"/>
+</jnlp>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="footer" maxHeight="60.0" maxWidth="-Infinity" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="1000.0" styleClass="footer" stylesheets="@../styles/mainstyle.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.application.fxmlcontrollers.FooterController">
+   <children>
+      <Label fx:id="footerCopyright" text="Copyright" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+   </children>
+</AnchorPane>

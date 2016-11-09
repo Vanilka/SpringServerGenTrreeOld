@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="gt-client-web:war">
+    <output-path>$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/target</output-path>
+    <root id="archive" name="gt-client-web-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="gt-client-web:war exploded" />
+    </root>
+  </artifact>
+</component>

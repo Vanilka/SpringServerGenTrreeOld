@@ -8,7 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/ExceptionManager.iml" filepath="$PROJECT_DIR$/ExceptionManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/GenealogyTreeProject.iml" filepath="$PROJECT_DIR$/GenealogyTreeProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/Service.iml" filepath="$PROJECT_DIR$/Service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WebApplication.iml" filepath="$PROJECT_DIR$/WebApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gt-client-desktop.iml" filepath="$PROJECT_DIR$/gt-client-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gt-client-web.iml" filepath="$PROJECT_DIR$/gt-client-web.iml" />
     </modules>
   </component>
 </project>

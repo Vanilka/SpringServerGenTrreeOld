@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="WebApplication:war">
-    <output-path>$PROJECT_DIR$/GenealogyTreeProject/WebApplication/target</output-path>
-    <root id="archive" name="WebApplication-0.0.1-SNAPSHOT.war">
-      <element id="artifact" artifact-name="WebApplication:war exploded" />
-    </root>
-  </artifact>
-</component>

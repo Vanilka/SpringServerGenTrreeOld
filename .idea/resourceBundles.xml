@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location.properties" />
+    <file url="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_en.properties" />
+    <file url="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_fr.properties" />
+    <file url="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_pl.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location.properties" />
+      <file value="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_en.properties" />
+      <file value="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_fr.properties" />
+      <file value="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/com/genealogytree/configuration/traduction/gt_location_pl.properties" />
+      <base-name>gt_location</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

@@ -1,0 +1,184 @@
+/* 
+    Created on : 14 oct. 2016, 21:07:45
+    Author     : vanilka
+*/
+
+/*
+Menu Colors : 
+
+Bar menu :  #2F3737
+Bar Menu selected :  #266558
+
+Item's background :  #404A4B;
+Item selected :   #266558
+
+text : #E0E4E3
+
+backgorundlogon : #3c4f4cff
+
+*/
+#rootWindow {
+	-fx-min-height: 700px;
+	-fx-min-width: 1200px;
+}
+
+.mainAnchorPane {
+
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: #3c4f4cff;
+    -fx-pref-height: 600px;
+    -fx-min-height: 600px;
+    -fx-max-height: -1;  
+    -fx-min-width : -1;
+    -fx-pref-width: 1000px;
+    -fx-max-width: -1;
+}
+.split-pane {
+	 -fx-background-color: transparent;
+	
+}
+
+#languageChooser {
+	-fx-background-color: #2F3737;
+	-fx-border-color: #266558;
+	-fx-border-style: dotted;
+}
+
+#languageChooser:showing {
+	-fx-background-color: #266558;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#languageChooser .cell {
+	-fx-text-fill: #E0E4E3;
+	-fx-padding: 0 10 0 10;
+}
+
+#languageChooser .list-view {
+	-fx-border-color: #266558;
+	-fx-border-style: dotted;
+}
+
+#languageChooser .list-view .list-cell {
+	-fx-background-color: #404A4B;
+	-fx-text-fill: #E0E4E3;
+	-fx-padding: 0 10 0 10;
+	-fx-border-color: #266558;
+	-fx-border-style: dotted;
+}
+
+#languageChooser .list-view .list-cell:filled:hover {
+	-fx-background-color: #266558;
+}
+
+#menuBarPane {
+	-fx-pref-height: 40px;
+	-fx-min-height: 40px;
+	-fx-max-height: 40px;
+	-fx-min-width: -1;
+	-fx-pref-width: -1;
+	-fx-max-width: -1;
+}
+
+.menu-bar {
+	-fx-padding: 0px 0px 0px 0px;
+	-fx-background-color: #2F3737;
+	-fx-pref-height: 40px;
+	-fx-min-height: 40px;
+	-fx-max-height: 40px;
+	-fx-min-width: -1;
+	-fx-pref-width: -1;
+	-fx-max-width: -1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.menu {
+	-fx-background-color: #2F3737;
+	-fx-pref-height: 40px;
+	-fx-min-height: 40px;
+	-fx-max-height: 40px;
+	-fx-min-width: 100px;
+	-fx-border-color: #266558;
+	-fx-border-style: dotted;
+}
+
+.menu:hover {
+	-fx-background-color: #266558;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.menu  .label {
+	-fx-text-fill: #E0E4E3;
+	-fx-padding: 0 10 0 10;
+}
+
+.menu:showing {
+	-fx-background-color: #266558;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.menu-item .label {
+	-fx-text-fill: #E0E4E3;
+	-fx-padding: 0 10 0 10;
+}
+
+.menu-item:focused {
+	-fx-background-color: #266558;
+}
+
+.menu-item:focused .label {
+	-fx-text-fill: #E0E4E3;
+}
+
+.context-menu {
+	-fx-background-color: #404A4B;
+	-fx-min-width: 150px;
+	-fx-border-color: #404A4B;
+}
+
+.footer {
+	-fx-background-color: #2F3737;
+	-fx-pref-height: 50px;
+	-fx-min-height: 50px;
+	-fx-max-height: 50px;
+	-fx-min-width: -1;
+	-fx-pref-width: -1;
+	-fx-max-width: -1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#footerCopyright {
+	/*  padding : TOP, RIGHT, BOTTOM, LEFT */
+	-fx-alignment: center;
+	-fx-text-fill: #E0E4E3;
+	-fx-font-size: 20px;
+}
+
+#chooseAppType {
+	-fx-padding: 0 0 0 0;
+	-fx-background-color: #3c4f4cff;
+	-fx-pref-height: 600px;
+	-fx-min-height: 600px;
+	-fx-max-height: -1;
+	-fx-min-width: -1;
+	-fx-pref-width: 1000px;
+	-fx-max-width: -1;
+	-fx-background-image:
+		url("/com/genealogytree/sources/backgrounds/TestBackground.png");
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: contain;
+}
+
+.projectPane {
+	-fx-pref-width: 300px;
+	-fx-pref-height: 400px;
+}
+
+#LocalProjectPane {
+	
+}
+
+#OnlineProjectPane {
+	
+}

@@ -22,22 +22,25 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="ClientDesktop" />
         <module name="DatabaseManager" />
         <module name="DataBaseRepository" />
         <module name="Domain" />
         <module name="ExceptionManager" />
+        <module name="gt-client-desktop" />
+        <module name="gt-client-web" />
         <module name="Service" />
-        <module name="WebApplication" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="DatabaseManager" target="1.5" />
-      <module name="DataBaseRepository" target="1.5" />
-      <module name="Domain" target="1.5" />
-      <module name="ExceptionManager" target="1.5" />
-      <module name="GenealogyTreeProject" target="1.5" />
-      <module name="Service" target="1.5" />
-      <module name="WebApplication" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="DatabaseManager" target="1.8" />
+      <module name="DataBaseRepository" target="1.8" />
+      <module name="Domain" target="1.8" />
+      <module name="ExceptionManager" target="1.8" />
+      <module name="GenealogyTreeProject" target="1.8" />
+      <module name="gt-client-desktop" target="1.8" />
+      <module name="gt-client-web" target="1.8" />
+      <module name="Service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
