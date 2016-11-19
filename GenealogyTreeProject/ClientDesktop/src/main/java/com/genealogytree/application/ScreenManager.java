@@ -5,36 +5,31 @@
  */
 package com.genealogytree.application;
 
-import com.genealogytree.GenealogyTree;
-import com.genealogytree.application.fxmlcontrollers.*;
+import com.genealogytree.application.fxmlcontrollers.ChooseApplicationType;
+import com.genealogytree.application.fxmlcontrollers.FooterController;
+import com.genealogytree.application.fxmlcontrollers.MainWindow;
+import com.genealogytree.application.fxmlcontrollers.MenuBarController;
 import com.genealogytree.configuration.FXMLFiles;
-import com.jfoenix.controls.JFXDrawer; 
-import com.genealogytree.application.*;
-import java.io.IOException;
+import com.jfoenix.controls.JFXDrawer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+
 /**
- *
  * @author vanilka
  */
 public class ScreenManager {
 
-    private GenealogyTreeContext context;
-
-    public enum Where {
-        TOP,
-        CENTER,
-        BOTTOM
-    }
     private static final Logger LOG = LogManager.getLogger(ScreenManager.class);
-
+    private GenealogyTreeContext context;
     private MainWindow mainWindow;
     private ChooseApplicationType chooseApplicationType;
     private FooterController footer;
@@ -42,19 +37,16 @@ public class ScreenManager {
     private BorderPane root;
     private Stage stage;
     private Scene scene;
-    
-    
+    public ScreenManager() {
+        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+    }
+
     public BorderPane getRoot() {
         return root;
     }
 
     public void setRoot(BorderPane root) {
         this.root = root;
-    }
-
-
-    public ScreenManager() {
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
     }
 
     public ScreenManager getManager() {
@@ -112,26 +104,32 @@ public class ScreenManager {
 
     }
 
-    public FXMLController loadFxml(FXMLController controller, JFXDrawer drawer, String fxml) {
+    public void showNewDialog(FXMLController controller, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
-       
-        try {
 
-            drawer.setContent((AnchorPane) loader.load());
+        try {
+            AnchorPane dialogwindow = (AnchorPane) loader.load();
             controller = loader.getController();
-            controller.setManager(this);
-            controller.setContext(this.context);
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.getStage());
+            Scene scene = new Scene(dialogwindow);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            dialogStage.showAndWait();
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
             LOG.error(ex.getClass() + " - " + ex.getMessage());
             LOG.error(ex.getCause());
         }
-        return controller;
+
     }
 
+
     public FXMLController loadFxml(FXMLController controller, Pane pane, String fxml) {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             pane.getChildren().clear();
             pane.getChildren().addAll((Pane) loader.load());
@@ -147,7 +145,7 @@ public class ScreenManager {
     }
 
     public FXMLController loadFxml(FXMLController controller, AnchorPane anchor, String fxml) {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             anchor.getChildren().clear();
             anchor.getChildren().addAll((AnchorPane) loader.load());
@@ -163,24 +161,19 @@ public class ScreenManager {
     }
 
     public void loadFxml(FXMLController controller, BorderPane border, String fxml, Where where) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml),this.context.getBundle());    
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             AnchorPane temp = (AnchorPane) loader.load();
             controller = loader.getController();
             switch (where) {
-                case TOP:           
-                    border.setTop(temp);     
-                    
-
+                case TOP:
+                    border.setTop(temp);
                     break;
                 case CENTER:
                     border.setCenter(temp);
-            
-              
                     break;
-                case BOTTOM:                 
+                case BOTTOM:
                     border.setBottom(temp);
-                  
                     break;
             }
             controller.setManager(this);
@@ -198,10 +191,16 @@ public class ScreenManager {
         }
 
     }
-       
-   
+
     public void setContext(GenealogyTreeContext context) {
         this.context = context;
+    }
+
+
+    public enum Where {
+        TOP,
+        CENTER,
+        BOTTOM
     }
 
 }

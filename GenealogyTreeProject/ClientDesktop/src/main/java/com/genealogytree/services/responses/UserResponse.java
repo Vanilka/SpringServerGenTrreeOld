@@ -1,25 +1,25 @@
 package com.genealogytree.services.responses;
 
-import com.genealogytree.domain.beans.User;
+import com.genealogytree.domain.beans.UserBean;
 
 public class UserResponse extends ServerResponse {
 
-	User user;
+    UserBean user;
 
-	public UserResponse() {
-		this(null);
-	}
+    public UserResponse() {
+        this(null);
+    }
 
-	public UserResponse(User u) {
-		super(ResponseStatus.OK);
-		this.user = u;
-	}
+    public UserResponse(UserBean u) {
+        super(ResponseStatus.OK);
+        this.user = u;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public UserBean getUser() {
+        return user;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
 }

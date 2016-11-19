@@ -5,9 +5,9 @@
  */
 package com.genealogytree.application.fxmlcontrollers;
 
-import java.awt.event.MouseEvent;
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.genealogytree.application.FXMLController;
+import com.genealogytree.application.GenealogyTreeContext;
+import com.genealogytree.application.ScreenManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,9 +15,8 @@ import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.genealogytree.application.FXMLController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -28,16 +27,16 @@ public class LocalApplicationChoiceController implements Initializable, FXMLCont
 
     private static final Logger LOG = LogManager.getLogger(LocalApplicationChoiceController.class);
     private ScreenManager manager;
-     private GenealogyTreeContext context;
-     
+    private GenealogyTreeContext context;
+
     @FXML
     private Button buttonik;
     @FXML
     private Pane mainPane;
-    
+
     @FXML
     private ResourceBundle languageBundle;
-   
+
 
     /**
      * Initializes the controller class.
@@ -45,7 +44,7 @@ public class LocalApplicationChoiceController implements Initializable, FXMLCont
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        LOG.info("Initialisation " + this.getClass().getSimpleName()+ ":  " +this.toString() );
+        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
         this.languageBundle = rb;
     }
 
@@ -59,7 +58,7 @@ public class LocalApplicationChoiceController implements Initializable, FXMLCont
         this.manager = manager; //To change body of generated methods, choose Tools | Templates.
     }
 
-       @Override
+    @Override
     public void setContext(GenealogyTreeContext context) {
         this.context = context;
     }

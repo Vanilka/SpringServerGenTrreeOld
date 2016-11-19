@@ -1,14 +1,17 @@
 package com.genealogytree.service;
 
-import java.util.List;
-
+import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
 
-public interface FamilyService {
-	
+import java.util.List;
 
-	public List<GT_Family> getAllFamilies();
-	public GT_Family addFamily(GT_Family family);
-	
+public interface FamilyService {
+
+
+    public List<GT_Family> getAllFamilies();
+    public List<GT_Family> getFamillies(GT_User user);
+
+    public GT_Family addFamily(GT_Family family);
+
 
 }

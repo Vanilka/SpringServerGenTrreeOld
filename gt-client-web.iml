@@ -15,6 +15,16 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/GenealogyTreeProject/DatabaseManager/src/main/java/com/genealogytree/DatabaseManager/DatabaseConfig.java</file>
+          <file>file://$MODULE_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/configuration/GT_AuthenticationEntryPoint.java</file>
+          <file>file://$MODULE_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/configuration/SecurityConfiguration.java</file>
+          <file>file://$MODULE_DIR$/GenealogyTreeProject/ClientWeb/src/main/webapp/WEB-INF/MainDispatcher.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/GenealogyTreeProject/ClientWeb/target/classes" />
@@ -55,6 +65,7 @@
     <orderEntry type="module" module-name="ExceptionManager" />
     <orderEntry type="module" module-name="Service" />
     <orderEntry type="module" module-name="DataBaseRepository" />
+    <orderEntry type="module" module-name="Domain" />
     <orderEntry type="module" module-name="DatabaseManager" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.2.3.Final" level="project" />

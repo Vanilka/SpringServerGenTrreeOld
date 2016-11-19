@@ -1,75 +1,84 @@
 package com.genealogytree.repository.entity.modules.tree;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import com.genealogytree.domain.beans.MemberBean;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name="Member")
-public class GT_Member {
-
-	@Version
-	private Long version;
-	
-	@Id
-	private Long id;
-	
-	@Column(nullable=false)
-	private String name;
-	
-	@Column(nullable=false)
-	private String surname;
-	
-	@Column(nullable=false)
-	private String age;
-
-	@Column
-	private String sex;
+@Table(name = "Member")
+public class GT_Member extends MemberBean implements Serializable {
 
 
-	
-	public Long getId() {
-		return id;
-	}
+    /**
+     * This is an Entity Class represent  Member in Database
+     */
+    @Version
+    private Long version;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Id
+    private Long id;
 
-	public String getName() {
-		return name;
-	}
+    @Column(nullable = false)
+    private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(nullable = false)
+    private String surname;
 
-	public String getSurname() {
-		return surname;
-	}
+    @Column(nullable = false)
+    private String age;
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    @Column
+    private String sex;
 
-	public String getAge() {
-		return age;
-	}
 
-	public void setAge(String age) {
-		this.age = age;
-	}
-	
+    @Override
+    public Long getId() {
+        return id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-	
-	
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+
 }

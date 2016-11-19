@@ -20,7 +20,7 @@
             <AppenderRef ref="errorLog" level="error"/>
             <AppenderRef ref="logApp" level="info"/>
         </Root>
-        
-        
+
+
     </Loggers>
 </Configuration>

@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXDrawersStack?>
-<?import java.net.URL?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import java.net.URL?>
 <AnchorPane
-	id="logonWindowPane"
-	fx:id="logonWindowPane"
-	xmlns="http://javafx.com/javafx/8.0.65"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="com.genealogytree.application.fxmlcontrollers.LogonWindowController">
-	<stylesheets>
-		<URL value="@../styles/application_logon.css" />
-	</stylesheets>
-	<children>
-		<AnchorPane
-			id="logonForm"
-			fx:id="logonForm"
-			minHeight="400"
-			minWidth="300"
-			prefHeight="400"
-			prefWidth="300"
-			styleClass="projectPane"
-			AnchorPane.rightAnchor="60.0" />
-		<AnchorPane
-			id="registerForm"
-			fx:id="registerForm"
-			minHeight="400"
-			minWidth="400"
-			prefHeight="400"
-			prefWidth="400" />
-	</children>
+        xmlns:fx="http://javafx.com/fxml/1"
+        id="logonWindowPane"
+        fx:id="logonWindowPane"
+        xmlns="http://javafx.com/javafx/8.0.65"
+        fx:controller="com.genealogytree.application.fxmlcontrollers.LogonWindowController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css"/>
+    </stylesheets>
+    <children>
+        <AnchorPane
+                id="logonForm"
+                fx:id="logonForm"
+                minHeight="400"
+                minWidth="300"
+                prefHeight="400"
+                prefWidth="300"
+                styleClass="projectPane"
+                AnchorPane.rightAnchor="60.0"/>
+        <AnchorPane
+                id="registerForm"
+                fx:id="registerForm"
+                minHeight="400"
+                minWidth="400"
+                prefHeight="400"
+                prefWidth="400"/>
+    </children>
 </AnchorPane>

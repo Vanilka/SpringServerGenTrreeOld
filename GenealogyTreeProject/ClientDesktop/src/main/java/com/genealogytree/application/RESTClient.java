@@ -6,14 +6,12 @@
 package com.genealogytree.application;
 
 /**
- *
  * @author vanilka
  */
 public class RESTClient {
-    
-	
-    String url;
-    
 
-    
+
+    String url;
+
+
 }

@@ -7,12 +7,12 @@ package com.genealogytree.application;
 
 
 /**
- *
  * @author vanilka
  */
-public interface  FXMLController {
-       public void setManager(ScreenManager manager) ;
-       public void setContext(GenealogyTreeContext context);
-       
-    
+public interface FXMLController {
+    public void setManager(ScreenManager manager);
+
+    public void setContext(GenealogyTreeContext context);
+
+
 }

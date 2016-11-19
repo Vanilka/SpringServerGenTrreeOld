@@ -40,6 +40,9 @@
           <element id="archive" name="DataBaseRepository-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="DataBaseRepository" />
           </element>
+          <element id="archive" name="Domain-0.0.1-SNAPSHOT.jar">
+            <element id="module-output" name="Domain" />
+          </element>
           <element id="archive" name="DatabaseManager-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="DatabaseManager" />
           </element>

@@ -1,0 +1,12 @@
+2016-11-11 01:31:50,686 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/WelcomeWindow.fxml
+
+2016-11-11 01:31:50,688 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException
+2016-11-11 01:36:20,592 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/WelcomeWindow.fxml
+
+2016-11-11 01:36:20,593 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException
+2016-11-11 01:39:41,268 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/WelcomeWindow.fxml
+
+2016-11-11 01:39:41,271 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException

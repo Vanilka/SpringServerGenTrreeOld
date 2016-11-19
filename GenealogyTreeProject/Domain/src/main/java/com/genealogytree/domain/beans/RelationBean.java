@@ -6,14 +6,13 @@
 package com.genealogytree.domain.beans;
 
 /**
- *
  * @author vanilka
  */
-public class Relation {
-    
+public class RelationBean {
+
     private Long id;
-    private Member SimLeft;
-    private Member SimRight;
+    private MemberBean SimLeft;
+    private MemberBean SimRight;
 
     public Long getId() {
         return id;
@@ -23,22 +22,21 @@ public class Relation {
         this.id = id;
     }
 
-    public Member getSimLeft() {
+    public MemberBean getSimLeft() {
         return SimLeft;
     }
 
-    public void setSimLeft(Member SimLeft) {
+    public void setSimLeft(MemberBean SimLeft) {
         this.SimLeft = SimLeft;
     }
 
-    public Member getSimRight() {
+    public MemberBean getSimRight() {
         return SimRight;
     }
 
-    public void setSimRight(Member SimRight) {
+    public void setSimRight(MemberBean SimRight) {
         this.SimRight = SimRight;
     }
-    
-    
-    
+
+
 }

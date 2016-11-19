@@ -5,7 +5,9 @@ package com.genealogytree.ExceptionManager.exception;
  */
 public class NotFoundUserException extends Exception {
 
-    public NotFoundUserException(String message) { super(message); }
+    public NotFoundUserException(String message) {
+        super(message);
+    }
 
     public NotFoundUserException(String message, Throwable cause) {
         super(message, cause);

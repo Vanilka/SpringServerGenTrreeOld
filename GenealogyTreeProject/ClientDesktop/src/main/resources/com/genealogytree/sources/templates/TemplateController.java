@@ -5,9 +5,9 @@
  */
 package com.genealogytree.sources.templates;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import com.genealogytree.application.FXMLController;
+import com.genealogytree.application.GenealogyTreeContext;
+import com.genealogytree.application.ScreenManager;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -18,9 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.genealogytree.application.FXMLController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
@@ -29,63 +28,63 @@ import com.genealogytree.application.ScreenManager;
  */
 public class TemplateController implements Initializable, FXMLController {
 
-	private static final Logger LOG = LogManager.getLogger(TemplateController.class);
+    private static final Logger LOG = LogManager.getLogger(TemplateController.class);
 
-	private ScreenManager manager;
-	private GenealogyTreeContext context;
+    private ScreenManager manager;
+    private GenealogyTreeContext context;
 
-	@FXML
-	private AnchorPane templateAnchorPane;
+    @FXML
+    private AnchorPane templateAnchorPane;
 
-	@FXML
-	private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+    @FXML
+    private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
-	/**
-	 * Initializes the controller class.
-	 */
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
 
-		this.languageBundle.setValue(rb);
+        this.languageBundle.setValue(rb);
 
 
-	}
+    }
 
-	/*
-	 * LISTEN LANGUAGE CHANGES
-	 */
-	private void addLanguageListener() {
-		this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-			@Override
-			public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-					ResourceBundle newValue) {
-				reloadElements();
-			}
-		});
-	}
+    /*
+     * LISTEN LANGUAGE CHANGES
+     */
+    private void addLanguageListener() {
+        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
+            @Override
+            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
+                                ResourceBundle newValue) {
+                reloadElements();
+            }
+        });
+    }
 
-	private String getValueFromKey(String key) {
-		return this.languageBundle.getValue().getString(key);
-	}
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
 
-	private void reloadElements() {
-		// Nothing to do
-	}
+    private void reloadElements() {
+        // Nothing to do
+    }
 
-	/*
-	 * GETTERS AND SETTERS
-	 */
-	@Override
-	public void setContext(GenealogyTreeContext context) {
-		this.context = context;
-		this.context = context;
-		this.languageBundle.bind(context.getBundleProperty());
-		addLanguageListener();
-	}
+    /*
+     * GETTERS AND SETTERS
+     */
+    @Override
+    public void setContext(GenealogyTreeContext context) {
+        this.context = context;
+        this.context = context;
+        this.languageBundle.bind(context.getBundleProperty());
+        addLanguageListener();
+    }
 
-	@Override
-	public void setManager(ScreenManager manager) {
-		this.manager = manager;
-	}
+    @Override
+    public void setManager(ScreenManager manager) {
+        this.manager = manager;
+    }
 }

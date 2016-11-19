@@ -1,69 +1,74 @@
 package com.genealogytree.services;
 
-import java.util.List;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
-import com.genealogytree.domain.beans.User;
+import com.genealogytree.domain.beans.UserBean;
 import com.genealogytree.exception.ExceptionBean;
 import com.genealogytree.services.responses.ExceptionResponse;
 import com.genealogytree.services.responses.ServerResponse;
 import com.genealogytree.services.responses.UserResponse;
+import com.oracle.tools.packager.Log;
+
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class GTUserService {
 
-	private GenealogyTreeContext context;
+    private GenealogyTreeContext context;
 
-	public ServerResponse registerUser(String email, String login, String password) {
-		ServerResponse result = null;
-		try {
-		User registerUser = new User(email, login, password);
-		Response registerResponse = this.context.getMainTarget().path("user").path("add")
-				.request(MediaType.APPLICATION_JSON).post(Entity.json(registerUser));
+    public  GTUserService() {
+        this(null);
+    }
+    public  GTUserService(GenealogyTreeContext context) {
+        this.context = context;
+    }
 
-		if (registerResponse.getStatus() != 200) {
-			result = new ExceptionResponse((registerResponse.readEntity(ExceptionBean.class)));
-		} else {
-			User user = registerResponse.readEntity(User.class);
-			result = new UserResponse(user);
-		}
-		} catch (Exception e){
-			result = new ExceptionResponse(new ExceptionBean());
-		}
-		return result;
-	}
+    public ServerResponse registerUser(String email, String login, String password) {
+        ServerResponse result = null;
+        try {
+            UserBean registerUser = new UserBean(email, login, password);
+            Response registerResponse = this.context.getMainTarget().path("user").path("add")
+                    .request(MediaType.APPLICATION_JSON).post(Entity.json(registerUser));
 
-	public ServerResponse connect(String login, String password) {
-		ServerResponse result = null;
-		try {
-			User loginuser = new User(null, login, password);
-			Response response = this.context.getMainTarget().path("user").path("login")
-					.request(MediaType.APPLICATION_JSON).post(Entity.json(loginuser));
-			if (response.getStatus() != 200) {
-				System.out.println("Nie Udalo SIE !");
-				System.out.println(response.readEntity(String.class));
-				result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
-				
-			} else {
-				User LoggedUser = response.readEntity(User.class);
-				this.context.setConnectedUser(LoggedUser);
-				result = new UserResponse(LoggedUser);
-			}
-			
-		} catch (Exception e) {
-			result = new ExceptionResponse(new ExceptionBean());
-		}
-		
-		return result;
-	}
+            if (registerResponse.getStatus() != 200) {
+                result = new ExceptionResponse((registerResponse.readEntity(ExceptionBean.class)));
+            } else {
+                UserBean user = registerResponse.readEntity(UserBean.class);
+                result = new UserResponse(user);
+            }
+        } catch (Exception e) {
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+        return result;
+    }
 
-	public void setContext(GenealogyTreeContext context) {
-		this.context = context;
-	}
+    public ServerResponse connect(String login, String password) {
+        ServerResponse result = null;
+        try {
+            UserBean loginuser = new UserBean(null, login, password);
+            Response response = this.context.getMainTarget().path("user").path("login")
+                    .request(MediaType.APPLICATION_JSON).post(Entity.json(loginuser));
+            if (response.getStatus() != 200) {
+                System.out.println("Nie Udalo SIE !");
+                System.out.println(response.readEntity(String.class));
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+
+            } else {
+                UserBean LoggedUser = response.readEntity(UserBean.class);
+                this.context.setConnectedUser(LoggedUser);
+
+                result = new UserResponse(LoggedUser);
+            }
+
+        } catch (Exception e) {
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+
+        return result;
+    }
+
+    public void setContext(GenealogyTreeContext context) {
+        this.context = context;
+    }
 
 }

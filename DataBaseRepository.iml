@@ -16,6 +16,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Domain" />
     <orderEntry type="module" module-name="DatabaseManager" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.3.RELEASE" level="project" />
