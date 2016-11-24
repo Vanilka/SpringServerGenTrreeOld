@@ -37,15 +37,6 @@ public class GT_Family extends FamilyBean implements Serializable {
         return version;
     }
 
-    /**
-     * SETTERS
-     */
-
-    @Override
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
     @Override
     @Id
     @GeneratedValue(generator = "InvSeqFam")
@@ -55,26 +46,36 @@ public class GT_Family extends FamilyBean implements Serializable {
     }
 
     @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
     @Column(nullable = false)
     public String getName() {
         return this.name;
     }
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ownerID", nullable = false)
+    // @Lob
+    public GT_User getOwner() {
+        return owner;
+    }
+
+    /**
+     * SETTERS
+     */
+
+    @Override
+    @Version
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public void setName(String name) {
         this.name = name;
-    }
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ownerID", nullable = false)
-    @Lob
-    public GT_User getOwner() {
-        return owner;
     }
 
     public void setOwner(GT_User owner) {

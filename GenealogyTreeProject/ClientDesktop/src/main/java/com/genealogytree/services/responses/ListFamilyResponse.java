@@ -1,6 +1,6 @@
 package com.genealogytree.services.responses;
 
-import com.genealogytree.domain.beans.FamilyBean;
+import com.genealogytree.domain.GTX_Family;
 
 import java.util.List;
 
@@ -9,22 +9,22 @@ import java.util.List;
  */
 public class ListFamilyResponse extends ServerResponse {
 
-    List<FamilyBean> listFamily;
+    List<GTX_Family> listFamily;
 
     public ListFamilyResponse() {
         this(null);
     }
 
-    public ListFamilyResponse(List<FamilyBean> list) {
+    public ListFamilyResponse(List<GTX_Family> list) {
         super(ResponseStatus.OK);
         this.listFamily = list;
     }
 
-    public List<FamilyBean> getListFamily() {
+    public List<GTX_Family> getListFamily() {
         return listFamily;
     }
 
-    public void setListFamily(List<FamilyBean> listFamily) {
+    public void setListFamily(List<GTX_Family> listFamily) {
         this.listFamily = listFamily;
     }
 }

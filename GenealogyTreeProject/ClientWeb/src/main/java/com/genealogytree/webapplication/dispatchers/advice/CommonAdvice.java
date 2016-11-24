@@ -7,6 +7,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +27,12 @@ public class CommonAdvice {
     public ResponseEntity<ExceptionBean> unauthorise(Exception e) {
         System.out.println(e.getMessage());
         ExceptionBean exception = new ExceptionBean(Causes.ANOTHER_CAUSE);
+        return new ResponseEntity<ExceptionBean>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ExceptionBean> handleException(UsernameNotFoundException e) {
+        ExceptionBean exception = new ExceptionBean(Causes.LOGIN_PASSWORD_INCORRECT);
         return new ResponseEntity<ExceptionBean>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

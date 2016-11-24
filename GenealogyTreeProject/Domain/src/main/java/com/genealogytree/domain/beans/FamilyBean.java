@@ -20,9 +20,8 @@ public class FamilyBean implements Serializable {
     private UserBean owner;
 
     /**
-    Constructor
+     Constructor
      */
-
     public FamilyBean() {
         this(null);
     }
@@ -32,8 +31,6 @@ public class FamilyBean implements Serializable {
         this.name = name;
     }
 
-
-
     /**
      * GETTER
      */
@@ -41,6 +38,7 @@ public class FamilyBean implements Serializable {
     public Long getVersion() {
         return version;
     }
+
     public Long getId() {
         return id;
     }

@@ -15,4 +15,6 @@ public interface FamilyRepository extends JpaRepository<GT_Family, Long> {
     @Query("Select f from GT_Family f WHERE f.owner= :user")
     public List<GT_Family> findAllFamillyByOwner(@Param("user") GT_User user);
 
+
+    public GT_Family findFamilyById(Long id);
 }

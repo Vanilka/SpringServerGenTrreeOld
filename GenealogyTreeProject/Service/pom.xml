@@ -10,6 +10,11 @@
     <dependencies>
         <dependency>
             <groupId>com.genealogytree</groupId>
+            <artifactId>ExceptionManager</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.genealogytree</groupId>
             <artifactId>DataBaseRepository</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

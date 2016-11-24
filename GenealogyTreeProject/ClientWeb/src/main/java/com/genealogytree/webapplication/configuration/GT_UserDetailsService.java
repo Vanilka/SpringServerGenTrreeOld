@@ -1,5 +1,6 @@
 package com.genealogytree.webapplication.configuration;
 
+import com.genealogytree.ExceptionManager.exception.NotFoundUserException;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

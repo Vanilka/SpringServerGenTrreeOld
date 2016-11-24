@@ -1,16 +1,18 @@
 package com.genealogytree.configuration.traduction;
 
 public enum Languages {
-    PL("pl", "poland.png"),
-    EN("en", "united-kingdom.png"),
-    FR("fr", "france.png");
+    PL("pl","PL", "poland.png"),
+    EN("en","EN", "united-kingdom.png"),
+    FR("fr","FR","france.png");
 
     final String location = "com/genealogytree/sources/icons/location/";
     private String language;
+    private String country;
     private String badge;
 
-    private Languages(String lang, String badge) {
+    private Languages(String lang,String country, String badge) {
         this.language = lang;
+        this.country = country;
         this.badge = badge;
     }
 
@@ -21,5 +23,9 @@ public enum Languages {
 
     public String getBadge() {
         return this.location.concat(this.badge);
+    }
+
+    public String getCountry() {
+        return  this.country;
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="infoProjectTab" fx:id="infoProjectTab" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.application.fxmlcontrollers.TabInfoProjectPaneController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css" />
+    </stylesheets>
+    <children>
+        <JFXButton fx:id="addSimButton" styleClass="jfxButton" buttonType="RAISED" layoutX="61.0" layoutY="64.0" onAction="#addNewSim" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" text="%addMember" />
+    </children>
+
+</AnchorPane>

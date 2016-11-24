@@ -1,7 +1,9 @@
 package com.genealogytree.webapplication.dispatchers;
 
 import com.genealogytree.ExceptionManager.config.Causes;
+import com.genealogytree.ExceptionManager.exception.NotFoundUserException;
 import com.genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
+import com.genealogytree.ExceptionManager.exception.UserOrPasswordIncorrectException;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +30,17 @@ public class requestUserMapper {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResponseEntity<GT_User> addUser(@RequestBody GT_User newUser) throws NotUniqueUserLoginException, Exception {
-        if (this.userService.exist(newUser.getLogin())) {
-            throw new NotUniqueUserLoginException(Causes.USER_ALREADY_EXIST.toString());
-        } else {
             GT_User addesUser = this.userService.addUser(newUser);
             return new ResponseEntity<GT_User>(addesUser, HttpStatus.OK);
-        }
+
     }
 
     /*
      *  LOGIN TO APPLICATION
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResponseEntity<GT_User> login(@RequestBody GT_User temp) throws Exception {
+    public ResponseEntity<GT_User> login(@RequestBody GT_User temp) throws UserOrPasswordIncorrectException, Exception {
         GT_User user = this.userService.getUser(temp.getLogin(), temp.getPassword());
-        if (user == null) {
-            System.out.println("Nie udalo sie... nie ma takiego usera");
-            throw new Exception("No nie... nie ma mnie");
-        }
         return new ResponseEntity<GT_User>(user, HttpStatus.OK);
     }
 

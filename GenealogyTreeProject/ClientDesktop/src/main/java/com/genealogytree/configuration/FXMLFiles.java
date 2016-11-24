@@ -9,19 +9,21 @@ package com.genealogytree.configuration;
  * @author vanilka
  */
 public enum FXMLFiles {
-    MAIN_FXML("MainFXML.fxml"),
-    MENU_BAR("MenuBar.fxml"),
-    FOOTER("Footer.fxml"),
-    CHOOSE_APPLICATION_TYPE("ChooseApplicationType.fxml"),
-    LOGON_FORM("LogonForm.fxml"),
-    LOCAL_APPLICATION_CHOICE("LocalApplicationChoice.fxml"),
-    ONLINE_APPLICATION_CHOICE("OnlineApplicationChoice.fxml"),
-    WELCOME_WINDOW("WelcomeWindow.fxml"),
-    LOGON_WINDOW("LogonWindow.fxml"),
-    REGISTER_FORM("RegisterForm.fxml"),
-    REGISTER_CONFIRMATION("RegisterConfirmation.fxml"),
-    MAIN_APPLICATION_WINDOW("MainApplicationWindow.fxml"),
-    NEW_PROJECT_DIALOG("NewProjectDialog.fxml");
+    MAIN_FXML("PaneMainFXML.fxml"),
+    MENU_BAR("PaneMenuBar.fxml"),
+    FOOTER("PaneFooter.fxml"),
+    CHOOSE_APPLICATION_TYPE("PaneChooseApplicationType.fxml"),
+    LOGON_FORM("PaneLogonForm.fxml"),
+    LOCAL_APPLICATION_CHOICE("PaneLocalApplicationChoice.fxml"),
+    ONLINE_APPLICATION_CHOICE("PaneOnlineApplicationChoice.fxml"),
+    WELCOME_WINDOW("PaneWelcomeWindow.fxml"),
+    LOGON_WINDOW("PaneLogonWindow.fxml"),
+    REGISTER_FORM("PaneRegisterForm.fxml"),
+    REGISTER_CONFIRMATION("PaneRegisterConfirmation.fxml"),
+    MAIN_APPLICATION_WINDOW("PaneMainApplicationWindow.fxml"),
+    NEW_PROJECT_DIALOG("DialogNewProject.fxml"),
+    TAB_ADD_NEW_MEMBER("TabAddNewMember.fxml"),
+    TAB_INFO_PROJECT("TabInfoProject.fxml");
 
     private final String fxmlPath = "/com/genealogytree/application/fxml/";
     private String file;

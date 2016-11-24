@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="newProjectDialog" fx:id="newProjectDialog" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.application.fxmlcontrollers.DialogNewProjectController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane fx:id="newProjectDialogInternePane" layoutX="19.0" layoutY="75.0" styleClass="logonCommon" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <JFXTextField fx:id="familyNameField" focusColor="#81d136" labelFloat="true" layoutX="71.0" layoutY="65.0" maxWidth="268.0" minWidth="268.0" prefHeight="55.0" prefWidth="268.0" promptText="%project_name" unFocusColor="#c3dbd4" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font size="18.0" />
+               </font></JFXTextField>
+            <JFXButton fx:id="confirmNewProject"  onAction="#confrim" buttonType="RAISED" layoutX="42.0" layoutY="155.0" prefHeight="41.0" prefWidth="140.0" ripplerFill="#81d136" styleClass="ButtonJFX" text="%create" textFill="#e8e6df" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="45.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="cancelNewProject" onAction="#cancel" buttonType="RAISED" layoutX="226.0" layoutY="155.0" prefHeight="41.0" prefWidth="140.0" ripplerFill="#81d136" styleClass="ButtonJFX" text="%cancel" textFill="#e8e6df" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="45.0">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

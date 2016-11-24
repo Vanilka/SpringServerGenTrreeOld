@@ -5,14 +5,14 @@
  */
 package com.genealogytree.application;
 
-import com.genealogytree.application.fxmlcontrollers.ChooseApplicationType;
-import com.genealogytree.application.fxmlcontrollers.FooterController;
-import com.genealogytree.application.fxmlcontrollers.MainWindow;
-import com.genealogytree.application.fxmlcontrollers.MenuBarController;
+import com.genealogytree.application.fxmlcontrollers.*;
+import com.genealogytree.configuration.BorderPaneReloadHelper;
 import com.genealogytree.configuration.FXMLFiles;
-import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -30,13 +30,19 @@ public class ScreenManager {
 
     private static final Logger LOG = LogManager.getLogger(ScreenManager.class);
     private GenealogyTreeContext context;
-    private MainWindow mainWindow;
-    private ChooseApplicationType chooseApplicationType;
-    private FooterController footer;
-    private MenuBarController menuBar;
+    private PaneMainWindowController mainWindow;
+    private PaneChooseApplicationTypeController chooseApplicationType;
+    private PaneFooterController footer;
+    private PaneMenuBarController menuBar;
     private BorderPane root;
     private Stage stage;
     private Scene scene;
+    private BorderPaneReloadHelper helper;
+
+    {
+        helper = new BorderPaneReloadHelper();
+    }
+
     public ScreenManager() {
         LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
     }
@@ -78,11 +84,11 @@ public class ScreenManager {
         this.stage.show();
     }
 
-    public MainWindow getMainWindow() {
+    public PaneMainWindowController getMainWindow() {
         return mainWindow;
     }
 
-    public void setMainWindow(MainWindow mainWindow) {
+    public void setMainWindow(PaneMainWindowController mainWindow) {
         this.mainWindow = mainWindow;
     }
 
@@ -104,13 +110,16 @@ public class ScreenManager {
 
     }
 
-    public void showNewDialog(FXMLController controller, String fxml) {
+    public void showNewDialog(FXMLDialogController controller, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
 
         try {
+            Stage dialogStage = new Stage();
             AnchorPane dialogwindow = (AnchorPane) loader.load();
             controller = loader.getController();
-            Stage dialogStage = new Stage();
+            controller.setManager(this);
+            controller.setContext(this.context);
+            controller.setStage(dialogStage);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
@@ -128,7 +137,7 @@ public class ScreenManager {
     }
 
 
-    public FXMLController loadFxml(FXMLController controller, Pane pane, String fxml) {
+    public FXMLPaneController loadFxml(FXMLPaneController controller, Pane pane, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             pane.getChildren().clear();
@@ -144,7 +153,7 @@ public class ScreenManager {
         return controller;
     }
 
-    public FXMLController loadFxml(FXMLController controller, AnchorPane anchor, String fxml) {
+    public FXMLPaneController loadFxml(FXMLPaneController controller, AnchorPane anchor, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             anchor.getChildren().clear();
@@ -160,7 +169,7 @@ public class ScreenManager {
         return controller;
     }
 
-    public void loadFxml(FXMLController controller, BorderPane border, String fxml, Where where) {
+    public void loadFxml(FXMLPaneController controller, BorderPane border, String fxml, Where where) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             AnchorPane temp = (AnchorPane) loader.load();
@@ -170,7 +179,9 @@ public class ScreenManager {
                     border.setTop(temp);
                     break;
                 case CENTER:
+                    helper.before(border);
                     border.setCenter(temp);
+                    helper.after(border);
                     break;
                 case BOTTOM:
                     border.setBottom(temp);
@@ -191,6 +202,57 @@ public class ScreenManager {
         }
 
     }
+
+    public FXMLTabController loadFxml(FXMLTabController controller, JFXTabPane tabPane, Tab tab, String fxml, String title) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
+        try {
+            tab.setContent(loader.load());
+            tab.setText(title);
+            controller = loader.getController();
+            tabPane.getTabs().add(tab);
+            tabPane.getSelectionModel().select(tab);
+            controller.setManager(this);
+            controller.setContext(this.context);
+            controller.setTabAndTPane(tabPane, tab);
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            LOG.error(ex.getClass() + " - " + ex.getMessage());
+            LOG.error(ex.getCause());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            LOG.error(ex.getClass() + " - " + ex.getMessage());
+            LOG.error(ex.getCause());
+        }
+
+        return controller;
+    }
+
+    public FXMLTabController loadFxml(FXMLTabController controller, JFXTabPane tabPane,Tab tab, String fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
+        try {
+            tab.setContent(loader.load());
+            controller = loader.getController();
+            controller.setManager(this);
+            controller.setContext(this.context);
+            controller.setTabAndTPane(tabPane,tab);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            LOG.error(ex.getClass() + " - " + ex.getMessage());
+            LOG.error(ex.getCause());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            LOG.error(ex.getClass() + " - " + ex.getMessage());
+            LOG.error(ex.getCause());
+        }
+
+        return controller;
+    }
+
 
     public void setContext(GenealogyTreeContext context) {
         this.context = context;

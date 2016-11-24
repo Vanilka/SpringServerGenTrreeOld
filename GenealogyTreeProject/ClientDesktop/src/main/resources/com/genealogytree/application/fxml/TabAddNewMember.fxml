@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="addNewMember" fx:id="addNewMember" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.application.fxmlcontrollers.TabAddNewMemberPaneController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField fx:id="simNameField" focusColor="#b5f448" labelFloat="true" layoutX="156.0" layoutY="23.0" promptText="%simName" />
+      <JFXTextField fx:id="simSurnameField" focusColor="#b5f448" labelFloat="true" layoutX="346.0" layoutY="23.0" promptText="%simSurname" />
+      <AnchorPane layoutX="159.0" layoutY="55.0" prefHeight="93.0" prefWidth="325.0">
+         <children>
+            <JFXRadioButton fx:id="simAgeBabyField" layoutY="14.0" styleClass="radioButtonFX" text="%simAgeBaby" />
+            <JFXRadioButton fx:id="simAgeChildField" layoutY="40.0" styleClass="radioButtonFX" text="%simAgeChild" />
+            <JFXRadioButton fx:id="simAgeAdoField" layoutY="64.0" prefHeight="17.0" prefWidth="130.0" styleClass="radioButtonFX" text="%simAgeAdo" />
+            <JFXRadioButton fx:id="simAgeJAdultField" layoutX="190.0" layoutY="14.0" styleClass="radioButtonFX" text="%simAgeJAdult" />
+            <JFXRadioButton fx:id="simAgeAdultField" layoutX="190.0" layoutY="40.0" prefHeight="17.0" prefWidth="134.0" styleClass="radioButtonFX" text="%simAgeAdult" />
+            <JFXRadioButton fx:id="simAgeSeniorField" layoutX="190.0" layoutY="64.0" styleClass="radioButtonFX" text="%simAgeSenior" />
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="addSimConfirmButton" buttonType="RAISED" layoutX="603.0" layoutY="24.0" onAction="#addSimConfirm" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%addSimConfirm" />
+      <JFXButton fx:id="addSimCancelButton" buttonType="RAISED" layoutX="603.0" layoutY="99.0" onAction="#setAddSimCancel" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%addSimCancel" />
+   </children>
+
+</AnchorPane>

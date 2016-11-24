@@ -1,5 +1,6 @@
 package com.genealogytree.service.implementation;
 
+import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
 import com.genealogytree.repository.FamilyRepository;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
@@ -33,6 +34,20 @@ public class FamilyServiceImpl implements FamilyService {
     public GT_Family addFamily(GT_Family family) {
 
         return this.repository.save(family);
+    }
+
+    @Override
+    public GT_Family getFamily(Long id) throws NotFoundFamilyException{
+        GT_Family family = this.repository.findOne(id);
+        if(family == null) {
+            throw  new NotFoundFamilyException();
+        }
+        return family;
+    }
+
+    @Override
+    public boolean exist(GT_Family family) {
+        return this.repository.exists(family.getId());
     }
 
 }

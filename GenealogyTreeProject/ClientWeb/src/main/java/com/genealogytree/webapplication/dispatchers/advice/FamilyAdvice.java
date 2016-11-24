@@ -2,7 +2,7 @@ package com.genealogytree.webapplication.dispatchers.advice;
 
 import com.genealogytree.ExceptionManager.config.Causes;
 import com.genealogytree.ExceptionManager.exception.ExceptionBean;
-import com.genealogytree.ExceptionManager.exception.NotFoundProjectException;
+import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
 import com.genealogytree.ExceptionManager.exception.NotFoundUserException;
 import com.genealogytree.ExceptionManager.exception.UserInstanceWithoutIdException;
 import com.genealogytree.webapplication.dispatchers.requestFamilyMapper;
@@ -34,8 +34,8 @@ public class FamilyAdvice {
         return new ResponseEntity<ExceptionBean>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(NotFoundProjectException.class)
-    public ResponseEntity<ExceptionBean> NotFoundProject(NotFoundProjectException e) {
+    @ExceptionHandler(NotFoundFamilyException.class)
+    public ResponseEntity<ExceptionBean> NotFoundProject(NotFoundFamilyException e) {
         ExceptionBean exception = new ExceptionBean(Causes.PROJECT_NOT_FOUND);
         return new ResponseEntity<ExceptionBean>(exception, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -7,8 +7,9 @@ package com.genealogytree.application;
 
 import com.genealogytree.configuration.Authenticator;
 import com.genealogytree.domain.beans.UserBean;
-import com.genealogytree.services.GTFamillyService;
-import com.genealogytree.services.GTUserService;
+import com.genealogytree.services.GTFamilyService;
+import com.genealogytree.services.implementation.GTFamilyServiceOffline;
+import com.genealogytree.services.implementation.GTUserServiceOnline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -37,14 +38,14 @@ public class GenealogyTreeContext {
     private String protocol;
     private int port;
 
-    private GTUserService userService;
-    private GTFamillyService familyService;
+    private GTUserServiceOnline userService;
+    private GTFamilyService familyService;
 
     private Locale locale;
     private ObjectProperty<ResourceBundle> bundle = new SimpleObjectProperty<>();
 
     {
-        locale = new Locale("en");
+        locale = new Locale("en", "EN");
         bundle.setValue(ResourceBundle.getBundle(TRADUCTION_LOCATION, locale));
 
         this.connectedUser.setValue(null);
@@ -198,25 +199,25 @@ public class GenealogyTreeContext {
         this.bundle.setValue(bundle);
     }
 
-    public GTUserService getUserService() {
+    public GTUserServiceOnline getUserService() {
         if (this.userService == null) {
-            this.userService = new GTUserService(this);
+            this.userService = new GTUserServiceOnline(this);
         }
         return userService;
     }
 
-    public void setUserService(GTUserService userService) {
+    public void setUserService(GTUserServiceOnline userService) {
         this.userService = userService;
     }
 
-    public GTFamillyService getFamilyService() {
+    public GTFamilyService getFamilyService() {
         if (this.familyService == null) {
-            this.familyService = new GTFamillyService(this);
+            this.familyService = new GTFamilyServiceOffline(this);
         }
         return familyService;
     }
 
-    public void setFamilyService(GTFamillyService familyService) {
+    public void setFamilyService(GTFamilyService familyService) {
         this.familyService = familyService;
     }
 

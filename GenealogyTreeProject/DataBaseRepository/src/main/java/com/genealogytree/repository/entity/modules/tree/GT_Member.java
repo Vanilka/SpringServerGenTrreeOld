@@ -9,32 +9,77 @@ import java.io.Serializable;
 @Table(name = "Member")
 public class GT_Member extends MemberBean implements Serializable {
 
-
     /**
      * This is an Entity Class represent  Member in Database
      */
+    private GT_Family ownerF;
+
+    /**
+     * Constructor
+     */
+    public GT_Member() {
+        super();
+    }
+
+    public GT_Member(String name, String surname, Age age, Sex sex, GT_Family ownerF) {
+        super(name, surname, age, sex);
+        this.ownerF = ownerF;
+    }
+
+    /*
+    *  GETTERS
+    */
+    @Override
     @Version
-    private Long version;
-
-    @Id
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String surname;
-
-    @Column(nullable = false)
-    private String age;
-
-    @Column
-    private String sex;
-
+    public Long getVersion() {
+        return version;
+    }
 
     @Override
+    @Id
+    @GeneratedValue(generator = "InvSeqMember")
+    @SequenceGenerator(name = "InvSeqMember", sequenceName = "INV_SEQMember", allocationSize = 5)
     public Long getId() {
         return id;
+    }
+
+    @Override
+    @Column(nullable = false)
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    @Column(nullable = false)
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    public Age getAge() {
+        return age;
+    }
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ownerF_ID", nullable = false)
+    public GT_Family getOwnerF() {
+        return ownerF;
+    }
+
+    @Override
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    public Sex getSex() {
+        return sex;
+    }
+
+    /*
+    * SETTERS
+    */
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     @Override
@@ -43,18 +88,8 @@ public class GT_Member extends MemberBean implements Serializable {
     }
 
     @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String getSurname() {
-        return surname;
     }
 
     @Override
@@ -62,23 +97,17 @@ public class GT_Member extends MemberBean implements Serializable {
         this.surname = surname;
     }
 
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
+    @Override
+    public void setAge(Age age) {
         this.age = age;
     }
 
-
-    public Long getVersion() {
-        return version;
+    @Override
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
-    public void setVersion(Long version) {
-        this.version = version;
+    public void setOwnerF(GT_Family ownerF) {
+        this.ownerF = ownerF;
     }
-
-
 }

@@ -1,17 +1,14 @@
 package com.genealogytree.webapplication.dispatchers;
 
-import com.genealogytree.ExceptionManager.config.Causes;
-import com.genealogytree.ExceptionManager.exception.NotFoundProjectException;
+import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
 import com.genealogytree.ExceptionManager.exception.NotFoundUserException;
 import com.genealogytree.ExceptionManager.exception.UserInstanceWithoutIdException;
 import com.genealogytree.repository.entity.modules.administration.GT_User;
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
 import com.genealogytree.service.FamilyService;
 import com.genealogytree.service.UserService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -34,11 +31,13 @@ public class requestFamilyMapper {
     UserService userService;
 
 
+
+
     /*
     *  GET FAMILLIES
     */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<GT_Family>> getFamily(Authentication auth) {
+    public ResponseEntity<List<GT_Family>> getFamily(Authentication auth) throws NotFoundUserException {
 
         GT_User u = this.userService.findUserByLogin(auth.getName());
         List<GT_Family> list = this.familyService.getFamillies(u);
@@ -63,7 +62,7 @@ public class requestFamilyMapper {
      */
 
     @RequestMapping(value="get", method = RequestMethod.GET)
-    public ResponseEntity<GT_Family> getFamily() throws NotFoundProjectException {
+    public ResponseEntity<GT_Family> getFamily() throws NotFoundFamilyException {
         GT_Family family = null;
         return new ResponseEntity<GT_Family>(family, HttpStatus.OK);
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane id="mainApplicationWindow" fx:id="mainApplicationWindow" styleClass="mainAnchorPane"
+            xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneMainApplicationWindowController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css"/>
+    </stylesheets>
+    <children>
+        <SplitPane dividerPositions="0.2809364548494983" layoutX="139.0" layoutY="78.0" orientation="VERTICAL"
+                   prefHeight="200.0" prefWidth="160.0" styleClass="gt-splitpane" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="220.0" prefHeight="220.0"
+                            maxHeight="220.0">
+                    <children>
+                        <JFXTabPane fx:id="gtMainTabPane" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="20"
+                                    AnchorPane.rightAnchor="20" AnchorPane.topAnchor="10">
+                            <tabs>
+                            </tabs>
+                        </JFXTabPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <SplitPane dividerPositions="0.22690763052208834" layoutX="55.0" layoutY="46.0"
+                                   prefHeight="160.0" prefWidth="200.0" styleClass="gt-splitpane"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane id="splitPaneHorizontal" maxWidth="250.0" minWidth="250.0"
+                                            prefWidth="250.0">
+                                    <children>
+                                        <TableView fx:id="gtFamilyMemberTable" layoutX="14.0" layoutY="14.0"
+                                                   prefHeight="200.0" prefWidth="200.0" styleClass="firstTypeTable"
+                                                   AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"
+                                                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                            <columns>
+                                                <TableColumn fx:id="simNameColumn" maxWidth="115.0" minWidth="115.0"
+                                                             prefWidth="-1.0" text="%simName"/>
+                                                <TableColumn fx:id="simSurnameColumn" maxWidth="115.0" minWidth="115.0"
+                                                             prefWidth="-1.0" text="%simSurname"/>
+                                            </columns>
+                                        </TableView>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"/>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

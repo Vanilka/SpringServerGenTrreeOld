@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<AnchorPane fx:id="rootWelcomeWindow" prefHeight="400.0" prefWidth="600.0" styleClass="mainAnchorPane"
+            xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneWelcomeWindowController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css"/>
+    </stylesheets>
+    <children>
+        <TableView id="projectsList" fx:id="projectsList" styleClass="firstTypeTable" layoutX="276.0" layoutY="100.0"
+                   onMouseClicked="#chooseProject">
+            <columns>
+                <TableColumn id="projectsName" fx:id="projectsName"  editable="false" maxWidth="500.0" minWidth="500.0"
+                             prefWidth="500.0" resizable="false" styleClass="projectsListColumn" text="%your_projects"/>
+            </columns>
+        </TableView>
+        <VBox fx:id="vbox_newProject" id="vbox_newProject" layoutX="60.0" layoutY="86.0">
+            <children>
+                <Button fx:id="firstBoule" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                        styleClass="newProjectSphere" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS"
+                        wrapText="true">
+                    <font>
+                        <Font name="Apple Braille Pinpoint 8 Dot" size="50.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="refreshProjectList" id="refreshProjectList" onAction="#refreshProjectList"
+                        alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                        styleClass="newProjectSphere" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS"
+                        wrapText="true">
+                    <font>
+                        <Font name="Apple Braille Pinpoint 8 Dot" size="50.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="createNewProject" alignment="CENTER" onAction="#newProject" contentDisplay="CENTER"
+                        mnemonicParsing="false"
+                        prefHeight="150.0" prefWidth="150.0" styleClass="newProjectSphere" textAlignment="CENTER"
+                        textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                    <font>
+                        <Font name="Apple Braille Pinpoint 8 Dot" size="50.0"/>
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

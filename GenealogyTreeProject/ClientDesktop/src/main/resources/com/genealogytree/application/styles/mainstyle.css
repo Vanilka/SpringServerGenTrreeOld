@@ -4,21 +4,6 @@
 */
 
 /*
-Menu Colors : 
-
-Bar menu :  -gentree-dark-green-grey
-Bar Menu selected :  -gentree-dark-selen
-
-Item's background :  -gentree-medium-grey;
-Item selected :   -gentree-dark-selen
-
-text : #E0E4E3
-
-backgorundlogon : -gentree-main-backgorund-color
-
-*/
-
-/*
     Colors Definition
 */
 
@@ -29,6 +14,7 @@ backgorundlogon : -gentree-main-backgorund-color
     -gentree-medium-grey: #404A4B;
     -geentree-greem-markup: #81d136;
     -gentree-focus-color: rgba(82, 202, 0, 0.9);
+    -gentree-content-pane: rgba(230, 255, 251, 0.2);
 }
 
 /*
@@ -312,25 +298,60 @@ backgorundlogon : -gentree-main-backgorund-color
     -fx-text-fill: honeydew;
 }
 
+/*
+*  TableView
+*/
 
+.firstTypeTable {
+    -fx-control-inner-background: transparent;
+    -fx-background-color: rgba(230, 255, 251, 0.2);
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+.firstTypeTable .filler {
+    -fx-background-color: -gentree-dark-green-grey;
+    -fx-background-radius: 20 20 0 0;
+
+}
+
+/*
+    Empty header (without column)
+*/
+
+.firstTypeTable .column-header-background {
+
+    /* Color of column header (all panel)*/
+    -fx-background-color: -gentree-dark-green-grey;
+    -fx-background-radius: 20 20 0 0;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+
+}
+
+.firstTypeTable .column-header {
+    -fx-background-radius: 20 20 0 0;
+    -fx-background-color: -gentree-dark-green-grey;
+}
+
+.firstTypeTable .column-header .label {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
 
 /*
     WelcomeWindow ->  TableView with Projects
 */
-
 #projectsList {
     /* Scroll*/
     /*-fx-base:  -gentree-dark-green-grey ;*/
 
     /*Cells background*/
-    -fx-control-inner-background: transparent;
-    -fx-background-color: rgba(230, 255, 251, 0.2);
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
     -fx-padding: 0 0 20 0;
-
     -fx-pref-width: 540px;
     -fx-pref-height: 500px;
 
@@ -349,31 +370,10 @@ backgorundlogon : -gentree-main-backgorund-color
 }
 
 /*
-    Empty header (without column)
-*/
-#projectsList .filler {
-    -fx-background-color: -gentree-dark-green-grey;
-    -fx-background-radius: 20 20 0 0;
-
-}
-
-#projectsList .column-header-background {
-
-    /* Color of column header (all panel)*/
-    -fx-background-color: -gentree-dark-green-grey;
-    -fx-background-radius: 20 20 0 0;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-
-}
-
-/*
     Column-header
 */
 #projectsList .column-header {
     -fx-size: 50;
-    -fx-background-radius: 20 20 0 0;
-    -fx-background-color: -gentree-dark-green-grey;
 
 }
 
@@ -384,10 +384,6 @@ backgorundlogon : -gentree-main-backgorund-color
 
 #projectsList .column-header .label {
     -fx-font-size: 25pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
     -fx-padding: 0 0 0 30;
 
 }
@@ -404,11 +400,14 @@ backgorundlogon : -gentree-main-backgorund-color
 
 }
 
-#projectsList .table-cell {
-    -fx-font-size: 15pt;
+.firstTypeTable .table-cell {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
+}
+
+#projectsList .table-cell {
+    -fx-font-size: 15pt;
     -fx-padding: 0 0 0 50;
 
 }
@@ -419,7 +418,7 @@ backgorundlogon : -gentree-main-backgorund-color
     -fx-background-insets: 0 20 0 20;
 }
 
-#projectsList .scroll-bar:vertical .thumb {
+.firstTypeTable .scroll-bar:vertical .thumb {
 
     -fx-background-color: derive(#81d136, 10%);
 
@@ -495,20 +494,18 @@ backgorundlogon : -gentree-main-backgorund-color
     /*-fx-border-color: rgba(168, 189, 185, 0.9);*/
 }
 
-
 /*
 *  DIALOGS WINDOWS
 */
 
 #newProjectDialog {
     -fx-min-height: 250px;
-    -fx-pref-height:250px ;
+    -fx-pref-height: 250px;
     -fx-max-height: 250px;
-    -fx-min-width: 450px ;
+    -fx-min-width: 450px;
     -fx-pref-width: 450px;
     -fx-max-width: 450px;
     -fx-background-color: -gentree-main-backgorund-color;
-
 
 }
 
@@ -516,3 +513,65 @@ backgorundlogon : -gentree-main-backgorund-color
     -fx-background-color: -gentree-dark-selen;
 }
 
+/*
+*    MainApplication window
+*/
+
+.gt-splitpane > .split-pane-divider {
+    -fx-background-color: transparent;
+    /*-fx-background-color: -gentree-dark-green-grey;*/
+    -fx-effect: dropshadow(gaussian, black, 4, 0.1, 0, 0);
+
+}
+
+#gtFamilyMemberTable {
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+}
+
+#addMemberButton {
+    -fx-background-color: #266558;
+}
+
+.gt_MaintabContentPane {
+    -fx-background-color: transparent;
+    -fx-pref-width: 800;
+    -fx-pref-height: 180;
+}
+
+#gtMainTabPane {
+    -fx-background-color: -gentree-content-pane;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+
+}
+
+#gtMainTabPane .tab-header-area .tab-header-background {
+    -fx-background-color: -gentree-dark-green-grey;
+    -fx-background-radius: 10 10 0 0;
+}
+
+#gtMainTabPane .tab:selected {
+    -fx-background-color: -gentree-dark-selen;
+    /*-fx-background-color: -gentree-focus-color;*/
+    -fx-background-radius: 10 10 0 0;
+}
+
+#gtMainTabPane .tab:selected .jfx-rippler {
+    -fx-rippler-fill: -geentree-greem-markup;
+}
+
+#gtMainTabPane .tab-header-area .tab-selected-line {
+    -fx-stroke: -geentree-greem-markup;
+}
+
+#gtMainTabPane .tab {
+    -fx-background-color: -gentree-medium-grey;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.radioButtonFX {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-selected-color: -geentree-greem-markup;
+}
