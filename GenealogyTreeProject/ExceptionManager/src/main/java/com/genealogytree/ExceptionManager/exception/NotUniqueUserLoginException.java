@@ -18,5 +18,9 @@ public class NotUniqueUserLoginException extends Exception {
         super(message, cause);
     }
 
+    public Causes getCausesInstance() {
+        return Causes.USER_ALREADY_EXIST;
+    }
+
 }
 

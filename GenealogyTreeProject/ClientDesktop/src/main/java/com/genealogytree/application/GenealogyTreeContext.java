@@ -92,7 +92,11 @@ public class GenealogyTreeContext {
         } catch (Exception e) {
 
         }
+    }
 
+    public void reloadContext() {
+        this.familyService.setCurrentFamily(null);
+        this.connectedUser.setValue(null);
     }
 
     public synchronized Client getClient() {
@@ -158,6 +162,7 @@ public class GenealogyTreeContext {
     public WebTarget getMainTarget() {
         return mainTarget;
     }
+
     public WebTarget getMainTarger(String user, String password) {
 
         return getMainTarget().register(new Authenticator(user, password));

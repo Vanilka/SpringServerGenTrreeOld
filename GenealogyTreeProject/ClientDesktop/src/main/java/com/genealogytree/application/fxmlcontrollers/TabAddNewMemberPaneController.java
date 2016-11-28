@@ -1,6 +1,5 @@
 package com.genealogytree.application.fxmlcontrollers;
 
-import com.genealogytree.application.FXMLPaneController;
 import com.genealogytree.application.FXMLTabController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
@@ -173,7 +172,7 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTabCont
         this.simAgeAdultField.setText(getValueFromKey("simAgeAdult"));
         this.simAgeSeniorField.setText(getValueFromKey("simAgeSenior"));
 
-        this.addSimConfirmButton.setText(getValueFromKey("addSimConfirm"));
+        this.addSimConfirmButton.setText(getValueFromKey("button_confirm"));
         this.addSimCancelButton.setText(getValueFromKey("addSimCancel"));
 
     }

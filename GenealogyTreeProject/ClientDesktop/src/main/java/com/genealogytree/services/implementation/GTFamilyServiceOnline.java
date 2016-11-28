@@ -12,6 +12,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -19,18 +21,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-public class GTFamillyServiceOnline implements GTFamilyService{
+public class GTFamilyServiceOnline implements GTFamilyService{
 
+    private static final Logger LOG = LogManager.getLogger(GTFamilyServiceOnline.class);
     private GenealogyTreeContext context;
 
     private ObjectProperty<GTX_Family> currentFamily;
 
 
-    public GTFamillyServiceOnline() {
+    public GTFamilyServiceOnline() {
         this(null);
     }
 
-    public GTFamillyServiceOnline(GenealogyTreeContext context) {
+    public GTFamilyServiceOnline(GenealogyTreeContext context) {
         currentFamily = new SimpleObjectProperty<>();
         this.context = context;
     }
@@ -47,6 +50,7 @@ public class GTFamillyServiceOnline implements GTFamilyService{
                     .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
                     .get();
             if (response.getStatus() != 200) {
+
                 result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
             } else {
                 List<GTX_Family> tempList = response.readEntity(new GenericType<List<GTX_Family>>() {
@@ -85,12 +89,46 @@ public class GTFamillyServiceOnline implements GTFamilyService{
                 }
 
             } catch (Exception e) {
-                System.out.println("exception");
-                e.printStackTrace();
                 result = new ExceptionResponse(new ExceptionBean());
             }
         return result;
     }
+
+    @Override
+    public ServerResponse updateFamily(GTX_Family family) {
+        return null;
+    }
+
+    @Override
+    public ServerResponse updateFamilyName(String newName) {
+        ServerResponse result = null;
+        GTX_Family familyBean = this.currentFamily.getValue();
+        familyBean.setName(newName);
+
+        try {
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("project")
+                    .path("update")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .put(Entity.json(familyBean));
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+            } else {
+                familyBean = response.readEntity(GTX_Family.class);
+                this.currentFamily.getValue().setName(familyBean.getName());
+                this.currentFamily.getValue().setVersion(familyBean.getVersion());
+                result = new FamilyResponse(familyBean);
+            }
+
+        } catch (Exception e) {
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+        return result;
+    }
+
 
     public void setContext(GenealogyTreeContext context) {
         this.context = context;

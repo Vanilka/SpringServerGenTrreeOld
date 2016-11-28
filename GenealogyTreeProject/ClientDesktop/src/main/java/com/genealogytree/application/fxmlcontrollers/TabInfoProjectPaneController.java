@@ -6,12 +6,14 @@ import com.genealogytree.application.ScreenManager;
 import com.genealogytree.configuration.FXMLFiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +39,21 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     private JFXButton addSimButton;
 
     @FXML
+    private JFXButton addRelationButton;
+
+    @FXML
+    private JFXButton updateFamilyName;
+
+    @FXML
+    private JFXTextField projectNameLabel;
+
+    @FXML
+    private JFXTextField projectMemberNumber;
+
+    @FXML
+    private Label projectNameValueLabel;
+
+    @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     private Tab tab;
@@ -47,6 +64,35 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.manager.loadFxml(new TabAddNewMemberPaneController(), this.tabPane, new Tab(), FXMLFiles.TAB_ADD_NEW_MEMBER.toString(), getValueFromKey("addMember"));
     }
 
+    @FXML
+    public void addNewRelation() {
+        this.manager.loadFxml(new TabAddNewRelationPaneController(), this.tabPane, new Tab(), FXMLFiles.TAB_ADD_NEW_RELATION.toString(), getValueFromKey("addRelation"));
+    }
+
+    @FXML
+    public void updateFamilyName() {
+        if (this.projectNameLabel.isEditable() &&
+                ! this.projectNameLabel.getText().equals(
+                        this.context.getFamilyService().getCurrentFamily().getName())) {
+            this.context.getFamilyService().updateFamilyName(this.projectNameLabel.getText());
+        }
+        this.projectNameLabel.setEditable(!this.projectNameLabel.isEditable());
+
+    }
+
+    private void setListener() {
+        this.projectNameLabel.editableProperty().addListener(this::changed);
+
+    }
+
+    private void changed(ObservableValue<? extends Boolean> boolChange, Boolean oldValue, Boolean newValue) {
+        if (newValue.booleanValue()) {
+            this.updateFamilyName.setText(getValueFromKey("button_confirm"));
+        } else {
+            this.updateFamilyName.setText(getValueFromKey("update_project_name"));
+        }
+    }
+
     /**
      * Initializes the controller class.
      */
@@ -54,7 +100,18 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     public void initialize(URL url, ResourceBundle rb) {
         LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
 
+        this.projectMemberNumber.setEditable(false);
+        this.projectNameLabel.setEditable(false);
         this.languageBundle.setValue(rb);
+
+        setListener();
+
+
+    }
+
+
+    private void addNameListener() {
+        this.projectNameLabel.textProperty().bind();
     }
 
     public Tab getTab() {
@@ -96,7 +153,16 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     }
 
     private void reloadElements() {
-        // Nothing to do
+        this.addSimButton.setText(getValueFromKey("addMember"));
+        this.addRelationButton.setText(getValueFromKey("addRelation"));
+        this.projectNameLabel.setPromptText(getValueFromKey("project_name_label"));
+        this.projectMemberNumber.setPromptText(getValueFromKey("project_member_number"));
+
+        if (this.projectNameLabel.isEditable()) {
+            this.updateFamilyName.setText(getValueFromKey("button_confirm"));
+        } else {
+            this.updateFamilyName.setText(getValueFromKey("update_project_name"));
+        }
     }
 
     /*
@@ -107,6 +173,7 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
+
     }
 
     @Override

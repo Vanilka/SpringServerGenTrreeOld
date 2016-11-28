@@ -3,6 +3,8 @@ package com.genealogytree.ExceptionManager.config;
 public enum Causes {
     ANOTHER_CAUSE(0, "Another Error"),
     UNAUTHORIZED(401, "Required full authorization"),
+    OPTIMISTIC_LOCK(111, "Row was updated or deleted by another transaction "),
+    NO_VERSION_FIELD(110, "Persistence Entity must provided version"),
     /*
     * USERS
      */
@@ -19,7 +21,8 @@ public enum Causes {
     /*
     *  FAMILY
      */
-    PROJECT_NOT_FOUND(601, "Family not found");
+    PROJECT_NOT_FOUND(701, "Family not found"),
+    PROJECT_ACCESS_VIOLATION(702, "Access Denied. This is not your project");
 
 
 

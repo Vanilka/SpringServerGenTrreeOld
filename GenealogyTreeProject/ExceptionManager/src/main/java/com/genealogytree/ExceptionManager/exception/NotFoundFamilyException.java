@@ -18,4 +18,8 @@ public class NotFoundFamilyException extends Exception {
     public NotFoundFamilyException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public Causes getCausesInstance() {
+        return Causes.PROJECT_NOT_FOUND;
+    }
 }

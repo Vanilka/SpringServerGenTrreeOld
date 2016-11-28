@@ -20,4 +20,9 @@ public class UserOrPasswordIncorrectException extends Exception {
     public UserOrPasswordIncorrectException(String message, Throwable cause) {
         super(message, cause);
     }
+
+
+    public Causes getCausesInstance() {
+        return Causes.LOGIN_PASSWORD_INCORRECT;
+    }
 }

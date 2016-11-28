@@ -45,6 +45,16 @@ public class GTFamilyServiceOffline implements GTFamilyService {
     }
 
     @Override
+    public ServerResponse updateFamily(GTX_Family family) {
+        return null;
+    }
+
+    @Override
+    public ServerResponse updateFamilyName(String newName) {
+        return null;
+    }
+
+    @Override
     public void setCurrentFamily(GTX_Family family) {
         this.currentFamily = family;
     }

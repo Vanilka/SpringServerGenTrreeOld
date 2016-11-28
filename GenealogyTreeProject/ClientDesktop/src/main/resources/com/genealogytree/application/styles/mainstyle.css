@@ -12,9 +12,13 @@
     -gentree-dark-selen: #266558;
     -gentree-dark-green-grey: #2F3737;
     -gentree-medium-grey: #404A4B;
-    -geentree-greem-markup: #81d136;
+    -gentree-greem-markup: #81d136;
     -gentree-focus-color: rgba(82, 202, 0, 0.9);
     -gentree-content-pane: rgba(230, 255, 251, 0.2);
+    -gentree-textfield-text-color: #ecf2dd;
+    -gentree-textfield-unfocus-text-color: #acbdb2;
+    -gentree-textfield-error-color: #9E0303;
+    -gentree-dark-selen-button: #214e41;
 }
 
 /*
@@ -200,6 +204,33 @@
 
 #OnlineProjectPane {
 }
+/*
+*  COMMONS
+*/
+.jfx-text-field, .jfx-password-field, .jfx-text-area{
+    -fx-background-color: transparent ;
+    -fx-font-weight: BOLD;
+    -fx-font-size: 15px;
+   /* -fx-prompt-text-fill: #c8c8bb;*/
+    -fx-prompt-text-fill: -gentree-textfield-unfocus-text-color;
+    -fx-text-fill: -gentree-textfield-text-color ;
+    -fx-alignment: top-left ;
+    -fx-focus-color: -gentree-greem-markup;
+    -fx-unfocus-color:  -gentree-medium-grey;
+}
+
+.jfx-text-field:error , .jfx-password-field:error , .jfx-text-area:error {
+    /* Line color */
+}
+
+.jfx-text-field .errorLabel, .jfx-password-field .errorLabel, .jfx-text-area .errorLabel{
+    -fx-text-fill : -gentree-textfield-error-color;
+    -fx-font-size: 0.8em;
+}
+.jfx-text-field .errorIcon, .jfx-password-field .errorIcon , .jfx-text-area .errorIcon{
+    -fx-text-fill : -gentree-textfield-error-color;
+    -fx-font-size: 1.0em;
+}
 
 /*
  *  Style Used for LOGON SCREENS
@@ -240,9 +271,11 @@
 }
 
 .jfxButton {
-    -fx-background-color: #1f7f6a;
-
+    -fx-background-color: -gentree-dark-selen;
+    -fx-text-fill: -gentree-textfield-text-color;
+    -fx-font-size: 18px;
 }
+
 
 .logonFXForm {
 
@@ -264,7 +297,7 @@
 }
 
 #buttonConnect {
-    -fx-background-color: #266558;
+    -fx-background-color: -gentree-dark-selen;
 }
 
 .linkHelpLogon {
@@ -289,12 +322,12 @@
 }
 
 #buttonRegister {
-    -fx-background-color: #266558;
+    -fx-background-color: -gentree-dark-selen;
     -fx-text-fill: honeydew;
 }
 
 #buttonConfirm {
-    -fx-background-color: #266558;
+    -fx-background-color: -gentree-dark-selen;
     -fx-text-fill: honeydew;
 }
 
@@ -511,6 +544,7 @@
 
 .ButtonJFX {
     -fx-background-color: -gentree-dark-selen;
+    -fx-font-size: 18px;
 }
 
 /*
@@ -530,13 +564,14 @@
 }
 
 #addMemberButton {
-    -fx-background-color: #266558;
+    -fx-background-color: -gentree-dark-selen;
 }
 
 .gt_MaintabContentPane {
     -fx-background-color: transparent;
-    -fx-pref-width: 800;
+    -fx-pref-width: 1000;
     -fx-pref-height: 180;
+    -fx-padding: 0 50 0 50;
 }
 
 #gtMainTabPane {
@@ -558,11 +593,11 @@
 }
 
 #gtMainTabPane .tab:selected .jfx-rippler {
-    -fx-rippler-fill: -geentree-greem-markup;
+    -fx-rippler-fill: -gentree-greem-markup;
 }
 
 #gtMainTabPane .tab-header-area .tab-selected-line {
-    -fx-stroke: -geentree-greem-markup;
+    -fx-stroke: -gentree-greem-markup;
 }
 
 #gtMainTabPane .tab {
@@ -573,5 +608,15 @@
 .radioButtonFX {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
-    -fx-selected-color: -geentree-greem-markup;
+    -fx-selected-color: -gentree-greem-markup;
+}
+
+.tabInfoButton {
+    -fx-pref-height: 90px;
+    -fx-pref-width: 140px;
+}
+
+#tabInfoButtonVbox {
+    -fx-spacing: 50px;
+    -fx-alignment: center-left;
 }

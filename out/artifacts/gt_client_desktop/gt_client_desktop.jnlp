@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="gt_client_desktop.jar" size="211368" download="eager" />
+    <jar href="gt_client_desktop.jar" size="217688" download="eager" />
     <jar href="lib/jfoenix.jar" size="2183063" download="eager" />
   </resources>
   <jfx:javafx-desc  width="600" height="400" main-class="com.genealogytree.GenealogyTree"  name="gt-client-desktop" />

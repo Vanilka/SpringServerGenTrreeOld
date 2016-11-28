@@ -9,7 +9,7 @@ import com.genealogytree.application.FXMLPaneController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
 import com.genealogytree.configuration.FXMLFiles;
-import com.genealogytree.services.implementation.GTFamillyServiceOnline;
+import com.genealogytree.services.implementation.GTFamilyServiceOnline;
 import com.genealogytree.services.implementation.GTUserServiceOnline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -123,7 +123,7 @@ public class PaneLogonWindowController implements Initializable, FXMLPaneControl
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
-        this.context.setFamilyService(new GTFamillyServiceOnline(this.context));
+        this.context.setFamilyService(new GTFamilyServiceOnline(this.context));
         this.context.setUserService(new GTUserServiceOnline(this.context));
     }
 

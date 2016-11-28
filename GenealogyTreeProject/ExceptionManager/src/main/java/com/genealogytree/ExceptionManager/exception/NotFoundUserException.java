@@ -18,4 +18,8 @@ public class NotFoundUserException extends Exception {
     public NotFoundUserException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public Causes getCausesInstance() {
+        return Causes.NOT_FOUND_USER;
+    }
 }

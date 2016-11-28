@@ -6,7 +6,7 @@ import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
 import com.genealogytree.configuration.FXMLFiles;
 import com.genealogytree.domain.GTX_Family;
-import com.genealogytree.services.implementation.GTFamillyServiceOnline;
+import com.genealogytree.services.implementation.GTFamilyServiceOnline;
 import com.genealogytree.services.implementation.GTFamilyServiceOffline;
 import com.genealogytree.services.responses.FamilyResponse;
 import com.genealogytree.services.responses.ServerResponse;
@@ -80,7 +80,7 @@ public class DialogNewProjectController implements Initializable, FXMLPaneContro
     @FXML
     public void confrim() {
 
-        if (this.context.getFamilyService() instanceof GTFamillyServiceOnline) {
+        if (this.context.getFamilyService() instanceof GTFamilyServiceOnline) {
             ServerResponse response = this.context.getFamilyService().addNewProject(new GTX_Family(this.familyNameField.getText().trim()));
             if (response instanceof FamilyResponse) {
                 System.out.println("utworzono nowy projekt");

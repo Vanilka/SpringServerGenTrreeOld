@@ -3,6 +3,7 @@ package com.genealogytree.domain;
 import com.genealogytree.configuration.Listenable;
 
 import com.genealogytree.domain.beans.FamilyBean;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.beans.PropertyChangeSupport;

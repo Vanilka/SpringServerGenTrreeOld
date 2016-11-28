@@ -9,6 +9,7 @@ import com.genealogytree.GenealogyTree;
 import com.genealogytree.application.FXMLPaneController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
+import com.genealogytree.configuration.FXMLFiles;
 import com.genealogytree.configuration.traduction.Languages;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -132,6 +133,17 @@ public class PaneMenuBarController implements Initializable, FXMLPaneController 
 
         this.languageChooser.setCellFactory(new LanguageCellFactory());
         this.languageChooser.setButtonCell(new LanguageCell());
+    }
+
+    @FXML
+    public void returnChooseApplication() {
+        this.manager.loadFxml(new PaneChooseApplicationTypeController(), this.manager.getMainWindow().getRootWindow(), FXMLFiles.CHOOSE_APPLICATION_TYPE.toString(), ScreenManager.Where.CENTER);;
+        this.context.reloadContext();
+    }
+
+    @FXML
+    public void synchroniseOnServer() {
+
     }
 
     /*

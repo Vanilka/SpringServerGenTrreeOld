@@ -10,10 +10,16 @@ import com.genealogytree.services.responses.ServerResponse;
 public interface GTFamilyService {
 
      void setContext(GenealogyTreeContext context);
+
      ServerResponse getProjects();
      ServerResponse addNewProject(GTX_Family familyBean);
+     ServerResponse updateFamily(GTX_Family family);
+
+     ServerResponse updateFamilyName(String newName);
 
       void setCurrentFamily(GTX_Family family);
      GTX_Family getCurrentFamily();
+
+
 
 }

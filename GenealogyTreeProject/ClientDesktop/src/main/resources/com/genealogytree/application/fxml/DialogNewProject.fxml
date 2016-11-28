@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="newProjectDialogInternePane" layoutX="19.0" layoutY="75.0" styleClass="logonCommon" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <JFXTextField fx:id="familyNameField" focusColor="#81d136" labelFloat="true" layoutX="71.0" layoutY="65.0" maxWidth="268.0" minWidth="268.0" prefHeight="55.0" prefWidth="268.0" promptText="%project_name" unFocusColor="#c3dbd4" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0">
+            <JFXTextField fx:id="familyNameField" labelFloat="true" layoutX="71.0" layoutY="65.0" maxWidth="268.0" minWidth="268.0" prefHeight="55.0" prefWidth="268.0" promptText="%project_name" unFocusColor="#c3dbd4" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font size="18.0" />
                </font></JFXTextField>

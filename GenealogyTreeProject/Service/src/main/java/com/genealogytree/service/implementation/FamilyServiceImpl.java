@@ -37,6 +37,11 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
+    public GT_Family updateFamily(GT_Family family) {
+        return this.repository.saveAndFlush(family);
+    }
+
+    @Override
     public GT_Family getFamily(Long id) throws NotFoundFamilyException{
         GT_Family family = this.repository.findOne(id);
         if(family == null) {

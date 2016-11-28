@@ -14,16 +14,16 @@
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>
     <children>
-        <JFXPasswordField fx:id="fieldPassword" focusColor="#81d136" labelFloat="true" layoutX="38.0" layoutY="152.0"
+        <JFXPasswordField fx:id="fieldPassword"  labelFloat="true" layoutX="38.0" layoutY="152.0"
                           maxWidth="224.0" minWidth="224.0" prefHeight="48.0" prefWidth="224.0"
-                          promptText="%logon_form_password" styleClass="cretentialFIeld" unFocusColor="#253930">
+                          promptText="%logon_form_password" styleClass="cretentialFIeld">
             <font>
                 <Font size="14.0"/>
             </font>
         </JFXPasswordField>
-        <JFXTextField fx:id="fieldLogin" focusColor="#81d136" labelFloat="true" layoutX="38.0" layoutY="54.0"
+        <JFXTextField fx:id="fieldLogin" labelFloat="true" layoutX="38.0" layoutY="54.0"
                       maxWidth="224.0" minWidth="224.0" prefHeight="48.0" prefWidth="224.0"
-                      promptText="%logon_form_login" styleClass="cretentialFIeld" unFocusColor="#253930">
+                      promptText="%logon_form_login" styleClass="cretentialFIeld" >
             <font>
                 <Font size="14.0"/>
             </font>

@@ -51,6 +51,8 @@ public class PaneChooseApplicationTypeController implements Initializable, FXMLP
         LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
         this.languageBundle.setValue(rb);
         addTopOffsetListener();
+        localProjectPane.resize(300, 400);
+        onlineProjectPane.resize(300,400);
     }
 
     public void addTopOffsetListener() {
