@@ -24,6 +24,7 @@ public enum FXMLFiles {
     NEW_PROJECT_DIALOG("DialogNewProject.fxml"),
     TAB_ADD_NEW_MEMBER("TabAddNewMember.fxml"),
     TAB_INFO_PROJECT("TabInfoProject.fxml"),
+    TAB_INFO_MEMBER("TabInfoMember.fxml"),
     TAB_ADD_NEW_RELATION("TabAddNewRelation.fxml");
 
     private final String fxmlPath = "/com/genealogytree/application/fxml/";

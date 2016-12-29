@@ -2,6 +2,7 @@ package com.genealogytree.services;
 
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.domain.GTX_Family;
+import com.genealogytree.domain.GTX_Member;
 import com.genealogytree.services.responses.ServerResponse;
 
 /**
@@ -16,6 +17,8 @@ public interface GTFamilyService {
      ServerResponse updateFamily(GTX_Family family);
 
      ServerResponse updateFamilyName(String newName);
+
+     ServerResponse addNewMember(GTX_Member member);
 
       void setCurrentFamily(GTX_Family family);
      GTX_Family getCurrentFamily();

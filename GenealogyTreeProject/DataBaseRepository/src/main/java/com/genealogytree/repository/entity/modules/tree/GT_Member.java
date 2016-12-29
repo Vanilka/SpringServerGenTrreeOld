@@ -1,6 +1,8 @@
 package com.genealogytree.repository.entity.modules.tree;
 
 import com.genealogytree.domain.beans.MemberBean;
+import com.genealogytree.domain.enums.Age;
+import com.genealogytree.domain.enums.Sex;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +15,7 @@ public class GT_Member extends MemberBean implements Serializable {
      * This is an Entity Class represent  Member in Database
      */
     private GT_Family ownerF;
+    private GT_Images image;
 
     /**
      * Constructor
@@ -24,6 +27,12 @@ public class GT_Member extends MemberBean implements Serializable {
     public GT_Member(String name, String surname, Age age, Sex sex, GT_Family ownerF) {
         super(name, surname, age, sex);
         this.ownerF = ownerF;
+    }
+
+    public GT_Member(String name, String surname, Age age, Sex sex, GT_Family ownerF, GT_Images image) {
+        super(name, surname, age, sex);
+        this.ownerF = ownerF;
+        this.image = image;
     }
 
     /*
@@ -75,6 +84,13 @@ public class GT_Member extends MemberBean implements Serializable {
         return sex;
     }
 
+
+    @OneToOne(optional = true, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "Image_ID", nullable = true)
+    public GT_Images getImage() {
+        return image;
+    }
+
     /*
     * SETTERS
     */
@@ -109,5 +125,9 @@ public class GT_Member extends MemberBean implements Serializable {
 
     public void setOwnerF(GT_Family ownerF) {
         this.ownerF = ownerF;
+    }
+
+    public void setImage(GT_Images image) {
+        this.image = image;
     }
 }

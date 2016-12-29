@@ -3,7 +3,10 @@ package com.genealogytree.domain;
 import com.genealogytree.configuration.Listenable;
 
 import com.genealogytree.domain.beans.FamilyBean;
+import com.genealogytree.domain.beans.UserBean;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.beans.PropertyChangeSupport;
@@ -13,16 +16,20 @@ import java.util.List;
 /**
  * Created by vanilka on 22/11/2016.
  */
-public class GTX_Family extends FamilyBean implements Serializable, Listenable {
+public class GTX_Family implements Serializable, Observable {
 
 
     private static final long serialVersionUID = -7356882826049849553L;
 
-    private ObservableList<GTX_Member> gtx_membersList;
-    private PropertyChangeSupport pcs;
+    private LongProperty version;
+    private LongProperty id;
+    private StringProperty name;
 
+    private ObservableList<GTX_Member> gtx_membersList;
     {
-        pcs = new PropertyChangeSupport(this);
+        version = new SimpleLongProperty();
+        id = new SimpleLongProperty();
+        name = new SimpleStringProperty();
         gtx_membersList = FXCollections.observableArrayList();
     }
 
@@ -30,9 +37,18 @@ public class GTX_Family extends FamilyBean implements Serializable, Listenable {
         super();
     }
 
-    public GTX_Family(String name) {
-        super(name);
+    public GTX_Family(FamilyBean bean) {
+        this.id.setValue(bean.getId());
+        this.name.setValue(bean.getName());
+        this.version.setValue(bean.getVersion());
+    };
+
+    public  GTX_Family(String name) {
+        this.version.setValue(null);
+        this.id.setValue(null);
+        this.name.setValue(name);
     }
+
 
     public void addMember(GTX_Member member) {
         gtx_membersList.add(member);
@@ -43,19 +59,30 @@ public class GTX_Family extends FamilyBean implements Serializable, Listenable {
      */
 
     public Long getVersion() {
-        return version;
+        return version.getValue();
     }
 
     public Long getId() {
-        return id;
+        return id.getValue();
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
+    }
+    public StringProperty getNameProperty() {
+        return this.name;
     }
 
     public ObservableList<GTX_Member> getGtx_membersList() {
         return gtx_membersList;
+    }
+
+    public FamilyBean getFamilyBean() {
+        FamilyBean bean = new FamilyBean();
+        bean.setVersion(getVersion());
+        bean.setId(getId());
+        bean.setName(getName());
+        return bean;
     }
 
     /**
@@ -63,18 +90,16 @@ public class GTX_Family extends FamilyBean implements Serializable, Listenable {
      */
 
     public void setVersion(Long version) {
-        this.version = version;
+        this.version.setValue(version);
     }
 
     public void setId(Long id) {
 
-        this.id = id;
+        this.id.setValue(id);
     }
 
     public void setName(String name) {
-        String oldName = this.name;
-        this.name = name;
-        pcs.firePropertyChange("name", oldName, this.name);
+        this.name.setValue(name);
     }
 
     public void setGtx_membersList(List<GTX_Member> gtx_membersList) {
@@ -82,8 +107,19 @@ public class GTX_Family extends FamilyBean implements Serializable, Listenable {
         this.gtx_membersList.addAll(gtx_membersList);
     }
 
+    public void updateFromFamilyBean(FamilyBean bean) {
+        this.id.setValue(bean.getId());
+        this.name.setValue(bean.getName());
+        this.version.setValue(bean.getVersion());
+    }
+
     @Override
-    public PropertyChangeSupport getPropertyChangeSupport() {
-        return this.pcs;
+    public void addListener(InvalidationListener listener) {
+
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+
     }
 }

@@ -5,22 +5,26 @@
  */
 package com.genealogytree.application;
 
-import com.genealogytree.application.fxmlcontrollers.*;
+import com.genealogytree.application.fxmlcontrollers.PaneChooseApplicationTypeController;
+import com.genealogytree.application.fxmlcontrollers.PaneFooterController;
+import com.genealogytree.application.fxmlcontrollers.PaneMainWindowController;
+import com.genealogytree.application.fxmlcontrollers.PaneMenuBarController;
 import com.genealogytree.configuration.BorderPaneReloadHelper;
 import com.genealogytree.configuration.FXMLFiles;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -38,6 +42,8 @@ public class ScreenManager {
     private Stage stage;
     private Scene scene;
     private BorderPaneReloadHelper helper;
+
+    final FileChooser fileChooser = new FileChooser();
 
     {
         helper = new BorderPaneReloadHelper();
@@ -109,6 +115,26 @@ public class ScreenManager {
         }
 
     }
+
+    public File openImageFileChooser() {
+        configureImageFileChooser(this.fileChooser);
+        File file = fileChooser.showOpenDialog(stage);
+        return file;
+
+    }
+
+    private void configureImageFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle(this.context.getBundle().getString("select_image_dialog"));
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+    }
+
 
     public void showNewDialog(FXMLDialogController controller, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
@@ -204,7 +230,7 @@ public class ScreenManager {
     }
 
     public FXMLTabController loadFxml(FXMLTabController controller, JFXTabPane tabPane, Tab tab, String fxml, String title) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             tab.setContent(loader.load());
             tab.setText(title);
@@ -230,14 +256,14 @@ public class ScreenManager {
         return controller;
     }
 
-    public FXMLTabController loadFxml(FXMLTabController controller, JFXTabPane tabPane,Tab tab, String fxml) {
+    public FXMLTabController loadFxml(FXMLTabController controller, JFXTabPane tabPane, Tab tab, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
             tab.setContent(loader.load());
             controller = loader.getController();
             controller.setManager(this);
             controller.setContext(this.context);
-            controller.setTabAndTPane(tabPane,tab);
+            controller.setTabAndTPane(tabPane, tab);
 
         } catch (IOException ex) {
             ex.printStackTrace();

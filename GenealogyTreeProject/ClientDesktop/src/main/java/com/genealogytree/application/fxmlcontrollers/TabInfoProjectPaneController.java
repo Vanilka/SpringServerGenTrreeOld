@@ -4,6 +4,8 @@ import com.genealogytree.application.FXMLTabController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
 import com.genealogytree.configuration.FXMLFiles;
+import com.genealogytree.services.responses.FamilyResponse;
+import com.genealogytree.services.responses.ServerResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
@@ -18,6 +20,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.appender.SyslogAppender;
+import org.apache.logging.log4j.core.jmx.Server;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -72,9 +76,15 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     @FXML
     public void updateFamilyName() {
         if (this.projectNameLabel.isEditable() &&
-                ! this.projectNameLabel.getText().equals(
+                !this.projectNameLabel.getText().equals(
                         this.context.getFamilyService().getCurrentFamily().getName())) {
-            this.context.getFamilyService().updateFamilyName(this.projectNameLabel.getText());
+            ServerResponse response = this.context.getFamilyService().updateFamilyName(this.projectNameLabel.getText());
+            if (response instanceof FamilyResponse) {
+                System.out.println("FamilyResponse");
+            } else {
+                System.out.println("Error response");
+
+            }
         }
         this.projectNameLabel.setEditable(!this.projectNameLabel.isEditable());
 
@@ -88,8 +98,10 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     private void changed(ObservableValue<? extends Boolean> boolChange, Boolean oldValue, Boolean newValue) {
         if (newValue.booleanValue()) {
             this.updateFamilyName.setText(getValueFromKey("button_confirm"));
+            unBindNameLabel();
         } else {
             this.updateFamilyName.setText(getValueFromKey("update_project_name"));
+            bindNameLabel();
         }
     }
 
@@ -105,14 +117,18 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.languageBundle.setValue(rb);
 
         setListener();
-
-
     }
 
 
-    private void addNameListener() {
-        this.projectNameLabel.textProperty().bind();
+    private void bindNameLabel() {
+       this.projectNameLabel.textProperty().bind(this.context.getFamilyService().getCurrentFamily().getNameProperty());
     }
+
+    private void unBindNameLabel() {
+        this.projectNameLabel.textProperty().unbind();
+    }
+
+
 
     public Tab getTab() {
         return tab;
@@ -173,6 +189,7 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
+        bindNameLabel();
 
     }
 

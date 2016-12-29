@@ -31,6 +31,7 @@ public class FamilyBean implements Serializable {
         this.name = name;
     }
 
+
     /**
      * GETTER
      */

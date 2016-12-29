@@ -5,6 +5,9 @@
  */
 package com.genealogytree.domain.beans;
 
+import com.genealogytree.domain.enums.Age;
+import com.genealogytree.domain.enums.Sex;
+
 import java.io.Serializable;
 
 /**
@@ -14,20 +17,14 @@ public class MemberBean implements Serializable {
 
     private static final long serialVersionUID = -8338241168394692965L;
 
-    public enum Age {
-        BABY, CHILD, ADO, YOUNG_ADULT, ADULT, SENIOR;
-    }
-
-    public enum Sex {
-        MALE, FEMALE
-    }
-
     protected Long version;
     protected Long id;
     protected String name;
     protected String surname;
     protected Age age;
     protected Sex sex;
+    private FamilyBean ownerF;
+    private ImageBean image;
 
 
     /**
@@ -50,11 +47,7 @@ public class MemberBean implements Serializable {
         this.surname = surname;
         this.age = age;
         this.sex = sex;
-
-
-
     }
-
 
 
     /*
@@ -85,6 +78,14 @@ public class MemberBean implements Serializable {
         return sex;
     }
 
+    public FamilyBean getOwnerF() {
+        return ownerF;
+    }
+
+    public ImageBean getImage() {
+        return image;
+    }
+
     /*
     *  SETTERS
     */
@@ -111,5 +112,13 @@ public class MemberBean implements Serializable {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public void setOwnerF(FamilyBean ownerF) {
+        this.ownerF = ownerF;
+    }
+
+    public void setImage(ImageBean image) {
+        this.image = image;
     }
 }

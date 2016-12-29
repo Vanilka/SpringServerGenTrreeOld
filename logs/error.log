@@ -22,3 +22,147 @@
 2016-11-23 00:36:38,773 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
 2016-11-23 00:53:10,705 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class java.lang.NullPointerException - null
 2016-11-23 00:53:10,706 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-24 15:05:49,584 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabInfoProject.fxml
+
+2016-12-24 15:05:49,587 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException: Cannot bind to null
+2016-12-24 15:06:27,657 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabInfoProject.fxml
+
+2016-12-24 15:06:27,659 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException: Cannot bind to null
+2016-12-25 23:05:09,959 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabInfoProject.fxml
+
+2016-12-25 23:05:09,960 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException: Cannot bind to null
+2016-12-26 00:21:20,551 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabInfoProject.fxml
+
+2016-12-26 00:21:20,552 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException
+2016-12-26 13:31:00,583 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:00,586 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:02,093 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:02,094 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:02,479 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:02,479 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:02,667 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:02,668 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:03,722 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:03,723 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:05,109 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:05,109 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:05,423 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:05,423 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:05,627 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:05,627 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:05,846 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:05,846 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,028 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,028 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,200 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,200 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,358 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,358 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,526 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,526 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,681 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,681 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:06,865 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:06,865 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:07,433 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:07,433 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:07,673 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:07,673 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,021 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,021 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,193 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,194 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,371 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,371 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,519 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,519 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,821 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,821 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:08,957 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:08,957 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:16,290 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:16,290 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:16,814 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:16,814 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:17,237 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:17,237 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 13:31:18,818 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 13:31:18,818 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 14:30:40,476 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 14:30:40,478 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 14:30:53,585 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 14:30:53,585 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 14:30:58,514 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 14:30:58,514 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 14:37:22,773 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - Resource "addSimConfirm" not found.
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml:26
+
+2016-12-26 14:37:22,774 ERROR c.g.a.ScreenManager [JavaFX Application Thread] null
+2016-12-26 16:47:57,997 ERROR c.g.a.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
+/Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/ClientDesktop/target/classes/com/genealogytree/application/fxml/TabAddNewMember.fxml
+
+2016-12-26 16:47:57,999 ERROR c.g.a.ScreenManager [JavaFX Application Thread] java.lang.NullPointerException

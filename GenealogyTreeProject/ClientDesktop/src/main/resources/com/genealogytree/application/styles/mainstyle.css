@@ -620,3 +620,12 @@
     -fx-spacing: 50px;
     -fx-alignment: center-left;
 }
+
+.simPhoto {
+
+}
+
+.imagePane {
+    -fx-background-color:-gentree-dark-green-grey ;
+
+}

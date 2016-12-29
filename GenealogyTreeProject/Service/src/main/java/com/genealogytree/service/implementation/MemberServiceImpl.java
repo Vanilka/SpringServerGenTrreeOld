@@ -4,8 +4,10 @@ import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
 import com.genealogytree.repository.FamilyRepository;
 import com.genealogytree.repository.MemberRepository;
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
+import com.genealogytree.repository.entity.modules.tree.GT_Images;
 import com.genealogytree.repository.entity.modules.tree.GT_Member;
 import com.genealogytree.service.FamilyService;
+import com.genealogytree.service.ImagesService;
 import com.genealogytree.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +27,9 @@ public class MemberServiceImpl  implements MemberService {
 
     @Autowired
     MemberRepository repository;
+
+    @Autowired
+    ImagesService imagesService;
 
     @Autowired
     FamilyService familyService;
@@ -47,6 +52,10 @@ public class MemberServiceImpl  implements MemberService {
 
     @Override
     public GT_Member addMember(GT_Member member) {
-        return repository.save(member);
+        member.getImage().setName(GT_Images.generateName());
+        GT_Member newMember = repository.save(member);
+        return newMember;
     }
+
 }
+
