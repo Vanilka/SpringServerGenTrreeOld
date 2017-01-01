@@ -3,6 +3,7 @@ package com.genealogytree.services.implementation;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.domain.GTX_Family;
 import com.genealogytree.domain.GTX_Member;
+import com.genealogytree.domain.GTX_Relation;
 import com.genealogytree.services.GTFamilyService;
 import com.genealogytree.services.responses.ServerResponse;
 import javafx.beans.property.ObjectProperty;
@@ -57,6 +58,11 @@ public class GTFamilyServiceOffline implements GTFamilyService {
 
     @Override
     public ServerResponse addNewMember(GTX_Member member) {
+        return null;
+    }
+
+    @Override
+    public ServerResponse addNewRelation(GTX_Relation relation) {
         return null;
     }
 

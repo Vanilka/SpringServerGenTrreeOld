@@ -16,7 +16,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -27,6 +31,8 @@ import java.util.ResourceBundle;
 public class GenealogyTreeContext {
 
     private static String TRADUCTION_LOCATION = "com.genealogytree.configuration.traduction.gt_location";
+    public static String IMAGES_DIR = "SimPhotos";
+
     private ObjectProperty<UserBean> connectedUser = new SimpleObjectProperty<>();
     private Client client;
     private WebTarget mainTarget;
@@ -49,6 +55,7 @@ public class GenealogyTreeContext {
         bundle.setValue(ResourceBundle.getBundle(TRADUCTION_LOCATION, locale));
 
         this.connectedUser.setValue(null);
+        createDirectories();
         setDefaultProperties();
     }
 
@@ -236,5 +243,16 @@ public class GenealogyTreeContext {
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+    }
+
+    private void createDirectories() {
+        Path path = Paths.get(IMAGES_DIR);
+        try {
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
+            }
+        } catch (Exception e) {
+
+        }
     }
 }

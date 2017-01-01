@@ -43,6 +43,9 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
     private AnchorPane mainApplicationWindow;
 
     @FXML
+    private JFXTabPane gtMainTabPane;
+
+    @FXML
     private TableView<GTX_Member> gtFamilyMemberTable;
 
     @FXML
@@ -50,9 +53,6 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
 
     @FXML
     private TableColumn<GTX_Member, String> simSurnameColumn;
-
-    @FXML
-    private JFXTabPane gtMainTabPane;
 
 
     private Tab gtMainTabInfo;
@@ -71,38 +71,11 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
 
         this.languageBundle.setValue(rb);
 
-        setCellFactory();
-
-
     }
 
-    @FXML
-    public void showInfoMember(MouseEvent event) {
-        if (event.getClickCount() == 2 && gtFamilyMemberTable.getSelectionModel().getSelectedItem() != null) {
-            GTX_Member member = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
-            Tab infoSimTab = new Tab();
-            TabInfoMemberPaneController tabInfoMember = (TabInfoMemberPaneController) this.manager.loadFxml(new TabInfoMemberPaneController(), gtMainTabPane, infoSimTab, FXMLFiles.TAB_INFO_MEMBER.toString(), member.getName().concat(" " + member.getSurname()));
-
-            tabInfoMember.setMember(member);
-
-        }
-    }
-
-    private void setCellFactory() {
-        this.simNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        this.simSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
-    }
-
-    private void setMemberListListener() {
-
-    }
 
     private void setInfoTab() {
         this.manager.loadFxml(new TabInfoProjectPaneController(), gtMainTabPane, gtMainTabInfo, FXMLFiles.TAB_INFO_PROJECT.toString(), getValueFromKey("info"));
-    }
-
-    private void setMemberList() {
-        this.gtFamilyMemberTable.setItems(this.context.getFamilyService().getCurrentFamily().getGtx_membersList());
     }
 
     /*
@@ -126,6 +99,28 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
         // Nothing to do
     }
 
+    @FXML
+    public void showInfoMember(MouseEvent event) {
+        if (event.getClickCount() == 2 && gtFamilyMemberTable.getSelectionModel().getSelectedItem() != null) {
+            GTX_Member member = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
+            Tab infoSimTab = new Tab();
+            TabInfoMemberPaneController tabInfoMember = (TabInfoMemberPaneController) this.manager.loadFxml(new TabInfoMemberPaneController(), gtMainTabPane, infoSimTab, FXMLFiles.TAB_INFO_MEMBER.toString(), member.getName().concat(" " + member.getSurname()));
+            tabInfoMember.setMember(member);
+
+        }
+    }
+
+    private void setCellFactory() {
+        this.simNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        this.simSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
+    }
+
+    private void setMemberList() {
+        this.gtFamilyMemberTable.setItems(this.context.getFamilyService().getCurrentFamily().getGtx_membersList());
+    }
+
+
+
     /*
      * GETTERS AND SETTERS
      */
@@ -135,8 +130,6 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
         setInfoTab();
-        setMemberList();
-
 
     }
 

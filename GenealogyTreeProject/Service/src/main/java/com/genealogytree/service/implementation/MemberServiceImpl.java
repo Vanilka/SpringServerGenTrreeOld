@@ -1,7 +1,6 @@
 package com.genealogytree.service.implementation;
 
 import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
-import com.genealogytree.repository.FamilyRepository;
 import com.genealogytree.repository.MemberRepository;
 import com.genealogytree.repository.entity.modules.tree.GT_Family;
 import com.genealogytree.repository.entity.modules.tree.GT_Images;
@@ -11,7 +10,6 @@ import com.genealogytree.service.ImagesService;
 import com.genealogytree.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,7 @@ import java.util.List;
 @Service
 @Transactional
 @ComponentScan("com.genealogytree")
-public class MemberServiceImpl  implements MemberService {
+public class MemberServiceImpl implements MemberService {
 
     @Autowired
     MemberRepository repository;
@@ -37,7 +35,7 @@ public class MemberServiceImpl  implements MemberService {
     @Override
     public List<GT_Member> getMembers(GT_Family family) throws NotFoundFamilyException {
 
-        if(familyService.exist(family) == false) {
+        if (familyService.exist(family) == false) {
             throw new NotFoundFamilyException();
         }
 
@@ -52,7 +50,9 @@ public class MemberServiceImpl  implements MemberService {
 
     @Override
     public GT_Member addMember(GT_Member member) {
-        member.getImage().setName(GT_Images.generateName());
+        if (member.getImage() != null) {
+            member.getImage().setName(GT_Images.generateName());
+        }
         GT_Member newMember = repository.save(member);
         return newMember;
     }

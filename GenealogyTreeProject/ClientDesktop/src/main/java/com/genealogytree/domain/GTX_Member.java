@@ -1,5 +1,6 @@
 package com.genealogytree.domain;
 
+import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.configuration.ImageFiles;
 import com.genealogytree.domain.beans.ImageBean;
 import com.genealogytree.domain.beans.MemberBean;
@@ -64,7 +65,7 @@ public class GTX_Member {
         if (bean.getImage() != null) {
             try {
                 System.out.println("Test open");
-                Path file = Paths.get(bean.getImage().getName() + ".png");
+                Path file = Paths.get(GenealogyTreeContext.IMAGES_DIR + "/" + bean.getImage().getName());
                 Files.write(file, bean.getImage().getContent());
                 setPhoto(file.toAbsolutePath().toString());
             } catch (Exception e) {
@@ -100,7 +101,7 @@ public class GTX_Member {
         return bean;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
         return version.get();
     }
 
@@ -108,7 +109,7 @@ public class GTX_Member {
         return version;
     }
 
-    public long getId() {
+    public Long getId() {
         return id.get();
     }
 
@@ -196,7 +197,7 @@ public class GTX_Member {
         if (bean.getImage() != null) {
             try {
                 System.out.println("Test open");
-                Path file = Paths.get(bean.getImage().getName());
+                Path file = Paths.get(GenealogyTreeContext.IMAGES_DIR + "/" + bean.getImage().getName());
                 Files.write(file, bean.getImage().getContent());
                 setPhoto(file.toAbsolutePath().toString());
             } catch (Exception e) {
@@ -222,5 +223,48 @@ public class GTX_Member {
     }
 
 
+
+
+    @Override
+    public String toString() {
+        return "GTX_Member{" +
+                "version=" + version +
+                ", id=" + id +
+                ", name=" + name +
+                ", surname=" + surname +
+                ", photo=" + photo +
+                ", age=" + age +
+                ", sex=" + sex +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GTX_Member)) return false;
+
+        GTX_Member that = (GTX_Member) o;
+
+        if (version != null ? !version.equals(that.version) : that.version != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
+        if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
+        if (age != that.age) return false;
+        return sex == that.sex;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = version != null ? version.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (surname != null ? surname.hashCode() : 0);
+        result = 31 * result + (photo != null ? photo.hashCode() : 0);
+        result = 31 * result + (age != null ? age.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        return result;
+    }
 }
 

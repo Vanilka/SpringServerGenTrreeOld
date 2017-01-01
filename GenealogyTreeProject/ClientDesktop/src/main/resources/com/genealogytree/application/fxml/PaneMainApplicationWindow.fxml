@@ -35,21 +35,17 @@
                                 <AnchorPane id="splitPaneHorizontal" maxWidth="250.0" minWidth="250.0"
                                             prefWidth="250.0">
                                     <children>
-                                        <TableView fx:id="gtFamilyMemberTable" layoutX="14.0" layoutY="14.0"
-                                                   prefHeight="200.0" prefWidth="200.0" styleClass="firstTypeTable"
-                                                   onMouseClicked="#showInfoMember"
-                                                   AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"
-                                                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                        <TableView fx:id="gtFamilyMemberTable" layoutX="20.0" layoutY="12.0" onMouseClicked="#showInfoMember" prefHeight="200.0" prefWidth="200.0" styleClass="firstTypeTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                                             <columns>
-                                                <TableColumn fx:id="simNameColumn" maxWidth="115.0" minWidth="115.0"
-                                                             prefWidth="-1.0" text="%simName"/>
-                                                <TableColumn fx:id="simSurnameColumn" maxWidth="115.0" minWidth="115.0"
-                                                             prefWidth="-1.0" text="%simSurname"/>
+                                                <TableColumn fx:id="simNameColumn" maxWidth="115.0" minWidth="115.0" prefWidth="-1.0" text="%simName" />
+                                                <TableColumn fx:id="simSurnameColumn" maxWidth="115.0" minWidth="115.0" prefWidth="-1.0" text="%simSurname" />
                                             </columns>
                                         </TableView>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"/>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+
+                                </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>

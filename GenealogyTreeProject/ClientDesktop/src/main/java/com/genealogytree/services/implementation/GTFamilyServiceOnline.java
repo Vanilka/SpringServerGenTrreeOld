@@ -3,8 +3,10 @@ package com.genealogytree.services.implementation;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.domain.GTX_Family;
 import com.genealogytree.domain.GTX_Member;
+import com.genealogytree.domain.GTX_Relation;
 import com.genealogytree.domain.beans.FamilyBean;
 import com.genealogytree.domain.beans.MemberBean;
+import com.genealogytree.domain.beans.RelationBean;
 import com.genealogytree.exception.ExceptionBean;
 import com.genealogytree.services.GTFamilyService;
 import com.genealogytree.services.responses.*;
@@ -152,6 +154,55 @@ public class GTFamilyServiceOnline implements GTFamilyService {
 
         return result;
     }
+
+    @Override
+    public ServerResponse addNewRelation(GTX_Relation relation) {
+        ServerResponse result = null;
+
+        try {
+            RelationBean bean = relation.getBean();
+            bean.setOwnerF(this.currentFamily.getValue().getFamilyBean());
+            System.out.println("Bean : " +Entity.json(bean));
+
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("relations")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .post(Entity.json(bean));
+
+            if (response.getStatus() != 200) {
+                System.out.println("Bad Status");
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+
+               ExceptionResponse exc = (ExceptionResponse) result;
+                System.out.println(exc.getException().getCause());
+            } else {
+                bean = response.readEntity(RelationBean.class);
+                relation.updateFromBean(bean);
+                refreshMemberFromBean(relation.getSimLeft(), new GTX_Member(bean.getSimLeft()));
+                this.currentFamily.getValue().addRelation(relation);
+                result = new RelationResponse(relation);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private GTX_Relation refreshMemberFromBean(GTX_Member target, GTX_Member source ) {
+        if ( this.getCurrentFamily().getGtx_membersList().contains(source)) {
+            System.out.println("To jest to !");
+        }
+
+
+        return null;
+    }
+
+    /*
+    * CHECKS
+     */
 
 
     public void setContext(GenealogyTreeContext context) {

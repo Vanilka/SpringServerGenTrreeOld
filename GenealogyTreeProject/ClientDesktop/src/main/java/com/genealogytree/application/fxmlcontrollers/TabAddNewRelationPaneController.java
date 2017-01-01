@@ -3,15 +3,26 @@ package com.genealogytree.application.fxmlcontrollers;
 import com.genealogytree.application.FXMLTabController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
+import com.genealogytree.configuration.ImageFiles;
+import com.genealogytree.domain.GTX_Member;
+import com.genealogytree.domain.GTX_Relation;
+import com.genealogytree.domain.enums.RelationType;
+import com.genealogytree.services.responses.ServerResponse;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,18 +35,41 @@ import java.util.ResourceBundle;
 public class TabAddNewRelationPaneController implements Initializable, FXMLTabController {
 
     private static final Logger LOG = LogManager.getLogger(TabAddNewRelationPaneController.class);
-
+    private  static final  int RELATION_HEIGHT = 50;
+    private  static final int  RELATION_WIDTH = 50;
     private ScreenManager manager;
     private GenealogyTreeContext context;
 
     @FXML
+    private AnchorPane addNewRelationTab;
+
+    @FXML
+    private JFXButton addSimCancelButton;
+
+    @FXML
+    private JFXButton addRelationConfirmButton;
+
+    @FXML
     private AnchorPane templateAnchorPane;
+
+    @FXML
+    private ComboBox<GTX_Member> simLeftChoice;
+
+    @FXML
+    private ComboBox<GTX_Member> childChoice;
+
+    @FXML
+    private ComboBox<GTX_Member> simRightChoice;
+
+    @FXML
+    private ComboBox<RelationType> relationType;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     private Tab tab;
     private JFXTabPane tabPane;
+
 
     /**
      * Initializes the controller class.
@@ -46,7 +80,146 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
 
         this.languageBundle.setValue(rb);
 
+        relationType.setItems(FXCollections.observableArrayList(
+                RelationType.NEUTRAL,
+                RelationType.LOVE,
+                RelationType.FIANCE,
+                RelationType.MARRIED
+        ));
+
+        setCellFactoryToCombobox(simLeftChoice);
+        setCellFactoryToCombobox(simRightChoice);
+        setCellFactoryToCombobox(childChoice);
+        setCellFactoryToRelationType(relationType);
     }
+
+    @FXML
+    public void addRelationConfirm() {
+        GTX_Relation relation = new GTX_Relation(simLeftChoice.getValue(), simRightChoice.getValue(), childChoice.getValue(), relationType.getValue(), true);
+        ServerResponse response = this.context.getFamilyService().addNewRelation(relation);
+
+        this.tabPane.getTabs().remove(tab);
+    }
+
+    @FXML
+    public void setRelationCancel() {
+        this.tabPane.getTabs().remove(tab);
+    }
+
+    private void setCellFactoryToCombobox(ComboBox<GTX_Member> combobox) {
+
+        combobox.setCellFactory(param -> {
+            final ListCell<GTX_Member> cell = getCustomListCellMembers();
+            return cell;
+        });
+
+        combobox.setButtonCell(getCustomListCellMembers());
+
+    }
+
+    private void setCellFactoryToRelationType(ComboBox<RelationType> combobox) {
+        combobox.setCellFactory(getCustomRelationListCellMembers());
+        combobox.setButtonCell(getCustomRelationListCellMembers().call(null));
+
+    }
+
+    private Callback<ListView<RelationType>, ListCell<RelationType>> getCustomRelationListCellMembers() {
+        Callback<ListView<RelationType>, ListCell<RelationType>> callback = new Callback<ListView<RelationType>, ListCell<RelationType>>() {
+            @Override
+            public ListCell<RelationType> call(ListView<RelationType> param) {
+                final ListCell<RelationType> relationCell = new ListCell<RelationType>() {
+                    @Override
+                    public void updateItem(RelationType item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            switch (item) {
+                                case NEUTRAL:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), RELATION_WIDTH, RELATION_HEIGHT));
+                                    setText("");
+                                    break;
+                                case LOVE:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_LOVE.toString(),RELATION_WIDTH, RELATION_HEIGHT));
+                                    setText("");
+                                    break;
+                                case FIANCE:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_FIANCE.toString(), RELATION_WIDTH, RELATION_HEIGHT));
+                                    setText("");
+                                    break;
+                                case MARRIED:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_MARRIED.toString(),RELATION_WIDTH, RELATION_HEIGHT));
+                                    setText("");
+                                    break;
+                                default:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), RELATION_WIDTH, RELATION_HEIGHT));
+                                    setText("");
+                            }
+                        } else {
+                            setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), RELATION_WIDTH, RELATION_HEIGHT));
+                            setText("");
+                        }
+                    }
+
+                };
+                return relationCell;
+            }
+        };
+        return callback;
+    }
+
+    private ListCell<GTX_Member> getCustomListCellMembers() {
+        ListCell<GTX_Member> cell = new ListCell<GTX_Member>() {
+            @Override
+            public void updateItem(GTX_Member item, boolean empty) {
+                super.updateItem(item, empty);
+                {
+                    if (item != null) {
+                        ImageView imv = new ImageView(item.getPhoto());
+                        imv.setFitWidth(80);
+                        imv.setFitHeight(100);
+                        setGraphic(imv);
+                        setText(item.getName() + " " + item.getSurname().toUpperCase());
+                    } else {
+                        setGraphic(null);
+                        setText("null");
+                    }
+
+                }
+            }
+        };
+        return cell;
+    }
+
+    private ImageView setGraphicToImageView(String path, int width, int height) {
+        ImageView imv = new ImageView(path);
+        imv.setFitWidth(width);
+        imv.setFitHeight(height);
+        return imv;
+    }
+
+    private void populateComboBox(ObservableList<GTX_Member> list, ComboBox<GTX_Member> comboBox) {
+        comboBox.setItems(list);
+    }
+
+
+    /*
+     * LISTEN LANGUAGE CHANGES
+     */
+    private void addLanguageListener() {
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+    }
+
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+        // Nothing to do
+    }
+
+
+    /*
+     * GETTERS AND SETTERS
+     */
 
     public Tab getTab() {
         return tab;
@@ -69,36 +242,15 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
         this.tab = tab;
     }
 
-    /*
-     * LISTEN LANGUAGE CHANGES
-     */
-    private void addLanguageListener() {
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
-    }
-
-    private String getValueFromKey(String key) {
-        return this.languageBundle.getValue().getString(key);
-    }
-
-    private void reloadElements() {
-        // Nothing to do
-    }
-
-
-    /*
-     * GETTERS AND SETTERS
-     */
     @Override
     public void setContext(GenealogyTreeContext context) {
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
+        populateComboBox(context.getFamilyService().getCurrentFamily().getGtx_membersList(), simLeftChoice);
+        populateComboBox(context.getFamilyService().getCurrentFamily().getGtx_membersList(), simRightChoice);
+        populateComboBox(context.getFamilyService().getCurrentFamily().getGtx_membersList(), childChoice);
+
     }
 
     @Override

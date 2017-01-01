@@ -57,6 +57,7 @@ public class CommonAdvice {
     public ResponseEntity<ExceptionBean> handleException(Exception e) {
         System.out.println("Error Handle");
         System.out.println(e.getStackTrace().toString());
+        e.printStackTrace();
         System.out.println("Skrocona wersja");
         System.out.println(e.getClass());
         System.out.println(e.getClass());

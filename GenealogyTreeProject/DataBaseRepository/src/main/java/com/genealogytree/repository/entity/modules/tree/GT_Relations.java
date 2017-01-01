@@ -1,67 +1,133 @@
 package com.genealogytree.repository.entity.modules.tree;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.genealogytree.domain.beans.RelationBean;
+import com.genealogytree.domain.enums.RelationType;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Relations")
-public class GT_Relations {
+public class GT_Relations extends RelationBean {
 
+
+    private GT_Member simLeft;
+
+    private GT_Member simRight;
+
+    private GT_Family ownerF;
+
+    private List<GT_Member> children;
+
+    {
+        children = new ArrayList<>();
+    }
+    /*
+    * CONSTRUCTORS
+     */
+    public GT_Relations() {
+        this(null, null, null, null);
+    }
+    public GT_Relations(GT_Member simLeft, GT_Member  simRight, RelationType type, Boolean active) {
+        super(type, active);
+        this.simLeft = simLeft;
+        this.simRight = simRight;
+    }
+
+
+    public void addChild(GT_Member member) {
+        if(! children.contains(member)) {
+            children.add(member);
+        }
+    }
+
+    /*
+    * GETTERS
+     */
+    @Override
+    @Version
+    public Long getVersion() {
+        return version;
+    }
+
+    @Override
     @Id
-    private Long id;
-
-//	//@Column
-//	//@ManyToOne	
-//	private GT_Member simLeft;
-//	
-//	//@Column
-//	//@ManyToOne
-//	private GT_Member simRight;
-
-    private String relationType;
-
-    private Boolean isActive;
-
+    @GeneratedValue(generator = "InvSeqRelation")
+    @SequenceGenerator(name = "InvSeqRelation", sequenceName = "INV_SEQRelation", allocationSize = 5)
     public Long getId() {
         return id;
     }
+
+    @Override
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "simLeft_ID", nullable = true)
+    public GT_Member getSimLeft() {
+        return simLeft;
+    }
+
+    @Override
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "simRight_ID", nullable = true)
+    public GT_Member getSimRight() {
+        return simRight;
+    }
+
+    @Override
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
+    public RelationType getRelationType() {
+        return relationType;
+    }
+
+    @Override
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ownerF_ID", nullable = false)
+    public GT_Family getOwnerF() {
+        return ownerF;
+    }
+
+    @Column(name="active", nullable = false)
+    public Boolean geActive() {
+        return active;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "relation_ID")
+    public List<GT_Member> getChildren() {
+        return children;
+    }
+
+    /*
+    * SETTERS
+     */
 
     public void setId(Long id) {
         this.id = id;
     }
 
-//	public GT_Member getSimLeft() {
-//		return simLeft;
-//	}
-//
-//	public void setSimLeft(GT_Member simLeft) {
-//		this.simLeft = simLeft;
-//	}
-//
-//	public GT_Member getSimRight() {
-//		return simRight;
-//	}
-//
-//	public void setSimRight(GT_Member simRight) {
-//		this.simRight = simRight;
-//	}
 
-    public String getRelationType() {
-        return relationType;
+    public void setSimLeft(GT_Member simLeft) {
+        this.simLeft = simLeft;
     }
 
-    public void setRelationType(String relationType) {
+    public void setSimRight(GT_Member simRight) {
+        this.simRight = simRight;
+    }
+
+    public void setOwnerF(GT_Family ownerF) {
+        this.ownerF = ownerF;
+    }
+
+    public void setRelationType(RelationType relationType) {
         this.relationType = relationType;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setChildren(List<GT_Member> children) {
+        this.children = children;
     }
-
-
 }

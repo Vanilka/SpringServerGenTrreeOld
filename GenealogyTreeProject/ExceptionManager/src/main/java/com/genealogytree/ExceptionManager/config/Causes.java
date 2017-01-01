@@ -22,11 +22,13 @@ public enum Causes {
     *  FAMILY
      */
     PROJECT_NOT_FOUND(701, "Family not found"),
-    PROJECT_ACCESS_VIOLATION(702, "Access Denied. This is not your project");
+    PROJECT_ACCESS_VIOLATION(702, "Access Denied. This is not your project"),
 
-
-
-
+    /*
+    RELATION
+     */
+    TOO_MANY_NULL_FIELDS(810, "Too many null fields in relation"),
+    INCORRECT_SEX(869, "Incorrect member sex in SimLeft or SimRight field");
 
 
     private int code;

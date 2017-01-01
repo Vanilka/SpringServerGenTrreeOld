@@ -22,14 +22,13 @@ import javafx.scene.layout.AnchorPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
  * Created by vanilka on 26/12/2016.
  */
-public class  TabInfoMemberPaneController implements Initializable, FXMLTabController {
+public class TabInfoMemberPaneController implements Initializable, FXMLTabController {
 
     private static final Logger LOG = LogManager.getLogger(TabInfoMemberPaneController.class);
 
@@ -86,25 +85,31 @@ public class  TabInfoMemberPaneController implements Initializable, FXMLTabContr
         this.tabPane.getTabs().remove(tab);
     }
 
-    public void addMemberChangeListener()  {
+    public void addMemberChangeListener() {
         this.member.addListener(new ChangeListener<GTX_Member>() {
             @Override
             public void changed(ObservableValue<? extends GTX_Member> observable, GTX_Member oldValue, GTX_Member newValue) {
-                if(newValue != null) {
+                if (newValue != null) {
                     simNameField.setText(member.getValue().getName());
                     simSurnameField.setText(member.getValue().getSurname());
                     simSex.setText(member.getValue().getSex().toString());
                     simAge.setText(member.getValue().getAge().toString());
-                     try {
+                    Image img = null;
+                    try {
+                        String path = member.getValue().getPhoto();
+                        if (path != ImageFiles.GENERIC_FEMALE.toString() && path != ImageFiles.GENERIC_MALE.toString()) {
+                            img = new Image("file:///" + path);
+                        } else {
+                            img = new Image(path);
+                        }
 
-                         File file = new File(member.getValue().getPhoto());
-                         System.out.println(member.getValue().getPhoto());
-                         Image img = new Image(file.toURI().toString());
-                         simPhoto.setImage(img);
+                    } catch (Exception e) {
+                        img = new Image(ImageFiles.GENERIC_MALE.toString());
+                    } finally {
+                        simPhoto.setImage(img);
 
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
+                    }
+
                 }
             }
         });

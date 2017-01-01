@@ -8,9 +8,13 @@ public enum ImageFiles {
     NO_NAME_FEMALE("NoNameFemale.png"),
     GENERIC_MALE("GenericMale.png"),
     GENERIC_FEMALE("GenericFemale.png"),
-    TEST_BACKGROUND("TestBackground.png");
+    TEST_BACKGROUND("TestBackground.png"),
+    RELATION_NEUTRAL("neutral.png"),
+    RELATION_MARRIED("maried.png"),
+    RELATION_FIANCE("fiance.png"),
+    RELATION_LOVE("love.png");
 
-    private final String path = "/com/genealogytree/sources/backgrounds/";
+    private final String path = "com/genealogytree/sources/backgrounds/";
     private String file;
 
     private ImageFiles(String file) {
