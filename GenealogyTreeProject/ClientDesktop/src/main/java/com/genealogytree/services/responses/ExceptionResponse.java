@@ -23,4 +23,10 @@ public class ExceptionResponse extends ServerResponse {
         this.exception = exception;
     }
 
+    @Override
+    public String toString() {
+        return "ExceptionResponse{" +
+                "exception=" + exception +
+                "} " + super.toString();
+    }
 }

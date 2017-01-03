@@ -28,4 +28,11 @@ public class ListMemberResponse extends ServerResponse{
     public void setListFMember(List<GTX_Member> listMember) {
         this.listMember = listMember;
     }
+
+    @Override
+    public String toString() {
+        return "ListMemberResponse{" +
+                "listMember=" + listMember +
+                "} " + super.toString();
+    }
 }

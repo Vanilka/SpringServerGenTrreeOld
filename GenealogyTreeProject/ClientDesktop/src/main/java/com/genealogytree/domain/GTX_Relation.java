@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -35,25 +36,21 @@ public class GTX_Relation implements Serializable{
         isActive = new SimpleBooleanProperty();
     }
 
+    public GTX_Relation() {
+        setType(RelationType.NEUTRAL);
+        setIsActive(true);
+    }
+
     public GTX_Relation(GTX_Member simLeft, GTX_Member simRight, GTX_Member child, RelationType type, boolean isActive) {
         setSimLeft(simLeft);
         setSimRight(simRight);
         addChild(child);
         setType(type);
         setIsActive(isActive);
-
     }
 
-    public RelationBean getBean() {
-        RelationBean bean = new RelationBean();
-        bean.setId(getId());
-        bean.setVersion(getVersion());
-        bean.setRelationType(getType());
-        bean.setSimLeft(getSimLeft().getMemberBean());
-        bean.setSimRight(getSimRight().getMemberBean());
-        bean.setchildren((List<MemberBean>) (List) getChildren());
-        bean.setActive(isIsActive());
-        return bean;
+    public GTX_Relation(GTX_Member simLeft, GTX_Member simRight, GTX_Member child) {
+        this(simLeft, simRight, child, RelationType.NEUTRAL, true);
     }
 
     public void updateFromBean(RelationBean bean) {
@@ -110,6 +107,10 @@ public class GTX_Relation implements Serializable{
         return children;
     }
 
+    public List<GTX_Member> getChildrenList() {
+        return children;
+    }
+
     public boolean isIsActive() {
 
         return isActive.get();
@@ -145,6 +146,10 @@ public class GTX_Relation implements Serializable{
 
     public void setChildren(ObservableList<GTX_Member> children) {
         this.children = children;
+    }
+    public void  setChildrenList(List<GTX_Member> children) {
+        this.children.clear();
+        this.children.addAll(children);
     }
 
     public void setIsActive(boolean isActive) {

@@ -6,3 +6,5 @@ package com.genealogytree.domain.enums;
 public enum Sex {
     MALE, FEMALE
 }
+
+

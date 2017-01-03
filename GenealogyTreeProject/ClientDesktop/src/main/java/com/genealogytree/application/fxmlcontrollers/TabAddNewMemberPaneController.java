@@ -110,7 +110,7 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTabCont
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+        setInfoLog("Initialisation:  " +this.toString());
 
         this.languageBundle.setValue(rb);
         addSexListener();
@@ -274,5 +274,17 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTabCont
     @Override
     public void setManager(ScreenManager manager) {
         this.manager = manager;
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
     }
 }

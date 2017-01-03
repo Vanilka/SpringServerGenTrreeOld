@@ -436,12 +436,13 @@
 .firstTypeTable .table-cell {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
-    -fx-alignment: center-left;
+    -fx-alignment: center;
 }
 
 #projectsList .table-cell {
     -fx-font-size: 15pt;
     -fx-padding: 0 0 0 50;
+    -fx-alignment: center-left;
 
 }
 
@@ -563,6 +564,46 @@
     -fx-border-radius: 20 20 20 20;
 }
 
+
+#gtFamilyRelationTable {
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+}
+
+.tableMembersAndRelations .cell {
+    -fx-border-color: transparent;
+}
+
+.tableMembersAndRelations .table-row-cell,
+.tableMembersAndRelations:focused .table-row-cell {
+    -fx-border-color: transparent transparent linear-gradient(from 0% 0% to 100% 0%,
+    transparent 0%,
+    -gentree-dark-green-grey 30%,
+    -gentree-dark-green-grey 70%,
+    transparent 100%) transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 0 0 0 0;
+
+}
+
+.tableMembersAndRelations .scroll-bar:vertical, .tableMembersAndRelations .corner {
+
+    -fx-opacity: 10;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.tableMembersAndRelations .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-padding: 0;
+}
+
+.tableMembersAndRelations:focused .table-row-cell:filled:focused:selected,
+.tableMembersAndRelations .table-row-cell:filled:focused:selected {
+    -fx-background-color: -gentree-dark-selen;
+    -fx-background-insets: 0 0 0 0;
+}
+
 #addMemberButton {
     -fx-background-color: -gentree-dark-selen;
 }
@@ -627,5 +668,19 @@
 
 .imagePane {
     -fx-background-color:-gentree-dark-green-grey ;
+
+}
+
+.workingPane {
+    -fx-background-color: -gentree-content-pane;
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-radius: 20 20 20 20;
+
+}
+
+.gtTransparentPane,
+.gtTransparentPane > .viewport{
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
 
 }

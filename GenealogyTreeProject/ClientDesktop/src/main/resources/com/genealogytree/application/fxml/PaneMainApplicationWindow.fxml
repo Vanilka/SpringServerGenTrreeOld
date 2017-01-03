@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 <?import java.net.URL?>
 <AnchorPane id="mainApplicationWindow" fx:id="mainApplicationWindow" styleClass="mainAnchorPane"
             xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
@@ -15,8 +16,7 @@
                    prefHeight="200.0" prefWidth="160.0" styleClass="gt-splitpane" AnchorPane.bottomAnchor="0.0"
                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane minHeight="220.0" prefHeight="220.0"
-                            maxHeight="220.0">
+                <AnchorPane maxHeight="220.0" minHeight="220.0" prefHeight="220.0">
                     <children>
                         <JFXTabPane fx:id="gtMainTabPane" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="20"
                                     AnchorPane.rightAnchor="20" AnchorPane.topAnchor="10">
@@ -35,17 +35,59 @@
                                 <AnchorPane id="splitPaneHorizontal" maxWidth="250.0" minWidth="250.0"
                                             prefWidth="250.0">
                                     <children>
-                                        <TableView fx:id="gtFamilyMemberTable" layoutX="20.0" layoutY="12.0" onMouseClicked="#showInfoMember" prefHeight="200.0" prefWidth="200.0" styleClass="firstTypeTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+
+                                        <TableView fx:id="gtFamilyMemberTable" layoutX="20.0" layoutY="12.0"
+                                                   onMouseClicked="#showInfoMember" prefHeight="200.0" prefWidth="200.0"
+                                                   AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0"
+                                                   AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                                             <columns>
-                                                <TableColumn fx:id="simNameColumn" maxWidth="115.0" minWidth="115.0" prefWidth="-1.0" text="%simName" />
-                                                <TableColumn fx:id="simSurnameColumn" maxWidth="115.0" minWidth="115.0" prefWidth="-1.0" text="%simSurname" />
+                                                <TableColumn fx:id="simNameColumn" maxWidth="110.0" minWidth="110.0"
+                                                             prefWidth="-1.0" text="%simName"/>
+                                                <TableColumn fx:id="simSurnameColumn" maxWidth="110.0" minWidth="110.0"
+                                                             prefWidth="-1.0" text="%simSurname"/>
                                             </columns>
+                                            <styleClass>
+                                                <String fx:value="firstTypeTable"/>
+                                                <String fx:value="tableMembersAndRelations"/>
+                                            </styleClass>
                                         </TableView>
+                                        <TableView fx:id="gtFamilyRelationTable" layoutX="20.0" layoutY="12.0"
+                                                   onMouseClicked="#showInfoRelation" prefHeight="200.0"
+                                                   prefWidth="200.0" AnchorPane.bottomAnchor="40.0"
+                                                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                                                   AnchorPane.topAnchor="5.0">
+                                            <columns>
+                                                <TableColumn fx:id="relationSimLeftColumn" maxWidth="85.0"
+                                                             minWidth="85.0" prefWidth="-1.0" text="%relation_sim"/>
+                                                <TableColumn fx:id="relationTypeColumn" maxWidth="50.0" minWidth="50.0"
+                                                             prefWidth="-1.0" text="%relation_type"/>
+                                                <TableColumn fx:id="relationSimRightColumn" maxWidth="85.0"
+                                                             minWidth="85.0" prefWidth="-1.0" text="%relation_sim"/>
+
+                                            </columns>
+                                            <styleClass>
+                                                <String fx:value="firstTypeTable"/>
+                                                <String fx:value="tableMembersAndRelations"/>
+                                            </styleClass>
+                                        </TableView>
+                                        <ToggleButton fx:id="buttonShowMemberTable" layoutX="23.0"
+                                                      mnemonicParsing="false" text="ToggleButton"
+                                                      AnchorPane.bottomAnchor="10.0"/>
+                                        <ToggleButton fx:id="buttonShowRelationTable" layoutX="125.0"
+                                                      mnemonicParsing="false" text="ToggleButton"
+                                                      AnchorPane.bottomAnchor="10.0"/>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                <AnchorPane fx:id="workAnchorPane">
+                                <children>
+                                    <AnchorPane fx:id="workAnchorPaneContent"
+                                                AnchorPane.bottomAnchor="40.0"
+                                                AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0"
+                                                AnchorPane.topAnchor="5.0">
 
-                                </AnchorPane>
+                                    </AnchorPane>
+                                </children>
+                            </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>

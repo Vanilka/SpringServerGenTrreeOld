@@ -64,9 +64,9 @@ public class RelationServiceImpl implements RelationService {
 
     private boolean checkNullFields(GT_Relations relation) {
 
-        if ((relation.getchildren() == null || relation.getchildren().size() == 0) && relation.getSimLeft() == null) {
+        if ((relation.getChildren() == null || relation.getChildren().size() == 0) && relation.getSimLeft() == null) {
             return false;
-        } else if ((relation.getchildren() == null || relation.getchildren().size() == 0 ) && relation.getSimRight() == null) {
+        } else if ((relation.getChildren() == null || relation.getChildren().size() == 0 ) && relation.getSimRight() == null) {
             return false;
         } else {
             return true;
@@ -74,6 +74,10 @@ public class RelationServiceImpl implements RelationService {
     }
 
     private boolean checkSex(GT_Relations relation) {
+        if(relation.getSimLeft() == null && relation.getSimRight() == null) {
+            return  true;
+        }
+
         if (relation.getSimLeft() != null && relation.getSimRight() != null
                 && relation.getSimLeft().getSex() != relation.getSimRight().getSex()
                 && (relation.getSimRight().getSex() == Sex.FEMALE

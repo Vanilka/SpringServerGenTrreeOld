@@ -37,6 +37,7 @@ public class requestRelationsMapper {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<GT_Relations> addRelation(@RequestBody GT_Relations temp) throws NotFoundFamilyException, TooManyNullFields, IncorrectSex {
 
+        System.out.println(temp.toString());
         GT_Family family = this.familyService.getFamily(temp.getOwnerF().getId());
         temp.setOwnerF(family);
         GT_Relations relation = this.relationService.addRelation(temp);

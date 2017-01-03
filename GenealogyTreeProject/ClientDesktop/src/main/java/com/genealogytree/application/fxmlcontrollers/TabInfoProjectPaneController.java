@@ -63,6 +63,22 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     private Tab tab;
     private JFXTabPane tabPane;
 
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        setInfoLog("Initialisation : " +this.toString());
+
+        this.projectMemberNumber.setEditable(false);
+        this.projectNameLabel.setEditable(false);
+        this.languageBundle.setValue(rb);
+
+        setListener();
+    }
+
+
     @FXML
     public void addNewSim() {
         this.manager.loadFxml(new TabAddNewMemberPaneController(), this.tabPane, new Tab(), FXMLFiles.TAB_ADD_NEW_MEMBER.toString(), getValueFromKey("addMember"));
@@ -104,21 +120,6 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
             bindNameLabel();
         }
     }
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
-
-        this.projectMemberNumber.setEditable(false);
-        this.projectNameLabel.setEditable(false);
-        this.languageBundle.setValue(rb);
-
-        setListener();
-    }
-
 
     private void bindNameLabel() {
        this.projectNameLabel.textProperty().bind(this.context.getFamilyService().getCurrentFamily().getNameProperty());
@@ -196,5 +197,17 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
     @Override
     public void setManager(ScreenManager manager) {
         this.manager = manager;
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
     }
 }

@@ -55,51 +55,9 @@ public class GTX_Member {
         setPhoto(photo);
     }
 
-    public GTX_Member(MemberBean bean) {
-        setVersion(bean.getVersion());
-        setId(bean.getId());
-        setName(bean.getName());
-        setSurname(bean.getSurname());
-        setAge(bean.getAge());
-        setSex(bean.getSex());
-        if (bean.getImage() != null) {
-            try {
-                System.out.println("Test open");
-                Path file = Paths.get(GenealogyTreeContext.IMAGES_DIR + "/" + bean.getImage().getName());
-                Files.write(file, bean.getImage().getContent());
-                setPhoto(file.toAbsolutePath().toString());
-            } catch (Exception e) {
-                System.out.println("test error");
-                e.printStackTrace();
-            }
-        }
-    }
-
     /*
      *  GETTER
      */
-
-    public MemberBean getMemberBean() {
-        MemberBean bean = new MemberBean();
-        bean.setVersion(getVersion());
-        bean.setId(getId());
-        bean.setName(getName());
-        bean.setSurname(getSurname());
-        bean.setSex(getSex());
-        bean.setAge(getAge());
-        if (photo.getValue() != null) {
-            if (Files.exists(Paths.get(photo.get()))) {
-                Path path = Paths.get(photo.get());
-                try {
-                    bean.setImage(new ImageBean(convertFileToArray(path)));
-                } catch (Exception e) {
-
-                }
-
-            }
-        }
-        return bean;
-    }
 
     public Long getVersion() {
         return version.get();
@@ -187,44 +145,6 @@ public class GTX_Member {
         this.photo.set(photo);
     }
 
-    public void updateFromBean(MemberBean bean) {
-        setVersion(bean.getVersion());
-        setId(bean.getId());
-        setName(bean.getName());
-        setSurname(bean.getSurname());
-        setAge(bean.getAge());
-        setSex(bean.getSex());
-        if (bean.getImage() != null) {
-            try {
-                System.out.println("Test open");
-                Path file = Paths.get(GenealogyTreeContext.IMAGES_DIR + "/" + bean.getImage().getName());
-                Files.write(file, bean.getImage().getContent());
-                setPhoto(file.toAbsolutePath().toString());
-            } catch (Exception e) {
-                System.out.println("test error");
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private byte[] convertFileToArray(File file) throws IOException {
-        byte[] byteFile = new byte[(int) file.length()];
-        FileInputStream fileInputStream = null;
-        fileInputStream = new FileInputStream(file);
-        fileInputStream.read(byteFile);
-        fileInputStream.close();
-        return byteFile;
-    }
-
-    private byte[] convertFileToArray(Path file) throws IOException {
-        byte[] byteFile;
-        byteFile = Files.readAllBytes(file);
-        return byteFile;
-    }
-
-
-
-
     @Override
     public String toString() {
         return "GTX_Member{" +
@@ -245,11 +165,11 @@ public class GTX_Member {
 
         GTX_Member that = (GTX_Member) o;
 
-        if (version != null ? !version.equals(that.version) : that.version != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (surname != null ? !surname.equals(that.surname) : that.surname != null) return false;
-        if (photo != null ? !photo.equals(that.photo) : that.photo != null) return false;
+        if (version.getValue() != null ? !version.getValue().equals(that.version.getValue()) : that.version.getValue() != null) return false;
+        if (id.getValue() != null ? !id.getValue().equals(that.id.getValue()) : that.id.getValue() != null) return false;
+        if (name.getValue() != null ? !name.getValue().equals(that.name.getValue()) : that.name.getValue() != null) return false;
+        if (surname.getValue() != null ? !surname.getValue().equals(that.surname.getValue()) : that.surname.getValue() != null) return false;
+        if (photo.getValue() != null ? !photo.getValue().equals(that.photo.getValue()) : that.photo.getValue() != null) return false;
         if (age != that.age) return false;
         return sex == that.sex;
 

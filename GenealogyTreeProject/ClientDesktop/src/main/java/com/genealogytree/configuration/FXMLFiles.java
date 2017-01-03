@@ -22,6 +22,7 @@ public enum FXMLFiles {
     REGISTER_CONFIRMATION("PaneRegisterConfirmation.fxml"),
     MAIN_APPLICATION_WINDOW("PaneMainApplicationWindow.fxml"),
     NEW_PROJECT_DIALOG("DialogNewProject.fxml"),
+    GENEALOGY_TREE_DRAW("PaneGenealogyTreeDraw.fxml"),
     TAB_ADD_NEW_MEMBER("TabAddNewMember.fxml"),
     TAB_INFO_PROJECT("TabInfoProject.fxml"),
     TAB_INFO_MEMBER("TabInfoMember.fxml"),

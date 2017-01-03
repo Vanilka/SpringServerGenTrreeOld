@@ -92,7 +92,7 @@ public class GT_Relations extends RelationBean {
         return active;
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "relation_ID")
     public List<GT_Member> getChildren() {
         return children;
@@ -129,5 +129,15 @@ public class GT_Relations extends RelationBean {
 
     public void setChildren(List<GT_Member> children) {
         this.children = children;
+    }
+
+    @Override
+    public String toString() {
+        return "GT_Relations{" +
+                "simLeft=" + simLeft +
+                ", simRight=" + simRight +
+                ", ownerF=" + ownerF +
+                ", children=" + children +
+                '}';
     }
 }

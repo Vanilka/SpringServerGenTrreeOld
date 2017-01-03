@@ -27,4 +27,11 @@ public class ListFamilyResponse extends ServerResponse {
     public void setListFamily(List<GTX_Family> listFamily) {
         this.listFamily = listFamily;
     }
+
+    @Override
+    public String toString() {
+        return "ListFamilyResponse{" +
+                "listFamily=" + listFamily +
+                "} " + super.toString();
+    }
 }

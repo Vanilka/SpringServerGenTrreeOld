@@ -63,7 +63,7 @@ public class PaneLogonFormController implements Initializable, FXMLPaneControlle
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+        LOG.info("Initialisation :  " + this.toString());
 
         this.languageBundle.setValue(rb);
 
@@ -138,6 +138,18 @@ public class PaneLogonFormController implements Initializable, FXMLPaneControlle
 
     public void setLogonWindow(PaneLogonWindowController logonWindow) {
         this.logonWindow = logonWindow;
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
     }
 
 }

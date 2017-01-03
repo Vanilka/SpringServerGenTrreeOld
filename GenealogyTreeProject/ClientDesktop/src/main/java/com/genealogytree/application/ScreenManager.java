@@ -179,6 +179,7 @@ public class ScreenManager {
         return controller;
     }
 
+
     public FXMLPaneController loadFxml(FXMLPaneController controller, AnchorPane anchor, String fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());
         try {
@@ -194,6 +195,7 @@ public class ScreenManager {
         }
         return controller;
     }
+
 
     public void loadFxml(FXMLPaneController controller, BorderPane border, String fxml, Where where) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml), this.context.getBundle());

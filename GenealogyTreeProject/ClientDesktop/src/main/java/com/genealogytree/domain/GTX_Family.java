@@ -34,6 +34,7 @@ public class GTX_Family implements Serializable, Observable {
         id = new SimpleLongProperty();
         name = new SimpleStringProperty();
         gtx_membersList = FXCollections.observableArrayList();
+        gtx_relations = FXCollections.observableArrayList();
     }
 
     public GTX_Family() {
@@ -125,7 +126,7 @@ public class GTX_Family implements Serializable, Observable {
 
     public void setGtx_relations(List<GTX_Relation> gtx_relations) {
         this.gtx_relations.clear();
-        this.gtx_membersList.addAll(gtx_membersList);
+        this.gtx_relations.addAll(gtx_relations);
     }
 
     public void setGtx_membersList(ObservableList<GTX_Member> gtx_membersList) {

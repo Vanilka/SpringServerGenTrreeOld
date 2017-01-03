@@ -5,6 +5,7 @@ import com.genealogytree.domain.GTX_Family;
 import com.genealogytree.domain.GTX_Member;
 import com.genealogytree.domain.GTX_Relation;
 import com.genealogytree.domain.beans.FamilyBean;
+import com.genealogytree.domain.beans.ImageBean;
 import com.genealogytree.domain.beans.MemberBean;
 import com.genealogytree.domain.beans.RelationBean;
 import com.genealogytree.exception.ExceptionBean;
@@ -12,6 +13,7 @@ import com.genealogytree.services.GTFamilyService;
 import com.genealogytree.services.responses.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +21,15 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GTFamilyServiceOnline implements GTFamilyService {
 
@@ -37,8 +46,203 @@ public class GTFamilyServiceOnline implements GTFamilyService {
         this.context = context;
     }
 
+
+    /*
+    *   SERVICE METHODS POST
+    */
+    @Override
+    public ServerResponse addNewProject(GTX_Family familyBean) {
+        return requestAddNewProject(familyBean);
+    }
+
+    @Override
+    public ServerResponse updateFamily(GTX_Family family) {
+        return requestUpdateFamily(family);
+    }
+
+    @Override
+    public ServerResponse updateFamilyName(String newName) {
+        return requestUpdateFamilyName(newName);
+    }
+
+    @Override
+    public ServerResponse addNewMember(GTX_Member member) {
+        return requestAddNewMember(member);
+    }
+
+    @Override
+    public ServerResponse addNewRelation(GTX_Relation relation) {
+        return requestAddNewRelation(relation);
+    }
+
+    /*
+    *   SERBICE METHODS GET
+     */
+
     @Override
     public ServerResponse getProjects() {
+        return requestGetProjects();
+    }
+
+    /*
+    *   REST REQUESTS POST
+    */
+
+    public ServerResponse requestAddNewProject(GTX_Family familyBean) {
+        setInfoLog("requestAddNewProject : parameter ->" + familyBean.toString());
+        setInfoLog("requestAddNewProject : getFamilyBeanFromGXT -> " + familyBean.getFamilyBean().toString());
+
+        ServerResponse result = null;
+        try {
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("project")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .post(Entity.json(familyBean.getFamilyBean()));
+
+            setInfoLog("requestAddNewProject : response -> " + response.toString());
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+
+            } else {
+                familyBean = new GTX_Family(response.readEntity(FamilyBean.class));
+                result = new FamilyResponse(familyBean);
+            }
+
+        } catch (Exception e) {
+            setErrorLog("requestAddNewProject : Exception -> " + e.getMessage());
+            setErrorLog("requestAddNewProject : Exception Cause -> " + e.getCause());
+            setErrorLog("requestAddNewProject : Exception Trace -> " + getExceptionTrace(e));
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+
+        setInfoLog("requestAddNewProject: result -> " + result.toString());
+        return result;
+    }
+
+    public ServerResponse requestUpdateFamily(GTX_Family family) {
+        return null;
+    }
+
+    public ServerResponse requestUpdateFamilyName(String newName) {
+        setInfoLog("requestUpdateFamilyName :  parameter -> " + newName);
+        ServerResponse result = null;
+
+        FamilyBean familyBean = this.currentFamily.getValue().getFamilyBean();
+        setInfoLog("requestUpdateFamilyName : familyBean [old value] -> " + familyBean);
+        familyBean.setName(newName);
+        setInfoLog("requestUpdateFamilyName : familyBean [new value] -> " + familyBean);
+        try {
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("project")
+                    .path("update")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .put(Entity.json(familyBean));
+
+            setInfoLog("requestUpdateFamilyName : response -> " + response.toString());
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+            } else {
+                familyBean = response.readEntity(FamilyBean.class);
+                this.currentFamily.getValue().updateFromFamilyBean(familyBean);
+                result = new FamilyResponse(this.currentFamily.getValue());
+            }
+
+        } catch (Exception e) {
+            setErrorLog("requestUpdateFamilyName : Exception -> " + e.getMessage());
+            setErrorLog("requestUpdateFamilyName : Exception Cause -> " + e.getCause());
+            setErrorLog("requestUpdateFamilyName : Exception Trace -> " + getExceptionTrace(e));
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+
+        setInfoLog("requestUpdateFamilyName: result -> " + result.toString());
+        return result;
+    }
+
+    public ServerResponse requestAddNewMember(GTX_Member member) {
+
+        setInfoLog("requestAddNewMember : parameter -> " + member.toString());
+
+        ServerResponse result = null;
+        try {
+            MemberBean bean = getMemberBeanFromGTX(member);
+            bean.setOwnerF(this.currentFamily.getValue().getFamilyBean());
+            setInfoLog("requestAddNewMember : MemberBean -> " + member.toString());
+
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("member")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .post(Entity.json(bean));
+
+            setInfoLog("requestAddNewMember : response -> " + response.toString());
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+            } else {
+                member = updateGTXFromBean(member, response.readEntity(MemberBean.class));
+                this.currentFamily.getValue().addMember(member);
+                GTX_Relation temp = new GTX_Relation(null, null, member);
+                addNewRelation(temp);
+                result = new MemberResponse(member);
+            }
+        } catch (Exception e) {
+            setErrorLog("requestAddNewMember : Exception -> " + e.getMessage());
+            setErrorLog("requestAddNewMember : ExceptionCause -> " + e.getCause());
+            setErrorLog("requestAddNewMember : Exception Trace -> " + getExceptionTrace(e));
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+        setInfoLog("requestAddNewMember: result -> " + result.toString());
+        return result;
+    }
+
+    public ServerResponse requestAddNewRelation(GTX_Relation relation) {
+        setInfoLog("requestAddNewRelation : parameter -> " + relation.toString());
+        ServerResponse result = null;
+        try {
+            RelationBean bean = getRelationBeanFromGTX(relation);
+            bean.setOwnerF(this.currentFamily.getValue().getFamilyBean());
+            setInfoLog("requestAddNewRelation : RelationBean -> " + bean.toString());
+
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("relations")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .post(Entity.json(bean));
+
+            setInfoLog("requestAddNewRelation : response -> " + response.toString());
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+            } else {
+                bean = response.readEntity(RelationBean.class);
+                updateRelationFromBean(relation, bean);
+                this.currentFamily.getValue().addRelation(relation);
+                result = new RelationResponse(relation);
+            }
+        } catch (Exception e) {
+            setErrorLog("requestAddNewRelation : Exception -> " + e.getMessage());
+            setErrorLog("requestAddNewRelation : Exception Cause -> " + e.getCause());
+            setErrorLog("requestAddNewRelation : Exception Trace -> " + getExceptionTrace(e));
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+        setInfoLog("requestAddNewRelation: result -> " + result.toString());
+        return result;
+    }
+
+
+    /*
+    *   REST REQUEST GET
+     */
+
+    public ServerResponse requestGetProjects() {
         ServerResponse result = null;
         try {
             String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
@@ -47,6 +251,9 @@ public class GTFamilyServiceOnline implements GTFamilyService {
                     .request(MediaType.APPLICATION_JSON)
                     .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
                     .get();
+
+            setInfoLog("requestGetProjects : response -> " + response.toString());
+
             if (response.getStatus() != 200) {
 
                 result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
@@ -58,170 +265,16 @@ public class GTFamilyServiceOnline implements GTFamilyService {
                 result = new ListFamilyResponse(famList);
             }
         } catch (Exception e) {
-            System.out.println("exception");
-            e.printStackTrace();
+            setErrorLog("requestGetProjects : Exception -> " + e.getMessage());
+            setErrorLog("requestGetProjects : Exception Cause -> " + e.getCause());
+            setErrorLog("requestGetProjects : Exception Trace -> " + getExceptionTrace(e));
             result = new ExceptionResponse(new ExceptionBean());
         }
-
+        setInfoLog("requestGetProjects : result -> " + result.toString());
         return result;
     }
 
-    @Override
-    public ServerResponse addNewProject(GTX_Family familyBean) {
-        ServerResponse result = null;
-        try {
-            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
-            Response response = this.context.getMainTarget()
-                    .path("project")
-                    .request(MediaType.APPLICATION_JSON)
-                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
-                    .post(Entity.json(familyBean.getFamilyBean()));
-
-            if (response.getStatus() != 200) {
-                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
-            } else {
-                familyBean = new GTX_Family(response.readEntity(FamilyBean.class));
-                result = new FamilyResponse(familyBean);
-            }
-
-        } catch (Exception e) {
-            result = new ExceptionResponse(new ExceptionBean());
-        }
-        return result;
-    }
-
-    @Override
-    public ServerResponse updateFamily(GTX_Family family) {
-        return null;
-    }
-
-    @Override
-    public ServerResponse updateFamilyName(String newName) {
-        ServerResponse result = null;
-        FamilyBean familyBean = this.currentFamily.getValue().getFamilyBean();
-        familyBean.setName(newName);
-
-        try {
-            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
-            Response response = this.context.getMainTarget()
-                    .path("project")
-                    .path("update")
-                    .request(MediaType.APPLICATION_JSON)
-                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
-                    .put(Entity.json(familyBean));
-
-            if (response.getStatus() != 200) {
-                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
-            } else {
-                familyBean = response.readEntity(FamilyBean.class);
-                this.currentFamily.getValue().updateFromFamilyBean(familyBean);
-                result = new FamilyResponse(this.currentFamily.getValue());
-            }
-
-        } catch (Exception e) {
-            result = new ExceptionResponse(new ExceptionBean());
-        }
-        return result;
-    }
-
-    @Override
-    public ServerResponse addNewMember(GTX_Member member) {
-        ServerResponse result = null;
-        try {
-            MemberBean bean = member.getMemberBean();
-            bean.setOwnerF(this.currentFamily.getValue().getFamilyBean());
-            System.out.println("Bean : " +Entity.json(bean));
-            System.out.println("bean image :" + bean.getImage());
-            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
-            Response response = this.context.getMainTarget()
-                    .path("member")
-                    .request(MediaType.APPLICATION_JSON)
-                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
-                    .post(Entity.json(bean));
-
-
-            if (response.getStatus() != 200) {
-                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
-            } else {
-                member.updateFromBean(response.readEntity(MemberBean.class));
-                this.currentFamily.getValue().addMember(member);
-                result = new MemberResponse(member);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = new ExceptionResponse(new ExceptionBean());
-        }
-
-        return result;
-    }
-
-    @Override
-    public ServerResponse addNewRelation(GTX_Relation relation) {
-        ServerResponse result = null;
-
-        try {
-            RelationBean bean = relation.getBean();
-            bean.setOwnerF(this.currentFamily.getValue().getFamilyBean());
-            System.out.println("Bean : " +Entity.json(bean));
-
-            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
-            Response response = this.context.getMainTarget()
-                    .path("relations")
-                    .request(MediaType.APPLICATION_JSON)
-                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
-                    .post(Entity.json(bean));
-
-            if (response.getStatus() != 200) {
-                System.out.println("Bad Status");
-                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
-
-               ExceptionResponse exc = (ExceptionResponse) result;
-                System.out.println(exc.getException().getCause());
-            } else {
-                bean = response.readEntity(RelationBean.class);
-                relation.updateFromBean(bean);
-                refreshMemberFromBean(relation.getSimLeft(), new GTX_Member(bean.getSimLeft()));
-                this.currentFamily.getValue().addRelation(relation);
-                result = new RelationResponse(relation);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    private GTX_Relation refreshMemberFromBean(GTX_Member target, GTX_Member source ) {
-        if ( this.getCurrentFamily().getGtx_membersList().contains(source)) {
-            System.out.println("To jest to !");
-        }
-
-
-        return null;
-    }
-
-    /*
-    * CHECKS
-     */
-
-
-    public void setContext(GenealogyTreeContext context) {
-        this.context = context;
-    }
-
-    @Override
-    public void setCurrentFamily(GTX_Family family) {
-        ServerResponse response = loadMembersList(family.getId());
-        if (response instanceof ListMemberResponse) {
-            family.setGtx_membersList(((ListMemberResponse) response).getListMember());
-        } else {
-
-        }
-        this.currentFamily.setValue(family);
-    }
-
-
-    private ServerResponse loadMembersList(Long familyID) {
+    private ServerResponse loadMembersList(GTX_Family family) {
 
         ServerResponse result = null;
         try {
@@ -229,10 +282,13 @@ public class GTFamilyServiceOnline implements GTFamilyService {
             Response response = this.context.getMainTarget()
                     .path("member")
                     .path("list")
-                    .path(familyID.toString())
+                    .path(family.getId().toString())
                     .request(MediaType.APPLICATION_JSON)
                     .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
                     .get();
+
+            setInfoLog("loadMembersList : response -> " + response.toString());
+
             if (response.getStatus() != 200) {
                 result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
             } else {
@@ -242,19 +298,55 @@ public class GTFamilyServiceOnline implements GTFamilyService {
                 result = new ListMemberResponse(memberList);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            setErrorLog("loadMembersList : Exception -> " + e.getMessage());
+            setErrorLog("loadMembersList : ExceptionCause -> " + e.getCause());
+            setErrorLog("loadMembersList : Exception Trace -> " + getExceptionTrace(e));
             result = new ExceptionResponse(new ExceptionBean());
         }
-
+        setInfoLog("loadMembersList : result -> " + result.toString());
         return result;
     }
 
-    @Override
-    public GTX_Family getCurrentFamily() {
-        return this.currentFamily.getValue();
+    private ServerResponse loadRelationsList(GTX_Family family) {
+        ServerResponse result = null;
+        try {
+            String token = this.context.getConnectedUser().getLogin() + ":" + this.context.getConnectedUser().getPassword();
+            Response response = this.context.getMainTarget()
+                    .path("relations")
+                    .path("list")
+                    .path(family.getId().toString())
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("Authorization", "Basic " + java.util.Base64.getEncoder().encodeToString(token.getBytes()))
+                    .get();
+
+            setInfoLog("loadRelationsList : response -> " + response.toString());
+
+            if (response.getStatus() != 200) {
+                result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
+            } else {
+                List<RelationBean> tempList = response.readEntity(new GenericType<List<RelationBean>>() {
+                });
+                List<GTX_Relation> relationList = convertRelationsList(tempList, family);
+                result = new ListRelationsResponse(relationList);
+            }
+        } catch (Exception e) {
+            setErrorLog("loadRelationsList : Exception -> " + e.getMessage());
+            setErrorLog("loadRelationsList : ExceptionCause -> " + e.getCause());
+            setErrorLog("loadRelationsList : Exception Trace -> " + getExceptionTrace(e));
+            result = new ExceptionResponse(new ExceptionBean());
+        }
+        setInfoLog("loadRelationsList : result -> " + result.toString());
+        return result;
     }
 
+        /*
+    *   CONVERSIONS
+    */
+
     private List<GTX_Family> convertFamilyList(List<FamilyBean> sourceList) {
+
+        setInfoLog("convertFamilyList : parameter -> " + sourceList.toString());
+
         List<GTX_Family> targetList = new ArrayList<>();
         for (FamilyBean bean : sourceList) {
             targetList.add(new GTX_Family(bean));
@@ -263,12 +355,249 @@ public class GTFamilyServiceOnline implements GTFamilyService {
     }
 
     private List<GTX_Member> convertMemberList(List<MemberBean> sourceList) {
+
+        setInfoLog("convertMemberList : parameter -> " + sourceList.toString());
+
         List<GTX_Member> targetList = new ArrayList<>();
         for (MemberBean bean : sourceList) {
-            targetList.add(new GTX_Member(bean));
+            targetList.add(getGTXFromMemberBean(bean));
         }
+
+        setInfoLog("convertMemberList : return value -> " + targetList.toString());
+
         return targetList;
     }
 
+    private List<GTX_Relation> convertRelationsList(List<RelationBean> sourceList) {
 
+       return convertRelationsList(sourceList, this.getCurrentFamily());
+    }
+
+    private List<GTX_Relation> convertRelationsList(List<RelationBean> sourceList, GTX_Family family) {
+
+        setInfoLog("convertRelationsList : parameter -> " + sourceList.toString());
+
+        List<GTX_Relation> targetList = new ArrayList<>();
+        for (RelationBean bean : sourceList) {
+            targetList.add(getGTXFromRelationBean(bean, family));
+        }
+
+        setInfoLog("convertRelationsList : return value -> " + targetList.toString());
+
+        return targetList;
+    }
+
+    private GTX_Member findMemberInList(GTX_Member member) {
+
+        return  findMemberInList(member, this.getCurrentFamily().getGtx_membersList());
+    }
+
+    private GTX_Member findMemberInList(GTX_Member member, ObservableList<GTX_Member> list) {
+
+        if (member == null || list == null || list.size() == 0) {
+            return null;
+        }
+        setInfoLog("findMemberInList : parameter -> " + member.toString());
+
+         list = list.filtered(p -> p.equals(member));
+
+        if (list.size() == 0) {
+            return null;
+        } else {
+            return list.get(0);
+        }
+    }
+
+    private MemberBean getMemberBeanFromGTX(GTX_Member source) {
+        if(source != null) {
+            setInfoLog("getMemberBeanFromGTX : parameter -> " + source.toString());
+            MemberBean target = new MemberBean();
+            target.setId(source.getId());
+            target.setVersion(source.getVersion());
+            target.setName(source.getName());
+            target.setSurname(source.getSurname());
+            target.setAge(source.getAge());
+            target.setSex(source.getSex());
+            if (source.getPhoto() != null) {
+                if (Files.exists(Paths.get(source.getPhoto()))) {
+                    Path path = Paths.get(source.getPhoto());
+                    try {
+                        target.setImage(new ImageBean(convertFileToArray(path)));
+                    } catch (Exception e) {
+                        setErrorLog("getMemberBeanFromGTX : Exception  -> " + e.getMessage());
+                        setErrorLog("getMemberBeanFromGTX : Exception  Cause -> " + e.getCause());
+                        setErrorLog("getMemberBeanFromGTX : Exception  Trace -> " + getExceptionTrace(e));
+                    }
+                }
+            }
+            setInfoLog("getMemberBeanFromGTX : return value  -> " + target.toString());
+            return target;
+        } else {
+            return null;
+        }
+    }
+
+    private GTX_Member getGTXFromMemberBean(MemberBean source) {
+
+        if (source != null) {
+            setInfoLog("getGTXFromMemberBean : parameter -> " + source.toString());
+            return updateGTXFromBean(new GTX_Member(), source);
+        } else {
+            return null;
+        }
+
+    }
+
+    private GTX_Member updateGTXFromBean(GTX_Member target, MemberBean source) {
+        setInfoLog("updateGTXFromBean : parameter target -> " + target.toString());
+        setInfoLog("updateGTXFromBean : parameter source -> " + source.toString());
+
+        if (source != null) {
+            target.setVersion(source.getVersion());
+            target.setId(source.getId());
+            target.setName(source.getName());
+            target.setSurname(source.getSurname());
+            target.setAge(source.getAge());
+            target.setSex(source.getSex());
+            if (source.getImage() != null) {
+                try {
+                    Path file = Paths.get(GenealogyTreeContext.IMAGES_DIR + "/" + source.getImage().getName());
+                    Files.write(file, source.getImage().getContent());
+                    target.setPhoto(file.toAbsolutePath().toString());
+                } catch (Exception e) {
+                    setErrorLog("updateGTXFromBean : Exception  -> " + e.getMessage());
+                    setErrorLog("updateGTXFromBean : Exception Cause -> " + e.getCause());
+                    setErrorLog("updateGTXFromBean : Exception Trace -> " + getExceptionTrace(e));
+
+                }
+            }
+        }
+        setInfoLog("updateGTXFromBean : return value -> " + target.toString());
+
+        return target;
+    }
+
+    private RelationBean getRelationBeanFromGTX(GTX_Relation source) {
+
+        setInfoLog("getRelationBeanFromGTX : parameter -> " + source.toString());
+
+        RelationBean target = new RelationBean();
+        target.setId(source.getId());
+        target.setVersion(source.getVersion());
+        target.setRelationType(source.getType());
+        target.setSimLeft(source.getSimLeft() != null ? getMemberBeanFromGTX(source.getSimLeft()) : null);
+        target.setSimRight(source.getSimRight() != null ? getMemberBeanFromGTX(source.getSimRight()) : null);
+        List<MemberBean> l = source.getChildrenList().stream().map(this::getMemberBeanFromGTX).collect(Collectors.toList());
+        target.setchildren(l);
+        target.setRelationType(source.getType());
+        target.setActive(source.isIsActive());
+
+        setInfoLog("getRelationBeanFromGTX : return value -> " + target.toString());
+
+        return target;
+    }
+
+    private GTX_Relation getGTXFromRelationBean(RelationBean source) {
+        return  getGTXFromRelationBean(source, this.getCurrentFamily());
+    }
+
+    private GTX_Relation getGTXFromRelationBean(RelationBean source, GTX_Family family) {
+
+        setInfoLog("getGTXFromRelationBean : parameter -> " + source.toString());
+
+        return updateRelationFromBean(new GTX_Relation(), source, family);
+    }
+
+    private GTX_Relation updateRelationFromBean(GTX_Relation target, RelationBean source) {
+        return updateRelationFromBean(target, source, this.getCurrentFamily());
+    }
+
+    private GTX_Relation updateRelationFromBean(GTX_Relation target, RelationBean source, GTX_Family family) {
+
+        setInfoLog("updateRelationFromBean : parameter -> " + source.toString());
+
+        if (source != null) {
+            target.updateFromBean(source);
+            target.setSimLeft(findMemberInList(getGTXFromMemberBean(source.getSimLeft()), family.getGtx_membersList()));
+            target.setSimRight(findMemberInList(getGTXFromMemberBean(source.getSimRight()), family.getGtx_membersList()));
+
+            List<GTX_Member> list = new ArrayList<>();
+            for (MemberBean b : source.getchildren()) {
+                GTX_Member m = findMemberInList(getGTXFromMemberBean(b), family.getGtx_membersList());
+                if (m != null) {
+                    list.add(m);
+                }
+            }
+
+            target.setChildrenList(list);
+
+        } else {
+            target = null;
+        }
+
+        setInfoLog("updateRelationFromBean : return value -> " + target.toString());
+
+        return target;
+    }
+
+    private byte[] convertFileToArray(Path file) throws IOException {
+        byte[] byteFile;
+        byteFile = Files.readAllBytes(file);
+        return byteFile;
+    }
+
+
+    /*
+    *  GETTERS
+    */
+
+    @Override
+    public GTX_Family getCurrentFamily() {
+        return this.currentFamily.getValue();
+    }
+
+    private String getExceptionTrace(Throwable t) {
+        StringWriter sw =new StringWriter();
+        t.printStackTrace(new PrintWriter(sw));
+        return sw.toString();
+    }
+
+    /*
+    * SETTERS
+     */
+
+    public void setContext(GenealogyTreeContext context) {
+        this.context = context;
+    }
+
+    @Override
+    public void setCurrentFamily(GTX_Family family) {
+
+        ServerResponse listMemberResponse = loadMembersList(family);
+        if (listMemberResponse instanceof ListMemberResponse) {
+            family.setGtx_membersList(((ListMemberResponse) listMemberResponse).getListMember());
+        } else {
+            System.out.println("Error charge list member");
+        }
+
+        ServerResponse listRelationResponse = loadRelationsList(family);
+        if (listRelationResponse instanceof ListRelationsResponse) {
+            family.setGtx_relations(((ListRelationsResponse) listRelationResponse).getListRelations());
+        } else {
+            System.out.println("Error charge list relation");
+        }
+        this.currentFamily.setValue(family);
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
+    }
 }

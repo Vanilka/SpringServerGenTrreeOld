@@ -89,5 +89,14 @@ public class UserBean implements Serializable{
         this.email = email;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "version=" + version +
+                ", id=" + id +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

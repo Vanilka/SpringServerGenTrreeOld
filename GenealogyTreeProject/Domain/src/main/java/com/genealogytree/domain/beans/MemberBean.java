@@ -121,4 +121,19 @@ public class MemberBean implements Serializable {
     public void setImage(ImageBean image) {
         this.image = image;
     }
+
+
+    @Override
+    public String toString() {
+        return "MemberBean{" +
+                "version=" + version +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", age=" + age +
+                ", sex=" + sex +
+                ", ownerF=" + ownerF +
+                ", image=" + image +
+                '}';
+    }
 }

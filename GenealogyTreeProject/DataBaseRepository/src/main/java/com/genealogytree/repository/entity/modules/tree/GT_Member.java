@@ -130,4 +130,9 @@ public class GT_Member extends MemberBean implements Serializable {
     public void setImage(GT_Images image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "GT_Member{} " + super.toString();
+    }
 }

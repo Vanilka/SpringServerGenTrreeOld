@@ -19,4 +19,10 @@ public abstract class ServerResponse {
         OK, FAIL;
     }
 
+    @Override
+    public String toString() {
+        return "ServerResponse{" +
+                "status=" + status +
+                '}';
+    }
 }

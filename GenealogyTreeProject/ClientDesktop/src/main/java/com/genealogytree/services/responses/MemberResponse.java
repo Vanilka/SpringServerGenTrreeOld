@@ -22,4 +22,11 @@ public class MemberResponse extends  ServerResponse {
     public void setMember(GTX_Member member) {
         this.member = member;
     }
+
+    @Override
+    public String toString() {
+        return "MemberResponse{" +
+                "member=" + member +
+                "} " + super.toString();
+    }
 }

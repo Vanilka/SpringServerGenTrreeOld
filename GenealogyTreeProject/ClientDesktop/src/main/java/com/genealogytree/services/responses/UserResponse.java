@@ -22,4 +22,11 @@ public class UserResponse extends ServerResponse {
     public void setUser(UserBean user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                "user=" + user +
+                "} " + super.toString();
+    }
 }

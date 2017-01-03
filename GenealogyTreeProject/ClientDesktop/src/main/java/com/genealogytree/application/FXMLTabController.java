@@ -8,6 +8,7 @@ import javafx.scene.control.Tab;
  */
 public interface FXMLTabController extends FXMLPaneController {
 
+
      Tab getTab();
 
      void setTab(Tab tab);
@@ -17,4 +18,5 @@ public interface FXMLTabController extends FXMLPaneController {
      void setTabPane(JFXTabPane tabPane);
 
      void setTabAndTPane(JFXTabPane tabPane, Tab tab);
+
 }

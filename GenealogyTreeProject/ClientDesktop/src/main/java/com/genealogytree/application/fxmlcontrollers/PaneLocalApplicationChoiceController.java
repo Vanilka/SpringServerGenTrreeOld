@@ -54,7 +54,7 @@ public class PaneLocalApplicationChoiceController implements Initializable, FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+        LOG.info("Initialisation :  " + this.toString());
 
         this.languageBundle.setValue(rb);
     }
@@ -101,6 +101,18 @@ public class PaneLocalApplicationChoiceController implements Initializable, FXML
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
     }
 
 }

@@ -114,4 +114,18 @@ public class RelationBean {
     public void setOwnerF(FamilyBean owner) {
         this.ownerF = owner;
     }
+
+    @Override
+    public String toString() {
+        return "RelationBean{" +
+                "version=" + version +
+                ", id=" + id +
+                ", active=" + active +
+                ", relationType=" + relationType +
+                ", SimLeft=" + SimLeft +
+                ", SimRight=" + SimRight +
+                ", children=" + children +
+                ", ownerF=" + ownerF +
+                '}';
+    }
 }

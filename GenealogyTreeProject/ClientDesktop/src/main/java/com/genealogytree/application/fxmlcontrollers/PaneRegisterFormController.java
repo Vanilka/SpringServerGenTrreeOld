@@ -39,12 +39,15 @@ import java.util.regex.Pattern;
  * @author mszymkow
  */
 public class PaneRegisterFormController implements Initializable, FXMLPaneController {
+
     private static final Logger LOG = LogManager.getLogger(PaneRegisterFormController.class);
+
     private final String MANDATORY_MESSAGE = "This field cannot be empty";
     private ScreenManager manager;
     private ObjectProperty<GenealogyTreeContext> context = new SimpleObjectProperty<>();
     private GTUserServiceOnline serviceUser;
     private PaneLogonWindowController logonWindow;
+
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
     @FXML
@@ -65,7 +68,7 @@ public class PaneRegisterFormController implements Initializable, FXMLPaneContro
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
+        setInfoLog("Initialisation:  " + this.toString());
         this.languageBundle.setValue(rb);
 
 		/*
@@ -212,5 +215,17 @@ public class PaneRegisterFormController implements Initializable, FXMLPaneContro
 
     public void setLogonWindow(PaneLogonWindowController logonWindow) {
         this.logonWindow = logonWindow;
+    }
+
+    private void setInfoLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.info(msg);
+        System.out.println("INFO:  " + msg);
+    }
+
+    private void setErrorLog(String msg) {
+        msg = this.getClass().getSimpleName() + ": " + msg;
+        LOG.error(msg);
+        System.out.println("ERROR:  " + msg);
     }
 }

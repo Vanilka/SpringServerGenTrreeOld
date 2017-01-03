@@ -22,5 +22,10 @@ public class FamilyResponse extends  ServerResponse{
         this.family = bean;
     }
 
-
+    @Override
+    public String toString() {
+        return "FamilyResponse{" +
+                "family=" + family +
+                "} " + super.toString();
+    }
 }

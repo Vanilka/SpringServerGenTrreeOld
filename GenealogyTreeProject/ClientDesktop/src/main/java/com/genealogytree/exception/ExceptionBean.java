@@ -29,4 +29,11 @@ public class ExceptionBean {
         this.code = code;
     }
 
+    @Override
+    public String toString() {
+        return "ExceptionBean{" +
+                "cause='" + cause + '\'' +
+                ", code=" + code +
+                '}';
+    }
 }

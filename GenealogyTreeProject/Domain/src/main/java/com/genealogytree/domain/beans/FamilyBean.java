@@ -71,4 +71,14 @@ public class FamilyBean implements Serializable {
     public void setOwner(UserBean owner) {
         this.owner = owner;
     }
+
+    @Override
+    public String toString() {
+        return "FamilyBean{" +
+                "version=" + version +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }

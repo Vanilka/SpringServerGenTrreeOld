@@ -1,5 +1,7 @@
 package com.genealogytree.domain.beans;
 
+import java.util.Arrays;
+
 /**
  * Created by vanilka on 27/12/2016.
  */
@@ -52,5 +54,15 @@ public class ImageBean {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "ImageBean{" +
+                "version=" + version +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", content=" + Arrays.toString(content) +
+                '}';
     }
 }
