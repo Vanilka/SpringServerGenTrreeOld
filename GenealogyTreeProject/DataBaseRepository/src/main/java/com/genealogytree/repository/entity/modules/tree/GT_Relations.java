@@ -29,6 +29,15 @@ public class GT_Relations extends RelationBean {
     public GT_Relations() {
         this(null, null, null, null);
     }
+
+    public GT_Relations (GT_Member simLeft, GT_Member simRight, GT_Member child, GT_Family ownerF, RelationType type, Boolean active) {
+        super(type, active);
+        this.simLeft = simLeft;
+        this.simRight = simRight;
+        this.ownerF = ownerF;
+
+        addChild(child);
+    }
     public GT_Relations(GT_Member simLeft, GT_Member  simRight, RelationType type, Boolean active) {
         super(type, active);
         this.simLeft = simLeft;
@@ -37,7 +46,7 @@ public class GT_Relations extends RelationBean {
 
 
     public void addChild(GT_Member member) {
-        if(! children.contains(member)) {
+        if(! children.contains(member) && member != null) {
             children.add(member);
         }
     }
@@ -92,7 +101,7 @@ public class GT_Relations extends RelationBean {
         return active;
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "relation_ID")
     public List<GT_Member> getChildren() {
         return children;

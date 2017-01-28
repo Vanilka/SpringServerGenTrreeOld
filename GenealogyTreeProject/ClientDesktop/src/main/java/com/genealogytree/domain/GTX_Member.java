@@ -101,7 +101,7 @@ public class GTX_Member {
 
     public String getPhoto() {
         if (photo.getValue() != null) {
-            return photo.get();
+            return "file:///" +photo.get();
         } else if (this.getSex().equals(Sex.FEMALE)) {
             return ImageFiles.GENERIC_FEMALE.toString();
         } else {
@@ -169,7 +169,6 @@ public class GTX_Member {
         if (id.getValue() != null ? !id.getValue().equals(that.id.getValue()) : that.id.getValue() != null) return false;
         if (name.getValue() != null ? !name.getValue().equals(that.name.getValue()) : that.name.getValue() != null) return false;
         if (surname.getValue() != null ? !surname.getValue().equals(that.surname.getValue()) : that.surname.getValue() != null) return false;
-        if (photo.getValue() != null ? !photo.getValue().equals(that.photo.getValue()) : that.photo.getValue() != null) return false;
         if (age != that.age) return false;
         return sex == that.sex;
 

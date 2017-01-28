@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataBaseRepository/DataBaseRepository.iml" filepath="$PROJECT_DIR$/DataBaseRepository/DataBaseRepository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DatabaseManager/DatabaseManager.iml" filepath="$PROJECT_DIR$/DatabaseManager/DatabaseManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExceptionManager/ExceptionManager.iml" filepath="$PROJECT_DIR$/ExceptionManager/ExceptionManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GenealogyTreeProject.iml" filepath="$PROJECT_DIR$/GenealogyTreeProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Service/Service.iml" filepath="$PROJECT_DIR$/Service/Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ClientDesktop/gt-client-desktop.iml" filepath="$PROJECT_DIR$/ClientDesktop/gt-client-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ClientWeb/gt-client-web.iml" filepath="$PROJECT_DIR$/ClientWeb/gt-client-web.iml" />
+    </modules>
+  </component>
+</project>

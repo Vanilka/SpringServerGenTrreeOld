@@ -97,6 +97,7 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
         buttonsTableGroup = new ToggleGroup();
     }
 
+
     /**
      * Initializes the controller class.
      */
@@ -110,12 +111,11 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
 
         this.languageBundle.setValue(rb);
 
+        setButtonToToggleGroup();
+        setCellValueFactory();
         this.relationSimLeftColumn.setCellFactory(setMemberCellFactory("LEFT"));
         this.relationSimRightColumn.setCellFactory(setMemberCellFactory("RIGHT"));
         this.relationTypeColumn.setCellFactory(setRelationTypeCellFactory());
-
-        setButtonToToggleGroup();
-        setCellValueFactory();
     }
 
     private void setInfoTab() {
@@ -186,8 +186,9 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
     public void showInfoRelation(MouseEvent event) {
         if (event.getClickCount() == 2 && gtFamilyRelationTable.getSelectionModel().getSelectedItem() != null) {
             GTX_Relation relation = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
-            System.out.println(relation.toString());
-
+            Tab infoRelationTab = new Tab();
+            TabInfoRelationPaneController tabInfoRelation = (TabInfoRelationPaneController) this.manager.loadFxml(new TabInfoMemberPaneController(), gtMainTabPane, infoRelationTab, FXMLFiles.TAB_INFO_RELATION.toString(), "Relation");
+            tabInfoRelation.setRelation(relation);
         }
     }
 
@@ -230,20 +231,20 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
                             if (!empty) {
                                 imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
                                 imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
-                                String path = parameter.equals("LEFT") == true ? ImageFiles.NO_NAME_FEMALE.toString() :
-                                        ImageFiles.NO_NAME_MALE.toString();
+                                String path = parameter.equals("LEFT") == true ?
+                                        ImageFiles.NO_NAME_FEMALE.toString() : ImageFiles.NO_NAME_MALE.toString();
                                 imageview.setImage(new Image(path));
                                 setGraphic(imageview);
                             }
                         }
                     }
+
                 };
                 return cell;
             }
         };
 
         return callback;
-
     }
 
     private Callback<TableColumn<GTX_Relation, RelationType>,
@@ -254,27 +255,27 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
             @Override
             public TableCell<GTX_Relation, RelationType> call(TableColumn<GTX_Relation, RelationType> param) {
                 TableCell<GTX_Relation, RelationType> cell = new TableCell<GTX_Relation, RelationType>() {
-
                     @Override
                     protected void updateItem(RelationType item, boolean empty) {
                         super.updateItem(item, empty);
-
+                        ImageView imageview = new ImageView();
                         if (item != null) {
-                            ImageView imageview = new ImageView();
+                            String path;
                             switch (item) {
                                 case FIANCE:
-                                    imageview = setGraphicToImageView(imageview, ImageFiles.RELATION_FIANCE.toString());
+                                    path = ImageFiles.RELATION_FIANCE.toString();
                                     break;
                                 case MARRIED:
-                                    imageview = setGraphicToImageView(imageview, ImageFiles.RELATION_MARRIED.toString());
+                                    path = ImageFiles.RELATION_MARRIED.toString();
                                     break;
                                 case LOVE:
-                                    imageview = setGraphicToImageView(imageview, ImageFiles.RELATION_LOVE.toString());
+                                    path = ImageFiles.RELATION_LOVE.toString();
                                     break;
                                 default:
-                                    imageview = setGraphicToImageView(imageview, ImageFiles.RELATION_NEUTRAL.toString());
+                                    path = ImageFiles.RELATION_NEUTRAL.toString();
                                     break;
                             }
+                            imageview.setImage(new Image(path));
                             imageview.setFitHeight(40);
                             imageview.setFitWidth(40);
                             setGraphic(imageview);

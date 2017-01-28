@@ -8,6 +8,7 @@ import com.genealogytree.domain.beans.FamilyBean;
 import com.genealogytree.domain.beans.ImageBean;
 import com.genealogytree.domain.beans.MemberBean;
 import com.genealogytree.domain.beans.RelationBean;
+import com.genealogytree.domain.wrappers.addMemberWrapper;
 import com.genealogytree.exception.ExceptionBean;
 import com.genealogytree.services.GTFamilyService;
 import com.genealogytree.services.responses.*;
@@ -74,6 +75,12 @@ public class GTFamilyServiceOnline implements GTFamilyService {
     public ServerResponse addNewRelation(GTX_Relation relation) {
         return requestAddNewRelation(relation);
     }
+
+    @Override
+    public ServerResponse updateRelation(GTX_Relation relation) {
+        return null;
+    }
+
 
     /*
     *   SERBICE METHODS GET
@@ -186,10 +193,11 @@ public class GTFamilyServiceOnline implements GTFamilyService {
             if (response.getStatus() != 200) {
                 result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
             } else {
-                member = updateGTXFromBean(member, response.readEntity(MemberBean.class));
+                addMemberWrapper wrapper = response.readEntity(addMemberWrapper.class);
+                member = updateGTXFromBean(member, wrapper.getMember());
                 this.currentFamily.getValue().addMember(member);
-                GTX_Relation temp = new GTX_Relation(null, null, member);
-                addNewRelation(temp);
+                GTX_Relation temp = getGTXFromRelationBean(wrapper.getRelation());
+                getCurrentFamily().getGtx_relations().add(temp);
                 result = new MemberResponse(member);
             }
         } catch (Exception e) {
@@ -223,6 +231,7 @@ public class GTFamilyServiceOnline implements GTFamilyService {
                 result = new ExceptionResponse((response.readEntity(ExceptionBean.class)));
             } else {
                 bean = response.readEntity(RelationBean.class);
+                setInfoLog("requestAddNewRelation : RelationBean from response -> " + bean.toString());
                 updateRelationFromBean(relation, bean);
                 this.currentFamily.getValue().addRelation(relation);
                 result = new RelationResponse(relation);
@@ -370,7 +379,7 @@ public class GTFamilyServiceOnline implements GTFamilyService {
 
     private List<GTX_Relation> convertRelationsList(List<RelationBean> sourceList) {
 
-       return convertRelationsList(sourceList, this.getCurrentFamily());
+        return convertRelationsList(sourceList, this.getCurrentFamily());
     }
 
     private List<GTX_Relation> convertRelationsList(List<RelationBean> sourceList, GTX_Family family) {
@@ -389,7 +398,7 @@ public class GTFamilyServiceOnline implements GTFamilyService {
 
     private GTX_Member findMemberInList(GTX_Member member) {
 
-        return  findMemberInList(member, this.getCurrentFamily().getGtx_membersList());
+        return findMemberInList(member, this.getCurrentFamily().getGtx_membersList());
     }
 
     private GTX_Member findMemberInList(GTX_Member member, ObservableList<GTX_Member> list) {
@@ -397,19 +406,20 @@ public class GTFamilyServiceOnline implements GTFamilyService {
         if (member == null || list == null || list.size() == 0) {
             return null;
         }
+
         setInfoLog("findMemberInList : parameter -> " + member.toString());
-
-         list = list.filtered(p -> p.equals(member));
-
+        list = list.filtered(p -> p.equals(member));
         if (list.size() == 0) {
+            System.out.println("nie ma !");
             return null;
         } else {
+
             return list.get(0);
         }
     }
 
     private MemberBean getMemberBeanFromGTX(GTX_Member source) {
-        if(source != null) {
+        if (source != null) {
             setInfoLog("getMemberBeanFromGTX : parameter -> " + source.toString());
             MemberBean target = new MemberBean();
             target.setId(source.getId());
@@ -418,9 +428,10 @@ public class GTFamilyServiceOnline implements GTFamilyService {
             target.setSurname(source.getSurname());
             target.setAge(source.getAge());
             target.setSex(source.getSex());
+
             if (source.getPhoto() != null) {
-                if (Files.exists(Paths.get(source.getPhoto()))) {
-                    Path path = Paths.get(source.getPhoto());
+                if (Files.exists(Paths.get(source.getPhoto().replace("file:///", "")))) {
+                    Path path = Paths.get(source.getPhoto().replace("file:///", ""));
                     try {
                         target.setImage(new ImageBean(convertFileToArray(path)));
                     } catch (Exception e) {
@@ -498,7 +509,7 @@ public class GTFamilyServiceOnline implements GTFamilyService {
     }
 
     private GTX_Relation getGTXFromRelationBean(RelationBean source) {
-        return  getGTXFromRelationBean(source, this.getCurrentFamily());
+        return getGTXFromRelationBean(source, this.getCurrentFamily());
     }
 
     private GTX_Relation getGTXFromRelationBean(RelationBean source, GTX_Family family) {
@@ -541,6 +552,7 @@ public class GTFamilyServiceOnline implements GTFamilyService {
     }
 
     private byte[] convertFileToArray(Path file) throws IOException {
+        setInfoLog("convertFileToArray : file value -> " + file.toString());
         byte[] byteFile;
         byteFile = Files.readAllBytes(file);
         return byteFile;
@@ -556,8 +568,13 @@ public class GTFamilyServiceOnline implements GTFamilyService {
         return this.currentFamily.getValue();
     }
 
+    @Override
+    public ObjectProperty<GTX_Family> currentFamilyProperty() {
+        return currentFamily;
+    }
+
     private String getExceptionTrace(Throwable t) {
-        StringWriter sw =new StringWriter();
+        StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
         return sw.toString();
     }
@@ -573,20 +590,24 @@ public class GTFamilyServiceOnline implements GTFamilyService {
     @Override
     public void setCurrentFamily(GTX_Family family) {
 
-        ServerResponse listMemberResponse = loadMembersList(family);
-        if (listMemberResponse instanceof ListMemberResponse) {
-            family.setGtx_membersList(((ListMemberResponse) listMemberResponse).getListMember());
-        } else {
-            System.out.println("Error charge list member");
-        }
+        if (family != null) {
 
-        ServerResponse listRelationResponse = loadRelationsList(family);
-        if (listRelationResponse instanceof ListRelationsResponse) {
-            family.setGtx_relations(((ListRelationsResponse) listRelationResponse).getListRelations());
-        } else {
-            System.out.println("Error charge list relation");
+            ServerResponse listMemberResponse = loadMembersList(family);
+            if (listMemberResponse instanceof ListMemberResponse) {
+                family.setGtx_membersList(((ListMemberResponse) listMemberResponse).getListMember());
+            } else {
+                setErrorLog("setCurrentFamily : Error :  Exception while set MemberList");
+            }
+
+            ServerResponse listRelationResponse = loadRelationsList(family);
+            if (listRelationResponse instanceof ListRelationsResponse) {
+                family.setGtx_relations(((ListRelationsResponse) listRelationResponse).getListRelations());
+            } else {
+                setErrorLog("setCurrentFamily : Error :  Exception while set RelationList");
+            }
         }
         this.currentFamily.setValue(family);
+
     }
 
     private void setInfoLog(String msg) {

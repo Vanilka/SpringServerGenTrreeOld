@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by vanilka on 22/11/2016.
  */
-public class GTX_Family implements Serializable, Observable {
+public class GTX_Family  implements Serializable, Observable {
 
 
     private static final long serialVersionUID = -7356882826049849553L;
@@ -148,6 +148,7 @@ public class GTX_Family implements Serializable, Observable {
     public void removeListener(InvalidationListener listener) {
 
     }
+
 
     @Override
     public String toString() {

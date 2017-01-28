@@ -70,7 +70,7 @@ public class TabInfoMemberPaneController implements Initializable, FXMLTabContro
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation : " +this.toString());
+        setInfoLog("Initialisation : " + this.toString());
         this.languageBundle.setValue(rb);
 
         this.simNameField.setEditable(false);
@@ -97,12 +97,7 @@ public class TabInfoMemberPaneController implements Initializable, FXMLTabContro
                     Image img = null;
                     try {
                         String path = member.getValue().getPhoto();
-                        if (path != ImageFiles.GENERIC_FEMALE.toString() && path != ImageFiles.GENERIC_MALE.toString()) {
-                            img = new Image("file:///" + path);
-                        } else {
-                            img = new Image(path);
-                        }
-
+                        img = new Image(path);
                     } catch (Exception e) {
                         img = new Image(ImageFiles.GENERIC_MALE.toString());
                     } finally {

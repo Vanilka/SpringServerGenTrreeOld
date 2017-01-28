@@ -7,13 +7,18 @@ import com.genealogytree.configuration.ImageFiles;
 import com.genealogytree.domain.GTX_Member;
 import com.genealogytree.domain.GTX_Relation;
 import com.genealogytree.domain.enums.RelationType;
+import com.genealogytree.services.responses.RelationResponse;
 import com.genealogytree.services.responses.ServerResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -35,8 +40,8 @@ import java.util.ResourceBundle;
 public class TabAddNewRelationPaneController implements Initializable, FXMLTabController {
 
     private static final Logger LOG = LogManager.getLogger(TabAddNewRelationPaneController.class);
-    private  static final  int RELATION_HEIGHT = 50;
-    private  static final int  RELATION_WIDTH = 50;
+    private static final int RELATION_HEIGHT = 50;
+    private static final int RELATION_WIDTH = 50;
     private ScreenManager manager;
     private GenealogyTreeContext context;
 
@@ -48,6 +53,9 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
 
     @FXML
     private JFXButton addRelationConfirmButton;
+
+    @FXML
+    private JFXToggleButton toggleActiveButton;
 
     @FXML
     private AnchorPane templateAnchorPane;
@@ -70,6 +78,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
     private Tab tab;
     private JFXTabPane tabPane;
 
+    private boolean isActive = false;
 
     /**
      * Initializes the controller class.
@@ -91,6 +100,21 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
         setCellFactoryToCombobox(simRightChoice);
         setCellFactoryToCombobox(childChoice);
         setCellFactoryToRelationType(relationType);
+
+        toggleActiveButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue == true) {
+                    toggleActiveButton.setText("Active");
+                } else {
+                    toggleActiveButton.setText("Inactive");
+                }
+            }
+        });
+
+        toggleActiveButton.setSelected(true);
+
+
     }
 
     @FXML
@@ -98,12 +122,20 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
         GTX_Relation relation = new GTX_Relation(simLeftChoice.getValue(), simRightChoice.getValue(), childChoice.getValue(), relationType.getValue(), true);
         ServerResponse response = this.context.getFamilyService().addNewRelation(relation);
 
-        this.tabPane.getTabs().remove(tab);
+        if (response instanceof RelationResponse) {
+            this.tabPane.getTabs().remove(tab);
+        }
     }
 
     @FXML
     public void setRelationCancel() {
         this.tabPane.getTabs().remove(tab);
+    }
+
+    @FXML
+    public void activeToggleButtonEvent(ActionEvent event) {
+
+
     }
 
     private void setCellFactoryToCombobox(ComboBox<GTX_Member> combobox) {
@@ -138,7 +170,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
                                     setText("");
                                     break;
                                 case LOVE:
-                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_LOVE.toString(),RELATION_WIDTH, RELATION_HEIGHT));
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_LOVE.toString(), RELATION_WIDTH, RELATION_HEIGHT));
                                     setText("");
                                     break;
                                 case FIANCE:
@@ -146,7 +178,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
                                     setText("");
                                     break;
                                 case MARRIED:
-                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_MARRIED.toString(),RELATION_WIDTH, RELATION_HEIGHT));
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_MARRIED.toString(), RELATION_WIDTH, RELATION_HEIGHT));
                                     setText("");
                                     break;
                                 default:
@@ -173,6 +205,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTabCo
                 super.updateItem(item, empty);
                 {
                     if (item != null) {
+
                         ImageView imv = new ImageView(item.getPhoto());
                         imv.setFitWidth(80);
                         imv.setFitHeight(100);

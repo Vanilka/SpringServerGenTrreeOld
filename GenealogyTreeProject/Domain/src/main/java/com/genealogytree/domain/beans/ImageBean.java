@@ -62,7 +62,7 @@ public class ImageBean {
                 "version=" + version +
                 ", id=" + id +
                 ", name='" + name + '\'' +
-                ", content=" + Arrays.toString(content) +
+                ", content=" + content +
                 '}';
     }
 }

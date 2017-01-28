@@ -9,6 +9,7 @@ public enum ImageFiles {
     GENERIC_MALE("GenericMale.png"),
     GENERIC_FEMALE("GenericFemale.png"),
     TEST_BACKGROUND("TestBackground.png"),
+    EQUAL_TRIANGLE("equalTrangle.png"),
     RELATION_NEUTRAL("neutral.png"),
     RELATION_MARRIED("maried.png"),
     RELATION_FIANCE("fiance.png"),

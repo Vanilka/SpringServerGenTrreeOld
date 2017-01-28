@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,12 +40,19 @@ public class RelationServiceImpl implements RelationService {
 
     @Override
     public GT_Relations addRelation(GT_Relations relation) throws TooManyNullFields, IncorrectSex {
+
+
         if (!checkNullFields(relation)) {
             throw new TooManyNullFields();
         }
         if (!checkSex(relation)) {
             throw new IncorrectSex();
         }
+
+        List<GT_Relations> toUpdate = new ArrayList<>();
+        List<GT_Relations> toDelete = new ArrayList<>();
+
+
         GT_Relations existing = getRelationBySimLeftAndSimRight(relation.getSimLeft(), relation.getSimRight());
         if(existing != null) {
             existing.setActive(relation.geActive());
@@ -91,4 +99,5 @@ public class RelationServiceImpl implements RelationService {
             return true;
         }
     }
+
 }

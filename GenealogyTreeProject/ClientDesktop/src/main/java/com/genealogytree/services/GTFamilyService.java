@@ -5,27 +5,34 @@ import com.genealogytree.domain.GTX_Family;
 import com.genealogytree.domain.GTX_Member;
 import com.genealogytree.domain.GTX_Relation;
 import com.genealogytree.services.responses.ServerResponse;
+import javafx.beans.property.ObjectProperty;
 
 /**
  * Created by vanilka on 22/11/2016.
  */
 public interface GTFamilyService {
 
-     void setContext(GenealogyTreeContext context);
+    void setContext(GenealogyTreeContext context);
 
-     ServerResponse getProjects();
-     ServerResponse addNewProject(GTX_Family familyBean);
-     ServerResponse updateFamily(GTX_Family family);
+    ServerResponse getProjects();
 
-     ServerResponse updateFamilyName(String newName);
+    ServerResponse addNewProject(GTX_Family familyBean);
 
-     ServerResponse addNewMember(GTX_Member member);
+    ServerResponse updateFamily(GTX_Family family);
 
-     ServerResponse addNewRelation(GTX_Relation relation);
+    ServerResponse updateFamilyName(String newName);
 
-      void setCurrentFamily(GTX_Family family);
-     GTX_Family getCurrentFamily();
+    ServerResponse addNewMember(GTX_Member member);
 
+    ServerResponse addNewRelation(GTX_Relation relation);
+
+    ServerResponse updateRelation(GTX_Relation relation);
+
+    void setCurrentFamily(GTX_Family family);
+
+    GTX_Family getCurrentFamily();
+
+    ObjectProperty<GTX_Family> currentFamilyProperty();
 
 
 }

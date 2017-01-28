@@ -64,7 +64,7 @@ public class DialogNewProjectController implements Initializable, FXMLPaneContro
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation :  " + this.toString());
+        setInfoLog("Initialisation :  " + this.toString());
         this.languageBundle.setValue(rb);
 
         addDisableButtonListener();
@@ -74,6 +74,7 @@ public class DialogNewProjectController implements Initializable, FXMLPaneContro
 
     @FXML
     public void cancel() {
+
         this.stage.close();
     }
 

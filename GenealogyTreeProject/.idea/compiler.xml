@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DatabaseManager" />
+        <module name="DataBaseRepository" />
+        <module name="Domain" />
+        <module name="ExceptionManager" />
+        <module name="gt-client-desktop" />
+        <module name="gt-client-web" />
+        <module name="Service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DatabaseManager" target="1.8" />
+      <module name="DataBaseRepository" target="1.8" />
+      <module name="Domain" target="1.8" />
+      <module name="ExceptionManager" target="1.8" />
+      <module name="GenealogyTreeProject" target="1.8" />
+      <module name="gt-client-desktop" target="1.8" />
+      <module name="gt-client-web" target="1.8" />
+      <module name="Service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

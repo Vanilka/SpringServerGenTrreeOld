@@ -145,12 +145,12 @@ public class ScreenManager {
             controller = loader.getController();
             controller.setManager(this);
             controller.setContext(this.context);
-            controller.setStage(dialogStage);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
             dialogStage.setScene(scene);
             dialogStage.setResizable(false);
+            controller.setStage(dialogStage);
             dialogStage.showAndWait();
 
 

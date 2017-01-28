@@ -26,6 +26,7 @@ public enum FXMLFiles {
     TAB_ADD_NEW_MEMBER("TabAddNewMember.fxml"),
     TAB_INFO_PROJECT("TabInfoProject.fxml"),
     TAB_INFO_MEMBER("TabInfoMember.fxml"),
+    TAB_INFO_RELATION("TabInfoRelation.fxml"),
     TAB_ADD_NEW_RELATION("TabAddNewRelation.fxml"),
     TAB_RELATION_TABLE("TabShowRelationTable.fxml"),
     TAB_MEMBER_TABLE("TabShowMemberTable.fxml");

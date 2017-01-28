@@ -12,7 +12,10 @@ import java.util.List;
 public interface MemberService {
 
     public List<GT_Member> getMembers(GT_Family family) throws NotFoundFamilyException;
+
     public  GT_Member getMember(Long id);
 
     public GT_Member addMember(GT_Member member);
+
+    public GT_Member deleteMember(GT_Member member);
 }

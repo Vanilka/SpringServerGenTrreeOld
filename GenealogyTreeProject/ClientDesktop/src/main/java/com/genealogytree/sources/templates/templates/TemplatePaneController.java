@@ -39,7 +39,7 @@ public class TemplatePaneController implements Initializable, FXMLPaneController
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
-    /**
+    /*
      * Initializes the controller class.
      */
     @Override

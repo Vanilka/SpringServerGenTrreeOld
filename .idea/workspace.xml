@@ -7,63 +7,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b47298d5-5fa4-42a0-91e1-1f1edd143757" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTRelationServiceOnline.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListRelationsResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneGenealogyTreeDraw.fxml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/sources/templates/TemplatePaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/sources/backgrounds/equalTrangle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTNode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoRelationPaneController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplateTabController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTNode.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabInfoRelation.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/wrappers/GT_addMemberWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/wrappers/GT_addRelationWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addMemberWrapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addRelationWrapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/gt_client_desktop/gt_client_desktop.jar" afterPath="$PROJECT_DIR$/out/artifacts/gt_client_desktop/gt_client_desktop.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/FXMLTabController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/FXMLTabController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/DialogNewProjectController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/DialogNewProjectController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneChooseApplicationTypeController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneChooseApplicationTypeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneFooterController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneFooterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLocalApplicationChoiceController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLocalApplicationChoiceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonFormController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonFormController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonWindowController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonWindowController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainWindowController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainWindowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMenuBarController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMenuBarController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneOnlineApplicationChoiceController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneOnlineApplicationChoiceController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterConfirmationController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterConfirmationController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneWelcomeWindowController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneWelcomeWindowController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewMemberPaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewMemberPaneController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/FXMLFiles.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/FXMLFiles.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/ImageFiles.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/ImageFiles.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Family.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Family.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Relation.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Relation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_User.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/exception/ExceptionBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/exception/ExceptionBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/GTFamilyService.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/GTFamilyService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOffline.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOffline.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ExceptionResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ExceptionResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/FamilyResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/FamilyResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListFamilyResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListFamilyResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListMemberResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListMemberResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/MemberResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/MemberResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/RelationResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/RelationResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ServerResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ServerResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/UserResponse.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/UserResponse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabAddNewRelation.fxml" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabAddNewRelation.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location.properties" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_en_EN.properties" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_en_EN.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_fr_FR.properties" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_fr_FR.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_pl_PL.properties" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/configuration/traduction/gt_location_pl_PL.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestRelationsMapper.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestRelationsMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Member.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Member.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/MemberAdvice.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/MemberAdvice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestMemberMapper.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestMemberMapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Relations.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Relations.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/FamilyBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/FamilyBean.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/MemberBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/MemberBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/RelationBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/RelationBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/UserBean.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/UserBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/enums/Sex.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/enums/Sex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/exception/NotFoundFamilyException.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/exception/NotFoundFamilyException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/FamilyService.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/FamilyService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/MemberService.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/MemberService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/MemberServiceImpl.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/MemberServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/RelationServiceImpl.java" afterPath="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/RelationServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/app.log" afterPath="$PROJECT_DIR$/logs/app.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/error.log" afterPath="$PROJECT_DIR$/logs/error.log" />
@@ -110,120 +96,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="mainstyle.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14872">
+              <caret line="676" column="35" lean-forward="false" selection-start-line="676" selection-start-column="35" selection-end-line="676" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="GTFamilyServiceOnline.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="244" column="48" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
+            <state relative-caret-position="5940">
+              <caret line="423" column="22" lean-forward="false" selection-start-line="423" selection-start-column="22" selection-end-line="423" selection-end-column="22" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getMemberBeanFromGTX#0;class#GTFamilyServiceOnline#0" expanded="false" />
+                <element signature="method#requestAddNewProject#0;class#GTFamilyServiceOnline#0" expanded="false" />
+                <element signature="method#requestUpdateFamilyName#0;class#GTFamilyServiceOnline#0" expanded="false" />
+                <element signature="method#requestAddNewMember#0;class#GTFamilyServiceOnline#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScreenManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java">
+      <file leaf-file-name="GTFamilyServiceOffline.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOffline.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-103">
-              <caret line="182" column="29" selection-start-line="182" selection-start-column="11" selection-end-line="182" selection-end-column="29" />
+            <state relative-caret-position="3850">
+              <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GTLeaf.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java">
+      <file leaf-file-name="FamilyRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/FamilyRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="12" column="38" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GTLeaf.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PaneMainApplicationWindowController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="126" column="55" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/javafx-src.zip!/javafx/scene/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-708">
-              <caret line="2882" column="22" selection-start-line="2882" selection-start-column="22" selection-end-line="2882" selection-end-column="22" />
+            <state relative-caret-position="110">
+              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaneGenealogyTreeDrawController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java">
+      <file leaf-file-name="GT_Relations.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Relations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="140" column="50" selection-start-line="140" selection-start-column="50" selection-end-line="140" selection-end-column="50" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4461#4462#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PaneGenealogyTreeDraw.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneGenealogyTreeDraw.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="75" />
+            <state relative-caret-position="1232">
+              <caret line="65" column="30" lean-forward="false" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaneMainApplicationWindow.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml">
+      <file leaf-file-name="requestMemberMapper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestMemberMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="32" column="74" selection-start-line="32" selection-start-column="74" selection-end-line="32" selection-end-column="74" />
+            <state relative-caret-position="528">
+              <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="TabAddNewRelationPaneController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainstyle.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css">
+      <file leaf-file-name="PaneRegisterFormController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="686" column="0" selection-start-line="686" selection-start-column="0" selection-end-line="686" selection-end-column="0" />
+            <state relative-caret-position="220">
+              <caret line="40" column="13" lean-forward="false" selection-start-line="135" selection-start-column="50" selection-end-line="135" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GTX_Member.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2640">
+              <caret line="174" column="5" lean-forward="false" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -254,57 +215,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/RelationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_User.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/enums/Sex.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTRelationServiceOnline.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Relation.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ExceptionResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/exception/ExceptionBean.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ServerResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/FamilyResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListFamilyResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListMemberResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListRelationsResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/MemberResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/RelationResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/UserResponse.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/FamilyBean.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/UserBean.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/FXMLTabController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewMemberPaneController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneWelcomeWindowController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterConfirmationController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMenuBarController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneOnlineApplicationChoiceController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainWindowController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonWindowController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonFormController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLocalApplicationChoiceController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneFooterController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneChooseApplicationTypeController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/DialogNewProjectController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/sources/templates/TemplatePaneController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/MemberBean.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDraw.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/FXMLFiles.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.fxml" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java" />
-        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneGenealogyTreeDraw.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/Node.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTNode.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/FamilyService.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/GTFamilyService.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Family.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplateTabController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabInfoRelationPane.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/FXMLFiles.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/ImageFiles.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabInfoRelation.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoRelationPaneController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/DialogNewProjectController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOffline.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Relation.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/wrappers/MemberWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/wrappers/MemberWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/MemberWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addMemberWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/wrappers/GT_addRelationWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addRelationWrapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/MemberService.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/MemberServiceImpl.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/MemberAdvice.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestMemberMapper.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Relations.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/RelationServiceImpl.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/exception/NotFoundFamilyException.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabAddNewRelation.fxml" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java" />
         <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java" />
+        <option value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java" />
       </list>
     </option>
   </component>
@@ -322,11 +283,6 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Bundled (Maven 3)" />
-      </MavenGeneralSettings>
-    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="createModuleGroups" value="true" />
@@ -373,20 +329,12 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="85" />
+    <option name="y" value="59" />
     <option name="width" value="1680" />
-    <option name="height" value="959" />
+    <option name="height" value="957" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -402,9 +350,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -412,204 +360,8 @@
               <option name="myItemId" value="GenealogyTreeProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genealogytree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genealogytree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genealogytree" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fxml" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GenealogyTreeProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ClientDesktop" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="genealogytree" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -631,6 +383,13 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/fxml" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/lib" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.genealogytree.configuration" />
       <recent name="com.genealogytree.application" />
@@ -639,20 +398,14 @@
       <recent name="com.genealogytree" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/lib" />
       <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/sources/backgrounds" />
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main" />
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls" />
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/fxml" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml" />
       <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers" />
       <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/lib" />
-      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application" />
+      <recent name="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GTClientDesktop">
+  <component name="RunManager" selected="Tomcat Server.SpringWebApplication">
     <configuration default="false" name="gt-client-desktop-0.0.1-SNAPSHOT.jar" type="JarApplication" factoryName="JAR Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="JAR_PATH" value="$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/target/gt-client-desktop-0.0.1-SNAPSHOT.jar" />
@@ -675,9 +428,10 @@
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
       <method />
     </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
@@ -687,7 +441,7 @@
       <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
       <option name="PREFERRED_AVD" value="" />
       <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
       <option name="DEBUGGER_TYPE" value="Java" />
@@ -695,7 +449,11 @@
       <option name="PREFERRED_AVD" value="" />
       <Java />
       <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
         <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -720,7 +478,11 @@
       <option name="PREFERRED_AVD" value="" />
       <Java />
       <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
         <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
       </Profilers>
       <method />
     </configuration>
@@ -898,6 +660,7 @@
       <setting name="cmdLine" value="run-app" />
       <setting name="passParentEnv" value="true" />
       <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
       <setting name="depsClasspath" value="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
@@ -914,27 +677,6 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
@@ -962,6 +704,12 @@
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
@@ -1057,34 +805,6 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -1095,7 +815,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
+      <command value="run" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -1214,6 +934,30 @@
         <item index="0" class="java.lang.String" itemvalue="JAR Application.gt-client-desktop-0.0.1-SNAPSHOT.jar" />
       </list>
     </recent_temporary>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -1254,12 +998,23 @@
       <workItem from="1483249924061" duration="6770000" />
       <workItem from="1483321086766" duration="31708000" />
       <workItem from="1483393052520" duration="21119000" />
-      <workItem from="1483421727508" duration="8021000" />
+      <workItem from="1483421727508" duration="28561000" />
+      <workItem from="1483493578204" duration="33051000" />
+      <workItem from="1484317524052" duration="317000" />
+      <workItem from="1484320129017" duration="5672000" />
+      <workItem from="1484486168946" duration="1039000" />
+      <workItem from="1484487336983" duration="7635000" />
+      <workItem from="1484510894180" duration="2096000" />
+      <workItem from="1484513138691" duration="6526000" />
+      <workItem from="1485027297562" duration="1158000" />
+      <workItem from="1485539395493" duration="519000" />
+      <workItem from="1485594467727" duration="1816000" />
+      <workItem from="1485611649570" duration="53000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="385438000" />
+    <option name="totallyTimeSpent" value="465860000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1271,42 +1026,46 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="959" extended-state="6" />
-    <editor active="true" />
+    <frame x="85" y="59" width="1680" height="957" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261391" sideWeight="0.4975278" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853717" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4172662" sideWeight="0.27008653" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18674698" sideWeight="0.50741655" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.497558" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18603213" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4172662" sideWeight="0.7299135" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32816228" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18974042" sideWeight="0.7701613" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23529412" sideWeight="0.22983871" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39346248" sideWeight="0.49505562" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18674698" sideWeight="0.49258342" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32771084" sideWeight="0.4975278" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4164649" sideWeight="0.7299135" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17923363" sideWeight="0.7701613" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23529412" sideWeight="0.22983871" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.6483313" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5045558" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3944844" sideWeight="0.49505562" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32566586" sideWeight="0.4975278" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="302" y="123" width="1017" height="767" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.4957265" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.6483313" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1322,27 +1081,30 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969098" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3944844" sideWeight="0.49505562" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39346248" sideWeight="0.49505562" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3261391" sideWeight="0.4975278" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32566586" sideWeight="0.4975278" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853717" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="302" y="123" width="1017" height="767" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4172662" sideWeight="0.7299135" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32816228" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4164649" sideWeight="0.7299135" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18974042" sideWeight="0.7701613" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20889987" sideWeight="0.7701613" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23529412" sideWeight="0.22983871" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.4957265" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733813" sideWeight="0.6483313" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5045558" order="5" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -1364,8 +1126,14 @@
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java</url>
+          <line>101</line>
+          <properties />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="42" />
+      <option name="time" value="47" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1374,416 +1142,372 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/GenealogyTree.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/wrappers.java" />
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/wrappers/GT_addMemberWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/GenealogyTreeContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="224" column="21" selection-start-line="224" selection-start-column="21" selection-end-line="224" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/exception/ExceptionBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ServerResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ExceptionResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
-          <folding>
-            <element signature="e#517#518#0" expanded="false" />
-            <element signature="e#559#560#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/FamilyResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListFamilyResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListMemberResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/MemberResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/RelationResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/UserResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/responses/ListRelationsResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="36" column="1" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/FamilyBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="75" column="18" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/UserBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="755">
-          <caret line="96" column="29" selection-start-line="96" selection-start-column="29" selection-end-line="96" selection-end-column="29" />
+        <state relative-caret-position="198">
+          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/RelationBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1364">
-          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+        <state relative-caret-position="398">
+          <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/FXMLTabController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTUserServiceOnline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state relative-caret-position="-286">
+          <caret line="27" column="38" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoRelationPaneController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="72" column="40" selection-start-line="72" selection-start-column="40" selection-end-line="72" selection-end-column="40" />
+        <state relative-caret-position="-1852">
+          <caret line="45" column="9" lean-forward="false" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/wrappers/GT_addRelationWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+        <state relative-caret-position="440">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="34" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="260" column="0" selection-start-line="260" selection-start-column="0" selection-end-line="270" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewMemberPaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3014">
-          <caret line="229" column="5" selection-start-line="229" selection-start-column="5" selection-end-line="229" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterConfirmationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="53" column="19" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMenuBarController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="84" column="33" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneOnlineApplicationChoiceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/DialogNewProjectController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addRelationWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
-          <caret line="66" column="33" selection-start-line="66" selection-start-column="33" selection-end-line="66" selection-end-column="33" />
-          <folding />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/exception/bundle/package-info.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/MemberService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#100#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="198">
+          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneChooseApplicationTypeController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/MemberServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="50" column="33" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="348">
+          <caret line="56" column="25" lean-forward="false" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonFormController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Family.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/exception/TooManyNullFields.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="126" column="16" selection-start-line="126" selection-start-column="16" selection-end-line="126" selection-end-column="16" />
+          <caret line="9" column="11" lean-forward="false" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestRelationsMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="33" column="22" lean-forward="false" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/RelationServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/RelationRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="15" column="17" lean-forward="false" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/RelationAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/MemberAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/gt.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestFamilyMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="48" column="25" lean-forward="false" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="74" column="25" lean-forward="false" selection-start-line="74" selection-start-column="25" selection-end-line="74" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/wrappers/addMemberWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/GenealogyTreeContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="49" column="24" lean-forward="false" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/FamilyAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" column="5" lean-forward="false" selection-start-line="22" selection-start-column="29" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/advice/CommonAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Family.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-144">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/ImagesRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/MemberRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/config/Causes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/ImagesService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Service/src/main/java/com/genealogytree/service/implementation/ImagesServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="27" column="26" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/MemberBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="126" column="30" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
+        <state relative-caret-position="418">
+          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLocalApplicationChoiceController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ExceptionManager/src/main/java/com/genealogytree/ExceptionManager/exception/NotFoundFamilyException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
-          <caret line="56" column="33" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
-          <folding />
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneWelcomeWindowController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DatabaseManager/src/main/java/com/genealogytree/DatabaseManager/DatabaseConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="450">
+          <caret line="59" column="3" lean-forward="false" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/sources/templates/templates/TemplatePaneController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
+        <state relative-caret-position="-22">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneFooterController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/Domain/src/main/java/com/genealogytree/domain/beans/ImageBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="78" />
-          <folding />
+        <state relative-caret-position="238">
+          <caret line="66" column="5" lean-forward="false" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabInfoMember.fxml">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoMemberPaneController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="104" selection-start-line="9" selection-start-column="83" selection-end-line="9" selection-end-column="104" />
-          <folding />
+        <state relative-caret-position="1760">
+          <caret line="105" column="21" lean-forward="false" selection-start-line="105" selection-start-column="21" selection-end-line="105" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMenuBarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="123" column="5" lean-forward="false" selection-start-line="123" selection-start-column="5" selection-end-line="123" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/ImageFiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="55" column="16" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneChooseApplicationType.fxml">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/TabAddNewRelation.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="181">
+          <caret line="21" column="139" lean-forward="false" selection-start-line="21" selection-start-column="116" selection-end-line="21" selection-end-column="139" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneLogonWindowController.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabInfoProjectPaneController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="83" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="-136">
+          <caret line="206" column="65" lean-forward="false" selection-start-line="206" selection-start-column="65" selection-end-line="206" selection-end-column="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/configuration/FXMLFiles.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/custom_controls/controllers/GTLeaf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="12" column="38" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="554" column="0" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
+        <state relative-caret-position="14872">
+          <caret line="676" column="35" lean-forward="false" selection-start-line="676" selection-start-column="35" selection-end-line="676" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOnline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="244" column="48" selection-start-line="244" selection-start-column="48" selection-end-line="244" selection-end-column="48" />
+        <state relative-caret-position="5940">
+          <caret line="423" column="22" lean-forward="false" selection-start-line="423" selection-start-column="22" selection-end-line="423" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getMemberBeanFromGTX#0;class#GTFamilyServiceOnline#0" expanded="false" />
+            <element signature="method#requestAddNewProject#0;class#GTFamilyServiceOnline#0" expanded="false" />
+            <element signature="method#requestUpdateFamilyName#0;class#GTFamilyServiceOnline#0" expanded="false" />
+            <element signature="method#requestAddNewMember#0;class#GTFamilyServiceOnline#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/ScreenManager.java">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/services/implementation/GTFamilyServiceOffline.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="182" column="29" selection-start-line="182" selection-start-column="11" selection-end-line="182" selection-end-column="29" />
+        <state relative-caret-position="3850">
+          <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/custom_controls/fxml/GTLeaf.fxml">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/FamilyRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneMainApplicationWindowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="126" column="55" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneMainApplicationWindow.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="32" column="74" selection-start-line="32" selection-start-column="74" selection-end-line="32" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneGenealogyTreeDrawController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="140" column="50" selection-start-line="140" selection-start-column="50" selection-end-line="140" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4461#4462#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/fxml/PaneGenealogyTreeDraw.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-708">
-          <caret line="2882" column="22" selection-start-line="2882" selection-start-column="22" selection-end-line="2882" selection-end-column="22" />
+        <state relative-caret-position="110">
+          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/resources/com/genealogytree/application/styles/mainstyle.css">
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/DataBaseRepository/src/main/java/com/genealogytree/repository/entity/modules/tree/GT_Relations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="686" column="0" selection-start-line="686" selection-start-column="0" selection-end-line="686" selection-end-column="0" />
+        <state relative-caret-position="1232">
+          <caret line="65" column="30" lean-forward="false" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/TabAddNewRelationPaneController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/application/fxmlcontrollers/PaneRegisterFormController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="40" column="13" lean-forward="false" selection-start-line="135" selection-start-column="50" selection-end-line="135" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientDesktop/src/main/java/com/genealogytree/domain/GTX_Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2640">
+          <caret line="174" column="5" lean-forward="false" selection-start-line="174" selection-start-column="5" selection-end-line="174" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenealogyTreeProject/ClientWeb/src/main/java/com/genealogytree/webapplication/dispatchers/requestMemberMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
           <folding />
         </state>
       </provider>

@@ -57,5 +57,14 @@ public class MemberServiceImpl implements MemberService {
         return newMember;
     }
 
+    @Override
+    public GT_Member deleteMember(GT_Member member) {
+
+        this.repository.delete(member);
+
+        return member;
+    }
+
+
 }
 

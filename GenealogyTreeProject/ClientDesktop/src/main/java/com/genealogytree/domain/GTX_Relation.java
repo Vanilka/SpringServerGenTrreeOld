@@ -133,7 +133,7 @@ public class GTX_Relation implements Serializable{
     }
 
     public void setType(RelationType type) {
-        this.type.set(type);
+        this.type.set(type != null ? type : RelationType.NEUTRAL);
     }
 
     public void setSimLeft(GTX_Member simLeft) {
@@ -147,6 +147,7 @@ public class GTX_Relation implements Serializable{
     public void setChildren(ObservableList<GTX_Member> children) {
         this.children = children;
     }
+
     public void  setChildrenList(List<GTX_Member> children) {
         this.children.clear();
         this.children.addAll(children);

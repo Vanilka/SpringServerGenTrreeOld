@@ -4,6 +4,7 @@ import com.genealogytree.application.FXMLPaneController;
 import com.genealogytree.application.GenealogyTreeContext;
 import com.genealogytree.application.ScreenManager;
 import com.genealogytree.application.custom_controls.controllers.GTLeaf;
+import com.genealogytree.application.custom_controls.controllers.GTNode;
 import com.genealogytree.sources.templates.templates.TemplatePaneController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Created by vanilka on 03/01/2017.
  */
-public class PaneGenealogyTreeDrawController extends AnchorPane implements Initializable, FXMLPaneController {
+public class PaneGenealogyTreeDrawController extends  AnchorPane implements Initializable, FXMLPaneController {
 
     private static final Logger LOG = LogManager.getLogger(TemplatePaneController.class);
 
@@ -50,8 +51,21 @@ public class PaneGenealogyTreeDrawController extends AnchorPane implements Initi
         setInfoLog("Initialisation :  " + this.toString());
 
         this.languageBundle.setValue(rb);
+    }
 
+    /*
+    *
+     */
 
+    public void Test() {
+        this.context.getFamilyService().currentFamilyProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue == null) {
+
+                System.out.println("Family is null");
+            } else {
+                System.out.println(" Family is:" +newValue.toString());
+            }
+        });
     }
 
     /*
@@ -84,41 +98,7 @@ public class PaneGenealogyTreeDrawController extends AnchorPane implements Initi
         this.context = context;
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-
-
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
-        projectContent.getChildren().add(new GTLeaf());
+        Test();
     }
 
     @Override

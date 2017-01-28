@@ -9,6 +9,10 @@ import com.genealogytree.services.responses.ServerResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -74,7 +78,6 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.projectMemberNumber.setEditable(false);
         this.projectNameLabel.setEditable(false);
         this.languageBundle.setValue(rb);
-
         setListener();
     }
 
@@ -108,8 +111,9 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
 
     private void setListener() {
         this.projectNameLabel.editableProperty().addListener(this::changed);
-
     }
+
+
 
     private void changed(ObservableValue<? extends Boolean> boolChange, Boolean oldValue, Boolean newValue) {
         if (newValue.booleanValue()) {
@@ -120,6 +124,7 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
             bindNameLabel();
         }
     }
+
 
     private void bindNameLabel() {
        this.projectNameLabel.textProperty().bind(this.context.getFamilyService().getCurrentFamily().getNameProperty());
@@ -191,6 +196,15 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTabContr
         this.languageBundle.bind(context.getBundleProperty());
         addLanguageListener();
         bindNameLabel();
+        projectMemberNumber.setText(""+context.getFamilyService().getCurrentFamily().getGtx_membersList().size());
+        this.context.getFamilyService().getCurrentFamily().getGtx_membersList().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                projectMemberNumber.setText(""+context.getFamilyService().getCurrentFamily().getGtx_membersList().size());
+            }
+        });
+        BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> this.context.getFamilyService().getCurrentFamily().getGtx_membersList().size() <2, this.context.getFamilyService().getCurrentFamily().getGtx_membersList());
+        addRelationButton.disableProperty().bind(disableBinding);
 
     }
 

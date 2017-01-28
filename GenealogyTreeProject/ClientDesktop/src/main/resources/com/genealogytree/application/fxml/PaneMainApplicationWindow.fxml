@@ -6,7 +6,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <AnchorPane id="mainApplicationWindow" fx:id="mainApplicationWindow" styleClass="mainAnchorPane"
-            xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.112-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.genealogytree.application.fxmlcontrollers.PaneMainApplicationWindowController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
@@ -38,7 +38,7 @@
 
                                         <TableView fx:id="gtFamilyMemberTable" layoutX="20.0" layoutY="12.0"
                                                    onMouseClicked="#showInfoMember" prefHeight="200.0" prefWidth="200.0"
-                                                   AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0"
+                                                   AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0"
                                                    AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                                             <columns>
                                                 <TableColumn fx:id="simNameColumn" maxWidth="110.0" minWidth="110.0"
@@ -51,9 +51,9 @@
                                                 <String fx:value="tableMembersAndRelations"/>
                                             </styleClass>
                                         </TableView>
-                                        <TableView fx:id="gtFamilyRelationTable" layoutX="20.0" layoutY="12.0"
-                                                   onMouseClicked="#showInfoRelation" prefHeight="200.0"
-                                                   prefWidth="200.0" AnchorPane.bottomAnchor="40.0"
+                                        <TableView id="gtFamilyRelationTable" fx:id="gtFamilyRelationTable"
+                                                   layoutX="20.0" layoutY="12.0" onMouseClicked="#showInfoRelation"
+                                                   prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0"
                                                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
                                                    AnchorPane.topAnchor="5.0">
                                             <columns>
@@ -70,24 +70,34 @@
                                                 <String fx:value="tableMembersAndRelations"/>
                                             </styleClass>
                                         </TableView>
-                                        <ToggleButton fx:id="buttonShowMemberTable" layoutX="23.0"
-                                                      mnemonicParsing="false" text="ToggleButton"
-                                                      AnchorPane.bottomAnchor="10.0"/>
-                                        <ToggleButton fx:id="buttonShowRelationTable" layoutX="125.0"
-                                                      mnemonicParsing="false" text="ToggleButton"
-                                                      AnchorPane.bottomAnchor="10.0"/>
+                                        <AnchorPane id="anchorToogleButtons" prefHeight="25.0"
+                                                    AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10"
+                                                    AnchorPane.rightAnchor="10.0">
+                                            <ToggleButton id="buttonShowMemberTable" fx:id="buttonShowMemberTable"
+                                                          layoutX="23.0" mnemonicParsing="false"
+                                                          prefWidth="114.0" styleClass="toogleButtonShowTable"
+                                                          text="Members" AnchorPane.bottomAnchor="0.0"
+                                                          AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                                            <ToggleButton id="buttonShowRelationTable" fx:id="buttonShowRelationTable"
+                                                          layoutX="125.0" layoutY="12.0" mnemonicParsing="false"
+                                                          prefWidth="114.0"
+                                                          styleClass="toogleButtonShowTable" text="Relations"
+                                                          AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                          AnchorPane.topAnchor="0.0"/>
+                                        </AnchorPane>
+
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane fx:id="workAnchorPane">
-                                <children>
-                                    <AnchorPane fx:id="workAnchorPaneContent"
-                                                AnchorPane.bottomAnchor="40.0"
-                                                AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0"
-                                                AnchorPane.topAnchor="5.0">
+                                    <children>
+                                        <AnchorPane fx:id="workAnchorPaneContent" AnchorPane.bottomAnchor="50.0"
+                                                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0"
+                                                    AnchorPane.topAnchor="5.0">
 
-                                    </AnchorPane>
-                                </children>
-                            </AnchorPane>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
                             </items>
                         </SplitPane>
                     </children>
