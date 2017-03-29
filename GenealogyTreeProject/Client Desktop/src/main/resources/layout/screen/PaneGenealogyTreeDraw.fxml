@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="paneGenealogyTreeDraw" fx:id="paneGenealogyTreeDraw"
+            styleClass="workingPane"
+            xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="com.genealogytree.client.desktop.controllers.implementation.PaneGenealogyTreeDrawController">
+    <stylesheets>
+        <URL value="@/layout/style/gentree.css"/>
+    </stylesheets>
+    <children>
+        <ScrollPane fx:id="workAnchorPane" AnchorPane.bottomAnchor="10.0"
+                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"
+                    styleClass="gtTransparentPane">
+            <content>
+                <HBox fx:id="projectContent" styleClass="gtTransparentPane"/>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

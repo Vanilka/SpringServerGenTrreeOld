@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="gt-client-web:war">
-    <output-path>$PROJECT_DIR$/ClientWeb/target</output-path>
-    <root id="archive" name="gt-client-web-0.0.1-SNAPSHOT.war">
-      <element id="artifact" artifact-name="gt-client-web:war exploded" />
-    </root>
-  </artifact>
-</component>

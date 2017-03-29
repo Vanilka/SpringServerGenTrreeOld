@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Client Desktop">
+    <output-path>$PROJECT_DIR$/out/artifacts/Client_Desktop</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="com.genealogytree.client.desktop.GenealogyTree" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Client_Desktop.jar">
+        <element id="module-output" name="Client Desktop" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/Client Desktop/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

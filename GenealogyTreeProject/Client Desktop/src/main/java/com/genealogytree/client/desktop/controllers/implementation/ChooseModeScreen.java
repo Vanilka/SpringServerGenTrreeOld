@@ -1,0 +1,100 @@
+package com.genealogytree.client.desktop.controllers.implementation;
+
+import com.genealogytree.client.desktop.configuration.ContextGT;
+import com.genealogytree.client.desktop.configuration.ScreenManager;
+import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.controllers.FXMLAnchorPane;
+import javafx.beans.property.ObjectProperty;
+
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+/**
+ * Created by Martyna SZYMKOWIAK on 19/03/2017.
+ */
+public class ChooseModeScreen implements Initializable, FXMLAnchorPane {
+
+    public static final ScreenManager sc = ScreenManager.getInstance();
+    public static final ContextGT context = ContextGT.getInstance();
+
+    @FXML
+    private Pane localProjectPane;
+
+    @FXML
+    private Pane onlineProjectPane;
+
+    @FXML
+    private AnchorPane mainAnchorPane;
+
+    private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.languageBundle.setValue(resources);
+        initOnlineProjectPane();
+        initLocalProjectPane();
+        setListeners();
+        addTopOffsetListener();
+        localProjectPane.resize(300, 400);
+        onlineProjectPane.resize(300, 400);
+    }
+
+    public void addTopOffsetListener() {
+
+        this.mainAnchorPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double y = (newValue.doubleValue() - localProjectPane.getHeight()) / 2;
+                localProjectPane.setLayoutY(y);
+                onlineProjectPane.setLayoutY(y);
+            }
+        });
+    }
+
+    public void initLocalProjectPane() {
+        this.sc.loadFxml(new PaneLocalApplicationModeController(), localProjectPane,
+                FXMLFile.LOCAL_APP_MODE);
+
+    }
+
+    public void initOnlineProjectPane() {
+        this.sc.loadFxml(new PaneOnlineApplicationChoiceController(), onlineProjectPane,
+                FXMLFile.ONLINE_APP_MODE);
+    }
+
+    private void setListeners() {
+        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
+
+            @Override
+            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
+                                ResourceBundle newValue) {
+                reloadElements();
+            }
+        });
+    }
+
+    /*
+    * LISTEN LANGUAGE CHANGES
+    */
+
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+
+    }
+    /*
+     ON CLICK ACTIONS
+     */
+
+}

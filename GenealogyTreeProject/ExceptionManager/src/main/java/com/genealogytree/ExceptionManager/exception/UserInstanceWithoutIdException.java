@@ -7,7 +7,9 @@ import com.genealogytree.ExceptionManager.config.Causes;
  */
 public class UserInstanceWithoutIdException extends Exception {
 
-    public  UserInstanceWithoutIdException() {this(Causes.USER_INISTANCE_WITHOUT_ID.toString());}
+    public UserInstanceWithoutIdException() {
+        this(Causes.USER_INISTANCE_WITHOUT_ID.toString());
+    }
 
     public UserInstanceWithoutIdException(String message) {
         super(message);

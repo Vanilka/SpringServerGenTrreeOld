@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Client_Desktop.jnlp">
+  <information>
+    <title>Client Desktop</title>
+    <vendor>Unknown</vendor>
+    <description>Client Desktop</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Client_Desktop.jar" size="319124" download="eager" />
+    <jar href="lib/jfoenix.jar" size="2183063" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="400" main-class="com.genealogytree.client.desktop.GenealogyTree"  name="Client Desktop" />
+  <update check="background"/>
+</jnlp>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="infoRelationTab" fx:id="infoRelationTab" maxHeight="280.0" minHeight="180.0"
+            prefHeight="181.0" prefWidth="819.0" styleClass="gt_MaintabContentPane"
+            xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="com.genealogytree.application.fxmlcontrollers.TabInfoRelationPaneController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css"/>
+    </stylesheets>
+    <children>
+        <JFXButton fx:id="cancelRelationView" buttonType="RAISED" layoutY="64.0" onAction="#closeTab" prefHeight="52.0"
+                   prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%addSimCancel"
+                   AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="64.0"/>
+        <AnchorPane id="infoRelationContentHBox" fx:id="conentHBox" layoutX="250.0" layoutY="15.0" prefHeight="160.0"
+                    prefWidth="846.0" styleClass="gtTransparentPane" AnchorPane.bottomAnchor="10.0"
+                    AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+            <children>
+                <AnchorPane fx:id="simLeftView" prefHeight="145.0" prefWidth="115.0" AnchorPane.bottomAnchor="10.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0"/>
+                <ImageView fx:id="typeRelationImgView" fitHeight="50.0" fitWidth="50.0" layoutX="135.0" layoutY="48.0"
+                           pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="62.0"
+                           AnchorPane.leftAnchor="135.0" AnchorPane.topAnchor="62.0"/>
+                <AnchorPane fx:id="simRightView" prefHeight="145.0" prefWidth="115.0" AnchorPane.bottomAnchor="10.0"
+                            AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="10.0"/>
+                <ImageView fx:id="equalRelation" fitHeight="140.0" fitWidth="70.0" pickOnBounds="true"
+                           preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="340.0"
+                           AnchorPane.topAnchor="10.0"/>
+
+                <HBox fx:id="childrenHBox" alignment="CENTER_LEFT" prefHeight="146.0" prefWidth="137.0"
+                      styleClass="gtTransparentPane" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="435.0"
+                      AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+
+                </HBox>
+            </children>
+        </AnchorPane>
+    </children>
+
+</AnchorPane>

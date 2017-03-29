@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="registerForm" fx:id="registerForm" maxHeight="458.0" prefHeight="458.0"
+            prefWidth="400.0" styleClass="logonCommon" xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneRegisterFormController">
+    <stylesheets>
+        <URL value="@../styles/mainstyle.css"/>
+    </stylesheets>
+    <children>
+        <JFXButton id="buttonRegister" fx:id="buttonRegister" buttonType="RAISED" layoutX="56.0" layoutY="392.0"
+                   onAction="#submitRegister" prefHeight="55.0" prefWidth="301.0" ripplerFill="#95ce46"
+                   text="CREATE ACCOUNT">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+        </JFXButton>
+        <JFXTextField fx:id="mailBox" labelFloat="true" layoutX="82.0" layoutY="47.0" maxWidth="249.0" minWidth="208.0"
+                      prefHeight="44.0" prefWidth="249.0" promptText="Mail Box"/>
+        <JFXTextField fx:id="loginField" labelFloat="true" layoutX="82.0" layoutY="128.0" maxWidth="249.0"
+                      minWidth="217.0" prefHeight="44.0" prefWidth="249.0" promptText="Login"/>
+        <JFXPasswordField fx:id="passwordField" labelFloat="true" layoutX="82.0" layoutY="220.0" maxWidth="249.0"
+                          minWidth="208.0" prefHeight="44.0" prefWidth="249.0" promptText="Password"/>
+        <Hyperlink layoutX="268.0" layoutY="455.0" onAction="#returnLogon" prefHeight="31.0" prefWidth="95.0"
+                   styleClass="linkHelpLogon" text="Return -&gt;" textAlignment="RIGHT"/>
+        <JFXPasswordField fx:id="passwordConfirmField" labelFloat="true" layoutX="82.0" layoutY="305.0" maxWidth="249.0"
+                          minWidth="208.0" prefHeight="44.0" prefWidth="249.0" promptText="Confirm Password"/>
+    </children>
+</AnchorPane>

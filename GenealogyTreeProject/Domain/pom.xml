@@ -10,4 +10,6 @@
     <name>Domain</name>
     <groupId>com.genealogytree</groupId>
     <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+    </dependencies>
 </project>

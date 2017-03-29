@@ -13,6 +13,7 @@ public enum Causes {
     USER_INISTANCE_WITHOUT_ID(602, "User Id must be provided"),
     LOGIN_PASSWORD_INCORRECT(603, "Login or Password Incorrect"),
 
+
     /*
     * MEMBER
     */
@@ -28,7 +29,11 @@ public enum Causes {
     RELATION
      */
     TOO_MANY_NULL_FIELDS(810, "Too many null fields in relation"),
-    INCORRECT_SEX(869, "Incorrect member sex in SimLeft or SimRight field");
+    INCORRECT_SEX(869, "Incorrect member sex in SimLeft or SimRight field"),
+    INCORRECT_STATUS(811, "Incorrect relation status"),
+    NO_VALID_MEMBERS(815, "No valid mermber in relation vas detected"),
+    INTEGRATION_VILATION(888, "Genealogy Tree integration violation");
+
 
 
     private int code;

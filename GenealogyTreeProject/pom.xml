@@ -7,14 +7,25 @@
     <packaging>pom</packaging>
     <name>Genealogy Tree Project</name>
     <modules>
-        <module>DatabaseManager</module>
+        <module>REST DB-Manager</module>
         <module>Domain</module>
-        <module>Service</module>
-        <module>ClientDesktop</module>
-        <module>DataBaseRepository</module>
         <module>ExceptionManager</module>
-        <module>ClientWeb</module>
+        <module>REST API</module>
+        <module>REST Repository</module>
+        <module>REST Service</module>
+        <module>REST Entity</module>
+        <module>REST Facade</module>
+        <module>Client Desktop</module>
+        <module>Client Web</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.14</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
