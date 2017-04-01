@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,9 +33,8 @@ import java.util.ResourceBundle;
 /**
  * Created by vanilka on 22/11/2016.
  */
+@Log4j2
 public class TabInfoProjectPaneController implements Initializable, FXMLTab {
-
-    private static final Logger LOG = LogManager.getLogger(TabInfoProjectPaneController.class);
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
@@ -71,7 +71,6 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation : " + this.toString());
 
         this.projectMemberNumber.setEditable(false);
         this.projectNameLabel.setEditable(false);
@@ -201,22 +200,10 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
         bindNameLabel();
 
         projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size());
-        this.context.getService().getCurrentFamily().getGtx_membersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size()));
+        context.getService().getCurrentFamily().getGtx_membersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size()));
         BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> context.getService().getCurrentFamily().getGtx_membersList().size() < 2, context.getService().getCurrentFamily().getGtx_membersList());
         addRelationButton.disableProperty().bind(disableBinding);
 
 
-    }
-
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
     }
 }

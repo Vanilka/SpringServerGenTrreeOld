@@ -3,6 +3,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLDialogController;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.domain.GTX_Family;
@@ -18,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,9 +29,8 @@ import java.util.ResourceBundle;
 /**
  * Created by vanilka on 19/11/2016.
  */
+@Log4j2
 public class DialogNewProjectController implements Initializable, FXMLPane, FXMLDialogController {
-
-    private static final Logger LOG = LogManager.getLogger(DialogNewProjectController.class);
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
@@ -60,11 +61,13 @@ public class DialogNewProjectController implements Initializable, FXMLPane, FXML
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation :  " + this.toString());
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
 
         addDisableButtonListener();
         addLanguageListener();
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 
@@ -120,15 +123,4 @@ public class DialogNewProjectController implements Initializable, FXMLPane, FXML
         this.stage = stage;
     }
 
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 }

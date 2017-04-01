@@ -62,7 +62,6 @@ public class PaneRegisterFormController implements Initializable, FXMLPane {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation:  " + this.toString());
         this.languageBundle.setValue(rb);
 
 		/*
@@ -179,15 +178,5 @@ public class PaneRegisterFormController implements Initializable, FXMLPane {
         this.logonWindow = logonWindow;
     }
 
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
 
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 }

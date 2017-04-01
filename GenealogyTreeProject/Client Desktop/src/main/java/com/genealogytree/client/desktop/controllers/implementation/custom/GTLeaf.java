@@ -12,13 +12,20 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 
 /**
  * Created by vanilka on 03/01/2017.
  */
+@Getter
+@Setter
 public class GTLeaf extends AnchorPane {
+
+    @FXML
+    private AnchorPane leafAnchorPane;
 
     @FXML
     private Label surnameSim;
@@ -41,6 +48,8 @@ public class GTLeaf extends AnchorPane {
         initialize();
         this.member.addListener(getChangeMemberListener());
         this.member.setValue(member);
+        setHeight(150.0);
+        setWidth(130.0);
 
     }
 
@@ -90,4 +99,28 @@ public class GTLeaf extends AnchorPane {
         }
     }
 
+    public ObjectProperty<GTX_Member> memberProperty() {
+        return member;
+    }
+
+    public GTX_Member getMember() {
+        return member.getValue();
+    }
+
+    public void setMember(GTX_Member member) {
+        this.member.set(member);
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("GTLeaf{");
+        sb.append(", surnameSim=").append(surnameSim);
+        sb.append(", nameSim=").append(nameSim);
+        sb.append(", photoSim=").append(photoSim);
+        sb.append(", member=").append(member);
+        sb.append(", memberProperty=").append(memberProperty());
+        sb.append('}');
+        return sb.toString();
+    }
 }

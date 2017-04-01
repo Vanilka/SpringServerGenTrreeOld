@@ -70,7 +70,6 @@ public class TabInfoMemberPaneController implements Initializable, FXMLTab {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation : " + this.toString());
         this.languageBundle.setValue(rb);
 
         this.simNameField.setEditable(false);
@@ -171,15 +170,4 @@ public class TabInfoMemberPaneController implements Initializable, FXMLTab {
         return member;
     }
 
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 }

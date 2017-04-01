@@ -14,7 +14,7 @@
         <menus>
             <Menu fx:id="menuFile" mnemonicParsing="false" styleClass="gentree-bars-pane" text="%menu_program">
                 <items>
-                    <MenuItem fx:id="menuItemConnectToServer"  mnemonicParsing="false"
+                    <MenuItem fx:id="menuItemConnectToServer" mnemonicParsing="false"
                               text="%menu_project_synchronise"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemClose"
@@ -26,12 +26,15 @@
             </Menu>
             <Menu fx:id="menuProject" mnemonicParsing="false" styleClass="gentree-bars-pane" text="%menu_project">
                 <items>
-                    <MenuItem fx:id="menuItemNewProject"  mnemonicParsing="false"
+                    <MenuItem fx:id="menuItemNewProject" mnemonicParsing="false"
                               text="%menu_project_new"/>
                     <MenuItem fx:id="menuItemOpenProject" mnemonicParsing="false" text="%menu_project_open"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemSaveProjectAs" mnemonicParsing="false" text="%menu_project_save_as"/>
                     <MenuItem fx:id="menuItemSaveProject" mnemonicParsing="false" text="%menu_project_save"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemExportImage" onAction="#generateImage"
+                              mnemonicParsing="false" text="%menu_project_export"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemCloseProject" text="%menu_project_close"/>
                 </items>

@@ -3,6 +3,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLAnchorPane;
 import javafx.beans.property.ObjectProperty;
 
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Martyna SZYMKOWIAK on 19/03/2017.
  */
+@Log4j2
 public class ChooseModeScreen implements Initializable, FXMLAnchorPane {
 
     public static final ScreenManager sc = ScreenManager.getInstance();
@@ -39,6 +42,7 @@ public class ChooseModeScreen implements Initializable, FXMLAnchorPane {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         initOnlineProjectPane();
         initLocalProjectPane();
@@ -46,6 +50,7 @@ public class ChooseModeScreen implements Initializable, FXMLAnchorPane {
         addTopOffsetListener();
         localProjectPane.resize(300, 400);
         onlineProjectPane.resize(300, 400);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     public void addTopOffsetListener() {

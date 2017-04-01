@@ -3,6 +3,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.ImageFiles;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTLeaf;
 import com.genealogytree.client.desktop.domain.GTX_Member;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,9 +32,8 @@ import java.util.ResourceBundle;
 /**
  * Created by vanilka on 04/01/2017.
  */
+@Log4j2
 public class TabInfoRelationPaneController implements Initializable, FXMLTab {
-
-    private static final Logger LOG = LogManager.getLogger(TabInfoRelationPaneController.class);
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
@@ -81,8 +82,7 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setInfoLog("Initialisation :  " + this.toString());
-
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
 
         simLeftView.getChildren().add(new GTLeaf());
@@ -91,6 +91,7 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
         equalRelation.setImage(new Image(ImageFiles.EQUAL_TRIANGLE.toString()));
 
         relation.addListener(getRelationListener());
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @FXML
@@ -208,18 +209,6 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
     public void setTabAndTPane(JFXTabPane tabPane, Tab tab) {
         this.tabPane = tabPane;
         this.tab = tab;
-    }
-
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
     }
 
 }

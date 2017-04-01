@@ -58,10 +58,13 @@ public class GTX_Family implements Serializable, Observable {
     }
 
     public GTX_Relation getBornRelation(GTX_Member member) {
-        GTX_Relation relation = gtx_relations.stream().filter(r -> r.getChildren().contains(member)).findFirst()
-                .orElse(null);
+        GTX_Relation relation = gtx_relations.stream()
+                .filter(r -> r.getChildren().contains(member))
+                .findFirst().orElse(null);
 
+        System.out.println("get Bord relation BB" +relation);
         if( relation == null) {
+            System.out.println("NIe ma born relation");
             relation = new GTX_Relation(null, null, member);
             gtx_relations.add(relation);
         }

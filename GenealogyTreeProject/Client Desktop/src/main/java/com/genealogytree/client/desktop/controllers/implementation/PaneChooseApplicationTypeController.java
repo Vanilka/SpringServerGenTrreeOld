@@ -8,6 +8,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,9 +30,9 @@ import java.util.ResourceBundle;
  *
  * @author vanilka
  */
+@Log4j2
 public class PaneChooseApplicationTypeController implements Initializable, FXMLPane {
 
-    private static final Logger LOG = LogManager.getLogger(PaneChooseApplicationTypeController.class);
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
 
@@ -48,7 +50,8 @@ public class PaneChooseApplicationTypeController implements Initializable, FXMLP
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation :  " + this.toString());
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
+
         this.languageBundle.setValue(rb);
         addTopOffsetListener();
         localProjectPane.resize(300, 400);
@@ -98,16 +101,5 @@ public class PaneChooseApplicationTypeController implements Initializable, FXMLP
     }
 
 
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 
 }

@@ -3,6 +3,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.ImageFiles;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
 import com.genealogytree.client.desktop.domain.GTX_Member;
 import com.genealogytree.client.desktop.domain.GTX_Relation;
@@ -29,18 +30,18 @@ import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import java.util.regex.Pattern;
 
 /**
  * Created by vanilka on 25/11/2016.
  */
+@Log4j2
 public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
 
     public static final ScreenManager sc = ScreenManager.getInstance();
@@ -98,6 +99,9 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
+
         this.languageBundle.setValue(rb);
         relationType.setItems(FXCollections.observableArrayList(
                 RelationType.NEUTRAL,
@@ -143,6 +147,8 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         simLeftChoice.getSelectionModel().selectFirst();
         simRightChoice.getSelectionModel().selectFirst();
         childChoice.getSelectionModel().selectFirst();
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @FXML
@@ -363,45 +369,33 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
 
     private void refreshChild() {
 
-        System.out.println("test1");
-
         ObservableList<GTX_Member> tempListChildren = context.getService().getCurrentFamily().getGtx_membersList()
                 .filtered(p -> context.getService().getCurrentFamily().getBornRelation(p).getSimLeft() == null
                         && context.getService().getCurrentFamily().getBornRelation(p).getSimRight() == null);
 
-        System.out.println("test2");
         if (selectedLeft != null && !selectedLeft.equals(simNull)) {
             tempListChildren = tempListChildren.filtered(p -> !p.equals(selectedLeft));
             tempListChildren = removeAllAscends(selectedLeft, tempListChildren);
 
         }
 
-        System.out.println("test3");
         if (selectedRight != null && !selectedRight.equals(simNull)) {
             tempListChildren = tempListChildren.filtered(p -> !p.equals(selectedRight));
             tempListChildren = removeAllAscends(selectedRight, tempListChildren);
         }
 
-        System.out.println("test4");
 
         if (selectedChild == null || selectedChild.equals(simNull)) {
-            System.out.println("test5");
             childChoice.getItems().removeIf(p -> p != simNull);
-            System.out.println("test5aa");
             childChoice.getItems().addAll(tempListChildren);
-            System.out.println("test5a");
 
-        } else if (tempListChildren.contains(selectedChild)) {
-            System.out.println("test6");
+        } else if (tempListChildren.contains(selectedChild)) {System.out.println("test6");
             tempListChildren = tempListChildren.filtered(p -> !p.equals(selectedChild));
             childChoice.getItems().removeIf(p -> p != selectedChild);
             childChoice.getItems().addAll(tempListChildren);
-            System.out.println("test6a");
         } else {
-            System.out.println("test7");
             childChoice.getItems().clear();
             childChoice.getItems().addAll(tempListChildren);
-            System.out.println("test7a");
 
         }
     }
@@ -523,15 +517,4 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         this.tab = tab;
     }
 
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 }

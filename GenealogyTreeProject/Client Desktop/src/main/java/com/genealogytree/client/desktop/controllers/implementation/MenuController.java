@@ -3,26 +3,38 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.AppLanguage;
-import com.genealogytree.client.desktop.configuration.messages.AppTitles;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLAnchorPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.util.Callback;
+import lombok.extern.log4j.Log4j2;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * Created by Martyna SZYMKOWIAK on 19/03/2017.
  */
+@Log4j2
 public class MenuController implements Initializable, FXMLAnchorPane {
 
     public static final ScreenManager sc = ScreenManager.getInstance();
@@ -65,10 +77,10 @@ public class MenuController implements Initializable, FXMLAnchorPane {
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       this.languageBundle.setValue(resources);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
+        this.languageBundle.setValue(resources);
 
         this.setCellFactoryToComboBox();
 
@@ -77,6 +89,8 @@ public class MenuController implements Initializable, FXMLAnchorPane {
                 .select(AppLanguage.valueOf(languageBundle.getValue().getString("language")));
         this.languageBundle.bind(context.getBundle());
         addLanguageListener();
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     private void setCellFactoryToComboBox() {
@@ -140,6 +154,7 @@ public class MenuController implements Initializable, FXMLAnchorPane {
         });
     }
 
+
     private String getValueFromKey(String key) {
         return this.languageBundle.getValue().getString(key);
     }
@@ -154,6 +169,7 @@ public class MenuController implements Initializable, FXMLAnchorPane {
         this.menuItemOpenProject.setText(getValueFromKey("menu_project_open"));
         this.menuItemSaveProject.setText(getValueFromKey("menu_project_save"));
         this.menuItemSaveProjectAs.setText(getValueFromKey("menu_project_save_as"));
+        this.menuItemSaveProjectAs.setText(getValueFromKey("menu_project_export"));
     }
 
     /*
@@ -163,4 +179,14 @@ public class MenuController implements Initializable, FXMLAnchorPane {
     public void closeApplication() {
         System.exit(0);
     }
+
+    @FXML
+    public void generateImage() throws IOException, AWTException {
+
+        WritableImage image = sc.getPaneGenealogyTreeDrawController().Image();
+        File file = new File("./screen/GenTree" + LocalDateTime.now() + ".png");
+        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+
+    }
+
 }

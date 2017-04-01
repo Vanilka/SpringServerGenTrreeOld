@@ -6,10 +6,7 @@ import com.genealogytree.client.desktop.configuration.messages.AppTitles;
 import com.genealogytree.client.desktop.controllers.FXMLDialogController;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
-import com.genealogytree.client.desktop.controllers.implementation.ChooseModeScreen;
-import com.genealogytree.client.desktop.controllers.implementation.FooterController;
-import com.genealogytree.client.desktop.controllers.implementation.MainScreen;
-import com.genealogytree.client.desktop.controllers.implementation.MenuController;
+import com.genealogytree.client.desktop.controllers.implementation.*;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -24,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.NotificationPane;
@@ -37,11 +35,10 @@ import java.io.IOException;
  */
 @Getter
 @Setter
+@Log4j2
 public class ScreenManager {
 
     public static final ContextGT context = ContextGT.getInstance();
-
-    private static final Logger LOG = LogManager.getLogger(ScreenManager.class);
     private static final ScreenManager INSTANCE = new ScreenManager();
     private static final FileChooser fileChooser = new FileChooser();
     private static String LAST_PATH;
@@ -52,18 +49,17 @@ public class ScreenManager {
     private FooterController footer;
     private MenuController menu;
     private ChooseModeScreen chooseModeScreen;
+    private PaneGenealogyTreeDrawController paneGenealogyTreeDrawController;
     private Stage stage;
     private Scene scene;
 
     {
         bpHelper = new BorderPaneReloadHelper();
     }
+
     private ScreenManager() {
         LAST_PATH = System.getProperty("user.home");
     }
-
-
-
 
     public static ScreenManager getInstance() {
         return INSTANCE;
@@ -94,9 +90,8 @@ public class ScreenManager {
             this.mainScreen = loader.getController();
             this.mainScreen.setRootBorderPane(this.rootBorderPane);
         } catch (IOException ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
     }
 
@@ -120,14 +115,12 @@ public class ScreenManager {
             }
 
         } catch (IOException ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
 
         } catch (Exception ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
 
     }
@@ -149,9 +142,8 @@ public class ScreenManager {
 
 
         } catch (Exception ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
 
     }
@@ -163,9 +155,8 @@ public class ScreenManager {
             pane.getChildren().addAll((Pane) loader.load());
             controller = loader.getController();
         } catch (Exception ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
         return controller;
     }
@@ -178,9 +169,8 @@ public class ScreenManager {
             anchor.getChildren().addAll((AnchorPane) loader.load());
             controller = loader.getController();
         } catch (Exception ex) {
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
-            ex.printStackTrace();
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
         return controller;
     }
@@ -198,13 +188,12 @@ public class ScreenManager {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
 
         } catch (Exception ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
 
         return controller;
@@ -218,14 +207,12 @@ public class ScreenManager {
             controller.setTabAndTPane(tabPane, tab);
 
         } catch (IOException ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
 
         } catch (Exception ex) {
-            ex.printStackTrace();
-            LOG.error(ex.getClass() + " - " + ex.getMessage());
-            LOG.error(ex.getCause());
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
         }
 
         return controller;
@@ -266,6 +253,14 @@ public class ScreenManager {
         TOP,
         CENTER,
         BOTTOM
+    }
+
+    /*
+        Register Screen
+     */
+
+    public void register(PaneGenealogyTreeDrawController controller) {
+        this.paneGenealogyTreeDrawController = controller;
     }
 
 

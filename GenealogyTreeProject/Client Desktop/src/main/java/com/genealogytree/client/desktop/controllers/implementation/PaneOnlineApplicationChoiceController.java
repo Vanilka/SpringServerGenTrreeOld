@@ -75,17 +75,5 @@ public class PaneOnlineApplicationChoiceController implements Initializable, FXM
     /*
      * GETTERS AND SETTERS
      */
-
-    private void setInfoLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.info(msg);
-        System.out.println("INFO:  " + msg);
-    }
-
-    private void setErrorLog(String msg) {
-        msg = this.getClass().getSimpleName() + ": " + msg;
-        LOG.error(msg);
-        System.out.println("ERROR:  " + msg);
-    }
 }
 
