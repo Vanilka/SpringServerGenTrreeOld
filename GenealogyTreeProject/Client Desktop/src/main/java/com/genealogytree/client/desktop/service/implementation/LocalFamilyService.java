@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Comparator;
+
 /**
  * Created by Martyna SZYMKOWIAK on 25/03/2017.
  */
@@ -30,25 +32,18 @@ public class LocalFamilyService implements FamilyService {
 
 
     {
+        log.trace(LogMessages.MSG_SERVICE_INITIALIZATION);
         family = new SimpleObjectProperty<>();
         idMember = 0L;
         idRelation = 0L;
     }
 
     private Long incrementMember() {
-        return idMember++;
+        return ++idMember;
     }
 
     private Long incrementRelation() {
-        return idRelation++;
-    }
-
-    @Override
-    public void setCurrentFamily(GTX_Family family) {
-        log.trace(LogMessages.MSG_FAMILY_SERVICE_CURRENT_FAMILY, family);
-        this.family.setValue(family);
-        setRelationListener();
-        setMemberListener();
+        return ++idRelation;
     }
 
     @Override
@@ -56,6 +51,22 @@ public class LocalFamilyService implements FamilyService {
         return family.getValue();
     }
 
+    @Override
+    public void setCurrentFamily(GTX_Family family) {
+        log.trace(LogMessages.MSG_FAMILY_SERVICE_CURRENT_FAMILY, family);
+        this.family.setValue(family);
+
+        if (family.getMembersList().size() > 0) {
+            idMember = family.getMembersList().stream().max(Comparator.comparingLong(GTX_Member::getId)).get().getId();
+        }
+
+        if(family.getRelationsList().size() > 0) {
+            idRelation = family.getRelationsList().stream().max(Comparator.comparingLong(GTX_Relation::getId)).get().getId();
+        }
+        setMemberListener();
+        setRelationListener();
+
+    }
 
     @Override
     public ServiceResponse updateFamilyName(String newFamilyName) {
@@ -65,9 +76,16 @@ public class LocalFamilyService implements FamilyService {
 
     @Override
     public ServiceResponse addMember(GTX_Member member) {
-        log.trace(LogMessages.MSG_MEMBER_ADD_NEW, member);
+        log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
         getCurrentFamily().addMember(member);
         getCurrentFamily().addRelation(new GTX_Relation(null, null, member));
+        return new MemberResponse(member);
+    }
+
+    @Override
+    public ServiceResponse updateMember(GTX_Member member, GTX_Member updated) {
+        log.info(LogMessages.MSG_MEMBER_UPDATE, member);
+        GTX_Member.insertValues(member, updated);
         return new MemberResponse(member);
     }
 
@@ -76,39 +94,41 @@ public class LocalFamilyService implements FamilyService {
         log.trace(LogMessages.MSG_RELATION_ADD_NEW, relation);
         // Remove others born relation for member
         log.trace(LogMessages.MSG_RELATION_VERIF_EXIST_BORN);
-        for(GTX_Member member : relation.getChildren()) {
+        for (GTX_Member member : relation.getChildren()) {
             log.trace(LogMessages.MSG_RELATION_VERIF_EXIST_BORN_FOR, member);
             GTX_Relation bornRelation = getCurrentFamily().getBornRelation(member);
             log.trace(LogMessages.MSG_RELATION_BORN, relation);
-            if(bornRelation.getChildren().size() > 1)  {
+            if (bornRelation.getChildren().size() > 1) {
                 bornRelation.getChildren().remove(member);
             } else {
-                getCurrentFamily().getGtx_relations().remove(bornRelation);
+                getCurrentFamily().getRelationsList().remove(bornRelation);
             }
         }
 
         GTX_Relation existing = exist(relation);
-        if(existing != null) {
+        if (existing != null) {
             for (GTX_Member member : relation.getChildren()) {
-                if (! existing.getChildren().contains(member)) {
+                if (!existing.getChildren().contains(member)) {
                     existing.getChildren().add(member);
                 }
+                existing.setType(relation.getType());
+                existing.setActive(relation.isActive());
             }
             return new RelationResponse(existing);
         }
 
-        getCurrentFamily().getGtx_relations().add(relation);
+        getCurrentFamily().getRelationsList().add(relation);
         return new RelationResponse(relation);
     }
 
 
     private GTX_Relation exist(GTX_Relation relation) {
-        if(relation.getSimLeft() == null && relation.getSimRight() == null) {
+        if (relation.getSimLeft() == null && relation.getSimRight() == null) {
             return null;
         }
 
-        for(GTX_Relation r : getCurrentFamily().getGtx_relations()) {
-            if(r.compareLeftRight(relation)) {
+        for (GTX_Relation r : getCurrentFamily().getRelationsList()) {
+            if (r.compareLeftRight(relation)) {
                 return r;
             }
         }
@@ -118,11 +138,16 @@ public class LocalFamilyService implements FamilyService {
 
 
     private void setMemberListener() {
-        getCurrentFamily().getGtx_membersList().addListener((ListChangeListener<GTX_Member>) c -> {
+        getCurrentFamily().getMembersList().addListener((ListChangeListener<GTX_Member>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     c.getAddedSubList().forEach(member -> {
-                        member.setId(incrementMember());
+                        if (member.getId() <= 0) {
+                            member.setId(incrementMember());
+                        } else {
+                            idMember = idMember < member.getId() ? member.getId() : idMember;
+                        }
+
                         log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
                     });
                 } else if (c.wasPermutated()) {
@@ -133,18 +158,25 @@ public class LocalFamilyService implements FamilyService {
                 } else if (c.wasUpdated()) {
                     //update item
                     System.out.println("UpdateItem Member");
+                } else if (c.wasRemoved()) {
+                    System.out.println("Removed " +c.getRemoved().toArray().toString());
+
                 } else {
                 }
             }
         });
     }
 
-    private void  setRelationListener() {
-        getCurrentFamily().getGtx_relations().addListener((ListChangeListener<GTX_Relation>) c -> {
+    private void setRelationListener() {
+        getCurrentFamily().getRelationsList().addListener((ListChangeListener<GTX_Relation>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     c.getAddedSubList().forEach(relation -> {
-                        relation.setId(incrementRelation());
+                        if (relation.getId() == null || relation.getId() <= 0) {
+                            relation.setId(incrementRelation());
+                        } else {
+                            idRelation = idRelation < relation.getId() ? relation.getId() : idRelation;
+                        }
                         log.info(LogMessages.MSG_RELATION_ADD_NEW, relation);
                     });
                 } else if (c.wasPermutated()) {
@@ -155,6 +187,8 @@ public class LocalFamilyService implements FamilyService {
                 } else if (c.wasUpdated()) {
                     //update item
                     System.out.println(" Relation UpdateItem");
+                } else if (c.wasRemoved()) {
+                    System.out.println("Relation removed" +c.getRemoved().toString());
                 } else {
                 }
             }

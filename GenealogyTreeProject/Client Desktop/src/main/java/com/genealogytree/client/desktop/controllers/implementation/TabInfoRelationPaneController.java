@@ -63,6 +63,9 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
     private JFXButton cancelRelationView;
 
     @FXML
+    private JFXButton modifyRelation;
+
+    @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     private Tab tab;
@@ -125,7 +128,7 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
         }
         simRightView.getChildren().add(leafSimRight);
 
-        typeRelationImgView.setImage(new Image(getTypeImagePath(relation.getType().getValue())));
+        typeRelationImgView.setImage(new Image(getTypeImagePath(relation.getType())));
 
         for (GTX_Member m : relation.getChildren()) {
             childrenHBox.getChildren().add(new GTLeaf(m));
@@ -168,7 +171,7 @@ public class TabInfoRelationPaneController implements Initializable, FXMLTab {
     }
 
     private void reloadElements() {
-        // Nothing to do
+        // TODO
     }
 
     /*

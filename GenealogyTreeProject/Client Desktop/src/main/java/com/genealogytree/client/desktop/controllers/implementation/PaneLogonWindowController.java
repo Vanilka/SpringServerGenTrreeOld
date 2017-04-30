@@ -8,6 +8,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,9 +29,9 @@ import java.util.ResourceBundle;
  *
  * @author vanilka
  */
+@Log4j2
 public class PaneLogonWindowController implements Initializable, FXMLPane {
 
-    private static final Logger LOG = LogManager.getLogger(PaneLogonWindowController.class);
 
     private PaneLogonFormController logonFormImpl;
     private PaneRegisterFormController registerFormImpl;
@@ -54,8 +56,7 @@ public class PaneLogonWindowController implements Initializable, FXMLPane {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation :  " + this.toString());
-
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
 
         addTopOffsetListener(this.logonForm);
@@ -68,6 +69,7 @@ public class PaneLogonWindowController implements Initializable, FXMLPane {
         this.logonFormImpl = (PaneLogonFormController) sc.loadFxml(this.logonFormImpl, this.logonForm,
                 FXMLFile.LOGON_FORM);
         this.logonFormImpl.setLogonWindow(this);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     public void addTopOffsetListener(AnchorPane pane) {

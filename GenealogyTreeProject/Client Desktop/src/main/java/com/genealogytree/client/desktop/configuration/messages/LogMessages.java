@@ -14,9 +14,12 @@ public class LogMessages {
 
     public static final String MSG_MEMBER_ADD_NEW = "Add new Member [{}]";
     public static final String MSG_RELATION_ADD_NEW = "Add new Relation [{}]";
+    public static final String MSG_MEMBER_UPDATE = "Update Member [{}]";
 
     public static final String MSG_RELATION_VERIF_EXIST_BORN = "Verification Existing of Born Relation";
     public static final String MSG_RELATION_VERIF_EXIST_BORN_FOR = "Verification Existing of Born Relation for [{}]";
     public static final String MSG_RELATION_BORN = "Born Relation [{}]";
+
+    public static final String MSG_SERVICE_INITIALIZATION = "Service Initialization";
 
 }

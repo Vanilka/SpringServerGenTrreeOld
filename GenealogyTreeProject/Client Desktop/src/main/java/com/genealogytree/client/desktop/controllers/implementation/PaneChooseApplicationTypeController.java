@@ -59,6 +59,7 @@ public class PaneChooseApplicationTypeController implements Initializable, FXMLP
         initLocalProjectPane();
         initOnlineProjectPane();
         setListeners();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     public void addTopOffsetListener() {

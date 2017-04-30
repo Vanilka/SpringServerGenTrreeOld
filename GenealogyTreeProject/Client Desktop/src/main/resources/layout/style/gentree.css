@@ -19,6 +19,8 @@
     -gentree-textfield-unfocus-text-color: #acbdb2;
     -gentree-textfield-error-color: #9E0303;
     -gentree-dark-selen-button: #214e41;
+    -gentree-dark-pane: rgba(28, 32, 29, 0.40);
+    -gentree-font-beidge: #faffd5;
 }
 
 /*
@@ -44,13 +46,12 @@
     -fx-max-width: -1;
 }
 
-.gt-screen{
-    
-    
+.gt-screen {
+
 }
 
 .gt-element-block {
-    
+
 }
 
 .split-pane {
@@ -242,17 +243,18 @@
     -jfx-unfocus-color: -gentree-medium-grey;
 }
 
-.jfx-text-field:error, .jfx-password-field:error, .jfx-text-area:error{
+.jfx-text-field:error, .jfx-password-field:error, .jfx-text-area:error {
     -jfx-focus-color: #D34336;
     -jfx-unfocus-color: #D34336;
 }
 
-.jfx-text-field .error-label, .jfx-password-field .error-label , .jfx-text-area .error-label{
-    -fx-text-fill : #D34336;
+.jfx-text-field .error-label, .jfx-password-field .error-label, .jfx-text-area .error-label {
+    -fx-text-fill: #D34336;
     -fx-font-size: 0.75em;
 }
-.jfx-text-field .error-icon, .jfx-password-field .error-icon, .jfx-text-area .error-icon{
-    -fx-text-fill : #D34336;
+
+.jfx-text-field .error-icon, .jfx-password-field .error-icon, .jfx-text-area .error-icon {
+    -fx-text-fill: #D34336;
     -fx-font-size: 1em;
 }
 
@@ -675,7 +677,7 @@
 
 .radioButtonFX {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: -gentree-font-beidge;
     -fx-selected-color: -gentree-greem-markup;
 }
 
@@ -721,17 +723,17 @@
 
     -fx-background-color: derive(#81d136, 10%);
 
-    -fx-background-insets: 2, 0, 0;
+    -fx-background-insets: 2, 0, 0, 0;
 
     -fx-background-radius: 2em;
-
 }
 
-#childrenHBox {
+#childrenSPane {
+    -fx-background-color: transparent;
     -fx-border-color: -gentree-dark-green-grey;
     -fx-border-width: 4;
     -fx-border-radius: 20 20 20 20;
-    -fx-padding: 10 20 10 20;
+    -fx-padding: 0 20 0 20;
     -fx-spacing: 20;
 }
 
@@ -740,6 +742,7 @@
 }
 
 #infoRelationContentHBox {
+
     -fx-spacing: 20;
 }
 
@@ -762,7 +765,7 @@
 
 .toogleButtonShowTable {
     -fx-background-color: rgba(168, 189, 185, 0.4);
-    -fx-text-fill: #faffd5;
+    -fx-text-fill: -gentree-font-beidge;
     -fx-font-size: 14px;
 }
 
@@ -772,15 +775,22 @@
 
 }
 
+.gt_darkPane {
+    -fx-background-color: -gentree-dark-pane;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-text-fill: -gentree-font-beidge;
+}
+
 .gt-combobox {
-    -fx-background-color: rgba(28, 32, 29, 0.40);
+    -fx-background-color: -gentree-dark-pane;
 }
 
 .gt-combobox .list-cell {
     -fx-background: rgba(28, 32, 29, 0.6);
     -fx-background-color: transparent;
-    -fx-text-fill: #faffd5;
-    -fx-padding: 3 0 2 7;
+    -fx-text-fill: -gentree-font-beidge;
+    -fx-padding: 3 0 2 15;
 }
 
 .gt-combobox .list-view {
@@ -798,7 +808,11 @@
     -fx-untoggle-color: -gentree-dark-green-grey;
     -fx-toggle-line-color: -gentree-greem-markup;
     -fx-untoggle-line-color: -gentree-dark-green-grey;
-    -fx-text-fill: #faffd5;
+    -fx-text-fill: -gentree-font-beidge;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
+
+/*
+GT LEAF
+ */

@@ -28,9 +28,13 @@
                 <items>
                     <MenuItem fx:id="menuItemNewProject" mnemonicParsing="false"
                               text="%menu_project_new"/>
-                    <MenuItem fx:id="menuItemOpenProject" mnemonicParsing="false" text="%menu_project_open"/>
+                    <MenuItem fx:id="menuItemOpenProject" mnemonicParsing="false"
+                              onAction="#openFromXML"
+                              text="%menu_project_open"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
-                    <MenuItem fx:id="menuItemSaveProjectAs" mnemonicParsing="false" text="%menu_project_save_as"/>
+                    <MenuItem fx:id="menuItemSaveProjectAs" mnemonicParsing="false"
+                              onAction="#saveToXML"
+                              text="%menu_project_save_as"/>
                     <MenuItem fx:id="menuItemSaveProject" mnemonicParsing="false" text="%menu_project_save"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemExportImage" onAction="#generateImage"

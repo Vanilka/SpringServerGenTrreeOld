@@ -7,6 +7,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.domain.GTX_Family;
 import javafx.beans.property.ObjectProperty;
@@ -22,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +36,7 @@ import java.util.ResourceBundle;
  * @author vanilka
  */
 
-
+@Log4j2
 public class PaneWelcomeWindowController implements Initializable, FXMLPane {
 
     private static final Logger LOG = LogManager.getLogger(PaneWelcomeWindowController.class);
@@ -66,8 +68,8 @@ public class PaneWelcomeWindowController implements Initializable, FXMLPane {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
-
         setFamilyCellFactory();
         addTopOffsetListener(projectsList);
         addTopOffsetListener(vbox_newProject);
@@ -77,6 +79,8 @@ public class PaneWelcomeWindowController implements Initializable, FXMLPane {
         projectsList.resize(540, 500);
         vbox_newProject.resize(200, 500);
         // TODO
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
 

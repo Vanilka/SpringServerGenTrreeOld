@@ -3,8 +3,10 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.AppLanguage;
+import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
 import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLAnchorPane;
+import com.genealogytree.client.desktop.domain.GTX_Family;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -23,6 +25,10 @@ import javafx.util.Callback;
 import lombok.extern.log4j.Log4j2;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -66,6 +72,9 @@ public class MenuController implements Initializable, FXMLAnchorPane {
 
     @FXML
     private MenuItem menuItemSaveProject;
+
+    @FXML
+    private MenuItem menuItemExportImage;
 
     @FXML
     private MenuItem menuItemCloseProject;
@@ -189,4 +198,40 @@ public class MenuController implements Initializable, FXMLAnchorPane {
 
     }
 
+    @FXML
+    public void saveToXML() {
+        File file = sc.saveXMLFileChooser();
+        if (file != null) {
+            try {
+
+                JAXBContext jaxbContext = JAXBContext.newInstance(GTX_Family.class);
+                Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+                // output pretty printed
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                jaxbMarshaller.marshal(context.getService().getCurrentFamily(), file);
+
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void openFromXML() {
+
+        File file = sc.openXMLFileChooser();
+        if (file != null) {
+            try {
+                JAXBContext jaxbContext = JAXBContext.newInstance(GTX_Family.class);
+                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+                GTX_Family customer = (GTX_Family) jaxbUnmarshaller.unmarshal(file);
+                context.getService().setCurrentFamily(customer);
+                sc.loadFxml(new PaneMainApplicationWindowController(), sc.getRootBorderPane(), FXMLFile.MAIN_APPLICATION_WINDOW, ScreenManager.Where.CENTER);
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+

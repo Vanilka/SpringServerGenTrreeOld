@@ -5,6 +5,7 @@ import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
 import com.genealogytree.client.desktop.configuration.enums.ImageFiles;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.domain.GTX_Member;
 import com.genealogytree.client.desktop.domain.GTX_Relation;
@@ -22,8 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,15 +34,14 @@ import java.util.ResourceBundle;
  * @author vanilka
  */
 
+@Log4j2
 public class PaneMainApplicationWindowController implements Initializable, FXMLPane {
 
-    private static final Logger LOG = LogManager.getLogger(PaneMainApplicationWindowController.class);
-
+    public static final ScreenManager sc = ScreenManager.getInstance();
+    public static final ContextGT context = ContextGT.getInstance();
     private static int TABLE_IMAGE_MEMBER_HEIGHT = 80;
     private static int TABLE_IMAGE_MEMBER_WIDTH = 60;
     private final ToggleGroup buttonsTableGroup;
-    public static final ScreenManager sc = ScreenManager.getInstance();
-    public static final ContextGT context = ContextGT.getInstance();
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
     @FXML
@@ -86,8 +85,7 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        LOG.info("Initialisation " + this.getClass().getSimpleName() + ":  " + this.toString());
-
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         gtFamilyMemberTable.setVisible(true);
         gtFamilyRelationTable.setVisible(false);
 
@@ -95,6 +93,7 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
 
         setButtonToToggleGroup();
         setCellValueFactory();
+
         this.relationSimLeftColumn.setCellFactory(setMemberCellFactory("LEFT"));
         this.relationSimRightColumn.setCellFactory(setMemberCellFactory("RIGHT"));
         this.relationTypeColumn.setCellFactory(setRelationTypeCellFactory());
@@ -104,6 +103,7 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
         setMemberList();
         setRelationList();
         setWorkingPane();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
 
     }
 
@@ -114,9 +114,6 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
 
     private void setWorkingPane() {
         PaneGenealogyTreeDrawController ctr = (PaneGenealogyTreeDrawController) sc.loadFxml(new PaneGenealogyTreeDrawController(), workAnchorPaneContent, FXMLFile.GENEALOGY_TREE_DRAW);
-
-        ctr.getPaneGenealogyTreeDraw().prefHeightProperty().bind(workAnchorPaneContent.heightProperty());
-        ctr.getPaneGenealogyTreeDraw().prefWidthProperty().bind(workAnchorPaneContent.widthProperty());
     }
 
     private void setButtonToToggleGroup() {
@@ -186,52 +183,53 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
         this.simSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
 
         this.relationSimLeftColumn.setCellValueFactory(cellData -> cellData.getValue().simLeftProperty());
-       this.relationSimRightColumn.setCellValueFactory(cellData -> cellData.getValue().simRightProperty());
-       this.relationTypeColumn.setCellValueFactory(cellData -> cellData.getValue().getType());
+        this.relationSimRightColumn.setCellValueFactory(cellData -> cellData.getValue().simRightProperty());
+        this.relationTypeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
 
     }
 
 
     private void setMemberList() {
-       this.gtFamilyMemberTable.setItems(context.getService().getCurrentFamily().getGtx_membersList());
+        this.gtFamilyMemberTable.setItems(context.getService().getCurrentFamily().getMembersList());
     }
 
     private void setRelationList() {
-      this.gtFamilyRelationTable.setItems(context.getService().getCurrentFamily().getGtx_relations());
+        this.gtFamilyRelationTable.setItems(context.getService().getCurrentFamily().getRelationsList());
     }
 
     private Callback<TableColumn<GTX_Relation, GTX_Member>,
             TableCell<GTX_Relation, GTX_Member>> setMemberCellFactory(String parameter) {
-        Callback<TableColumn<GTX_Relation, GTX_Member>, TableCell<GTX_Relation, GTX_Member>> callback = new Callback<TableColumn<GTX_Relation, GTX_Member>, TableCell<GTX_Relation, GTX_Member>>() {
-            @Override
-            public TableCell<GTX_Relation, GTX_Member> call(TableColumn<GTX_Relation, GTX_Member> param) {
-                TableCell<GTX_Relation, GTX_Member> cell = new TableCell<GTX_Relation, GTX_Member>() {
-
+        Callback<TableColumn<GTX_Relation, GTX_Member>, TableCell<GTX_Relation, GTX_Member>> callback =
+                new Callback<TableColumn<GTX_Relation, GTX_Member>, TableCell<GTX_Relation, GTX_Member>>() {
                     @Override
-                    protected void updateItem(GTX_Member item, boolean empty) {
-                        super.updateItem(item, empty);
-                        ImageView imageview = new ImageView();
-                        if (item != null) {
-                            imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
-                            imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
-                            imageview.setImage(new Image(item.getPhoto()));
-                            setGraphic(imageview);
-                        } else {
-                            if (!empty) {
-                                imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
-                                imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
-                                String path = parameter.equals("LEFT") == true ?
-                                        ImageFiles.NO_NAME_FEMALE.toString() : ImageFiles.NO_NAME_MALE.toString();
-                                imageview.setImage(new Image(path));
-                                setGraphic(imageview);
-                            }
-                        }
-                    }
+                    public TableCell<GTX_Relation, GTX_Member> call(TableColumn<GTX_Relation, GTX_Member> param) {
+                        TableCell<GTX_Relation, GTX_Member> cell = new TableCell<GTX_Relation, GTX_Member>() {
 
+                            @Override
+                            protected void updateItem(GTX_Member item, boolean empty) {
+                                super.updateItem(item, empty);
+                                ImageView imageview = new ImageView();
+                                if (item != null) {
+                                    imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
+                                    imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
+                                    imageview.setImage(new Image(item.getPhoto()));
+                                    setGraphic(imageview);
+                                } else {
+                                    if (!empty) {
+                                        imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
+                                        imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
+                                        String path = parameter.equals("LEFT") == true ?
+                                                ImageFiles.NO_NAME_FEMALE.toString() : ImageFiles.NO_NAME_MALE.toString();
+                                        imageview.setImage(new Image(path));
+                                        setGraphic(imageview);
+                                    }
+                                }
+                            }
+
+                        };
+                        return cell;
+                    }
                 };
-                return cell;
-            }
-        };
 
         return callback;
     }

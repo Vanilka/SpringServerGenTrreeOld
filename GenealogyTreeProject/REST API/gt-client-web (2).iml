@@ -15,20 +15,10 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="Spring" name="Spring">
-      <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/MainDispatcher.xml</file>
-          <file>file://$MODULE_DIR$/src/main/java/com/genealogytree/webapplication/configuration/GT_AuthenticationEntryPoint.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/com/genealogytree/webapplication/configuration/SecurityConfiguration.java</file>
-          <file>file://$MODULE_DIR$/../REST DB-Manager/src/main/java/com/genealogytree/DatabaseManager/DatabaseConfig.java</file>
-        </fileset>
-      </configuration>
-    </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/target/classes" />
-    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/../Client Web/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../Client Web/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
@@ -38,5 +28,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.14" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.12" level="project" />
   </component>
 </module>

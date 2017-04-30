@@ -3,6 +3,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.FXMLFile;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
 
 import com.genealogytree.client.desktop.service.responses.FamilyResponse;
@@ -11,7 +12,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
@@ -24,8 +24,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -72,6 +70,7 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.projectMemberNumber.setEditable(false);
         this.projectNameLabel.setEditable(false);
         this.languageBundle.setValue(rb);
@@ -79,11 +78,11 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
         addLanguageListener();
         bindNameLabel();
 
-        projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size());
-        this.context.getService().getCurrentFamily().getGtx_membersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size()));
-        BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> context.getService().getCurrentFamily().getGtx_membersList().size() < 2, context.getService().getCurrentFamily().getGtx_membersList());
+        projectMemberNumber.setText("" + context.getService().getCurrentFamily().getMembersList().size());
+        context.getService().getCurrentFamily().getMembersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getMembersList().size()));
+        BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> context.getService().getCurrentFamily().getMembersList().size() < 2, context.getService().getCurrentFamily().getMembersList());
         addRelationButton.disableProperty().bind(disableBinding);
-
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
 
@@ -132,7 +131,7 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
 
 
     private void bindNameLabel() {
-       this.projectNameLabel.textProperty().bind(context.getService().getCurrentFamily().getNameProperty());
+       this.projectNameLabel.textProperty().bind(context.getService().getCurrentFamily().nameProperty());
     }
 
     private void unBindNameLabel() {
@@ -199,9 +198,9 @@ public class TabInfoProjectPaneController implements Initializable, FXMLTab {
         addLanguageListener();
         bindNameLabel();
 
-        projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size());
-        context.getService().getCurrentFamily().getGtx_membersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getGtx_membersList().size()));
-        BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> context.getService().getCurrentFamily().getGtx_membersList().size() < 2, context.getService().getCurrentFamily().getGtx_membersList());
+        projectMemberNumber.setText("" + context.getService().getCurrentFamily().getMembersList().size());
+        context.getService().getCurrentFamily().getMembersList().addListener((InvalidationListener) observable -> projectMemberNumber.setText("" + context.getService().getCurrentFamily().getMembersList().size()));
+        BooleanBinding disableBinding = Bindings.createBooleanBinding(() -> context.getService().getCurrentFamily().getMembersList().size() < 2, context.getService().getCurrentFamily().getMembersList());
         addRelationButton.disableProperty().bind(disableBinding);
 
 

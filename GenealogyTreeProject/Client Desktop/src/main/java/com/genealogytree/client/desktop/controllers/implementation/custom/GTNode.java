@@ -7,6 +7,8 @@ package com.genealogytree.client.desktop.controllers.implementation.custom;
 
 import com.genealogytree.client.desktop.GenealogyTree;
 import com.genealogytree.client.desktop.domain.GTX_Relation;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -31,7 +33,6 @@ public class GTNode extends AnchorPane {
     private static int MIN_OFFSET_VERTICAL = 200;
 
 
-
     @FXML
     private Rectangle bodyNode;
 
@@ -50,7 +51,11 @@ public class GTNode extends AnchorPane {
     @FXML
     private HBox contentHbox;
 
-    private GTX_Relation racine;
+    private ObjectProperty<GTX_Relation> racine;
+
+    {
+        racine = new SimpleObjectProperty<>();
+    }
 
     public GTNode(GTX_Relation bean) {
         super();
@@ -63,12 +68,29 @@ public class GTNode extends AnchorPane {
             exception.printStackTrace();
             throw new RuntimeException(exception);
         }
-
+        propertyBinding();
         initAutoResizing();
 
-        this.racine = bean;
+        this.racine.set(bean);
     }
 
+    private void propertyBinding() {
+
+        //Listen Racine Changes
+        racine.addListener((observable, oldValue, newValue) -> {
+            if(oldValue != null) {
+                nameNode.textProperty().unbind();
+            }
+
+            nameNode.textProperty().bind(racine.getValue().getChildren().get(0).surnameProperty());
+        });
+
+
+    }
+
+    private void initListener() {
+
+    }
 
     private void initAutoResizing() {
         bodyNodeDark.widthProperty().bind(this.widthProperty().subtract(OFFSET_FOND_DARK));
@@ -83,6 +105,18 @@ public class GTNode extends AnchorPane {
 
         content.setBorder(new Border(new BorderStroke(Color.RED,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+
+    public ObjectProperty<GTX_Relation> racineProperty() {
+        return racine;
+    }
+
+    public GTX_Relation getRacine() {
+        return racine.get();
+    }
+
+    public void setRacine(GTX_Relation racine) {
+        this.racine.set(racine);
     }
 }
 

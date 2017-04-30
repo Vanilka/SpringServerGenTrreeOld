@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="addNewMember" fx:id="addNewMember"
-            styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabAddNewMemberPaneController">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="addNewMember" fx:id="addNewMember" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabAddNewMemberPaneController">
     <stylesheets>
-        <URL value="@/layout/style/gentree.css"/>
+        <URL value="@/layout/style/gentree.css" />
     </stylesheets>
     <children>
-        <JFXTextField fx:id="simNameField"  labelFloat="true" layoutX="173.0" layoutY="24.0"
-                      promptText="%simName"/>
-        <JFXTextField fx:id="simSurnameField" labelFloat="true" layoutX="363.0" layoutY="24.0"
-                      promptText="%simSurname"/>
-        <AnchorPane layoutX="181.0" layoutY="56.0" prefHeight="93.0" prefWidth="325.0">
+      <VBox layoutX="395.0" layoutY="29.0" prefHeight="52.0" prefWidth="151.0" spacing="5.0" styleClass="gt_darkPane" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="20.0">
+         <children>
+                <JFXRadioButton fx:id="simSexMale" styleClass="radioButtonFX" text="%simSexM" />
+                <JFXRadioButton fx:id="simSexFemale" styleClass="radioButtonFX" text="%simSexF" />
+         </children>
+      </VBox>
+        <VBox layoutX="171.0" layoutY="18.0" spacing="25.0" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0">
             <children>
-                <JFXRadioButton fx:id="simAgeBabyField" layoutY="14.0" styleClass="radioButtonFX" text="%simAgeBaby"/>
-                <JFXRadioButton fx:id="simAgeChildField" layoutY="40.0" styleClass="radioButtonFX" text="%simAgeChild"/>
-                <JFXRadioButton fx:id="simAgeAdoField" layoutY="64.0" prefHeight="17.0" prefWidth="130.0"
-                                styleClass="radioButtonFX" text="%simAgeAdo"/>
-                <JFXRadioButton fx:id="simAgeJAdultField" layoutX="190.0" layoutY="14.0" styleClass="radioButtonFX"
-                                text="%simAgeJAdult"/>
-                <JFXRadioButton fx:id="simAgeAdultField" layoutX="190.0" layoutY="40.0" prefHeight="17.0"
-                                prefWidth="134.0" styleClass="radioButtonFX" text="%simAgeAdult"/>
-                <JFXRadioButton fx:id="simAgeSeniorField" layoutX="190.0" layoutY="64.0" styleClass="radioButtonFX"
-                                text="%simAgeSenior"/>
+                <JFXTextField fx:id="simNameField" labelFloat="true" promptText="%simName" />
+                <JFXTextField fx:id="simSurnameField" labelFloat="true" promptText="%simSurname" />
+                <JFXTextField fx:id="simBornnameField" labelFloat="true" promptText="%simBornName" />
             </children>
-        </AnchorPane>
-        <JFXButton fx:id="addSimConfirmButton" buttonType="RAISED" layoutX="702.0" layoutY="29.0"
-                   onAction="#addSimConfirm" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448"
-                   styleClass="jfxButton" text="%addSimConfirm"/>
-        <JFXButton fx:id="addSimCancelButton" buttonType="RAISED" layoutX="702.0" layoutY="102.0"
-                   onAction="#setAddSimCancel" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448"
-                   styleClass="jfxButton" text="%addSimCancel"/>
-        <AnchorPane layoutX="556.0" layoutY="15.0" prefHeight="52.0" prefWidth="127.0">
+        </VBox>
+        <JFXButton fx:id="addSimConfirmButton" buttonType="RAISED" layoutX="702.0" layoutY="29.0" onAction="#addSimConfirm" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%addSimConfirm" />
+        <JFXButton fx:id="addSimCancelButton" buttonType="RAISED" layoutX="702.0" layoutY="102.0" onAction="#setAddSimCancel" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%addSimCancel" />
+        <Pane fx:id="ImagePane" layoutX="21.0" layoutY="15.0" maxHeight="150.0" maxWidth="125.0" minHeight="150.0" minWidth="125.0" prefHeight="150.0" prefWidth="125.0" styleClass="imagePane">
             <children>
-                <JFXRadioButton fx:id="simSexMale" styleClass="radioButtonFX" text="%simSexM"/>
-                <JFXRadioButton fx:id="simSexFemale" layoutY="27.0" styleClass="radioButtonFX" text="%simSexF"/>
-            </children>
-        </AnchorPane>
-        <Pane fx:id="ImagePane" layoutX="21.0" layoutY="15.0" maxHeight="150.0" maxWidth="125.0" minHeight="150.0"
-              minWidth="125.0" prefHeight="150.0" prefWidth="125.0" styleClass="imagePane">
-            <children>
-                <ImageView fx:id="simPhoto" fitHeight="140.0" fitWidth="115.0" layoutX="5.0" layoutY="5.0"
-                           onMouseClicked="#setImage" pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="simPhoto" fitHeight="140.0" fitWidth="115.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#setImage" pickOnBounds="true" preserveRatio="true" />
             </children>
         </Pane>
+        <ComboBox fx:id="comboBoxAge" layoutX="344.0" layoutY="108.0" prefHeight="41.0" prefWidth="151.0" styleClass="gt-combobox" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="345.0" />
+        <Label layoutX="383.0" layoutY="90.0" prefHeight="25.0" prefWidth="151.0" text="Age :" textFill="#acbdb2" AnchorPane.leftAnchor="345.0">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     </children>
 
 </AnchorPane>

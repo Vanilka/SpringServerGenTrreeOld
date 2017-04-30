@@ -7,6 +7,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.jfoenix.controls.JFXButton;
 import javafx.beans.property.ObjectProperty;
@@ -16,6 +17,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,12 +29,12 @@ import java.util.ResourceBundle;
  *
  * @author mszymkow
  */
+@Log4j2
 public class PaneRegisterConfirmationController implements Initializable, FXMLPane {
-    private static final Logger LOG = LogManager.getLogger(PaneRegisterConfirmationController.class);
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
-    private ScreenManager manager;
+
 
     private PaneLogonWindowController logonWindow;
 
@@ -50,12 +52,14 @@ public class PaneRegisterConfirmationController implements Initializable, FXMLPa
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
 
         addLanguageListener();
 		/*
          * Add Listener to listen context changes
 		 */
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @FXML

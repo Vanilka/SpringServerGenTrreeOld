@@ -4,6 +4,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
 import com.genealogytree.client.desktop.configuration.enums.ImageFiles;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
 import com.genealogytree.client.desktop.domain.GTX_Member;
 import com.genealogytree.client.desktop.service.responses.MemberResponse;
@@ -21,6 +22,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -28,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,6 +43,7 @@ import java.util.ResourceBundle;
 /**
  * Created by vanilka on 22/11/2016.
  */
+@Log4j2
 public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
 
     private static final Logger LOG = LogManager.getLogger(TabAddNewMemberPaneController.class);
@@ -57,28 +61,16 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
     private JFXTextField simSurnameField;
 
     @FXML
-    private JFXRadioButton simAgeBabyField;
-
-    @FXML
-    private JFXRadioButton simAgeChildField;
-
-    @FXML
-    private JFXRadioButton simAgeAdoField;
-
-    @FXML
-    private JFXRadioButton simAgeJAdultField;
-
-    @FXML
-    private JFXRadioButton simAgeAdultField;
-
-    @FXML
-    private JFXRadioButton simAgeSeniorField;
+    private JFXTextField simBornnameField;
 
     @FXML
     private JFXRadioButton simSexMale;
 
     @FXML
     private JFXRadioButton simSexFemale;
+
+    @FXML
+    private ComboBox<Age> comboBoxAge;
 
     @FXML
     private JFXButton addSimConfirmButton;
@@ -92,7 +84,6 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
-    private ToggleGroup toogleGroupAge;
     private ToggleGroup toogleGroupeSex;
 
     private Tab tab;
@@ -105,23 +96,29 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
      */
 
     {
-        toogleGroupAge = new ToggleGroup();
         toogleGroupeSex = new ToggleGroup();
         path = null;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
         addSexListener();
-        createAgeToogleGroupe();
         createSexToogleGroupe();
+        populateAgeComboBox();
         addLanguageListener();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
+    }
+
+    private void populateAgeComboBox() {
+        comboBoxAge.getItems().addAll(Age.values());
+        comboBoxAge.getSelectionModel().select(Age.YOUNG_ADULT);
     }
 
     @FXML
     public void addSimConfirm() {
-        GTX_Member member = new GTX_Member(this.simNameField.getText(), this.simSurnameField.getText(), (Age) toogleGroupAge.getSelectedToggle().getUserData(), (Sex) toogleGroupeSex.getSelectedToggle().getUserData(), path);
+        GTX_Member member = new GTX_Member(this.simNameField.getText(), this.simSurnameField.getText(), this.simBornnameField.getText(), comboBoxAge.getSelectionModel().getSelectedItem(), (Sex) toogleGroupeSex.getSelectedToggle().getUserData(), path);
 
         ServiceResponse response = context.getService().addMember(member);
         if (response instanceof MemberResponse) {
@@ -169,28 +166,6 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
         this.tabPane.getTabs().remove(tab);
     }
 
-    private void createAgeToogleGroupe() {
-        this.simAgeBabyField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeBabyField.setUserData(Age.BABY);
-
-        this.simAgeChildField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeChildField.setUserData(Age.CHILD);
-
-        this.simAgeAdoField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeAdoField.setUserData(Age.ADO);
-
-        this.simAgeJAdultField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeJAdultField.setUserData(Age.YOUNG_ADULT);
-
-        this.simAgeAdultField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeAdultField.setUserData(Age.ADULT);
-
-        this.simAgeSeniorField.setToggleGroup(this.toogleGroupAge);
-        this.simAgeSeniorField.setUserData(Age.SENIOR);
-
-        this.toogleGroupAge.selectToggle(simAgeJAdultField);
-
-    }
 
     private void createSexToogleGroupe() {
         this.simSexMale.setToggleGroup(this.toogleGroupeSex);
@@ -244,13 +219,6 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
 
         this.simNameField.setPromptText(getValueFromKey("simName"));
         this.simSurnameField.setPromptText(getValueFromKey("simSurname"));
-
-        this.simAgeBabyField.setText(getValueFromKey("simAgeBaby"));
-        this.simAgeChildField.setText(getValueFromKey("simAgeChild"));
-        this.simAgeAdoField.setText(getValueFromKey("simAgeAdo"));
-        this.simAgeJAdultField.setText(getValueFromKey("simAgeJAdult"));
-        this.simAgeAdultField.setText(getValueFromKey("simAgeAdult"));
-        this.simAgeSeniorField.setText(getValueFromKey("simAgeSenior"));
 
         this.addSimConfirmButton.setText(getValueFromKey("button_confirm"));
         this.addSimCancelButton.setText(getValueFromKey("addSimCancel"));

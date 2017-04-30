@@ -6,6 +6,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class GTRelationType extends AnchorPane {
+public class GTRelationType extends StackPane {
 
     Circle circle;
     ImageView typeImg;
@@ -55,6 +56,7 @@ public class GTRelationType extends AnchorPane {
         imageContainer.getChildren().addAll(circle, typeImg);
         getChildren().add(imageContainer);
         initListeners();
+        setAlignment(Pos.CENTER);
     }
 
     private void initCircle() {
@@ -87,5 +89,34 @@ public class GTRelationType extends AnchorPane {
 
         });
     }
+
+
+    /*
+        GETTERS
+     */
+
+    public ObjectProperty<RelationType> typeProperty() {
+        return type;
+    }
+
+    public boolean isIsActive() {
+        return isActive.get();
+    }
+
+    public BooleanProperty isActiveProperty() {
+        return isActive;
+    }
+
+    /*
+            SETTERS
+         */
+    public void setType(RelationType type) {
+        this.type.set(type);
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive.set(isActive);
+    }
+
 
 }

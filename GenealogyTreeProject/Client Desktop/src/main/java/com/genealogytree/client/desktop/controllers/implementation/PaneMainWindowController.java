@@ -7,10 +7,12 @@ package com.genealogytree.client.desktop.controllers.implementation;
 
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,9 +22,9 @@ import java.util.ResourceBundle;
 /**
  * @author vanilka
  */
+@Log4j2
 public class PaneMainWindowController implements Initializable, FXMLPane {
 
-    private static final Logger LOG = LogManager.getLogger(PaneMainWindowController.class);
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
 
@@ -34,8 +36,9 @@ public class PaneMainWindowController implements Initializable, FXMLPane {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LOG.info("Initialisation :  " + this.toString());
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle = rb;
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 

@@ -6,9 +6,8 @@
         <artifactId>GenealogyTreeProject</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>gt-client-web</artifactId>
+    <artifactId>gt-rest-api</artifactId>
     <name>Genealogy Tree REST API</name>
-
     <properties>
         <spring.version>4.3.3.RELEASE</spring.version>
         <spring.security.version>4.1.3.RELEASE</spring.security.version>

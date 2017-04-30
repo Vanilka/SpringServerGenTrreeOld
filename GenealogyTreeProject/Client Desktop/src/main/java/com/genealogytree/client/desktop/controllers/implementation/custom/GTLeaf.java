@@ -11,11 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by vanilka on 03/01/2017.
@@ -34,10 +37,16 @@ public class GTLeaf extends AnchorPane {
     private Label nameSim;
 
     @FXML
+    private Label bornameSim;
+
+    @FXML
     private ImageView photoSim;
 
-    private ObjectProperty<GTX_Member> member;
+    @FXML
+    private Rectangle rectangleFond;
 
+    private ObjectProperty<GTX_Member> member;
+    private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
     {
         member = new SimpleObjectProperty<>();
 
@@ -48,8 +57,7 @@ public class GTLeaf extends AnchorPane {
         initialize();
         this.member.addListener(getChangeMemberListener());
         this.member.setValue(member);
-        setHeight(150.0);
-        setWidth(130.0);
+        resize(255,145);
 
     }
 
@@ -69,10 +77,23 @@ public class GTLeaf extends AnchorPane {
             exception.printStackTrace();
             throw new RuntimeException(exception);
         }
+
+        this.setOnMouseEntered(t -> {
+        rectangleFond.setStroke(Color.valueOf("#64bf37"));
+        });
+
+        this.setOnMouseExited(t -> {
+
+            rectangleFond.setStroke(Color.TRANSPARENT);
+        });
     }
 
     private ChangeListener<GTX_Member> getChangeMemberListener() {
         ChangeListener<GTX_Member> simListener = (observable, oldValue, newValue) -> {
+            if(oldValue != null) {
+                oldValue.getProperties().forEach(p -> p.removeListener(listener));
+            }
+            newValue.getProperties().forEach(p -> p.addListener(listener));
             fillComponents(newValue);
         };
         return simListener;
@@ -86,6 +107,11 @@ public class GTLeaf extends AnchorPane {
         } else {
             nameSim.setText(member.getName());
             surnameSim.setText(member.getSurname());
+            if (member.getBornname()!= null && !member.getBornname().equals("") && !member.getBornname().equals(member.getSurname())) {
+                bornameSim.setText("("+member.getBornname()+")");
+            } else {
+                bornameSim.setText("");
+            }
             setImage(member.getPhoto());
         }
     }

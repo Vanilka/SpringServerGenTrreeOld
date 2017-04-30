@@ -7,7 +7,7 @@ import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTNode;
 import com.genealogytree.client.desktop.domain.GTX_Family;
 import com.genealogytree.client.desktop.service.GenTreeDrawingService;
-import com.genealogytree.client.desktop.service.GenTreeDrawingServiceImpl;
+import com.genealogytree.client.desktop.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,14 +17,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,26 +30,30 @@ import java.util.ResourceBundle;
  * Created by vanilka on 03/01/2017.
  */
 @Log4j2
-public class PaneGenealogyTreeDrawController extends AnchorPane implements Initializable, FXMLPane{
+public class PaneGenealogyTreeDrawController extends AnchorPane implements Initializable, FXMLPane {
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
 
     @FXML
-    ScrollPane workAnchorPane;
+    ScrollPane workAnchorPaneContent;
 
     @FXML
     AnchorPane paneGenealogyTreeDraw;
+
     @FXML
     HBox projectContent;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
+    @Getter
     private GenTreeDrawingService drawingService;
+
     {
         drawingService = new GenTreeDrawingServiceImpl();
     }
+
     /**
      * Initializes the controller class.
      */
@@ -63,29 +64,34 @@ public class PaneGenealogyTreeDrawController extends AnchorPane implements Initi
         this.languageBundle.setValue(rb);
         addLanguageListener();
         initRelationListener();
+        redrawTree();
+
+
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
+    }
 
+
+    private void redrawTree() {
+        projectContent.getChildren().clear();
+        getCurrentFamilly().getRelationsList()
+                .filtered(c -> c.getSimLeft() == null)
+                .filtered(c -> c.getSimRight() == null)
+                .forEach(c -> {
+                    GTNode node = new GTNode(c);
+                    drawingService.startDraw(node);
+                    projectContent.getChildren().add(node);
+                });
     }
 
     /*
 
      */
     public void initRelationListener() {
-        context.getService().getCurrentFamily().getGtx_relations().addListener((InvalidationListener) observable -> {
+        context.getService().getCurrentFamily().getRelationsList().addListener((InvalidationListener) observable -> {
             // TODO  Redraw Tree
-            projectContent.getChildren().clear();
-            getCurrentFamilly().getGtx_relations()
-                    .filtered(c-> c.getSimLeft() == null)
-                    .filtered(c-> c.getSimRight() == null)
-                    .forEach(c -> {
-                        GTNode node = new GTNode(c);
-                        drawingService.startDraw(node);
-                        projectContent.getChildren().add(node);
-                    });
+            redrawTree();
         });
-
-
 
 
     }

@@ -1,40 +1,50 @@
 package com.genealogytree.client.desktop.domain;
 
+import com.genealogytree.client.desktop.configuration.helper.BooleanPropertyMarshaller;
+import com.genealogytree.client.desktop.configuration.helper.StringPropertyMarshaller;
 import com.genealogytree.domain.enums.RelationType;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.Getter;
-import lombok.Setter;
 
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by vanilka on 31/12/2016.
  */
-@Getter
-@Setter
-public class GTX_Relation implements Serializable {
+
+@XmlType(name = "relation")
+public class GTX_Relation implements  Serializable {
     private static final long serialVersionUID = 2837614786245672177L;
 
     private Long id;
+
     private Long version;
+
     private ObjectProperty<RelationType> type;
+
     private ObjectProperty<GTX_Member> simLeft;
+
     private ObjectProperty<GTX_Member> simRight;
+
     private ObservableList<GTX_Member> children;
-    private BooleanProperty isActive;
+
+    private BooleanProperty active;
+
+    private BooleanProperty current;
 
     {
         type = new SimpleObjectProperty<>();
         simLeft = new SimpleObjectProperty<>();
         simRight = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        isActive = new SimpleBooleanProperty();
+        active = new SimpleBooleanProperty();
     }
 
     public GTX_Relation() {
@@ -45,12 +55,14 @@ public class GTX_Relation implements Serializable {
         this(simLeft, simRight, child, RelationType.NEUTRAL, true);
     }
 
-    public GTX_Relation(GTX_Member simLeft, GTX_Member simRight, GTX_Member child, RelationType type, boolean isActive) {
+    public GTX_Relation(GTX_Member simLeft, GTX_Member simRight, GTX_Member child, RelationType type, boolean active) {
         setSimLeft(simLeft);
         setSimRight(simRight);
-        getChildren().add(child);
+        if(child != null) {
+            getChildren().add(child);
+        }
         setType(type);
-        setIsActive(isActive);
+        setActive(active);
     }
 
 
@@ -67,55 +79,106 @@ public class GTX_Relation implements Serializable {
 
     }
 
+    public boolean isRacine() {
+        return getSimLeft() == null && getSimRight() == null;
+    }
+
+
     /*
         GETTERS
     */
 
+    public Long getId() {
+        return id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public RelationType getType() {
+        return type.get();
+    }
+
+    public ObjectProperty<RelationType> typeProperty() {
+        return type;
+    }
+
+    public GTX_Member getSimLeft() {
+        return simLeft.get();
+    }
+
     public ObjectProperty<GTX_Member> simLeftProperty() {
         return simLeft;
+    }
+
+    public GTX_Member getSimRight() {
+        return simRight.get();
     }
 
     public ObjectProperty<GTX_Member> simRightProperty() {
         return simRight;
     }
 
-    public GTX_Member getSimLeft() {
-        return simLeft.getValue();
+    public ObservableList<GTX_Member> getChildren() {
+        return children;
     }
 
-    public void setSimLeft(GTX_Member simLeft) {
-        this.simLeft.set(simLeft);
+
+
+    public Boolean isActive() {
+        return active.get();
     }
 
-    public GTX_Member getSimRight() {
-        return simRight.getValue();
+
+    public BooleanProperty activeProperty() {
+        return active;
+    }
+
+
+    public Boolean isCurrent() {
+        return current.get();
+    }
+
+    public BooleanProperty currentProperty() {
+        return current;
     }
 
     /*
     *  SETTERS
      */
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
+
+    public void setType(RelationType type) {
+        this.type.set(type);
+    }
+
+    public void setSimLeft(GTX_Member simLeft) {
+        this.simLeft.set(simLeft);
+    }
+
     public void setSimRight(GTX_Member simRight) {
         this.simRight.set(simRight);
     }
 
-    public BooleanProperty isActiveProperty() {
-        return isActive;
+    public void setChildren(ObservableList<GTX_Member> children) {
+        this.children = children;
     }
 
-    public void setChildrenList(List<GTX_Member> children) {
-        this.children.clear();
-        this.children.addAll(children);
+    public void setActive(boolean active) {
+        this.active.set(active);
     }
 
-    public void setType(RelationType type) {
-        this.type.set(type != null ? type : RelationType.NEUTRAL);
+    public void setCurrent(boolean current) {
+        this.current.set(current);
     }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive.set(isActive);
-    }
-
 
     @Override
     public String toString() {
@@ -126,7 +189,7 @@ public class GTX_Relation implements Serializable {
                 ", simLeft=" + simLeft +
                 ", simRight=" + simRight +
                 ", children=" + children +
-                ", isActive=" + isActive +
+                ", active=" + active +
                 '}';
     }
 
@@ -144,7 +207,7 @@ public class GTX_Relation implements Serializable {
         if (getSimRight() != null ? !getSimRight().equals(that.getSimRight()) : that.getSimRight() != null)
             return false;
         if (children != null ? !children.equals(that.children) : that.children != null) return false;
-        return isActive != null ? isActive.equals(that.isActive) : that.isActive == null;
+        return active != null ? active.equals(that.active) : that.active == null;
 
     }
 
@@ -157,7 +220,7 @@ public class GTX_Relation implements Serializable {
         result = 31 * result + (simLeft != null ? simLeft.hashCode() : 0);
         result = 31 * result + (simRight != null ? simRight.hashCode() : 0);
         result = 31 * result + (children != null ? children.hashCode() : 0);
-        result = 31 * result + (isActive != null ? isActive.hashCode() : 0);
+        result = 31 * result + (active != null ? active.hashCode() : 0);
         return result;
     }
 }

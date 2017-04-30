@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Client Desktop/Client Desktop.iml" filepath="$PROJECT_DIR$/Client Desktop/Client Desktop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Client Web/Client Web.iml" filepath="$PROJECT_DIR$/Client Web/Client Web.iml" />
       <module fileurl="file://$PROJECT_DIR$/Domain/Domain.iml" filepath="$PROJECT_DIR$/Domain/Domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/ExceptionManager/ExceptionManager.iml" filepath="$PROJECT_DIR$/ExceptionManager/ExceptionManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/GenealogyTreeProject.iml" filepath="$PROJECT_DIR$/GenealogyTreeProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST API/REST API.iml" filepath="$PROJECT_DIR$/REST API/REST API.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST DB-Manager/REST DB-Manager.iml" filepath="$PROJECT_DIR$/REST DB-Manager/REST DB-Manager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST Entity/REST Entity.iml" filepath="$PROJECT_DIR$/REST Entity/REST Entity.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST Facade/REST Facade.iml" filepath="$PROJECT_DIR$/REST Facade/REST Facade.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST Repository/REST Repository.iml" filepath="$PROJECT_DIR$/REST Repository/REST Repository.iml" />
-      <module fileurl="file://$PROJECT_DIR$/REST Service/REST Service.iml" filepath="$PROJECT_DIR$/REST Service/REST Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Client Desktop/gt-client-desktop.iml" filepath="$PROJECT_DIR$/Client Desktop/gt-client-desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Client Web/gt-client-web.iml" filepath="$PROJECT_DIR$/Client Web/gt-client-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST API/gt-rest-api.iml" filepath="$PROJECT_DIR$/REST API/gt-rest-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST DB-Manager/rest-db-manager.iml" filepath="$PROJECT_DIR$/REST DB-Manager/rest-db-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST Entity/rest-entity.iml" filepath="$PROJECT_DIR$/REST Entity/rest-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST Facade/rest-facade.iml" filepath="$PROJECT_DIR$/REST Facade/rest-facade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST Repository/rest-repository-layer.iml" filepath="$PROJECT_DIR$/REST Repository/rest-repository-layer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/REST Service/rest-service-layer.iml" filepath="$PROJECT_DIR$/REST Service/rest-service-layer.iml" />
     </modules>
   </component>
 </project>

@@ -7,6 +7,7 @@ package com.genealogytree.client.desktop.controllers.implementation;
 
 import com.genealogytree.client.desktop.configuration.ContextGT;
 import com.genealogytree.client.desktop.configuration.ScreenManager;
+import com.genealogytree.client.desktop.configuration.messages.LogMessages;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -20,6 +21,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
+import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,9 +33,9 @@ import java.util.ResourceBundle;
  *
  * @author vanilka
  */
+@Log4j2
 public class PaneLogonFormController implements Initializable, FXMLPane {
 
-    private static final Logger LOG = LogManager.getLogger(PaneLogonFormController.class);
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
 
@@ -58,8 +60,7 @@ public class PaneLogonFormController implements Initializable, FXMLPane {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        LOG.info("Initialisation :  " + this.toString());
-
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
 
 		/*
@@ -70,6 +71,7 @@ public class PaneLogonFormController implements Initializable, FXMLPane {
                 () -> this.fieldLogin.getText().isEmpty() || this.fieldPassword.getText().isEmpty(),
                 this.fieldLogin.textProperty(), this.fieldPassword.textProperty());
         this.buttonConnect.disableProperty().bind(disableBinding);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @FXML

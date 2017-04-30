@@ -1,33 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="infoMemberTab" fx:id="infoMemberTab" prefWidth="819.0"
-            styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabInfoMemberPaneController">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="infoMemberTab" fx:id="infoMemberTab" prefWidth="819.0" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabInfoMemberPaneController">
     <stylesheets>
-        <URL value="@/layout/style/gentree.css"/>
+        <URL value="@/layout/style/gentree.css" />
     </stylesheets>
     <children>
-        <JFXTextField fx:id="simSurnameField" labelFloat="true" layoutX="235.0" layoutY="101.0"
-                      promptText="%simSurname"/>
-        <JFXTextField fx:id="simNameField" focusColor="#b5f448" labelFloat="true" layoutX="235.0" layoutY="44.0"
-                      promptText="%simName"/>
-        <JFXTextField fx:id="simSex" labelFloat="true" layoutX="471.0" layoutY="101.0" promptText="%simSex"/>
-        <JFXTextField fx:id="simAge" labelFloat="true" layoutX="471.0" layoutY="44.0" promptText="%simAge"/>
-        <Pane fx:id="ImagePane" layoutX="66.0" layoutY="15.0" maxHeight="150.0" maxWidth="125.0" minHeight="150.0"
-              minWidth="125.0" prefHeight="150.0" prefWidth="125.0" styleClass="imagePane">
+      <VBox layoutX="271.0" layoutY="22.0" spacing="30.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="20.0">
+         <children>
+              <JFXTextField fx:id="simNameField" focusColor="#b5f448" labelFloat="true" promptText="%simName" />
+              <JFXTextField fx:id="simSurnameField" labelFloat="true" promptText="%simSurname" />
+            <JFXTextField fx:id="simBornnameField" labelFloat="true" promptText="%simBornName" />
+         </children>
+      </VBox>
+      <VBox fx:id="roVbox" layoutX="508.0" layoutY="50.0" prefHeight="92.0" prefWidth="151.0" spacing="30.0">
+         <children>
+              <JFXTextField fx:id="simAge" labelFloat="true" promptText="%simAge" />
+              <JFXTextField fx:id="simSex" labelFloat="true" promptText="%simSex" />
+         </children>
+      </VBox>
+        <Pane fx:id="ImagePane" layoutX="101.0" layoutY="15.0" maxHeight="150.0" maxWidth="125.0" minHeight="150.0" minWidth="125.0" prefHeight="150.0" prefWidth="125.0" styleClass="imagePane">
             <children>
-                <ImageView fx:id="simPhoto" fitHeight="140.0" fitWidth="115.0" layoutX="5.0" layoutY="5.0"
-                           pickOnBounds="true" preserveRatio="true"/>
+                <ImageView fx:id="simPhoto" fitHeight="140.0" fitWidth="115.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </Pane>
-        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="711.0" layoutY="50.0" onAction="#buttonCancel"
-                   prefHeight="80.0" prefWidth="167.0" ripplerFill="#b5f448" styleClass="jfxButton"
-                   text="%addSimCancel"/>
+      <JFXTextField fx:id="simId" labelFloat="true" layoutX="14.0" layoutY="44.0" prefHeight="25.0" prefWidth="50.0" promptText="ID" />
+      <VBox fx:id="rwVbox" layoutX="508.0" layoutY="9.0" prefHeight="92.0" prefWidth="151.0" spacing="20.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <VBox prefHeight="52.0" prefWidth="151.0" spacing="5.0" styleClass="gt_darkPane">
+               <children>
+                  <JFXRadioButton fx:id="simSexMale" styleClass="radioButtonFX" text="%simSexM" />
+                  <JFXRadioButton fx:id="simSexFemale" styleClass="radioButtonFX" text="%simSexF" />
+               </children>
+            </VBox>
+            <BorderPane>
+               <center>
+                  <ComboBox fx:id="comboBoxAge" prefHeight="41.0" prefWidth="151.0" styleClass="gt-combobox" />
+               </center>
+               <top>
+                  <Label prefHeight="25.0" prefWidth="151.0" text="Age :" textFill="#acbdb2" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </top>
+            </BorderPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <JFXButton fx:id="buttonModify" buttonType="RAISED" layoutX="676.0" layoutY="18.0" onAction="#buttonModify" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%button_modify" />
+      <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="676.0" layoutY="90.0" onAction="#buttonCancel" prefHeight="52.0" prefWidth="137.0" ripplerFill="#b5f448" styleClass="jfxButton" text="%button_close" />
     </children>
 
 </AnchorPane>

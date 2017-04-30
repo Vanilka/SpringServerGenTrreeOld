@@ -80,7 +80,7 @@ public class DialogNewProjectController implements Initializable, FXMLPane, FXML
 
     @FXML
     public void confrim() {
-        this.context.getService().setCurrentFamily(new GTX_Family(this.familyNameField.getText().trim()));
+        context.getService().setCurrentFamily(new GTX_Family(this.familyNameField.getText().trim()));
         sc.loadFxml(new PaneMainApplicationWindowController(), sc.getRootBorderPane(), FXMLFile.MAIN_APPLICATION_WINDOW, ScreenManager.Where.CENTER);
         this.stage.close();
 

@@ -22,9 +22,6 @@ import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.Notifications;
 
 import java.io.File;
@@ -40,7 +37,8 @@ public class ScreenManager {
 
     public static final ContextGT context = ContextGT.getInstance();
     private static final ScreenManager INSTANCE = new ScreenManager();
-    private static final FileChooser fileChooser = new FileChooser();
+    private static final FileChooser imgFileChooser = new FileChooser();
+    private static final FileChooser xmlFileChooser = new FileChooser();
     private static String LAST_PATH;
 
     private BorderPaneReloadHelper bpHelper;
@@ -230,11 +228,25 @@ public class ScreenManager {
     }
 
     public File openImageFileChooser() {
-        configureImageFileChooser(fileChooser);
-        File file = fileChooser.showOpenDialog(stage);
+        configureImageFileChooser(imgFileChooser);
+        File file = imgFileChooser.showOpenDialog(stage);
         LAST_PATH = file == null ? LAST_PATH : file.getParent();
         return file;
 
+    }
+
+    public File openXMLFileChooser() {
+        configureXmlFileChooser(xmlFileChooser);
+        File file = xmlFileChooser.showOpenDialog(stage);
+        LAST_PATH = file == null ? LAST_PATH : file.getParent();
+        return file;
+    }
+
+    public File saveXMLFileChooser() {
+        configureXmlFileChooser(xmlFileChooser);
+        File file = xmlFileChooser.showSaveDialog(stage);
+        LAST_PATH = file == null ? LAST_PATH : file.getParent();
+        return file;
     }
 
     private void configureImageFileChooser(final FileChooser fileChooser) {
@@ -246,6 +258,16 @@ public class ScreenManager {
                 new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+    }
+
+    private void configureXmlFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle(context.getBundleValue().getString("select_xml_dialog"));
+        fileChooser.setInitialDirectory(
+                new File(LAST_PATH)
+        );
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("XML", "*.xml")
         );
     }
 

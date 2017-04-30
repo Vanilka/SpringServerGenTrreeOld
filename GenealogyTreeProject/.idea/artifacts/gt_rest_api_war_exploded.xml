@@ -1,30 +1,30 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Client Web:war exploded">
-    <output-path>$PROJECT_DIR$/REST API/target/gt-client-web-0.0.1-SNAPSHOT</output-path>
+  <artifact type="exploded-war" name="gt-rest-api:war exploded">
+    <output-path>$PROJECT_DIR$/REST API/target/gt-rest-api-0.0.1-SNAPSHOT</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="Client Web" />
+          <element id="module-output" name="gt-rest-api" />
         </element>
         <element id="directory" name="lib">
           <element id="archive" name="rest-facade-0.0.1-SNAPSHOT.jar">
-            <element id="module-output" name="REST Facade" />
+            <element id="module-output" name="rest-facade" />
           </element>
           <element id="archive" name="rest-service-layer-0.0.1-SNAPSHOT.jar">
-            <element id="module-output" name="REST Service" />
+            <element id="module-output" name="rest-service-layer" />
           </element>
           <element id="archive" name="rest-repository-layer-0.0.1-SNAPSHOT.jar">
-            <element id="module-output" name="REST Repository" />
+            <element id="module-output" name="rest-repository-layer" />
           </element>
           <element id="archive" name="Domain-0.0.1-SNAPSHOT.jar">
             <element id="module-output" name="Domain" />
           </element>
           <element id="archive" name="rest-entity-0.0.1-SNAPSHOT.jar">
-            <element id="module-output" name="REST Entity" />
+            <element id="module-output" name="rest-entity" />
           </element>
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
           <element id="archive" name="rest-db-manager-0.0.1-SNAPSHOT.jar">
-            <element id="module-output" name="REST DB-Manager" />
+            <element id="module-output" name="rest-db-manager" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.2.3.Final" />
@@ -80,12 +80,13 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.5" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3.2" />
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.14" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.12" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/REST API/target/gt-client-web-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/REST API/target/gt-rest-api-0.0.1-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="Client Web/web/Web" />
+      <element id="javaee-facet-resources" facet="gt-rest-api/web/Web" />
     </root>
   </artifact>
 </component>

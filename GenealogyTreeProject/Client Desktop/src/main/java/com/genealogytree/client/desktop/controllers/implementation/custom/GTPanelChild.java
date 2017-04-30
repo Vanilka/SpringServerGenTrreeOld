@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -20,12 +21,14 @@ import lombok.Setter;
 @Setter
 public class GTPanelChild extends BorderPane {
 
-    private StackPane pane;
+    private HBox pane;
     private ObjectProperty<GTLeaf> leaf;
     private ObservableList<GTPanelSim> panels;
 
     {
         init();
+        setPadding(new Insets(100, 0, 0, 0));
+
     }
 
     public GTPanelChild(GTLeaf leaf) {
@@ -46,10 +49,14 @@ public class GTPanelChild extends BorderPane {
 
 
     private void init() {
-        pane = new StackPane();
+        pane = new HBox();
         leaf = new SimpleObjectProperty<>();
         panels = FXCollections.observableArrayList();
+        pane.getChildren().addAll(panels);
         initListeners();
+        paneLayout();
+
+
 
 
     }
@@ -61,6 +68,7 @@ public class GTPanelChild extends BorderPane {
             while (c.next()) {
                 if (c.wasAdded()) {
                     System.out.println("added Panel");
+                    pane.getChildren().addAll(c.getAddedSubList());
                 }
             }
         });
@@ -73,6 +81,7 @@ public class GTPanelChild extends BorderPane {
                 System.out.println("panel empty");
             } else {
                 System.out.println("panels not empty");
+                pane.getChildren().remove(leaf.get());
             }
         });
 
@@ -87,8 +96,9 @@ public class GTPanelChild extends BorderPane {
     }
 
 
-    private void bpTestInit(StackPane pane) {
-        pane.setAlignment(Pos.CENTER);
+    private void bpTestInit(HBox pane) {
+        pane.setAlignment(Pos.TOP_CENTER);
+        pane.setSpacing(50);
         pane.setBorder(new Border(new BorderStroke(Color.BLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
@@ -101,6 +111,10 @@ public class GTPanelChild extends BorderPane {
         return leaf.get();
     }
 
+    private void paneLayout() {
+
+
+    }
 
     @Override
     public String toString() {

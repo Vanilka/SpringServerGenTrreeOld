@@ -31,8 +31,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,7 +44,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
 
     public static final ScreenManager sc = ScreenManager.getInstance();
     public static final ContextGT context = ContextGT.getInstance();
-    private static final Logger LOG = LogManager.getLogger(TabAddNewRelationPaneController.class);
+
     private static final int RELATION_HEIGHT = 50;
     private static final int RELATION_WIDTH = 50;
     @FXML
@@ -86,7 +84,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     private GTX_Member selectedRight;
     private GTX_Member selectedChild;
 
-    private GTX_Member simNull = new GTX_Member("Noname", "Noname", null, null, null);
+    private GTX_Member simNull = new GTX_Member("Noname", "Noname", "", null, null, null);
 
     private boolean isActive = false;
 
@@ -97,6 +95,11 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     /**
      * Initializes the controller class.
      */
+
+    private ObservableList<GTX_Member> femaleList = context.getService().getCurrentFamily().getMembersList().filtered(sexFilter(Sex.FEMALE));
+    private ObservableList<GTX_Member> maleList = context.getService().getCurrentFamily().getMembersList().filtered(sexFilter(Sex.MALE));
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -110,6 +113,8 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
                 RelationType.MARRIED
         ));
 
+        relationType.getSelectionModel().selectFirst();
+
 
 
         /*
@@ -121,7 +126,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         setCellFactoryToCombobox(childChoice);
         setCellFactoryToRelationType(relationType);
         toggleActiveButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == true) {
+            if (newValue) {
                 toggleActiveButton.setText("Active");
             } else {
                 toggleActiveButton.setText("Inactive");
@@ -136,13 +141,12 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         /*
             POPULATE COMBOBOX
          */
-        addSelectedMemberListener();
-        populateComboBox(context.getService().getCurrentFamily().getGtx_membersList().filtered(sexFilter(Sex.FEMALE)), simLeftChoice);
-        populateComboBox(context.getService().getCurrentFamily().getGtx_membersList().filtered(sexFilter(Sex.MALE)), simRightChoice);
-        populateComboBox(context.getService().getCurrentFamily().getGtx_membersList()
-                .filtered(p ->context.getService().getCurrentFamily().getBornRelation(p).getSimLeft() == null )
-                .filtered(p -> context.getService().getCurrentFamily().getBornRelation(p).getSimRight() == null), childChoice);
 
+
+        addSelectedMemberListener();
+        populateComboBox(context.getService().getCurrentFamily().getMembersList().filtered(sexFilter(Sex.FEMALE)), simLeftChoice);
+        populateComboBox(context.getService().getCurrentFamily().getMembersList().filtered(sexFilter(Sex.MALE)), simRightChoice);
+        populateComboBox(findRacines(), childChoice);
 
         simLeftChoice.getSelectionModel().selectFirst();
         simRightChoice.getSelectionModel().selectFirst();
@@ -152,7 +156,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     }
 
     @FXML
-    public void addRelationConfirm() {
+    public void addRelationConfirm() throws Throwable {
 
         GTX_Relation relation = new GTX_Relation(
                 selectedLeft == null || selectedLeft.equals(simNull) ? null : selectedLeft,
@@ -163,13 +167,15 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         ServiceResponse response = context.getService().addRelation(relation);
 
         if (response instanceof RelationResponse) {
+
             this.tabPane.getTabs().remove(tab);
         }
     }
 
     @FXML
-    public void setRelationCancel() {
+    public void setRelationCancel() throws Throwable {
         this.tabPane.getTabs().remove(tab);
+
     }
 
     @FXML
@@ -208,6 +214,11 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         childChoice.valueProperty().addListener((observable, oldValue, newValue) -> {
             selectedChild = newValue;
         });
+    }
+
+    private void releaseListeners() {
+        simLeftChoice.getItems().clear();
+        childChoice.getItems().clear();
     }
 
     private void setCellFactoryToCombobox(ComboBox<GTX_Member> combobox) {
@@ -320,14 +331,13 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
      */
 
     private void populateComboBox(ObservableList<GTX_Member> list, ComboBox<GTX_Member> comboBox) {
-
         comboBox.getItems().addAll(simNull);
         comboBox.getItems().addAll(list);
 
     }
 
     private void refreshChoseRight() {
-        ObservableList<GTX_Member> list = context.getService().getCurrentFamily().getGtx_membersList().filtered(sexFilter(Sex.MALE));
+        ObservableList<GTX_Member> list = maleList;
 
         // Remove sisters from List
         if (selectedLeft != null && !selectedLeft.equals(simNull)) {
@@ -348,11 +358,12 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     }
 
     private void refreshChoseLeft() {
-        ObservableList<GTX_Member> list = context.getService().getCurrentFamily().getGtx_membersList().filtered(sexFilter(Sex.FEMALE));
+        ObservableList<GTX_Member> list = femaleList;
 
         // Remove sisters from List
         if (selectedRight != null && !selectedRight.equals(simNull)) {
             for (GTX_Member member : context.getService().getCurrentFamily().getBornRelation(selectedRight).getChildren()) {
+                System.out.println("Member relation " +member);
                 if (member.getSex().equals(Sex.FEMALE)) {
                     list = list.filtered(p -> (!p.equals(member)));
                 }
@@ -369,9 +380,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
 
     private void refreshChild() {
 
-        ObservableList<GTX_Member> tempListChildren = context.getService().getCurrentFamily().getGtx_membersList()
-                .filtered(p -> context.getService().getCurrentFamily().getBornRelation(p).getSimLeft() == null
-                        && context.getService().getCurrentFamily().getBornRelation(p).getSimRight() == null);
+        ObservableList<GTX_Member> tempListChildren = findRacines();
 
         if (selectedLeft != null && !selectedLeft.equals(simNull)) {
             tempListChildren = tempListChildren.filtered(p -> !p.equals(selectedLeft));
@@ -420,7 +429,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     }
 
     private ObservableList<GTX_Member> removeDescends(GTX_Member member, ObservableList<GTX_Member> list) {
-        ObservableList<GTX_Relation> relations = context.getService().getCurrentFamily().getGtx_relations()
+        ObservableList<GTX_Relation> relations = context.getService().getCurrentFamily().getRelationsList()
                 .filtered(p -> ((p.getSimRight() != null && p.getSimRight().equals(member))
                         | (p.getSimLeft() != null && p.getSimLeft().equals(member))));
 
@@ -515,6 +524,22 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
     public void setTabAndTPane(JFXTabPane tabPane, Tab tab) {
         this.tabPane = tabPane;
         this.tab = tab;
+    }
+
+    public boolean isRacine(GTX_Member p) {
+        System.out.println("IS RACINE CALLED");
+        log.error("RACINE LAMBDA CALLED");
+        return context.getService().getCurrentFamily().getBornRelation(p).isRacine();
+    }
+
+    private ObservableList<GTX_Member> findRacines() {
+        ObservableList<GTX_Member> childhood = FXCollections.observableArrayList();
+        for(GTX_Relation r : context.getService().getCurrentFamily().getRelationsList()) {
+            if(r.getSimLeft() == null && r.getSimRight() == null) {
+                childhood.addAll(r.getChildren());
+            }
+        }
+        return childhood;
     }
 
 }

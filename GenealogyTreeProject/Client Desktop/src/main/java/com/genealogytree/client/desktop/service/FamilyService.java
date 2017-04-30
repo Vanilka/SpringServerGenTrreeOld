@@ -15,6 +15,8 @@ public interface FamilyService {
 
     ServiceResponse addMember(GTX_Member member);
 
+    ServiceResponse updateMember(GTX_Member member, GTX_Member updated);
+
     ServiceResponse addRelation(GTX_Relation relation);
 
     ServiceResponse updateFamilyName(String newFamilyName);
