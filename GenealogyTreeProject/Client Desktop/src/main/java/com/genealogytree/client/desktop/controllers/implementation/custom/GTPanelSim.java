@@ -4,7 +4,9 @@ import com.genealogytree.client.desktop.domain.GTX_Relation;
 import com.genealogytree.domain.enums.RelationType;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -17,6 +19,7 @@ import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,19 +40,18 @@ public class GTPanelSim extends BorderPane {
     private ObservableList<GTPanelChild> childrenPanel;
     private ObjectProperty<GTLeaf> leaf;
     private ObjectProperty<GTLeaf> spouse;
+    private BooleanProperty isActive;
     private GTConnectorSpouse connectorSpouse;
     private List<GTConnectorChildren> connectorChildrenList;
 
 
     {
         init();
-
     }
 
 
     public GTPanelSim() {
         this(null, null , null);
-
     }
 
 
@@ -101,6 +103,18 @@ public class GTPanelSim extends BorderPane {
 
             relationsElementsLocate();
         });
+
+        isActive.addListener(((observable, oldValue, newValue) -> {
+            System.out.println("isActive");
+            if(newValue) {
+                System.out.println("isActive  = true");
+                this.leaf.getValue().setVisible(true);
+            } else {
+                System.out.println("isActive  = false");
+                this.leaf.getValue().setVisible(false);
+            }
+        } ));
+
     }
 
 
@@ -110,6 +124,7 @@ public class GTPanelSim extends BorderPane {
         this.childrenPanel = FXCollections.observableArrayList();
         this.leaf = new SimpleObjectProperty<>();
         this.spouse = new SimpleObjectProperty<>();
+        this.isActive = new SimpleBooleanProperty(true);
         initNodes();
     }
 
@@ -163,6 +178,16 @@ public class GTPanelSim extends BorderPane {
         this.childrenPanel.add(child);
     }
 
+    public List<GTLeaf> getLeafs() {
+        List<GTLeaf> result = new ArrayList<>();
+
+        childrenPanel.forEach(p -> result.add(p.getLeaf()));
+        return  result;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive.set(isActive);
+    }
 
     @Override
     public String toString() {

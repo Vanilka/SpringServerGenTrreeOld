@@ -163,7 +163,7 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
                 selectedRight == null || selectedRight.equals(simNull) ? null : selectedRight,
                 selectedChild == null || selectedChild.equals(simNull) ? null : selectedChild,
                 relationType.getValue(),
-                true);
+                toggleActiveButton.isSelected());
         ServiceResponse response = context.getService().addRelation(relation);
 
         if (response instanceof RelationResponse) {
@@ -216,10 +216,6 @@ public class TabAddNewRelationPaneController implements Initializable, FXMLTab {
         });
     }
 
-    private void releaseListeners() {
-        simLeftChoice.getItems().clear();
-        childChoice.getItems().clear();
-    }
 
     private void setCellFactoryToCombobox(ComboBox<GTX_Member> combobox) {
 

@@ -222,6 +222,8 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
                                                 ImageFiles.NO_NAME_FEMALE.toString() : ImageFiles.NO_NAME_MALE.toString();
                                         imageview.setImage(new Image(path));
                                         setGraphic(imageview);
+                                    } else {
+                                        setGraphic(null);
                                     }
                                 }
                             }
@@ -266,6 +268,8 @@ public class PaneMainApplicationWindowController implements Initializable, FXMLP
                             imageview.setFitHeight(40);
                             imageview.setFitWidth(40);
                             setGraphic(imageview);
+                        } else {
+                            setGraphic(null);
                         }
                     }
                 };

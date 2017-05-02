@@ -15,6 +15,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -104,6 +106,7 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
     public void initialize(URL url, ResourceBundle rb) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(rb);
+        addSimConfirmDisableBinding();
         addSexListener();
         createSexToogleGroupe();
         populateAgeComboBox();
@@ -128,17 +131,21 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
         }
     }
 
+    private void addSimConfirmDisableBinding() {
+        BooleanBinding disableBinding = Bindings.createBooleanBinding(() ->
+                ((simNameField.getText().isEmpty() || simSurnameField.getText().isEmpty())), simNameField.textProperty(), simSurnameField.textProperty());
+
+        this.addSimConfirmButton.disableProperty().bind(disableBinding);
+    }
+
 
     private void addSexListener() {
-        toogleGroupeSex.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                if (path == null) {
-                    if (newValue.getUserData().equals(Sex.MALE)) {
-                        simPhoto.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
-                    } else {
-                        simPhoto.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
-                    }
+        toogleGroupeSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (path == null) {
+                if (newValue.getUserData().equals(Sex.MALE)) {
+                    simPhoto.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+                } else {
+                    simPhoto.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
                 }
             }
         });
@@ -202,13 +209,7 @@ public class TabAddNewMemberPaneController implements Initializable, FXMLTab {
      * LISTEN LANGUAGE CHANGES
      */
     private void addLanguageListener() {
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }
 
     private String getValueFromKey(String key) {

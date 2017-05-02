@@ -37,7 +37,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
         //TODO exception if leaf is null
         // Find relations where Sim is Mother or Father
-        System.out.println(panel.getLeaf().getMember());
         ObservableList<GTX_Relation> relationList = context.getService().getCurrentFamily().getRelationsList()
                 .filtered(r -> ((r.getSimLeft() != null && r.getSimLeft().equals(panel.getLeaf().getMember()))
                         || (r.getSimRight() != null && r.getSimRight().equals(panel.getLeaf().getMember()))));
@@ -47,6 +46,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         for (GTX_Relation r : relationList) {
             GTPanelSim simPanel = toPanelSim(r, panel.getLeaf().getMember());
             if (isStrong(r, panel.getLeaf().getMember())) {
+
                 for (GTX_Member child : r.getChildren()) {
                     GTPanelChild childPanel = new GTPanelChild(new GTLeaf(child));
                     populatePanel(childPanel);
@@ -72,7 +72,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             setLeafAndSpouse(simPanel, simRight, simLeft);
         }
 
+        System.out.println("relation is " + relation.isActive());
         simPanel.getRelationType().setType(relation.getType());
+        simPanel.setIsActive(false);
         return simPanel;
     }
 
@@ -82,7 +84,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             panel.setSpouse(new GTLeaf(spouse));
         }
     }
-
 
 
     public void test(GTX_Relation racine, AnchorPane AnchorB) {
@@ -118,7 +119,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
-    private boolean isStrong(GTX_Relation r, GTX_Member bean)  {
+    private boolean isStrong(GTX_Relation r, GTX_Member bean) {
 
         if (!((r.getSimLeft() != null && r.getSimLeft().equals(bean))
                 || r.getSimRight() != null && r.getSimRight().equals(bean))) {
