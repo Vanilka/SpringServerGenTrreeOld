@@ -9,6 +9,7 @@ import com.genealogytree.client.desktop.service.GenTreeDrawingService;
 import com.genealogytree.domain.enums.RelationType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         List<GTNode> nodes = findNodes();
         box.getChildren().addAll(nodes);
 
-
         nodes.forEach(node -> {
             node.getRootRelation().getChildren().forEach(child -> {
                 GTLeaf leaf = new GTLeaf(child);
@@ -48,8 +48,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
                 node.getContentHbox().getChildren().add(panelChild);
             });
         });
@@ -72,22 +70,27 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         /*
 
          */
-        if (relations.size() == 0 || !hasCurrentRelation(relations)) {
-            GTPanelSignle gtPanelSignle = new GTPanelSignle(new GTLeaf(child.getLeaf().getMember()), child);
-            child.setPanelCurrent(gtPanelSignle);
-        }
+
+        child.setPanelSingle(new GTPanelSignle(new GTLeaf(child.getLeaf().getMember()), child));
+
 
         for (GTX_Relation relation : relations) {
             GTPanelSim panelSim;
-            if (relation.getSimLeft() == null || relation.getSimRight() == null
-                    || relation.getType() != RelationType.NEUTRAL && relation.isActive()) {
+
+            if (relation.getSimLeft() == null || relation.getSimRight() == null) {
                 panelSim = generatePanelCurrent(relation, child.getLeaf().getMember());
-                ((GTPanelCurrent) panelSim).setParentPanel(child);
-                child.setPanelCurrent(((GTPanelCurrent) panelSim));
+                ((GTPanelSignle) panelSim).setParentPanel(child);
+                child.setPanelSingle(((GTPanelSignle) panelSim));
+
+            } else if (relation.getSimLeft() != null && relation.getSimRight() != null
+                    && relation.getType() != RelationType.NEUTRAL && relation.isActive()) {
+                panelSim = generatePanelCurrent(relation, child.getLeaf().getMember());
+                ((GTPanelCouple) panelSim).setParentPanel(child);
+                child.setPanelCouple(((GTPanelCouple) panelSim));
             } else {
                 panelSim = generatePanelEx(relation, child.getLeaf().getMember());
                 ((GTPanelEx) panelSim).setParentPanel(child);
-                child.getPanels().add(((GTPanelEx) panelSim));
+                child.getPanelsExList().add(((GTPanelEx) panelSim));
             }
             relation.getChildren().forEach(c -> {
                 GTLeaf leaf = new GTLeaf(c);

@@ -10,15 +10,19 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Line;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -41,10 +45,6 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private AnchorPane leafPane;
-
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private AnchorPane spousePane;
 
     @Getter(AccessLevel.NONE)
@@ -53,12 +53,10 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private HBox childrenHbox;
+    private HBox childrenbox;
 
 
     private GTRelationReference relationRef;
-
-
 
     private ObservableList<GTPanelChild> childrenPanelList;
     private ObjectProperty<GTLeaf> leaf;
@@ -68,12 +66,12 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     private GTConnectorSpouse connectorSpouse;
     private List<GTConnectorChildren> connectorChildrenList;
 
+    private List<Line> connectors;
+
 
     {
         init();
     }
-
-
 
     public GTPanelCouple(GTLeaf leaf, GTLeaf spouse) {
 
@@ -96,7 +94,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         if (childrenPanelList != null) {
             this.childrenPanelList = childrenPanelList;
         }
-        setCenter(childrenHbox);
+        setCenter(childrenbox);
         setTop(relation);
     }
 
@@ -111,32 +109,113 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         childrenPanelList.addAll(panelChildList);
     }
 
+    private void boundListener() {
+        relationType.get().layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+        relationType.get().layoutYProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+        relation.heightProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+        relation.widthProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+        relationTypePane.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+        relationTypePane.layoutYProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+    }
+
+    private void initListenerChildLeaf(GTPanelChild child) {
+        drawLines();
+        child.needsLayoutProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+        child.returnLeaf().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
+    }
+
+    private void drawLines() {
+            this.getChildren().removeAll(connectors);
+            connectors.clear();
+            /*
+                init Bound fo this Leaf
+             */
+            Bounds thisBound = getRelativeBounds(relationTypePane);
+            Point2D bottomPoint = getBottomPoint(thisBound);
+            List<Bounds> childrenBounds = new ArrayList<>();
+
+            /*
+                Create Bounds of children
+             */
+            childrenPanelList.forEach(c -> {
+                childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
+            });
+
+            /*
+                Foreach child bounds create point2 ( top point)  -> start point for connector
+             */
+            List<Point2D> point2DList = new ArrayList<>();
+            childrenBounds.forEach(childBounds -> {
+                point2DList.add(getTopPoint(childBounds));
+            });
+
+            /*
+                Create connector Vertical from child
+             */
+            point2DList.forEach(point -> {
+                connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
+            });
+
+            Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
+            Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
+
+            /*
+                Create connector beetwen siblings
+             */
+            if (p1.getX() != p2.getX()) {
+                connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
+            }
+
+
+            /*
+                   Create connecor beetwen child and parent
+             */
+            connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
+
+            getChildren().addAll(connectors);
+
+    }
+
     private void initListeners() {
         childrenPanelList.addListener((ListChangeListener<? super GTPanelChild>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
-                    childrenHbox.getChildren().addAll(c.getAddedSubList());
-
-                    c.getAddedSubList().forEach(child -> {
-
-                    });
+                    childrenbox.getChildren().addAll(c.getAddedSubList());
+                    c.getAddedSubList().forEach(this::initListenerChildLeaf);
                 } else if (c.wasRemoved()) {
-                    childrenHbox.getChildren().removeAll(c.getRemoved());
+                    childrenbox.getChildren().removeAll(c.getRemoved());
                 } else {
                 }
             }
-        });
-
-        leaf.addListener((observable, oldValue, newValue) -> {
-            leafPane.getChildren().clear();
-            leafPane.getChildren().addAll(newValue);
         });
 
         spouse.addListener((observable, oldValue, newValue) -> {
 
             if (oldValue != null) {
                 spousePane.getChildren().remove(oldValue);
-
             }
 
             if (newValue == null) {
@@ -144,7 +223,6 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
             } else {
                 spousePane.getChildren().add(newValue);
             }
-
             relationsElementsLocate();
         });
 
@@ -153,14 +231,15 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
             if(newValue == null ) {
                 relationTypePane.getChildren().clear();
             } else {
+                boundListener();
                 relationTypePane.getChildren().add(newValue);
             }
         });
 
     }
 
-
     private void init() {
+        this.connectors = new ArrayList<>();
         this.relationType = new SimpleObjectProperty<>();
         this.relationRef = new GTRelationReference();
         this.childrenPanelList = FXCollections.observableArrayList();
@@ -171,28 +250,23 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void initNodes() {
-        this.childrenHbox = new HBox();
+        this.childrenbox = new HBox();
         this.spousePane = new AnchorPane();
         this.relationTypePane = new StackPane();
-        this.leafPane = new AnchorPane();
         this.relation = new HBox();
         initListeners();
-        childrenHbox.setAlignment(Pos.CENTER);
-        childrenHbox.setSpacing(50);
-        relation.getChildren().addAll(leafPane, relationTypePane, spousePane);
+        childrenbox.setAlignment(Pos.CENTER);
+        childrenbox.setSpacing(50);
+        relation.getChildren().addAll(relationTypePane, spousePane);
 
         // Hide spousePane if spouse leaf is null
         BooleanBinding visibleBinding = Bindings.createBooleanBinding(() -> (spouse.getValue() != null), spouse);
         spousePane.visibleProperty().bind(visibleBinding);
-
         relationPaneLayout();
-
     }
 
     private void relationsElementsLocate() {
         relation.getChildren().clear();
-        relation.getChildren().add(leafPane);
-
         if (spouse != null) {
             relation.getChildren().addAll(relationTypePane, spousePane);
         }
@@ -204,9 +278,9 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void autoresize() {
-        this.prefWidthProperty().bind(childrenHbox.widthProperty());
-        childrenHbox.maxHeight(Double.MAX_VALUE);
-        childrenHbox.maxWidth(Double.MAX_VALUE);
+        this.prefWidthProperty().bind(childrenbox.widthProperty());
+        childrenbox.maxHeight(Double.MAX_VALUE);
+        childrenbox.maxWidth(Double.MAX_VALUE);
     }
 
 

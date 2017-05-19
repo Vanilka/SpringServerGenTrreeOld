@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class GTPanelEx extends BorderPane implements GTPanelSim, GTPanel {
+public class GTPanelEx extends GTPanelCommon implements GTPanelSim, GTPanel {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -130,6 +130,8 @@ public class GTPanelEx extends BorderPane implements GTPanelSim, GTPanel {
     private void initHbox() {
         box = new HBox();
         box.setSpacing(50);
+
+        childrenbox = new HBox();
     }
 
     private void initRelationStackPane() {

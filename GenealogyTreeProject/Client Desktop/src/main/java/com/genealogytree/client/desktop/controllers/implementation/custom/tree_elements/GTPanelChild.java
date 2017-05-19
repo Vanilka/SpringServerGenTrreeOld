@@ -2,20 +2,17 @@ package com.genealogytree.client.desktop.controllers.implementation.custom.tree_
 
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTPanel;
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTPanelSim;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,17 +21,17 @@ import lombok.Setter;
  * Created by Martyna SZYMKOWIAK on 30/03/2017.
  * An graphical object representing the child relation id GenealogyTree.
  * For Each Child in relation the GTPanelChild is generated
+ *
  * @author Martyna SZYMKOWIAK
- *
- * Top
- * Center HboxPane
- * Right panelCurrent
- * Left
- *
+ *         <p>
+ *         Top
+ *         Center HboxPane
+ *         Right panelSingle
+ *         Left
  */
 @Getter
 @Setter
-public class GTPanelChild extends BorderPane implements GTPanel {
+public class GTPanelChild extends GTPanelCommon implements GTPanel {
 
 
     @Getter(AccessLevel.NONE)
@@ -43,22 +40,23 @@ public class GTPanelChild extends BorderPane implements GTPanel {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private BorderPane paneCurrent;
+    private StackPane paneSingle;
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private StackPane paneCouple;
 
-    private ObjectProperty<GTLeaf> leaf;
-    private ObservableList<GTPanelEx> panels;
-    private ObjectProperty<GTPanelCurrent> panelCurrent;
+    private ObservableList<GTPanelEx> panelsExList;
+    private ObjectProperty<GTPanelSignle> panelSingle;
+    private ObjectProperty<GTPanelCouple> panelCouple;
 
     private GTPanel parentPanel;
+    private ObjectProperty<GTLeaf> leaf;
 
-    private Bounds boundToParent;
 
     {
         init();
         setPadding(new Insets(100, 0, 0, 0));
-
-
     }
 
     public GTPanelChild(GTLeaf leaf) {
@@ -68,66 +66,60 @@ public class GTPanelChild extends BorderPane implements GTPanel {
 
     public GTPanelChild(GTLeaf leaf, GTPanelSim parent) {
         viewInit(pane);
-        viewInit(paneCurrent);
+        viewInit(paneSingle);
         this.leaf.setValue(leaf);
 
+        if (panelsExList != null && !panelsExList.isEmpty()) {
+            this.panelsExList.addAll(panelsExList);
+        }
 
-        if (panels != null && !panels.isEmpty()) {
-            this.panels.addAll(panels);
-       }
+        setLeft(pane);
+        setCenter(paneSingle);
+        setRight(paneCouple);
 
-        setCenter(pane);
-        setRight(paneCurrent);
     }
-
 
 
     private void init() {
         pane = new HBox();
-        paneCurrent = new BorderPane();
+        paneSingle = new StackPane();
+        paneCouple = new StackPane();
         leaf = new SimpleObjectProperty<>();
-        panelCurrent = new SimpleObjectProperty<>();
-        panels = FXCollections.observableArrayList();
-        pane.getChildren().addAll(panels);
+        panelSingle = new SimpleObjectProperty<>();
+        panelCouple = new SimpleObjectProperty<>();
+        panelsExList = FXCollections.observableArrayList();
+        pane.getChildren().addAll(panelsExList);
         initListeners();
-        paneLayout();
-
     }
 
     private void initListeners() {
 
         //
-        panels.addListener((ListChangeListener<GTPanelEx>) c -> {
+        panelsExList.addListener((ListChangeListener<GTPanelEx>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
-                    System.out.println("added Panel");
                     pane.getChildren().addAll(c.getAddedSubList());
+                } else if (c.wasRemoved()) {
+                    pane.getChildren().removeAll(c.getRemoved());
                 }
             }
         });
 
-        panelCurrent.addListener((observable, oldValue, newValue) -> {
-            if(oldValue != null) {
-                System.out.println("OLD VALUE WAS NULL");
-                paneCurrent.getChildren().remove(oldValue);
+        panelSingle.addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null) {
+                paneSingle.getChildren().remove(oldValue);
             }
-
-            if(newValue != null) {
-                System.out.println("THIS IS NEW VALUE");
-                paneCurrent.setCenter(newValue);
-            }
+            paneSingle.getChildren().add(newValue == null ? new GTPanelSignle(leaf.get(), this) : newValue);
         });
 
-
-
-        BooleanBinding panelEmpty = Bindings.createBooleanBinding(() -> (panels == null || panels.isEmpty()) || panelCurrent == null, panels, panelCurrent);
-
-        panelEmpty.addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-              //DO SOMETHING
+        panelCouple.addListener((observable, oldValue, newValue) -> {
+            if (oldValue != null) {
+                paneCouple.getChildren().remove(oldValue);
             }
-        });
 
+            if (newValue != null)
+                paneCouple.getChildren().add(newValue);
+        });
     }
 
 
@@ -136,11 +128,39 @@ public class GTPanelChild extends BorderPane implements GTPanel {
         pane.setSpacing(50);
         pane.setBorder(new Border(new BorderStroke(Color.BLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+/*        Rectangle rectangle = new Rectangle(pane.getLayoutX(), pane.getLayoutY(), pane.getWidth(), pane.getHeight());
+        rectangle.setFill(Color.ANTIQUEWHITE);
+        rectangle.widthProperty().bind(pane.widthProperty().add(20));
+        rectangle.heightProperty().bind(pane.heightProperty().subtract(40));
+        rectangle.layoutXProperty().bind(pane.layoutXProperty().subtract(20));
+        rectangle.layoutYProperty().bind(pane.layoutYProperty().add(20));
+        getChildren().add(rectangle);*/
     }
 
     private void viewInit(BorderPane pane) {
         pane.setBorder(new Border(new BorderStroke(Color.DARKCYAN,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+
+    private void viewInit(StackPane pane) {
+        pane.setBorder(new Border(new BorderStroke(Color.DARKCYAN,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+
+    public ReadOnlyObjectProperty<GTLeaf> returnLeaf() {
+        return panelSingle.get().getLeaf();
+    }
+        /*
+            GETTERS
+        */
+
+    public ObjectProperty<GTPanelSignle> panelSingleProperty() {
+        return panelSingle;
+    }
+
+    public ObjectProperty<GTPanelCouple> panelCoupleProperty() {
+        return panelCouple;
     }
 
     public ObjectProperty<GTLeaf> leafProperty() {
@@ -151,30 +171,28 @@ public class GTPanelChild extends BorderPane implements GTPanel {
         return leaf.get();
     }
 
-    private void paneLayout() {
 
+    /*
+        SETTERS
+     */
 
+    public void setPanelSingle(GTPanelSignle panelSingle) {
+        this.panelSingle.set(panelSingle);
     }
 
-    public ObjectProperty<GTPanelCurrent> panelCurrentProperty() {
-        return panelCurrent;
+    public void setPanelCouple(GTPanelCouple panelCouple) {
+        this.panelCouple.set(panelCouple);
     }
 
-    public void setPanelCurrent(GTPanelCurrent panelCurrent) {
-        this.panelCurrent.set(panelCurrent);
+    public void setLeaf(GTLeaf leaf) {
+        this.leaf.set(leaf);
     }
-
-    public ReadOnlyObjectProperty<GTLeaf> returnLeaf() {
-        return panelCurrent.get().returnLeaf();
-    }
-
-
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("GTPanelChild{");
         sb.append("leaf=").append(leaf);
-        sb.append(", panels=").append(panels);
+        sb.append(", panelsExList=").append(panelsExList);
         sb.append(", leafProperty=").append(leafProperty());
         sb.append('}');
         return sb.toString();

@@ -6,6 +6,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class GTPanelCurrent extends BorderPane implements GTPanelSim {
+public class GTPanelCurrent extends GTPanelCommon implements GTPanelSim {
 
     protected GTPanel parentPanel;
 
@@ -33,6 +35,8 @@ public class GTPanelCurrent extends BorderPane implements GTPanelSim {
     public ReadOnlyObjectProperty<GTLeaf> returnLeaf() {
         return null;
     }
+
+
 
 
 }

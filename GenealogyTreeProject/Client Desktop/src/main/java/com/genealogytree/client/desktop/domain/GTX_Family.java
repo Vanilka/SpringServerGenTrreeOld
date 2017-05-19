@@ -1,9 +1,5 @@
 package com.genealogytree.client.desktop.domain;
 
-
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +10,6 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by vanilka on 22/11/2016.

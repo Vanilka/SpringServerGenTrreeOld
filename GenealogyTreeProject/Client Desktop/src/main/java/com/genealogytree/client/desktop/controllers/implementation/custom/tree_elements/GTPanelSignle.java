@@ -3,7 +3,6 @@ package com.genealogytree.client.desktop.controllers.implementation.custom.tree_
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTPanel;
 import com.genealogytree.client.desktop.controllers.implementation.custom.GTPanelSim;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -13,16 +12,18 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -41,6 +42,11 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
     private ObjectProperty<GTLeaf> leaf;
     private ObservableList<GTPanelChild> childrenPanelList;
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private List<Line> connectors;
+
+
     public GTPanelSignle(GTLeaf leaf, GTPanel parent) {
         init();
         this.leaf.setValue(leaf);
@@ -50,7 +56,6 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
         setAlignment(leaf, Pos.CENTER);
         resize(400, 500);
     }
-
 
     @Override
     public void setGTPanelChild(GTPanelChild panelChild) {
@@ -63,6 +68,7 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void init() {
+        connectors = new ArrayList<>();
         leaf = new SimpleObjectProperty<>();
         childrenPanelList = FXCollections.observableArrayList();
         initNodes();
@@ -81,7 +87,6 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
                 if (c.wasAdded()) {
                     childrenbox.getChildren().addAll(c.getAddedSubList());
                     c.getAddedSubList().forEach(this::initListenerChildLeaf);
-
 
 
                 } else if (c.wasRemoved()) {
@@ -119,64 +124,56 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
         childrenbox.maxWidth(Double.MAX_VALUE);
     }
 
-
-    private Bounds getRelativeBounds(Node node) {
-        Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
-        return this.sceneToLocal(nodeBoundsInScene);
-    }
-
-    private Point2D getTopPoint(Bounds b) {
-        System.out.println("TOP POINT");
-        if (b != null) {
-            System.out.println(b);
-        }
-
-        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY());
-    }
-
-    private Point2D getBottomPoint(Bounds b) {
-
-        System.out.println("Bottom POINT");
-        if (b != null) {
-            System.out.println(b);
-        }
-
-        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
-    }
-
-    private void drawConnector(Point2D p1, Point2D p2) {
-        Line connector = new Line(p1.getX(), p1.getY(), p2.getX(), p2.getY());
-        connector.setStroke(Color.BLACK);
-        connector.setStrokeWidth(10);
-
-        Circle circle = new Circle(p1.getX(), p1.getY(), 30, Color.BROWN);
-
-        Circle circle2 = new Circle(p2.getX(), p2.getY(), 60, Color.grayRgb(23, 0.5));
-
-        this.getChildren().addAll(connector, circle, circle2);
-
-
-    }
-
     private void drawLines() {
         if (leaf.get() != null) {
+            this.getChildren().removeAll(connectors);
+            connectors.clear();
+            /*
+                init Bound fo this Leaf
+             */
             Bounds thisBound = getRelativeBounds(leaf.getValue());
-
+            Point2D bottomPoint = getBottomPoint(thisBound);
             List<Bounds> childrenBounds = new ArrayList<>();
 
+            /*
+                Create Bounds of children
+             */
             childrenPanelList.forEach(c -> {
                 childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
             });
 
-            if (childrenBounds.size() == 1) {
-                System.out.println("Children Pane bound " + childrenBounds.get(0));
-                System.out.println("this bound " + thisBound);
-                Point2D topPoint = getTopPoint(childrenBounds.get(0));
-                Point2D bottomPoint = getBottomPoint(thisBound);
-                if (topPoint != null && bottomPoint != null) {
-                    drawConnector(bottomPoint, topPoint);
-                }
+            /*
+                Foreach child bounds create point2 ( top point)  -> start point for connector
+             */
+            List<Point2D> point2DList = new ArrayList<>();
+            childrenBounds.forEach(childBounds -> {
+                point2DList.add(getTopPoint(childBounds));
+            });
+
+            /*
+                Create connector Vertical from child
+             */
+            point2DList.forEach(point -> {
+                connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
+            });
+
+            Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
+            Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
+
+            /*
+                Create connector beetwen siblings
+             */
+            if (p1.getX() != p2.getX()) {
+                connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
             }
+
+
+            /*
+                   Create connecor beetwen child and parent
+             */
+            connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
+
+            getChildren().addAll(connectors);
         }
     }
 
@@ -188,6 +185,21 @@ public class GTPanelSignle extends GTPanelCurrent implements GTPanelSim, GTPanel
         leaf.get().layoutYProperty().addListener((observable, oldValue, newValue) -> {
             drawLines();
         });
+    }
+
+    /*
+        GETTER
+     */
+    public ObjectProperty<GTLeaf> leafProperty() {
+        return leaf;
+    }
+
+    /*
+        SETTER
+     */
+
+    public void setLeaf(GTLeaf leaf) {
+        this.leaf.set(leaf);
     }
 
     @Override
