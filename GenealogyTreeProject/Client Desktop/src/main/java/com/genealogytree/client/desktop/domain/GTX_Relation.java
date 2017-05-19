@@ -14,16 +14,20 @@ import javafx.collections.ObservableList;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * Created by vanilka on 31/12/2016.
  */
 
 @XmlType(name = "relation")
-public class GTX_Relation implements  Serializable {
+public class GTX_Relation extends Observable implements  Serializable {
     private static final long serialVersionUID = 2837614786245672177L;
 
     private Long id;
+
+    @XmlTransient
+    private Long gtId;
 
     private Long version;
 
@@ -65,6 +69,10 @@ public class GTX_Relation implements  Serializable {
         setActive(active);
     }
 
+    private void invalidate() {
+        setChanged();
+        notifyObservers();
+    }
 
     public boolean compareLeftRight(GTX_Relation other) {
 
@@ -90,6 +98,10 @@ public class GTX_Relation implements  Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getGtId() {
+        return gtId;
     }
 
     public Long getVersion() {
@@ -125,7 +137,6 @@ public class GTX_Relation implements  Serializable {
     }
 
 
-
     public Boolean isActive() {
         return active.get();
     }
@@ -152,6 +163,10 @@ public class GTX_Relation implements  Serializable {
         this.id = id;
     }
 
+    public void setGtId(Long gtId) {
+        this.gtId = gtId;
+    }
+
     public void setVersion(Long version) {
         this.version = version;
     }
@@ -174,7 +189,9 @@ public class GTX_Relation implements  Serializable {
 
     public void setActive(boolean active) {
         this.active.set(active);
+        invalidate();
     }
+
 
     public void setCurrent(boolean current) {
         this.current.set(current);

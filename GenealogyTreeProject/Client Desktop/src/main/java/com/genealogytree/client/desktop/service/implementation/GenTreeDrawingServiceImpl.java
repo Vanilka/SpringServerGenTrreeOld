@@ -1,15 +1,16 @@
 package com.genealogytree.client.desktop.service.implementation;
 
 import com.genealogytree.client.desktop.configuration.ContextGT;
-import com.genealogytree.client.desktop.controllers.implementation.custom.*;
+import com.genealogytree.client.desktop.controllers.implementation.custom.GTPanelSim;
+import com.genealogytree.client.desktop.controllers.implementation.custom.tree_elements.*;
 import com.genealogytree.client.desktop.domain.GTX_Member;
 import com.genealogytree.client.desktop.domain.GTX_Relation;
 import com.genealogytree.client.desktop.service.GenTreeDrawingService;
-import com.genealogytree.domain.enums.Sex;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import com.genealogytree.domain.enums.RelationType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 31/03/2017.
@@ -17,120 +18,187 @@ import javafx.scene.paint.Color;
 public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     ContextGT context = ContextGT.getInstance();
+    AnchorPane common;
+    private int nodeCounter;
 
     public GenTreeDrawingServiceImpl() {
+        nodeCounter = 1;
 
     }
+
 
     @Override
-    public void startDraw(GTNode node) {
+    public void startDraw(HBox box) {
+
+        reset();
+        /*
+            Retrieve all NODES from RelationList
+            NODE = Relation where SimLeft == null and SimRight == null
+         */
+        List<GTNode> nodes = findNodes();
+        box.getChildren().addAll(nodes);
 
 
-        for (GTX_Member m : node.getRacine().getChildren()) {
-            GTPanelChild panel = new GTPanelChild(new GTLeaf(m));
-            populatePanel(panel);
-            node.getContentHbox().getChildren().add(panel);
-        }
-    }
-
-    public void populatePanel(GTPanelChild panel) {
-
-        //TODO exception if leaf is null
-        // Find relations where Sim is Mother or Father
-        ObservableList<GTX_Relation> relationList = context.getService().getCurrentFamily().getRelationsList()
-                .filtered(r -> ((r.getSimLeft() != null && r.getSimLeft().equals(panel.getLeaf().getMember()))
-                        || (r.getSimRight() != null && r.getSimRight().equals(panel.getLeaf().getMember()))));
-        //Transform List of GTX_Relation to GTPanelSim
-        ObservableList<GTPanelSim> panelSimObservableList = FXCollections.observableArrayList();
-
-        for (GTX_Relation r : relationList) {
-            GTPanelSim simPanel = toPanelSim(r, panel.getLeaf().getMember());
-            if (isStrong(r, panel.getLeaf().getMember())) {
-
-                for (GTX_Member child : r.getChildren()) {
-                    GTPanelChild childPanel = new GTPanelChild(new GTLeaf(child));
-                    populatePanel(childPanel);
-                    simPanel.addPanelChild(childPanel);
+        nodes.forEach(node -> {
+            node.getRootRelation().getChildren().forEach(child -> {
+                GTLeaf leaf = new GTLeaf(child);
+                GTPanelChild panelChild = new GTPanelChild(leaf, null);
+                try {
+                    populatePanel(panelChild, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
+
+                node.getContentHbox().getChildren().add(panelChild);
+            });
+        });
+    }
+
+
+    public void populatePanel(GTPanelChild child, GTPanelSim parent) throws Exception {
+
+        /*
+         * Search all relations where  (GTPanelChild) child is simLeft or simRight
+         */
+        List<GTX_Relation> relations = context.getService().getCurrentFamily().getRelationsList()
+                .filtered(r -> ((r.getSimLeft() != null) && r.getSimLeft().equals(child.getLeaf().getMember()))
+                        || r.getSimRight() != null && r.getSimRight().equals(child.getLeaf().getMember()));
+
+        if (!verifyIsActiveCount(relations)) {
+            // throw new Exception("More that ONE relation Active !");
+        }
+
+        /*
+
+         */
+        if (relations.size() == 0 || !hasCurrentRelation(relations)) {
+            GTPanelSignle gtPanelSignle = new GTPanelSignle(new GTLeaf(child.getLeaf().getMember()), child);
+            child.setPanelCurrent(gtPanelSignle);
+        }
+
+        for (GTX_Relation relation : relations) {
+            GTPanelSim panelSim;
+            if (relation.getSimLeft() == null || relation.getSimRight() == null
+                    || relation.getType() != RelationType.NEUTRAL && relation.isActive()) {
+                panelSim = generatePanelCurrent(relation, child.getLeaf().getMember());
+                ((GTPanelCurrent) panelSim).setParentPanel(child);
+                child.setPanelCurrent(((GTPanelCurrent) panelSim));
+            } else {
+                panelSim = generatePanelEx(relation, child.getLeaf().getMember());
+                ((GTPanelEx) panelSim).setParentPanel(child);
+                child.getPanels().add(((GTPanelEx) panelSim));
             }
-            panelSimObservableList.add(simPanel);
-        }
-        panel.getPanels().addAll(panelSimObservableList);
-
-    }
-
-
-    private GTPanelSim toPanelSim(GTX_Relation relation, GTX_Member member) {
-        GTPanelSim simPanel = new GTPanelSim();
-
-        GTX_Member simLeft = relation.getSimLeft();
-        GTX_Member simRight = relation.getSimRight();
-
-        if (simLeft != null && simLeft.equals(member)) {
-            setLeafAndSpouse(simPanel, simLeft, simRight);
-        } else {
-            setLeafAndSpouse(simPanel, simRight, simLeft);
+            relation.getChildren().forEach(c -> {
+                GTLeaf leaf = new GTLeaf(c);
+                GTPanelChild panelChild = new GTPanelChild(leaf, panelSim);
+                try {
+                    populatePanel(panelChild, null);
+                    panelSim.setGTPanelChild(panelChild);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
         }
 
-        System.out.println("relation is " + relation.isActive());
-        simPanel.getRelationType().setType(relation.getType());
-        simPanel.setIsActive(false);
-        return simPanel;
     }
 
-    private void setLeafAndSpouse(GTPanelSim panel, GTX_Member leaf, GTX_Member spouse) {
-        panel.setLeaf(new GTLeaf(leaf));
-        if (spouse != null) {
-            panel.setSpouse(new GTLeaf(spouse));
+
+    private GTPanelCurrent generatePanelCurrent(GTX_Relation relation, GTX_Member sim) {
+
+        if (relation.getSimLeft() != null && relation.getSimLeft().equals(sim)) {
+            if (relation.getSimRight() == null) {
+                return new GTPanelSignle(new GTLeaf(sim), null);
+            } else {
+                return new GTPanelCouple(new GTLeaf(sim), new GTLeaf(relation.getSimRight()), new GTRelationType(relation.getType(), relation.isActive()));
+            }
+        }
+
+        if (relation.getSimRight() != null && relation.getSimRight().equals(sim)) {
+            if (relation.getSimLeft() == null) {
+                return new GTPanelSignle(new GTLeaf(sim), null);
+            } else {
+                return new GTPanelCouple(new GTLeaf(sim), new GTLeaf(relation.getSimLeft()), new GTRelationType(relation.getType(), relation.isActive()));
+            }
+        }
+        return null;
+    }
+
+    private GTPanelEx generatePanelEx(GTX_Relation relation, GTX_Member sim) {
+        if (relation.getSimRight() != null && relation.getSimLeft() != null) {
+            if (relation.getSimRight().equals(sim)) {
+                return new GTPanelEx(new GTLeaf(sim), new GTLeaf(relation.getSimLeft()), generateRelationType(relation), null);
+            }
+
+            if (relation.getSimLeft().equals(sim)) {
+                return new GTPanelEx(new GTLeaf(sim), new GTLeaf(relation.getSimRight()), generateRelationType(relation), null);
+            }
+        }
+
+        return null;
+    }
+
+    private GTRelationType generateRelationType(GTX_Relation relation) {
+        return new GTRelationType(relation.getType(), relation.isActive());
+    }
+
+    private boolean hasCurrentRelation(List<GTX_Relation> relations) {
+        return (relations.stream()
+                .filter(relation -> relation.getSimRight() != null)
+                .filter(relation -> relation.getSimLeft() != null)
+                .filter(relation -> relation.getType() != RelationType.NEUTRAL)
+                .filter(GTX_Relation::isActive)
+                .count() > 0);
+
+
+    }
+
+    /**
+     * Function to find all roots from Relations Lists
+     * <br> The function search the relation "ROOT":
+     * <br> Mandatory Condition:
+     * <br> SimLeft = null
+     * <br> SimRight = null
+     *
+     * @return List of GTNode's
+     */
+    private List<GTNode> findNodes() {
+        List<GTNode> result = new ArrayList<>();
+
+        context.getService().getCurrentFamily().getRelationsList()
+                .filtered(r -> r.getSimLeft() == null)
+                .filtered(r -> r.getSimRight() == null)
+                .forEach(node -> {
+                    result.add(new GTNode(node, nodeCounter++));
+                });
+        return result;
+    }
+
+
+    /**
+     * Function for juge for which partner in Relation the children will appartient.
+     *
+     * @return true or false
+     */
+    public boolean isStrong() {
+
+
+        return false;
+    }
+
+    private void reset() {
+        nodeCounter = 1;
+        Long tempId = 0L;
+        for (GTX_Relation gtx_relation : context.getService().getCurrentFamily().getRelationsList()) {
+            gtx_relation.setId(tempId++);
         }
     }
 
+    private boolean verifyIsActiveCount(List<GTX_Relation> list) {
 
-    public void test(GTX_Relation racine, AnchorPane AnchorB) {
-        for (GTX_Member m : racine.getChildren()) {
-            GTLeaf leaf1 = new GTLeaf(racine.getSimLeft());
-
-            AnchorPane ap = new AnchorPane();
-            ap.getChildren().add(leaf1);
-            ap.setBorder(new Border(new BorderStroke(Color.BLACK,
-                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-            leaf1.setLayoutX(50);
-            leaf1.setLayoutY(50);
-
-            GTLeaf leaf2 = new GTLeaf(racine.getSimRight());
-            leaf2.setLayoutX(300);
-            leaf2.setLayoutY(50);
-
-            AnchorPane ap2 = new AnchorPane();
-            ap2.getChildren().add(leaf2);
-            ap2.setLayoutX(400);
-            ap2.setBorder(new Border(new BorderStroke(Color.BLACK,
-                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-            GTConnectorSpouse connectorSpouse = new GTConnectorSpouse(leaf1, leaf2);
-            GTConnectorChildren connectorChildren = new GTConnectorChildren(leaf1, leaf2);
-            AnchorB.getChildren().addAll(ap, ap2, connectorSpouse, connectorChildren);
-
-        }
-    }
-
-    private void bpTestInit(BorderPane pane) {
-        pane.resize(300, 300);
-        pane.setBorder(new Border(new BorderStroke(Color.RED,
-                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-    }
-
-    private boolean isStrong(GTX_Relation r, GTX_Member bean) {
-
-        if (!((r.getSimLeft() != null && r.getSimLeft().equals(bean))
-                || r.getSimRight() != null && r.getSimRight().equals(bean))) {
-
+        if (list.stream().filter(relation -> (relation.getType() != RelationType.NEUTRAL))
+                .filter(GTX_Relation::isActive).count() > 1) {
             return false;
-        } else {
-            if (bean.getSex().equals(Sex.FEMALE)) {
-                if (r.getSimRight() != null && r.getSimRight().getSex().equals(Sex.MALE) && r.isActive()) {
-                    return false;
-                }
-            }
         }
         return true;
     }

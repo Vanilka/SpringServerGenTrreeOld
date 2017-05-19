@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="registerForm" fx:id="registerForm" maxHeight="458.0" prefHeight="458.0"
             prefWidth="400.0" styleClass="gentree-element-pane" xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.PaneRegisterFormController">
+            fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.PaneRegisterFormController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

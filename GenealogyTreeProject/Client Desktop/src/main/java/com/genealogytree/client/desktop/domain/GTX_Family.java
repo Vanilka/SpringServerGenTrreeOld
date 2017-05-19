@@ -23,7 +23,7 @@ import java.util.List;
 
 @Log4j2
 @XmlRootElement
-public class GTX_Family implements Serializable, Observable {
+public class GTX_Family implements Serializable {
 
 
     private static final long serialVersionUID = -7356882826049849553L;
@@ -154,16 +154,6 @@ public class GTX_Family implements Serializable, Observable {
 
     public void setRelationsList(ObservableList<GTX_Relation> relationsList) {
         this.relationsList = relationsList;
-    }
-
-    @Override
-    public void addListener(InvalidationListener listener) {
-
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-
     }
 
 

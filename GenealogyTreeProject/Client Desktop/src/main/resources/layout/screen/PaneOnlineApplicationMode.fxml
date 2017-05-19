@@ -8,7 +8,7 @@
       onMouseClicked="#selectOnlineApplication"
       prefHeight="400.0" prefWidth="600.0" styleClass="logonFXPane, logonCommon"
       xmlns="http://javafx.com/javafx/8.0.65"
-      fx:controller="com.genealogytree.client.desktop.controllers.implementation.PaneOnlineApplicationChoiceController">
+      fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.PaneOnlineApplicationChoiceController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

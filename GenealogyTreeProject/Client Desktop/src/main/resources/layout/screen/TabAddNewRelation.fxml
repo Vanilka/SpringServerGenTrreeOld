@@ -8,7 +8,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="addNewRelationTab" fx:id="addNewRelationTab" prefWidth="819.0"
             styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.112-ea"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabAddNewRelationPaneController">
+            fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.TabAddNewRelationPaneController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

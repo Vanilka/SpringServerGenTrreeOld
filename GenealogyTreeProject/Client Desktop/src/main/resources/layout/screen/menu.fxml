@@ -6,7 +6,7 @@
 <AnchorPane id="menuBarPane"
             xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.MenuController">
+            fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.MenuController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

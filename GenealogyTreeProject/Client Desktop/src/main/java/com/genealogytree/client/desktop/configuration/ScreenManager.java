@@ -6,7 +6,7 @@ import com.genealogytree.client.desktop.configuration.messages.AppTitles;
 import com.genealogytree.client.desktop.controllers.FXMLDialogController;
 import com.genealogytree.client.desktop.controllers.FXMLPane;
 import com.genealogytree.client.desktop.controllers.FXMLTab;
-import com.genealogytree.client.desktop.controllers.implementation.*;
+import com.genealogytree.client.desktop.controllers.implementation.scene.*;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;

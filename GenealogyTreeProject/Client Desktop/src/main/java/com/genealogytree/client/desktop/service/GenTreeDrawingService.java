@@ -1,6 +1,6 @@
 package com.genealogytree.client.desktop.service;
 
-import com.genealogytree.client.desktop.controllers.implementation.custom.GTNode;
+import javafx.scene.layout.HBox;
 
 /**
  * Created by Martyna SZYMKOWIAK on 31/03/2017.
@@ -8,5 +8,5 @@ import com.genealogytree.client.desktop.controllers.implementation.custom.GTNode
 public interface GenTreeDrawingService {
 
 
-    void startDraw(GTNode node);
+    void startDraw(HBox box);
 }

@@ -7,7 +7,7 @@
         xmlns:fx="http://javafx.com/fxml/1" id="paneGenealogyTreeDraw" fx:id="paneGenealogyTreeDraw"
         styleClass="workingPane"
         xmlns="http://javafx.com/javafx/8.0.65"
-        fx:controller="com.genealogytree.client.desktop.controllers.implementation.PaneGenealogyTreeDrawController"
+        fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.PaneGenealogyTreeDrawController"
 
         AnchorPane.bottomAnchor="0.0"
         AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
@@ -21,7 +21,15 @@
                     AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"
                     styleClass="gtTransparentPane">
             <content>
-                <HBox fx:id="projectContent" styleClass="gtTransparentPane"/>
+                <AnchorPane fx:id="AnchorPaneContent" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <HBox fx:id="projectContent" styleClass="gtTransparentPane" AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </children>
+
+                </AnchorPane>
+
             </content>
         </ScrollPane>
     </children>

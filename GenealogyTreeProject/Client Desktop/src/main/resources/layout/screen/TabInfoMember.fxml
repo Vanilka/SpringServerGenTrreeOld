@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="infoMemberTab" fx:id="infoMemberTab" prefWidth="819.0" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.TabInfoMemberPaneController">
+<AnchorPane id="infoMemberTab" fx:id="infoMemberTab" prefWidth="819.0" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.TabInfoMemberPaneController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css" />
     </stylesheets>
