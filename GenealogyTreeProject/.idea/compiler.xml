@@ -18,7 +18,7 @@
         <module name="rest-service-layer" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="Domain" target="1.8" />
       <module name="ExceptionManager" target="1.8" />
       <module name="GenealogyTreeProject" target="1.8" />

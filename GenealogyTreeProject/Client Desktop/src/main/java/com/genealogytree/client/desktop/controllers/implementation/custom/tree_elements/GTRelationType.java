@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -22,6 +21,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GTRelationType extends StackPane {
+
+    public static final double WIDTH = 60;
+    public static final double HEIGHT = 60;
 
     Circle circle;
     ImageView typeImg;
@@ -40,9 +42,10 @@ public class GTRelationType extends StackPane {
     }
 
     public GTRelationType(RelationType type, boolean isActive) {
-    this.type.setValue(type);
-    this.isActive.setValue(isActive);
-
+        this.type.setValue(type);
+        this.isActive.setValue(isActive);
+        setMinSize(WIDTH, HEIGHT);
+        setMaxSize(WIDTH, HEIGHT);
     }
 
 
@@ -57,13 +60,13 @@ public class GTRelationType extends StackPane {
         getChildren().add(imageContainer);
         initListeners();
         setAlignment(Pos.CENTER);
+
     }
 
     private void initCircle() {
 
         circle = new Circle(10, 10, 30, Color.grayRgb(23, 0.5));
     }
-
 
 
     private void initListeners() {
@@ -103,6 +106,10 @@ public class GTRelationType extends StackPane {
         return isActive.get();
     }
 
+    public void setIsActive(boolean isActive) {
+        this.isActive.set(isActive);
+    }
+
     public BooleanProperty isActiveProperty() {
         return isActive;
     }
@@ -112,10 +119,6 @@ public class GTRelationType extends StackPane {
          */
     public void setType(RelationType type) {
         this.type.set(type);
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive.set(isActive);
     }
 
 

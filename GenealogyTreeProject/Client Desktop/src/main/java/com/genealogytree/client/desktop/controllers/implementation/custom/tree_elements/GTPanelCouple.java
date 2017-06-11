@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -27,13 +28,12 @@ import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 29/03/2017.
- *
+ * <p>
  * Top Hbox contains leaf, relationType, spouse
  * Left
  * Center
  * Right
  * Bottom  Children
- *
  */
 @Getter
 @Setter
@@ -75,12 +75,12 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
 
     public GTPanelCouple(GTLeaf leaf, GTLeaf spouse) {
 
-        this(leaf, spouse, new GTRelationType(),null);
+        this(leaf, spouse, new GTRelationType(), null);
     }
 
     public GTPanelCouple(GTLeaf leaf, GTLeaf spouse, GTRelationType relationType) {
 
-        this(leaf, spouse, relationType,null);
+        this(leaf, spouse, relationType, null);
     }
 
 
@@ -110,13 +110,18 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void boundListener() {
-        relationType.get().layoutXProperty().addListener((observable, oldValue, newValue) -> {
+        relationType.get().needsLayoutProperty().addListener((observable, oldValue, newValue) -> {
             drawLines();
         });
 
-        relationType.get().layoutYProperty().addListener((observable, oldValue, newValue) -> {
+        relationType.get().widthProperty().addListener((observable, oldValue, newValue) -> {
             drawLines();
         });
+
+        relationType.get().heightProperty().addListener((observable, oldValue, newValue) -> {
+            drawLines();
+        });
+
 
         relation.heightProperty().addListener((observable, oldValue, newValue) -> {
             drawLines();
@@ -126,14 +131,22 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
             drawLines();
         });
 
-        relationTypePane.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+        relationTypePane.needsLayoutProperty().addListener((observable, oldValue, newValue) -> {
             drawLines();
         });
+    }
+    @Override
+    protected Bounds getRelativeBounds(Node node) {
+        Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
+        return this.sceneToLocal(nodeBoundsInScene);
+    }
+    @Override
+    protected Point2D getBottomPoint(Bounds b) {
 
-        relationTypePane.layoutYProperty().addListener((observable, oldValue, newValue) -> {
-            drawLines();
-        });
-
+        if (b != null) {
+            System.out.println(b);
+        }
+        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
     }
 
     private void initListenerChildLeaf(GTPanelChild child) {
@@ -148,54 +161,56 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void drawLines() {
-            this.getChildren().removeAll(connectors);
-            connectors.clear();
+        this.getChildren().removeAll(connectors);
+        connectors.clear();
             /*
                 init Bound fo this Leaf
              */
-            Bounds thisBound = getRelativeBounds(relationTypePane);
-            Point2D bottomPoint = getBottomPoint(thisBound);
-            List<Bounds> childrenBounds = new ArrayList<>();
+        Bounds thisBound = getRelativeBounds(relationType.get());
+        System.out.println("BOUND OF RELATION : " + thisBound);
+        Point2D bottomPoint = getBottomPoint(thisBound);
+        System.out.println("point of relation :"  +bottomPoint);
+        List<Bounds> childrenBounds = new ArrayList<>();
 
             /*
                 Create Bounds of children
              */
-            childrenPanelList.forEach(c -> {
-                childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
-            });
+        childrenPanelList.forEach(c -> {
+            childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
+        });
 
             /*
                 Foreach child bounds create point2 ( top point)  -> start point for connector
              */
-            List<Point2D> point2DList = new ArrayList<>();
-            childrenBounds.forEach(childBounds -> {
-                point2DList.add(getTopPoint(childBounds));
-            });
+        List<Point2D> point2DList = new ArrayList<>();
+        childrenBounds.forEach(childBounds -> {
+            point2DList.add(getTopPoint(childBounds));
+        });
 
             /*
                 Create connector Vertical from child
              */
-            point2DList.forEach(point -> {
-                connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
-            });
+        point2DList.forEach(point -> {
+            connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
+        });
 
-            Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
-            Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
+        Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
+        Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
 
             /*
                 Create connector beetwen siblings
              */
-            if (p1.getX() != p2.getX()) {
-                connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
-            }
+        if (p1.getX() != p2.getX()) {
+            connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
+        }
 
 
             /*
                    Create connecor beetwen child and parent
              */
-            connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
+        connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
 
-            getChildren().addAll(connectors);
+        getChildren().addAll(connectors);
 
     }
 
@@ -228,7 +243,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
 
 
         relationType.addListener((observable, oldValue, newValue) -> {
-            if(newValue == null ) {
+            if (newValue == null) {
                 relationTypePane.getChildren().clear();
             } else {
                 boundListener();
@@ -275,6 +290,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     private void relationPaneLayout() {
         relation.setAlignment(Pos.CENTER);
         relation.setSpacing(40);
+        relationTypePane.resize(60, 60);
     }
 
     private void autoresize() {
