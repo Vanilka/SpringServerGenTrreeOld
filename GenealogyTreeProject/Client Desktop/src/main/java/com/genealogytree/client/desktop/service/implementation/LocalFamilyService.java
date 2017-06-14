@@ -156,6 +156,7 @@ public class LocalFamilyService implements FamilyService {
         this.family.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 guard = new ActiveRelationGuard(newValue.getRelationsList());
+                newValue.getRelationsList().forEach( element -> guard.addObserverTo(element));
             }
         });
     }

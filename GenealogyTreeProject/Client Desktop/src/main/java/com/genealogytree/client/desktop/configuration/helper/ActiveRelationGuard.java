@@ -26,6 +26,7 @@ public class ActiveRelationGuard implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("UPDATE DETECTED");
         if (o instanceof GTX_Relation) {
             GTX_Relation relation = (GTX_Relation) o;
 
