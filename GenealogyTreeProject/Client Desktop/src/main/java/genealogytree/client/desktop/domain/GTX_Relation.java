@@ -1,7 +1,7 @@
 package genealogytree.client.desktop.domain;
 
-import genealogytree.client.desktop.configuration.helper.BooleanPropertyMarshaller;
-import genealogytree.client.desktop.configuration.helper.SimMarshaller;
+import genealogytree.client.desktop.configuration.helper.marshallers.BooleanPropertyMarshaller;
+import genealogytree.client.desktop.configuration.helper.marshallers.SimMarshaller;
 import genealogytree.domain.enums.RelationType;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;

@@ -25,8 +25,8 @@ import lombok.Setter;
  * @author Martyna SZYMKOWIAK
  *         <p>
  *         Top
- *         Center HboxPane
- *         Right panelSingle
+ *         Center PanelSingle
+ *         Right PanelCurrent
  *         Left pane EX
  */
 @Getter
@@ -44,7 +44,7 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private StackPane paneCouple;
+    private AnchorPane paneCouple;
 
     private ObservableList<GTPanelEx> panelsExList;
     private ObjectProperty<GTPanelSignle> panelSingle;
@@ -73,13 +73,16 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
         setCenter(paneSingle);
         setRight(paneCouple);
 
+        paneCouple.setBorder(new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
+
 
 
     private void init() {
         pane = new HBox();
         paneSingle = new StackPane();
-        paneCouple = new StackPane();
+        paneCouple = new AnchorPane();
         leaf = new SimpleObjectProperty<>();
         panelSingle = new SimpleObjectProperty<>();
         panelCouple = new SimpleObjectProperty<>();
@@ -115,6 +118,7 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
 
             if (newValue != null)
                 paneCouple.getChildren().add(newValue);
+
         });
     }
 

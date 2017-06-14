@@ -14,9 +14,8 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -41,7 +40,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private HBox relation;
+    private AnchorPane relation;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -128,6 +127,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         });
 
         relation.widthProperty().addListener((observable, oldValue, newValue) -> {
+
             drawLines();
         });
 
@@ -206,6 +206,11 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
              */
             if (p1.getX() != p2.getX()) {
                 connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
+                Double offset = (p1.getX()+p2.getX())/2 - 30;
+                relationTypePane.setLayoutX(offset);
+                spousePane.setLayoutX(offset+200);
+                relation.resize(offset+ 500, relation.getHeight());
+                this.autoresize();
             }
 
 
@@ -272,7 +277,7 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         this.childrenbox = new HBox();
         this.spousePane = new AnchorPane();
         this.relationTypePane = new StackPane();
-        this.relation = new HBox();
+        this.relation = new AnchorPane();
         initListeners();
         childrenbox.setAlignment(Pos.CENTER);
         childrenbox.setSpacing(50);
@@ -282,6 +287,8 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         BooleanBinding visibleBinding = Bindings.createBooleanBinding(() -> (spouse.getValue() != null), spouse);
         spousePane.visibleProperty().bind(visibleBinding);
         relationPaneLayout();
+
+
     }
 
     private void relationsElementsLocate() {
@@ -292,13 +299,15 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
     }
 
     private void relationPaneLayout() {
-        relation.setAlignment(Pos.CENTER);
-        relation.setSpacing(40);
         relationTypePane.resize(60, 60);
+        relation.setBorder(new Border(new BorderStroke(Color.PINK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+
+
     }
 
     private void autoresize() {
-        this.prefWidthProperty().bind(childrenbox.widthProperty());
         childrenbox.maxHeight(Double.MAX_VALUE);
         childrenbox.maxWidth(Double.MAX_VALUE);
     }

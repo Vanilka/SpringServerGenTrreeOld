@@ -1,6 +1,5 @@
 package genealogytree.service;
 
-import genealogytree.ExceptionManager.exception.NotFoundFamilyException;
 import genealogytree.persist.entity.modules.administration.UserEntity;
 import genealogytree.persist.entity.modules.tree.FamilyEntity;
 

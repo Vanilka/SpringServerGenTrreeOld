@@ -1,9 +1,7 @@
 package genealogytree.webapplication.dispatchers;
 
 import genealogytree.ExceptionManager.exception.*;
-import genealogytree.domain.dto.FamilyDTO;
 import genealogytree.domain.dto.RelationDTO;
-import genealogytree.persist.entity.modules.tree.FamilyEntity;
 import genealogytree.server.facade.ProjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;

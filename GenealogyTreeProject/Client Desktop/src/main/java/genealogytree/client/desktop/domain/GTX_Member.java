@@ -1,8 +1,8 @@
 package genealogytree.client.desktop.domain;
 
 import genealogytree.client.desktop.configuration.enums.ImageFiles;
-import genealogytree.client.desktop.configuration.helper.PhotoMarshaller;
-import genealogytree.client.desktop.configuration.helper.WSLongAdapter;
+import genealogytree.client.desktop.configuration.helper.marshallers.PhotoMarshaller;
+import genealogytree.client.desktop.configuration.helper.marshallers.WSLongAdapter;
 import genealogytree.domain.enums.Age;
 import genealogytree.domain.enums.Sex;
 import javafx.beans.property.*;

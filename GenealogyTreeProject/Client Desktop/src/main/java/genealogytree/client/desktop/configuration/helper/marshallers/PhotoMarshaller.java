@@ -1,4 +1,4 @@
-package genealogytree.client.desktop.configuration.helper;
+package genealogytree.client.desktop.configuration.helper.marshallers;
 
 import genealogytree.client.desktop.configuration.enums.ImageFiles;
 

@@ -1,4 +1,4 @@
-package genealogytree.client.desktop.configuration.helper;
+package genealogytree.client.desktop.configuration.helper.marshallers;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

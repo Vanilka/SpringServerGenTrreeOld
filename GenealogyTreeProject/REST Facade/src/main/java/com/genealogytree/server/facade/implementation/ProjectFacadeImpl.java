@@ -13,7 +13,6 @@ import genealogytree.persist.entity.modules.tree.RelationsEntity;
 import genealogytree.server.facade.ProjectFacade;
 import genealogytree.server.facade.converters.ConverterDtoToEntity;
 import genealogytree.server.facade.converters.ConverterEntityToDto;
-import genealogytree.service.validators.Validator;
 import genealogytree.service.FamilyService;
 import genealogytree.service.MemberService;
 import genealogytree.service.RelationService;
