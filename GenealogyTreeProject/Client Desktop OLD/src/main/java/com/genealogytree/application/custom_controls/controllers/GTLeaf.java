@@ -1,8 +1,8 @@
-package com.genealogytree.application.custom_controls.controllers;
+package genealogytree.application.custom_controls.controllers;
 
-import com.genealogytree.GenealogyTree;
-import com.genealogytree.configuration.ImageFiles;
-import com.genealogytree.domain.GTX_Member;
+import genealogytree.GenealogyTree;
+import genealogytree.configuration.ImageFiles;
+import genealogytree.domain.GTX_Member;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;

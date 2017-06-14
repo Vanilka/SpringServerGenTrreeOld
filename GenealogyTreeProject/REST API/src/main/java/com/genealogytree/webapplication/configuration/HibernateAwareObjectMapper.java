@@ -1,4 +1,4 @@
-package com.genealogytree.webapplication.configuration;
+package genealogytree.webapplication.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;

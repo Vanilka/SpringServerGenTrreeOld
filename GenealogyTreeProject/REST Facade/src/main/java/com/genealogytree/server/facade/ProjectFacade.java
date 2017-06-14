@@ -1,12 +1,12 @@
-package com.genealogytree.server.facade;
+package genealogytree.server.facade;
 
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.domain.dto.FamilyDTO;
-import com.genealogytree.domain.dto.MemberDTO;
-import com.genealogytree.domain.dto.RelationDTO;
-import com.genealogytree.domain.dto.UserDTO;
-import com.genealogytree.domain.wrappers.CreatedMemberWrapper;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.domain.dto.FamilyDTO;
+import genealogytree.domain.dto.MemberDTO;
+import genealogytree.domain.dto.RelationDTO;
+import genealogytree.domain.dto.UserDTO;
+import genealogytree.domain.wrappers.CreatedMemberWrapper;
 
 import java.util.List;
 

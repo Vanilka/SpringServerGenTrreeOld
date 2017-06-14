@@ -1,12 +1,12 @@
-package com.genealogytree.sources.templates.templates;
+package genealogytree.sources.templates.templates;
 
 /**
  * Created by vanilka on 04/01/2017.
  */
 
-import com.genealogytree.application.FXMLTabController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
+import genealogytree.application.FXMLTabController;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.application.ScreenManager;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
  */
 public class TemplateTabController implements Initializable, FXMLTabController {
 
-    private static final Logger LOG = LogManager.getLogger(com.genealogytree.application.fxmlcontrollers.TabInfoRelationPaneController.class);
+    private static final Logger LOG = LogManager.getLogger(genealogytree.application.fxmlcontrollers.TabInfoRelationPaneController.class);
 
     private ScreenManager manager;
     private GenealogyTreeContext context;

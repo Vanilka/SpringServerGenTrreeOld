@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application.fxmlcontrollers;
+package genealogytree.application.fxmlcontrollers;
 
-import com.genealogytree.application.FXMLPaneController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
-import com.genealogytree.configuration.FXMLFiles;
-import com.genealogytree.services.implementation.GTUserServiceOnline;
-import com.genealogytree.services.responses.ExceptionResponse;
-import com.genealogytree.services.responses.ServerResponse;
-import com.genealogytree.services.responses.UserResponse;
+import genealogytree.application.FXMLPaneController;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.application.ScreenManager;
+import genealogytree.configuration.FXMLFiles;
+import genealogytree.services.implementation.GTUserServiceOnline;
+import genealogytree.services.responses.ExceptionResponse;
+import genealogytree.services.responses.ServerResponse;
+import genealogytree.services.responses.UserResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;

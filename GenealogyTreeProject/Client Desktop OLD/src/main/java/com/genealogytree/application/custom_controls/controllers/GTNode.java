@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application.custom_controls.controllers;
+package genealogytree.application.custom_controls.controllers;
 
-import com.genealogytree.GenealogyTree;
+import genealogytree.GenealogyTree;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

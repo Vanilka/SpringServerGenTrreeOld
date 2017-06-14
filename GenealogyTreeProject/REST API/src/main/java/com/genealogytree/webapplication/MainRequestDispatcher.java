@@ -1,4 +1,4 @@
-package com.genealogytree.webapplication;
+package genealogytree.webapplication;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 @RequestMapping("/")
 public class MainRequestDispatcher {
 

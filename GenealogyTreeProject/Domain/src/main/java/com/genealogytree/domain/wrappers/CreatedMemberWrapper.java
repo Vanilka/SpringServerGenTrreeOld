@@ -1,7 +1,7 @@
-package com.genealogytree.domain.wrappers;
+package genealogytree.domain.wrappers;
 
-import com.genealogytree.domain.dto.MemberDTO;
-import com.genealogytree.domain.dto.RelationDTO;
+import genealogytree.domain.dto.MemberDTO;
+import genealogytree.domain.dto.RelationDTO;
 
 /**
  * Created by vanilka on 04/01/2017.

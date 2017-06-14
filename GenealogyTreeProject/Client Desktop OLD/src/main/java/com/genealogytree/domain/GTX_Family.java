@@ -1,6 +1,6 @@
-package com.genealogytree.domain;
+package genealogytree.domain;
 
-import com.genealogytree.domain.beans.FamilyBean;
+import genealogytree.domain.beans.FamilyBean;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.LongProperty;

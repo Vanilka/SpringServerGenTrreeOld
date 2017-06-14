@@ -1,8 +1,8 @@
-package com.genealogytree.service;
+package genealogytree.service;
 
-import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.ExceptionManager.exception.NotFoundFamilyException;
+import genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
 
 import java.util.List;
 

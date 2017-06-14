@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>GenealogyTreeProject</artifactId>
-        <groupId>com.genealogytree</groupId>
+        <groupId>genealogytree</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,7 @@
     <dependencies>
         <!-- PROJECT DEPENDENCY-->
         <dependency>
-            <groupId>com.genealogytree</groupId>
+            <groupId>genealogytree</groupId>
             <artifactId>Domain</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -70,7 +70,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.genealogytree.client.desktop.GenealogyTree</mainClass>
+                            <mainClass>GenealogyTree</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

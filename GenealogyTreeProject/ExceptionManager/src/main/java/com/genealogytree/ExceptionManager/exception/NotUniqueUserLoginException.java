@@ -1,6 +1,6 @@
-package com.genealogytree.ExceptionManager.exception;
+package genealogytree.ExceptionManager.exception;
 
-import com.genealogytree.ExceptionManager.config.Causes;
+import genealogytree.ExceptionManager.config.Causes;
 
 public class NotUniqueUserLoginException extends Exception {
 

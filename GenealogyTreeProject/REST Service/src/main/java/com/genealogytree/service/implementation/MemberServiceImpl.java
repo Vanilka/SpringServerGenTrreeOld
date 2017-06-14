@@ -1,13 +1,13 @@
-package com.genealogytree.service.implementation;
+package genealogytree.service.implementation;
 
-import com.genealogytree.ExceptionManager.exception.NotFoundFamilyException;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.persist.entity.modules.tree.ImagesEntity;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.repository.MemberRepository;
-import com.genealogytree.service.FamilyService;
-import com.genealogytree.service.ImagesService;
-import com.genealogytree.service.MemberService;
+import genealogytree.ExceptionManager.exception.NotFoundFamilyException;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.persist.entity.modules.tree.ImagesEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.repository.MemberRepository;
+import genealogytree.service.FamilyService;
+import genealogytree.service.ImagesService;
+import genealogytree.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 public class MemberServiceImpl implements MemberService {
 
     @Autowired

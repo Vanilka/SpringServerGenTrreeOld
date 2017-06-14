@@ -1,12 +1,12 @@
-package com.genealogytree.server.facade.converters.implementation;
+package genealogytree.server.facade.converters.implementation;
 
-import com.genealogytree.domain.dto.*;
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.persist.entity.modules.tree.ImagesEntity;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.persist.entity.modules.tree.RelationsEntity;
-import com.genealogytree.server.facade.converters.ConverterEntityToDto;
+import genealogytree.domain.dto.*;
+import genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.persist.entity.modules.tree.ImagesEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.RelationsEntity;
+import genealogytree.server.facade.converters.ConverterEntityToDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

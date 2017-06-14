@@ -1,7 +1,7 @@
-package com.genealogytree.services;
+package genealogytree.services;
 
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.services.responses.ServerResponse;
 
 /**
  * Created by vanilka on 22/11/2016.

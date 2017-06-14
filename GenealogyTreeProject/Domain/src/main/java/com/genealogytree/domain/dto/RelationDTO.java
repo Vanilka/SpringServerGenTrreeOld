@@ -1,6 +1,6 @@
-package com.genealogytree.domain.dto;
+package genealogytree.domain.dto;
 
-import com.genealogytree.domain.enums.RelationType;
+import genealogytree.domain.enums.RelationType;
 import lombok.Getter;
 import lombok.Setter;
 

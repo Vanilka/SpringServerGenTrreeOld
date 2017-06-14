@@ -1,4 +1,4 @@
-package com.genealogytree.configuration;
+package genealogytree.configuration;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;

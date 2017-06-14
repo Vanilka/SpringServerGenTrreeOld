@@ -1,4 +1,4 @@
-package com.genealogytree.configuration.traduction;
+package genealogytree.configuration.traduction;
 
 public enum Languages {
     PL("pl", "PL", "poland.png"),

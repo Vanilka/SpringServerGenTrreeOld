@@ -1,9 +1,9 @@
-package com.genealogytree.service;
+package genealogytree.service;
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.persist.entity.modules.tree.RelationsEntity;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.RelationsEntity;
 
 import java.util.List;
 

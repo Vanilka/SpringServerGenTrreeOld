@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.sources.icons;
+package genealogytree.sources.icons;

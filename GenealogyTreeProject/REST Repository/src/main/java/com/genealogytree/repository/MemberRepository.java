@@ -1,7 +1,7 @@
-package com.genealogytree.repository;
+package genealogytree.repository;
 
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

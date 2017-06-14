@@ -1,6 +1,6 @@
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;
 
-import com.genealogytree.domain.beans.UserBean;
+import genealogytree.domain.beans.UserBean;
 
 public class UserResponse extends ServerResponse {
 

@@ -3,7 +3,7 @@
  * To change this template file,  Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application;
+package genealogytree.application;
 
 /**
  * @author vanilka

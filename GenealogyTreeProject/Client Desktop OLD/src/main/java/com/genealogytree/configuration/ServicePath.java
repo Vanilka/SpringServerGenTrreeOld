@@ -1,4 +1,4 @@
-package com.genealogytree.configuration;
+package genealogytree.configuration;
 
 public enum ServicePath {
     USER("user"),

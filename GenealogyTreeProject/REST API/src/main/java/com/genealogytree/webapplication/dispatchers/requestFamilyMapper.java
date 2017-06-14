@@ -1,12 +1,12 @@
-package com.genealogytree.webapplication.dispatchers;
+package genealogytree.webapplication.dispatchers;
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.domain.dto.FamilyDTO;
-import com.genealogytree.domain.dto.UserDTO;
-import com.genealogytree.server.facade.ProjectFacade;
-import com.genealogytree.server.facade.UserFacade;
-import com.genealogytree.service.FamilyService;
-import com.genealogytree.service.UserService;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.domain.dto.FamilyDTO;
+import genealogytree.domain.dto.UserDTO;
+import genealogytree.server.facade.ProjectFacade;
+import genealogytree.server.facade.UserFacade;
+import genealogytree.service.FamilyService;
+import genealogytree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 @RequestMapping("/project")
 public class requestFamilyMapper {
 

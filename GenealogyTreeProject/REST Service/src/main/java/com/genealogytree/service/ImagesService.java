@@ -1,6 +1,6 @@
-package com.genealogytree.service;
+package genealogytree.service;
 
-import com.genealogytree.persist.entity.modules.tree.ImagesEntity;
+import genealogytree.persist.entity.modules.tree.ImagesEntity;
 
 /**
  * Created by vanilka on 27/12/2016.

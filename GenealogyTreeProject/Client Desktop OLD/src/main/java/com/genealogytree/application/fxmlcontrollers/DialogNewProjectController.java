@@ -1,15 +1,15 @@
-package com.genealogytree.application.fxmlcontrollers;
+package genealogytree.application.fxmlcontrollers;
 
-import com.genealogytree.application.FXMLDialogController;
-import com.genealogytree.application.FXMLPaneController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
-import com.genealogytree.configuration.FXMLFiles;
-import com.genealogytree.domain.GTX_Family;
-import com.genealogytree.services.implementation.GTFamilyServiceOffline;
-import com.genealogytree.services.implementation.GTFamilyServiceOnline;
-import com.genealogytree.services.responses.FamilyResponse;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.FXMLDialogController;
+import genealogytree.application.FXMLPaneController;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.application.ScreenManager;
+import genealogytree.configuration.FXMLFiles;
+import genealogytree.domain.GTX_Family;
+import genealogytree.services.implementation.GTFamilyServiceOffline;
+import genealogytree.services.implementation.GTFamilyServiceOnline;
+import genealogytree.services.responses.FamilyResponse;
+import genealogytree.services.responses.ServerResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.binding.Bindings;

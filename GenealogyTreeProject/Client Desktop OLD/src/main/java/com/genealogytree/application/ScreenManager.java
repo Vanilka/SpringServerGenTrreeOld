@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application;
+package genealogytree.application;
 
-import com.genealogytree.application.fxmlcontrollers.PaneChooseApplicationTypeController;
-import com.genealogytree.application.fxmlcontrollers.PaneFooterController;
-import com.genealogytree.application.fxmlcontrollers.PaneMainWindowController;
-import com.genealogytree.application.fxmlcontrollers.PaneMenuBarController;
-import com.genealogytree.configuration.BorderPaneReloadHelper;
-import com.genealogytree.configuration.FXMLFiles;
+import genealogytree.application.fxmlcontrollers.PaneChooseApplicationTypeController;
+import genealogytree.application.fxmlcontrollers.PaneFooterController;
+import genealogytree.application.fxmlcontrollers.PaneMainWindowController;
+import genealogytree.application.fxmlcontrollers.PaneMenuBarController;
+import genealogytree.configuration.BorderPaneReloadHelper;
+import genealogytree.configuration.FXMLFiles;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application;
+package genealogytree.application;
 
-import com.genealogytree.configuration.Authenticator;
-import com.genealogytree.domain.beans.UserBean;
-import com.genealogytree.services.GTFamilyService;
-import com.genealogytree.services.implementation.GTFamilyServiceOffline;
-import com.genealogytree.services.implementation.GTUserServiceOnline;
+import genealogytree.configuration.Authenticator;
+import genealogytree.domain.beans.UserBean;
+import genealogytree.services.GTFamilyService;
+import genealogytree.services.implementation.GTFamilyServiceOffline;
+import genealogytree.services.implementation.GTUserServiceOnline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 

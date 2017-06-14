@@ -1,4 +1,4 @@
-package com.genealogytree.ExceptionManager.config;
+package genealogytree.ExceptionManager.config;
 
 public enum Causes {
     ANOTHER_CAUSE(0, "Another Error"),

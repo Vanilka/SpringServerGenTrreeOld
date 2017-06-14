@@ -1,4 +1,4 @@
-package com.genealogytree.exception;
+package genealogytree.exception;
 
 import java.util.Locale;
 

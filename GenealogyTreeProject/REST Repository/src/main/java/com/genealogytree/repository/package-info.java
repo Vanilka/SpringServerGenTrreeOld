@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.repository;
+package genealogytree.repository;

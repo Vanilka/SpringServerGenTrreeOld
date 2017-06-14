@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="newProjectDialog" fx:id="newProjectDialog"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.DialogNewProjectController">
+            fx:controller="genealogytree.application.fxmlcontrollers.DialogNewProjectController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

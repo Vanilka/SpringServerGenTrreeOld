@@ -1,7 +1,7 @@
-package com.genealogytree.domain.dto;
+package genealogytree.domain.dto;
 
-import com.genealogytree.domain.enums.Age;
-import com.genealogytree.domain.enums.Sex;
+import genealogytree.domain.enums.Age;
+import genealogytree.domain.enums.Sex;
 import lombok.Getter;
 import lombok.Setter;
 

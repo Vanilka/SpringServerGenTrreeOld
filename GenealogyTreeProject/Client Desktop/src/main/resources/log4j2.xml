@@ -16,7 +16,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.genealogytree" level="TRACE">
+        <Logger name="genealogytree" level="TRACE">
             <appender-ref ref="Console" level="TRACE"/>
         </Logger>
         <Root level="debug">

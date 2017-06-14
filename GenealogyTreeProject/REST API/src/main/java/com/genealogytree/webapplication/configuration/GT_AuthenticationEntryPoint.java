@@ -1,8 +1,8 @@
-package com.genealogytree.webapplication.configuration;
+package genealogytree.webapplication.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.genealogytree.ExceptionManager.config.Causes;
-import com.genealogytree.ExceptionManager.exception.ExceptionBean;
+import genealogytree.ExceptionManager.config.Causes;
+import genealogytree.ExceptionManager.exception.ExceptionBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;

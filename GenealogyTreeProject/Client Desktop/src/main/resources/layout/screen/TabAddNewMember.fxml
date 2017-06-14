@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="addNewMember" fx:id="addNewMember" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.TabAddNewMemberPaneController">
+<AnchorPane id="addNewMember" fx:id="addNewMember" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="genealogytree.client.desktop.controllers.implementation.scene.TabAddNewMemberPaneController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css" />
     </stylesheets>

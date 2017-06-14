@@ -1,4 +1,4 @@
-package com.genealogytree.configuration;
+package genealogytree.configuration;
 
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;

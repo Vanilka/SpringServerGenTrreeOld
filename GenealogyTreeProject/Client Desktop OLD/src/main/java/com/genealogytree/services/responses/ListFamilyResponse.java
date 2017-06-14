@@ -1,6 +1,6 @@
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;
 
-import com.genealogytree.domain.GTX_Family;
+import genealogytree.domain.GTX_Family;
 
 import java.util.List;
 

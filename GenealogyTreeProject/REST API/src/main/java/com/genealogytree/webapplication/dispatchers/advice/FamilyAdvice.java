@@ -1,7 +1,7 @@
-package com.genealogytree.webapplication.dispatchers.advice;
+package genealogytree.webapplication.dispatchers.advice;
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.webapplication.dispatchers.requestFamilyMapper;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.webapplication.dispatchers.requestFamilyMapper;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

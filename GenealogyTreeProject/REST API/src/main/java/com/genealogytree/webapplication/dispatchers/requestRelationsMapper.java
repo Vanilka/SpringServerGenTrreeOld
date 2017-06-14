@@ -1,10 +1,10 @@
-package com.genealogytree.webapplication.dispatchers;
+package genealogytree.webapplication.dispatchers;
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.domain.dto.FamilyDTO;
-import com.genealogytree.domain.dto.RelationDTO;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.server.facade.ProjectFacade;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.domain.dto.FamilyDTO;
+import genealogytree.domain.dto.RelationDTO;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.server.facade.ProjectFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by vanilka on 30/12/2016.
  */
 @RestController
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 @RequestMapping("/relations")
 public class requestRelationsMapper {
 

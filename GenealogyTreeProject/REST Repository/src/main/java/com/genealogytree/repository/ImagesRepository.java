@@ -1,6 +1,6 @@
-package com.genealogytree.repository;
+package genealogytree.repository;
 
-import com.genealogytree.persist.entity.modules.tree.ImagesEntity;
+import genealogytree.persist.entity.modules.tree.ImagesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.configuration.traduction;
+package genealogytree.configuration.traduction;

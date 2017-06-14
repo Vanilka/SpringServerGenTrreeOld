@@ -1,6 +1,6 @@
-package com.genealogytree.domain;
+package genealogytree.domain;
 
-import com.genealogytree.domain.beans.UserBean;
+import genealogytree.domain.beans.UserBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

@@ -1,4 +1,4 @@
 /**
  * @author vanilka
  */
-package com.genealogytree.exception;
+package genealogytree.exception;

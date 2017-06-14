@@ -1,14 +1,14 @@
-package com.genealogytree.application.fxmlcontrollers;
+package genealogytree.application.fxmlcontrollers;
 
-import com.genealogytree.application.FXMLTabController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
-import com.genealogytree.configuration.ImageFiles;
-import com.genealogytree.domain.GTX_Member;
-import com.genealogytree.domain.enums.Age;
-import com.genealogytree.domain.enums.Sex;
-import com.genealogytree.services.responses.MemberResponse;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.FXMLTabController;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.application.ScreenManager;
+import genealogytree.configuration.ImageFiles;
+import genealogytree.domain.GTX_Member;
+import genealogytree.domain.enums.Age;
+import genealogytree.domain.enums.Sex;
+import genealogytree.services.responses.MemberResponse;
+import genealogytree.services.responses.ServerResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTabPane;

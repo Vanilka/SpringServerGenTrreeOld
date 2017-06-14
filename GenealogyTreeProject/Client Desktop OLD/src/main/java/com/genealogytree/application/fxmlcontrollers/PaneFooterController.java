@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.genealogytree.application.fxmlcontrollers;
+package genealogytree.application.fxmlcontrollers;
 
-import com.genealogytree.application.FXMLPaneController;
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.application.ScreenManager;
+import genealogytree.application.FXMLPaneController;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.application.ScreenManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

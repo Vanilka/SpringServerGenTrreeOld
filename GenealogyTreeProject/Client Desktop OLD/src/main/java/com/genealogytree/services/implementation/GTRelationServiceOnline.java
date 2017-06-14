@@ -1,4 +1,4 @@
-package com.genealogytree.services.implementation;
+package genealogytree.services.implementation;
 
 /**
  * Created by vanilka on 02/01/2017.

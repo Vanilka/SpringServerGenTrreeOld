@@ -1,8 +1,8 @@
-package com.genealogytree.domain;
+package genealogytree.domain;
 
-import com.genealogytree.configuration.ImageFiles;
-import com.genealogytree.domain.enums.Age;
-import com.genealogytree.domain.enums.Sex;
+import genealogytree.configuration.ImageFiles;
+import genealogytree.domain.enums.Age;
+import genealogytree.domain.enums.Sex;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;

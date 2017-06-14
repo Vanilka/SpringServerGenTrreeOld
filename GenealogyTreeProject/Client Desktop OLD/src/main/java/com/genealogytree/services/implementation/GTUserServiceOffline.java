@@ -1,9 +1,9 @@
-package com.genealogytree.services.implementation;
+package genealogytree.services.implementation;
 
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.domain.beans.UserBean;
-import com.genealogytree.services.GTUserService;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.domain.beans.UserBean;
+import genealogytree.services.GTUserService;
+import genealogytree.services.responses.ServerResponse;
 
 /**
  * Created by vanilka on 22/11/2016.

@@ -1,7 +1,7 @@
-package com.genealogytree.domain;
+package genealogytree.domain;
 
-import com.genealogytree.domain.beans.RelationBean;
-import com.genealogytree.domain.enums.RelationType;
+import genealogytree.domain.beans.RelationBean;
+import genealogytree.domain.enums.RelationType;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;

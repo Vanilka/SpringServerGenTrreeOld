@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="infoRelationTab" fx:id="infoRelationTab" maxHeight="280.0" minHeight="180.0" prefHeight="181.0" prefWidth="819.0" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.TabInfoRelationPaneController">
+<AnchorPane id="infoRelationTab" fx:id="infoRelationTab" maxHeight="280.0" minHeight="180.0" prefHeight="181.0" prefWidth="819.0" styleClass="gt_MaintabContentPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="genealogytree.client.desktop.controllers.implementation.scene.TabInfoRelationPaneController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css" />
     </stylesheets>

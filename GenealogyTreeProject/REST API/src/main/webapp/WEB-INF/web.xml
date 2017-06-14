@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
-    <display-name>com.genealogytree.WebApplication-0.0.1-SNAPSHOT</display-name>
+    <display-name>genealogytree.WebApplication-0.0.1-SNAPSHOT</display-name>
     <display-name>Spring Web MVC Application</display-name>
     <servlet>
         <servlet-name>MainDispatcher</servlet-name>

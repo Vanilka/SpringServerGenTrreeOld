@@ -1,7 +1,7 @@
-package com.genealogytree.service.validators;
+package genealogytree.service.validators;
 
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.persist.entity.modules.tree.RelationsEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.RelationsEntity;
 
 import java.util.List;
 

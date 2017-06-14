@@ -1,4 +1,4 @@
-package com.genealogytree.webapplication.configuration;
+package genealogytree.webapplication.configuration;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

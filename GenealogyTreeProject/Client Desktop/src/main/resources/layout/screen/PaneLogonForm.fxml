@@ -9,7 +9,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="400" minWidth="300" prefHeight="400" prefWidth="300"
             styleClass="logonFXForm, gentree-element-pane" xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.PaneLogonFormController">
+            fx:controller="genealogytree.client.desktop.controllers.implementation.scene.PaneLogonFormController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

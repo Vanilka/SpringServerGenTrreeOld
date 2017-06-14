@@ -7,7 +7,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="infoRelationTab" fx:id="infoRelationTab" maxHeight="280.0" minHeight="180.0"
             prefHeight="181.0" prefWidth="819.0" styleClass="gt_MaintabContentPane"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.TabInfoRelationPaneController">
+            fx:controller="genealogytree.application.fxmlcontrollers.TabInfoRelationPaneController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

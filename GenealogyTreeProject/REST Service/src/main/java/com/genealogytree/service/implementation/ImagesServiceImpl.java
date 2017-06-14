@@ -1,8 +1,8 @@
-package com.genealogytree.service.implementation;
+package genealogytree.service.implementation;
 
-import com.genealogytree.persist.entity.modules.tree.ImagesEntity;
-import com.genealogytree.repository.ImagesRepository;
-import com.genealogytree.service.ImagesService;
+import genealogytree.persist.entity.modules.tree.ImagesEntity;
+import genealogytree.repository.ImagesRepository;
+import genealogytree.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 public class ImagesServiceImpl implements ImagesService {
 
     @Autowired

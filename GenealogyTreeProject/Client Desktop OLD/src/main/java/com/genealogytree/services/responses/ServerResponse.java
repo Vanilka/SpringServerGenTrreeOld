@@ -1,4 +1,4 @@
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;
 
 public abstract class ServerResponse {
     private ResponseStatus status;

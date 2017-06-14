@@ -1,6 +1,6 @@
-package com.genealogytree.persist.entity.modules.tree;
+package genealogytree.persist.entity.modules.tree;
 
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.persist.entity.modules.administration.UserEntity;
 import lombok.Setter;
 
 import javax.persistence.*;

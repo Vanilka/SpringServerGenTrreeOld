@@ -1,12 +1,12 @@
-package com.genealogytree.service.implementation;
+package genealogytree.service.implementation;
 
-import com.genealogytree.ExceptionManager.exception.*;
-import com.genealogytree.persist.entity.modules.tree.FamilyEntity;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.persist.entity.modules.tree.RelationsEntity;
-import com.genealogytree.repository.RelationRepository;
-import com.genealogytree.service.RelationService;
-import com.genealogytree.service.validators.Validator;
+import genealogytree.ExceptionManager.exception.*;
+import genealogytree.persist.entity.modules.tree.FamilyEntity;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.RelationsEntity;
+import genealogytree.repository.RelationRepository;
+import genealogytree.service.RelationService;
+import genealogytree.service.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.function.Predicate;
  */
 @Service
 @Transactional
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 public class RelationServiceImpl implements RelationService {
 
     @Autowired

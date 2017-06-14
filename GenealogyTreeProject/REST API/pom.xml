@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.genealogytree</groupId>
+        <groupId>genealogytree</groupId>
         <artifactId>GenealogyTreeProject</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -18,12 +18,12 @@
 
         <!-- Project Dependency-->
         <dependency>
-            <groupId>com.genealogytree</groupId>
+            <groupId>genealogytree</groupId>
             <artifactId>rest-facade</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.genealogytree</groupId>
+            <groupId>genealogytree</groupId>
             <artifactId>ExceptionManager</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

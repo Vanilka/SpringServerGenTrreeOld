@@ -5,7 +5,7 @@
 <?import java.net.URL?>
 <AnchorPane id="mainAnchorPane" fx:id="mainAnchorPane" xmlns="http://javafx.com/javafx/8.0.65"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.ChooseModeScreen">
+            fx:controller="genealogytree.client.desktop.controllers.implementation.scene.ChooseModeScreen">
     <stylesheets>
         <URL value="@/layout/style/gentree.css"/>
     </stylesheets>

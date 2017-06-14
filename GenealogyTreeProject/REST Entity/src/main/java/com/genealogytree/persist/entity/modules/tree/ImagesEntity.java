@@ -1,4 +1,4 @@
-package com.genealogytree.persist.entity.modules.tree;
+package genealogytree.persist.entity.modules.tree;
 
 import lombok.Setter;
 

@@ -1,11 +1,11 @@
-package com.genealogytree.service.validators.implementation;
+package genealogytree.service.validators.implementation;
 
-import com.genealogytree.domain.enums.RelationType;
-import com.genealogytree.domain.enums.Sex;
-import com.genealogytree.persist.entity.modules.tree.MemberEntity;
-import com.genealogytree.persist.entity.modules.tree.RelationsEntity;
-import com.genealogytree.service.MemberService;
-import com.genealogytree.service.validators.Validator;
+import genealogytree.domain.enums.RelationType;
+import genealogytree.domain.enums.Sex;
+import genealogytree.persist.entity.modules.tree.MemberEntity;
+import genealogytree.persist.entity.modules.tree.RelationsEntity;
+import genealogytree.service.MemberService;
+import genealogytree.service.validators.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

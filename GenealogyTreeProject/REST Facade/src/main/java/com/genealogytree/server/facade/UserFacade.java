@@ -1,8 +1,8 @@
-package com.genealogytree.server.facade;
+package genealogytree.server.facade;
 
-import com.genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
-import com.genealogytree.ExceptionManager.exception.UserOrPasswordIncorrectException;
-import com.genealogytree.domain.dto.UserDTO;
+import genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
+import genealogytree.ExceptionManager.exception.UserOrPasswordIncorrectException;
+import genealogytree.domain.dto.UserDTO;
 
 import java.util.List;
 

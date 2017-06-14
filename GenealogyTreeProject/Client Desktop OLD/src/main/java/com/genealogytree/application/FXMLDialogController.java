@@ -1,4 +1,4 @@
-package com.genealogytree.application;
+package genealogytree.application;
 
 import javafx.stage.Stage;
 

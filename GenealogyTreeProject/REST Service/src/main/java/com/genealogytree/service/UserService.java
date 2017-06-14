@@ -1,7 +1,7 @@
-package com.genealogytree.service;
+package genealogytree.service;
 
-import com.genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
+import genealogytree.persist.entity.modules.administration.UserEntity;
 
 import java.util.List;
 

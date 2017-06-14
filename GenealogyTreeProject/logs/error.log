@@ -139,11 +139,11 @@
 2017-03-25 16:04:44,094 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
 /Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/Client%20Desktop/target/classes/layout/screen/DialogNewProject.fxml:10
 
-2017-03-25 16:04:44,095 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] java.lang.ClassNotFoundException: com.genealogytree.application.fxmlcontrollers.DialogNewProjectController
+2017-03-25 16:04:44,095 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] java.lang.ClassNotFoundException: genealogytree.application.fxmlcontrollers.DialogNewProjectController
 2017-03-25 16:13:38,617 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
 /Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/Client%20Desktop/target/classes/layout/screen/PaneGenealogyTreeDraw.fxml:9
 
-2017-03-25 16:13:38,619 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] java.lang.ClassNotFoundException: com.genealogytree.application.fxmlcontrollers.PaneGenealogyTreeDrawController
+2017-03-25 16:13:38,619 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] java.lang.ClassNotFoundException: genealogytree.application.fxmlcontrollers.PaneGenealogyTreeDrawController
 2017-03-25 16:13:38,623 ERROR c.g.c.d.c.ScreenManager [JavaFX Application Thread] class javafx.fxml.LoadException - 
 /Volumes/Studia/Programowanie/Projekty/IntelliJ/Repository/GenealogyTreeProject/Client%20Desktop/target/classes/layout/screen/PaneMainApplicationWindow.fxml
 

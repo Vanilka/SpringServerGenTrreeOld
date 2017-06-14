@@ -1,14 +1,14 @@
-package com.genealogytree.services.implementation;
+package genealogytree.services.implementation;
 
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.domain.GTX_Family;
-import com.genealogytree.domain.GTX_Member;
-import com.genealogytree.domain.GTX_Relation;
-import com.genealogytree.services.GTFamilyService;
-import com.genealogytree.services.responses.FamilyResponse;
-import com.genealogytree.services.responses.MemberResponse;
-import com.genealogytree.services.responses.RelationResponse;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.domain.GTX_Family;
+import genealogytree.domain.GTX_Member;
+import genealogytree.domain.GTX_Relation;
+import genealogytree.services.GTFamilyService;
+import genealogytree.services.responses.FamilyResponse;
+import genealogytree.services.responses.MemberResponse;
+import genealogytree.services.responses.RelationResponse;
+import genealogytree.services.responses.ServerResponse;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;

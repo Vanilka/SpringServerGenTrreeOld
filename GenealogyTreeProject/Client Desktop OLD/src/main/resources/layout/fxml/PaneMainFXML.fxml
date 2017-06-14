@@ -4,7 +4,7 @@
 <?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" id="rootWindow" fx:id="rootWindow"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneMainWindowController">
+            fx:controller="genealogytree.application.fxmlcontrollers.PaneMainWindowController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

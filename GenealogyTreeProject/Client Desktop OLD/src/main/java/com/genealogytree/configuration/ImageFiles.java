@@ -1,4 +1,4 @@
-package com.genealogytree.configuration;
+package genealogytree.configuration;
 
 /**
  * Created by vanilka on 27/12/2016.

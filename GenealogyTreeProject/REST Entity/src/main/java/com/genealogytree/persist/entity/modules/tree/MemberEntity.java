@@ -1,7 +1,7 @@
-package com.genealogytree.persist.entity.modules.tree;
+package genealogytree.persist.entity.modules.tree;
 
-import com.genealogytree.domain.enums.Age;
-import com.genealogytree.domain.enums.Sex;
+import genealogytree.domain.enums.Age;
+import genealogytree.domain.enums.Sex;
 import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;

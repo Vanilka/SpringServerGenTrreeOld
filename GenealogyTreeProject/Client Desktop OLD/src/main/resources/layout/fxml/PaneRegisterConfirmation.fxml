@@ -9,7 +9,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="registerConfirmation" fx:id="registerConfirmation" maxHeight="458.0"
             prefHeight="458.0" prefWidth="400.0" styleClass="logonCommon"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneRegisterConfirmationController">
+            fx:controller="genealogytree.application.fxmlcontrollers.PaneRegisterConfirmationController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

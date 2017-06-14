@@ -1,9 +1,9 @@
-package com.genealogytree.webapplication.dispatchers.advice;
+package genealogytree.webapplication.dispatchers.advice;
 
 
-import com.genealogytree.ExceptionManager.config.Causes;
-import com.genealogytree.ExceptionManager.exception.ExceptionBean;
-import com.genealogytree.ExceptionManager.exception.NoVersionFieldInEntity;
+import genealogytree.ExceptionManager.config.Causes;
+import genealogytree.ExceptionManager.exception.ExceptionBean;
+import genealogytree.ExceptionManager.exception.NoVersionFieldInEntity;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

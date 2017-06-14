@@ -1,4 +1,4 @@
-package com.genealogytree.domain.dto;
+package genealogytree.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;

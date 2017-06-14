@@ -1,6 +1,6 @@
-package com.genealogytree.ExceptionManager.exception;
+package genealogytree.ExceptionManager.exception;
 
-import com.genealogytree.ExceptionManager.config.Causes;
+import genealogytree.ExceptionManager.config.Causes;
 
 /**
  * Created by Martyna SZYMKOWIAK on 24/03/2017.

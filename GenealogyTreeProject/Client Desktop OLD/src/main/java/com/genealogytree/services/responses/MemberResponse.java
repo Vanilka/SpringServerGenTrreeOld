@@ -1,6 +1,6 @@
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;
 
-import com.genealogytree.domain.GTX_Member;
+import genealogytree.domain.GTX_Member;
 
 /**
  * Created by vanilka on 26/12/2016.

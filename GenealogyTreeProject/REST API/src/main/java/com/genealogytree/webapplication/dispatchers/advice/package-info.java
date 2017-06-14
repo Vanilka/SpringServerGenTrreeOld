@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.webapplication.dispatchers.advice;
+package genealogytree.webapplication.dispatchers.advice;

@@ -1,7 +1,7 @@
-package com.genealogytree.webapplication.configuration;
+package genealogytree.webapplication.configuration;
 
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
-import com.genealogytree.service.UserService;
+import genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;

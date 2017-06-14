@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;

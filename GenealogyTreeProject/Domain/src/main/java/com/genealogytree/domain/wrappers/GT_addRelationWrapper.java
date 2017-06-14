@@ -1,6 +1,6 @@
-package com.genealogytree.domain.wrappers;
+package genealogytree.domain.wrappers;
 
-import com.genealogytree.domain.dto.RelationDTO;
+import genealogytree.domain.dto.RelationDTO;
 
 import java.util.List;
 

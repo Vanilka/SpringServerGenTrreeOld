@@ -1,10 +1,10 @@
-package com.genealogytree.services;
+package genealogytree.services;
 
-import com.genealogytree.application.GenealogyTreeContext;
-import com.genealogytree.domain.GTX_Family;
-import com.genealogytree.domain.GTX_Member;
-import com.genealogytree.domain.GTX_Relation;
-import com.genealogytree.services.responses.ServerResponse;
+import genealogytree.application.GenealogyTreeContext;
+import genealogytree.domain.GTX_Family;
+import genealogytree.domain.GTX_Member;
+import genealogytree.domain.GTX_Relation;
+import genealogytree.services.responses.ServerResponse;
 import javafx.beans.property.ObjectProperty;
 
 /**

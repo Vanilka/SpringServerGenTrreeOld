@@ -1,4 +1,4 @@
-package com.genealogytree.configuration;
+package genealogytree.configuration;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

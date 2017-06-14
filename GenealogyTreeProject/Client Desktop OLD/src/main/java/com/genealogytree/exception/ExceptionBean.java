@@ -1,4 +1,4 @@
-package com.genealogytree.exception;
+package genealogytree.exception;
 
 public class ExceptionBean {
     private String cause;

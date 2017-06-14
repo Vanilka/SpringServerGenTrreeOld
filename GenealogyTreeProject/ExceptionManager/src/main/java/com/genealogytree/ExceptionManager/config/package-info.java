@@ -6,4 +6,4 @@
  * @author vanilka
  *
  */
-package com.genealogytree.ExceptionManager.config;
+package genealogytree.ExceptionManager.config;

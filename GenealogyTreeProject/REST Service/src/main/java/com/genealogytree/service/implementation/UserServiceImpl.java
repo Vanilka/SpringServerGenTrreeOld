@@ -1,9 +1,9 @@
-package com.genealogytree.service.implementation;
+package genealogytree.service.implementation;
 
-import com.genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
-import com.genealogytree.persist.entity.modules.administration.UserEntity;
-import com.genealogytree.repository.UserRepository;
-import com.genealogytree.service.UserService;
+import genealogytree.ExceptionManager.exception.NotUniqueUserLoginException;
+import genealogytree.persist.entity.modules.administration.UserEntity;
+import genealogytree.repository.UserRepository;
+import genealogytree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-@ComponentScan("com.genealogytree")
+@ComponentScan("genealogytree")
 public class UserServiceImpl implements UserService {
 
     @Autowired

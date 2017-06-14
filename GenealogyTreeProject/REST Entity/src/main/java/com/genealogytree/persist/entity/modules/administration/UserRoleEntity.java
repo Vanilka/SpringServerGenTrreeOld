@@ -1,4 +1,4 @@
-package com.genealogytree.persist.entity.modules.administration;
+package genealogytree.persist.entity.modules.administration;
 
 import javax.persistence.*;
 

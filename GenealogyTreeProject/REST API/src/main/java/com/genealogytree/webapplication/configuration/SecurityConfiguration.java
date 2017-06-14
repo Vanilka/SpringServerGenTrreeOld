@@ -1,4 +1,4 @@
-package com.genealogytree.webapplication.configuration;
+package genealogytree.webapplication.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

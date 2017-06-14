@@ -1,4 +1,4 @@
-package com.genealogytree.application;
+package genealogytree.application;
 
 import com.jfoenix.controls.JFXTabPane;
 import javafx.scene.control.Tab;

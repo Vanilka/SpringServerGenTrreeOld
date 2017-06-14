@@ -1,9 +1,9 @@
-package com.genealogytree.webapplication.dispatchers.advice;
+package genealogytree.webapplication.dispatchers.advice;
 
-import com.genealogytree.ExceptionManager.config.Causes;
-import com.genealogytree.ExceptionManager.exception.ExceptionBean;
-import com.genealogytree.ExceptionManager.exception.TooManyNullFields;
-import com.genealogytree.webapplication.dispatchers.requestRelationsMapper;
+import genealogytree.ExceptionManager.config.Causes;
+import genealogytree.ExceptionManager.exception.ExceptionBean;
+import genealogytree.ExceptionManager.exception.TooManyNullFields;
+import genealogytree.webapplication.dispatchers.requestRelationsMapper;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;

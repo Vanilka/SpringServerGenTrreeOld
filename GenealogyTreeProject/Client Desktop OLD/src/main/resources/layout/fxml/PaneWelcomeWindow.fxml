@@ -7,7 +7,7 @@
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootWelcomeWindow" prefHeight="400.0" prefWidth="600.0"
             styleClass="mainAnchorPane" xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneWelcomeWindowController">
+            fx:controller="genealogytree.application.fxmlcontrollers.PaneWelcomeWindowController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

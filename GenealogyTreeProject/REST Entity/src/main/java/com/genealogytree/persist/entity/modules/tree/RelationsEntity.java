@@ -1,6 +1,6 @@
-package com.genealogytree.persist.entity.modules.tree;
+package genealogytree.persist.entity.modules.tree;
 
-import com.genealogytree.domain.enums.RelationType;
+import genealogytree.domain.enums.RelationType;
 import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;

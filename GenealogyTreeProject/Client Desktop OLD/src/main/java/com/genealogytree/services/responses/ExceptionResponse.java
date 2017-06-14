@@ -1,6 +1,6 @@
-package com.genealogytree.services.responses;
+package genealogytree.services.responses;
 
-import com.genealogytree.exception.ExceptionBean;
+import genealogytree.exception.ExceptionBean;
 
 public class ExceptionResponse extends ServerResponse {
 

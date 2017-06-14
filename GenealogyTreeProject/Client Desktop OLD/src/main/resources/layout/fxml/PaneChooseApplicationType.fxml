@@ -5,7 +5,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="chooseAppType"
             fx:id="chooseAppType"
             xmlns="http://javafx.com/javafx/8.0.65"
-            fx:controller="com.genealogytree.application.fxmlcontrollers.PaneChooseApplicationTypeController">
+            fx:controller="genealogytree.application.fxmlcontrollers.PaneChooseApplicationTypeController">
     <stylesheets>
         <URL value="@../styles/mainstyle.css"/>
     </stylesheets>

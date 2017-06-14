@@ -9,7 +9,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="mainApplicationWindow" fx:id="mainApplicationWindow" styleClass="mainAnchorPane, gt-screen" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.genealogytree.client.desktop.controllers.implementation.scene.PaneMainApplicationWindowController">
+<AnchorPane id="mainApplicationWindow" fx:id="mainApplicationWindow" styleClass="mainAnchorPane, gt-screen" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="genealogytree.client.desktop.controllers.implementation.scene.PaneMainApplicationWindowController">
     <stylesheets>
         <URL value="@/layout/style/gentree.css" />
     </stylesheets>

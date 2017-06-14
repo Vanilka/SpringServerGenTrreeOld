@@ -1,4 +1,4 @@
-package com.genealogytree.domain.enums;
+package genealogytree.domain.enums;
 
 /**
  * Created by vanilka on 30/12/2016.
