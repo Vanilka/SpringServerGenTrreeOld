@@ -106,7 +106,13 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     }
 
-
+    /**
+     * Function to generating graphical represntation of relation CURRENT
+     *
+     * @param relation
+     * @param sim
+     * @return
+     */
     private GTPanelCurrent generatePanelCurrent(GTX_Relation relation, GTX_Member sim) {
 
         if (relation.getSimLeft() != null && relation.getSimLeft().equals(sim)) {
@@ -127,6 +133,13 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         return null;
     }
 
+    /**
+     * Function to generating graphical representation of Relation EX
+     *
+     * @param relation
+     * @param sim
+     * @return GTPanelEx
+     */
     private GTPanelEx generatePanelEx(GTX_Relation relation, GTX_Member sim) {
         if (relation.getSimRight() != null && relation.getSimLeft() != null) {
             if (relation.getSimRight().equals(sim)) {
@@ -141,10 +154,23 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         return null;
     }
 
+    /**
+     *  Function generating graphical representation of Relation
+     *
+     * @param relation
+     * @return GTRelationType
+     */
     private GTRelationType generateRelationType(GTX_Relation relation) {
         return new GTRelationType(relation.getType(), relation.isActive());
     }
 
+    /**
+     *  Function to verify that the list of relation contain relation of type CURRENT
+     *  CURRENT : (simLeft != null  and simRight != null and relation type != neutral and IS ACTIVE)
+     *
+     * @param relations
+     * @return true/false
+     */
     private boolean hasCurrentRelation(List<GTX_Relation> relations) {
         return (relations.stream()
                 .filter(relation -> relation.getSimRight() != null)
@@ -152,8 +178,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
                 .filter(relation -> relation.getType() != RelationType.NEUTRAL)
                 .filter(GTX_Relation::isActive)
                 .count() > 0);
-
-
     }
 
     /**

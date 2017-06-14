@@ -2,14 +2,12 @@ package com.genealogytree.client.desktop.domain;
 
 import com.genealogytree.client.desktop.configuration.enums.ImageFiles;
 import com.genealogytree.client.desktop.configuration.helper.PhotoMarshaller;
+import com.genealogytree.client.desktop.configuration.helper.WSLongAdapter;
 import com.genealogytree.domain.enums.Age;
 import com.genealogytree.domain.enums.Sex;
 import javafx.beans.property.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -138,6 +136,8 @@ public class GTX_Member implements Serializable {
         return version;
     }
 
+    @XmlID
+    @XmlJavaTypeAdapter(type=long.class, value=WSLongAdapter.class)
     public long getId() {
         return id.get();
     }

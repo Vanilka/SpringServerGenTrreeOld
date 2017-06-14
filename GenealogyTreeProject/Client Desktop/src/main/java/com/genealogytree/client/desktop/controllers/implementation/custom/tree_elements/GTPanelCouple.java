@@ -135,11 +135,13 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
             drawLines();
         });
     }
+
     @Override
     protected Bounds getRelativeBounds(Node node) {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         return this.sceneToLocal(nodeBoundsInScene);
     }
+
     @Override
     protected Point2D getBottomPoint(Bounds b) {
 
@@ -169,49 +171,51 @@ public class GTPanelCouple extends GTPanelCurrent implements GTPanelSim, GTPanel
         Bounds thisBound = getRelativeBounds(relationType.get());
         System.out.println("BOUND OF RELATION : " + thisBound);
         Point2D bottomPoint = getBottomPoint(thisBound);
-        System.out.println("point of relation :"  +bottomPoint);
+        System.out.println("point of relation :" + bottomPoint);
         List<Bounds> childrenBounds = new ArrayList<>();
 
             /*
                 Create Bounds of children
              */
-        childrenPanelList.forEach(c -> {
-            childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
-        });
+
+        if (childrenPanelList.size() > 0) {
+            childrenPanelList.forEach(c -> {
+                childrenBounds.add(getRelativeBounds(c.returnLeaf().get()));
+            });
 
             /*
                 Foreach child bounds create point2 ( top point)  -> start point for connector
              */
-        List<Point2D> point2DList = new ArrayList<>();
-        childrenBounds.forEach(childBounds -> {
-            point2DList.add(getTopPoint(childBounds));
-        });
+            List<Point2D> point2DList = new ArrayList<>();
+            childrenBounds.forEach(childBounds -> {
+                point2DList.add(getTopPoint(childBounds));
+            });
 
             /*
                 Create connector Vertical from child
              */
-        point2DList.forEach(point -> {
-            connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
-        });
+            point2DList.forEach(point -> {
+                connectors.add(drawConnector(point, new Point2D(point.getX(), point.getY() - 20)));
+            });
 
-        Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
-        Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
+            Point2D p1 = point2DList.stream().min(Comparator.comparingDouble(Point2D::getX)).get();
+            Point2D p2 = point2DList.stream().max(Comparator.comparingDouble(Point2D::getX)).get();
 
             /*
                 Create connector beetwen siblings
              */
-        if (p1.getX() != p2.getX()) {
-            connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
-        }
+            if (p1.getX() != p2.getX()) {
+                connectors.add(drawConnector(new Point2D(p1.getX(), p1.getY() - 20), new Point2D(p2.getX(), p2.getY() - 20)));
+            }
 
 
             /*
                    Create connecor beetwen child and parent
              */
-        connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
+            connectors.add(drawConnector(bottomPoint, new Point2D((p1.getX() + p2.getX()) / 2, p1.getY() - 20)));
 
-        getChildren().addAll(connectors);
-
+            getChildren().addAll(connectors);
+        }
     }
 
     private void initListeners() {

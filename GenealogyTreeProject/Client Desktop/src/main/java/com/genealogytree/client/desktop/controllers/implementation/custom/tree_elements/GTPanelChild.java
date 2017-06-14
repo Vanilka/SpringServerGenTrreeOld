@@ -27,7 +27,7 @@ import lombok.Setter;
  *         Top
  *         Center HboxPane
  *         Right panelSingle
- *         Left
+ *         Left pane EX
  */
 @Getter
 @Setter
@@ -56,7 +56,7 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
 
     {
         init();
-        setPadding(new Insets(100, 0, 0, 0));
+        setPadding(new Insets(100, 30, 0, 30));
     }
 
     public GTPanelChild(GTLeaf leaf) {
@@ -68,10 +68,6 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
         viewInit(pane);
         viewInit(paneSingle);
         this.leaf.setValue(leaf);
-
-        if (panelsExList != null && !panelsExList.isEmpty()) {
-            this.panelsExList.addAll(panelsExList);
-        }
 
         setLeft(pane);
         setCenter(paneSingle);
@@ -129,13 +125,22 @@ public class GTPanelChild extends GTPanelCommon implements GTPanel {
         pane.setBorder(new Border(new BorderStroke(Color.BLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-/*        Rectangle rectangle = new Rectangle(pane.getLayoutX(), pane.getLayoutY(), pane.getWidth(), pane.getHeight());
+        Rectangle rectangle = new Rectangle(pane.getLayoutX(), pane.getLayoutY(), pane.getWidth(), pane.getHeight());
         rectangle.setFill(Color.ANTIQUEWHITE);
+        rectangle.setVisible(false);
         rectangle.widthProperty().bind(pane.widthProperty().add(20));
-        rectangle.heightProperty().bind(pane.heightProperty().subtract(40));
+        rectangle.setHeight(100);
         rectangle.layoutXProperty().bind(pane.layoutXProperty().subtract(20));
         rectangle.layoutYProperty().bind(pane.layoutYProperty().add(20));
-        getChildren().add(rectangle);*/
+        getChildren().add(rectangle);
+
+        panelsExList.addListener((ListChangeListener<? super GTPanelEx>) c -> {
+            if(c.getList().size() > 0) {
+                rectangle.setVisible(true);
+            } else {
+                rectangle.setVisible(false);
+            }
+        });
     }
 
     private void viewInit(BorderPane pane) {

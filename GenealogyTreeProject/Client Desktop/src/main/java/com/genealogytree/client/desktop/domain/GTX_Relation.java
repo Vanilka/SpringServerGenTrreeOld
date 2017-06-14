@@ -1,6 +1,7 @@
 package com.genealogytree.client.desktop.domain;
 
 import com.genealogytree.client.desktop.configuration.helper.BooleanPropertyMarshaller;
+import com.genealogytree.client.desktop.configuration.helper.SimMarshaller;
 import com.genealogytree.client.desktop.configuration.helper.StringPropertyMarshaller;
 import com.genealogytree.domain.enums.RelationType;
 import javafx.beans.binding.BooleanBinding;
@@ -39,6 +40,8 @@ public class GTX_Relation extends Observable implements  Serializable {
 
     private ObservableList<GTX_Member> children;
 
+    @XmlElement()
+    @XmlJavaTypeAdapter(BooleanPropertyMarshaller.class)
     private BooleanProperty active;
 
     private BooleanProperty current;
@@ -116,6 +119,7 @@ public class GTX_Relation extends Observable implements  Serializable {
         return type;
     }
 
+    @XmlIDREF
     public GTX_Member getSimLeft() {
         return simLeft.get();
     }
@@ -124,6 +128,7 @@ public class GTX_Relation extends Observable implements  Serializable {
         return simLeft;
     }
 
+    @XmlIDREF
     public GTX_Member getSimRight() {
         return simRight.get();
     }
@@ -132,6 +137,9 @@ public class GTX_Relation extends Observable implements  Serializable {
         return simRight;
     }
 
+    @XmlElementWrapper
+    @XmlElement(name="child")
+    @XmlJavaTypeAdapter(SimMarshaller.class)
     public ObservableList<GTX_Member> getChildren() {
         return children;
     }

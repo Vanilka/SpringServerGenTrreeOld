@@ -20,6 +20,6 @@ public class BooleanPropertyMarshaller extends XmlAdapter<String, BooleanPropert
 
     @Override
     public String marshal(BooleanProperty v) throws Exception {
-        return v.toString();
+        return ""+v.get();
     }
 }
