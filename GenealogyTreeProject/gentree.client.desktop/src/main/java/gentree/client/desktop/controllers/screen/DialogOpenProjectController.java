@@ -2,7 +2,6 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
 import gentree.client.desktop.configurations.enums.FilesFXML;
 import gentree.client.desktop.configurations.messages.Keys;
 import gentree.client.desktop.configurations.messages.LogMessages;
@@ -20,8 +19,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
@@ -35,23 +32,40 @@ import java.util.ResourceBundle;
 public class DialogOpenProjectController implements Initializable, FXMLController, FXMLPane, FXMLDialogController {
 
 
-
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
     private JFXTabPane tabPaneOpenProject;
 
+    @FXML
+    private JFXButton buttonConfirm;
 
+    @FXML
+    private JFXButton buttonCancel;
+
+    /*
+        Tab Open New Project
+     */
     private Tab tabOpenNewProject;
+    private TabOpenNewProjectController tabOpenNewProjectController;
+
+    /*
+        Tab Open Existing Project
+     */
     private Tab tabOpenExistingProject;
+    private TabOpenExistingProjectController tabOpenExistingProjectController;
 
     private Stage stage;
 
     {
         tabOpenExistingProject = new Tab();
         tabOpenNewProject = new Tab();
+
+        tabOpenNewProjectController = new TabOpenNewProjectController();
+        tabOpenExistingProjectController = new TabOpenExistingProjectController();
     }
+
     /**
      * Initializes the controller class.
      */
@@ -78,35 +92,37 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
     @FXML
     public void confrim() {
-    /*    context.getService().setCurrentFamilly(new Familly(this.familyNameField.getText().trim()));
-        sm.loadFxml(new MainWindowController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
-        */
+        if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
+            context.getService().setCurrentFamilly(new Familly(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
+            sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+        }
         this.stage.close();
 
     }
 
 
     private void initTabs() {
-        sm.loadFxml(new TabOpenNewProjectController(), tabPaneOpenProject, tabOpenNewProject, FilesFXML.TAB_OPEN_NEW_PROJECT_FXML, getValueFromKey(Keys.TAB_NEW_PROJECT));
-        sm.loadFxml(new TabOpenExistingProjectController(), tabPaneOpenProject, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
+        tabOpenNewProjectController = (TabOpenNewProjectController) sm.loadFxml(tabOpenNewProjectController, tabPaneOpenProject, tabOpenNewProject, FilesFXML.TAB_OPEN_NEW_PROJECT_FXML, getValueFromKey(Keys.TAB_NEW_PROJECT));
+        tabOpenExistingProjectController = (TabOpenExistingProjectController) sm.loadFxml(tabOpenExistingProjectController, tabPaneOpenProject, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
         tabPaneOpenProject.getSelectionModel().select(tabOpenNewProject);
     }
 
     private void addSelectedTabListener() {
         tabPaneOpenProject.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            if(newValue.equals(tabOpenNewProject)) {
-                System.out.println("new");
-            } else if(newValue.equals(tabOpenExistingProject)) {
-                System.out.println("existing");
+            if (newValue.equals(tabOpenNewProject)) {
+                buttonConfirm.setText(getValueFromKey(Keys.CREATE));
+            } else if (newValue.equals(tabOpenExistingProject)) {
+                buttonConfirm.setText(getValueFromKey(Keys.OPEN));
             }
         });
     }
 
     private void addDisableButtonListener() {
-/*        BooleanBinding disableBinding = Bindings.createBooleanBinding(
-                () -> this.familyNameField.getText().isEmpty(), this.familyNameField.textProperty());
-        this.confirmNewProject.disableProperty().bind(disableBinding);*/
+        BooleanBinding disableBinding = Bindings.createBooleanBinding(
+                () -> tabOpenNewProjectController.getFamilyNameField().getText().isEmpty(),
+                tabOpenNewProjectController.getFamilyNameField().textProperty());
+        this.buttonConfirm.disableProperty().bind(disableBinding);
     }
 
     /*

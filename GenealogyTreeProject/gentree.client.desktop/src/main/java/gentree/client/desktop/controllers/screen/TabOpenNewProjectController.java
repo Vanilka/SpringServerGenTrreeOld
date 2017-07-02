@@ -41,4 +41,6 @@ public class TabOpenNewProjectController implements Initializable, FXMLControlle
         this.tabPane = tabPane;
         this.tab = tab;
     }
+
+
 }

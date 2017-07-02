@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  */
 public class MainWindowController implements Initializable, FXMLController, FXMLPane {
 
-    @FXML
+
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @Override

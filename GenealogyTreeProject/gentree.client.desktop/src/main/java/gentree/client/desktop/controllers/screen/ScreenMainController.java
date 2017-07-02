@@ -1,6 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
  */
 
 @Log4j2
-public class ScreenMainController implements Initializable, FXMLController {
+public class ScreenMainController implements Initializable, FXMLController, FXMLAnchorPane {
 
     @FXML
     @Setter

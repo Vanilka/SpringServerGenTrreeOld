@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="tabOpenNewProject" fx:id="tabNewProject"
-            styleClass="tab" xmlns="http://javafx.com/javafx/8.0.131"
+            styleClass="" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.TabOpenNewProjectController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>
