@@ -6,30 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Domain" />
-        <module name="ExceptionManager" />
-        <module name="gt-client-desktop" />
-        <module name="gt-client-web" />
-        <module name="gt-rest-api" />
-        <module name="rest-db-manager" />
-        <module name="rest-entity" />
-        <module name="rest-facade" />
-        <module name="rest-repository-layer" />
-        <module name="rest-service-layer" />
+        <module name="gentree.client.desktop" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="Domain" target="1.8" />
-      <module name="ExceptionManager" target="1.8" />
+    <bytecodeTargetLevel>
       <module name="GenealogyTreeProject" target="1.8" />
-      <module name="gt-client-desktop" target="1.8" />
-      <module name="gt-client-web" target="1.8" />
-      <module name="gt-rest-api" target="1.8" />
-      <module name="rest-db-manager" target="1.8" />
-      <module name="rest-entity" target="1.8" />
-      <module name="rest-facade" target="1.8" />
-      <module name="rest-repository-layer" target="1.8" />
-      <module name="rest-service-layer" target="1.8" />
+      <module name="gentree.client.desktop" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
