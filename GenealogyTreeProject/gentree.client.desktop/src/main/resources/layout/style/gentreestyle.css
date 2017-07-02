@@ -1,0 +1,254 @@
+
+/*
+    Colors Definition
+*/
+.root {
+
+    -gentree-main-backgorund-color: #3c4f4c;
+    
+    -gentree-background-2: #266558;
+    -gentree-background-3: #2F3737;
+    -gentree-background-4: #404A4B;
+    -gentree-background-5: rgba(168, 189, 185, 0.6);
+    -gentree-dark-pane: rgba(28, 32, 29, 0.40);
+    -gentree-markup: #81d136;
+    -gentree-focus-color: rgba(82, 202, 0, 0.9);
+    -gentree-content-pane: rgba(230, 255, 251, 0.2);
+    -gentree-textfield-text-color: #ecf2dd;
+    -gentree-textfield-unfocus-text-color: #acbdb2;
+    -gentree-textfield-error-color: #9E0303;
+    -gentree-button-1: #214e41;
+    -gentree-font-color-1: #faffd5;
+    -gentree-font-color-2: #c7c5c4;
+
+}
+
+/*
+    Root Windows
+*/
+#rootWindow {
+    -fx-min-height: 700px;
+    -fx-min-width: 1200px;
+}
+
+/*
+    Commons Panes
+ */
+
+.mainAnchorPane {
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: -gentree-main-backgorund-color;
+    -fx-pref-height: 600px;
+    -fx-min-height: 600px;
+    -fx-max-height: -1;
+    -fx-min-width: -1;
+    -fx-pref-width: 1000px;
+    -fx-max-width: -1;
+}
+
+.commonPane {
+    -fx-background-color: -gentree-background-5;
+    -fx-border-radius: 20 20 20 20;
+    -fx-background-radius: 20 20 20 20;
+    -fx-border-color: rgba(168, 189, 185, 0.6);
+}
+
+.commonPaneType1 {
+    -fx-min-height: 400px;
+    -fx-pref-height: 400px;
+    -fx-max-height: 400px;
+    -fx-min-width: 300px;
+    -fx-pref-width: 300px;
+    -fx-max-width: 300px;
+}
+
+.commonPaneType1:pressed {
+    -fx-border-color: rgba(168, 189, 185, 0.6);
+    -fx-background-color: rgba(168, 189, 185, 0.6);
+    -fx-effect: innershadow(two-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+}
+
+/*
+    Menu Bar ->  Language Chooser
+*/
+#languageChooser {
+    -fx-background-color: -gentree-background-3;
+    -fx-border-color: -gentree-background-2;
+    -fx-border-style: dotted;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#languageChooser:showing {
+    -fx-background-color: -gentree-background-2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+#languageChooser .cell,
+#languageChooser .list-view .list-cell {
+    -fx-text-fill: -gentree-font-color-2;
+    -fx-padding: 0 10 0 10;
+}
+
+#languageChooser .list-view {
+    -fx-border-color: -gentree-background-3;
+    -fx-background-color:-gentree-background-3;
+    -fx-border-style: dotted;
+}
+
+#languageChooser .list-view .list-cell {
+    -fx-background-color: -gentree-background-3;
+    -fx-border-color: transparent transparent -gentree-background-2 transparent;
+    -fx-border-style: dotted;
+}
+
+#languageChooser .list-view .list-cell:filled:hover,
+#languageChooser:hover {
+    -fx-background-color: -gentree-background-2;
+}
+
+/*
+    Menu Bar
+*/
+#menuBarPane {
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-min-width: -1;
+    -fx-pref-width: -1;
+    -fx-max-width: -1;
+}
+
+.menu-bar {
+    -fx-padding: 0px 0px 0px 0px;
+    -fx-background-color: -gentree-background-3;
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-min-width: -1;
+    -fx-pref-width: -1;
+    -fx-max-width: -1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.menu {
+    -fx-background-color: -gentree-background-3;
+    -fx-pref-height: 40px;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+    -fx-min-width: 100px;
+    -fx-border-color: -gentree-background-2;
+    -fx-border-style: dotted;
+}
+
+.menu:hover {
+    -fx-background-color: -gentree-background-2;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+.menu:showing {
+    -fx-background-color: -gentree-background-2;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+
+
+.menu .label, .menu-item .label {
+    -fx-text-fill: -gentree-font-color-2;
+    -fx-padding: 0 10 0 10;
+}
+
+
+.menu-item:focused {
+    -fx-background-color: -gentree-background-2;
+}
+
+.context-menu {
+    -fx-background-color: -gentree-background-4;
+    -fx-min-width: 150px;
+    -fx-border-color: -gentree-background-4;
+}
+
+/*
+    Welcome Window
+ */
+
+/*
+    MainApplication Windows -?
+*/
+
+#chooseAppType {
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: -gentree-main-backgorund-color;
+    -fx-pref-height: 600px;
+    -fx-min-height: 600px;
+    -fx-max-height: -1;
+    -fx-min-width: -1;
+    -fx-pref-width: 1000px;
+    -fx-max-width: -1;
+    -fx-background-image: url("/layout/images/backgrounds/TestBackground.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+}
+
+
+.projectPane {
+    -fx-pref-width: 300px;
+    -fx-pref-height: 400px;
+}
+
+/*
+    Dialog Pane
+ */
+
+.dialog-pane {
+    -fx-min-height: 250px;
+    -fx-pref-height: 250px;
+    -fx-max-height: 250px;
+    -fx-min-width: 450px;
+    -fx-pref-width: 450px;
+    -fx-max-width: 450px;
+    -fx-background-color: -gentree-main-backgorund-color;
+}
+
+
+/*
+    Tab Pane
+ */
+
+.tabPane {
+
+    -fx-background-color: -gentree-content-pane;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+.tabPane .tab-header-area .tab-header-background {
+    -fx-background-color: -gentree-background-3;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.tabPane .tab:selected {
+    -fx-background-color: -gentree-background-2;
+    /*-fx-background-color: -gentree-focus-color;*/
+    -fx-background-radius: 10 10 0 0;
+}
+
+.tabPane .tab:selected .jfx-rippler {
+    -fx-rippler-fill: -gentree-markup;
+}
+
+.tabPane .tab-header-area .tab-selected-line {
+    -fx-stroke: -gentree-markup;
+}
+
+.tabPane .tab {
+    -fx-background-color: -gentree-background-4;
+    -fx-background-radius: 10 10 0 0;
+}
+
+
+.button {
+    -fx-background-color: -gentree-background-2;
+    -fx-text-fill: -gentree-textfield-text-color;
+    -fx-font-size: 18px;
+}

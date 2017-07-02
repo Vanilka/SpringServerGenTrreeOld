@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<AnchorPane id="mainAnchorPane" fx:id="mainAnchorPane" xmlns="http://javafx.com/javafx/8.0.65"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.ScreenWelcomeController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <styleClass>
+        <String fx:value="gt-screen"/>
+        <String fx:value="mainAnchorPane"/>
+    </styleClass>
+    <children>
+        <Pane id="LocalProjectPane" fx:id="localProjectPane" prefHeight="400" prefWidth="300" styleClass="projectPane"
+              AnchorPane.leftAnchor="60.0"/>
+        <Pane id="OnlineProjectPane" fx:id="onlineProjectPane" styleClass="projectPane" AnchorPane.rightAnchor="60.0"/>
+    </children>
+</AnchorPane>
