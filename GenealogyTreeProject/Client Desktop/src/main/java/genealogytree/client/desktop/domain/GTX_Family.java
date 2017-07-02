@@ -15,7 +15,6 @@ import java.io.Serializable;
  * Created by vanilka on 22/11/2016.
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
-
 @Log4j2
 @XmlRootElement
 public class GTX_Family implements Serializable {

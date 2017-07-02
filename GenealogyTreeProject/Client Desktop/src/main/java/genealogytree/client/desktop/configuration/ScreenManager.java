@@ -174,6 +174,9 @@ public class ScreenManager {
     }
 
     public FXMLTab loadFxml(FXMLTab controller, JFXTabPane tabPane, Tab tab, FXMLFile fxml, String title) {
+        System.out.println("fxml : "+fxml);
+        System.out.println("RB :" +context.getBundleValue().getLocale());
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
         try {
             tab.setContent(loader.load());
