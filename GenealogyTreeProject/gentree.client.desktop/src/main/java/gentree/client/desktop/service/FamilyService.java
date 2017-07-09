@@ -1,13 +1,16 @@
 package gentree.client.desktop.service;
 
-import gentree.client.desktop.domain.Familly;
+import gentree.client.desktop.domain.Family;
+import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.service.responses.ServiceResponse;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
  */
 public interface FamilyService  {
 
-    Familly getCurrentFamilly();
-    void setCurrentFamilly(Familly familly);
+    Family getCurrentFamily();
+    void setCurrentFamily(Family family);
 
+    ServiceResponse addMember(Member member);
 }

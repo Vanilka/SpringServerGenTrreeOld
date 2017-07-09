@@ -12,9 +12,14 @@ public enum FilesFXML {
     ONLINE_APP_MODE("button.online.mode.fxml"),
     SCREEN_WELCOME_FXML("screen.welcome.fxml"),
     OPEN_PROJECT_DIALOG("dialog.open.project.fxml"),
+    ADD_MEMBER_DIALOG("dialog.add.member.fxml"),
     SCREEN_MAIN_FXML("screen.main.fxml"),
     TAB_OPEN_NEW_PROJECT_FXML("tab.open.new.project.fxml"),
-    TAB_OPEN_EXISTING_PROJECT_FXML("tab.open.existing.project.fxml");
+    TAB_OPEN_EXISTING_PROJECT_FXML("tab.open.existing.project.fxml"),
+    SCREEN_MAIN_RIGHT_FXML("screen.main.right.fxml"),
+    SCREEN_MAIN_LEFT_FXML("screen.main.left.fxml"),
+    SCREEN_MAIN_LEFT_FAMILY_INFO_FXML("tab.family.info.fxml"),
+    SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml");
 
     private final String fxmlPath = "/layout/screen/";
     private String file;

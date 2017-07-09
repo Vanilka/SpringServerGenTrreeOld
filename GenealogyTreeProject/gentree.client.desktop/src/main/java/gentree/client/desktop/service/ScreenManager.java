@@ -7,10 +7,7 @@ import gentree.client.desktop.configurations.messages.AppTitles;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.controllers.FXMLTab;
-import gentree.client.desktop.controllers.screen.MainFooterController;
-import gentree.client.desktop.controllers.screen.MainMenuController;
-import gentree.client.desktop.controllers.screen.ScreenMainController;
-import gentree.client.desktop.controllers.screen.ScreenWelcomeController;
+import gentree.client.desktop.controllers.screen.*;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -45,6 +42,7 @@ public class ScreenManager {
     private static final FileChooser xmlFileChooser = new FileChooser();
     private static String LAST_PATH;
     BorderPaneReloadHelper bpHelper;
+
     /*
         Commons controllers
      */
@@ -55,6 +53,7 @@ public class ScreenManager {
     /*
         Commons Panes
      */
+    private ScreenMainRightController screenMainRightController;
     private BorderPane mainWindowBorderPane;
     private Stage stage;
     private Scene scene;
@@ -145,6 +144,7 @@ public class ScreenManager {
         } catch (Exception ex) {
             log.error(ex.getMessage());
             log.error(ex.getCause());
+            ex.printStackTrace();
         }
 
     }
@@ -275,6 +275,14 @@ public class ScreenManager {
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("XML", "*.xml")
         );
+    }
+
+    /*
+        Register Screen
+     */
+
+    public void register(ScreenMainRightController controller) {
+        this.screenMainRightController = controller;
     }
 
     public enum Where {

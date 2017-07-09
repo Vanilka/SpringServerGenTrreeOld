@@ -54,13 +54,7 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
      * LISTEN LANGUAGE CHANGES
      */
     private void addLanguageListener() {
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }
 
     private String getValueFromKey(String key) {

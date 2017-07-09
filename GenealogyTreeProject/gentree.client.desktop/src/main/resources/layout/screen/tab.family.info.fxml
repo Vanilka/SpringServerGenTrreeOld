@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane id="screenMainLeftFamilyInfoController" fx:id="screenMainLeftFamilyInfoController"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.TabFamilyInfoController"
+            styleClass="transparentPane"
+            AnchorPane.bottomAnchor="30" AnchorPane.topAnchor="30"
+            AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <VBox fx:id="contentVBox" spacing="50.0" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20"
+              AnchorPane.rightAnchor="20" AnchorPane.topAnchor="30">
+            <children>
+                <AnchorPane maxWidth="200" minWidth="200">
+                    <children>
+                        <JFXTextField fx:id="familyName" labelFloat="true" prefHeight="37.0" prefWidth="199.0"
+                                      promptText="%project_name_label"
+                                      styleClass="jfx-text-field, jfx-text-allways-focused"/>
+                        <JFXTextField fx:id="membersCount" labelFloat="true" layoutY="69.0" prefHeight="37.0"
+                                      prefWidth="199.0" promptText="%project_member_number"
+                                      styleClass="jfx-text-field, jfx-text-allways-focused,"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane maxWidth="200" minWidth="200">
+                    <children>
+                        <JFXButton fx:id="modifyNameButton" buttonType="RAISED" prefHeight="37.0" prefWidth="187.0"
+                                   text="%modify"/>
+                        <JFXButton fx:id="addMemberButton" buttonType="RAISED" layoutY="52.0" prefHeight="37.0"
+                                   prefWidth="187.0" text="%add_member" onAction="#openNewMemberDialog"/>
+                    </children>
+                </AnchorPane>
+            </children>
+            <padding>
+                <Insets bottom="30.0" top="10.0"/>
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<fx:root fx:id="imgNode" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="293.0"
+         prefWidth="356.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.111"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Rectangle fx:id="bodyNodeDark" arcHeight="40.0" arcWidth="40.0" fill="#f2fffad7" height="293.0" layoutX="10.0"
+                   layoutY="47.0" smooth="false" stroke="#2f3737" strokeType="INSIDE" strokeWidth="10.0" width="361.0"
+                   AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                   AnchorPane.topAnchor="5.0">
+            <effect>
+                <DropShadow color="#343937" height="20.63" radius="10.6675" spread="0.14" width="24.04"/>
+            </effect>
+        </Rectangle>
+        <Rectangle fx:id="bodyNode" arcHeight="20.0" arcWidth="20.0" fill="#bfe1dac4" height="274.0" layoutY="37.0"
+                   smooth="false" stroke="#214e41ed" strokeType="INSIDE" strokeWidth="0.0" width="341.0"
+                   AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+                   AnchorPane.topAnchor="15.0">
+            <effect>
+                <InnerShadow choke="0.24" height="48.57" radius="29.097499999999997" width="69.82"/>
+            </effect>
+        </Rectangle>
+        <Rectangle fx:id="labelFondNode" arcHeight="40.0" arcWidth="40.0" fill="#2f3737" height="37.0" stroke="#2f3737"
+                   strokeType="INSIDE" strokeWidth="0.0" width="200.0" AnchorPane.leftAnchor="5.0"
+                   AnchorPane.topAnchor="5.0"/>
+        <Label fx:id="nameNode" alignment="CENTER" layoutX="25.0" layoutY="4.0" text="Label" textFill="WHITE"
+               textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="7.0">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <StackPane fx:id="content" layoutX="23.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                   prefHeight="244.0" prefWidth="315.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0"
+                   AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <HBox fx:id="contentHbox" alignment="CENTER" maxHeight="1.7976931348623157E308"
+                      maxWidth="1.7976931348623157E308" AnchorPane.topAnchor="30.0"/>
+            </children>
+            <padding>
+                <Insets bottom="30.0"/>
+            </padding>
+        </StackPane>
+    </children>
+</fx:root>

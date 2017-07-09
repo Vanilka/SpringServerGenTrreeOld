@@ -23,7 +23,7 @@ public class GenTreeContext {
 
     private Locale locale;
     private ObjectProperty<ResourceBundle> bundle = new SimpleObjectProperty<>();
-    FamilyService service;
+    private FamilyService service;
 
     {
         locale = new Locale("pl", "PL");
@@ -43,5 +43,12 @@ public class GenTreeContext {
         return bundle.getValue();
     }
 
+    /*
+        GETTERS
+     */
+
+    /*
+        SETTERS
+     */
 
 }

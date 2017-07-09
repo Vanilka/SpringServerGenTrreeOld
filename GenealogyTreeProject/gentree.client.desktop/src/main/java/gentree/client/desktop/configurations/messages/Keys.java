@@ -64,4 +64,6 @@ public class Keys {
     public static final String SIM_BORN_NAME = "sim_born_name";
     public static final String TAB_NEW_PROJECT = "tab_project_new";
     public static final String TAB_OPEN_PROJECT = "tab_project_open";
+    public static final String TAB_FAMILY_INFO = "tab_family_info";
+    public static final String TAB_FAMILY_VIEW = "tab_family_view";
 }

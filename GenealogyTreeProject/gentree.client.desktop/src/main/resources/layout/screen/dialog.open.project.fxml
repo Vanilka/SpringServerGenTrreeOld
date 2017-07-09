@@ -4,7 +4,7 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane id="newProjectDialog" fx:id="newProjectDialog" minHeight="300" minWidth="400" styleClass="dialog-pane"
+<AnchorPane id="newProjectDialog" fx:id="newProjectDialog" styleClass="dialog-pane"
             xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gentree.client.desktop.controllers.screen.DialogOpenProjectController">
     <stylesheets>

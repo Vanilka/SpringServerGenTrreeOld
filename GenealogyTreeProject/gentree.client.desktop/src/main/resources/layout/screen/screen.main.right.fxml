@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane id="screenMainRight" fx:id="screenMainRight" styleClass=""
-            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="gentree.client.desktop.controllers.screen.ScreenMainRightController"
-            minWidth="500" minHeight="400">
+<AnchorPane id="screenMainRight" fx:id="screenMainRight"
+            styleClass="transparentPane" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0"
+            AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" xmlns="http://javafx.com/javafx/8.0.131"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.ScreenMainRightController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
+    <children>
+        <ScrollPane fx:id="treeDrawScrollPane" styleClass="transparentPane" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <AnchorPane fx:id="treeDrawAnchorPane" styleClass="contentPane">
+                    <children>
+                        <HBox fx:id="genTreeContent" styleClass="transparentPane" AnchorPane.bottomAnchor="0.0"
+                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </children>
 
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
 
 </AnchorPane>

@@ -8,7 +8,7 @@ import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import gentree.client.desktop.controllers.FXMLPane;
-import gentree.client.desktop.domain.Familly;
+import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.service.ScreenManager;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -93,7 +93,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     @FXML
     public void confrim() {
         if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
-            context.getService().setCurrentFamilly(new Familly(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
+            context.getService().setCurrentFamily(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
             sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
         }
         this.stage.close();
@@ -129,13 +129,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
      * LISTEN LANGUAGE CHANGES
      */
     private void addLanguageListener() {
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }
 
     private String getValueFromKey(String key) {
