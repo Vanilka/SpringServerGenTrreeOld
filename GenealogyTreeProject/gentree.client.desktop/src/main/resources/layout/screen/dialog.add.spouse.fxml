@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane id="" fx:id="" minHeight="400" minWidth="700" styleClass="dialog-pane"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.DialogAddSpouseController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="20"
+                    AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+            <children>
+                <Label layoutX="20" prefHeight="33.0" prefWidth="252.0" text="%label_current_sim"/>
+                <AnchorPane fx:id="currentMemberPane" layoutX="20" layoutY="50" maxHeight="145.0" maxWidth="255.0"
+                            minHeight="145.0" minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
+
+                <Label layoutX="450" prefHeight="33.0" prefWidth="254.0" text="%label_spouse_sim_both"/>
+                <AnchorPane fx:id="spousePane" layoutX="450" layoutY="50" maxHeight="145.0" maxWidth="255.0"
+                            minHeight="145.0" minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
+                <JFXButton fx:id="chooseSpouse" layoutX="450" layoutY="200" onAction="#openChoosingSpouse"
+                           text="Set/Change"/>
+
+
+                <Separator layoutX="52.0" layoutY="276.0" prefHeight="0.0" prefWidth="534.0"
+                           AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0"/>
+                <JFXCheckBox fx:id="checkBoxHomoAllowed"
+                             text="%label_isAllowedHomo"
+                             layoutY="283.0" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50"/>
+
+            </children>
+        </AnchorPane>
+        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="10.0"/>
+        <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="10.0"/>
+    </children>
+</AnchorPane>

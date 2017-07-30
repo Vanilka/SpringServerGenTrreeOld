@@ -1,23 +1,34 @@
 package gentree.client.desktop.service;
 
 import com.jfoenix.controls.JFXTabPane;
+import gentree.client.desktop.configurations.GenTreeProperties;
 import gentree.client.desktop.configurations.enums.FilesFXML;
 import gentree.client.desktop.configurations.helper.BorderPaneReloadHelper;
 import gentree.client.desktop.configurations.messages.AppTitles;
-import gentree.client.desktop.controllers.FXMLDialogController;
-import gentree.client.desktop.controllers.FXMLPane;
-import gentree.client.desktop.controllers.FXMLTab;
+import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
+import gentree.client.desktop.controllers.tree_elements.FamilyMember;
+import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.enums.Gender;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +37,7 @@ import org.controlsfx.control.Notifications;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -37,6 +49,7 @@ public class ScreenManager {
 
     public static final ScreenManager INSTANCE = new ScreenManager();
     public static final GenTreeContext context = GenTreeContext.INSTANCE;
+    public static final GenTreeProperties properties = GenTreeProperties.INSTANCE;
 
     private static final FileChooser imgFileChooser = new FileChooser();
     private static final FileChooser xmlFileChooser = new FileChooser();
@@ -50,6 +63,7 @@ public class ScreenManager {
     private MainMenuController mainMenuController;
     private MainFooterController mainFooterController;
     private ScreenWelcomeController screenWelcomeController;
+    private RootWindowController rootWindowController;
     /*
         Commons Panes
      */
@@ -57,6 +71,13 @@ public class ScreenManager {
     private BorderPane mainWindowBorderPane;
     private Stage stage;
     private Scene scene;
+
+
+    /*
+        Context Menus
+     */
+
+    private SimContextMenu simContextMenu;
 
     public ScreenManager() {
         bpHelper = new BorderPaneReloadHelper();
@@ -66,10 +87,11 @@ public class ScreenManager {
 
     public void init() {
         initRoot();
-        loadFxml(mainFooterController, this.screenMainController.getRootBorderPane(), FilesFXML.MAIN_FOOTER_FXML, Where.BOTTOM);
-        loadFxml(mainMenuController, this.screenMainController.getRootBorderPane(), FilesFXML.MAIN_MENU_FXML, Where.TOP);
-        loadFxml(screenWelcomeController, this.screenMainController.getRootBorderPane(), FilesFXML.SCREEN_WELCOME_FXML, Where.CENTER);
+        loadFxml(mainFooterController, this.mainWindowBorderPane, FilesFXML.MAIN_FOOTER_FXML, Where.BOTTOM);
+        loadFxml(mainMenuController, this.mainWindowBorderPane, FilesFXML.MAIN_MENU_FXML, Where.TOP);
+        loadFxml(screenWelcomeController, this.mainWindowBorderPane, FilesFXML.SCREEN_WELCOME_FXML, Where.CENTER);
 
+        simContextMenu = new SimContextMenu();
 
         this.scene = new Scene(mainWindowBorderPane);
         this.stage.setScene(this.scene);
@@ -86,8 +108,7 @@ public class ScreenManager {
         loader.setLocation(getClass().getResource(FilesFXML.ROOT_WINDOW_FXML.toString()));
         try {
             this.mainWindowBorderPane = ((BorderPane) loader.load());
-            this.screenMainController = loader.getController();
-            this.screenMainController.setRootBorderPane(this.mainWindowBorderPane);
+            this.rootWindowController = loader.getController();
         } catch (IOException ex) {
             log.error(ex.getMessage());
             log.error(ex.getCause());
@@ -146,8 +167,60 @@ public class ScreenManager {
             log.error(ex.getCause());
             ex.printStackTrace();
         }
-
     }
+
+
+    public void showNewDialog(FXMLDialogWithMemberController controller, Member member, FilesFXML fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
+        try {
+            Stage dialogStage = new Stage();
+            AnchorPane dialogwindow = (AnchorPane) loader.load();
+            controller = loader.getController();
+            controller.setMember(member);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.getStage());
+            Scene scene = new Scene(dialogwindow);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
+            ex.printStackTrace();
+        }
+    }
+
+    public Member showNewDialog(FXMLDialogReturningMember controller, Member member, List<Member> list, FilesFXML fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
+        try {
+            Stage dialogStage = new Stage();
+            AnchorPane dialogwindow = (AnchorPane) loader.load();
+            controller = loader.getController();
+            controller.setMember(member);
+            controller.setMemberList(list);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.getStage());
+            Scene scene = new Scene(dialogwindow);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+            return controller.getResult();
+
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
+            ex.printStackTrace();
+        }
+        return  null;
+    }
+
+
+
+
+
+
 
     public FXMLPane loadFxml(FXMLPane controller, Pane pane, FilesFXML fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
@@ -172,6 +245,7 @@ public class ScreenManager {
         } catch (Exception ex) {
             log.error(ex.getMessage());
             log.error(ex.getCause());
+            ex.printStackTrace();
         }
         return controller;
     }
@@ -219,6 +293,19 @@ public class ScreenManager {
             ex.printStackTrace();
         }
 
+        return controller;
+    }
+
+    public FXMLPane loadAdditionalFxmltoAnchorPane(FXMLPane controller, AnchorPane anchor, FilesFXML fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
+        try {
+            anchor.getChildren().addAll((AnchorPane) loader.load());
+            controller = loader.getController();
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
+            ex.printStackTrace();
+        }
         return controller;
     }
 
@@ -277,6 +364,16 @@ public class ScreenManager {
         );
     }
 
+    public void reloadScreenWelcomeController() {
+        loadFxml(screenWelcomeController, this.mainWindowBorderPane, FilesFXML.SCREEN_WELCOME_FXML, Where.CENTER);
+        context.setService(null);
+    }
+
+    public void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event) {
+
+        simContextMenu.show(familyMember, event);
+    }
+
     /*
         Register Screen
      */
@@ -285,11 +382,24 @@ public class ScreenManager {
         this.screenMainRightController = controller;
     }
 
+    public void register(ScreenMainController controller) {
+        this.screenMainController = controller;
+    }
+
     public enum Where {
         TOP,
         CENTER,
         BOTTOM
     }
 
+
+    /*
+        Cell Factory
+     */
+
+    public Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> getPhotoValueFactory() {
+        Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> callback = param -> new ReadOnlyObjectWrapper<>(param.getValue().getPhoto());
+        return callback;
+    }
 
 }

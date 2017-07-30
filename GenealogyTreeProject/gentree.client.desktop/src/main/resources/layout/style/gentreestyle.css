@@ -3,22 +3,35 @@
 */
 .root {
 
-    -gentree-main-backgorund-color: #3c4f4c;
-    -gentree-background-2: #266558;
-    -gentree-background-3: #2F3737;
-    -gentree-background-4: #404A4B;
-    -gentree-background-5: rgba(168, 189, 185, 0.6);
-    -gentree-dark-pane: rgba(28, 32, 29, 0.40);
-    -gentree-markup: #81d136;
-    -gentree-focus-color: rgba(82, 202, 0, 0.9);
-    -gentree-unfocus-color: #404A4B;
-    -gentree-content-pane: rgba(230, 255, 251, 0.2);
-    -gentree-textfield-text-color: #ecf2dd;
-    -gentree-textfield-unfocus-text-color: #acbdb2;
-    -gentree-textfield-error-color: #9E0303;
-    -gentree-button-1: #214e41;
-    -gentree-font-color-1: #faffd5;
-    -gentree-font-color-2: #c7c5c4;
+    -gentree-main-backgorund-color: rgb(137, 137, 140);
+    -gentree-color-2: #0188AE;
+    -gentree-color-3: #0B4F6C;
+    -gentree-color-4: #757575;
+    -gentree-color-5: #4d5056;
+    -gentree-color-6: rgba(251, 251, 255, 0.45);
+    -gentree-color-7: rgba(28, 32, 29, 0.40);
+    -gentree-color-8: #404A4B;
+    -gentree-color-9: #595756;
+    -gentree-color-10: #353a41;
+    -gentree-color-11: #9E0303;
+    -gentree-color-12: #fffbf8;
+
+/*    -gentree-main-backgorund-color: #3c4f4c;
+    -gentree-color-2: #266558;
+    -gentree-color-4: #2F3737;
+    -gentree-color-5: #404A4B;
+    -gentree-color-6: rgba(168, 189, 185, 0.6);
+    -gentree-color-7: rgba(28, 32, 29, 0.40);
+    -gentree-color-3: #81d136;
+    -gentree-color-3: rgba(82, 202, 0, 0.9);
+    -gentree-color-8: #404A4B;
+    -gentree-color-6: rgba(230, 255, 251, 0.2);
+    -gentree-color-9: #ecf2dd;
+    -gentree-color-10: #acbdb2;
+    -gentree-color-11: #9E0303;
+    -gentree-color-3: #214e41;
+    -gentree-color-12: #faffd5;
+    -gentree-color-12: #c7c5c4;*/
 
 }
 
@@ -37,6 +50,10 @@
 .mainAnchorPane {
     -fx-padding: 0 0 0 0;
     -fx-background-color: -gentree-main-backgorund-color;
+    -fx-background-image: url("/layout/images/backgrounds/gentreebackground.jpg");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
     -fx-pref-height: 600px;
     -fx-min-height: 600px;
     -fx-max-height: -1;
@@ -51,10 +68,10 @@
 }
 
 .darkPane {
-    -fx-background-color: -gentree-dark-pane;
+    -fx-background-color: -gentree-color-7;
     -fx-background-radius: 5;
     -fx-padding: 10;
-    -fx-text-fill: -gentree-font-color-1;
+    -fx-text-fill: -gentree-color-12;
 }
 
 .transparentSplit > .split-pane-divider {
@@ -81,7 +98,25 @@
 .transparentPane .scroll-bar:vertical .thumb,
 .transparentPane .scroll-bar:horizontal .thumb {
 
-    -fx-background-color: derive(#81d136, 10%);
+    -fx-background-color: derive(-gentree-color-2, 10%);
+
+    -fx-background-insets: 2, 0, 0, 0;
+
+    -fx-background-radius: 2em;
+}
+
+.contentPane .scroll-bar:vertical,
+.contentPane .scroll-bar:horizontal,
+.contentPane .corner {
+    -fx-opacity: 10;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.contentPane .scroll-bar:vertical .thumb,
+.contentPane .scroll-bar:horizontal .thumb {
+
+    -fx-background-color: derive(#0188AE, 10%);
 
     -fx-background-insets: 2, 0, 0, 0;
 
@@ -89,14 +124,14 @@
 }
 
 .commonPane {
-    -fx-background-color: -gentree-background-5;
+    -fx-background-color: -gentree-color-6;
     -fx-border-radius: 20 20 20 20;
     -fx-background-radius: 20 20 20 20;
     -fx-border-color: rgba(168, 189, 185, 0.6);
 }
 
 .contentPane {
-    -fx-background-color: -gentree-content-pane;
+    -fx-background-color: -gentree-color-6;
     -fx-border-radius: 20 20 20 20;
     -fx-background-radius: 20 20 20 20;
 
@@ -121,38 +156,38 @@
     Menu Bar ->  Language Chooser
 */
 #languageChooser {
-    -fx-background-color: -gentree-background-3;
-    -fx-border-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-4;
+    -fx-border-color: -gentree-color-2;
     -fx-border-style: dotted;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 #languageChooser:showing {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 #languageChooser .cell,
 #languageChooser .list-view .list-cell {
-    -fx-text-fill: -gentree-font-color-2;
+    -fx-text-fill: -gentree-color-12;
     -fx-padding: 0 10 0 10;
 }
 
 #languageChooser .list-view {
-    -fx-border-color: -gentree-background-3;
-    -fx-background-color: -gentree-background-3;
+    -fx-border-color: -gentree-color-4;
+    -fx-background-color: -gentree-color-4;
     -fx-border-style: dotted;
 }
 
 #languageChooser .list-view .list-cell {
-    -fx-background-color: -gentree-background-3;
-    -fx-border-color: transparent transparent -gentree-background-2 transparent;
+    -fx-background-color: -gentree-color-4;
+    -fx-border-color: transparent transparent -gentree-color-2 transparent;
     -fx-border-style: dotted;
 }
 
 #languageChooser .list-view .list-cell:filled:hover,
 #languageChooser:hover {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
 }
 
 /*
@@ -169,7 +204,7 @@
 
 .menu-bar {
     -fx-padding: 0px 0px 0px 0px;
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-pref-height: 40px;
     -fx-min-height: 40px;
     -fx-max-height: 40px;
@@ -180,38 +215,38 @@
 }
 
 .menu {
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-pref-height: 40px;
     -fx-min-height: 40px;
     -fx-max-height: 40px;
     -fx-min-width: 100px;
-    -fx-border-color: -gentree-background-2;
+    -fx-border-color: -gentree-color-2;
     -fx-border-style: dotted;
 }
 
 .menu:hover {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 .menu:showing {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
 .menu .label, .menu-item .label {
-    -fx-text-fill: -gentree-font-color-2;
+    -fx-text-fill: -gentree-color-12;
     -fx-padding: 0 10 0 10;
 }
 
 .menu-item:focused {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
 }
 
 .context-menu {
-    -fx-background-color: -gentree-background-4;
+    -fx-background-color: -gentree-color-5;
     -fx-min-width: 150px;
-    -fx-border-color: -gentree-background-4;
+    -fx-border-color: -gentree-color-5;
 }
 
 /*
@@ -247,7 +282,7 @@
  */
 
 .footer {
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-pref-height: 50px;
     -fx-min-height: 50px;
     -fx-max-height: 50px;
@@ -270,6 +305,10 @@
 
 .dialog-pane {
     -fx-background-color: -gentree-main-backgorund-color;
+    -fx-background-image: url("/layout/images/backgrounds/gentreebackground.jpg");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }
 
 #newProjectDialog {
@@ -296,32 +335,32 @@
 
 .tabPane {
 
-    -fx-background-color: -gentree-content-pane;
+    -fx-background-color: -gentree-color-6;
     -fx-background-radius: 10 10 10 10;
     -fx-border-radius: 10 10 10 10;
 }
 
 .tabPane .tab-header-area .tab-header-background {
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-background-radius: 10 10 0 0;
 }
 
 .tabPane .tab:selected {
-    -fx-background-color: -gentree-background-2;
-    /*-fx-background-color: -gentree-focus-color;*/
+    -fx-background-color: -gentree-color-2;
+    /*-fx-background-color: -gentree-color-3;*/
     -fx-background-radius: 10 10 0 0;
 }
 
 .tabPane .tab:selected .jfx-rippler {
-    -fx-rippler-fill: -gentree-markup;
+    -fx-rippler-fill: -gentree-color-3;
 }
 
 .tabPane .tab-header-area .tab-selected-line {
-    -fx-stroke: -gentree-markup;
+    -fx-stroke: -gentree-color-3;
 }
 
 .tabPane .tab {
-    -fx-background-color: -gentree-background-4;
+    -fx-background-color: -gentree-color-5;
     -fx-background-radius: 10 10 0 0;
 }
 
@@ -330,8 +369,8 @@
  */
 
 .button {
-    -fx-background-color: -gentree-background-2;
-    -fx-text-fill: -gentree-textfield-text-color;
+    -fx-background-color: -gentree-color-3;
+    -fx-text-fill: -gentree-color-12;
     -fx-font-size: 18px;
 }
 
@@ -340,31 +379,31 @@
     -fx-font-weight: BOLD;
     -fx-font-size: 15px;
     /* -fx-prompt-text-fill: #c8c8bb;*/
-    -fx-prompt-text-fill: -gentree-textfield-unfocus-text-color;
-    -fx-text-fill: -gentree-textfield-text-color;
+    -fx-prompt-text-fill: -gentree-color-10;
+    -fx-text-fill: -gentree-color-9;
     -fx-alignment: top-left;
-    -jfx-focus-color: -gentree-markup;
-    -jfx-unfocus-color: -gentree-unfocus-color;
+    -jfx-focus-color: -gentree-color-3;
+    -jfx-unfocus-color: -gentree-color-8;
 }
 
 .jfx-text-field:error, .jfx-password-field:error, .jfx-text-area:error {
-    -jfx-focus-color: -gentree-textfield-error-color;
-    -jfx-unfocus-color: -gentree-textfield-error-color;
+    -jfx-focus-color: -gentree-color-11;
+    -jfx-unfocus-color: -gentree-color-11;
 }
 
 .jfx-text-field .error-label, .jfx-password-field .error-label, .jfx-text-area .error-label {
-    -fx-text-fill: -gentree-textfield-error-color;
+    -fx-text-fill: -gentree-color-11;
     -fx-font-size: 0.75em;
 }
 
 .jfx-text-field .error-icon, .jfx-password-field .error-icon, .jfx-text-area .error-icon {
-    -fx-text-fill: -gentree-textfield-error-color;
+    -fx-text-fill: -gentree-color-11;
     -fx-font-size: 1em;
 }
 
-.jfx-text-allways-focused {
-    -jfx-unfocus-color: -gentree-markup;
-    -fx-prompt-text-fill: -gentree-markup;
+.jfx-text-always-focused {
+    -jfx-unfocus-color: -gentree-color-3;
+    -fx-prompt-text-fill: -gentree-color-3;
 }
 
 #genTreeContent {
@@ -384,7 +423,7 @@
 }
 
 .firstTypeTable .filler {
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-background-radius: 20 20 0 0;
 
 }
@@ -394,7 +433,7 @@
 .firstTypeTable .column-header-background:pressed {
 
     /* Color of column header (all panel)*/
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
     -fx-background-radius: 20 20 0 0;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
@@ -406,7 +445,7 @@
 .firstTypeTable .column-header:focused,
 .firstTypeTable .column-header:pressed{
     -fx-background-radius: 20 20 0 0;
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
 }
 
 
@@ -436,8 +475,8 @@
 .tableMembersAndRelations:focused .table-row-cell {
     -fx-border-color: transparent transparent linear-gradient(from 0% 0% to 100% 0%,
     transparent 0%,
-    -gentree-background-3 30%,
-    -gentree-background-3 70%,
+    -gentree-color-4 30%,
+    -gentree-color-4 70%,
     transparent 100%) transparent;
     -fx-border-width: 1;
     -fx-border-insets: 0 0 0 0;
@@ -458,10 +497,16 @@
 
 .tableMembersAndRelations:focused .table-row-cell:filled:focused:selected,
 .tableMembersAndRelations .table-row-cell:filled:focused:selected {
-    -fx-background-color: -gentree-button-1;
-    -fx-background-insets: 0 0 0 0;
-}
+     -fx-background-color: -gentree-color-3;
+     -fx-background-insets: 0 0 0 0;
+ }
 
+.tableMembersAndRelations:focused .table-row-cell:filled:focused:selected .table-cell,
+.tableMembersAndRelations .table-row-cell:filled:focused:selected .table-cell {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill:  white;
+    -fx-alignment: center;
+}
 #gtFamilyRelationTable .cell {
 
     -fx-cell-size: 90px;
@@ -469,9 +514,11 @@
 
 .firstTypeTable .table-cell {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill:  -gentree-color-10;
     -fx-alignment: center;
 }
+
+
 
 
 /*
@@ -486,18 +533,18 @@
 
 .toogleButtonShowTable {
     -fx-background-color: rgba(168, 189, 185, 0.4);
-    -fx-text-fill: -gentree-font-color-1;
+    -fx-text-fill: -gentree-color-12;
     -fx-font-size: 14px;
 }
 
 .toogleButtonShowTable:pressed, .toogleButtonShowTable:selected {
-    -fx-background-color: -gentree-markup;
+    -fx-background-color: -gentree-color-3;
     -fx-effect: innershadow(two-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 0);
 
 }
 
 .imagePane {
-    -fx-background-color: -gentree-background-3;
+    -fx-background-color: -gentree-color-4;
 }
 
 /*
@@ -506,13 +553,13 @@
 
 
 .combobox {
-    -fx-background-color: -gentree-dark-pane;
+    -fx-background-color: -gentree-color-7;
 }
 
 .combobox .list-cell {
     -fx-background: rgba(28, 32, 29, 0.6);
     -fx-background-color: transparent;
-    -fx-text-fill: -gentree-font-color-1;
+    -fx-text-fill: -gentree-color-12;
     -fx-padding: 3 0 2 15;
 }
 
@@ -523,7 +570,7 @@
 }
 
 .combobox .list-cell:hover {
-    -fx-background-color: -gentree-background-2;
+    -fx-background-color: -gentree-color-2;
 }
 
 /*
@@ -532,6 +579,24 @@
 
 .radioButtonFX {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: -gentree-font-color-1;
-    -fx-selected-color: -gentree-markup;
+    -fx-text-fill: -gentree-color-12;
+    -fx-selected-color: -gentree-color-3;
+}
+
+/*
+        Labels
+ */
+.label1 {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: -gentree-color-10;
+}
+
+/*
+    Separators
+ */
+
+.gentree-separator {
+    -fx-background-color: -gentree-color-7;
+    -fx-stroke-width: 4;
+
 }

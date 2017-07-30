@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<AnchorPane fx:id="dialogAddMember" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.112"
+<AnchorPane fx:id="dialogAddMember" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddMemberController">
     <stylesheets>
@@ -23,8 +22,12 @@
                         <Pane maxHeight="170.0" maxWidth="145.0" minHeight="170.0" minWidth="145.0" prefHeight="170.0"
                               prefWidth="145.0" styleClass="imagePane" AnchorPane.leftAnchor="25.0"
                               AnchorPane.topAnchor="25.0">
-                            <ImageView fx:id="photo" fitHeight="150.0" fitWidth="125.0" layoutX="10" layoutY="10"
-                                       pickOnBounds="true" preserveRatio="true"/>
+                            <ImageView fx:id="photo"
+                                       onMouseClicked="#choosePhoto"
+                                       fitHeight="150.0" fitWidth="125.0"
+                                       layoutX="10" layoutY="10"
+                                       pickOnBounds="true" preserveRatio="true"
+                            />
                         </Pane>
                         <JFXTextField fx:id="simName" labelFloat="true" layoutX="200.0" layoutY="35.0" prefHeight="33.0"
                                       prefWidth="193.0" promptText="%sim_name"/>
@@ -36,7 +39,7 @@
                             <children>
                                 <ComboBox fx:id="comboBoxAge" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
                                           styleClass="combobox"/>
-                                <Label prefHeight="25.0" prefWidth="151.0" text="Age :" textFill="#acbdb2">
+                                <Label prefHeight="25.0" prefWidth="151.0" text="Age :" styleClass="label1">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
@@ -52,7 +55,7 @@
                                                     styleClass="radioButtonFX" text="%sim_sex_m"/>
                                 </Pane>
                                 <Label layoutX="10.0" prefHeight="25.0" prefWidth="151.0" text="Sex: "
-                                       textFill="#acbdb2">
+                                       styleClass="label1">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
@@ -62,7 +65,7 @@
                         <AnchorPane layoutX="22.0" layoutY="290">
                             <children>
                                 <Label layoutX="10" prefHeight="25.0" prefWidth="151.0" text="Race:"
-                                       textFill="#acbdb2">
+                                       styleClass="label1">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
@@ -75,28 +78,28 @@
 
                         <AnchorPane layoutX="22.0" layoutY="370">
                             <children>
-                                <Label layoutX="10" prefHeight="25.0" prefWidth="151.0" text="Is Viant :"
-                                       textFill="#acbdb2">
+                                <Label layoutX="10" prefHeight="25.0" prefWidth="151.0" text="Is Alive:"
+                                       styleClass="label1">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
                                 </Label>
                                 <Pane layoutY="25.0" prefHeight="50.0" prefWidth="151.0" styleClass="darkPane">
-                                    <JFXToggleButton id="toggleVivantButton" fx:id="toggleVivantButton"
+                                    <JFXToggleButton id="toggleAliveButton" fx:id="toggleAliveButton"
                                                      prefHeight="50.0" prefWidth="151.0" text="is vivant"
                                                      textFill="#faffd5"/>
                                 </Pane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane layoutY="370.0" layoutX="189.0">
+                        <AnchorPane fx:id="paneDeathCause" layoutY="370.0" layoutX="189.0">
                             <children>
                                 <Label layoutX="10" prefHeight="25.0" prefWidth="151.0" text="Death Cause"
-                                       textFill="#acbdb2">
+                                       styleClass="label1">
                                     <font>
                                         <Font size="14.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="comboBoxDeathCause" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
+                                <ComboBox fx:id="comboBoxDeathCause" layoutY="25.0" prefHeight="41.0" prefWidth="256.0"
                                           styleClass="combobox"/>
                             </children>
                         </AnchorPane>

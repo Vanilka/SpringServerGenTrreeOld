@@ -1,18 +1,34 @@
 package gentree.client.desktop.controllers.screen;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configurations.GenTreeDefaultProperties;
+import gentree.client.desktop.configurations.GenTreeProperties;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.util.Callback;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -20,20 +36,31 @@ import java.util.ResourceBundle;
  */
 @Getter
 @Setter
+@Log4j2
 public class TabOpenExistingProjectController implements Initializable, FXMLController, FXMLTab {
+
+    private Properties properties = GenTreeProperties.INSTANCE.getAppProperties();
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private JFXTextField familyNameField;
+    private ComboBox<Path> projectChooser;
+
 
     private Tab tab;
     private JFXTabPane tabPane;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         languageBundle.setValue(resources);
+        setCellFactoryToProjectComboBox();
+        populateComboBox();
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
+
     }
 
     @Override
@@ -41,4 +68,52 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
         this.tabPane = tabPane;
         this.tab = tab;
     }
+
+
+    private void populateComboBox() {
+        ObservableList<Path> list = FXCollections.observableArrayList();
+        try {
+            Files.newDirectoryStream(
+                    Paths.get(properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME)),
+                    path -> (path.toFile().isFile() && path.toFile().getName().contains(".xml")))
+                    .forEach((list::add));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        projectChooser.setItems(list);
+    }
+
+    private void setCellFactoryToProjectComboBox() {
+        projectChooser.setCellFactory(getCustomPathListCallback());
+        projectChooser.setButtonCell(getCustomPathListCallback().call(null));
+
+    }
+
+
+    private Callback<ListView<Path>, ListCell<Path>> getCustomPathListCallback() {
+
+        Callback<ListView<Path>, ListCell<Path>> callback = new Callback<ListView<Path>, ListCell<Path>>() {
+            @Override
+            public ListCell<Path> call(ListView<Path> param) {
+                final ListCell<Path> pathCell = new ListCell<Path>() {
+                    @Override
+                    public void updateItem(Path item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item.toFile().getName());
+                        }
+                    }
+
+                };
+                return pathCell;
+            }
+        };
+        return callback;
+    }
+
+    public Path getSelectedFile() {
+            return projectChooser.getSelectionModel().getSelectedItem();
+    }
+
+
 }

@@ -2,6 +2,7 @@ package gentree.client.desktop.service;
 
 import gentree.client.desktop.configurations.messages.AppTitles;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,12 @@ public class GenTreeContext {
 
     private Locale locale;
     private ObjectProperty<ResourceBundle> bundle = new SimpleObjectProperty<>();
-    private FamilyService service;
+    private ObjectProperty<FamilyService> service = new SimpleObjectProperty<>();
+
+
 
     {
+
         locale = new Locale("pl", "PL");
         bundle.setValue(ResourceBundle.getBundle(AppTitles.PARAM_TRADUCTION_LOCATION, locale));
     }
@@ -47,8 +51,19 @@ public class GenTreeContext {
         GETTERS
      */
 
+    public ReadOnlyObjectProperty<FamilyService> serviceProperty() {
+        return service;
+    }
+
+    public FamilyService getService() {
+        return service.get();
+    }
     /*
         SETTERS
      */
+
+    public void setService(FamilyService service) {
+        this.service.set(service);
+    }
 
 }

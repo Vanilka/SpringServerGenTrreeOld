@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane id="dialogAddParentToMember" fx:id="dialogAddParentToMember" minHeight="700" minWidth="700"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.DialogAddParentsToMemberController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="20"
+                    AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+            <children>
+
+                <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="40.0">
+                    <children>
+                        <Label prefHeight="33.0" prefWidth="252.0" text="%label_mother"/>
+                        <AnchorPane fx:id="motherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
+                                    minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
+                        <JFXButton fx:id="chooseMother" onAction="#openChoosingMother" text="Set/Change"/>
+                    </children>
+                </VBox>
+
+
+                <VBox alignment="TOP_CENTER" layoutX="350.0" layoutY="40.0">
+                    <children>
+                        <Label prefHeight="33.0" prefWidth="254.0" text="%label_father"/>
+                        <AnchorPane fx:id="fatherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
+                                    minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
+                        <JFXButton fx:id="chooseFather" onAction="#openChoosingFather" text="Set/Change"/>
+                    </children>
+                </VBox>
+                <AnchorPane fx:id="relationTypePane"/>
+
+                <AnchorPane fx:id="currentMember" layoutY="300.0" layoutX="200"/>
+
+            </children>
+            <opaqueInsets>
+                <Insets left="10.0" right="10.0"/>
+            </opaqueInsets>
+        </AnchorPane>
+        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="10.0"/>
+        <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="10.0"/>
+    </children>
+</AnchorPane>

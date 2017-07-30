@@ -3,7 +3,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane id="screenMainController" fx:id="screenMainController" styleClass="mainAnchorPane"
+<AnchorPane id="screenMainAnchorPane" fx:id="screenMainAnchorPane" styleClass="mainAnchorPane"
             xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gentree.client.desktop.controllers.screen.ScreenMainController"
             >

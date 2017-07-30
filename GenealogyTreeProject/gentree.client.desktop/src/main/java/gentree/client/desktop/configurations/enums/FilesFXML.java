@@ -19,7 +19,16 @@ public enum FilesFXML {
     SCREEN_MAIN_RIGHT_FXML("screen.main.right.fxml"),
     SCREEN_MAIN_LEFT_FXML("screen.main.left.fxml"),
     SCREEN_MAIN_LEFT_FAMILY_INFO_FXML("tab.family.info.fxml"),
-    SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml");
+    SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml"),
+    PANE_SHOW_INFO_MEMBER_FXML("pane.show.info.member.fxml"),
+    DIALOG_APP_PROPERTIES("dialog.app.properties.fxml"),
+    DIALOG_APP_PROPERTIES_TREE("dialog.app.properties.tree.fxml"),
+    DIALOG_APP_PROPERTIES_OTHER("dialog.app.properties.other.fxml"),
+    DIALOG_APP_PROPERTIES_ONLINE("dialog.app.properties.online.fxml"),
+    DIALOG_ADD_PARENTS_TO_MEMBER("dialog.add.parents.to.member.fxml"),
+    DIALOG_ADD_SPOUSE_TO_MEMBER("dialog.add.spouse.fxml"),
+    DIALOG_CHOOSE_MEMBER("dialog.choose.member.fxml");
+
 
     private final String fxmlPath = "/layout/screen/";
     private String file;

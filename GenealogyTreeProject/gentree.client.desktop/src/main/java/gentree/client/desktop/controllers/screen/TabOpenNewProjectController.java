@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import javafx.beans.property.ObjectProperty;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +22,7 @@ import java.util.ResourceBundle;
  */
 @Getter
 @Setter
+@Log4j2
 public class TabOpenNewProjectController implements Initializable, FXMLController, FXMLTab {
 
     @FXML
@@ -33,7 +36,10 @@ public class TabOpenNewProjectController implements Initializable, FXMLControlle
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         languageBundle.setValue(resources);
+
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @Override

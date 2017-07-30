@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane id="paneShowInfoSim" fx:id="paneShowInfoSim" styleClass="contentPane"
+            xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gentree.client.desktop.controllers.screen.PaneShowInfoSim"
+            AnchorPane.bottomAnchor="30" AnchorPane.topAnchor="30"
+            AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <ScrollPane styleClass="transparentPane" minHeight="300" minWidth="200"
+                    AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0"
+                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10">
+            <content>
+                <AnchorPane fx:id="contentPane"
+                            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <JFXTextField fx:id="simId" labelFloat="true" styleClass="jfx-text-always-focused"
+                                      layoutX="20.0" prefHeight="33.0"
+                                      prefWidth="20.0" promptText="ID"
+                                      AnchorPane.topAnchor="50.0"/>
+                        <Pane maxHeight="170.0" maxWidth="145.0" minHeight="170.0" minWidth="145.0" prefHeight="170.0"
+                              prefWidth="145.0" styleClass="imagePane" AnchorPane.leftAnchor="55.0"
+                              AnchorPane.topAnchor="25.0">
+                            <ImageView fx:id="photo" fitHeight="150.0" fitWidth="125.0" layoutX="10" layoutY="10"
+                                       pickOnBounds="true" preserveRatio="true"/>
+                        </Pane>
+
+                        <JFXTextField fx:id="simName" labelFloat="true" styleClass="jfx-text-always-focused"
+                                      layoutX="30.0" layoutY="230.0" prefHeight="33.0"
+                                      prefWidth="193.0" promptText="%sim_name"/>
+                        <JFXTextField fx:id="simSurname" labelFloat="true" styleClass="jfx-text-always-focused"
+                                      layoutX="30.0" layoutY="290.0"
+                                      prefHeight="33.0" prefWidth="193.0" promptText="%sim_surname"/>
+                        <JFXTextField fx:id="simBornname" labelFloat="true" styleClass="jfx-text-always-focused"
+                                      layoutX="30.0" layoutY="350.0"
+                                      prefHeight="33.0" prefWidth="193.0" promptText="%sim_born_name"/>
+
+                        <JFXButton fx:id="returnButton" text="%return" buttonType="RAISED"
+                                   onAction="#returnAction"
+                                   prefWidth="100.0"
+                                   layoutX="50" layoutY="450.0"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

@@ -813,6 +813,11 @@
     -fx-font-weight: bold;
 }
 
+.gentree-separator {
+    -fx-background-color: #e79423;
+
+}
+
 /*
 GT LEAF
  */

@@ -64,7 +64,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>GenealogyTree</mainClass>
+                            <mainClass>gentree.client.desktop.GenTreeRun</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

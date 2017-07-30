@@ -19,7 +19,7 @@
                     AnchorPane.topAnchor="10.0"/>
         <JFXButton fx:id="buttonCancel" onAction="#cancel" styleClass="button" text="%cancel" layoutX="74.0"
                    layoutY="209.0" prefHeight="30.0" prefWidth="120.0"/>
-        <JFXButton fx:id="buttonConfirm" onAction="#confrim" styleClass="button" text="%create" layoutX="293.0"
+        <JFXButton fx:id="buttonConfirm" onAction="#confirm" styleClass="button" text="%create" layoutX="293.0"
                    layoutY="209.0" prefHeight="30.0" prefWidth="120.0"/>
     </children>
 </AnchorPane>

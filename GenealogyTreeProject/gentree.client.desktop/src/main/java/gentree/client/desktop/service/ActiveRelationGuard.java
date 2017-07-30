@@ -31,14 +31,14 @@ public class ActiveRelationGuard implements Observer {
             /*
                 After change an relation type to Active,  auto-change others to inActive
              */
-            if (relation.getLeft() != null && relation.getRight() != null && relation.isIsActive()) {
+            if (relation.getLeft() != null && relation.getRight() != null && relation.getActive()) {
                 relations
                         .filtered(r -> r.getLeft() != null)
                         .filtered(r -> r.getRight() != null)
                         .filtered(r -> r.getType() != RelationType.NEUTRAL)
                         .filtered(r -> (r.getRight().equals(relation.getRight()) || r.getLeft().equals(relation.getLeft())))
                         .filtered(r -> !r.equals(relation))
-                        .forEach(r -> r.setIsActive(false));
+                        .forEach(r -> r.setActive(false));
             }
 
             /*

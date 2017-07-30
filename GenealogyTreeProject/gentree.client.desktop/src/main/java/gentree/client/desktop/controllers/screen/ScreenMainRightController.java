@@ -4,16 +4,16 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.desktop.service.implementation.GenTreeDrawingServiceImpl;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  * Created by Martyna SZYMKOWIAK on 02/07/2017.
  */
 @Log4j2
-public class ScreenMainRightController implements Initializable, FXMLController, FXMLAnchorPane {
+public class ScreenMainRightController extends AnchorPane implements Initializable, FXMLController, FXMLAnchorPane {
 
     @FXML
     private ScrollPane treeDrawScrollPane;
@@ -35,6 +35,9 @@ public class ScreenMainRightController implements Initializable, FXMLController,
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
+    @FXML
+    private HBox genTreeContent;
+
     @Getter
     private GenTreeDrawingService drawingService;
 
@@ -43,8 +46,8 @@ public class ScreenMainRightController implements Initializable, FXMLController,
         this.languageBundle.setValue(resources);
         sm.register(this);
         drawingService = new GenTreeDrawingServiceImpl();
-        treeDrawScrollPane.setFitToHeight(true);
-        treeDrawScrollPane.setFitToWidth(true);
+        initRelationListener();
+        redrawTree();
         this.languageBundle.setValue(resources);
     }
 
@@ -54,9 +57,21 @@ public class ScreenMainRightController implements Initializable, FXMLController,
         return image;
     }
 
+    public void redrawTree() {
+        genTreeContent.getChildren().clear();
+        drawingService.startDraw(genTreeContent);
+    }
+
     /*
     *   LISTEN LANGUAGE CHANGES
     */
+    public void initRelationListener() {
+        context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) observable -> {
+            // TODO  Redraw Tree
+            redrawTree();
+        });
+    }
+
     private void addLanguageListener() {
         this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }

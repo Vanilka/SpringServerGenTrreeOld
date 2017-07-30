@@ -1,5 +1,6 @@
 package gentree.client.desktop;
 
+import gentree.client.desktop.configurations.GenTreeDefaultProperties;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
 import javafx.application.Application;
@@ -13,6 +14,8 @@ public class GenTreeRun extends Application {
 
     private static ScreenManager sc = ScreenManager.INSTANCE;
     private static GenTreeContext gtc = GenTreeContext.INSTANCE;
+    private static GenTreeDefaultProperties def = GenTreeDefaultProperties.INSTANCE;
+
 
     public static void main(String[] args) {
         launch(args);

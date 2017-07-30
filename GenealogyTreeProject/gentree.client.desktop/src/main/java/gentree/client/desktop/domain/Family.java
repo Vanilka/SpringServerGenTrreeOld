@@ -1,5 +1,6 @@
 package gentree.client.desktop.domain;
 
+import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,18 +8,15 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
  */
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@Getter
-@Setter
 @Log4j2
 @XmlRootElement
 public class Family implements Serializable {
@@ -59,25 +57,63 @@ public class Family implements Serializable {
     }
 
 
+    public Relation findBornRelation(Member m) throws NotUniqueBornRelationException {
+       List<Relation> list = relations.filtered(relation -> relation.getChildren().contains(m));
+
+       if(list.isEmpty()) {
+           return  null;
+       }
+
+       if(list.size() > 1) {
+           throw new NotUniqueBornRelationException();
+       }
+
+      return list.get(0);
+    }
+
+
 
     /*
         GETTERS
      */
 
+    public long getVersion() {
+        return version.get();
+    }
+
     public LongProperty versionProperty() {
         return version;
+    }
+
+    public long getId() {
+        return id.get();
     }
 
     public LongProperty idProperty() {
         return id;
     }
 
+    public String getName() {
+        return name.get();
+    }
+
     public StringProperty nameProperty() {
         return name;
     }
 
+    @XmlElementWrapper(name="members")
+    @XmlElements({ @XmlElement(name = "sim", type = Member.class) })
+    public ObservableList<Member> getMembers() {
+        return members;
+    }
 
-    /*
+    @XmlElementWrapper(name="relations")
+    @XmlElements({ @XmlElement(name = "relation", type = Relation.class) })
+    public ObservableList<Relation> getRelations() {
+        return relations;
+    }
+
+/*
         SETTERS
      */
 
@@ -85,11 +121,21 @@ public class Family implements Serializable {
         this.version.set(version);
     }
 
+    @XmlElement
     public void setId(long id) {
         this.id.set(id);
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name.set(name);
+    }
+
+    public void setMembers(ObservableList<Member> members) {
+        this.members = members;
+    }
+
+    public void setRelations(ObservableList<Relation> relations) {
+        this.relations = relations;
     }
 }

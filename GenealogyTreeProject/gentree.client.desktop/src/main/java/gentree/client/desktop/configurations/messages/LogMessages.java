@@ -20,4 +20,11 @@ public class LogMessages {
 
     public static final String MSG_SERVICE_INITIALIZATION = "Service Initialization";
 
+
+    public static final String MSG_NO_CONFIG_FILE = "Cannot find config file. It will be created.";
+    public static final String MSG_READ_CONFIG_FILE = "Read config file";
+    public static final String MSG_DIR_NOT_EXIST = "Mandatory directory {{}} not exist. It will be created";
+    public static final String MSG_MISSING_PROPERTY = "THe property {{}} is missing in config file. The default value will be used";
+
+    public static final String MSG_ERROR_LOAD_IMAGE = "Error while load image";
 }

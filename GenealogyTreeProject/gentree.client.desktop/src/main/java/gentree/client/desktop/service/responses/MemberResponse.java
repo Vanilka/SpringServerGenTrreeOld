@@ -19,10 +19,12 @@ public class MemberResponse extends ServiceResponse {
         this.member = member;
     }
 
+
     @Override
     public String toString() {
-        return "MemberResponse{" +
-                "member=" + member +
-                "} " + super.toString();
+        final StringBuilder sb = new StringBuilder("MemberResponse{");
+        sb.append("mem=").append(member);
+        sb.append('}');
+        return sb.toString();
     }
 }

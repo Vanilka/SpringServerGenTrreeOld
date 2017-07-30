@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
 import gentree.client.desktop.configurations.enums.ImageFiles;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
@@ -10,7 +11,6 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,11 +34,10 @@ import java.util.ResourceBundle;
 @Log4j2
 public class TabFamilyViewController implements Initializable, FXMLController, FXMLAnchorPane, FXMLTab {
 
+    public static final String TABLE_RELATION_SIM_RIGHT = "RIGHT";
+    public static final String TABLE_RELATION_SIM_LEFT = "LEFT";
     private static int TABLE_IMAGE_MEMBER_HEIGHT = 80;
     private static int TABLE_IMAGE_MEMBER_WIDTH = 60;
-    public static final String TABLE_RELATION_SIM_RIGHT= "RIGHT";
-    public static final String TABLE_RELATION_SIM_LEFT= "LEFT";
-
     private final ToggleGroup buttonsTableGroup;
 
     @FXML
@@ -52,6 +51,8 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     private TableColumn<Member, String> simNameColumn;
     @FXML
     private TableColumn<Member, String> simSurnameColumn;
+    @FXML
+    private TableColumn<Member, String> simPhotoColumn;
     @FXML
     private TableView<Relation> gtFamilyRelationTable;
     @FXML
@@ -77,6 +78,7 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
 
         gtFamilyMemberTable.setVisible(true);
@@ -88,9 +90,11 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         this.relationSimLeftColumn.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_LEFT));
         this.relationSimRightColumn.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_RIGHT));
         this.relationTypeColumn.setCellFactory(setRelationTypeCellFactory());
+        this.simPhotoColumn.setCellFactory(setPhotoCellFactory());
 
         setMemberList();
         setRelationList();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 
@@ -131,13 +135,11 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     @FXML
     public void showInfoMember(MouseEvent event) {
-/*        if (event.getClickCount() == 2 && gtFamilyMemberTable.getSelectionModel().getSelectedItem() != null) {
-            Member member = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
-            Tab infoSimTab = new Tab();
-            TabInfoMemberPaneController tabInfoMember = (TabInfoMemberPaneController) sc.loadFxml(new TabInfoMemberPaneController(), gtMainTabPane, infoSimTab, FXMLFile.TAB_INFO_MEMBER, member.getName().concat(" " + member.getSurname()));
-            tabInfoMember.setMember(member);
+        Member selected = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
+        if (event.getClickCount() == 2 && selected != null) {
+            sm.getScreenMainController().showInfoSim(selected);
 
-        }*/
+        }
     }
 
     @FXML
@@ -151,12 +153,13 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     }
 
     private void setCellValueFactory() {
-        this.simNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-        this.simSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
+        this.simNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
+        this.simSurnameColumn.setCellValueFactory(data -> data.getValue().surnameProperty());
+        this.simPhotoColumn.setCellValueFactory(sm.getPhotoValueFactory());
 
-        this.relationSimLeftColumn.setCellValueFactory(cellData -> cellData.getValue().leftProperty());
-        this.relationSimRightColumn.setCellValueFactory(cellData -> cellData.getValue().rightProperty());
-        this.relationTypeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
+        this.relationSimLeftColumn.setCellValueFactory(data -> data.getValue().leftProperty());
+        this.relationSimRightColumn.setCellValueFactory(data -> data.getValue().rightProperty());
+        this.relationTypeColumn.setCellValueFactory(data -> data.getValue().typeProperty());
 
     }
 
@@ -184,8 +187,8 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
                                 if (item != null) {
                                     imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
                                     imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
-                                     imageview.setImage(new Image(item.getPhoto()));
-                                      setGraphic(imageview);
+                                    imageview.setImage(new Image(item.getPhoto()));
+                                    setGraphic(imageview);
                                 } else {
                                     if (!empty) {
                                         imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
@@ -210,7 +213,6 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     private Callback<TableColumn<Relation, RelationType>,
             TableCell<Relation, RelationType>> setRelationTypeCellFactory() {
-
         Callback<TableColumn<Relation, RelationType>,
                 TableCell<Relation, RelationType>> callback = new Callback<TableColumn<Relation, RelationType>, TableCell<Relation, RelationType>>() {
             @Override
@@ -248,7 +250,42 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
                 return cell;
             }
         };
+        return callback;
+    }
 
+    private Callback<TableColumn<Member, String>,
+            TableCell<Member, String>> setPhotoCellFactory() {
+
+        Callback<TableColumn<Member, String>, TableCell<Member, String>> callback =
+                new Callback<TableColumn<Member, String>, TableCell<Member, String>>() {
+                    @Override
+                    public TableCell<Member, String> call(TableColumn<Member, String> param) {
+
+                        TableCell<Member, String> cell = new TableCell<Member, String>() {
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                System.out.println(item);
+                                super.updateItem(item, empty);
+                                ImageView imageview = new ImageView();
+                                imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
+                                imageview.setFitWidth(TABLE_IMAGE_MEMBER_WIDTH);
+                                if (item != null) {
+                                    imageview.setImage(new Image(item));
+                                    setGraphic(imageview);
+                                } else {
+                                    if (!empty) {
+
+                                        imageview.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+                                        setGraphic(imageview);
+                                    } else {
+                                        setGraphic(null);
+                                    }
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
         return callback;
     }
 
@@ -258,10 +295,9 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     }
 
 
-
     @Override
     public void setTabAndTPane(JFXTabPane tabPane, Tab tab) {
         this.tab = tab;
-        this.tabPane =tabPane;
+        this.tabPane = tabPane;
     }
 }

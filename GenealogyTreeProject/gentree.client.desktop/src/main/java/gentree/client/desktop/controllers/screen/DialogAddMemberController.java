@@ -3,6 +3,8 @@ package gentree.client.desktop.controllers.screen;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
+import gentree.client.desktop.configurations.GenTreeDefaultProperties;
 import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
@@ -22,10 +24,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 /**
@@ -36,7 +43,12 @@ import java.util.ResourceBundle;
 public class DialogAddMemberController implements Initializable, FXMLController, FXMLPane, FXMLDialogController {
 
 
+    private static final String PREFIX_FILE_LOAD = "file://";
+
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+
+    @FXML
+    private AnchorPane paneDeathCause;
 
     @FXML
     private JFXTextField simName;
@@ -66,6 +78,9 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     private ComboBox<DeathCauses> comboBoxDeathCause;
 
     @FXML
+    private JFXToggleButton toggleAliveButton;
+
+    @FXML
     private JFXButton buttonCancel;
 
     @FXML
@@ -85,14 +100,14 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
-        initSexListener();
+        initListeners();
         createSexToogleGroupe();
         populateAgeComboBox();
         populateRaceComboBox();
         populateDeathCauseComboBox();
-        initLanguageListener();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
+
 
     public void cancel() {
         this.stage.close();
@@ -100,9 +115,12 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     public void confirm() {
 
-        Member member = new Member(this.simName.getText(), this.simSurname.getText(), this.simBornname.getText(),
+        Member member = new Member(this.simName.getText(), this.simSurname.getText(), this.simBornname.getText(), path,
                 comboBoxAge.getSelectionModel().getSelectedItem(),
-                (Gender) toggleGroupSex.getSelectedToggle().getUserData(), path);
+                (Gender) toggleGroupSex.getSelectedToggle().getUserData(),
+                comboBoxRace.getSelectionModel().getSelectedItem(),
+                toggleAliveButton.isSelected(),
+                toggleAliveButton.isSelected() ? null : comboBoxDeathCause.getSelectionModel().getSelectedItem());
 
         ServiceResponse response = context.getService().addMember(member);
 
@@ -112,17 +130,22 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     }
 
 
-    private void initSexListener() {
-        toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (path == null) {
-                if (newValue.getUserData().equals(Gender.M)) {
-                    photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
-                } else {
-                    photo.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
+    public void choosePhoto(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            File file = sm.openImageFileChooser();
+            if (file != null) {
+                try {
+                    path =PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
+                    this.photo.setImage(new Image(path));
+                } catch (Exception e) {
+                    log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
+                    e.printStackTrace();
                 }
             }
-        });
+        }
     }
+
+
 
     private void createSexToogleGroupe() {
         this.simSexMale.setToggleGroup(this.toggleGroupSex);
@@ -147,9 +170,47 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         comboBoxDeathCause.getSelectionModel().select(DeathCauses.NATURAL);
     }
 
+
     /*
- * LISTEN LANGUAGE CHANGES
- */
+        INIT LISTENERS
+     */
+
+    private void initListeners() {
+        initLanguageListener();
+        initAliveListener();
+        initSexListener();
+    }
+
+    private void initAliveListener() {
+        toggleAliveButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                toggleAliveButton.setText("Alive");
+                paneDeathCause.setVisible(false);
+
+            } else {
+                toggleAliveButton.setText("Mort");
+                paneDeathCause.setVisible(true);
+            }
+        });
+
+        toggleAliveButton.setSelected(true);
+    }
+
+    private void initSexListener() {
+        toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (path == null) {
+                if (newValue.getUserData().equals(Gender.M)) {
+                    photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+                } else {
+                    photo.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
+                }
+            }
+        });
+    }
+
+    /*
+    *  LISTEN LANGUAGE CHANGES
+    */
     private void initLanguageListener() {
         this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }
@@ -162,8 +223,8 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         // Nothing to do
     }
 
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
 }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import gentree.client.desktop.configurations.enums.FilesFXML;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import javafx.beans.InvalidationListener;
@@ -64,10 +65,12 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         initGraphicalElements();
         loadFamily();
         addListener();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     @FXML
@@ -76,7 +79,7 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     }
 
     private void loadFamily() {
-        familyName.setText(context.getService().getCurrentFamily().getName().get());
+        familyName.setText(context.getService().getCurrentFamily().getName());
     }
 
     private void initGraphicalElements() {

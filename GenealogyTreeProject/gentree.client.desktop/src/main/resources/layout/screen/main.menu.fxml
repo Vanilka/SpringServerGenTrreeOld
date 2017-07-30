@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-
 <AnchorPane id="menuBarPane"
             xmlns:fx="http://javafx.com/fxml/1"
             xmlns="http://javafx.com/javafx/8.0.65"
@@ -17,6 +16,10 @@
                 <items>
                     <MenuItem fx:id="menuItemConnectToServer" mnemonicParsing="false"
                               text="%menu_project_synchronise"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemAppProperties" mnemonicParsing="false"
+                              text="%menu_program_properties"
+                              onAction="#openProperties"/>
                     <SeparatorMenuItem mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemClose"
                               mnemonicParsing="false"
@@ -32,16 +35,16 @@
                     <MenuItem fx:id="menuItemOpenProject" mnemonicParsing="false"
                               onAction="#openFromXML"
                               text="%menu_project_open"/>
-                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <SeparatorMenuItem fx:id="separator_1" mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemSaveProjectAs" mnemonicParsing="false"
                               onAction="#saveToXML"
-                              text="%menu_project_save_as"/>
-                    <MenuItem fx:id="menuItemSaveProject" mnemonicParsing="false" text="%menu_project_save"/>
-                    <SeparatorMenuItem mnemonicParsing="false"/>
+                              text="%menu_project_save"/>
+                    <SeparatorMenuItem fx:id="separator_2" mnemonicParsing="false"/>
                     <MenuItem fx:id="menuItemExportImage" onAction="#generateImage"
                               mnemonicParsing="false" text="%menu_project_export"/>
-                    <SeparatorMenuItem mnemonicParsing="false"/>
-                    <MenuItem fx:id="menuItemCloseProject" text="%menu_project_close"/>
+                    <SeparatorMenuItem fx:id="separator_3" mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemCloseProject" text="%menu_project_close"
+                              onAction="#closeProject"/>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="%menu_help">

@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.tree_elements;
 
 import gentree.client.desktop.GenTreeRun;
 import gentree.client.desktop.domain.Relation;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;

@@ -10,19 +10,22 @@ import gentree.client.desktop.controllers.FXMLDialogController;
 import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ResourceBundle;
 
 /**
@@ -91,13 +94,41 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     }
 
     @FXML
-    public void confrim() {
+    public void confirm() {
         if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
-            context.getService().setCurrentFamily(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
+
+            ((GenTreeLocalService) context.getService()).createProject(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
             sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+
+        } else if(tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
+
+            Path path = tabOpenExistingProjectController.getSelectedFile();
+            Family family = readFamilyFromXML(path.toFile());
+
+            ((GenTreeLocalService) context.getService()).openProject(family, path.toFile().getName());
+            sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+        } else {
+
+            //To to show error
         }
         this.stage.close();
 
+    }
+
+
+    private Family readFamilyFromXML(File file) {
+       Family customer = null;
+
+        try {
+            JAXBContext jaxbContext = JAXBContext.newInstance(Family.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+             customer = (Family) jaxbUnmarshaller.unmarshal(file);
+        } catch (Exception e) {
+            log.error("ERROR");
+            e.printStackTrace();
+        }
+
+        return customer;
     }
 
 
@@ -115,15 +146,25 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
             } else if (newValue.equals(tabOpenExistingProject)) {
                 buttonConfirm.setText(getValueFromKey(Keys.OPEN));
             }
+
+
         });
     }
 
     private void addDisableButtonListener() {
         BooleanBinding disableBinding = Bindings.createBooleanBinding(
-                () -> tabOpenNewProjectController.getFamilyNameField().getText().isEmpty(),
-                tabOpenNewProjectController.getFamilyNameField().textProperty());
+                () -> ((tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)
+                        && tabOpenNewProjectController.getFamilyNameField().getText().isEmpty())
+                        ||
+                        (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)
+                                && tabOpenExistingProjectController.getProjectChooser().getSelectionModel().getSelectedItem() == null)),
+                tabOpenNewProjectController.getFamilyNameField().textProperty(),
+                tabOpenExistingProjectController.getProjectChooser().getSelectionModel().selectedIndexProperty(),
+                tabPaneOpenProject.getSelectionModel().selectedItemProperty());
         this.buttonConfirm.disableProperty().bind(disableBinding);
     }
+
+
 
     /*
      * LISTEN LANGUAGE CHANGES

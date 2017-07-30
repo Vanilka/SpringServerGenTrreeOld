@@ -1,16 +1,18 @@
 package gentree.client.desktop.controllers.screen;
 
 import gentree.client.desktop.configurations.enums.AppLanguage;
+import gentree.client.desktop.configurations.enums.FilesFXML;
 import gentree.client.desktop.configurations.messages.Keys;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLBorderPane;
 import gentree.client.desktop.controllers.FXMLController;
+import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,20 +20,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.util.Callback;
 import lombok.extern.log4j.Log4j2;
 
-import javax.imageio.ImageIO;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -40,6 +34,8 @@ import java.util.ResourceBundle;
  */
 @Log4j2
 public class MainMenuController implements Initializable, FXMLController, FXMLBorderPane {
+
+
     @FXML
     private MenuBar mainBar;
 
@@ -65,13 +61,19 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     private MenuItem menuItemSaveProjectAs;
 
     @FXML
-    private MenuItem menuItemSaveProject;
-
-    @FXML
     private MenuItem menuItemExportImage;
 
     @FXML
     private MenuItem menuItemCloseProject;
+
+    @FXML
+    private SeparatorMenuItem separator_1;
+
+    @FXML
+    private SeparatorMenuItem separator_2;
+
+    @FXML
+    private SeparatorMenuItem separator_3;
 
     @FXML
     private ComboBox<AppLanguage> languageChooser;
@@ -84,9 +86,9 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-
+        initMenuItemsVisibility();
+        initFamilyServiceListener();
         this.setCellFactoryToComboBox();
-
         this.languageChooser.setItems(FXCollections.observableArrayList(AppLanguage.values()));
         this.languageChooser.getSelectionModel()
                 .select(AppLanguage.valueOf(languageBundle.getValue().getString(Keys.LANGUAGE)));
@@ -96,41 +98,42 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
-    private void setCellFactoryToComboBox() {
-        class LanguageCell extends ListCell<AppLanguage> {
-            {
-                super.setPrefHeight(40);
-                super.setPrefWidth(150);
-            }
 
-            @Override
-            public void updateItem(AppLanguage item, boolean empty) {
-                super.updateItem(item, empty);
-                {
-                    if (item != null) {
-                        ImageView imv = new ImageView(item.getBadge());
-                        imv.setFitWidth(30);
-                        imv.setFitHeight(30);
-                        setGraphic(imv);
-                        setText(item.toString().toUpperCase());
 
+
+    /*
+           LISTENERS
+     */
+
+    private void initMenuItemsVisibility() {
+        menuItemCloseProject.setVisible(false);
+        menuItemSaveProjectAs.setVisible(false);
+        separator_2.setVisible(false);
+        separator_3.setVisible(false);
+    }
+
+    private void initFamilyServiceListener() {
+        context.serviceProperty().addListener((obsContext, oldContext, newContext) ->
+        {
+            if (newContext != null) {
+                newContext.familyProperty().addListener((obsFamily, oldFamily, newFamily) -> {
+                    if (newFamily == null) {
+                        changeElementsVisibility(false);
                     } else {
-                        setText("empty");
+                        changeElementsVisibility(true);
                     }
-                }
+                });
+            } else {
+                changeElementsVisibility(false);
             }
-        }
+        });
+    }
 
-        class LanguageCellFactory implements Callback<ListView<AppLanguage>, ListCell<AppLanguage>> {
-            @Override
-            public ListCell<AppLanguage> call(ListView<AppLanguage> param) {
-                // TODO Auto-generated method stub
-                return new LanguageCell();
-            }
-        }
-
-        this.languageChooser.setCellFactory(new LanguageCellFactory());
-        this.languageChooser.setButtonCell(new LanguageCell());
+    private void changeElementsVisibility(boolean value) {
+        menuItemCloseProject.setVisible(value);
+        menuItemSaveProjectAs.setVisible(value);
+        separator_2.setVisible(value);
+        separator_3.setVisible(value);
     }
 
 
@@ -169,14 +172,20 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
         this.menuItemCloseProject.setText(getValueFromKey(Keys.MENU_PROJECT_CLOSE));
         this.menuItemNewProject.setText(getValueFromKey(Keys.MENU_PROJECT_NEW));
         this.menuItemOpenProject.setText(getValueFromKey(Keys.MENU_PROJECT_OPEN));
-        this.menuItemSaveProject.setText(getValueFromKey(Keys.MENU_PROJECT_SAVE));
         this.menuItemSaveProjectAs.setText(getValueFromKey(Keys.MENU_PROJECT_SAVE_AS));
-        this.menuItemSaveProjectAs.setText(getValueFromKey(Keys.MENU_PROJECT_EXPORT));
+
     }
 
     /*
         MENU BUTTON ACTION
      */
+    @FXML
+    public void openProperties(ActionEvent actionEvent) {
+
+        sm.showNewDialog(new DialogAppPropertiesController(), FilesFXML.DIALOG_APP_PROPERTIES);
+    }
+
+
     @FXML
     public void closeApplication() {
         System.exit(0);
@@ -193,22 +202,9 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
 
     @FXML
     public void saveToXML() {
-       /* File file = sc.saveXMLFileChooser();
-        if (file != null) {
-            try {
-
-                JAXBContext jaxbContext = JAXBContext.newInstance(GTX_Family.class);
-                Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-                // output pretty printed
-                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                jaxbMarshaller.marshal(context.getService().getCurrentFamily(), file);
-
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-        }*/
+        ((GenTreeLocalService) context.getService()).saveProject();
     }
+
 
     @FXML
     public void openFromXML() {
@@ -227,4 +223,50 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
         }*/
     }
 
+    @FXML
+    public void closeProject() {
+        sm.reloadScreenWelcomeController();
+    }
+
+
+    /*
+        CELL FACTORY
+     */
+
+    private void setCellFactoryToComboBox() {
+        class LanguageCell extends ListCell<AppLanguage> {
+            {
+                super.setPrefHeight(40);
+                super.setPrefWidth(150);
+            }
+
+            @Override
+            public void updateItem(AppLanguage item, boolean empty) {
+                super.updateItem(item, empty);
+                {
+                    if (item != null) {
+                        ImageView imv = new ImageView(item.getBadge());
+                        imv.setFitWidth(30);
+                        imv.setFitHeight(30);
+                        setGraphic(imv);
+                        setText(item.toString().toUpperCase());
+
+                    } else {
+                        setText("empty");
+                    }
+                }
+            }
+        }
+
+        class LanguageCellFactory implements Callback<ListView<AppLanguage>, ListCell<AppLanguage>> {
+            @Override
+            public ListCell<AppLanguage> call(ListView<AppLanguage> param) {
+                // TODO Auto-generated method stub
+                return new LanguageCell();
+            }
+        }
+
+        this.languageChooser.setCellFactory(new LanguageCellFactory());
+        this.languageChooser.setButtonCell(new LanguageCell());
+    }
 }

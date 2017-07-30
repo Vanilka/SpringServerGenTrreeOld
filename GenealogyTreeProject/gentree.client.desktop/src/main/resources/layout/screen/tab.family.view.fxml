@@ -15,16 +15,17 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-
         <TableView fx:id="gtFamilyMemberTable"
-                   onMouseClicked="#showInfoMember" prefHeight="200.0" prefWidth="200.0"
+                   onMouseClicked="#showInfoMember" prefHeight="20.0" prefWidth="240.0"
                    AnchorPane.bottomAnchor="50.0"
                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                    AnchorPane.topAnchor="10.0">
             <columns>
-                <TableColumn fx:id="simNameColumn" maxWidth="100.0" minWidth="100.0"
+                <TableColumn fx:id="simPhotoColumn" maxWidth="60" minWidth="60"
+                text="%avatar"/>
+                <TableColumn fx:id="simNameColumn" maxWidth="90.0" minWidth="90.0"
                               text="%sim_name"/>
-                <TableColumn fx:id="simSurnameColumn" maxWidth="100.0" minWidth="100.0"
+                <TableColumn fx:id="simSurnameColumn" maxWidth="90.0" minWidth="90.0"
                               text="%sim_surname"/>
             </columns>
             <styleClass>
