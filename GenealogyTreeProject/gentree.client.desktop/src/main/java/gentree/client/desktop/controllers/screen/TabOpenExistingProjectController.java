@@ -1,9 +1,8 @@
 package gentree.client.desktop.controllers.screen;
 
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.configurations.GenTreeDefaultProperties;
 import gentree.client.desktop.configurations.GenTreeProperties;
+import gentree.client.desktop.configurations.enums.PropertiesKeys;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
@@ -21,14 +20,13 @@ import javafx.util.Callback;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.configuration2.Configuration;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -39,7 +37,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class TabOpenExistingProjectController implements Initializable, FXMLController, FXMLTab {
 
-    private Properties properties = GenTreeProperties.INSTANCE.getAppProperties();
+    private Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -74,7 +72,7 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
         ObservableList<Path> list = FXCollections.observableArrayList();
         try {
             Files.newDirectoryStream(
-                    Paths.get(properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME)),
+                    Paths.get(config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME)),
                     path -> (path.toFile().isFile() && path.toFile().getName().contains(".xml")))
                     .forEach((list::add));
         } catch (IOException e) {
@@ -112,7 +110,7 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
     }
 
     public Path getSelectedFile() {
-            return projectChooser.getSelectionModel().getSelectedItem();
+        return projectChooser.getSelectionModel().getSelectedItem();
     }
 
 

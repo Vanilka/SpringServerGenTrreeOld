@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import java.net.URL?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import java.lang.String?>
-<?import javafx.scene.control.ToggleButton?>
-<AnchorPane id="familyView" fx:id="familyView" styleClass=""
-            xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="familyView" fx:id="familyView"
+            styleClass="" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.TabFamilyViewController"
             AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
             AnchorPane.topAnchor="30">
@@ -22,11 +20,11 @@
                    AnchorPane.topAnchor="10.0">
             <columns>
                 <TableColumn fx:id="simPhotoColumn" maxWidth="60" minWidth="60"
-                text="%avatar"/>
+                             text="%avatar"/>
                 <TableColumn fx:id="simNameColumn" maxWidth="90.0" minWidth="90.0"
-                              text="%sim_name"/>
+                             text="%sim_name"/>
                 <TableColumn fx:id="simSurnameColumn" maxWidth="90.0" minWidth="90.0"
-                              text="%sim_surname"/>
+                             text="%sim_surname"/>
             </columns>
             <styleClass>
                 <String fx:value="firstTypeTable"/>

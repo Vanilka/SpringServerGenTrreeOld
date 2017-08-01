@@ -7,5 +7,5 @@ import javafx.stage.Stage;
  */
 public interface FXMLDialogController {
 
-     void setStage(Stage stage);
+    void setStage(Stage stage);
 }

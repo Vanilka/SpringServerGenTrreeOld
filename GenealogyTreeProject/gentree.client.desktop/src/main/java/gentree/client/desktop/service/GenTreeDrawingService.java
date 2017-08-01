@@ -7,5 +7,5 @@ import javafx.scene.layout.HBox;
  */
 public interface GenTreeDrawingService {
 
-   void startDraw(HBox box);
+    void startDraw(HBox box);
 }

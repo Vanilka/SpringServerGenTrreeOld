@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 public abstract class SubBorderPane extends BorderPane {
 
-    //private SubBorderPane parent;
+    private SubBorderPane parentPane;
 
 }

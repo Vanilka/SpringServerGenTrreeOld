@@ -2,8 +2,6 @@ package gentree.client.desktop.exception;
 
 import gentree.client.desktop.configurations.enums.ExceptionCauses;
 
-import java.util.List;
-
 /**
  * Created by Martyna SZYMKOWIAK on 21/07/2017.
  */

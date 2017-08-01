@@ -49,7 +49,6 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     private ScreenMainRightController screenMainRightController;
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
@@ -74,8 +73,7 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     }
 
 
-
-    public void removeInfoSim(Node node ) {
+    public void removeInfoSim(Node node) {
         screenMainLeft.getChildren().remove(node);
         screenMainLeft.getChildren().forEach(n -> n.setVisible(true));
     }

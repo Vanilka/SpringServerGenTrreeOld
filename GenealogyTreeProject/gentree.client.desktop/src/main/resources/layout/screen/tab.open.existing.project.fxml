@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<?import javafx.scene.control.ComboBox?>
-<AnchorPane id="tabOpenExistingProject" fx:id="tabOpenExistingProject" styleClass=""
-            xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="tabOpenExistingProject" fx:id="tabOpenExistingProject"
+            styleClass="" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.TabOpenExistingProjectController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
         <ComboBox fx:id="projectChooser" editable="false" layoutX="71.0" layoutY="65.0" maxWidth="268.0"
-                     minWidth="268.0" prefHeight="55.0" prefWidth="268.0" AnchorPane.bottomAnchor="90.0"
-                     AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0"/>
+                  minWidth="268.0" prefHeight="55.0" prefWidth="268.0" AnchorPane.bottomAnchor="90.0"
+                  AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0"/>
     </children>
 </AnchorPane>

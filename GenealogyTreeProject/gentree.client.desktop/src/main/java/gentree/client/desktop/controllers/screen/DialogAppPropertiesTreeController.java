@@ -1,8 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXToggleButton;
-import gentree.client.desktop.configurations.GenTreeDefaultProperties;
-import gentree.client.desktop.configurations.GenTreeProperties;
+import gentree.client.desktop.configurations.enums.PropertiesKeys;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
@@ -11,13 +10,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -37,7 +33,6 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
@@ -47,10 +42,8 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
     }
 
 
-
-
     private void populateProperties() {
-        toggleAllowedHomo.setSelected(Boolean.valueOf(properties.get(GenTreeDefaultProperties.PARAM_DEFAULT_ALLOW_HOMO)));
+        toggleAllowedHomo.setSelected(Boolean.valueOf(properties.get(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO)));
     }
 
     /*
@@ -67,7 +60,7 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
             } else {
                 toggleAllowedHomo.setText("NOT ALLOWED");
             }
-            properties.replace(GenTreeDefaultProperties.PARAM_DEFAULT_ALLOW_HOMO, newValue.toString());
+            properties.replace(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO, newValue.toString());
         });
     }
 

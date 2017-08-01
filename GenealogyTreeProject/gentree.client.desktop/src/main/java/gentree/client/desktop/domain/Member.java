@@ -63,7 +63,7 @@ public class Member implements Serializable {
         setGender(gender);
         setRace(race);
         setAlive(isAlive);
-        if(! isAlive) {
+        if (!isAlive) {
             setDeathCause(deathCause);
         }
 
@@ -74,9 +74,13 @@ public class Member implements Serializable {
      */
 
     @XmlID
-    @XmlJavaTypeAdapter(type=long.class, value=LongAdapter.class)
+    @XmlJavaTypeAdapter(type = long.class, value = LongAdapter.class)
     public long getId() {
         return id.get();
+    }
+
+    public void setId(long id) {
+        this.id.set(id);
     }
 
     public LongProperty idProperty() {
@@ -87,6 +91,10 @@ public class Member implements Serializable {
         return name.get();
     }
 
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
     public StringProperty nameProperty() {
         return name;
     }
@@ -95,12 +103,20 @@ public class Member implements Serializable {
         return surname.get();
     }
 
+    public void setSurname(String surname) {
+        this.surname.set(surname);
+    }
+
     public StringProperty surnameProperty() {
         return surname;
     }
 
     public String getBornname() {
         return bornname.get();
+    }
+
+    public void setBornname(String bornname) {
+        this.bornname.set(bornname);
     }
 
     public StringProperty bornnameProperty() {
@@ -119,12 +135,20 @@ public class Member implements Serializable {
         }
     }
 
+    public void setPhoto(String photo) {
+        this.photo.set(photo);
+    }
+
     public StringProperty photoProperty() {
         return photo;
     }
 
     public Age getAge() {
         return age.get();
+    }
+
+    public void setAge(Age age) {
+        this.age.set(age);
     }
 
     public ObjectProperty<Age> ageProperty() {
@@ -135,12 +159,24 @@ public class Member implements Serializable {
         return race.get();
     }
 
+    public void setRace(Race race) {
+        this.race.set(race);
+    }
+
+    /*
+            SETTERS
+     */
+
     public ObjectProperty<Race> raceProperty() {
         return race;
     }
 
     public Gender getGender() {
         return gender.get();
+    }
+
+    public void setGender(Gender gender) {
+        this.gender.set(gender);
     }
 
     public ObjectProperty<Gender> genderProperty() {
@@ -151,6 +187,14 @@ public class Member implements Serializable {
         return deathCause.get();
     }
 
+    public void setDeathCause(DeathCauses deathCause) {
+        this.deathCause.set(deathCause);
+
+        if (deathCause != null) {
+            setAlive(false);
+        }
+    }
+
     public ObjectProperty<DeathCauses> deathCauseProperty() {
         return deathCause;
     }
@@ -159,61 +203,16 @@ public class Member implements Serializable {
         return alive.get();
     }
 
-    public BooleanProperty aliveProperty() {
-        return alive;
-    }
-
-    /*
-            SETTERS
-     */
-
-    public void setId(long id) {
-        this.id.set(id);
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
-    public void setSurname(String surname) {
-        this.surname.set(surname);
-    }
-
-    public void setBornname(String bornname) {
-        this.bornname.set(bornname);
-    }
-
-    public void setPhoto(String photo) {
-        this.photo.set(photo);
-    }
-
-    public void setAge(Age age) {
-        this.age.set(age);
-    }
-
-    public void setRace(Race race) {
-       this.race.set(race);
-    }
-
-    public void setGender(Gender gender) {
-        this.gender.set(gender);
-    }
-
-    public void setDeathCause(DeathCauses deathCause) {
-        this.deathCause.set(deathCause);
-
-        if(deathCause != null) {
-            setAlive(false);
-        }
-    }
-
     public void setAlive(boolean alive) {
         this.alive.set(alive);
-        if(alive) {
+        if (alive) {
             setDeathCause(null);
         }
     }
 
+    public BooleanProperty aliveProperty() {
+        return alive;
+    }
 
     @Override
     public String toString() {

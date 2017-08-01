@@ -2,7 +2,6 @@ package gentree.client.desktop.controllers.tree_elements;
 
 import gentree.client.desktop.GenTreeRun;
 import gentree.client.desktop.domain.Relation;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -41,7 +40,7 @@ public class FamilyGroup extends AnchorPane {
     private Label nameNode;
 
     @FXML
-    private StackPane content;
+    private AnchorPane content;
 
     @FXML
     private HBox contentHbox;
@@ -114,13 +113,13 @@ public class FamilyGroup extends AnchorPane {
      * Function guard for resizing elements
      */
     private void initAutoResizing() {
-        bodyNodeDark.widthProperty().bind(this.widthProperty().subtract(OFFSET_FOND_DARK));
-        bodyNodeDark.heightProperty().bind(this.heightProperty().subtract(OFFSET_FOND_DARK));
-        bodyNode.widthProperty().bind(this.widthProperty().subtract(OFFSET_FOND));
-        bodyNode.heightProperty().bind(this.heightProperty().subtract(OFFSET_FOND));
-        content.prefWidthProperty().bind(contentHbox.widthProperty());
+        bodyNodeDark.widthProperty().bind(widthProperty().subtract(OFFSET_FOND_DARK));
+        bodyNodeDark.heightProperty().bind(heightProperty().subtract(OFFSET_FOND_DARK));
+        bodyNode.widthProperty().bind(widthProperty().subtract(OFFSET_FOND));
+        bodyNode.heightProperty().bind(heightProperty().subtract(OFFSET_FOND));
 
-        contentHbox.setBorder(new Border(new BorderStroke(Color.GREEN,
+
+        contentHbox.setBorder(new Border(new BorderStroke(Color.BLUE,
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         content.setBorder(new Border(new BorderStroke(Color.RED,

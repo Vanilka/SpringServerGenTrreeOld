@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
@@ -84,7 +83,7 @@ public class MemberCard extends AnchorPane {
             if (oldValue != null) {
                 oldValue.getProperties().forEach(p -> p.removeListener(listener));
             }
-            if(newValue != null) {
+            if (newValue != null) {
                 newValue.getProperties().forEach(p -> p.addListener(listener));
             }
             fillComponents(newValue);

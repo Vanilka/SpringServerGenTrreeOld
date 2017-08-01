@@ -114,15 +114,16 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     @FXML
     public void confirm() {
 
-        if (currentBornRelation.get().getChildren().size() > 1) {
+
+        if(currentBornRelation.get().getChildren().size() == 1 && existingRelation.get() == null) {
+            currentBornRelation.get().setLeft(mother.get());
+            currentBornRelation.get().setRight(father.get());
+            context.getService().updateRelation(currentBornRelation.get());
+        } else {
             context.getService().moveChildFromRelation(member.get(), currentBornRelation.get(),
                     existingRelation.get() == null
                             ? new Relation(mother.get(), father.get(), RelationType.NEUTRAL, true, null)
                             : existingRelation.get());
-        } else {
-            currentBornRelation.get().setLeft(mother.get());
-            currentBornRelation.get().setRight(father.get());
-            context.getService().updateRelation(currentBornRelation.get());
         }
 
         stage.close();
@@ -163,7 +164,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
         initMemberListener();
         initBornRelationListener();
         initFatherListener();
-        initMotherListenr();
+        initMotherListener();
     }
 
 
@@ -184,7 +185,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
         });
     }
 
-    private void initMotherListenr() {
+    private void initMotherListener() {
         mother.addListener((observable, oldValue, newValue) -> {
             motherCard.setMember(newValue);
             findRelation(newValue, father.get());

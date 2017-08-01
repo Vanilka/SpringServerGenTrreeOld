@@ -1,11 +1,12 @@
 package gentree.client.desktop.domain;
 
 import gentree.client.desktop.exception.NotUniqueBornRelationException;
-import javafx.beans.property.*;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.xml.bind.annotation.*;
@@ -58,17 +59,17 @@ public class Family implements Serializable {
 
 
     public Relation findBornRelation(Member m) throws NotUniqueBornRelationException {
-       List<Relation> list = relations.filtered(relation -> relation.getChildren().contains(m));
+        List<Relation> list = relations.filtered(relation -> relation.getChildren().contains(m));
 
-       if(list.isEmpty()) {
-           return  null;
-       }
+        if (list.isEmpty()) {
+            return null;
+        }
 
-       if(list.size() > 1) {
-           throw new NotUniqueBornRelationException();
-       }
+        if (list.size() > 1) {
+            throw new NotUniqueBornRelationException();
+        }
 
-      return list.get(0);
+        return list.get(0);
     }
 
 
@@ -81,12 +82,21 @@ public class Family implements Serializable {
         return version.get();
     }
 
+    public void setVersion(long version) {
+        this.version.set(version);
+    }
+
     public LongProperty versionProperty() {
         return version;
     }
 
     public long getId() {
         return id.get();
+    }
+
+    @XmlElement
+    public void setId(long id) {
+        this.id.set(id);
     }
 
     public LongProperty idProperty() {
@@ -97,42 +107,33 @@ public class Family implements Serializable {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
-    @XmlElementWrapper(name="members")
-    @XmlElements({ @XmlElement(name = "sim", type = Member.class) })
-    public ObservableList<Member> getMembers() {
-        return members;
-    }
-
-    @XmlElementWrapper(name="relations")
-    @XmlElements({ @XmlElement(name = "relation", type = Relation.class) })
-    public ObservableList<Relation> getRelations() {
-        return relations;
+    @XmlElement
+    public void setName(String name) {
+        this.name.set(name);
     }
 
 /*
         SETTERS
      */
 
-    public void setVersion(long version) {
-        this.version.set(version);
+    public StringProperty nameProperty() {
+        return name;
     }
 
-    @XmlElement
-    public void setId(long id) {
-        this.id.set(id);
-    }
-
-    @XmlElement
-    public void setName(String name) {
-        this.name.set(name);
+    @XmlElementWrapper(name = "members")
+    @XmlElements({@XmlElement(name = "sim", type = Member.class)})
+    public ObservableList<Member> getMembers() {
+        return members;
     }
 
     public void setMembers(ObservableList<Member> members) {
         this.members = members;
+    }
+
+    @XmlElementWrapper(name = "relations")
+    @XmlElements({@XmlElement(name = "relation", type = Relation.class)})
+    public ObservableList<Relation> getRelations() {
+        return relations;
     }
 
     public void setRelations(ObservableList<Relation> relations) {

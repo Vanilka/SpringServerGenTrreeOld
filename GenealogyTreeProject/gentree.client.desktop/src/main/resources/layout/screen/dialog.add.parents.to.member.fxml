@@ -5,8 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane id="dialogAddParentToMember" fx:id="dialogAddParentToMember" minHeight="700" minWidth="700"
-            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAddParentToMember" fx:id="dialogAddParentToMember" minHeight="700"
+            minWidth="700" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddParentsToMemberController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

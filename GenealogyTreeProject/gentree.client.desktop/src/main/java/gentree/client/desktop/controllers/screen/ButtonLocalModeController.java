@@ -13,8 +13,6 @@ import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,7 +30,6 @@ import java.util.ResourceBundle;
  */
 @Log4j2
 public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLController {
-
 
 
     @FXML

@@ -3,8 +3,7 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
+import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -16,29 +15,42 @@ import javafx.scene.layout.HBox;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class PanelRelationCurrent extends SubBorderPane {
+public class PanelRelationCurrent extends SubBorderPane implements RelationPane{
 
     private final AnchorPane relation;
     private final HBox childrenBox;
 
+    private final FamilyMember spouseCard;
+    private final RelationTypeElement relationTypeElement;
 
-    private final ObjectProperty<RelationTypeElement> relationTypeElement;
-    private final ObjectProperty<FamilyMember> spouse;
-    private final ObservableList<FamilyMember> children;
+
+    private final ObjectProperty<RelationType> relationType;
+    private final ObjectProperty<Member> spouse;
+    private final ObservableList<PanelChild> children;
 
     {
         relation = new AnchorPane();
         childrenBox = new HBox();
-
-        relationTypeElement = new SimpleObjectProperty<>();
+        spouseCard = new FamilyMember();
+        relationTypeElement = new RelationTypeElement();
+        relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
     }
 
-    PanelRelationCurrent() {
-        autoresize();
+    public PanelRelationCurrent() {
+        this(null, RelationType.NEUTRAL, null);
+    }
+
+    public PanelRelationCurrent(Member spouse, RelationType type) {
+        this(spouse, type, null);
+    }
+
+    public PanelRelationCurrent(Member spouse, RelationType type, SubBorderPane parent) {
         initPanes();
         initListeners();
+        this.spouse.setValue(spouse);
+        this.relationType.setValue(type);
     }
 
 
@@ -46,11 +58,8 @@ public class PanelRelationCurrent extends SubBorderPane {
         this.setCenter(childrenBox);
         this.setTop(relation);
 
-    }
+        spouseCard.setLayoutX(200);
 
-    private void autoresize() {
-        childrenBox.maxHeight(Double.MAX_VALUE);
-        childrenBox.maxWidth(Double.MAX_VALUE);
     }
 
     /*
@@ -60,22 +69,30 @@ public class PanelRelationCurrent extends SubBorderPane {
     private void initListeners() {
         initSpouseListener();
         initChildrenListener();
+        initRelationTypeListener();
     }
 
 
     private void initSpouseListener() {
         spouse.addListener((observable, oldValue, newValue) -> {
             relation.getChildren().removeAll();
-            if(newValue != null) {
-              relation.getChildren().addAll(relationTypeElement.get(), spouse.get());
+            if (newValue != null) {
+                spouseCard.setMember(newValue);
+                relation.getChildren().addAll(relationTypeElement, spouseCard);
             }
         });
     }
 
+    private void initRelationTypeListener() {
+        relationType.addListener((observable, oldValue, newValue) -> {
+            relationTypeElement.setType(newValue == null ? RelationType.NEUTRAL : newValue);
+        });
+    }
+
     private void initChildrenListener() {
-        children.addListener((ListChangeListener<FamilyMember>) c ->  {
+        children.addListener((ListChangeListener<PanelChild>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     childrenBox.getChildren().addAll(c.getAddedSubList());
                 } else if (c.wasRemoved()) {
                     childrenBox.getChildren().removeAll(c.getRemoved());
@@ -85,5 +102,9 @@ public class PanelRelationCurrent extends SubBorderPane {
         });
     }
 
-
+    @Override
+    public void addChild(PanelChild child) {
+        children.add(child);
+        child.setParentPane(this);
+    }
 }

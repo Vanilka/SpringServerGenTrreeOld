@@ -3,8 +3,8 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<AnchorPane id="mainAnchorPane" fx:id="mainAnchorPane" xmlns="http://javafx.com/javafx/8.0.65"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="mainAnchorPane" fx:id="mainAnchorPane"
+            xmlns="http://javafx.com/javafx/8.0.65"
             fx:controller="gentree.client.desktop.controllers.screen.ScreenWelcomeController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

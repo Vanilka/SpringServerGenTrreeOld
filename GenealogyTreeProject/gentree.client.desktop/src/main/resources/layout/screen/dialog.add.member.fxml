@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<AnchorPane fx:id="dialogAddMember" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="dialogAddMember" styleClass="dialog-pane"
+            xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddMemberController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

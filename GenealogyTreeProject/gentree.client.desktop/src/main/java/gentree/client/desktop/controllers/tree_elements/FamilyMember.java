@@ -23,7 +23,7 @@ import java.io.IOException;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class FamilyMember extends AnchorPane  {
+public class FamilyMember extends AnchorPane {
 
     ScreenManager sm = ScreenManager.INSTANCE;
 

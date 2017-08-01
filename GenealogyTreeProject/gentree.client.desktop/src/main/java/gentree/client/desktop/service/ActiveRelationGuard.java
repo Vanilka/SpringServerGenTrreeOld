@@ -44,7 +44,7 @@ public class ActiveRelationGuard implements Observer {
             /*
                 Redraw tree
              */
-          //  sm.getPaneGenealogyTreeDrawController().redrawTree();
+            //  sm.getPaneGenealogyTreeDrawController().redrawTree();
         }
     }
 

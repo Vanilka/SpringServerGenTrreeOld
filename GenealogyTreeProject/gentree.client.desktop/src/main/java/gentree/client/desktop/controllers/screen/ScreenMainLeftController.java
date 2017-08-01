@@ -9,12 +9,11 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 /**
  * Created by Martyna SZYMKOWIAK on 02/07/2017.
@@ -31,18 +30,16 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
 
     private Tab familyInfo;
     private Tab familyView;
-
-    {
-        familyInfo = new Tab();
-        familyView = new Tab();
-    }
-
     /*
         Controllers
      */
     private TabFamilyInfoController tabFamilyInfoController;
     private TabFamilyViewController tabFamilyViewController;
 
+    {
+        familyInfo = new Tab();
+        familyView = new Tab();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

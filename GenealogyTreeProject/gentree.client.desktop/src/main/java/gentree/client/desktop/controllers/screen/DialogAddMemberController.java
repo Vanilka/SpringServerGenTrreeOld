@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import gentree.client.desktop.configurations.GenTreeDefaultProperties;
 import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
@@ -31,8 +30,6 @@ import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 /**
@@ -135,7 +132,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
             File file = sm.openImageFileChooser();
             if (file != null) {
                 try {
-                    path =PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
+                    path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
                     this.photo.setImage(new Image(path));
                 } catch (Exception e) {
                     log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
@@ -144,7 +141,6 @@ public class DialogAddMemberController implements Initializable, FXMLController,
             }
         }
     }
-
 
 
     private void createSexToogleGroupe() {

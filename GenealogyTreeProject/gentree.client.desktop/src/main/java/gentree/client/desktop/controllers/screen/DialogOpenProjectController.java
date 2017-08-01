@@ -100,7 +100,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
             ((GenTreeLocalService) context.getService()).createProject(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
             sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
 
-        } else if(tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
+        } else if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
 
             Path path = tabOpenExistingProjectController.getSelectedFile();
             Family family = readFamilyFromXML(path.toFile());
@@ -117,12 +117,12 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
 
     private Family readFamilyFromXML(File file) {
-       Family customer = null;
+        Family customer = null;
 
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Family.class);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-             customer = (Family) jaxbUnmarshaller.unmarshal(file);
+            customer = (Family) jaxbUnmarshaller.unmarshal(file);
         } catch (Exception e) {
             log.error("ERROR");
             e.printStackTrace();
@@ -163,7 +163,6 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
                 tabPaneOpenProject.getSelectionModel().selectedItemProperty());
         this.buttonConfirm.disableProperty().bind(disableBinding);
     }
-
 
 
     /*

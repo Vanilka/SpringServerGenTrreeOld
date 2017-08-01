@@ -3,24 +3,24 @@ package gentree.client.desktop.service;
 import com.jfoenix.controls.JFXTabPane;
 import gentree.client.desktop.configurations.GenTreeProperties;
 import gentree.client.desktop.configurations.enums.FilesFXML;
+import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.helper.BorderPaneReloadHelper;
 import gentree.client.desktop.configurations.messages.AppTitles;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.domain.Member;
-import gentree.client.desktop.domain.enums.Gender;
+import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -213,13 +213,8 @@ public class ScreenManager {
             log.error(ex.getCause());
             ex.printStackTrace();
         }
-        return  null;
+        return null;
     }
-
-
-
-
-
 
 
     public FXMLPane loadFxml(FXMLPane controller, Pane pane, FilesFXML fxml) {
@@ -386,20 +381,76 @@ public class ScreenManager {
         this.screenMainController = controller;
     }
 
-    public enum Where {
-        TOP,
-        CENTER,
-        BOTTOM
+    public Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> getPhotoValueFactory() {
+        Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> callback = param -> new ReadOnlyObjectWrapper<>(param.getValue().getPhoto());
+        return callback;
     }
 
 
     /*
-        Cell Factory
-     */
+    Cell Factory
+    */
 
-    public Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> getPhotoValueFactory() {
-        Callback<TableColumn.CellDataFeatures<Member, String>, ObservableValue<String>> callback = param -> new ReadOnlyObjectWrapper<>(param.getValue().getPhoto());
+    public Callback<ListView<RelationType>, ListCell<RelationType>> getCustomRelationListCell() {
+        int relationWidth = 50;
+        int relationHeight = 50;
+
+        Callback<ListView<RelationType>, ListCell<RelationType>> callback = new Callback<ListView<RelationType>, ListCell<RelationType>>() {
+            @Override
+            public ListCell<RelationType> call(ListView<RelationType> param) {
+                final ListCell<RelationType> relationCell = new ListCell<RelationType>() {
+                    @Override
+                    public void updateItem(RelationType item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            switch (item) {
+                                case NEUTRAL:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), relationWidth, relationHeight));
+                                    setText("");
+                                    break;
+                                case LOVE:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_LOVE.toString(), relationWidth, relationHeight));
+                                    setText("");
+                                    break;
+                                case FIANCE:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_FIANCE.toString(), relationWidth, relationHeight));
+                                    setText("");
+                                    break;
+                                case MARRIED:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_MARRIED.toString(), relationWidth, relationHeight));
+                                    setText("");
+                                    break;
+                                default:
+                                    setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), relationWidth, relationHeight));
+                                    setText("");
+                            }
+                        } else {
+                            setGraphic(setGraphicToImageView(ImageFiles.RELATION_NEUTRAL.toString(), relationWidth, relationHeight));
+                            setText("");
+                        }
+                    }
+
+                };
+                return relationCell;
+            }
+        };
         return callback;
+
+
+    }
+
+    private ImageView setGraphicToImageView(String path, int width, int height) {
+        ImageView imv = new ImageView(path);
+        imv.setFitWidth(width);
+        imv.setFitHeight(height);
+        return imv;
+    }
+
+
+    public enum Where {
+        TOP,
+        CENTER,
+        BOTTOM
     }
 
 }

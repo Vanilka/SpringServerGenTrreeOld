@@ -18,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PanelSingle extends SubBorderPane {
+public class PanelSingle extends SubBorderPane implements RelationPane{
 
     private final FamilyMember member;
 
@@ -29,20 +29,28 @@ public class PanelSingle extends SubBorderPane {
     /*
         Initialization
      */
+
     {
         member = new FamilyMember();
         hboxChildren = new HBox();
         panelChildrenList = FXCollections.observableArrayList();
+
     }
 
     public PanelSingle() {
-        init();
+        this(null, null);
     }
 
     public PanelSingle(Member m) {
-        this();
-        member.setMember(m);
+        this(m, null);
     }
+
+    public PanelSingle(Member m, SubBorderPane parent) {
+        init();
+        member.setMember(m);
+        setParentPane(parent);
+    }
+
 
     private void init() {
         initListeners();
@@ -51,13 +59,13 @@ public class PanelSingle extends SubBorderPane {
     }
 
     private void initListeners() {
-        panelChildrenList.addListener((ListChangeListener<PanelChild> ) c -> {
+        panelChildrenList.addListener((ListChangeListener<PanelChild>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     hboxChildren.getChildren().addAll(c.getAddedSubList());
                 }
 
-                if (c.wasRemoved()){
+                if (c.wasRemoved()) {
                     hboxChildren.getChildren().removeAll(c.getRemoved());
                 }
             }
@@ -65,8 +73,15 @@ public class PanelSingle extends SubBorderPane {
     }
 
     public void addMember(Member m) {
-        if(m != null) {
+        if (m != null) {
             member.setMember(m);
         }
+    }
+
+
+    @Override
+    public void addChild(PanelChild child) {
+        panelChildrenList.add(child);
+        child.setParentPane(this);
     }
 }

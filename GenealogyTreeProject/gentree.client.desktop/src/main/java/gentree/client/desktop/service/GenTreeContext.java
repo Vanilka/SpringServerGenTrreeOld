@@ -27,7 +27,6 @@ public class GenTreeContext {
     private ObjectProperty<FamilyService> service = new SimpleObjectProperty<>();
 
 
-
     {
 
         locale = new Locale("pl", "PL");

@@ -3,6 +3,7 @@ package gentree.client.desktop.controllers.screen;
 import com.jfoenix.controls.JFXButton;
 import gentree.client.desktop.configurations.GenTreeProperties;
 import gentree.client.desktop.configurations.enums.FilesFXML;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import javafx.beans.property.ObjectProperty;
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.configuration2.Configuration;
 
 import java.net.URL;
 import java.util.*;
@@ -63,18 +65,19 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
         toggleButtons = new ArrayList<>();
         paneMap = new HashMap<>();
         propertiesMap = new HashMap<>();
-        GenTreeProperties.INSTANCE.getAppProperties().forEach((key, value) -> propertiesMap.put(key.toString(), value.toString()));
-
+        populatePropertiesMap();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-        populateMap();
+        populatePaneMap();
         initPanes();
         initToggleButtons();
         initListeners();
         initGroup();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
 
@@ -93,7 +96,7 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
     }
 
 
-    private void populateMap() {
+    private void populatePaneMap() {
         paneMap.put(buttonOnlineProperties, paneOnlineProperties);
         paneMap.put(buttonOtherProperties, paneOtherProperties);
         paneMap.put(buttonTreeProperties, paneTreeProperties);
@@ -114,13 +117,24 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
     }
 
     private void saveProperties() {
-        Properties p = GenTreeProperties.INSTANCE.getAppProperties();
+        Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
 
         propertiesMap.forEach((k, v) -> {
-            if(p.containsKey(k) && !p.getProperty(k).equals(v)) {
-                p.setProperty(k, v);
+            if (config.containsKey(k) && !config.getString(k).equals(v)) {
+                config.setProperty(k, v);
             }
         });
+
+        GenTreeProperties.INSTANCE.storeProperties();
+    }
+
+    private void populatePropertiesMap() {
+        Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
+        Iterator<String> keys = config.getKeys();
+        while (keys.hasNext()) {
+            String key = keys.next();
+            propertiesMap.put(key, config.getString(key));
+        }
     }
 
     /*

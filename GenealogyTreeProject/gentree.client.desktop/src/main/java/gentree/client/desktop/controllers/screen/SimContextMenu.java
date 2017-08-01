@@ -15,17 +15,15 @@ public class SimContextMenu extends ContextMenu {
 
     GenTreeContext context = GenTreeContext.INSTANCE;
     ScreenManager sm = ScreenManager.INSTANCE;
-
-   private MenuItem itemAddParents = new MenuItem("AddParents");
-   private MenuItem itemAddSiblings = new MenuItem("AssSpouse");
+    FamilyMember member;
+    private MenuItem itemAddParents = new MenuItem("AddParents");
+    private MenuItem itemAddSiblings = new MenuItem("AssSpouse");
 
     public SimContextMenu() {
         super();
         initItems();
         this.getItems().addAll(itemAddParents, itemAddSiblings);
     }
-
-    FamilyMember member;
 
     public void show(FamilyMember n, ContextMenuEvent event) {
         member = n;
@@ -37,7 +35,7 @@ public class SimContextMenu extends ContextMenu {
         initItemAddSpouse();
     }
 
-    private void  initItemAddParents() {
+    private void initItemAddParents() {
 
         itemAddParents.setOnAction(event -> sm.showNewDialog(new DialogAddParentsToMemberController(), member.getMember(), FilesFXML.DIALOG_ADD_PARENTS_TO_MEMBER));
     }
@@ -45,8 +43,6 @@ public class SimContextMenu extends ContextMenu {
     private void initItemAddSpouse() {
         itemAddSiblings.setOnAction(event -> sm.showNewDialog(new DialogAddSpouseController(), member.getMember(), FilesFXML.DIALOG_ADD_SPOUSE_TO_MEMBER));
     }
-
-
 
 
 }

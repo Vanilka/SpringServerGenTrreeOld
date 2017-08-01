@@ -4,7 +4,6 @@ import gentree.client.desktop.configurations.enums.FilesFXML;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
-import gentree.client.desktop.controllers.FXMLPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -98,7 +97,6 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
     /*
      ON CLICK ACTIONS
      */
-
 
 
 }

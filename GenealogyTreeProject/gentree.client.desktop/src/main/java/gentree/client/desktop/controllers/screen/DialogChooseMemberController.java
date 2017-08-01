@@ -1,9 +1,9 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogReturningMember;
-import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.Age;
 import gentree.client.desktop.domain.enums.Gender;
@@ -18,7 +18,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import lombok.Setter;
@@ -76,14 +75,16 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         this.memberPhoto.setCellFactory(initPhotoCellFactory());
         this.memberGender.setCellFactory(initGenderCellFactory());
         this.memberAge.setCellFactory(initAgeCellFactory());
         setCellValueFactory();
-       // initMemberListener();
+        // initMemberListener();
         initSelectedMemberListener();
         memberTable.setItems(memberList);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 
@@ -133,7 +134,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
         });
 
         selectedMember.addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
+            if (newValue != null) {
                 photo.setImage(new Image(newValue.getPhoto()));
                 simName.setText(newValue.getName());
                 simSurname.setText(newValue.getSurname());

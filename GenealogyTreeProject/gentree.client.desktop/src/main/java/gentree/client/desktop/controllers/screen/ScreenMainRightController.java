@@ -1,5 +1,6 @@
 package gentree.client.desktop.controllers.screen;
 
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
@@ -43,12 +44,13 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         sm.register(this);
         drawingService = new GenTreeDrawingServiceImpl();
         initRelationListener();
         redrawTree();
-        this.languageBundle.setValue(resources);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
 

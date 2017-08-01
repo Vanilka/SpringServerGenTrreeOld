@@ -1,8 +1,6 @@
 package gentree.client.desktop.configurations.helper;
 
 import gentree.client.desktop.domain.Member;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
@@ -15,13 +13,16 @@ import javax.xml.bind.annotation.XmlType;
 public class SimWrapper {
 
     @XmlIDREF
-    @XmlAttribute(name="ref")
+    @XmlAttribute(name = "ref")
     private Member member;
 
-    public SimWrapper(){};
+    public SimWrapper() {
+    }
+
+    ;
 
     public SimWrapper(Member member) {
-       this.member = member;
+        this.member = member;
     }
 
     public Member getMember() {

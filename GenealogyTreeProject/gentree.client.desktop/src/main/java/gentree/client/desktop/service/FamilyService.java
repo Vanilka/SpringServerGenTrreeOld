@@ -3,23 +3,26 @@ package gentree.client.desktop.service;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.responses.ServiceResponse;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
  */
-public interface FamilyService  {
+public interface FamilyService {
 
     Family getCurrentFamily();
 
-    ReadOnlyObjectProperty<Family> familyProperty();
-
     void setCurrentFamily(Family family);
+
+    ReadOnlyObjectProperty<Family> familyProperty();
 
     ServiceResponse addMember(Member member);
 
     ServiceResponse addRelation(Relation relation);
+
+    ServiceResponse addRelation(Member left, Member right, RelationType type,  boolean active);
 
     ServiceResponse updateRelation(Relation relation);
 

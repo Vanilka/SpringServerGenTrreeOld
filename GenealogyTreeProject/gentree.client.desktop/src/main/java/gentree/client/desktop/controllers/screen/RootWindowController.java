@@ -1,5 +1,6 @@
 package gentree.client.desktop.controllers.screen;
 
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLBorderPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
@@ -23,6 +24,8 @@ public class RootWindowController implements Initializable, FXMLController, FXML
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 }

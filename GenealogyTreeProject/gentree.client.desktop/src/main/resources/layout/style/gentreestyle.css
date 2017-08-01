@@ -16,22 +16,22 @@
     -gentree-color-11: #9E0303;
     -gentree-color-12: #fffbf8;
 
-/*    -gentree-main-backgorund-color: #3c4f4c;
-    -gentree-color-2: #266558;
-    -gentree-color-4: #2F3737;
-    -gentree-color-5: #404A4B;
-    -gentree-color-6: rgba(168, 189, 185, 0.6);
-    -gentree-color-7: rgba(28, 32, 29, 0.40);
-    -gentree-color-3: #81d136;
-    -gentree-color-3: rgba(82, 202, 0, 0.9);
-    -gentree-color-8: #404A4B;
-    -gentree-color-6: rgba(230, 255, 251, 0.2);
-    -gentree-color-9: #ecf2dd;
-    -gentree-color-10: #acbdb2;
-    -gentree-color-11: #9E0303;
-    -gentree-color-3: #214e41;
-    -gentree-color-12: #faffd5;
-    -gentree-color-12: #c7c5c4;*/
+    /*    -gentree-main-backgorund-color: #3c4f4c;
+        -gentree-color-2: #266558;
+        -gentree-color-4: #2F3737;
+        -gentree-color-5: #404A4B;
+        -gentree-color-6: rgba(168, 189, 185, 0.6);
+        -gentree-color-7: rgba(28, 32, 29, 0.40);
+        -gentree-color-3: #81d136;
+        -gentree-color-3: rgba(82, 202, 0, 0.9);
+        -gentree-color-8: #404A4B;
+        -gentree-color-6: rgba(230, 255, 251, 0.2);
+        -gentree-color-9: #ecf2dd;
+        -gentree-color-10: #acbdb2;
+        -gentree-color-11: #9E0303;
+        -gentree-color-3: #214e41;
+        -gentree-color-12: #faffd5;
+        -gentree-color-12: #c7c5c4;*/
 
 }
 
@@ -410,7 +410,6 @@
 
 }
 
-
 /*
     Table View  Member and Relations
  */
@@ -440,14 +439,12 @@
 
 }
 
-
 .firstTypeTable .column-header,
 .firstTypeTable .column-header:focused,
-.firstTypeTable .column-header:pressed{
+.firstTypeTable .column-header:pressed {
     -fx-background-radius: 20 20 0 0;
     -fx-background-color: -gentree-color-4;
 }
-
 
 .firstTypeTable .column-header .label {
     -fx-font-family: "Segoe UI Light";
@@ -455,7 +452,6 @@
     -fx-font-weight: bold;
     -fx-alignment: center;
 }
-
 
 #gtFamilyMemberTable {
     -fx-background-radius: 20 20 20 20;
@@ -497,16 +493,17 @@
 
 .tableMembersAndRelations:focused .table-row-cell:filled:focused:selected,
 .tableMembersAndRelations .table-row-cell:filled:focused:selected {
-     -fx-background-color: -gentree-color-3;
-     -fx-background-insets: 0 0 0 0;
- }
+    -fx-background-color: -gentree-color-3;
+    -fx-background-insets: 0 0 0 0;
+}
 
 .tableMembersAndRelations:focused .table-row-cell:filled:focused:selected .table-cell,
 .tableMembersAndRelations .table-row-cell:filled:focused:selected .table-cell {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill:  white;
+    -fx-text-fill: white;
     -fx-alignment: center;
 }
+
 #gtFamilyRelationTable .cell {
 
     -fx-cell-size: 90px;
@@ -514,12 +511,9 @@
 
 .firstTypeTable .table-cell {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill:  -gentree-color-10;
+    -fx-text-fill: -gentree-color-10;
     -fx-alignment: center;
 }
-
-
-
 
 /*
     Toogle Buttons
@@ -550,7 +544,6 @@
 /*
     Combobox
  */
-
 
 .combobox {
     -fx-background-color: -gentree-color-7;

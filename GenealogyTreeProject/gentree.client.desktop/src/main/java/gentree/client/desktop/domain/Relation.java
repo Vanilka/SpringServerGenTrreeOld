@@ -56,23 +56,23 @@ public class Relation extends Observable implements Serializable {
 
 
     public void addChildren(Member... children) {
-        for(Member child : children) {
-            if( ! this.children.contains(child)) {
+        for (Member child : children) {
+            if (!this.children.contains(child)) {
                 this.children.add(child);
             }
         }
     }
 
     public boolean compareLeft(Object o) {
-        if(getLeft() == null && o == null) return true;
-        if(getLeft() == o) return  true;
+        if (getLeft() == null && o == null) return true;
+        if (getLeft() == o) return true;
         Member other = (Member) o;
         return getLeft().equals(o);
     }
 
     public boolean compareRight(Object o) {
-        if(getRight() == null && o == null) return true;
-        if(getRight() == o ) return true;
+        if (getRight() == null && o == null) return true;
+        if (getRight() == o) return true;
         Member other = (Member) o;
         return getRight().equals(o);
     }
@@ -86,6 +86,10 @@ public class Relation extends Observable implements Serializable {
         return id.get();
     }
 
+    public void setId(long id) {
+        this.id.set(id);
+    }
+
     public LongProperty idProperty() {
         return id;
     }
@@ -93,6 +97,10 @@ public class Relation extends Observable implements Serializable {
     @XmlIDREF
     public Member getLeft() {
         return left.get();
+    }
+
+    public void setLeft(Member left) {
+        this.left.set(left);
     }
 
     public ObjectProperty<Member> leftProperty() {
@@ -104,19 +112,35 @@ public class Relation extends Observable implements Serializable {
         return right.get();
     }
 
+    public void setRight(Member right) {
+        this.right.set(right);
+    }
+
     public ObjectProperty<Member> rightProperty() {
         return right;
     }
 
     @XmlElementWrapper
-    @XmlElement(name="child")
+    @XmlElement(name = "child")
     @XmlJavaTypeAdapter(SimMarshaller.class)
     public ObservableList<Member> getChildren() {
         return children;
     }
 
+    public void setChildren(ObservableList<Member> children) {
+        this.children = children;
+    }
+
+    /*
+        SETTERS
+     */
+
     public RelationType getType() {
         return type.get();
+    }
+
+    public void setType(RelationType type) {
+        this.type.set(type);
     }
 
     public ObjectProperty<RelationType> typeProperty() {
@@ -127,35 +151,11 @@ public class Relation extends Observable implements Serializable {
         return active.get();
     }
 
-    public BooleanProperty activeProperty() {
-        return active;
-    }
-
-    /*
-        SETTERS
-     */
-
-    public void setId(long id) {
-        this.id.set(id);
-    }
-
-    public void setLeft(Member left) {
-        this.left.set(left);
-    }
-
-    public void setRight(Member right) {
-        this.right.set(right);
-    }
-
-    public void setChildren(ObservableList<Member> children) {
-        this.children = children;
-    }
-
-    public void setType(RelationType type) {
-        this.type.set(type);
-    }
-
     public void setActive(boolean active) {
         this.active.set(active);
+    }
+
+    public BooleanProperty activeProperty() {
+        return active;
     }
 }

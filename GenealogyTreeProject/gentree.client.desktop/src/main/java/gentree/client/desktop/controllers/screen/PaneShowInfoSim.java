@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
@@ -64,7 +65,6 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
 
-
     {
         member = new SimpleObjectProperty<>();
 
@@ -78,17 +78,19 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         readOnlyControls = Arrays.asList(simId, simName, simSurname, simBornname);
         initControlsProperties();
         initListeners();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 
     private void initControlsProperties() {
 
         readOnlyControls.forEach(control -> {
-            if(control instanceof JFXTextField) {
+            if (control instanceof JFXTextField) {
                 ((JFXTextField) control).setEditable(true);
             }
         });
@@ -126,15 +128,15 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
         return member.get();
     }
 
-    public ObjectProperty<Member> memberProperty() {
-        return member;
+    public void setMember(Member member) {
+        this.member.set(member);
     }
 
     /*
         SETTER
      */
 
-    public void setMember(Member member) {
-        this.member.set(member);
+    public ObjectProperty<Member> memberProperty() {
+        return member;
     }
 }

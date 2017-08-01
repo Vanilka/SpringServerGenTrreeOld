@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
@@ -7,9 +8,8 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<?import com.jfoenix.controls.JFXButton?>
-<AnchorPane id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400" minWidth="500" styleClass="dialog-pane"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400" minWidth="500"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111"
             fx:controller="gentree.client.desktop.controllers.screen.DialogChooseMemberController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

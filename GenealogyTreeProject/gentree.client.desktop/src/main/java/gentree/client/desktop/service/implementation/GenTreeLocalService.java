@@ -1,12 +1,14 @@
 package gentree.client.desktop.service.implementation;
 
-import gentree.client.desktop.configurations.GenTreeDefaultProperties;
 import gentree.client.desktop.configurations.GenTreeProperties;
 import gentree.client.desktop.configurations.enums.ImageFiles;
+import gentree.client.desktop.configurations.enums.PropertiesKeys;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.desktop.domain.enums.Gender;
+import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.ActiveRelationGuard;
 import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.responses.MemberResponse;
@@ -17,6 +19,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.configuration2.Configuration;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -28,7 +31,6 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -39,7 +41,7 @@ public class GenTreeLocalService implements FamilyService {
     private final static String PROJECT_FILE_EXTENSION = ".xml";
     private static final String PREFIX_FILE_ABSOLUTE = "file://";
     private static final String PREFIX_FILE_RELATIVE = "file:";
-    private final Properties properties = GenTreeProperties.INSTANCE.getAppProperties();
+    private final Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
     private ObjectProperty<Family> currentFamily;
     private ActiveRelationGuard guard;
 
@@ -62,7 +64,7 @@ public class GenTreeLocalService implements FamilyService {
     public ServiceResponse addMember(Member member) {
         log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
         if (!isGenericPhoto(member.getPhoto())) {
-            String newPhotoPath = copyPhoto(properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_IMAGE_NAME), member.getPhoto());
+            String newPhotoPath = copyPhoto(config.getString(PropertiesKeys.PARAM_DIR_IMAGE_NAME), member.getPhoto());
             member.setPhoto(newPhotoPath == null ? null : PREFIX_FILE_RELATIVE + newPhotoPath);
         }
         getCurrentFamily().addMember(member);
@@ -73,9 +75,44 @@ public class GenTreeLocalService implements FamilyService {
     public ServiceResponse addRelation(Relation relation) {
         if (relation.getLeft() == null && relation.getRight() == null) {
             getCurrentFamily().addRelation(relation);
+        } else {
+            Relation exist = findRelation(relation.getLeft(), relation.getRight());
+            if (exist == null) {
+                getCurrentFamily().addRelation(relation);
+            } else {
+                relation = mergeRelations(exist, relation);
+            }
         }
-
         return new RelationResponse(relation);
+    }
+
+    private Relation mergeRelations(Relation root, Relation merged) {
+        root.setType(merged.getType());
+        root.setActive(merged.getActive());
+        merged.getChildren().forEach(root::addChildren);
+
+
+        return root;
+    }
+
+
+    @Override
+    public ServiceResponse addRelation(Member m1, Member m2, RelationType type, boolean active) {
+        Member left;
+        Member right;
+
+        /*
+            Left is an user with higher ID
+         */
+        if (m1.getGender() == m2.getGender()) {
+            left = m1.getId() > m2.getId() ? m1 : m2;
+            right = m1.getId() < m2.getId() ? m1 : m2;
+        } else {
+            left = m1.getGender() == Gender.F ? m1 : m2;
+            right = m1.getGender() == Gender.M ? m1 : m2;
+
+        }
+        return addRelation(new Relation(left, right, type, active));
     }
 
     @Override
@@ -86,9 +123,12 @@ public class GenTreeLocalService implements FamilyService {
 
     @Override
     public ServiceResponse moveChildFromRelation(Member m, Relation oldRelation, Relation newRelation) {
-
         oldRelation.getChildren().remove(m);
         newRelation.getChildren().add(m);
+
+        if ((oldRelation.getLeft() == null || oldRelation.getRight() == null) && oldRelation.getChildren().isEmpty()) {
+            getCurrentFamily().getRelations().remove(oldRelation);
+        }
 
         return new RelationResponse(newRelation);
     }
@@ -97,7 +137,7 @@ public class GenTreeLocalService implements FamilyService {
     public Relation findRelation(Member left, Member right) {
         List<Relation> list = getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() != null || r.getRight() != null)
-                .filtered(r -> r.compareLeft(left)&& r.compareRight(right));
+                .filtered(r -> r.compareLeft(left) && r.compareRight(right));
         return list.size() == 0 ? null : list.get(0);
 
     }
@@ -233,7 +273,7 @@ public class GenTreeLocalService implements FamilyService {
         setCurrentFamily(currentFamily);
 
         String filename = generateProjectName(currentFamily.getName());
-        String baseDir = properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME);
+        String baseDir = config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME);
         try {
             Files.createDirectory(Paths.get(baseDir, filename.replace(PROJECT_FILE_EXTENSION, "")));
             Files.createFile(Paths.get(baseDir, filename));
@@ -270,7 +310,7 @@ public class GenTreeLocalService implements FamilyService {
     private String generateProjectName(String name) {
         name = name.replaceAll("[^a-zA-Z0-9]+", "");
 
-        String baseDir = properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME);
+        String baseDir = config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME);
         String filename = name + PROJECT_FILE_EXTENSION;
 
         if (Files.exists(Paths.get(baseDir, filename))) {
@@ -298,7 +338,7 @@ public class GenTreeLocalService implements FamilyService {
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(getCurrentFamily(), new File(
-                    properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME), projectFilename));
+                    config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME), projectFilename));
         } catch (Exception e) {
             log.error(e.getMessage());
             e.printStackTrace();
@@ -306,7 +346,7 @@ public class GenTreeLocalService implements FamilyService {
     }
 
     /**
-     * Copy Member photo t0 parent folder
+     * Copy Member photo t0 parentPane folder
      *
      * @param parent
      * @param path
@@ -326,7 +366,7 @@ public class GenTreeLocalService implements FamilyService {
     }
 
     /**
-     * Move photo to parent folder
+     * Move photo to parentPane folder
      *
      * @param parent
      * @param path
@@ -367,7 +407,7 @@ public class GenTreeLocalService implements FamilyService {
     private boolean needCopy(String s) {
         boolean result = !isGenericPhoto(s)
                 && (s.contains(PREFIX_FILE_RELATIVE)
-                && !s.contains(properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME))
+                && !s.contains(config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME))
                 && !s.contains(projectFilename.replace(PROJECT_FILE_EXTENSION, "")))
                 || s.contains(PREFIX_FILE_ABSOLUTE);
         return result;
@@ -384,7 +424,7 @@ public class GenTreeLocalService implements FamilyService {
                 .filtered(m -> needCopy(m.getPhoto()))
                 .forEach(member -> {
                     String newPath = movePhoto(Paths.get(
-                            properties.getProperty(GenTreeDefaultProperties.PARAM_DIR_PROJECT_NAME),
+                            config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME),
                             projectFilename.replace(PROJECT_FILE_EXTENSION, "")).toString(),
                             member.getPhoto());
                     member.setPhoto(newPath == null ? null : PREFIX_FILE_RELATIVE + newPath);

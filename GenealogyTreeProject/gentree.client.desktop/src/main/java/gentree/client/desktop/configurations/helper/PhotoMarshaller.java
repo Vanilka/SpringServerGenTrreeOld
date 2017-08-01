@@ -11,7 +11,7 @@ public class PhotoMarshaller extends XmlAdapter<String, String> {
 
     @Override
     public String unmarshal(String v) throws Exception {
-        if(v == null || v.equals("")) {
+        if (v == null || v.equals("")) {
             return null;
         }
         return v;

@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane id="menuBarPane"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            id="menuBarPane"
             xmlns="http://javafx.com/javafx/8.0.65"
             fx:controller="gentree.client.desktop.controllers.screen.MainMenuController">
     <stylesheets>
