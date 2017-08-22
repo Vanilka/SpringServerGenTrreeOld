@@ -1,6 +1,7 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,5 +13,13 @@ import lombok.Setter;
 public abstract class SubBorderPane extends BorderPane {
 
     private SubBorderPane parentPane;
+
+    protected void initBorder(Color color, Pane node) {
+        node.setBorder(new Border
+                (new BorderStroke(color,
+                        BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY,
+                        BorderWidths.DEFAULT)));
+    }
 
 }

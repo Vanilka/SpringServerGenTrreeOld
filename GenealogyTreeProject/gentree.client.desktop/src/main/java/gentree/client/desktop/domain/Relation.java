@@ -55,31 +55,42 @@ public class Relation extends Observable implements Serializable {
     }
 
 
+    private void invalidate() {
+        setChanged();
+        notifyObservers();
+    }
+
     public void addChildren(Member... children) {
-        for (Member child : children) {
-            if (!this.children.contains(child)) {
-                this.children.add(child);
+        if (children != null) {
+            for (Member child : children) {
+                if (!this.children.contains(child)) {
+                    this.children.add(child);
+                }
             }
         }
     }
 
     public boolean compareLeft(Object o) {
         if (getLeft() == null && o == null) return true;
+        if (getLeft() == null) return false;
+        if (o == null) return false;
         if (getLeft() == o) return true;
         Member other = (Member) o;
-        return getLeft().equals(o);
+        return getLeft().equals(other);
     }
 
     public boolean compareRight(Object o) {
         if (getRight() == null && o == null) return true;
+        if (getRight() == null) return false;
+        if (o == null) return false;
         if (getRight() == o) return true;
         Member other = (Member) o;
-        return getRight().equals(o);
+        return getRight().equals(other);
     }
 
 
     /*
-        GETTERS
+        GETTERS AND SETTERS
      */
 
     public long getId() {
@@ -131,9 +142,6 @@ public class Relation extends Observable implements Serializable {
         this.children = children;
     }
 
-    /*
-        SETTERS
-     */
 
     public RelationType getType() {
         return type.get();
@@ -153,6 +161,7 @@ public class Relation extends Observable implements Serializable {
 
     public void setActive(boolean active) {
         this.active.set(active);
+        invalidate();
     }
 
     public BooleanProperty activeProperty() {

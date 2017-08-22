@@ -7,8 +7,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,6 +72,12 @@ public class PanelChild extends SubBorderPane {
         setCenter(panelSinglePane);
         setLeft(panelRelationExPane);
         setRight(panelRelationCurrentPane);
+
+        this.initBorder(Color.ORANGE, this);
+
+        if(parent != null) {
+            this.setPadding(new Insets(60, 10, 10, 10));
+        }
     }
 
 

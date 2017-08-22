@@ -60,6 +60,11 @@ public class GenTreeLocalService implements FamilyService {
         idRelation = 0L;
     }
 
+
+    public GenTreeLocalService() {
+        setCurrentFamilyListener();
+    }
+
     @Override
     public ServiceResponse addMember(Member member) {
         log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
@@ -149,6 +154,16 @@ public class GenTreeLocalService implements FamilyService {
     private void setMemberId() {
     }
 
+    private void setCurrentFamilyListener() {
+        this.currentFamily.addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                guard = new ActiveRelationGuard(newValue.getRelations());
+                newValue.getRelations().forEach(element -> guard.addObserverTo(element));
+            }
+        });
+    }
+
+
     private void setMemberListener() {
         getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) c -> {
             while (c.next()) {
@@ -180,7 +195,7 @@ public class GenTreeLocalService implements FamilyService {
             while (c.next()) {
                 if (c.wasAdded()) {
                     c.getAddedSubList().forEach(relation -> {
-                        //  guard.addObserverTo(relation);
+                        guard.addObserverTo(relation);
                         incrementRelationId(relation);
                         log.info(LogMessages.MSG_RELATION_ADD_NEW, relation);
                     });

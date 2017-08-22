@@ -11,8 +11,10 @@ import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.controllers.tree_elements.MemberCard;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -100,13 +102,84 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
 
     @FXML
     public void openChoosingSpouse(ActionEvent actionEvent) {
-        List<Member> spouseList = context.getService().getCurrentFamily().getMembers()
-                .filtered(mbr -> !mbr.equals(member.get()))
-                .filtered(mbr -> mbr.getGender() != returnGenderDenied());
+        List<Member> spouseList = generateSpouseList();
 
         Member m = sm.showNewDialog(new DialogChooseMemberController(), member.get(), spouseList, FilesFXML.DIALOG_CHOOSE_MEMBER);
         if (m != null) spouse.set(m);
     }
+
+
+    private ObservableList<Member> generateSpouseList() {
+        ObservableList<Member> list = context.getService().getCurrentFamily().getMembers()
+                .filtered(mbr -> !mbr.equals(member.get()))
+                .filtered(mbr -> mbr.getGender() != returnGenderDenied());
+
+        list = removeAscends(list, member.get());
+        list = removeDescends(list, member.get());
+
+        return list;
+    }
+
+    private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
+
+        try {
+            Relation bornRelation = context.getService().getCurrentFamily().findBornRelation(m);
+            /*
+                Remove Sibling
+             */
+            for (Member sibbling : bornRelation.getChildren()) {
+                list = list.filtered(p -> !p.equals(m));
+            }
+            /*
+                RemoveLeft
+             */
+            if(bornRelation.getLeft() != null) {
+                list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
+                list = removeAscends(list, bornRelation.getLeft());
+            }
+
+            /*
+                Remove Rightrs
+             */
+            if(bornRelation.getRight() != null) {
+                list = list.filtered(p -> !p.equals(bornRelation.getRight()));
+                list = removeAscends(list, bornRelation.getRight());
+            }
+
+
+
+        } catch (NotUniqueBornRelationException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return list;
+
+    }
+
+    private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
+        /*
+            Find relations that M is father or mother
+         */
+        List<Relation> relations = context.getService().getCurrentFamily().getRelations()
+                .filtered(p -> (p.getRight() != null && p.getRight().equals(m))
+                        || (p.getLeft() != null && p.getLeft().equals(m)));
+
+        for (Relation r : relations) {
+            if (r.getChildren() != null && r.getChildren().size() > 0) {
+                for (Member child : r.getChildren()) {
+                    list = list.filtered(q -> !q.equals(child));
+                    removeDescends(list, child);
+                }
+            }
+        }
+        return list;
+    }
+
+    /*
+        Init Methods
+     */
 
     private void initPanes() {
         currentMemberPane.getChildren().add(memberCard);

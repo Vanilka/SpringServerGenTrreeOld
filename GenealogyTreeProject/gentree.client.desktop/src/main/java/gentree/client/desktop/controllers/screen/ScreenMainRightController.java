@@ -45,11 +45,16 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
+
         this.languageBundle.setValue(resources);
         sm.register(this);
-        drawingService = new GenTreeDrawingServiceImpl();
+
+        drawingService = new GenTreeDrawingServiceImpl(genTreeContent);
+        sm.register(drawingService);
+
         initRelationListener();
         redrawTree();
+
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
@@ -60,8 +65,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
     public void redrawTree() {
-        genTreeContent.getChildren().clear();
-        drawingService.startDraw(genTreeContent);
+        drawingService.startDraw();
     }
 
     /*

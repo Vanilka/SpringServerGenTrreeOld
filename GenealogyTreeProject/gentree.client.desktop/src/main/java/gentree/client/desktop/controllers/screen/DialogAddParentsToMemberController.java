@@ -15,6 +15,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
+import java.rmi.Remote;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -106,6 +109,20 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
     @FXML
+    public void removeMother(ActionEvent actionEvent) {
+        mother.setValue(null);
+    }
+
+
+    @FXML
+    public void removeFather(ActionEvent actionEvent) {
+        father.setValue(null);
+    }
+
+
+
+
+    @FXML
     public void cancel() {
         stage.close();
     }
@@ -115,7 +132,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     public void confirm() {
 
 
-        if(currentBornRelation.get().getChildren().size() == 1 && existingRelation.get() == null) {
+        if (currentBornRelation.get().getChildren().size() == 1 && existingRelation.get() == null) {
             currentBornRelation.get().setLeft(mother.get());
             currentBornRelation.get().setRight(father.get());
             context.getService().updateRelation(currentBornRelation.get());
@@ -151,9 +168,77 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
      * @return
      */
     private List<Member> generateList(Member member, Gender gender) {
-        return context.getService().getCurrentFamily().getMembers()
+        ObservableList<Member> list = context.getService().getCurrentFamily().getMembers()
                 .filtered(m -> !m.equals(member))
                 .filtered(m -> m.getGender() != gender);
+
+        /*
+            Protection to not set my child as my parent
+         */
+        list = removeDescends(list, member);
+       // list = removeAscends(list, member);
+
+        return list;
+    }
+
+
+    private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
+
+        try {
+            Relation bornRelation = context.getService().getCurrentFamily().findBornRelation(m);
+
+            /*
+                Remove Sibling
+             */
+            for (Member sibbling : bornRelation.getChildren()) {
+                list = list.filtered(p -> !p.equals(m));
+            }
+
+            /*
+                RemoveLeft
+             */
+            if(bornRelation.getLeft() != null) {
+                list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
+                list = removeAscends(list, bornRelation.getLeft());
+            }
+
+            /*
+                Remove Rightrs
+             */
+            if(bornRelation.getRight() != null) {
+                list = list.filtered(p -> !p.equals(bornRelation.getRight()));
+                list = removeAscends(list, bornRelation.getRight());
+            }
+
+
+
+        } catch (NotUniqueBornRelationException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+
+
+        return list;
+
+    }
+
+    private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
+        /*
+            Find relations that M is father or mother
+         */
+        List<Relation> relations = context.getService().getCurrentFamily().getRelations()
+                .filtered(p -> (p.getRight() != null && p.getRight().equals(m))
+                        || (p.getLeft() != null && p.getLeft().equals(m)));
+
+        for (Relation r : relations) {
+            if (r.getChildren() != null && r.getChildren().size() > 0) {
+                for (Member child : r.getChildren()) {
+                    list = list.filtered(q -> !q.equals(child));
+                    removeDescends(list, child);
+                }
+            }
+        }
+        return list;
     }
 
     /*
@@ -188,6 +273,8 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private void initMotherListener() {
         mother.addListener((observable, oldValue, newValue) -> {
             motherCard.setMember(newValue);
+            System.out.println(newValue);
+            System.out.println(father.get());
             findRelation(newValue, father.get());
 
         });
@@ -196,6 +283,8 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private void initFatherListener() {
         father.addListener((observable, oldValue, newValue) -> {
             fatherCard.setMember(newValue);
+            System.out.println(newValue);
+            System.out.println(mother.get());
             findRelation(mother.get(), newValue);
         });
     }
@@ -250,4 +339,5 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 }

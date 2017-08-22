@@ -27,7 +27,8 @@ public enum FilesFXML {
     DIALOG_APP_PROPERTIES_ONLINE("dialog.app.properties.online.fxml"),
     DIALOG_ADD_PARENTS_TO_MEMBER("dialog.add.parents.to.member.fxml"),
     DIALOG_ADD_SPOUSE_TO_MEMBER("dialog.add.spouse.fxml"),
-    DIALOG_CHOOSE_MEMBER("dialog.choose.member.fxml");
+    DIALOG_CHOOSE_MEMBER("dialog.choose.member.fxml"),
+    DIALOG_ADD_CHILDREN("dialog.add.children.fxml");
 
 
     private final String fxmlPath = "/layout/screen/";

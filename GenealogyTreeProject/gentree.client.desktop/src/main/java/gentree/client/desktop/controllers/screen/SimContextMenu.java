@@ -5,6 +5,7 @@ import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 
@@ -17,12 +18,14 @@ public class SimContextMenu extends ContextMenu {
     ScreenManager sm = ScreenManager.INSTANCE;
     FamilyMember member;
     private MenuItem itemAddParents = new MenuItem("AddParents");
-    private MenuItem itemAddSiblings = new MenuItem("AssSpouse");
+    private MenuItem itemAddSiblings = new MenuItem("AddSpouse");
+    private MenuItem itemAddChildren = new MenuItem("AddChildren");
+
 
     public SimContextMenu() {
         super();
         initItems();
-        this.getItems().addAll(itemAddParents, itemAddSiblings);
+        this.getItems().addAll(itemAddParents, itemAddSiblings, itemAddChildren);
     }
 
     public void show(FamilyMember n, ContextMenuEvent event) {
@@ -42,6 +45,10 @@ public class SimContextMenu extends ContextMenu {
 
     private void initItemAddSpouse() {
         itemAddSiblings.setOnAction(event -> sm.showNewDialog(new DialogAddSpouseController(), member.getMember(), FilesFXML.DIALOG_ADD_SPOUSE_TO_MEMBER));
+    }
+
+    private void initItemAddChildren() {
+        itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), member.getMember(), FilesFXML.DIALOG_ADD_CHILDREN));
     }
 
 

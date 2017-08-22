@@ -5,7 +5,9 @@ import gentree.client.desktop.domain.Member;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,13 +51,25 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         init();
         member.setMember(m);
         setParentPane(parent);
+
+        this.initBorder(Color.DARKBLUE, this);
+        this.setPadding(new Insets(10, 10, 10, 10));
     }
 
 
+    /*
+        Init Panes
+     */
+
     private void init() {
         initListeners();
+        initHbox();
         setTop(member);
         setCenter(hboxChildren);
+    }
+
+    private void  initHbox() {
+        hboxChildren.setSpacing(10);
     }
 
     private void initListeners() {

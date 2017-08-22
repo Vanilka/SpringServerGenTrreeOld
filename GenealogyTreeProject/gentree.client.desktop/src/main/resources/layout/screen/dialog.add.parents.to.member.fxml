@@ -22,6 +22,7 @@
                         <AnchorPane fx:id="motherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
                                     minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
                         <JFXButton fx:id="chooseMother" onAction="#openChoosingMother" text="Set/Change"/>
+                        <JFXButton fx:id="removeMother" onAction="#removeMother" text="X" />
                     </children>
                 </VBox>
 
@@ -32,6 +33,7 @@
                         <AnchorPane fx:id="fatherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
                                     minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
                         <JFXButton fx:id="chooseFather" onAction="#openChoosingFather" text="Set/Change"/>
+                        <JFXButton fx:id="removeFather" onAction="#removeFather" text="X" />
                     </children>
                 </VBox>
                 <AnchorPane fx:id="relationTypePane"/>

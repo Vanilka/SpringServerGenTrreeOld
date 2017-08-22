@@ -19,11 +19,16 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     GenTreeContext context = GenTreeContext.INSTANCE;
 
+    private final HBox box;
+
     private int nodeCounter;
 
-    @Override
-    public void startDraw(HBox box) {
+    public GenTreeDrawingServiceImpl(HBox box) {
+        this.box = box;
+    }
 
+    @Override
+    public void startDraw() {
         reset();
         List<FamilyGroup> groups = findGroups();
         box.getChildren().addAll(groups);
@@ -120,7 +125,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             if (isActive && type != RelationType.NEUTRAL) {
                 return new PanelRelationCurrent(other, type);
             } else {
-                return new PanelRelationEx();
+                return new PanelRelationEx(other, type);
             }
         }
     }
@@ -132,6 +137,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
 
     private void reset() {
+        box.getChildren().clear();
         nodeCounter = 1;
     }
 

@@ -64,6 +64,7 @@ public class ScreenManager {
     private MainFooterController mainFooterController;
     private ScreenWelcomeController screenWelcomeController;
     private RootWindowController rootWindowController;
+    private GenTreeDrawingService genTreeDrawingService;
     /*
         Commons Panes
      */
@@ -444,6 +445,10 @@ public class ScreenManager {
         imv.setFitWidth(width);
         imv.setFitHeight(height);
         return imv;
+    }
+
+    public void register(GenTreeDrawingService drawingService) {
+        this.genTreeDrawingService = drawingService;
     }
 
 
