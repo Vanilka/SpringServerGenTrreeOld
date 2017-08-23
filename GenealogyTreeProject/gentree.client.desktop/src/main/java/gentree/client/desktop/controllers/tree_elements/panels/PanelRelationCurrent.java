@@ -1,8 +1,8 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
-import gentree.client.desktop.controllers.tree_elements.connectors.ChildrenConnector;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
+import gentree.client.desktop.controllers.tree_elements.connectors.RelationCurrentConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -10,12 +10,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-
-import javax.sound.midi.Soundbank;
+import lombok.Getter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
@@ -32,6 +34,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final static double PADDING_RIGHT = 10.0;
     private final static double PADDING_BOTTOM = 10.0;
 
+    @Getter
     private final AnchorPane relation;
     private final HBox childrenBox;
 
@@ -42,7 +45,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
-    private final ChildrenConnector childrenConnector;
+    private final RelationCurrentConnector childrenConnector;
 
 
     {
@@ -53,9 +56,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        childrenConnector = new ChildrenConnector(this);
-
-
+        childrenConnector = new RelationCurrentConnector(this);
     }
 
     public PanelRelationCurrent() {
@@ -72,6 +73,8 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         this.spouse.setValue(spouse);
         this.relationType.setValue(type);
         this.initBorder(Color.GREEN, this);
+        this.initBorder(Color.CHOCOLATE, relation);
+        this.initBorder(Color.DARKMAGENTA, relationTypeElement);
     }
 
 
@@ -135,23 +138,27 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
 
     private void initRelationPaneSizeListener() {
+
         relation.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (relationTypeElement != null) {
                 relationTypeElement.setLayoutY((newValue.doubleValue() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
             }
         });
 
-        relationTypeElement.heightProperty().addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setLayoutY((relation.getHeight() - newValue.doubleValue() - MARGIN_BOTTOM - PADDING_TOP) / 2);
+
+      childrenConnector.middleProperty().addListener((observable, oldValue, newValue) -> {
+            relationTypeElement.setLayoutX(newValue.getX() - relationTypeElement.getWidth()/2);
+            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
+            childrenConnector.connectNodeWithMiddle(relationTypeElement);
         });
 
-
-      //  spouseCard.setLayoutX(600 - getLayoutBounds().getMinX());
-
-        relation.boundsInLocalProperty().addListener((observable, oldValue, newValue) ->  {
-            
+        relationTypeElement.widthProperty().addListener((observable, oldValue, newValue) -> {
+            relationTypeElement.setLayoutX(childrenConnector.getMiddle().getX() -relationTypeElement.getWidth()/2);
+            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
+            childrenConnector.connectNodeWithMiddle(relationTypeElement);
         });
     }
+
 
 
     @Override
@@ -159,4 +166,19 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         children.add(child);
         child.setParentPane(this);
     }
+
+    protected Bounds getRelativeBounds(Node node, Node relativeTo) {
+        Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
+        return relativeTo.sceneToLocal(nodeBoundsInScene);
+    }
+
+    protected Point2D getBottomPoint(Bounds b) {
+
+        if (b != null) {
+            System.out.println(b);
+        }
+        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
+    }
 }
+
+
