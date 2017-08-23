@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            id="menuBarPane"
+            xmlns="http://javafx.com/javafx/8.0.65"
+            fx:controller="gentree.client.desktop.controllers.screen.MainMenuController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <MenuBar fx:id="mainBar" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="0" styleClass="gentree-bars-pane">
+        <menus>
+            <Menu fx:id="menuFile" mnemonicParsing="false" styleClass="gentree-bars-pane" text="%menu_program">
+                <items>
+                    <MenuItem fx:id="menuItemConnectToServer" mnemonicParsing="false"
+                              text="%menu_project_synchronise"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemAppProperties" mnemonicParsing="false"
+                              text="%menu_program_properties"
+                              onAction="#openProperties"/>
+                    <SeparatorMenuItem mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemClose"
+                              mnemonicParsing="false"
+                              text="%menu_program_close"
+                              onAction="#closeApplication"
+                    />
+                </items>
+            </Menu>
+            <Menu fx:id="menuProject" mnemonicParsing="false" styleClass="gentree-bars-pane" text="%menu_project">
+                <items>
+                    <MenuItem fx:id="menuItemNewProject" mnemonicParsing="false"
+                              text="%menu_project_new"/>
+                    <MenuItem fx:id="menuItemOpenProject" mnemonicParsing="false"
+                              onAction="#openFromXML"
+                              text="%menu_project_open"/>
+                    <SeparatorMenuItem fx:id="separator_1" mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemSaveProjectAs" mnemonicParsing="false"
+                              onAction="#saveToXML"
+                              text="%menu_project_save"/>
+                    <SeparatorMenuItem fx:id="separator_2" mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemExportImage" onAction="#generateImage"
+                              mnemonicParsing="false" text="%menu_project_export"/>
+                    <SeparatorMenuItem fx:id="separator_3" mnemonicParsing="false"/>
+                    <MenuItem fx:id="menuItemCloseProject" text="%menu_project_close"
+                              onAction="#closeProject"/>
+                </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="%menu_help">
+                <items>
+                    <MenuItem mnemonicParsing="false" text="About"/>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+    <ComboBox id="languageChooser" fx:id="languageChooser" prefWidth="110.0" AnchorPane.bottomAnchor="0.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+</AnchorPane>

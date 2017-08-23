@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400" minWidth="500"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111"
+            fx:controller="gentree.client.desktop.controllers.screen.DialogChooseMemberController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0"
+                    AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <children>
+                <Label layoutY="10.0" text="SELECTED MEMBER"/>
+                <AnchorPane layoutY="40">
+                    <children>
+                        <Pane maxHeight="170.0" maxWidth="145.0" minHeight="129.0" minWidth="106.0" prefHeight="129.0"
+                              prefWidth="106.0" styleClass="imagePane" AnchorPane.leftAnchor="25.0"
+                              AnchorPane.topAnchor="25.0">
+                            <ImageView fx:id="photo" fitHeight="115.0" fitWidth="86.0" layoutX="10" layoutY="7.0"
+                                       pickOnBounds="true" preserveRatio="true"/>
+                        </Pane>
+                        <JFXTextField fx:id="simName" labelFloat="true" layoutX="176.0" layoutY="45.0" prefHeight="33.0"
+                                      prefWidth="193.0" promptText="%sim_name"/>
+                        <JFXTextField fx:id="simSurname" labelFloat="true" layoutX="176.0" layoutY="110.0"
+                                      prefHeight="33.0" prefWidth="193.0" promptText="%sim_surname"/>
+                    </children>
+                </AnchorPane>
+                <TableView fx:id="memberTable"
+                           AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                           layoutY="200.0">
+                    <columns>
+                        <TableColumn fx:id="memberPhoto" maxWidth="60" minWidth="60" text="Avatar"/>
+                        <TableColumn fx:id="memberName" maxWidth="90" minWidth="100" text="%sim_name"/>
+                        <TableColumn fx:id="memberSurname" maxWidth="90" minWidth="100" text="%sim_surname"/>
+                        <TableColumn fx:id="memberAge" maxWidth="70" minWidth="100" text="%sim_age"/>
+                        <TableColumn fx:id="memberGender" maxWidth="30" minWidth="60" text="%sim_sex"/>
+                    </columns>
+                    <styleClass>
+                        <String fx:value="firstTypeTable"/>
+                        <String fx:value="tableMembersAndRelations"/>
+                    </styleClass>
+                </TableView>
+            </children>
+            <opaqueInsets>
+                <Insets left="10.0" right="10.0"/>
+            </opaqueInsets>
+        </AnchorPane>
+        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="10.0"/>
+        <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="10.0"/>
+    </children>
+</AnchorPane>

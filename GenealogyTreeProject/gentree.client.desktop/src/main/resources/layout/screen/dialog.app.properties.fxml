@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAppProperties" fx:id="dialogAppProperties" minHeight="400" minWidth="500"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111"
+            fx:controller="gentree.client.desktop.controllers.screen.DialogAppPropertiesController">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <BorderPane fx:id="contentPane" styleClass="contentPane" AnchorPane.bottomAnchor="50.0"
+                    AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <left>
+                <VBox layoutY="20.0" prefHeight="380.0" prefWidth="148.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ToggleButton fx:id="buttonTreeProperties" prefHeight="42.0" prefWidth="152.0"
+                                      text="Tree Properties"/>
+                        <ToggleButton fx:id="buttonOnlineProperties" prefHeight="42.0" prefWidth="152.0"
+                                      text="Online Properties"/>
+                        <ToggleButton fx:id="buttonOtherProperties" prefHeight="42.0" prefWidth="152.0"
+                                      text="Other Properties"/>
+                    </children>
+                </VBox>
+            </left>
+            <center>
+                <AnchorPane>
+                    <children>
+                        <AnchorPane fx:id="paneTreeProperties" visible="false"/>
+                        <AnchorPane fx:id="paneOnlineProperties" visible="false"/>
+                        <AnchorPane fx:id="paneOtherProperties" visible="false"/>
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="10.0"/>
+        <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
+                   prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="10.0"/>
+    </children>
+</AnchorPane>

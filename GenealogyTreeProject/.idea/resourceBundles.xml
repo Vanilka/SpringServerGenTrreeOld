@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location.properties" />
+    <file url="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_en_EN.properties" />
+    <file url="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_fr_FR.properties" />
+    <file url="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_pl_PL.properties" />
+    <custom-resource-bundle>
+      <file value="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location.properties" />
+      <file value="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_en_EN.properties" />
+      <file value="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_fr_FR.properties" />
+      <file value="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/traduction/gentree_location_pl_PL.properties" />
+      <base-name>gentree_location</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

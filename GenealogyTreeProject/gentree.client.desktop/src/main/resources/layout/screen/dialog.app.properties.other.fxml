@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="" fx:id=""
+            styleClass="" xmlns="http://javafx.com/javafx/8.0.131"
+            fx:controller="gentree.client.desktop.controllers.screen.DialogAppPropertiesOtherController"
+            minWidth="500" minHeight="400">
+    <stylesheets>
+        <URL value="@/layout/style/gentreestyle.css"/>
+    </stylesheets>
+    <children>
+        <Label text="APP PROPERTIES OTHER"/>
+    </children>
+</AnchorPane>
