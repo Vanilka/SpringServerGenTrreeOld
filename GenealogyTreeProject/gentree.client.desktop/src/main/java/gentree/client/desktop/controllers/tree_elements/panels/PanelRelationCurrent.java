@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import lombok.Getter;
 
 /**
@@ -32,10 +33,11 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final static double PADDING_TOP = 10.0;
     private final static double PADDING_LEFT = 10.0;
     private final static double PADDING_RIGHT = 10.0;
-    private final static double PADDING_BOTTOM = 10.0;
+    private final static double PADDING_BOTTOM = 0.0;
 
     @Getter
     private final AnchorPane relation;
+    @Getter
     private final HBox childrenBox;
 
     private final FamilyMember spouseCard;
@@ -142,13 +144,31 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         relation.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (relationTypeElement != null) {
                 relationTypeElement.setLayoutY((newValue.doubleValue() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
+                calculateRelationElementsPosition();
             }
         });
 
 
+        childrenConnector.getLine().startXProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+        });
 
+        relationTypeElement.boundsInLocalProperty().addListener(c-> {
+            calculateRelationElementsPosition();
+        });
     }
 
+    private void calculateRelationElementsPosition() {
+        if (children.size() > 0) {
+            Line line = childrenConnector.getLine();
+            relationTypeElement.setLayoutX(line.getStartX() - relationTypeElement.getWidth() / 2 - PADDING_LEFT);
+            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
+            childrenConnector.connectRelationToChildren(relationTypeElement);
+        } else {
+            relationTypeElement.setLayoutX(100);
+            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
+        }
+    }
 
 
     @Override

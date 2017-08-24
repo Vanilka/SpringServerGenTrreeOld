@@ -21,6 +21,15 @@ import javafx.scene.paint.Color;
  */
 public class PanelRelationEx extends SubBorderPane implements RelationPane {
 
+    private final static double MARGIN_TOP = 0.0;
+    private final static double MARGIN_LEFT = 0.0;
+    private final static double MARGIN_RIGHT = 0.0;
+    private final static double MARGIN_BOTTOM = 50.0;
+
+    private final static double PADDING_TOP = 10.0;
+    private final static double PADDING_LEFT = 10.0;
+    private final static double PADDING_RIGHT = 10.0;
+    private final static double PADDING_BOTTOM = 0.0;
 
     private final HBox relation;
     private final HBox childrenBox;
@@ -56,7 +65,6 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         this.spouse.setValue(spouse);
         this.relationType.setValue(type);
         this.initBorder(Color.BROWN, this);
-        this.setPadding(new Insets(10, 10, 10, 10));
 
     }
 
@@ -66,8 +74,8 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         this.setCenter(childrenBox);
         this.setTop(relation);
         relationTypeElement.setLayoutX(300);
-        this.setPadding(new Insets(10, 10, 10, 10));
-        setMargin(relation, new Insets(0, 0, 50, 0));
+        this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
+        setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
 
     }
 

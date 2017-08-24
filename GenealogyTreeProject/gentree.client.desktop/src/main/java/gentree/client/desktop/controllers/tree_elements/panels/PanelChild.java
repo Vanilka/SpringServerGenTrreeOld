@@ -27,6 +27,15 @@ import lombok.Setter;
 @Setter
 public class PanelChild extends SubBorderPane {
 
+    private final static double MARGIN_TOP = 0.0;
+    private final static double MARGIN_LEFT = 0.0;
+    private final static double MARGIN_RIGHT = 0.0;
+    private final static double MARGIN_BOTTOM = 50.0;
+
+    private final static double PADDING_TOP = 60.0;
+    private final static double PADDING_LEFT = 10.0;
+    private final static double PADDING_RIGHT = 10.0;
+    private final static double PADDING_BOTTOM = 0.0;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -76,7 +85,7 @@ public class PanelChild extends SubBorderPane {
         this.initBorder(Color.ORANGE, this);
 
         if(parent != null) {
-            this.setPadding(new Insets(60, 10, 10, 10));
+            this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
     }
 

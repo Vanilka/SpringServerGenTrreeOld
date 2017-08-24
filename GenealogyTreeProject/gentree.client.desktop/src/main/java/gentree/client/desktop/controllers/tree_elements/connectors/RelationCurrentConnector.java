@@ -3,7 +3,6 @@ package gentree.client.desktop.controllers.tree_elements.connectors;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelChild;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationCurrent;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -15,7 +14,6 @@ import javafx.scene.shape.Line;
 import lombok.Getter;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/08/2017.
@@ -47,8 +45,11 @@ public class RelationCurrentConnector extends LineConnector {
         list.addListener((ListChangeListener<ChildConnector>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
+                    populateFirstAndLastChild();
                     drawLine();
                     for (ChildConnector childc : c.getAddedSubList()) {
+                        populateFirstAndLastChild();
+
                         childc.getLine().boundsInParentProperty().addListener(observable -> {
                             drawLine();
                         });
@@ -74,8 +75,6 @@ public class RelationCurrentConnector extends LineConnector {
                     c.getRemoved().forEach(ChildConnector::removeLine);
                 }
             }
-            populateFirstAndLastChild();
-            drawChildrenConnectors();
         });
     }
 
@@ -102,15 +101,13 @@ public class RelationCurrentConnector extends LineConnector {
     }
 
     private void drawLine() {
-
-        if (list.size() > 1) {
+        populateFirstAndLastChild();
+        if (list.size() > 0) {
             subBorderPane.getChildren().remove(getLine());
             if (firstChild.get() != null && lastChild.get() != null) {
-                System.out.println("Rysowanie Linii");
+
                 Line start = firstChild.get().getLine();
                 Line end = lastChild.get().getLine();
-                System.out.println("Start: " +start);
-                System.out.println("end : " +end);
 
                 getLine().setStartX(start.getEndX());
                 getLine().setStartY(start.getEndY());
@@ -137,7 +134,6 @@ public class RelationCurrentConnector extends LineConnector {
             initLineProperties(withNodeConnector.get());
         }
     }
-
 
     protected Bounds getRelativeBounds(Node node) {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
