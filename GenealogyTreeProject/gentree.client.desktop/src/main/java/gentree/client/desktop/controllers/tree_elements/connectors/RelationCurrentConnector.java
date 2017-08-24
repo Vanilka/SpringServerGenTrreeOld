@@ -24,7 +24,8 @@ public class RelationCurrentConnector extends LineConnector {
 
     private PanelRelationCurrent subBorderPane;
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
-    private ObjectProperty<Point2D> middle = new SimpleObjectProperty<>(new Point2D(0, 0));
+    private ObjectProperty<ChildConnector> firstChild = new SimpleObjectProperty<>();
+    private ObjectProperty<ChildConnector> lastChild = new SimpleObjectProperty<>();
 
     @Getter
     private ObjectProperty<Line> withNodeConnector = new SimpleObjectProperty<>(new Line());
@@ -47,7 +48,6 @@ public class RelationCurrentConnector extends LineConnector {
             while (c.next()) {
                 if (c.wasAdded()) {
                     drawLine();
-
                     for (ChildConnector childc : c.getAddedSubList()) {
                         childc.getLine().boundsInParentProperty().addListener(observable -> {
                             drawLine();
@@ -74,7 +74,19 @@ public class RelationCurrentConnector extends LineConnector {
                     c.getRemoved().forEach(ChildConnector::removeLine);
                 }
             }
+            populateFirstAndLastChild();
+            drawChildrenConnectors();
         });
+    }
+
+    private void populateFirstAndLastChild() {
+        if (!list.isEmpty()) {
+            firstChild.setValue(list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).get());
+            lastChild.setValue(list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).get());
+        } else {
+            firstChild.setValue(null);
+            lastChild.setValue(null);
+        }
     }
 
     public void addPanelChild(PanelChild child) {
@@ -87,39 +99,37 @@ public class RelationCurrentConnector extends LineConnector {
 
     public void drawChildrenConnectors() {
         drawLine();
-
     }
 
     private void drawLine() {
 
-        subBorderPane.getChildren().remove(getLine());
+        if (list.size() > 1) {
+            subBorderPane.getChildren().remove(getLine());
+            if (firstChild.get() != null && lastChild.get() != null) {
+                System.out.println("Rysowanie Linii");
+                Line start = firstChild.get().getLine();
+                Line end = lastChild.get().getLine();
+                System.out.println("Start: " +start);
+                System.out.println("end : " +end);
 
-        Optional<ChildConnector> opStart = list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX()));
-        Optional<ChildConnector> opEnd = list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX()));
+                getLine().setStartX(start.getEndX());
+                getLine().setStartY(start.getEndY());
+                getLine().setEndX(end.getEndX());
+                getLine().setEndY(end.getEndY());
 
-        if (opStart.isPresent() && opEnd.isPresent()) {
-            Line start = opStart.get().getLine();
-            Line end = opEnd.get().getLine();
-            getLine().setStartX(start.getEndX());
-            getLine().setStartY(start.getEndY());
-            getLine().setEndX(end.getEndX());
-            getLine().setEndY(end.getEndY());
-
-            //To jest punkt wyznaczający srodek poziomej linii
-            middle.set(new Point2D((getLine().getStartX() + getLine().getEndX()) / 2, getLine().getStartY()));
-
-            subBorderPane.getChildren().add(getLine());
+                subBorderPane.getChildren().add(getLine());
+            }
         }
     }
 
-    public void connectNodeWithMiddle(Node n) {
+    public void connectRelationToChildren(Node n) {
         if (list.size() != 0) {
             subBorderPane.getChildren().remove(withNodeConnector.get());
             Bounds b = getRelativeBounds(n);
             Point2D bottomPoint = getBottomPoint(b);
 
-            withNodeConnector.get().setStartX(getMiddle().getX());
-            withNodeConnector.get().setStartY(getMiddle().getY());
+            withNodeConnector.get().setStartX(firstChild.get().getLine().getEndX());
+            withNodeConnector.get().setStartY(firstChild.get().getLine().getEndY());
             withNodeConnector.get().setEndX(bottomPoint.getX());
             withNodeConnector.get().setEndY(bottomPoint.getY());
 
@@ -138,15 +148,4 @@ public class RelationCurrentConnector extends LineConnector {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
-
-
-    public Point2D getMiddle() {
-        return middle.get();
-    }
-
-    public ReadOnlyProperty<Point2D> middleProperty() {
-        return middle;
-    }
-
-
 }

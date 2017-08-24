@@ -146,17 +146,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         });
 
 
-      childrenConnector.middleProperty().addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setLayoutX(newValue.getX() - relationTypeElement.getWidth()/2);
-            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
-            childrenConnector.connectNodeWithMiddle(relationTypeElement);
-        });
 
-        relationTypeElement.widthProperty().addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setLayoutX(childrenConnector.getMiddle().getX() -relationTypeElement.getWidth()/2);
-            spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
-            childrenConnector.connectNodeWithMiddle(relationTypeElement);
-        });
     }
 
 
