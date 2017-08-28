@@ -28,7 +28,6 @@ public class LineConnector {
     protected Point2D getBottomPoint(Bounds b) {
 
         if (b != null) {
-            System.out.println(b);
         }
         return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
     }

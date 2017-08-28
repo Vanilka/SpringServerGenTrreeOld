@@ -24,8 +24,8 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
 
     private final FamilyMember member;
 
-    private final HBox hboxChildren;
-
+    protected final HBox childrenBox;
+    protected final ObservableList<PanelChild> children;
     private final ObservableList<PanelChild> panelChildrenList;
 
     /*
@@ -34,8 +34,9 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
 
     {
         member = new FamilyMember();
-        hboxChildren = new HBox();
         panelChildrenList = FXCollections.observableArrayList();
+        childrenBox = new HBox();
+        children = FXCollections.observableArrayList();
 
     }
 
@@ -65,22 +66,22 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         initListeners();
         initHbox();
         setTop(member);
-        setCenter(hboxChildren);
+        setCenter(childrenBox);
     }
 
     private void  initHbox() {
-        hboxChildren.setSpacing(10);
+        childrenBox.setSpacing(10);
     }
 
     private void initListeners() {
         panelChildrenList.addListener((ListChangeListener<PanelChild>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
-                    hboxChildren.getChildren().addAll(c.getAddedSubList());
+                    childrenBox.getChildren().addAll(c.getAddedSubList());
                 }
 
                 if (c.wasRemoved()) {
-                    hboxChildren.getChildren().removeAll(c.getRemoved());
+                    childrenBox.getChildren().removeAll(c.getRemoved());
                 }
             }
         });

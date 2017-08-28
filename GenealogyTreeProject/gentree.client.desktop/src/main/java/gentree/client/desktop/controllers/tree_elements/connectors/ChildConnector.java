@@ -23,11 +23,11 @@ import lombok.Setter;
 @Setter
 public class ChildConnector extends LineConnector{
 
-    private final PanelRelationCurrent subBorderPane;
+    private final SubBorderPane subBorderPane;
     private final PanelChild panelChild;
 
 
-    public ChildConnector(PanelChild child, PanelRelationCurrent subBorderPane) {
+    public ChildConnector(PanelChild child, SubBorderPane subBorderPane) {
         super();
         this.panelChild = child;
         this.subBorderPane = subBorderPane;

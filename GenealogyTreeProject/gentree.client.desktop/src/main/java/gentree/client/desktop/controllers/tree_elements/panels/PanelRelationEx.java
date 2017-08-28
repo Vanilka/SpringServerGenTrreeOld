@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
+import gentree.client.desktop.controllers.tree_elements.connectors.RelationExConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -12,9 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
@@ -31,7 +33,10 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private final static double PADDING_RIGHT = 10.0;
     private final static double PADDING_BOTTOM = 0.0;
 
-    private final HBox relation;
+    private final static double MINIMAL_RELATION_WIDTH = 550.0;
+    private final static double SPACE_BEETWEN_OBJECTS = 100.0;
+
+    private final AnchorPane relation;
     private final HBox childrenBox;
 
     private final FamilyMember spouseCard;
@@ -40,15 +45,18 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
+    private final RelationExConnector childrenConnector;
+
 
     {
-        relation = new HBox();
+        relation = new AnchorPane();
         childrenBox = new HBox();
         spouseCard = new FamilyMember();
         relationTypeElement = new RelationTypeElement();
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
+        childrenConnector = new RelationExConnector(this);
     }
 
     public PanelRelationEx() {
@@ -65,6 +73,9 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         this.spouse.setValue(spouse);
         this.relationType.setValue(type);
         this.initBorder(Color.BROWN, this);
+        relation.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        initBorder(Color.CHOCOLATE, relation);
+        initBorder(Color.GREEN, childrenBox);
 
     }
 
@@ -73,7 +84,8 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         initHbox();
         this.setCenter(childrenBox);
         this.setTop(relation);
-        relationTypeElement.setLayoutX(300);
+        relation.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
 
@@ -81,14 +93,14 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
 
     private void initHbox() {
         childrenBox.setSpacing(10);
-        relation.setSpacing(40);
-        relation.setAlignment(Pos.CENTER);
+        childrenBox.setAlignment(Pos.TOP_RIGHT);
     }
 
 
     @Override
     public void addChild(PanelChild child) {
-
+        children.add(child);
+        child.setParentPane(this);
     }
 
     /*
@@ -100,6 +112,7 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         initSpouseListener();
         initChildrenListener();
         initRelationTypeListener();
+        initRelationElementsPositionListener();
     }
 
 
@@ -124,16 +137,71 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
             while (c.next()) {
                 if (c.wasAdded()) {
                     childrenBox.getChildren().addAll(c.getAddedSubList());
-
-                    c.getAddedSubList().forEach(child -> {
-
-                    });
-
+                    c.getAddedSubList().forEach(childrenConnector::addPanelChild);
                 } else if (c.wasRemoved()) {
                     childrenBox.getChildren().removeAll(c.getRemoved());
+                    c.getRemoved().forEach(childrenConnector::removePanelChild);
                 }
             }
-
         });
     }
+
+    private void initRelationElementsPositionListener() {
+
+        childrenBox.prefWidthProperty().bindBidirectional(relation.prefWidthProperty());
+
+        relation.heightProperty().addListener((observable, oldValue, newValue) -> {
+            if (relationTypeElement != null) {
+                relationTypeElement.setLayoutY((newValue.doubleValue() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
+                calculateRelationElementsPosition();
+            }
+        });
+
+        relation.widthProperty().addListener((observable, oldValue, newValue) -> {
+            calculateRelationElementsPosition();
+            resizeRelation();
+        });
+
+
+        childrenConnector.getLine().startXProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+            resizeRelation();
+
+        });
+
+        childrenConnector.getLine().endXProperty().addListener((observable, oldValue, newValue) -> {
+            calculateRelationElementsPosition();
+            resizeRelation();
+        });
+
+        relationTypeElement.boundsInLocalProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+            resizeRelation();
+        });
+
+    }
+
+    private void calculateRelationElementsPosition() {
+        if (children.size() > 0) {
+            Line line = childrenConnector.getLine();
+            Double offset = line.getEndX() - relationTypeElement.getWidth()/2.0 - 10.0;
+            relationTypeElement.setLayoutX(offset);
+            offset = offset - spouseCard.getWidth() - SPACE_BEETWEN_OBJECTS;
+            spouseCard.setLayoutX(offset);
+            childrenConnector.connectRelationToChildren(relationTypeElement);
+
+        } else {
+            relationTypeElement.setLayoutX(SPACE_BEETWEN_OBJECTS);
+        }
+    }
+
+    private void resizeRelation() {
+
+        if(spouseCard.getLayoutX() < 0) {
+            relation.setPrefWidth(MINIMAL_RELATION_WIDTH);
+        }
+    }
+
+
 }
+

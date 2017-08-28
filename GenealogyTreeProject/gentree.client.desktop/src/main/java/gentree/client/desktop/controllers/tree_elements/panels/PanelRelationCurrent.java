@@ -13,8 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -74,9 +76,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         initListeners();
         this.spouse.setValue(spouse);
         this.relationType.setValue(type);
-        this.initBorder(Color.GREEN, this);
-        this.initBorder(Color.CHOCOLATE, relation);
-        this.initBorder(Color.DARKMAGENTA, relationTypeElement);
     }
 
 
@@ -84,6 +83,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         initHbox();
         this.setCenter(childrenBox);
         this.setTop(relation);
+        BorderPane.setAlignment(childrenBox, Pos.TOP_RIGHT);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
 
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
@@ -92,7 +92,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     private void initHbox() {
         childrenBox.setSpacing(10);
-        initBorder(Color.DARKMAGENTA, childrenBox);
     }
 
     /*
@@ -155,6 +154,10 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
         relationTypeElement.boundsInLocalProperty().addListener(c-> {
             calculateRelationElementsPosition();
+        });
+
+        relationTypeElement.layoutYProperty().addListener((observable, oldValue, newValue) -> {
+
         });
     }
 
