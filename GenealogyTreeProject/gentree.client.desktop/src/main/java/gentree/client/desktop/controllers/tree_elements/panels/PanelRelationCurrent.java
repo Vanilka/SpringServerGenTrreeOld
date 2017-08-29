@@ -2,7 +2,7 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
-import gentree.client.desktop.controllers.tree_elements.connectors.RelationCurrentConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.RelationConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -18,7 +18,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 
@@ -37,6 +36,8 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final static double PADDING_RIGHT = 10.0;
     private final static double PADDING_BOTTOM = 0.0;
 
+    private final static double MINIMAL_RELATION_WIDTH = 550.0;
+
     @Getter
     private final AnchorPane relation;
     @Getter
@@ -49,7 +50,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
-    private final RelationCurrentConnector childrenConnector;
+    private final RelationConnector childrenConnector;
 
 
     {
@@ -60,7 +61,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        childrenConnector = new RelationCurrentConnector(this);
+        childrenConnector = new RelationConnector(this);
     }
 
     public PanelRelationCurrent() {
@@ -103,6 +104,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         initChildrenListener();
         initRelationTypeListener();
         initRelationPaneSizeListener();
+        resizeRelation();
     }
 
 
@@ -140,6 +142,8 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     private void initRelationPaneSizeListener() {
 
+        relation.prefWidthProperty().bindBidirectional(childrenBox.prefWidthProperty());
+
         relation.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (relationTypeElement != null) {
                 relationTypeElement.setLayoutY((newValue.doubleValue() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
@@ -147,17 +151,28 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
             }
         });
 
+        relation.widthProperty().addListener((observable, oldValue, newValue) -> {
+            calculateRelationElementsPosition();
+
+        });
+
+        spouseCard.layoutXProperty().addListener(observable -> {
+            resizeRelation();
+        });
 
         childrenConnector.getLine().startXProperty().addListener(c -> {
             calculateRelationElementsPosition();
+            resizeRelation();
         });
 
         relationTypeElement.boundsInLocalProperty().addListener(c-> {
             calculateRelationElementsPosition();
+            resizeRelation();
         });
 
         relationTypeElement.layoutYProperty().addListener((observable, oldValue, newValue) -> {
-
+            calculateRelationElementsPosition();
+            resizeRelation();
         });
     }
 
@@ -170,6 +185,13 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         } else {
             relationTypeElement.setLayoutX(100);
             spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
+            relation.setPrefWidth(MINIMAL_RELATION_WIDTH);
+        }
+    }
+
+    private void resizeRelation() {
+        if((spouseCard.getLayoutX() + spouseCard.getWidth()) > relation.getWidth()) {
+            relation.setPrefWidth(MINIMAL_RELATION_WIDTH);
         }
     }
 

@@ -2,7 +2,7 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
-import gentree.client.desktop.controllers.tree_elements.connectors.RelationExConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.RelationConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -45,7 +44,7 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
-    private final RelationExConnector childrenConnector;
+    private final RelationConnector childrenConnector;
 
 
     {
@@ -56,7 +55,7 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        childrenConnector = new RelationExConnector(this);
+        childrenConnector = new RelationConnector(this);
     }
 
     public PanelRelationEx() {

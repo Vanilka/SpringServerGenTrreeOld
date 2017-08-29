@@ -30,6 +30,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     @Override
     public void startDraw() {
         reset();
+        /*
+            Find Roots ( simLeft = null and simRight = null
+         */
         List<FamilyGroup> groups = findGroups();
         box.getChildren().addAll(groups);
 
@@ -42,6 +45,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         });
     }
 
+    /**
+     *  AddRelations for Panel Child
+     * @param panelChild
+     */
     private void populateChild(PanelChild panelChild) {
         List<Relation> relationsList = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> (r.getLeft() != null && r.getLeft().equals(panelChild.getMember()))

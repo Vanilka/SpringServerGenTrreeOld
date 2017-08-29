@@ -3,6 +3,7 @@ package gentree.client.desktop.controllers.tree_elements.connectors;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelChild;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationCurrent;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationEx;
+import gentree.client.desktop.controllers.tree_elements.panels.SubBorderPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -17,11 +18,11 @@ import lombok.Getter;
 import java.util.Comparator;
 
 /**
- * Created by Martyna SZYMKOWIAK on 25/08/2017.
+ * Created by Martyna SZYMKOWIAK on 20/08/2017.
  */
-public class RelationExConnector extends LineConnector {
+public class RelationConnector extends LineConnector {
 
-    private PanelRelationEx subBorderPane;
+    private SubBorderPane subBorderPane;
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
     private ObjectProperty<ChildConnector> firstChild = new SimpleObjectProperty<>();
     private ObjectProperty<ChildConnector> lastChild = new SimpleObjectProperty<>();
@@ -29,7 +30,7 @@ public class RelationExConnector extends LineConnector {
     @Getter
     private ObjectProperty<Line> withNodeConnector = new SimpleObjectProperty<>(new Line());
 
-    public RelationExConnector(PanelRelationEx subBorderPane) {
+    public RelationConnector(SubBorderPane subBorderPane) {
         super();
         this.subBorderPane = subBorderPane;
         initLineProperties(withNodeConnector.get());
@@ -109,31 +110,74 @@ public class RelationExConnector extends LineConnector {
 
                 Line start = firstChild.get().getLine();
                 Line end = lastChild.get().getLine();
-
                 getLine().setStartX(start.getEndX());
                 getLine().setStartY(start.getEndY());
                 getLine().setEndX(end.getEndX());
                 getLine().setEndY(end.getEndY());
 
-                subBorderPane.getChildren().add(getLine());
+                subBorderPane.getChildren().add(0, getLine());
             }
         }
     }
 
     public void connectRelationToChildren(Node n) {
         if (list.size() != 0) {
+            if (subBorderPane instanceof PanelRelationCurrent) {
+                connectToLeft(n);
+            } else if (subBorderPane instanceof PanelRelationEx) {
+                connectToRight(n);
+            } else {
+                System.out.println("Connect to center");
+                connectToCenter(n);
+            }
+        }
+    }
+
+    private void connectToLeft(Node n) {
+        subBorderPane.getChildren().remove(withNodeConnector.get());
+        Bounds b = getRelativeBounds(n);
+        Point2D bottomPoint = getBottomPoint(b);
+
+        System.out.println("Connect to Left first child line" +firstChild.get().getLine());
+
+        withNodeConnector.get().setStartX(firstChild.get().getLine().getEndX());
+        withNodeConnector.get().setStartY(firstChild.get().getLine().getEndY());
+        withNodeConnector.get().setEndX(bottomPoint.getX());
+        withNodeConnector.get().setEndY(bottomPoint.getY());
+
+        subBorderPane.getChildren().add(0, withNodeConnector.get());
+        initLineProperties(withNodeConnector.get());
+    }
+
+    private void connectToRight(Node n) {
+        subBorderPane.getChildren().remove(withNodeConnector.get());
+        Bounds b = getRelativeBounds(n);
+        Point2D bottomPoint = getBottomPoint(b);
+
+        withNodeConnector.get().setStartX(lastChild.get().getLine().getEndX());
+        withNodeConnector.get().setStartY(lastChild.get().getLine().getEndY());
+        withNodeConnector.get().setEndX(bottomPoint.getX());
+        withNodeConnector.get().setEndY(bottomPoint.getY());
+
+        subBorderPane.getChildren().add(withNodeConnector.get());
+        initLineProperties(withNodeConnector.get());
+    }
+
+    private void connectToCenter(Node n) {
             subBorderPane.getChildren().remove(withNodeConnector.get());
+
             Bounds b = getRelativeBounds(n);
             Point2D bottomPoint = getBottomPoint(b);
 
-            withNodeConnector.get().setStartX(lastChild.get().getLine().getEndX());
-            withNodeConnector.get().setStartY(lastChild.get().getLine().getEndY());
+            Double middle = (firstChild.get().getLine().getEndX() + lastChild.get().getLine().getEndX()) / 2;
+            System.out.println("Connect to Center first child line" +firstChild.get().getLine());
+            withNodeConnector.get().setStartX(middle);
+            withNodeConnector.get().setStartY(getLine().getStartY());
             withNodeConnector.get().setEndX(bottomPoint.getX());
             withNodeConnector.get().setEndY(bottomPoint.getY());
 
             subBorderPane.getChildren().add(withNodeConnector.get());
             initLineProperties(withNodeConnector.get());
-        }
     }
 
     protected Bounds getRelativeBounds(Node node) {
