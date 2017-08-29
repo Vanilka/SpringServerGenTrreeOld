@@ -2,7 +2,8 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
-import gentree.client.desktop.controllers.tree_elements.connectors.RelationConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.SpouseExConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -16,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
@@ -23,7 +26,7 @@ import javafx.scene.shape.Line;
 public class PanelRelationEx extends SubBorderPane implements RelationPane {
 
     private final static double MARGIN_TOP = 0.0;
-    private final static double MARGIN_LEFT = 0.0;
+    private final static double MARGIN_LEFT = 20.0;
     private final static double MARGIN_RIGHT = 0.0;
     private final static double MARGIN_BOTTOM = 50.0;
 
@@ -38,13 +41,17 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private final AnchorPane relation;
     private final HBox childrenBox;
 
+    @Getter
     private final FamilyMember spouseCard;
+
+    @Getter
     private final RelationTypeElement relationTypeElement;
 
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
-    private final RelationConnector childrenConnector;
+    private final ParentToChildrenConnector childrenConnector;
+    private final SpouseExConnector spouseExConnector;
 
 
     {
@@ -55,7 +62,8 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        childrenConnector = new RelationConnector(this);
+        childrenConnector = new ParentToChildrenConnector(this);
+        spouseExConnector = new SpouseExConnector(this);
     }
 
     public PanelRelationEx() {
@@ -71,11 +79,7 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         initListeners();
         this.spouse.setValue(spouse);
         this.relationType.setValue(type);
-        this.initBorder(Color.BROWN, this);
         relation.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        initBorder(Color.CHOCOLATE, relation);
-        initBorder(Color.GREEN, childrenBox);
-
     }
 
 
@@ -112,6 +116,7 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
         initChildrenListener();
         initRelationTypeListener();
         initRelationElementsPositionListener();
+        calculateRelationElementsPosition();
     }
 
 
@@ -183,14 +188,15 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private void calculateRelationElementsPosition() {
         if (children.size() > 0) {
             Line line = childrenConnector.getLine();
-            Double offset = line.getEndX() - relationTypeElement.getWidth()/2.0 - 10.0;
+            Double offset = line.getEndX() - relationTypeElement.getWidth()/2.0 - MARGIN_LEFT - PADDING_LEFT;
             relationTypeElement.setLayoutX(offset);
             offset = offset - spouseCard.getWidth() - SPACE_BEETWEN_OBJECTS;
             spouseCard.setLayoutX(offset);
             childrenConnector.connectRelationToChildren(relationTypeElement);
 
         } else {
-            relationTypeElement.setLayoutX(SPACE_BEETWEN_OBJECTS);
+            relationTypeElement.setLayoutX(spouseCard.getWidth() +SPACE_BEETWEN_OBJECTS);
+            relation.setPrefWidth(50);
         }
     }
 

@@ -2,7 +2,7 @@ package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
-import gentree.client.desktop.controllers.tree_elements.connectors.RelationConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
@@ -40,28 +41,31 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     @Getter
     private final AnchorPane relation;
+
     @Getter
     private final HBox childrenBox;
 
+    @Getter
     private final FamilyMember spouseCard;
-    private final RelationTypeElement relationTypeElement;
 
+    @Getter
+    private final RelationTypeElement relationTypeElement;
 
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObservableList<PanelChild> children;
-    private final RelationConnector childrenConnector;
+    private final ParentToChildrenConnector childrenConnector;
 
 
     {
         relation = new AnchorPane();
         childrenBox = new HBox();
-        spouseCard = new FamilyMember();
         relationTypeElement = new RelationTypeElement();
+        spouseCard = new FamilyMember();
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
-        childrenConnector = new RelationConnector(this);
+        childrenConnector = new ParentToChildrenConnector(this);
     }
 
     public PanelRelationCurrent() {
@@ -86,7 +90,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         this.setTop(relation);
         BorderPane.setAlignment(childrenBox, Pos.TOP_RIGHT);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
-
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
 
     }
@@ -209,9 +212,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     protected Point2D getBottomPoint(Bounds b) {
 
-        if (b != null) {
-            System.out.println(b);
-        }
         return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
     }
 }

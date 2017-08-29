@@ -1,5 +1,6 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
+import gentree.client.desktop.controllers.tree_elements.connectors.SpouseConnector;
 import gentree.client.desktop.domain.Member;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -46,8 +47,8 @@ public class PanelChild extends SubBorderPane {
     @Setter(AccessLevel.NONE)
     private final AnchorPane panelRelationCurrentPane;
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
+
+    @Getter
     private final HBox panelRelationExPane;
 
 
@@ -56,16 +57,19 @@ public class PanelChild extends SubBorderPane {
     private final ObjectProperty<PanelRelationCurrent> panelRelationCurrent;
     private final ObservableList<PanelRelationEx> panelRelationEx;
 
+    private final SpouseConnector spouseConnector;
+
     {
         panelSinglePane = new AnchorPane();
         panelRelationCurrentPane = new AnchorPane();
         panelRelationExPane = new HBox();
 
-
         member = new SimpleObjectProperty<>();
         panelSingle = new SimpleObjectProperty<>();
         panelRelationCurrent = new SimpleObjectProperty<>();
         panelRelationEx = FXCollections.observableArrayList();
+        spouseConnector = new SpouseConnector(this);
+
 
         initListeners();
         initPanes();
@@ -81,8 +85,6 @@ public class PanelChild extends SubBorderPane {
         setCenter(panelSinglePane);
         setLeft(panelRelationExPane);
         setRight(panelRelationCurrentPane);
-
-        this.initBorder(Color.ORANGE, this);
 
         if(parent != null) {
             this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
@@ -140,14 +142,6 @@ public class PanelChild extends SubBorderPane {
         panelRelationExPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
     }
-
-    private void setAnchors(Node n) {
-        AnchorPane.setBottomAnchor(n, 0.0);
-        AnchorPane.setRightAnchor(n, 0.0);
-        AnchorPane.setLeftAnchor(n, 0.0);
-        AnchorPane.setTopAnchor(n, 0.0);
-    }
-
 
     /*
         Getters

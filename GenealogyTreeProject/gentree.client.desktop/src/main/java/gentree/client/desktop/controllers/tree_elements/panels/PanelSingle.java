@@ -1,7 +1,7 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
-import gentree.client.desktop.controllers.tree_elements.connectors.RelationConnector;
+import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.domain.Member;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -42,7 +42,7 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     private final HBox childrenBox;
     private final ObservableList<PanelChild> childrenPanels;
   //  private final ObservableList<PanelChild> panelChildrenList;
-    private final RelationConnector childrenConnector;
+    private final ParentToChildrenConnector childrenConnector;
 
     /*
         Initialization
@@ -54,7 +54,7 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
      //   panelChildrenList = FXCollections.observableArrayList();
         childrenBox = new HBox();
         childrenPanels = FXCollections.observableArrayList();
-        childrenConnector = new RelationConnector(this);
+        childrenConnector = new ParentToChildrenConnector(this);
 
     }
 
@@ -70,8 +70,6 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         init();
         member.setMember(m);
         setParentPane(parent);
-
-        this.initBorder(Color.DARKBLUE, this);
     }
 
 
@@ -100,6 +98,7 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     private void initListeners() {
         initChildrenListener();
         initRelationElementsPositionListener();
+
     }
 
     private void initChildrenListener() {

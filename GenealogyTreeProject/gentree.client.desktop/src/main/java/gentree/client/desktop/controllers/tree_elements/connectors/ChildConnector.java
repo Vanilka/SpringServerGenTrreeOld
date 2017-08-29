@@ -18,10 +18,12 @@ import lombok.Setter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/08/2017.
+ *
+ * Class responsible to drawing Vertical Line from Child
  */
 @Getter
 @Setter
-public class ChildConnector extends LineConnector{
+public class ChildConnector extends LineConnector {
 
     private final SubBorderPane subBorderPane;
     private final PanelChild panelChild;

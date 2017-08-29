@@ -14,8 +14,11 @@ import lombok.Getter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 23/08/2017.
+ *
+ * Class to manage Line Connectors.
+ *
  */
-public class LineConnector {
+public class LineConnector extends Connector {
 
 
     protected ObjectProperty<Line> line;
@@ -25,24 +28,14 @@ public class LineConnector {
         initLineProperties(line.get());
     }
 
-    protected Point2D getBottomPoint(Bounds b) {
-
-        if (b != null) {
-        }
-        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
-    }
-
-
-    protected Point2D getTopPoint(Bounds b) {
-        if (b != null) {
-        }
-
-        return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY());
-    }
 
     protected void initLineProperties(Line line) {
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(10);
+        initLineProperties(line, Color.BLACK, 10.0);
+    }
+
+    protected void initLineProperties(Line line, Color color, Double width) {
+        line.setStroke(color);
+        line.setStrokeWidth(width);
         line.setStrokeLineJoin(StrokeLineJoin.ROUND);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
     }
