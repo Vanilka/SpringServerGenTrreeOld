@@ -70,6 +70,7 @@ public class PanelChild extends SubBorderPane {
         panelRelationEx = FXCollections.observableArrayList();
         spouseConnector = new SpouseConnector(this);
 
+        initBorder(Color.RED, this);
 
         initListeners();
         initPanes();

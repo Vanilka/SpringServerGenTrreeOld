@@ -41,7 +41,7 @@
                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0"/>
             </children>
             <padding>
-                <Insets bottom="30.0" left="60"/>
+                <Insets top="30.0" bottom="30.0" left="60" right="60"/>
             </padding>
         </AnchorPane>
     </children>

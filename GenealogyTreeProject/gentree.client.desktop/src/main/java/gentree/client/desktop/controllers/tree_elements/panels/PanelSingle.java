@@ -1,8 +1,12 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
+import gentree.client.desktop.controllers.tree_elements.RelationReference;
 import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -25,7 +29,6 @@ import lombok.Setter;
 @Setter
 public class PanelSingle extends SubBorderPane implements RelationPane{
 
-
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
     private final static double MARGIN_RIGHT = 0.0;
@@ -38,11 +41,12 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
 
     private final AnchorPane pane;
     private final FamilyMember member;
+    private final ObjectProperty<Relation> thisRelation;
 
     private final HBox childrenBox;
     private final ObservableList<PanelChild> childrenPanels;
-  //  private final ObservableList<PanelChild> panelChildrenList;
     private final ParentToChildrenConnector childrenConnector;
+    private final RelationReference thisRelationReference;
 
     /*
         Initialization
@@ -51,7 +55,8 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     {
         pane = new AnchorPane();
         member = new FamilyMember();
-     //   panelChildrenList = FXCollections.observableArrayList();
+        thisRelation = new SimpleObjectProperty<>();
+        thisRelationReference = new RelationReference(RelationReference.RelationReferenceType.DSC);
         childrenBox = new HBox();
         childrenPanels = FXCollections.observableArrayList();
         childrenConnector = new ParentToChildrenConnector(this);
@@ -59,17 +64,28 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     }
 
     public PanelSingle() {
-        this(null, null);
+        this(null, null,null);
     }
 
     public PanelSingle(Member m) {
-        this(m, null);
+        this(m, null, null);
     }
 
     public PanelSingle(Member m, SubBorderPane parent) {
+        this(m, null, parent);
+    }
+
+    public PanelSingle(Member m, Relation thisRelation) {
+        this(m, thisRelation,null);
+    }
+
+    public PanelSingle(Member m, Relation thisRelation, SubBorderPane parent) {
         init();
-        member.setMember(m);
+        this.member.setMember(m);
+        this.thisRelation.setValue(thisRelation);
         setParentPane(parent);
+
+        initBorder(Color.BLUE, this);
     }
 
 
@@ -85,10 +101,12 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         setCenter(childrenBox);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(pane, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+
     }
 
     private void initPane() {
-        pane.getChildren().add(member);
+        pane.setPrefHeight(RELATION_HEIGHT);
+        pane.getChildren().addAll(member, thisRelationReference);
     }
 
     private void  initHbox() {
@@ -96,10 +114,19 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     }
 
     private void initListeners() {
+        initThisRelationListener();
         initChildrenListener();
         initRelationElementsPositionListener();
 
     }
+
+    private void initThisRelationListener() {
+
+        thisRelation.addListener((observable, oldValue, newValue) -> {
+            thisRelationReference.setRelation(newValue);
+        });
+    }
+
 
     private void initChildrenListener() {
         childrenPanels.addListener((ListChangeListener<PanelChild>) c -> {
@@ -122,6 +149,7 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     private void initRelationElementsPositionListener() {
 
         childrenBox.prefWidthProperty().bindBidirectional(pane.prefWidthProperty());
+        this.prefWidthProperty().bind(childrenBox.widthProperty());
 
         pane.widthProperty().addListener(observable -> {
             calculateRelationElementsPosition();
@@ -142,6 +170,18 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         childrenConnector.getLine().endYProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
+
+        member.layoutXProperty().addListener(observable -> {
+            calculateThisRelationPosition();
+        });
+
+        member.layoutYProperty().addListener(observable -> {
+            calculateThisRelationPosition();
+        });
+
+        member.widthProperty().addListener(observable -> {
+            calculateThisRelationPosition();
+        });
     }
 
     private void calculateRelationElementsPosition() {
@@ -152,6 +192,14 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
             childrenConnector.connectRelationToChildren(member);
         }
     }
+
+    private void calculateThisRelationPosition() {
+
+        thisRelationReference.setLayoutX(member.getLayoutX());
+        thisRelationReference.setLayoutY(member.getLayoutY() + member.getHeight());
+
+    }
+
 
     public void addMember(Member m) {
         if (m != null) {

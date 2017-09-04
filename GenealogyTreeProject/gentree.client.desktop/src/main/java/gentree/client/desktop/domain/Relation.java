@@ -5,6 +5,8 @@ import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -22,6 +24,9 @@ public class Relation extends Observable implements Serializable {
 
     private LongProperty id;
 
+    @XmlTransient
+    private LongProperty referenceNumber;
+
     private ObjectProperty<Member> left;
     private ObjectProperty<Member> right;
     private ObservableList<Member> children;
@@ -30,11 +35,13 @@ public class Relation extends Observable implements Serializable {
 
     {
         this.id = new SimpleLongProperty();
+        this.referenceNumber = new SimpleLongProperty();
         this.left = new SimpleObjectProperty<>();
         this.right = new SimpleObjectProperty<>();
         this.children = FXCollections.observableArrayList();
         this.type = new SimpleObjectProperty<>();
         this.active = new SimpleBooleanProperty();
+
     }
 
     public Relation() {
@@ -86,6 +93,10 @@ public class Relation extends Observable implements Serializable {
         if (getRight() == o) return true;
         Member other = (Member) o;
         return getRight().equals(other);
+    }
+
+    public boolean isRoot() {
+        return getRight() == null && getLeft() == null;
     }
 
 
@@ -144,11 +155,11 @@ public class Relation extends Observable implements Serializable {
 
 
     public RelationType getType() {
-        return type.get();
+        return type.get() == null ? RelationType.NEUTRAL : type.get();
     }
 
     public void setType(RelationType type) {
-        this.type.set(type);
+        this.type.set(type == null ? RelationType.NEUTRAL : type);
     }
 
     public ObjectProperty<RelationType> typeProperty() {
@@ -166,5 +177,21 @@ public class Relation extends Observable implements Serializable {
 
     public BooleanProperty activeProperty() {
         return active;
+    }
+
+    public Long getReferenceNumber() {
+        return referenceNumber.get();
+    }
+
+    public LongProperty referenceNumberProperty() {
+        return referenceNumber;
+    }
+
+    public void setReferenceNumber(long referenceNumber) {
+        this.referenceNumber.set(referenceNumber);
+    }
+
+    public void setReferenceNumber(Long referenceNumber) {
+        this.referenceNumber.setValue(referenceNumber);
     }
 }

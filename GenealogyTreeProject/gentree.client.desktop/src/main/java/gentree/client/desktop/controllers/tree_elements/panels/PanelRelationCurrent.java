@@ -1,11 +1,15 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
+import gentree.client.desktop.controllers.tree_elements.RelationReference;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -37,7 +41,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     private final static double PADDING_RIGHT = 10.0;
     private final static double PADDING_BOTTOM = 0.0;
 
-    private final static double MINIMAL_RELATION_WIDTH = 550.0;
+    private final static double MINIMAL_RELATION_WIDTH = 450.0;
 
     @Getter
     private final AnchorPane relation;
@@ -53,8 +57,14 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
+    private final ObjectProperty<Relation> thisRelation;
     private final ObservableList<PanelChild> children;
     private final ParentToChildrenConnector childrenConnector;
+    private final RelationReference thisRelationReference;
+    private final RelationReference spouseRelationReference;
+    private final ObjectProperty<Relation> spouseBornRelation;
+
+
 
 
     {
@@ -64,27 +74,33 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
         spouseCard = new FamilyMember();
         relationType = new SimpleObjectProperty<>();
         spouse = new SimpleObjectProperty<>();
+        thisRelation = new SimpleObjectProperty<>();
         children = FXCollections.observableArrayList();
         childrenConnector = new ParentToChildrenConnector(this);
+        spouseBornRelation = new SimpleObjectProperty<>();
+        spouseRelationReference = new RelationReference(RelationReference.RelationReferenceType.ASC);
+        thisRelationReference = new RelationReference(RelationReference.RelationReferenceType.DSC);
     }
 
     public PanelRelationCurrent() {
-        this(null, RelationType.NEUTRAL, null);
+        this(null, null, null, null);
     }
 
-    public PanelRelationCurrent(Member spouse, RelationType type) {
-        this(spouse, type, null);
+    public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn) {
+        this(spouse, thisRelation, spouseBorn, null);
     }
 
-    public PanelRelationCurrent(Member spouse, RelationType type, SubBorderPane parent) {
+    public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
         initPanes();
         initListeners();
         this.spouse.setValue(spouse);
-        this.relationType.setValue(type);
+        this.thisRelation.setValue(thisRelation);
+        this.spouseBornRelation.setValue(spouseBorn);
     }
 
 
     private void initPanes() {
+        relation.setPrefHeight(RELATION_HEIGHT);
         initHbox();
         this.setCenter(childrenBox);
         this.setTop(relation);
@@ -104,10 +120,13 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     private void initListeners() {
         initSpouseListener();
+        initThisRelationListener();
+        initSpouseBornRelationListener();
         initChildrenListener();
         initRelationTypeListener();
         initRelationPaneSizeListener();
         resizeRelation();
+        calculateRelationElementsPosition();
     }
 
 
@@ -116,10 +135,32 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
             relation.getChildren().removeAll();
             if (newValue != null) {
                 spouseCard.setMember(newValue);
-                relation.getChildren().addAll(relationTypeElement, spouseCard);
+                relation.getChildren().addAll(relationTypeElement, spouseCard, spouseRelationReference, thisRelationReference);
             }
         });
     }
+
+    private void initThisRelationListener() {
+
+        thisRelation.addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                relationType.bind(newValue.typeProperty());
+            } else {
+                relationType.unbind();
+            }
+            thisRelationReference.setRelation(newValue);
+        });
+    }
+
+
+
+    private void initSpouseBornRelationListener() {
+        spouseBornRelation.addListener((observable, oldValue, newValue) -> {
+            spouseRelationReference.setRelation(newValue);
+        });
+
+    }
+
 
 
     private void initRelationTypeListener() {
@@ -139,6 +180,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
                     c.getRemoved().forEach(childrenConnector::removePanelChild);
                 }
             }
+            calculateRelationElementsPosition();
         });
     }
 
@@ -149,7 +191,7 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
         relation.heightProperty().addListener((observable, oldValue, newValue) -> {
             if (relationTypeElement != null) {
-                relationTypeElement.setLayoutY((newValue.doubleValue() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
+                relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
                 calculateRelationElementsPosition();
             }
         });
@@ -161,6 +203,12 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
         spouseCard.layoutXProperty().addListener(observable -> {
             resizeRelation();
+            setSpouseRelationreferencePosition();
+
+        });
+
+        spouseCard.layoutYProperty().addListener(observable -> {
+            setSpouseRelationreferencePosition();
         });
 
         childrenConnector.getLine().startXProperty().addListener(c -> {
@@ -170,13 +218,24 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
         relationTypeElement.boundsInLocalProperty().addListener(c-> {
             calculateRelationElementsPosition();
+            calculateThisRelationPosition();
             resizeRelation();
         });
 
         relationTypeElement.layoutYProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
+            calculateThisRelationPosition();
             resizeRelation();
         });
+
+        relationTypeElement.heightProperty().addListener(c -> {
+            calculateThisRelationPosition();
+        });
+    }
+
+    private void setSpouseRelationreferencePosition() {
+        spouseRelationReference.setLayoutX(spouseCard.getLayoutX()+30);
+        spouseRelationReference.setLayoutY(spouseCard.getLayoutY()-60);
     }
 
     private void calculateRelationElementsPosition() {
@@ -190,6 +249,13 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
             spouseCard.setLayoutX(relationTypeElement.getLayoutX() + 200);
             relation.setPrefWidth(MINIMAL_RELATION_WIDTH);
         }
+    }
+
+    private void calculateThisRelationPosition() {
+
+        thisRelationReference.setLayoutX(relationTypeElement.getLayoutX());
+        thisRelationReference.setLayoutY(relationTypeElement.getLayoutY() + relationTypeElement.getHeight());
+
     }
 
     private void resizeRelation() {
@@ -213,6 +279,23 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
     protected Point2D getBottomPoint(Bounds b) {
 
         return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
+    }
+
+
+    /*
+        GETTERS AND SETTERS
+     */
+
+    public Relation getSpouseBornRelation() {
+        return spouseBornRelation.get();
+    }
+
+    public ObjectProperty<Relation> spouseBornRelationProperty() {
+        return spouseBornRelation;
+    }
+
+    public void setSpouseBornRelation(Relation spouseBornRelation) {
+        this.spouseBornRelation.set(spouseBornRelation);
     }
 }
 

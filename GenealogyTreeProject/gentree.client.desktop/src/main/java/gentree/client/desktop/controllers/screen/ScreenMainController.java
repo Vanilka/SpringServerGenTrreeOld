@@ -5,6 +5,7 @@ import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -72,10 +73,18 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
         paneShowInfoSim.setMember(member);
     }
 
+    public void showInfoRelation(Relation relation) {
+        screenMainLeft.getChildren().forEach(n -> n.setVisible(false));
+        PaneShowInfoRelation paneShowInfoRelation = (PaneShowInfoRelation) sm.loadAdditionalFxmltoAnchorPane(
+                new PaneShowInfoSim(), screenMainLeft, FilesFXML.PANE_SHOW_INFO_RELATION_FXML);
+        paneShowInfoRelation.setRelation(relation);
+    }
 
-    public void removeInfoSim(Node node) {
+
+    public void removeInfoPanel(Node node) {
         screenMainLeft.getChildren().remove(node);
         screenMainLeft.getChildren().forEach(n -> n.setVisible(true));
     }
+
 
 }

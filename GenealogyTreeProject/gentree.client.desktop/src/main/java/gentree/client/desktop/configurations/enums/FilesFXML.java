@@ -21,6 +21,7 @@ public enum FilesFXML {
     SCREEN_MAIN_LEFT_FAMILY_INFO_FXML("tab.family.info.fxml"),
     SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml"),
     PANE_SHOW_INFO_MEMBER_FXML("pane.show.info.member.fxml"),
+    PANE_SHOW_INFO_RELATION_FXML("pane.show.info.relation.fxml"),
     DIALOG_APP_PROPERTIES("dialog.app.properties.fxml"),
     DIALOG_APP_PROPERTIES_TREE("dialog.app.properties.tree.fxml"),
     DIALOG_APP_PROPERTIES_OTHER("dialog.app.properties.other.fxml"),

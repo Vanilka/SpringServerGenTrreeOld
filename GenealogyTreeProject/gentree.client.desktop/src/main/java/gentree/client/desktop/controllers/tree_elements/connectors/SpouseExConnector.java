@@ -54,7 +54,6 @@ public class SpouseExConnector extends LineConnector {
 
     private void drawLine() {
         try {
-
             FamilyMember spouse = panelRelationEx.getSpouseCard();
             RelationTypeElement relationType = panelRelationEx.getRelationTypeElement();
             if(spouse != null && relationType != null) {

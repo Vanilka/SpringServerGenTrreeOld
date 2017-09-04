@@ -171,7 +171,7 @@ public class ParentToChildrenConnector extends LineConnector {
         withNodeConnector.get().setEndX(bottomPoint.getX());
         withNodeConnector.get().setEndY(bottomPoint.getY());
 
-        subBorderPane.getChildren().add(withNodeConnector.get());
+        subBorderPane.getChildren().add(1, withNodeConnector.get());
         initLineProperties(withNodeConnector.get());
     }
 

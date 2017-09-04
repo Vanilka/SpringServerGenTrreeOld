@@ -1,13 +1,17 @@
 package gentree.client.desktop.service.implementation;
 
+import gentree.client.desktop.configurations.enums.ExceptionCauses;
+import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.tree_elements.FamilyGroup;
 import gentree.client.desktop.controllers.tree_elements.panels.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import javafx.scene.layout.HBox;
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +19,17 @@ import java.util.List;
 /**
  * Created by Martyna SZYMKOWIAK on 06/07/2017.
  */
+@Log4j2
 public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
-    GenTreeContext context = GenTreeContext.INSTANCE;
-
     private final HBox box;
-
+    GenTreeContext context = GenTreeContext.INSTANCE;
     private int nodeCounter;
+    private Long idReference;
+
+    {
+        idReference = 0L;
+    }
 
     public GenTreeDrawingServiceImpl(HBox box) {
         this.box = box;
@@ -46,7 +54,8 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     }
 
     /**
-     *  AddRelations for Panel Child
+     * AddRelations for Panel Child
+     *
      * @param panelChild
      */
     private void populateChild(PanelChild panelChild) {
@@ -58,7 +67,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         /*
             Panel Single will allways created
          */
-        panelChild.setPanelSingle(new PanelSingle(panelChild.getMember(), panelChild));
+        panelChild.setPanelSingle(new PanelSingle(panelChild.getMember(), null, panelChild));
 
         /*
             Checking relations
@@ -80,18 +89,20 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             /*
                 Populate Children Panels
              */
-            populateRelationPanel(relation, panel);
+            if (isStrong(relation, panelChild.getMember())) {
+                populateRelationPanel(relation, panel);
+            }
         }
     }
+
 
     private void populateRelationPanel(Relation relation, SubBorderPane panel) {
 
         relation.getChildren().forEach(c -> {
             PanelChild panelChild = new PanelChild(c, panel);
             populateChild(panelChild);
-            ((RelationPane) panel ).addChild(panelChild);
+            ((RelationPane) panel).addChild(panelChild);
         });
-
 
 
     }
@@ -116,37 +127,98 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     private SubBorderPane generateSubPanel(Relation relation, Member sim) {
 
         if (relation.getLeft() != null && relation.getLeft().equals(sim)) {
-            return generateSupPanel(sim, relation.getRight(), relation.getType(), relation.getActive());
+            return generateSupPanel(sim, relation.getRight(), relation);
         }
 
         if (relation.getRight() != null && relation.getRight().equals(sim)) {
-            return generateSupPanel(sim, relation.getLeft(), relation.getType(), relation.getActive());
+            return generateSupPanel(sim, relation.getLeft(), relation);
         }
         return null;
     }
 
-    private SubBorderPane generateSupPanel(Member root, Member other, RelationType type, boolean isActive) {
+    /**
+     * Function generating Relation Panel of type :
+     * a) Single
+     * b) Relation Current
+     * c) Relation Ex
+     * depending the params
+     *
+     * @param root
+     * @param other
+     * @param relation
+     * @return
+     */
+    private SubBorderPane generateSupPanel(Member root, Member other, Relation relation) {
         if (other == null) {
-            return new PanelSingle(root);
+            return new PanelSingle(root, relation);
         } else {
-            if (isActive && type != RelationType.NEUTRAL) {
-                return new PanelRelationCurrent(other, type);
+            if (relation.getActive() && relation.getType() != RelationType.NEUTRAL) {
+                Relation r = findBornRelation(other);
+                if(r != null && !r.isRoot() && r.getReferenceNumber() == 0) {
+                    r.setReferenceNumber(++idReference);
+                }
+                return new PanelRelationCurrent(other, relation, r);
             } else {
-                return new PanelRelationEx(other, type);
+                return new PanelRelationEx(other, relation);
             }
         }
     }
 
+    /**
+     * Strong regles :
+     * a) If relation is Active  Father is Strong
+     * b) If relation is Not Active  Mather is Strong
+     *
+     * @param relation
+     * @param member
+     * @return
+     */
+    private boolean isStrong(Relation relation, Member member) {
+        return whoIsStrong(relation).equals(member);
+    }
 
-    private boolean isStrong() {
-        return false;
+    /**
+     * Strong regles :
+     * a) If relation is Active  Father is Strong
+     * b) If relation is Not Active  Mather is Strong
+     *
+     * @param relation
+     * @return
+     */
+    private Member whoIsStrong(Relation relation) {
+        if (relation.getLeft() != null || relation.getRight() != null) {
+            if (relation.getLeft() == null) {
+                return relation.getRight();
+            } else if (relation.getRight() == null) {
+                return relation.getLeft();
+            } else if (relation.getActive()) {
+                return relation.getRight();
+            } else {
+                relation.getLeft();
+            }
+        } else {
+            return null;
+        }
+        return null;
     }
 
 
     private void reset() {
         box.getChildren().clear();
         nodeCounter = 1;
+        context.getService().getCurrentFamily().getRelations()
+                .filtered(r -> r.getReferenceNumber() > 0)
+                .forEach(r -> r.setReferenceNumber(null));
+        idReference = 0L;
     }
 
+    private Relation findBornRelation(Member m) {
+        try {
+            return context.getService().getCurrentFamily().findBornRelation(m);
+        } catch (NotUniqueBornRelationException e) {
+            log.error(LogMessages.MSG_ERROR_BORN, m);
+            return null;
+        }
+    }
 
 }

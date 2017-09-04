@@ -25,6 +25,7 @@ import lombok.Setter;
 @Setter
 public class ChildConnector extends LineConnector {
 
+    private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
     private final SubBorderPane subBorderPane;
     private final PanelChild panelChild;
 
@@ -87,7 +88,7 @@ public class ChildConnector extends LineConnector {
     private void redrawLine() {
         Bounds childBounds = getRelativeBounds(panelChild.getPanelSingle().get().getMember());
         Point2D startPoint = getTopPoint(childBounds);
-        Point2D endPoint = new Point2D(startPoint.getX(), startPoint.getY() - 50);
+        Point2D endPoint = new Point2D(startPoint.getX(), startPoint.getY() - CHILD_CONNECTOR_HEIGHT );
 
         getLine().setStartX(startPoint.getX());
         getLine().setStartY(startPoint.getY());

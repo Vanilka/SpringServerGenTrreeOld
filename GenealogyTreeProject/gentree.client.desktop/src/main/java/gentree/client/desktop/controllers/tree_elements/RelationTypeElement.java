@@ -1,5 +1,6 @@
 package gentree.client.desktop.controllers.tree_elements;
 
+import com.sun.scenario.effect.Color4f;
 import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.BooleanProperty;
@@ -7,6 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -28,6 +30,7 @@ public class RelationTypeElement extends StackPane {
     Circle circle;
     ImageView typeImg;
     StackPane imageContainer;
+    DropShadow dropShadow;
     private ObjectProperty<RelationType> type;
     private BooleanProperty isActive;
 
@@ -51,14 +54,34 @@ public class RelationTypeElement extends StackPane {
         isActive = new SimpleBooleanProperty();
         typeImg = new ImageView();
         imageContainer = new StackPane();
+        dropShadow = new DropShadow();
         initCircle();
+        initShadow();
 
         imageContainer.getChildren().addAll(circle, typeImg);
         getChildren().add(imageContainer);
         initListeners();
         setAlignment(Pos.CENTER);
 
+
+        this.setOnMouseEntered(t -> {
+            circle.setEffect(dropShadow);
+        });
+
+        this.setOnMouseExited(t -> {
+
+         circle.setEffect(null);
+        });
+
     }
+
+    private void initShadow() {
+        dropShadow.setRadius(10.0f);
+        dropShadow.setOffsetX(3);
+        dropShadow.setOffsetY(3);
+        dropShadow.setColor(Color.color(0.7, 0.7, 0.2));
+    }
+
 
     private void initCircle() {
 

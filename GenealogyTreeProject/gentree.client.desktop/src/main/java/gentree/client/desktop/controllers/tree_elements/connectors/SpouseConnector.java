@@ -14,18 +14,25 @@ import javafx.scene.shape.Line;
  */
 public class SpouseConnector extends LineConnector {
 
+    private static final Color COLOR_EX = Color.web("#85a2a3");
+    private static final Color COLOR_CURRENT = Color.web("#5F9EA0");
+
+
     private final PanelChild panelChild;
 
     private final Line lineRelationToSim;
     private final Line lineSimConnectAllEx;
+    private final Line lineSimConnectSpouse;
 
     public SpouseConnector(PanelChild panelChild) {
         super();
         this.lineRelationToSim = new Line();
         this.lineSimConnectAllEx = new Line();
+        this.lineSimConnectSpouse = new Line();
         this.panelChild = panelChild;
         initLineProperties(lineRelationToSim);
-        initLineProperties(lineSimConnectAllEx, Color.CADETBLUE, 100.0);
+        initLineProperties(lineSimConnectAllEx, COLOR_EX, 100.0);
+        initLineProperties(lineSimConnectSpouse, COLOR_CURRENT,100.0);
         initListener();
     }
 
@@ -133,22 +140,19 @@ public class SpouseConnector extends LineConnector {
 
         Bounds spouseBounds = getRelativeBounds(spouse);
         Point2D spousePoint = getLeftPoint(spouseBounds);
+        Point2D spouseRightPoint = getRightPoint(spouseBounds);
 
         panelChild.getChildren().remove(lineRelationToSim);
         panelChild.getChildren().remove(getLine());
+        panelChild.getChildren().remove(lineSimConnectSpouse);
 
-        lineRelationToSim.setStartX(simPoint.getX());
-        lineRelationToSim.setStartY(simPoint.getY());
-        lineRelationToSim.setEndX(relationTypePointLeft.getX());
-        lineRelationToSim.setEndY(relationTypePointLeft.getY());
-
-        getLine().setStartX(relationTypePointRight.getX());
-        getLine().setStartY(relationTypePointRight.getY());
-        getLine().setEndX(spousePoint.getX());
-        getLine().setEndY(spousePoint.getY());
+        setLineCoordinates(lineRelationToSim, simPoint.getX(), simPoint.getY(), relationTypePointLeft.getX(), relationTypePointLeft.getY());
+        setLineCoordinates(getLine(), relationTypePointRight.getX(), relationTypePointRight.getY(), spousePoint.getX(), spousePoint.getY());
+        setLineCoordinates(lineSimConnectSpouse, simPoint.getX(), simPoint.getY(), spouseRightPoint.getX()+20,  spouseRightPoint.getY());
 
         panelChild.getChildren().add(0, lineRelationToSim);
-        panelChild.getChildren().add(1, getLine());
+        panelChild.getChildren().add(1, lineSimConnectSpouse);
+        panelChild.getChildren().add(2, getLine());
 
     }
 
@@ -169,6 +173,18 @@ public class SpouseConnector extends LineConnector {
 
             panelChild.getChildren().add(0, lineSimConnectAllEx);
         }
+    }
+
+    private void setLineCoordinates(Line line, Double startX, Double startY, Double endX, Double endY) {
+        line.setStartX(startX);
+        line.setStartY(startY);
+        line.setEndX(endX);
+        line.setEndY(endY);
+    }
+
+
+    private void drawSpouseFond() {
+
     }
 
     protected Bounds getRelativeBounds(Node node) {

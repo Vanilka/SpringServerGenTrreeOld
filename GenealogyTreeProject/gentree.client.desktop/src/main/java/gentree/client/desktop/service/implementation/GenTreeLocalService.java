@@ -445,7 +445,6 @@ public class GenTreeLocalService implements FamilyService {
                     member.setPhoto(newPath == null ? null : PREFIX_FILE_RELATIVE + newPath);
 
                 });
-
     }
 }
 
