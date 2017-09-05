@@ -1,9 +1,6 @@
 package gentree.client.desktop.controllers.tree_elements.connectors;
 
-import gentree.client.desktop.controllers.tree_elements.panels.PanelChild;
-import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationCurrent;
-import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationEx;
-import gentree.client.desktop.controllers.tree_elements.panels.SubBorderPane;
+import gentree.client.desktop.controllers.tree_elements.panels.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -22,7 +19,14 @@ import java.util.Comparator;
  */
 public class ParentToChildrenConnector extends LineConnector {
 
-    private SubBorderPane subBorderPane;
+    /*
+    *   Pane Relation  parent for this Connector
+    */
+    private SubRelationPane subBorderPane;
+
+    /*
+    *   Child Connectors for children in Sub-Relation-Pane
+     */
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
     private ObjectProperty<ChildConnector> firstChild = new SimpleObjectProperty<>();
     private ObjectProperty<ChildConnector> lastChild = new SimpleObjectProperty<>();
@@ -30,7 +34,7 @@ public class ParentToChildrenConnector extends LineConnector {
     @Getter
     private ObjectProperty<Line> withNodeConnector = new SimpleObjectProperty<>(new Line());
 
-    public ParentToChildrenConnector(SubBorderPane subBorderPane) {
+    public ParentToChildrenConnector(SubRelationPane subBorderPane) {
         super();
         this.subBorderPane = subBorderPane;
         initLineProperties(withNodeConnector.get());
@@ -53,6 +57,10 @@ public class ParentToChildrenConnector extends LineConnector {
                         populateFirstAndLastChild();
 
                         childConnector.getLine().boundsInParentProperty().addListener(observable -> {
+                            drawLine();
+                        });
+
+                        childConnector.getLine().boundsInLocalProperty().addListener(observable -> {
                             drawLine();
                         });
 

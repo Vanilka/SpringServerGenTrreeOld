@@ -29,7 +29,7 @@ import lombok.Setter;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class PanelRelationCurrent extends SubBorderPane implements RelationPane {
+public class PanelRelationCurrent extends SubRelationPane implements RelationPane {
 
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
@@ -45,9 +45,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     @Getter
     private final AnchorPane relation;
-
-    @Getter
-    private final HBox childrenBox;
 
     @Getter
     private final FamilyMember spouseCard;
@@ -69,7 +66,6 @@ public class PanelRelationCurrent extends SubBorderPane implements RelationPane 
 
     {
         relation = new AnchorPane();
-        childrenBox = new HBox();
         relationTypeElement = new RelationTypeElement();
         spouseCard = new FamilyMember();
         relationType = new SimpleObjectProperty<>();

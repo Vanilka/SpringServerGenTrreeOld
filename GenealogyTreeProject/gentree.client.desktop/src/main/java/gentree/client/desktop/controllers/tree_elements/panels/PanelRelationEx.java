@@ -13,7 +13,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +24,7 @@ import lombok.Getter;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class PanelRelationEx extends SubBorderPane implements RelationPane {
+public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 20.0;
@@ -41,7 +40,6 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     private final static double SPACE_BEETWEN_OBJECTS = 100.0;
 
     private final AnchorPane relation;
-    private final HBox childrenBox;
 
     @Getter
     private final FamilyMember spouseCard;
@@ -62,7 +60,6 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
 
     {
         relation = new AnchorPane();
-        childrenBox = new HBox();
         spouseCard = new FamilyMember();
         relationTypeElement = new RelationTypeElement();
         relationType = new SimpleObjectProperty<>();
@@ -85,14 +82,12 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
     }
 
     public PanelRelationEx(Member spouse, Relation thisRelation, SubBorderPane parent) {
+        super();
         initPanes();
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
         this.relation.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        initBorder(Color.AZURE, childrenBox);
-        initBorder(Color.RED, relation);
-        initBorder(Color.BLACK, this);
     }
 
 
@@ -179,53 +174,52 @@ public class PanelRelationEx extends SubBorderPane implements RelationPane {
 
     private void initRelationElementsPositionListener() {
 
-        relation.heightProperty().addListener((observable, oldValue, newValue) -> {
-            if (relationTypeElement != null) {
-                relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight() - MARGIN_BOTTOM - PADDING_TOP) / 2);
+        relation.prefWidthProperty().bindBidirectional(childrenBox.prefWidthProperty());
+
+        relationTypeElement.boundsInLocalProperty().addListener(c -> {
+            relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
+            calculateRelationElementsPosition();
+            calculateThisRelationPosition();
+
+        });
+
+        spouseCard.boundsInLocalProperty().addListener(c -> {
+            relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
+            calculateRelationElementsPosition();
+            calculateThisRelationPosition();
+        });
+
+
+        relation.boundsInParentProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+            calculateThisRelationPosition();
+        });
+
+        relation.boundsInLocalProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+            calculateThisRelationPosition();
+        });
+
+
+        childrenConnector.getLine().boundsInLocalProperty().addListener(c -> {
+            calculateRelationElementsPosition();
+        });
+
+
+        spouseCard.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.doubleValue() < 0)
+            {
+                Double expectedValue = relation.getWidth() + newValue.doubleValue() * (-1) + 100;
+                relation.resize(expectedValue, relation.getHeight());
                 calculateRelationElementsPosition();
             }
         });
 
-        relation.widthProperty().addListener((observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-        });
-
-        relation.prefWidthProperty().addListener((observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-        });
-
-
-        childrenConnector.getLine().startXProperty().addListener(c -> {
-            calculateRelationElementsPosition();
-
-        });
-
-        childrenConnector.getLine().endXProperty().addListener((observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-
-        });
-
-        relationTypeElement.boundsInLocalProperty().addListener(c -> {
-           // calculateRelationElementsPosition();
-          //  calculateThisRelationPosition();
-
-        });
-
-        relationTypeElement.heightProperty().addListener(c -> {
-            calculateThisRelationPosition();
-        });
-
-        relationTypeElement.widthProperty().addListener(c -> {
-            calculateRelationElementsPosition();
-        });
-
-        spouseCard.layoutXProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.doubleValue() < 0) {
-                relation.setPrefWidth(relation.getWidth() + newValue.doubleValue()*(-1) +100);
-            }
-        });
-
         childrenBox.prefWidthProperty().addListener(observable -> {
+            calculateRelationElementsPosition();
+        });
+
+        childrenBox.widthProperty().addListener(observable -> {
             calculateRelationElementsPosition();
         });
     }

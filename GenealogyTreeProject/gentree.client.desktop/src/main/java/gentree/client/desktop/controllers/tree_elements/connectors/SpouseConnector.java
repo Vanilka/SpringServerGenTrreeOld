@@ -17,7 +17,6 @@ public class SpouseConnector extends LineConnector {
     private static final Color COLOR_EX = Color.web("#85a2a3");
     private static final Color COLOR_CURRENT = Color.web("#5F9EA0");
 
-
     private final PanelChild panelChild;
 
     private final Line lineRelationToSim;
@@ -150,8 +149,8 @@ public class SpouseConnector extends LineConnector {
         setLineCoordinates(getLine(), relationTypePointRight.getX(), relationTypePointRight.getY(), spousePoint.getX(), spousePoint.getY());
         setLineCoordinates(lineSimConnectSpouse, simPoint.getX(), simPoint.getY(), spouseRightPoint.getX()+20,  spouseRightPoint.getY());
 
-        panelChild.getChildren().add(0, lineRelationToSim);
-        panelChild.getChildren().add(1, lineSimConnectSpouse);
+        panelChild.getChildren().add(0, lineSimConnectSpouse);
+        panelChild.getChildren().add(1, lineRelationToSim);
         panelChild.getChildren().add(2, getLine());
 
     }

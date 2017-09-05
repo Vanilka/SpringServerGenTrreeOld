@@ -27,7 +27,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PanelSingle extends SubBorderPane implements RelationPane{
+public class PanelSingle extends SubRelationPane implements RelationPane{
 
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
@@ -43,7 +43,6 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     private final FamilyMember member;
     private final ObjectProperty<Relation> thisRelation;
 
-    private final HBox childrenBox;
     private final ObservableList<PanelChild> childrenPanels;
     private final ParentToChildrenConnector childrenConnector;
     private final RelationReference thisRelationReference;
@@ -57,7 +56,6 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
         member = new FamilyMember();
         thisRelation = new SimpleObjectProperty<>();
         thisRelationReference = new RelationReference(RelationReference.RelationReferenceType.DSC);
-        childrenBox = new HBox();
         childrenPanels = FXCollections.observableArrayList();
         childrenConnector = new ParentToChildrenConnector(this);
 
@@ -80,6 +78,7 @@ public class PanelSingle extends SubBorderPane implements RelationPane{
     }
 
     public PanelSingle(Member m, Relation thisRelation, SubBorderPane parent) {
+        super();
         init();
         this.member.setMember(m);
         this.thisRelation.setValue(thisRelation);

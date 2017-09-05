@@ -3,6 +3,7 @@ package gentree.client.desktop.controllers.tree_elements.connectors;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelChild;
 import gentree.client.desktop.controllers.tree_elements.panels.PanelRelationCurrent;
 import gentree.client.desktop.controllers.tree_elements.panels.SubBorderPane;
+import gentree.client.desktop.controllers.tree_elements.panels.SubRelationPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;
@@ -26,11 +27,11 @@ import lombok.Setter;
 public class ChildConnector extends LineConnector {
 
     private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
-    private final SubBorderPane subBorderPane;
+    private final SubRelationPane subBorderPane;
     private final PanelChild panelChild;
 
 
-    public ChildConnector(PanelChild child, SubBorderPane subBorderPane) {
+    public ChildConnector(PanelChild child, SubRelationPane subBorderPane) {
         super();
         this.panelChild = child;
         this.subBorderPane = subBorderPane;
@@ -47,7 +48,6 @@ public class ChildConnector extends LineConnector {
 
         if (panelChild != null && panelChild.getPanelSingle() != null) {
             removeLine();
-            redrawLine();
             subBorderPane.getChildren().add(line.get());
 
         } else {
@@ -67,11 +67,29 @@ public class ChildConnector extends LineConnector {
             redrawLine();
         });
 
+        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener(c -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().boundsInParentProperty().addListener(c -> {
+            redrawLine();
+        });
+
         subBorderPane.boundsInLocalProperty().addListener(observable -> {
             redrawLine();
         });
 
         subBorderPane.boundsInParentProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().boundsInLocalProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().boundsInParentProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
             redrawLine();
         });
 
