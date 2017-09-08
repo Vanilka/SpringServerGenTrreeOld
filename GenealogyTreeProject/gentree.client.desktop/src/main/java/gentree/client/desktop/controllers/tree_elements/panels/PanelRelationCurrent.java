@@ -248,9 +248,9 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     }
 
     private void calculateThisRelationPosition() {
-
-        thisRelationReference.setLayoutX(relationTypeElement.getLayoutX());
-        thisRelationReference.setLayoutY(relationTypeElement.getLayoutY() + relationTypeElement.getHeight());
+        thisRelationReference.setManaged(false);
+        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty());
+        thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.prefHeightProperty()));
 
     }
 

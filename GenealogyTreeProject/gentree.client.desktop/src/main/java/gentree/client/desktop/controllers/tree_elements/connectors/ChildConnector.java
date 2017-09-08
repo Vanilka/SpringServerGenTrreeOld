@@ -58,6 +58,7 @@ public class ChildConnector extends LineConnector {
     }
 
     private void initLineListeners() {
+
         panelChild.getPanelSingle().get().getMember().boundsInParentProperty().addListener(observable -> {
             redrawLine();
         });
@@ -93,6 +94,10 @@ public class ChildConnector extends LineConnector {
             redrawLine();
         });
 
+        subBorderPane.getChildrenBox().layoutXProperty().addListener(c -> {
+            redrawLine();
+        });
+
         panelChild.boundsInParentProperty().addListener(observable -> {
             redrawLine();
         });
@@ -100,6 +105,8 @@ public class ChildConnector extends LineConnector {
         panelChild.boundsInLocalProperty().addListener(observable -> {
             redrawLine();
         });
+
+
 
     }
 

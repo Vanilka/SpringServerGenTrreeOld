@@ -20,13 +20,13 @@ import java.util.Comparator;
 public class ParentToChildrenConnector extends LineConnector {
 
     /*
-    *   Pane Relation  parent for this Connector
+    *  Parent pane for this Connector
     */
     private SubRelationPane subBorderPane;
 
     /*
     *   Child Connectors for children in Sub-Relation-Pane
-     */
+    */
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
     private ObjectProperty<ChildConnector> firstChild = new SimpleObjectProperty<>();
     private ObjectProperty<ChildConnector> lastChild = new SimpleObjectProperty<>();
@@ -34,6 +34,10 @@ public class ParentToChildrenConnector extends LineConnector {
     @Getter
     private ObjectProperty<Line> withNodeConnector = new SimpleObjectProperty<>(new Line());
 
+    /**
+     * SubRelationPane element is the parent for this Connector
+     * @param subBorderPane
+     */
     public ParentToChildrenConnector(SubRelationPane subBorderPane) {
         super();
         this.subBorderPane = subBorderPane;
