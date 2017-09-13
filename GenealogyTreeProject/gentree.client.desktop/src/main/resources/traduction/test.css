@@ -527,7 +527,7 @@
     -fx-min-height: 150px;
     -fx-max-width: 150px;
     -fx-max-height: 150px;
-    -fx-background-image: url("/layout/images/backgrounds/newproject.png");
+    -fx-background-image: url("/layout/images/backgrounds/new.png");
     -fx-background-position: center;
 
 }

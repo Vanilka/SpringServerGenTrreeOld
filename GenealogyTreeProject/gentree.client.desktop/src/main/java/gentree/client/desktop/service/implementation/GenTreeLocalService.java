@@ -9,6 +9,7 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import gentree.client.desktop.service.ActiveRelationGuard;
 import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.responses.MemberResponse;
@@ -17,7 +18,9 @@ import gentree.client.desktop.service.responses.ServiceResponse;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.Configuration;
 
@@ -138,6 +141,28 @@ public class GenTreeLocalService implements FamilyService {
         return new RelationResponse(newRelation);
     }
 
+    private void moveChildToNewRelation(Relation target, Member m) {
+        try {
+            Relation born = getCurrentFamily().findBornRelation(m);
+            moveChildFromRelation(m, born, target);
+
+        } catch (NotUniqueBornRelationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public ServiceResponse moveChildrenToNewRelation(Relation target, List<Member> children) {
+
+        children.forEach(c -> {
+            if (!target.getChildren().contains(c)) {
+                moveChildToNewRelation(target, c);
+            }
+        });
+
+        return new RelationResponse(target);
+    }
+
     @Override
     public Relation findRelation(Member left, Member right) {
         List<Relation> list = getCurrentFamily().getRelations()
@@ -146,6 +171,21 @@ public class GenTreeLocalService implements FamilyService {
         return list.size() == 0 ? null : list.get(0);
 
     }
+
+    @Override
+    public ObservableList<Member> findAllRootMembers() {
+        ObservableList<Member> rootList = FXCollections.observableArrayList();
+
+        getCurrentFamily().getRelations()
+                .filtered(r -> r.getLeft() == null)
+                .filtered(r -> r.getRight() == null)
+                .filtered(r -> !r.getChildren().isEmpty())
+                .forEach(root -> rootList.addAll(root.getChildren()));
+
+
+        return rootList;
+    }
+
 
     /*
         LISTENERS
@@ -156,7 +196,7 @@ public class GenTreeLocalService implements FamilyService {
 
     private void setCurrentFamilyListener() {
         this.currentFamily.addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
+            if (newValue != null) {
                 guard = new ActiveRelationGuard(newValue.getRelations());
                 newValue.getRelations().forEach(element -> guard.addObserverTo(element));
             }

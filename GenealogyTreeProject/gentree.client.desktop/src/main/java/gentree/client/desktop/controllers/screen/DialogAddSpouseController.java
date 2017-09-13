@@ -236,8 +236,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
         this.stage = stage;
     }
 
-    @Override
-    public void setMember(Member m) {
+    public void setFather(Member m) {
         this.member.set(m);
     }
 }

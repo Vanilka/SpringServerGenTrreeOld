@@ -91,13 +91,7 @@ public class FamilyMember extends AnchorPane {
             rectangleFond.setStroke(Color.TRANSPARENT);
         });
 
-        this.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
-            @Override
-            public void handle(ContextMenuEvent event) {
-
-                sm.showSimContextMenu(returnThis(), event);
-            }
-        });
+        this.setOnContextMenuRequested(event -> sm.showSimContextMenu(returnThis(), event));
     }
 
     private ChangeListener<Member> getChangeMemberListener() {

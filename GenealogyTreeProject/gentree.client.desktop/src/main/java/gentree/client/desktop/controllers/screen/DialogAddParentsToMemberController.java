@@ -156,8 +156,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private void populateParentFields() {
         this.mother.set(currentBornRelation.get().getLeft());
         this.father.set(currentBornRelation.get().getRight());
-
-
     }
 
     /**
@@ -273,8 +271,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private void initMotherListener() {
         mother.addListener((observable, oldValue, newValue) -> {
             motherCard.setMember(newValue);
-            System.out.println(newValue);
-            System.out.println(father.get());
             findRelation(newValue, father.get());
 
         });
@@ -283,8 +279,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private void initFatherListener() {
         father.addListener((observable, oldValue, newValue) -> {
             fatherCard.setMember(newValue);
-            System.out.println(newValue);
-            System.out.println(mother.get());
             findRelation(mother.get(), newValue);
         });
     }
@@ -300,7 +294,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
 
     private void findRelation(Member mother, Member father) {
         existingRelation.setValue(context.getService().findRelation(mother, father));
-        System.out.println("Existing born relation " + existingRelation);
     }
 
 
@@ -320,13 +313,12 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     /*
         SETTERS
      */
-    @Override
-    public void setMember(Member member) {
+    public void setFather(Member member) {
         this.member.set(member);
         try {
             setCurrentBornRelation(context.getService().getCurrentFamily().findBornRelation(member));
         } catch (NotUniqueBornRelationException e) {
-            log.error("ERROR NOT UNIQUE BORN");
+            log.error(LogMessages.MSG_ERROR_BORN, member);
         }
 
     }

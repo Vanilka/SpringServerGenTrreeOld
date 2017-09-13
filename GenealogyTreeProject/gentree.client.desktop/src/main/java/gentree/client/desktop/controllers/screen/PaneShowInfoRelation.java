@@ -8,6 +8,7 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.tree_elements.FamilyMemberCard;
 import gentree.client.desktop.controllers.tree_elements.MemberCard;
+import gentree.client.desktop.controllers.tree_elements.RelationTypeCard;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
@@ -81,7 +82,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     private FamilyMemberCard motherCard;
     private FamilyMemberCard fatherCard;
-    private RelationTypeElement relationTypeElement;
+    private RelationTypeCard relationTypeElement;
 
     private ObjectProperty<Relation> relation;
 
@@ -94,7 +95,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     {
         motherCard = new FamilyMemberCard();
         fatherCard = new FamilyMemberCard();
-        relationTypeElement = new RelationTypeElement();
+        relationTypeElement = new RelationTypeCard();
         relation = new SimpleObjectProperty<>();
 
     }
@@ -141,7 +142,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         relationId.setText(Long.toString(r.getId()));
         motherCard.setMember(r.getLeft());
         fatherCard.setMember(r.getRight());
-        relationTypeElement.setType(r.getType());
+        relationTypeElement.setRelation(r);
         familyMemberTable.setItems(r.getChildren());
     }
 

@@ -125,7 +125,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         initSpouseListener();
         initThisRelationListener();
         initChildrenListener();
-        initRelationTypeListener();
         initRelationElementsPositionListener();
         calculateRelationElementsPosition();
     }
@@ -133,11 +132,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private void initThisRelationListener() {
 
         thisRelation.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                relationType.bind(newValue.typeProperty());
-            } else {
-                relationType.unbind();
-            }
+            relationTypeElement.setRelation(newValue);
             thisRelationReference.setRelation(newValue);
         });
     }
@@ -150,12 +145,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
                 spouseCard.setMember(newValue);
                 relation.getChildren().addAll(spouseCard, relationTypeElement, spouseRelationReference, thisRelationReference);
             }
-        });
-    }
-
-    private void initRelationTypeListener() {
-        relationType.addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setType(newValue == null ? RelationType.NEUTRAL : newValue);
         });
     }
 

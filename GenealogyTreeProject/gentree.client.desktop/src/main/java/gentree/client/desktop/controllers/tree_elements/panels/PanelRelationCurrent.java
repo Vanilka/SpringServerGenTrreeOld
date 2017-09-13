@@ -119,7 +119,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         initThisRelationListener();
         initSpouseBornRelationListener();
         initChildrenListener();
-        initRelationTypeListener();
         initRelationPaneSizeListener();
         resizeRelation();
         calculateRelationElementsPosition();
@@ -139,11 +138,7 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     private void initThisRelationListener() {
 
         thisRelation.addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-                relationType.bind(newValue.typeProperty());
-            } else {
-                relationType.unbind();
-            }
+            relationTypeElement.setRelation(newValue);
             thisRelationReference.setRelation(newValue);
         });
     }
@@ -155,14 +150,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
             spouseRelationReference.setRelation(newValue);
         });
 
-    }
-
-
-
-    private void initRelationTypeListener() {
-        relationType.addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setType(newValue == null ? RelationType.NEUTRAL : newValue);
-        });
     }
 
     private void initChildrenListener() {

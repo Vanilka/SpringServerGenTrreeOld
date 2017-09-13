@@ -153,11 +153,11 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             return new PanelSingle(root, relation);
         } else {
             if (relation.getActive() && relation.getType() != RelationType.NEUTRAL) {
-                Relation r = findBornRelation(other);
-                if(r != null && !r.isRoot() && r.getReferenceNumber() == 0) {
-                    r.setReferenceNumber(++idReference);
+                Relation bornRelation = findBornRelation(other);
+                if(bornRelation != null && !bornRelation.isRoot() && bornRelation.getReferenceNumber() == 0) {
+                    bornRelation.setReferenceNumber(++idReference);
                 }
-                return new PanelRelationCurrent(other, relation, r);
+                return new PanelRelationCurrent(other, relation, bornRelation);
             } else {
                 return new PanelRelationEx(other, relation);
             }
