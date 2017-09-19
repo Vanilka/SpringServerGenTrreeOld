@@ -141,7 +141,6 @@ public class PanelChild extends SubBorderPane {
 
     private void initPanes() {
         panelRelationExPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
     }
 
     /*

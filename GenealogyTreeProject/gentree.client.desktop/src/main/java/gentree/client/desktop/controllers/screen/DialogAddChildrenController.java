@@ -131,7 +131,19 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
         return context.getService().findAllRootMembers()
                 .filtered(c -> !c.equals(relation.get().getLeft()))
                 .filtered(c -> !c.equals(relation.get().getRight()))
-                .filtered(c -> !childrenList.contains(c));
+                .filtered(c -> !childrenList.contains(c))
+                .filtered(c -> !isAscOf(relation.get().getLeft(), c))
+                .filtered(c -> !isAscOf(relation.get().getRight(), c));
+    }
+
+    /**
+     * Verify if parameter sim is Ascendant of parameter grain
+     * @param grain
+     * @param sim
+     * @return
+     */
+    private boolean isAscOf(Member grain, Member sim) {
+        return sim != null && context.getService().isAscOf(grain, sim);
     }
 
 

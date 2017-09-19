@@ -37,4 +37,8 @@ public interface FamilyService {
 
     Relation findRelation(Member left, Member right);
 
+    boolean isAscOf(Member grain, Member sim);
+
+    boolean isDescOf(Member grain, Member sim);
+
 }

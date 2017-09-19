@@ -73,6 +73,51 @@ public class Family implements Serializable {
     }
 
 
+    /**
+     * Verify if parameter sim is Ascendant of parameter grain
+     *
+     * @param grain
+     * @param sim
+     * @return
+     */
+    public boolean isAscOf(Member grain, Member sim) {
+        if(grain == null || sim == null) return false;
+
+        try {
+            Relation r = findBornRelation(grain);
+            if(r.compareLeft(sim) || isAscOf(r.getLeft(), sim)) return true;
+            if(r.compareRight(sim) || isAscOf(r.getRight(),sim)) return true;
+
+        } catch (NotUniqueBornRelationException e) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Verify if parameter sim is Descendant of parameter grain
+     *
+     * @param grain
+     * @param sim
+     * @return
+     */
+    public boolean isDescOf(Member grain, Member sim) {
+        if (grain == null || sim == null) return  false;
+
+        List<Relation> list = relations.filtered(r -> r.compareLeft(grain) || r.compareRight(grain));
+
+        for(Relation r : list) {
+            if (r.getChildren().contains(sim)) return true;
+
+            for(Member m : r.getChildren()) {
+                if(isDescOf(m, sim)) return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
     /*
         GETTERS
