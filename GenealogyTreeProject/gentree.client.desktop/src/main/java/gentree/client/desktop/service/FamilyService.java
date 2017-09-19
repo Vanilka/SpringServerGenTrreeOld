@@ -6,6 +6,9 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.responses.ServiceResponse;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.collections.ObservableList;
+
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -18,16 +21,24 @@ public interface FamilyService {
 
     ReadOnlyObjectProperty<Family> familyProperty();
 
+    ObservableList<Member> findAllRootMembers();
+
     ServiceResponse addMember(Member member);
 
     ServiceResponse addRelation(Relation relation);
 
-    ServiceResponse addRelation(Member left, Member right, RelationType type,  boolean active);
+    ServiceResponse addRelation(Member left, Member right, RelationType type, boolean active);
+
+    ServiceResponse moveChildrenToNewRelation(Relation to, List<Member> children);
 
     ServiceResponse updateRelation(Relation relation);
 
     ServiceResponse moveChildFromRelation(Member m, Relation oldRelation, Relation newRelation);
 
     Relation findRelation(Member left, Member right);
+
+    boolean isAscOf(Member grain, Member sim);
+
+    boolean isDescOf(Member grain, Member sim);
 
 }

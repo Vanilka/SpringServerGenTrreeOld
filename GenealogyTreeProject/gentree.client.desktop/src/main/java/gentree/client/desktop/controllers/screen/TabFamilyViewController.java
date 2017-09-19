@@ -144,12 +144,10 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     @FXML
     public void showInfoRelation(MouseEvent event) {
-/*        if (event.getClickCount() == 2 && gtFamilyRelationTable.getSelectionModel().getSelectedItem() != null) {
-            GTX_Relation relation = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
-            Tab infoRelationTab = new Tab();
-            TabInfoRelationPaneController tabInfoRelation = (TabInfoRelationPaneController) sc.loadFxml(new TabInfoRelationPaneController(), gtMainTabPane, infoRelationTab, FXMLFile.TAB_INFO_RELATION, "Relation");
-            tabInfoRelation.setRelation(relation);
-        }*/
+        Relation selected = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
+        if(event.getClickCount() == 2 && selected != null) {
+            sm.getScreenMainController().showInfoRelation(selected);
+        }
     }
 
     private void setCellValueFactory() {

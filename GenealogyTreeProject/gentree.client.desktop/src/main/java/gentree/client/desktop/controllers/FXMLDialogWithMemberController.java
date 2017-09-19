@@ -7,5 +7,5 @@ import gentree.client.desktop.domain.Member;
  */
 public interface FXMLDialogWithMemberController extends FXMLDialogController {
 
-    void setMember(Member m);
+    void setFather(Member m);
 }

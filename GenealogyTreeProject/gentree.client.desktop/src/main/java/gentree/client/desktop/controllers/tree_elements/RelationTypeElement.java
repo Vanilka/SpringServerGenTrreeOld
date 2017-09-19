@@ -1,12 +1,15 @@
 package gentree.client.desktop.controllers.tree_elements;
 
 import gentree.client.desktop.configurations.enums.ImageFiles;
+import gentree.client.desktop.controllers.screen.PaneShowInfoRelation;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import javafx.beans.property.BooleanProperty;
+import gentree.client.desktop.service.ScreenManager;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -20,103 +23,44 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeElement extends StackPane {
+public class RelationTypeElement extends RelationTypeCard {
 
-    public static final double WIDTH = 60;
-    public static final double HEIGHT = 60;
 
-    Circle circle;
-    ImageView typeImg;
-    StackPane imageContainer;
-    private ObjectProperty<RelationType> type;
-    private BooleanProperty isActive;
+    ScreenManager sm = ScreenManager.INSTANCE;
 
     {
         init();
     }
 
     public RelationTypeElement() {
-        this(RelationType.NEUTRAL, true);
+        super();
     }
 
-    public RelationTypeElement(RelationType type, boolean isActive) {
-        this.type.setValue(type);
-        this.isActive.setValue(isActive);
-        setMinSize(WIDTH, HEIGHT);
-        setMaxSize(WIDTH, HEIGHT);
+    public RelationTypeElement(Relation relation) {
+        super(relation);
     }
 
     private void init() {
-        type = new SimpleObjectProperty<>();
-        isActive = new SimpleBooleanProperty();
-        typeImg = new ImageView();
-        imageContainer = new StackPane();
-        initCircle();
+        dropShadow = new DropShadow();
+        initShadow();
 
-        imageContainer.getChildren().addAll(circle, typeImg);
-        getChildren().add(imageContainer);
-        initListeners();
-        setAlignment(Pos.CENTER);
+        this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
+
+        this.setOnMouseExited(t -> circle.setEffect(null));
+
+        this.setOnContextMenuRequested(event -> sm.showRelationContextMenu(returnThis(), event));
 
     }
 
-    private void initCircle() {
-
-        circle = new Circle(10, 10, 30, Color.grayRgb(23, 0.5));
+    private void initShadow() {
+        dropShadow.setRadius(10.0f);
+        dropShadow.setOffsetX(3);
+        dropShadow.setOffsetY(3);
+        dropShadow.setColor(Color.color(0.7, 0.7, 0.2));
     }
 
-
-    private void initListeners() {
-        type.addListener((observable, oldValue, newValue) -> {
-            String path;
-            switch (newValue) {
-                case NEUTRAL:
-                    path = ImageFiles.RELATION_NEUTRAL.toString();
-                    break;
-                case FIANCE:
-                    path = ImageFiles.RELATION_FIANCE.toString();
-                    break;
-                case LOVE:
-                    path = ImageFiles.RELATION_LOVE.toString();
-                    break;
-                case MARRIED:
-                    path = ImageFiles.RELATION_MARRIED.toString();
-                    break;
-                default:
-                    path = ImageFiles.RELATION_NEUTRAL.toString();
-            }
-            typeImg.setImage(new Image(path));
-
-        });
+    private RelationTypeElement returnThis() {
+        return this;
     }
-
-
-    /*
-        GETTERS
-     */
-
-    public ObjectProperty<RelationType> typeProperty() {
-        return type;
-    }
-
-    public boolean isIsActive() {
-        return isActive.get();
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive.set(isActive);
-    }
-
-    public BooleanProperty isActiveProperty() {
-        return isActive;
-    }
-
-    /*
-            SETTERS
-         */
-    public void setType(RelationType type) {
-        this.type.set(type);
-    }
-
 
 }

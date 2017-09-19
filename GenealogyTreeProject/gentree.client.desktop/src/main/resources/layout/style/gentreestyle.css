@@ -152,6 +152,12 @@
     -fx-effect: innershadow(two-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
 }
 
+.dottedPane {
+    -fx-border-color: -gentree-color-8 ;
+    -fx-border-width: 3px;
+    -fx-border-style: dashed;
+}
+
 /*
     Menu Bar ->  Language Chooser
 */
@@ -592,4 +598,37 @@
     -fx-background-color: -gentree-color-7;
     -fx-stroke-width: 4;
 
+}
+
+/*
+    Custom Button
+ */
+
+.addElementButton {
+    -fx-border-color: rgba(84, 122, 117, 0.69);
+    -fx-background-color: rgba(117, 142, 145, 0.81);
+    -fx-background-image:  url("/layout/images/backgrounds/new.png");
+    -fx-background-size: 50 50;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-effect: innershadow(two-pass-box, rgba(0, 0, 0, 0.78), 10, 0, 0, 0);
+    -fx-border-width: 4px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+.addElementButton:pressed {
+    -fx-background-color: rgba(1, 64, 65, 0.9);
+}
+
+.addElementButton:hover {
+    -fx-border-color: rgba(1, 64, 65, 0.9);
+}
+
+/*
+    Custom Pane
+ */
+
+#childrenFlowPane{
+    -fx-padding: 10px 10px 10px 10px;
 }

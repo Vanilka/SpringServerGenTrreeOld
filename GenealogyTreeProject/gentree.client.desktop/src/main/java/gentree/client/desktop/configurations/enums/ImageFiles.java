@@ -13,6 +13,7 @@ public enum ImageFiles {
     RELATION_NEUTRAL("neutral.png"),
     RELATION_MARRIED("maried.png"),
     RELATION_FIANCE("fiance.png"),
+    NEW_ADDITION("new.png"),
     RELATION_LOVE("love.png");
 
     private final String path = "/layout/images/backgrounds/";

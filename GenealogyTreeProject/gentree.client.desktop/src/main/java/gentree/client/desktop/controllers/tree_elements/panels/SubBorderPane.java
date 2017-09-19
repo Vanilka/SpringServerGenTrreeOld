@@ -1,5 +1,7 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import lombok.Getter;
@@ -11,6 +13,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public abstract class SubBorderPane extends BorderPane {
+    /**
+     *  Relation Height =
+     */
+    protected final static double RELATION_HEIGHT = 260;
 
     private SubBorderPane parentPane;
 
@@ -21,5 +27,11 @@ public abstract class SubBorderPane extends BorderPane {
                         CornerRadii.EMPTY,
                         BorderWidths.DEFAULT)));
     }
+
+    protected Bounds getRelativeBounds(Node node, Node relativeTo) {
+        Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
+        return relativeTo.sceneToLocal(nodeBoundsInScene);
+    }
+
 
 }

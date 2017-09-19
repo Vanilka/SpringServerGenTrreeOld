@@ -72,7 +72,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
     @FXML
     private void returnAction() {
-        sm.getScreenMainController().removeInfoSim(paneShowInfoSim);
+        sm.getScreenMainController().removeInfoPanel(paneShowInfoSim);
     }
 
 

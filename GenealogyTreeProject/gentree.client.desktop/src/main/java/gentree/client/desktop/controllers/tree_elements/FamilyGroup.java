@@ -109,6 +109,7 @@ public class FamilyGroup extends AnchorPane {
     }
 
 
+
     /**
      * Function guard for resizing elements
      */
@@ -117,13 +118,6 @@ public class FamilyGroup extends AnchorPane {
         bodyNodeDark.heightProperty().bind(heightProperty().subtract(OFFSET_FOND_DARK));
         bodyNode.widthProperty().bind(widthProperty().subtract(OFFSET_FOND));
         bodyNode.heightProperty().bind(heightProperty().subtract(OFFSET_FOND));
-
-
-        contentHbox.setBorder(new Border(new BorderStroke(Color.BLUE,
-                BorderStrokeStyle.DOTTED, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
-        content.setBorder(new Border(new BorderStroke(Color.RED,
-                BorderStrokeStyle.DOTTED, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
     /**

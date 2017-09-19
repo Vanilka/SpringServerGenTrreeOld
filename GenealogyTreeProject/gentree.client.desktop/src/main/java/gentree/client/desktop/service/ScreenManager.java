@@ -9,7 +9,9 @@ import gentree.client.desktop.configurations.messages.AppTitles;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
+import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -79,6 +81,7 @@ public class ScreenManager {
      */
 
     private SimContextMenu simContextMenu;
+    private RelationContextMenu relationContextMenu;
 
     public ScreenManager() {
         bpHelper = new BorderPaneReloadHelper();
@@ -93,6 +96,7 @@ public class ScreenManager {
         loadFxml(screenWelcomeController, this.mainWindowBorderPane, FilesFXML.SCREEN_WELCOME_FXML, Where.CENTER);
 
         simContextMenu = new SimContextMenu();
+        relationContextMenu = new RelationContextMenu();
 
         this.scene = new Scene(mainWindowBorderPane);
         this.stage.setScene(this.scene);
@@ -177,7 +181,28 @@ public class ScreenManager {
             Stage dialogStage = new Stage();
             AnchorPane dialogwindow = (AnchorPane) loader.load();
             controller = loader.getController();
-            controller.setMember(member);
+            controller.setFather(member);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(this.getStage());
+            Scene scene = new Scene(dialogwindow);
+            dialogStage.setScene(scene);
+            dialogStage.setResizable(false);
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
+            ex.printStackTrace();
+        }
+    }
+
+    public void showNewDialog(FXMLDialogWithRelationController controller, Relation r, FilesFXML fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
+        try {
+            Stage dialogStage = new Stage();
+            AnchorPane dialogwindow = (AnchorPane) loader.load();
+            controller = loader.getController();
+            controller.setRelation(r);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
@@ -368,6 +393,10 @@ public class ScreenManager {
     public void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event) {
 
         simContextMenu.show(familyMember, event);
+    }
+
+    public void showRelationContextMenu(RelationTypeElement relationTypeElement, ContextMenuEvent event) {
+        relationContextMenu.show(relationTypeElement, event);
     }
 
     /*

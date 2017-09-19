@@ -1,5 +1,6 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
+import gentree.client.desktop.controllers.tree_elements.connectors.SpouseConnector;
 import gentree.client.desktop.domain.Member;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -27,6 +28,15 @@ import lombok.Setter;
 @Setter
 public class PanelChild extends SubBorderPane {
 
+    private final static double MARGIN_TOP = 0.0;
+    private final static double MARGIN_LEFT = 0.0;
+    private final static double MARGIN_RIGHT = 0.0;
+    private final static double MARGIN_BOTTOM = 50.0;
+
+    private final static double PADDING_TOP = 60.0;
+    private final static double PADDING_LEFT = 10.0;
+    private final static double PADDING_RIGHT = 10.0;
+    private final static double PADDING_BOTTOM = 0.0;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -37,8 +47,8 @@ public class PanelChild extends SubBorderPane {
     @Setter(AccessLevel.NONE)
     private final AnchorPane panelRelationCurrentPane;
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
+
+    @Getter
     private final HBox panelRelationExPane;
 
 
@@ -47,16 +57,20 @@ public class PanelChild extends SubBorderPane {
     private final ObjectProperty<PanelRelationCurrent> panelRelationCurrent;
     private final ObservableList<PanelRelationEx> panelRelationEx;
 
+    private final SpouseConnector spouseConnector;
+
     {
         panelSinglePane = new AnchorPane();
         panelRelationCurrentPane = new AnchorPane();
         panelRelationExPane = new HBox();
 
-
         member = new SimpleObjectProperty<>();
         panelSingle = new SimpleObjectProperty<>();
         panelRelationCurrent = new SimpleObjectProperty<>();
         panelRelationEx = FXCollections.observableArrayList();
+        spouseConnector = new SpouseConnector(this);
+
+        initBorder(Color.RED, this);
 
         initListeners();
         initPanes();
@@ -73,10 +87,8 @@ public class PanelChild extends SubBorderPane {
         setLeft(panelRelationExPane);
         setRight(panelRelationCurrentPane);
 
-        this.initBorder(Color.ORANGE, this);
-
         if(parent != null) {
-            this.setPadding(new Insets(60, 10, 10, 10));
+            this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
     }
 
@@ -128,15 +140,8 @@ public class PanelChild extends SubBorderPane {
     }
 
     private void initPanes() {
+        panelRelationExPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
-
-    private void setAnchors(Node n) {
-        AnchorPane.setBottomAnchor(n, 0.0);
-        AnchorPane.setRightAnchor(n, 0.0);
-        AnchorPane.setLeftAnchor(n, 0.0);
-        AnchorPane.setTopAnchor(n, 0.0);
-    }
-
 
     /*
         Getters

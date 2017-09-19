@@ -81,7 +81,6 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
         this.memberGender.setCellFactory(initGenderCellFactory());
         this.memberAge.setCellFactory(initAgeCellFactory());
         setCellValueFactory();
-        // initMemberListener();
         initSelectedMemberListener();
         memberTable.setItems(memberList);
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
