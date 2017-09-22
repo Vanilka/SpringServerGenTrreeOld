@@ -192,11 +192,14 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         });
 
 
+
         relation.boundsInParentProperty().addListener(c -> {
+            System.out.println("Relation panel of : " + spouseCard + "  -> " +relation.getBoundsInLocal());
             calculateRelationElementsPosition();
         });
 
         relation.boundsInLocalProperty().addListener(c -> {
+            System.out.println("Relation panel of : " + spouseCard + "  -> " +relation.getBoundsInLocal());
             calculateRelationElementsPosition();
         });
 
