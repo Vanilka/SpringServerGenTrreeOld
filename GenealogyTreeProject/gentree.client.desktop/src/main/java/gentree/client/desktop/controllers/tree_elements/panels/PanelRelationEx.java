@@ -95,7 +95,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
 
     private void initPanes() {
-        relation.resize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
+        relation.setPrefSize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
         initHbox();
         this.setCenter(childrenBox);
         this.setTop(relation);
@@ -186,7 +186,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         spouseCard.layoutXProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.doubleValue() < 0) {
                 Double expectedValue = relation.getWidth() + newValue.doubleValue() * (-1) + 100;
-                relation.setPrefWidth(expectedValue);
+                this.setPrefWidth(expectedValue);
                 calculateRelationElementsPosition();
             }
         });
@@ -198,8 +198,9 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             calculateRelationElementsPosition();
         });
 
-        relation.boundsInLocalProperty().addListener(c -> {
-            System.out.println("(local) Relation panel of : " + spouseCard.getMember() + "  -> " +relation.getBoundsInLocal());
+        relation.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("(local) Relation panel of old : " + spouseCard.getMember() + "  -> " +oldValue);
+            System.out.println("(local) Relation panel of new : " + spouseCard.getMember() + "  -> " +newValue);
             calculateRelationElementsPosition();
         });
 
