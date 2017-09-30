@@ -83,7 +83,7 @@ public class ScreenManager {
     private SimContextMenu simContextMenu;
     private RelationContextMenu relationContextMenu;
 
-    public ScreenManager() {
+    private ScreenManager() {
         bpHelper = new BorderPaneReloadHelper();
         LAST_PATH = System.getProperty("user.home");
     }

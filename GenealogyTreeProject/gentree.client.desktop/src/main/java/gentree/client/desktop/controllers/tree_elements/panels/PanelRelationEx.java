@@ -95,7 +95,9 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
 
     private void initPanes() {
-        relation.setPrefSize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
+        //relation.setPrefSize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
+        this.relation.resize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
+        resize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
         initHbox();
         this.setCenter(childrenBox);
         this.setTop(relation);
