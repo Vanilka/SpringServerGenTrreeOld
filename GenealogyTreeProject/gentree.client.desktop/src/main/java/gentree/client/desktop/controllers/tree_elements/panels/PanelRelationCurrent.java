@@ -97,12 +97,25 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
 
     private void initPanes() {
         relation.setPrefHeight(RELATION_HEIGHT);
+        setPrefSize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT+100);
         initHbox();
+        initAnchorPanesOffset();
         this.setCenter(childrenBox);
         this.setTop(relation);
         BorderPane.setAlignment(childrenBox, Pos.TOP_RIGHT);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+
+    }
+
+
+
+    private  void initAnchorPanesOffset() {
+        AnchorPane.setLeftAnchor(relation, 10.0);
+        AnchorPane.setRightAnchor(relation, 10.0);
+
+        AnchorPane.setLeftAnchor(childrenBox, 10.0);
+        AnchorPane.setRightAnchor(childrenBox, 10.0);
 
     }
 

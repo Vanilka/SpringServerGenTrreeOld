@@ -81,6 +81,7 @@ public class PanelChild extends SubBorderPane {
     }
 
     public PanelChild(Member m, SubBorderPane parent) {
+        setPrefSize(200, 200);
         member.setValue(m);
         setParentPane(parent);
         setCenter(panelSinglePane);

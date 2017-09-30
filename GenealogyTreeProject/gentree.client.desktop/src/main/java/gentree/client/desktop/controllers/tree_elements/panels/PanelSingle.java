@@ -104,6 +104,7 @@ public class PanelSingle extends SubRelationPane implements RelationPane{
     }
 
     private void initPane() {
+        setPrefSize(100,100);
         pane.setPrefHeight(RELATION_HEIGHT);
         pane.getChildren().addAll(member, thisRelationReference);
     }
