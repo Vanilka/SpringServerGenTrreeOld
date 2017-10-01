@@ -1,6 +1,6 @@
 package gentree.client.desktop.domain;
 
-import gentree.client.desktop.configurations.helper.SimMarshaller;
+import gentree.client.desktop.configuration.wrappers.SimMarshaller;
 import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;

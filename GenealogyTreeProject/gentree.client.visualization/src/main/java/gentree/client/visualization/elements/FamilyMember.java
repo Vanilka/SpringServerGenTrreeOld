@@ -1,8 +1,6 @@
-package gentree.client.desktop.controllers.tree_elements;
+package gentree.client.visualization.elements;
 
-import gentree.client.desktop.GenTreeRun;
 import gentree.client.desktop.domain.Member;
-import gentree.client.desktop.service.ScreenManager;
 import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -25,8 +23,6 @@ public class FamilyMember extends AnchorPane {
 
     private final static int MEMBER_WIDTH = 133;
     private final static int MEMBER_HEIGHT = 188;
-
-    ScreenManager sm = ScreenManager.INSTANCE;
 
     @FXML
     private AnchorPane leafAnchorPane;
@@ -68,7 +64,7 @@ public class FamilyMember extends AnchorPane {
     }
 
     private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(GenTreeRun.class.getResource("/layout/tree_elements/family.member.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/layout/tree_elements/family.member.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -88,8 +84,6 @@ public class FamilyMember extends AnchorPane {
 
             rectangleFond.setStroke(Color.TRANSPARENT);
         });
-
-        this.setOnContextMenuRequested(event -> sm.showSimContextMenu(returnThis(), event));
     }
 
     private ChangeListener<Member> getChangeMemberListener() {

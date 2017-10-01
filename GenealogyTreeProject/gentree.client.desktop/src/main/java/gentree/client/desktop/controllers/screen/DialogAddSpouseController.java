@@ -9,15 +9,13 @@ import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.controllers.tree_elements.MemberCard;
-import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
-import gentree.client.desktop.exception.NotUniqueBornRelationException;
+import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +27,6 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.Configuration;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 

@@ -1,21 +1,18 @@
 package gentree.client.desktop.controllers.tree_elements;
 
 import gentree.client.desktop.GenTreeRun;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;

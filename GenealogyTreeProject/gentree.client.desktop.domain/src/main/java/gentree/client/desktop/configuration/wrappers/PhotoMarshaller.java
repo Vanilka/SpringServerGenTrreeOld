@@ -1,6 +1,5 @@
-package gentree.client.desktop.configurations.helper;
+package gentree.client.desktop.configuration.wrappers;
 
-import gentree.client.desktop.configurations.enums.ImageFiles;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
@@ -19,7 +18,7 @@ public class PhotoMarshaller extends XmlAdapter<String, String> {
 
     @Override
     public String marshal(String v) throws Exception {
-        if (v.equals(ImageFiles.GENERIC_MALE.toString()) || v.equals(ImageFiles.GENERIC_FEMALE.toString())) {
+        if (v.equals("") || v.equals("")) {
             return null;
         } else {
             return v;

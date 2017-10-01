@@ -1,4 +1,4 @@
-package gentree.client.desktop.configurations.helper;
+package gentree.client.desktop.configuration.wrappers;
 
 import gentree.client.desktop.domain.Member;
 

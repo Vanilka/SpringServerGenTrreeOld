@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
@@ -15,6 +14,7 @@ import gentree.client.desktop.domain.enums.DeathCauses;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.Race;
 import gentree.client.desktop.service.responses.ServiceResponse;
+import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -96,7 +96,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-        photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+        photo.setImage(new Image("file:/"+ImageFiles.GENERIC_MALE.toFile().getAbsolutePath()));
         initListeners();
         createSexToogleGroupe();
         populateAgeComboBox();
@@ -196,9 +196,9 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (path == null) {
                 if (newValue.getUserData().equals(Gender.M)) {
-                    photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+                    photo.setImage(new Image("file:/" +ImageFiles.GENERIC_MALE.toFile().getAbsolutePath()));
                 } else {
-                    photo.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
+                    photo.setImage(new Image("file:/" +ImageFiles.GENERIC_FEMALE.toFile().getAbsolutePath()));
                 }
             }
         });

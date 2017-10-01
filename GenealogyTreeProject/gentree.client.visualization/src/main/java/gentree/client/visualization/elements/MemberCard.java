@@ -1,8 +1,6 @@
-package gentree.client.desktop.controllers.tree_elements;
+package gentree.client.visualization.elements;
 
-import gentree.client.desktop.GenTreeRun;
 import gentree.client.desktop.domain.Member;
-import gentree.client.desktop.service.ScreenManager;
 import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,20 +11,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
 /**
- * Created by Martyna SZYMKOWIAK on 20/07/2017.
+ * Created by Martyna SZYMKOWIAK on 24/07/2017.
  */
-public class FamilyMember extends AnchorPane {
-
-    private final static int MEMBER_WIDTH = 133;
-    private final static int MEMBER_HEIGHT = 188;
-
-    ScreenManager sm = ScreenManager.INSTANCE;
+public class MemberCard extends AnchorPane {
 
     @FXML
     private AnchorPane leafAnchorPane;
@@ -46,6 +38,7 @@ public class FamilyMember extends AnchorPane {
     @FXML
     private Rectangle rectangleFond;
 
+
     private ObjectProperty<Member> member;
     private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
 
@@ -54,21 +47,22 @@ public class FamilyMember extends AnchorPane {
 
     }
 
-    public FamilyMember(Member member) {
+
+    public MemberCard(Member member) {
         super();
         initialize();
         this.member.addListener(getChangeMemberListener());
         this.member.setValue(member);
-        resize(MEMBER_WIDTH, MEMBER_HEIGHT);
+        resize(255, 145);
 
     }
 
-    public FamilyMember() {
+    public MemberCard() {
         this(null);
     }
 
     private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(GenTreeRun.class.getResource("/layout/tree_elements/family.member.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/tree_elements/member.card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -79,17 +73,6 @@ public class FamilyMember extends AnchorPane {
             exception.printStackTrace();
             throw new RuntimeException(exception);
         }
-
-        this.setOnMouseEntered(t -> {
-            rectangleFond.setStroke(Color.valueOf("#64bf37"));
-        });
-
-        this.setOnMouseExited(t -> {
-
-            rectangleFond.setStroke(Color.TRANSPARENT);
-        });
-
-        this.setOnContextMenuRequested(event -> sm.showSimContextMenu(returnThis(), event));
     }
 
     private ChangeListener<Member> getChangeMemberListener() {
@@ -97,7 +80,9 @@ public class FamilyMember extends AnchorPane {
             if (oldValue != null) {
                 oldValue.getProperties().forEach(p -> p.removeListener(listener));
             }
-            newValue.getProperties().forEach(p -> p.addListener(listener));
+            if (newValue != null) {
+                newValue.getProperties().forEach(p -> p.addListener(listener));
+            }
             fillComponents(newValue);
         };
         return simListener;
@@ -141,8 +126,9 @@ public class FamilyMember extends AnchorPane {
         this.member.set(member);
     }
 
-    private FamilyMember returnThis() {
+    private MemberCard returnThis() {
         return this;
     }
 
 }
+

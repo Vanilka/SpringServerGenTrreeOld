@@ -1,4 +1,4 @@
-package gentree.client.desktop.controllers.tree_elements;
+package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;

@@ -1,8 +1,6 @@
 package gentree.client.desktop.domain;
-
-import gentree.client.desktop.configurations.enums.ImageFiles;
-import gentree.client.desktop.configurations.helper.LongAdapter;
-import gentree.client.desktop.configurations.helper.PhotoMarshaller;
+import gentree.client.desktop.configuration.wrappers.LongAdapter;
+import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
 import gentree.client.desktop.domain.enums.Age;
 import gentree.client.desktop.domain.enums.DeathCauses;
 import gentree.client.desktop.domain.enums.Gender;
@@ -22,6 +20,8 @@ import java.util.stream.Stream;
 public class Member implements Serializable {
 
     private static final long serialVersionUID = 7165660080715738518L;
+    private static final String DEFAULT_FEMALE_LOCATION = "";
+    private static final String DEFAULT_MALE_LOCATION = "";
 
     private LongProperty id;
     private StringProperty name;
@@ -129,9 +129,9 @@ public class Member implements Serializable {
         if (photo.getValue() != null && !photo.getValue().equals("")) {
             return photo.get();
         } else if (getGender().equals(Gender.F)) {
-            return ImageFiles.GENERIC_FEMALE.toString();
+            return DEFAULT_FEMALE_LOCATION;
         } else {
-            return ImageFiles.GENERIC_MALE.toString();
+            return DEFAULT_MALE_LOCATION;
         }
     }
 

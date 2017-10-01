@@ -1,6 +1,7 @@
-package gentree.client.desktop.exception;
+package gentree.exception;
 
-import gentree.client.desktop.configurations.enums.ExceptionCauses;
+
+import gentree.exception.configuration.ExceptionCauses;
 
 /**
  * Created by Martyna SZYMKOWIAK on 21/07/2017.

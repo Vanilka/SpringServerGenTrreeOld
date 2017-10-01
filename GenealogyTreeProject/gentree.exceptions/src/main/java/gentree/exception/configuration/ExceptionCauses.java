@@ -1,4 +1,4 @@
-package gentree.client.desktop.configurations.enums;
+package gentree.exception.configuration;
 
 /**
  * Created by Martyna SZYMKOWIAK on 21/07/2017.

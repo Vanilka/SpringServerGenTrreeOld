@@ -1,9 +1,9 @@
 package gentree.client.desktop.controllers.tree_elements;
 
 import gentree.client.desktop.GenTreeRun;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;

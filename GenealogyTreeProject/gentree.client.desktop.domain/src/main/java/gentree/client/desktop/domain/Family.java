@@ -1,6 +1,6 @@
 package gentree.client.desktop.domain;
 
-import gentree.client.desktop.exception.NotUniqueBornRelationException;
+import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,6 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.extern.log4j.Log4j2;
+
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;

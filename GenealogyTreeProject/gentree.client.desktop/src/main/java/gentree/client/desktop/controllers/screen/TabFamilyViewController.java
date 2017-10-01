@@ -1,7 +1,6 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
@@ -9,6 +8,7 @@ import gentree.client.desktop.controllers.FXMLTab;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;

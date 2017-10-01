@@ -2,17 +2,15 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.tree_elements.FamilyMemberCard;
-import gentree.client.desktop.controllers.tree_elements.MemberCard;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeCard;
-import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.visualization.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;

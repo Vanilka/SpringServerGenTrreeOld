@@ -1,7 +1,6 @@
 package gentree.client.desktop.service.implementation;
 
 import gentree.client.desktop.configurations.GenTreeProperties;
-import gentree.client.desktop.configurations.enums.ImageFiles;
 import gentree.client.desktop.configurations.enums.PropertiesKeys;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
@@ -9,12 +8,13 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
-import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import gentree.client.desktop.service.ActiveRelationGuard;
 import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.RelationResponse;
 import gentree.client.desktop.service.responses.ServiceResponse;
+import gentree.client.visualization.configuration.ImageFiles;
+import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

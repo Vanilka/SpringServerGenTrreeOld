@@ -1,15 +1,14 @@
 package gentree.client.desktop.service.implementation;
 
-import gentree.client.desktop.configurations.enums.ExceptionCauses;
 import gentree.client.desktop.configurations.messages.LogMessages;
 import gentree.client.desktop.controllers.tree_elements.FamilyGroup;
 import gentree.client.desktop.controllers.tree_elements.panels.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import gentree.client.desktop.exception.NotUniqueBornRelationException;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
+import gentree.exception.NotUniqueBornRelationException;
 import javafx.scene.layout.HBox;
 import lombok.extern.log4j.Log4j2;
 

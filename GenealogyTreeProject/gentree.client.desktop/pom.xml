@@ -17,14 +17,19 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.client.desktop.domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.client.visualization</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.exceptions</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
