@@ -1,13 +1,13 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
-import gentree.client.desktop.controllers.tree_elements.RelationReference;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.controllers.tree_elements.connectors.SpouseExConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.visualization.elements.RelationReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;

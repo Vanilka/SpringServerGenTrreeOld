@@ -3,6 +3,7 @@ package gentree.client.desktop.controllers.tree_elements;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.visualization.elements.RelationTypeCard;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import lombok.Getter;

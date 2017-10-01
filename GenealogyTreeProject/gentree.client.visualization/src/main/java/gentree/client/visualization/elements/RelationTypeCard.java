@@ -26,12 +26,12 @@ public class RelationTypeCard extends StackPane {
     public static final double WIDTH = 60;
     public static final double HEIGHT = 60;
 
-    Circle circle;
-    ImageView typeImg;
-    StackPane imageContainer;
-    DropShadow dropShadow;
-    ObjectProperty<Relation> relation;
-    ObjectProperty<RelationType> relationType;
+    protected Circle circle;
+    protected ImageView typeImg;
+    protected StackPane imageContainer;
+    protected DropShadow dropShadow;
+    protected ObjectProperty<Relation> relation;
+    protected ObjectProperty<RelationType> relationType;
 
     {
         init();

@@ -1,15 +1,13 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import gentree.client.desktop.controllers.tree_elements.FamilyMember;
-import gentree.client.desktop.controllers.tree_elements.RelationReference;
 import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
 import gentree.client.desktop.controllers.tree_elements.connectors.ParentToChildrenConnector;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import javafx.beans.property.BooleanProperty;
+import gentree.client.visualization.elements.RelationReference;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -21,10 +19,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Line;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
