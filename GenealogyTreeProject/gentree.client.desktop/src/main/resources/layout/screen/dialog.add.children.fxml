@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <AnchorPane id="dialogAddChildren" fx:id="dialoAddChildren" minHeight="700" minWidth="700" styleClass="dialog-pane"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddChildrenController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

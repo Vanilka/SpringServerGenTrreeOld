@@ -87,11 +87,17 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     }
 
     public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
+
         initPanes();
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
         this.spouseBornRelation.setValue(spouseBorn);
+
+        setOnMouseClicked(event -> {
+            System.out.println("clicket on me :" + this.toString());
+        });
+
     }
 
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="screenMainLeftFamilyInfoController"
-            fx:id="screenMainLeftFamilyInfoController" xmlns="http://javafx.com/javafx/8.0.111"
+            fx:id="screenMainLeftFamilyInfoController" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.TabFamilyInfoController"
             styleClass="transparentPane"
             AnchorPane.bottomAnchor="30" AnchorPane.topAnchor="30"

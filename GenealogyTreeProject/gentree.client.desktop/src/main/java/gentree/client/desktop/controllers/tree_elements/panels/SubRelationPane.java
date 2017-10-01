@@ -1,6 +1,7 @@
 package gentree.client.desktop.controllers.tree_elements.panels;
 
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import lombok.Getter;
 
 /**
@@ -13,5 +14,11 @@ public abstract class SubRelationPane extends SubBorderPane {
 
     SubRelationPane() {
         childrenBox = new HBox();
+
+        setOnMouseClicked(event -> {
+            System.out.println("clicket on me :" + this.toString());
+        });
     }
+
+
 }

@@ -44,6 +44,7 @@ public class RelationTypeCard extends StackPane {
     public RelationTypeCard(Relation relation) {
         this.relation.setValue(relation);
         setMinSize(WIDTH, HEIGHT);
+        setPrefSize(WIDTH, HEIGHT);
         setMaxSize(WIDTH, HEIGHT);
     }
 

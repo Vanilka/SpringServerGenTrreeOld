@@ -8,7 +8,6 @@ import gentree.client.desktop.controllers.tree_elements.connectors.SpouseExConne
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -24,6 +24,7 @@ import lombok.Getter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
+ * Class to visualization PanelRelation Ex in GenealogyTree
  */
 public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
@@ -38,9 +39,9 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private final static double PADDING_BOTTOM = 0.0;
 
     private final static double MINIMAL_RELATION_WIDTH = 450.0;
-    private final static double SPACE_BEETWEN_OBJECTS = 100.0;
+    private final static double SPACE_BETWEEN_OBJECTS = 100.0;
 
-    private final AnchorPane relation;
+    private final Pane relation;
 
     @Getter
     private final FamilyMember spouseCard;
@@ -60,7 +61,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
 
     {
-        relation = new AnchorPane();
+        relation = new Pane();
         spouseCard = new FamilyMember();
         relationTypeElement = new RelationTypeElement();
         relationType = new SimpleObjectProperty<>();
@@ -88,7 +89,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
-        this.relation.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         initBorder(Color.GREEN, this);
         initBorder(Color.FUCHSIA, relation);
         initBorder(Color.ORANGE, childrenBox);
@@ -96,31 +96,35 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
 
     private void initPanes() {
-        setPrefSize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
+        setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        //computePrefWidth(MINIMAL_RELATION_WIDTH);
         //this.relation.resize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
         //resize(MINIMAL_RELATION_WIDTH, RELATION_HEIGHT);
         initHbox();
-        initAnchorPanesOffset();
+       // initAnchorPanesOffset();
         this.setCenter(childrenBox);
         this.setTop(relation);
-        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
     }
 
 
-    private  void initAnchorPanesOffset() {
+    private void initAnchorPanesOffset() {
         AnchorPane.setLeftAnchor(relation, 10.0);
         AnchorPane.setRightAnchor(relation, 10.0);
 
         AnchorPane.setLeftAnchor(childrenBox, 10.0);
         AnchorPane.setRightAnchor(childrenBox, 10.0);
 
+
+
     }
 
     private void initHbox() {
         childrenBox.setSpacing(10);
         childrenBox.setAlignment(Pos.TOP_RIGHT);
+        childrenBox.prefWidthProperty().bind(prefWidthProperty());
+        relation.prefWidthProperty().bind(prefWidthProperty());
     }
 
 
@@ -192,16 +196,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             calculateRelationElementsPosition();
         });
 
-        relation.boundsInParentProperty().addListener(c -> {
-            System.out.println("(parent) Relation panel of : " + spouseCard.getMember() + "  -> " +relation.getBoundsInLocal());
-            calculateRelationElementsPosition();
-        });
-
-        relation.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("(local) Relation panel of old : " + spouseCard.getMember() + "  -> " +oldValue);
-            System.out.println("(local) Relation panel of new : " + spouseCard.getMember() + "  -> " +newValue);
-            calculateRelationElementsPosition();
-        });
 
         childrenBox.boundsInLocalProperty().addListener(c -> {
             calculateRelationElementsPosition();
@@ -238,10 +232,15 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         if (children.size() > 0) {
             Line line = childrenConnector.getLine();
             Double offsetRelationType = line.getEndX() - relationTypeElement.getWidth() / 2.0 - MARGIN_LEFT - PADDING_LEFT;
-            Double offsetSpouse = offsetRelationType - SPACE_BEETWEN_OBJECTS - 200;
+            Double offsetSpouse = offsetRelationType - SPACE_BETWEEN_OBJECTS - 200;
 
-            if(offsetSpouse < 0) {
-                setPrefWidth(getWidth() - offsetSpouse);
+            if (offsetSpouse < 0) {
+                System.out.println("Offest Spouse " + offsetSpouse);
+                System.out.println("Current prefWidth " + getPrefWidth());
+                Double x = getWidth() - offsetSpouse + 50;
+                System.out.println("New pref width " + x);
+                this.setPrefWidth(x);
+
             } else {
                 relationTypeElement.setLayoutX(offsetRelationType);
                 spouseCard.setLayoutX(offsetSpouse);
@@ -250,8 +249,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             childrenConnector.connectRelationToChildren(relationTypeElement);
 
         } else {
-            relationTypeElement.setLayoutX(spouseCard.getWidth() + SPACE_BEETWEN_OBJECTS);
-            relation.setPrefWidth(MINIMAL_RELATION_WIDTH);
+            relationTypeElement.setLayoutX(spouseCard.getWidth() + SPACE_BETWEEN_OBJECTS);
+            this.setPrefWidth(MINIMAL_RELATION_WIDTH);
         }
     }
 
