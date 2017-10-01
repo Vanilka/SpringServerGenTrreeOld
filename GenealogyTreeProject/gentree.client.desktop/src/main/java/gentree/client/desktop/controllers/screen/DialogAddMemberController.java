@@ -96,7 +96,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-        photo.setImage(new Image("file:/"+ImageFiles.GENERIC_MALE.toFile().getAbsolutePath()));
+        photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
         initListeners();
         createSexToogleGroupe();
         populateAgeComboBox();
@@ -196,9 +196,9 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (path == null) {
                 if (newValue.getUserData().equals(Gender.M)) {
-                    photo.setImage(new Image("file:/" +ImageFiles.GENERIC_MALE.toFile().getAbsolutePath()));
+                    photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
                 } else {
-                    photo.setImage(new Image("file:/" +ImageFiles.GENERIC_FEMALE.toFile().getAbsolutePath()));
+                    photo.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
                 }
             }
         });

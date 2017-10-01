@@ -19,21 +19,17 @@ public enum ImageFiles {
     NEW_ADDITION("new.png"),
     RELATION_LOVE("love.png");
 
-    private final String path = "layout/images/";
+    private final String path = "/layout/images/backgrounds/";
     private String file;
 
-    private ImageFiles(String file) {
-        this.file = path.concat(file);
+    private ImageFiles(String filePath) {
+
+        file = path.concat(filePath);
     }
 
     @Override
     public String toString() {
-        return file;
-    }
-
-    public File toFile() {
-        System.out.println("File exist : ?" + Files.exists(Paths.get(file)));
-        return new File(file);
+        return  file;
     }
 }
 

@@ -20,8 +20,8 @@ import java.util.stream.Stream;
 public class Member implements Serializable {
 
     private static final long serialVersionUID = 7165660080715738518L;
-    private static final String DEFAULT_FEMALE_LOCATION = "";
-    private static final String DEFAULT_MALE_LOCATION = "";
+    private static  String DEFAULT_FEMALE_LOCATION = "";
+    private static  String DEFAULT_MALE_LOCATION = "";
 
     private LongProperty id;
     private StringProperty name;
@@ -208,6 +208,14 @@ public class Member implements Serializable {
         if (alive) {
             setDeathCause(null);
         }
+    }
+
+    public static void setDefaultFemaleLocation(String defaultFemaleLocation) {
+        DEFAULT_FEMALE_LOCATION = defaultFemaleLocation;
+    }
+
+    public static void setDefaultMaleLocation(String defaultMaleLocation) {
+        DEFAULT_MALE_LOCATION = defaultMaleLocation;
     }
 
     public BooleanProperty aliveProperty() {

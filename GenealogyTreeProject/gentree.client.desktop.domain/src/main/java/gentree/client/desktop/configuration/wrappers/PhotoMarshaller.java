@@ -2,11 +2,15 @@ package gentree.client.desktop.configuration.wrappers;
 
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 17/07/2017.
  */
 public class PhotoMarshaller extends XmlAdapter<String, String> {
+    private static List<String> ignoredPaths = new ArrayList<>();
 
     @Override
     public String unmarshal(String v) throws Exception {
@@ -18,10 +22,15 @@ public class PhotoMarshaller extends XmlAdapter<String, String> {
 
     @Override
     public String marshal(String v) throws Exception {
-        if (v.equals("") || v.equals("")) {
+        if (ignoredPaths.contains(v)) {
             return null;
         } else {
             return v;
         }
+    }
+
+    public static void addIgnoredPaths(String... paths) {
+
+        ignoredPaths.addAll(Arrays.asList(paths));
     }
 }
