@@ -1,7 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
-import gentree.client.desktop.configurations.enums.FilesFXML;
-import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
+import gentree.client.desktop.configuration.common.enums.FilesFXML;
+import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.GenTreeContext;

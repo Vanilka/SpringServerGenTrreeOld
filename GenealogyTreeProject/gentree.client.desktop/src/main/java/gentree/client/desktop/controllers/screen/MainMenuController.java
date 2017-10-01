@@ -1,9 +1,9 @@
 package gentree.client.desktop.controllers.screen;
 
-import gentree.client.desktop.configurations.enums.AppLanguage;
-import gentree.client.desktop.configurations.enums.FilesFXML;
-import gentree.client.desktop.configurations.messages.Keys;
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.common.enums.AppLanguage;
+import gentree.client.desktop.configuration.common.enums.FilesFXML;
+import gentree.client.desktop.configuration.common.messages.Keys;
+import gentree.client.desktop.configuration.common.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLBorderPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;

@@ -2,7 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.common.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import javafx.beans.property.ObjectProperty;

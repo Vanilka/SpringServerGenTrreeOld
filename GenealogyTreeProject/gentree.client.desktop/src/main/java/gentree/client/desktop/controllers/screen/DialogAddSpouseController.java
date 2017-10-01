@@ -2,10 +2,10 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import gentree.client.desktop.configurations.GenTreeProperties;
-import gentree.client.desktop.configurations.enums.FilesFXML;
-import gentree.client.desktop.configurations.enums.PropertiesKeys;
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.common.GenTreeProperties;
+import gentree.client.desktop.configuration.common.enums.FilesFXML;
+import gentree.client.desktop.configuration.common.enums.PropertiesKeys;
+import gentree.client.desktop.configuration.common.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.domain.Member;

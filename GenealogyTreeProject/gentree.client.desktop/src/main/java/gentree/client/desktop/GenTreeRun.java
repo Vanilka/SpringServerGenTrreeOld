@@ -1,11 +1,14 @@
 package gentree.client.desktop;
 
 import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
-import gentree.client.desktop.configurations.GenTreeDefaultProperties;
+import gentree.client.desktop.configuration.common.GenTreeDefaultProperties;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
-import gentree.client.visualization.configuration.ImageFiles;
+import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.client.visualization.elements.FamilyMember;
+import gentree.client.visualization.elements.RelationTypeElement;
+import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -32,10 +35,13 @@ public class GenTreeRun extends Application {
     }
 
     private void configureStatics() {
+        FamilyMember.setContextProviderProperty(sc);
+        RelationTypeElement.setContextProviderProperty(sc);
         PhotoMarshaller.addIgnoredPaths(ImageFiles.GENERIC_FEMALE.toString(),
                 ImageFiles.GENERIC_FEMALE.toString());
         Member.setDefaultFemaleLocation(ImageFiles.GENERIC_FEMALE.toString());
         Member.setDefaultMaleLocation(ImageFiles.GENERIC_MALE.toString());
+        GenTreeDrawingServiceImpl.setContext(gtc);
     }
 
 }

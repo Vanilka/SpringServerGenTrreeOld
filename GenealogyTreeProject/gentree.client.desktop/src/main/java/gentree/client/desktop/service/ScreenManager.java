@@ -1,18 +1,20 @@
 package gentree.client.desktop.service;
 
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.configurations.GenTreeProperties;
-import gentree.client.desktop.configurations.enums.FilesFXML;
-import gentree.client.desktop.configurations.helper.BorderPaneReloadHelper;
-import gentree.client.desktop.configurations.messages.AppTitles;
+import gentree.client.desktop.configuration.common.GenTreeProperties;
+import gentree.client.desktop.configuration.common.enums.FilesFXML;
+import gentree.client.desktop.configuration.common.helper.BorderPaneReloadHelper;
+import gentree.client.desktop.configuration.common.messages.AppTitles;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
-import gentree.client.desktop.controllers.tree_elements.FamilyMember;
-import gentree.client.desktop.controllers.tree_elements.RelationTypeElement;
+import gentree.client.visualization.core.GenTreeDrawingService;
+import gentree.client.visualization.elements.configuration.ContextProvider;
+import gentree.client.visualization.elements.FamilyMember;
+import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import gentree.client.visualization.configuration.ImageFiles;
+import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +49,7 @@ import java.util.List;
 @Getter
 @Setter
 @Log4j2
-public class ScreenManager {
+public class ScreenManager implements ContextProvider {
 
     public static final ScreenManager INSTANCE = new ScreenManager();
     public static final GenTreeContext context = GenTreeContext.INSTANCE;
@@ -390,11 +392,13 @@ public class ScreenManager {
         context.setService(null);
     }
 
+    @Override
     public void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event) {
 
         simContextMenu.show(familyMember, event);
     }
 
+    @Override
     public void showRelationContextMenu(RelationTypeElement relationTypeElement, ContextMenuEvent event) {
         relationContextMenu.show(relationTypeElement, event);
     }

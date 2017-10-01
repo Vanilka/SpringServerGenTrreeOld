@@ -4,7 +4,7 @@
     <root id="archive" name="gentree.client.desktop.jar">
       <element id="module-output" name="gentree.client.desktop" />
       <element id="module-output" name="gentree.client.desktop.domain" />
-      <element id="module-output" name="gentree.client.visualization" />
+      <element id="module-output" name="gentree.client.visualization.elements" />
       <element id="module-output" name="gentree.exceptions" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.9.3/commons-beanutils-1.9.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/jfoenix/jfoenix/1.5.0/jfoenix-1.5.0.jar" path-in-jar="/" />
