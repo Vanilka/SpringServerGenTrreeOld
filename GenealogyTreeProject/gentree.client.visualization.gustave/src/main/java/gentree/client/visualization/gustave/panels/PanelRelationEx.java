@@ -185,31 +185,19 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
         relationTypeElement.boundsInLocalProperty().addListener(c -> {
             relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
-            calculateRelationElementsPosition();
-
         });
-
-        calculateThisRelationPosition();
 
         spouseCard.boundsInLocalProperty().addListener(c -> {
             relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
             calculateRelationElementsPosition();
         });
 
-
-        childrenBox.boundsInLocalProperty().addListener(c -> {
-            calculateRelationElementsPosition();
-        });
-
         childrenBox.boundsInParentProperty().addListener(c -> {
             calculateRelationElementsPosition();
         });
-
-
-        childrenConnector.getLine().boundsInLocalProperty().addListener(c -> {
+        childrenConnector.getLine().boundsInParentProperty().addListener(c -> {
             calculateRelationElementsPosition();
         });
-
 
         childrenBox.prefWidthProperty().addListener(observable -> {
             calculateRelationElementsPosition();
@@ -219,13 +207,18 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             calculateRelationElementsPosition();
         });
 
-        prefWidthProperty().addListener(observable -> {
+        boundsInParentProperty().addListener(observable -> {
             calculateRelationElementsPosition();
         });
 
-        widthProperty().addListener(observable -> {
+        boundsInLocalProperty().addListener(observable -> {
             calculateRelationElementsPosition();
         });
+
+        childrenConnector.getLine().parentProperty().addListener((obs, oldValue, newValue) -> {
+            System.out.println("New parent for line" +newValue);
+        });
+
     }
 
     private void calculateRelationElementsPosition() {

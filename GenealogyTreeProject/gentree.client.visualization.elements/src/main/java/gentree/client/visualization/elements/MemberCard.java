@@ -63,7 +63,7 @@ public class MemberCard extends AnchorPane {
     }
 
     private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/tree_elements/member.card.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/elements/member.card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

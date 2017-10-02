@@ -2,6 +2,8 @@ package gentree.client.visualization.gustave.connectors;
 
 import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -15,7 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ChildConnector extends LineConnector {
+public class ChildConnector extends LineConnector  {
 
     private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
     private final SubRelationPane subBorderPane;
@@ -54,15 +56,6 @@ public class ChildConnector extends LineConnector {
             redrawLine();
         });
 
-
-        panelChild.getPanelSingle().get().getMember().boundsInLocalProperty().addListener(observable -> {
-            redrawLine();
-        });
-
-        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener(c -> {
-            redrawLine();
-        });
-
         panelChild.getPanelSingle().get().boundsInParentProperty().addListener(c -> {
             redrawLine();
         });
@@ -75,9 +68,6 @@ public class ChildConnector extends LineConnector {
             redrawLine();
         });
 
-        subBorderPane.boundsInLocalProperty().addListener(observable -> {
-            redrawLine();
-        });
 
         subBorderPane.boundsInParentProperty().addListener(observable -> {
             redrawLine();
@@ -91,34 +81,16 @@ public class ChildConnector extends LineConnector {
             redrawLine();
         });
 
-        subBorderPane.getChildrenBox().boundsInLocalProperty().addListener(c -> {
-            System.out.println("Children box bounts parent");
-            redrawLine();
-        });
 
         subBorderPane.getChildrenBox().boundsInParentProperty().addListener(c -> {
             System.out.println("Children box bounts parent");
             redrawLine();
         });
 
-        subBorderPane.getChildrenBox().prefWidthProperty().addListener(c -> {
-            System.out.println("Children box bounts parent");
-            redrawLine();
-        });
-
-        subBorderPane.getChildrenBox().widthProperty().addListener(c -> {
-            System.out.println("Children box bounts parent");
-            redrawLine();
-        });
-
-
         panelChild.boundsInParentProperty().addListener(observable -> {
             redrawLine();
         });
 
-        panelChild.boundsInLocalProperty().addListener(observable -> {
-            redrawLine();
-        });
 
         panelChild.prefWidthProperty().addListener(observable -> {
             redrawLine();
@@ -144,6 +116,8 @@ public class ChildConnector extends LineConnector {
         getLine().setEndX(endPoint.getX());
         getLine().setEndY(endPoint.getY());
 
+        invalidate();
+
         System.out.println("SubborderPane " +subBorderPane.toString());
 
         System.out.println("PanelChild " +subBorderPane.toString());
@@ -154,6 +128,4 @@ public class ChildConnector extends LineConnector {
         Bounds result = subBorderPane.sceneToLocal(nodeBoundsInScene);
         return result;
     }
-
-
 }

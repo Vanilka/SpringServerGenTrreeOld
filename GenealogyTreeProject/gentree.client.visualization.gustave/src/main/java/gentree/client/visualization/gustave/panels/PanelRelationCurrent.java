@@ -215,7 +215,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         });
 
         relationTypeElement.boundsInLocalProperty().addListener(c-> {
-            calculateRelationElementsPosition();
             calculateThisRelationPosition();
             resizeRelation();
         });
