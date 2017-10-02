@@ -116,7 +116,6 @@ public class ChildConnector extends LineConnector  {
         getLine().setEndX(endPoint.getX());
         getLine().setEndY(endPoint.getY());
 
-        invalidate();
 
         System.out.println("SubborderPane " +subBorderPane.toString());
 

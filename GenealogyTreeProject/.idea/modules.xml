@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/gentree.client.desktop.domain/gentree.client.desktop.domain.iml" filepath="$PROJECT_DIR$/gentree.client.desktop.domain/gentree.client.desktop.domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.elements/gentree.client.visualization.elements.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.elements/gentree.client.visualization.elements.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" filepath="$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" />
     </modules>
   </component>

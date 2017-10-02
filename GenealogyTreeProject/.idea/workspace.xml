@@ -19,6 +19,7 @@
     <ignored path="$PROJECT_DIR$/gentree.client.desktop.configuration.common/target/" />
     <ignored path="$PROJECT_DIR$/gentree.client.desktop.i]]]/target/" />
     <ignored path="$PROJECT_DIR$/gentree.client.desktop.context/target/" />
+    <ignored path="$PROJECT_DIR$/gentree.client.visualization.vanilla/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,33 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="ChildrenConnectorsGuard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/configuration/ChildrenConnectorsGuard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="44" column="30" lean-forward="true" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChildConnector.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ChildConnector.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1274">
-              <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ActiveRelationGuard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
                 <element signature="e#600#601#0" expanded="true" />
                 <element signature="e#642#643#0" expanded="true" />
@@ -77,11 +56,79 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ChildConnector.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ChildConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1017">
+              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LineConnector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/LineConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Connector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/Connector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ParentToChildrenConnector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="121" column="50" lean-forward="true" selection-start-line="121" selection-start-column="50" selection-end-line="121" selection-end-column="50" />
+            <state relative-caret-position="146">
+              <caret line="178" column="30" lean-forward="false" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3624#3625#0" expanded="true" />
+                <element signature="e#3690#3691#0" expanded="true" />
+                <element signature="e#3744#3745#0" expanded="true" />
+                <element signature="e#3811#3812#0" expanded="true" />
+                <element signature="e#3855#3856#0" expanded="true" />
+                <element signature="e#3881#3882#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenTreeDrawingServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="93" column="13" lean-forward="true" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="29" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -90,7 +137,7 @@
       <file leaf-file-name="PanelChild.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelChild.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1391">
+            <state relative-caret-position="615">
               <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
@@ -100,18 +147,8 @@
       <file leaf-file-name="MemberCard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/MemberCard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="65" column="79" lean-forward="true" selection-start-line="65" selection-start-column="79" selection-end-line="65" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PanelSingle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelSingle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="750">
+              <caret line="65" column="79" lean-forward="false" selection-start-line="65" selection-start-column="79" selection-end-line="65" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -189,8 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/PaneShowInfoRelation.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/tree_elements/connectors/SpouseConnector.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/tree_elements/panels/PanelRelationCurrent.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddChildrenController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/tree_elements/FamilyMember.java" />
@@ -235,11 +270,13 @@
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationCurrent.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/configuration/ChildConnectorGuard.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/MemberCard.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/configuration/ChildrenConnectorsGuard.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.vanilla/pom.xml" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.vanilla/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/Connector.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ChildConnector.java" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/MemberCard.java" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/configuration/ChildrenConnectorsGuard.java" />
       </list>
     </option>
   </component>
@@ -294,10 +331,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1122" />
+    <option name="width" value="1440" />
+    <option name="height" value="823" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -314,10 +351,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -373,51 +406,6 @@
             <path>
               <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="desktop" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="desktop" type="462c0819:PsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
               <item name="gentree.client.visualization.gustave" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -459,17 +447,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="visualization" type="462c0819:PsiDirectoryNode" />
               <item name="gustave" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.visualization.gustave" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="visualization" type="462c0819:PsiDirectoryNode" />
-              <item name="gustave" type="462c0819:PsiDirectoryNode" />
-              <item name="configuration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
@@ -484,23 +461,16 @@
             </path>
             <path>
               <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
-              <item name="gentree.client.visualization.gustave" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="visualization" type="462c0819:PsiDirectoryNode" />
-              <item name="gustave" type="462c0819:PsiDirectoryNode" />
-              <item name="panels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -517,23 +487,23 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gentree.client.visualization/src/main/resources/layout/images/backgrounds" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gentree.client.visualization.service.implementation" />
+      <recent name="gentree.client.desktop.controllers.tree_elements.panels" />
+      <recent name="gentree.client.desktop.controllers" />
+      <recent name="gentree.client.desktop.controllers.tree_elements" />
+      <recent name="gentree.client.desktop.controllers.screen" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen" />
       <recent name="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/tree_elements" />
       <recent name="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/images/backgrounds" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="gentree.client.desktop.controllers.tree_elements.panels" />
-      <recent name="gentree.client.desktop.controllers" />
-      <recent name="gentree.client.desktop.controllers.tree_elements" />
-      <recent name="gentree.client.desktop.controllers.screen" />
-      <recent name="gentree.client.desktop.service.implementation" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/gentree.client.visualization/src/main/resources/layout/images/backgrounds" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -982,37 +952,37 @@
       <workItem from="1506866199060" duration="3041000" />
       <workItem from="1506891759742" duration="11801000" />
       <workItem from="1506907522445" duration="8618000" />
+      <workItem from="1506942220109" duration="1044000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="543809000" />
+    <option name="totallyTimeSpent" value="544853000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1122" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="823" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23928945" sideWeight="0.49200583" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23860182" sideWeight="0.49200583" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4785789" sideWeight="0.20528017" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2182112" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40647858" sideWeight="0.7947198" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13525836" sideWeight="0.7947198" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2974138" sideWeight="0.7314949" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28197673" sideWeight="0.7314949" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.8020134" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3970742" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23824258" sideWeight="0.26850507" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3970742" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1081,21 +1051,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/GenTreeContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/messages/Keys.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/messages/LogMessages.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1222,14 +1177,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
@@ -1287,9 +1234,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="126" column="11" lean-forward="false" selection-start-line="126" selection-start-column="11" selection-end-line="126" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1308,9 +1252,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1500">
           <caret line="100" column="32" lean-forward="false" selection-start-line="100" selection-start-column="32" selection-end-line="100" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1362,14 +1303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/Connector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationCurrent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1699">
@@ -1378,19 +1311,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/LineConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/javafx/beans/property/ObjectPropertyBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1409,7 +1333,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1423,7 +1346,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelChild.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1391">
+        <state relative-caret-position="615">
           <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
         </state>
@@ -1431,8 +1354,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/MemberCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="65" column="79" lean-forward="true" selection-start-line="65" selection-start-column="79" selection-end-line="65" selection-end-column="79" />
+        <state relative-caret-position="750">
+          <caret line="65" column="79" lean-forward="false" selection-start-line="65" selection-start-column="79" selection-end-line="65" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -1441,22 +1364,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
           <caret line="415" column="0" lean-forward="false" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="121" column="50" lean-forward="true" selection-start-line="121" selection-start-column="50" selection-end-line="121" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#600#601#0" expanded="true" />
             <element signature="e#642#643#0" expanded="true" />
@@ -1464,20 +1378,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="29" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="93" column="13" lean-forward="true" selection-start-line="93" selection-start-column="13" selection-end-line="93" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/configuration/ChildrenConnectorsGuard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="44" column="30" lean-forward="true" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+        <state relative-caret-position="206">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="50" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="178" column="30" lean-forward="false" selection-start-line="178" selection-start-column="30" selection-end-line="178" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#3624#3625#0" expanded="true" />
+            <element signature="e#3690#3691#0" expanded="true" />
+            <element signature="e#3744#3745#0" expanded="true" />
+            <element signature="e#3811#3812#0" expanded="true" />
+            <element signature="e#3855#3856#0" expanded="true" />
+            <element signature="e#3881#3882#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/LineConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/Connector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ChildConnector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1274">
-          <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+        <state relative-caret-position="1017">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1536,11 +1504,11 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>gentree.client.visualization.elements</last-edited>
+          <last-edited>gentree.client.visualization.vanilla</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.37745097" />
                 <option value="0.6" />
               </list>
             </option>
