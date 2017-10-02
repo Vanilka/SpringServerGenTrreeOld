@@ -1,0 +1,159 @@
+package gentree.client.visualization.gustave.connectors;
+
+import gentree.client.visualization.gustave.panels.PanelChild;
+import gentree.client.visualization.gustave.panels.SubRelationPane;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.Node;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * Created by Martyna SZYMKOWIAK on 20/08/2017.
+ *
+ * Class responsible to drawing Vertical Line from Child
+ */
+@Getter
+@Setter
+public class ChildConnector extends LineConnector {
+
+    private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
+    private final SubRelationPane subBorderPane;
+    private final PanelChild panelChild;
+
+
+    public ChildConnector(PanelChild child, SubRelationPane subBorderPane) {
+        super();
+        this.panelChild = child;
+        this.subBorderPane = subBorderPane;
+        initLine();
+
+    }
+
+
+    public void removeLine() {
+        subBorderPane.getChildren().remove(getLine());
+    }
+
+    private void initLine() {
+
+        if (panelChild != null && panelChild.getPanelSingle() != null) {
+            removeLine();
+            subBorderPane.getChildren().add(line.get());
+
+        } else {
+            removeLine();
+        }
+        initLineListeners();
+
+    }
+
+    private void initLineListeners() {
+
+        panelChild.getPanelSingle().get().getMember().boundsInParentProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+
+        panelChild.getPanelSingle().get().getMember().boundsInLocalProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener(c -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().boundsInParentProperty().addListener(c -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().prefWidthProperty().addListener(c -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().heightProperty().addListener(c -> {
+            redrawLine();
+        });
+
+        subBorderPane.boundsInLocalProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        subBorderPane.boundsInParentProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        subBorderPane.prefWidthProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        subBorderPane.heightProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().boundsInLocalProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().boundsInParentProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().prefWidthProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
+            redrawLine();
+        });
+
+        subBorderPane.getChildrenBox().widthProperty().addListener(c -> {
+            System.out.println("Children box bounts parent");
+            redrawLine();
+        });
+
+
+        panelChild.boundsInParentProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        panelChild.boundsInLocalProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        panelChild.prefWidthProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+        panelChild.heightProperty().addListener(observable -> {
+            redrawLine();
+        });
+
+
+
+
+
+    }
+
+    private void redrawLine() {
+        Bounds childBounds = getRelativeBounds(panelChild.getPanelSingle().get().getMember());
+        Point2D startPoint = getTopPoint(childBounds);
+        Point2D endPoint = new Point2D(startPoint.getX(), startPoint.getY() - CHILD_CONNECTOR_HEIGHT );
+
+        getLine().setStartX(startPoint.getX());
+        getLine().setStartY(startPoint.getY());
+        getLine().setEndX(endPoint.getX());
+        getLine().setEndY(endPoint.getY());
+
+        System.out.println("SubborderPane " +subBorderPane.toString());
+
+        System.out.println("PanelChild " +subBorderPane.toString());
+    }
+
+    private Bounds getRelativeBounds(Node node) {
+        Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
+        Bounds result = subBorderPane.sceneToLocal(nodeBoundsInScene);
+        return result;
+    }
+
+
+}

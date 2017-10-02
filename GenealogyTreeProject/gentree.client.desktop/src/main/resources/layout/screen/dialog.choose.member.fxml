@@ -9,7 +9,7 @@
 <?import java.lang.String?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400" minWidth="500"
-            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.111"
+            styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogChooseMemberController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>

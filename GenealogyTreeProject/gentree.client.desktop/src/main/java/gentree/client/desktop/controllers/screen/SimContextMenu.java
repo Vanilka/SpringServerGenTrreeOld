@@ -1,11 +1,10 @@
 package gentree.client.desktop.controllers.screen;
 
-import gentree.client.desktop.configurations.enums.FilesFXML;
-import gentree.client.desktop.controllers.tree_elements.FamilyMember;
+import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 

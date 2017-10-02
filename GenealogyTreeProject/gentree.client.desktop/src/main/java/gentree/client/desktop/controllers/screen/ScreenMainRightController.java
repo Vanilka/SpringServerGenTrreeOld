@@ -1,10 +1,10 @@
 package gentree.client.desktop.controllers.screen;
 
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
-import gentree.client.desktop.service.implementation.GenTreeDrawingServiceImpl;
+import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

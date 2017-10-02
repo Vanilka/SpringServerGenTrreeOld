@@ -17,14 +17,24 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.client.desktop.domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j.version}</version>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.client.visualization.gustave</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.client.desktop.context</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.exceptions</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
@@ -35,16 +45,6 @@
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
             <version>8.40.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.9.3</version>
         </dependency>
     </dependencies>
 

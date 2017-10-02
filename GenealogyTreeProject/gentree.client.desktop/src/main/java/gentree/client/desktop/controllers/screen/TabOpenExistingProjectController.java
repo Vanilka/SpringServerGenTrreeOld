@@ -1,9 +1,9 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.configurations.GenTreeProperties;
-import gentree.client.desktop.configurations.enums.PropertiesKeys;
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.GenTreeProperties;
+import gentree.client.desktop.configuration.enums.PropertiesKeys;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import javafx.beans.property.ObjectProperty;

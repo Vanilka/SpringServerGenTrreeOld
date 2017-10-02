@@ -1,6 +1,6 @@
 package gentree.client.desktop.service;
 
-import gentree.client.desktop.configurations.messages.AppTitles;
+import gentree.client.desktop.configuration.messages.AppTitles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 @Getter
 @Setter
 @Log4j2
-public class GenTreeContext {
+public class GenTreeContext implements FamilyContext{
 
     public static final GenTreeContext INSTANCE = new GenTreeContext();
 

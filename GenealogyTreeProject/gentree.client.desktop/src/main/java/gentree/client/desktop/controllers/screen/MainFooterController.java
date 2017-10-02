@@ -1,8 +1,8 @@
 package gentree.client.desktop.controllers.screen;
 
 
-import gentree.client.desktop.configurations.messages.AppTitles;
-import gentree.client.desktop.configurations.messages.LogMessages;
+import gentree.client.desktop.configuration.messages.AppTitles;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
