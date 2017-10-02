@@ -1,6 +1,6 @@
 package gentree.client.desktop.service;
 
-import gentree.client.desktop.configuration.common.messages.AppTitles;
+import gentree.client.desktop.configuration.messages.AppTitles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

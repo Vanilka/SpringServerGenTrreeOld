@@ -13,7 +13,6 @@
         <module>gentree.client.visualization.elements</module>
         <module>gentree.exceptions</module>
         <module>gentree.client.visualization.gustave</module>
-        <module>gentree.client.desktop.configuration.common</module>
         <module>gentree.client.desktop.context</module>
     </modules>
     <packaging>pom</packaging>

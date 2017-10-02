@@ -1,10 +1,10 @@
 package gentree.client.desktop.service;
 
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.configuration.common.GenTreeProperties;
-import gentree.client.desktop.configuration.common.enums.FilesFXML;
-import gentree.client.desktop.configuration.common.helper.BorderPaneReloadHelper;
-import gentree.client.desktop.configuration.common.messages.AppTitles;
+import gentree.client.desktop.configuration.GenTreeProperties;
+import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.configuration.helper.BorderPaneReloadHelper;
+import gentree.client.desktop.configuration.messages.AppTitles;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
 import gentree.client.visualization.elements.configuration.ContextProvider;

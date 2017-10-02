@@ -1,4 +1,4 @@
-package gentree.client.desktop.configuration.common.helper;
+package gentree.client.desktop.configuration.helper;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.scene.Node;

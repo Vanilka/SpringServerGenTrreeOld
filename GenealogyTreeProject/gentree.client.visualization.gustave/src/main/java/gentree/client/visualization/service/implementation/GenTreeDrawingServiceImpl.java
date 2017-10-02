@@ -1,6 +1,6 @@
 package gentree.client.visualization.service.implementation;
 
-import gentree.client.desktop.configuration.common.messages.LogMessages;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.client.desktop.domain.Member;

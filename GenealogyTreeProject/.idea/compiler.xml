@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gentree.client.desktop" />
-        <module name="gentree.client.desktop.configuration.common" />
         <module name="gentree.client.desktop.context" />
         <module name="gentree.client.desktop.domain" />
         <module name="gentree.client.visualization" />

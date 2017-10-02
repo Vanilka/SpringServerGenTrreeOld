@@ -1,9 +1,9 @@
 package gentree.client.desktop.service.implementation;
 
 
-import gentree.client.desktop.configuration.common.GenTreeProperties;
-import gentree.client.desktop.configuration.common.enums.PropertiesKeys;
-import gentree.client.desktop.configuration.common.messages.LogMessages;
+import gentree.client.desktop.configuration.GenTreeProperties;
+import gentree.client.desktop.configuration.enums.PropertiesKeys;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;

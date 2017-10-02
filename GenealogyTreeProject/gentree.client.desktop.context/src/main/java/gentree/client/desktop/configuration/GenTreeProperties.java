@@ -1,6 +1,6 @@
-package gentree.client.desktop.configuration.common;
+package gentree.client.desktop.configuration;
 
-import gentree.client.desktop.configuration.common.messages.LogMessages;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.Configuration;

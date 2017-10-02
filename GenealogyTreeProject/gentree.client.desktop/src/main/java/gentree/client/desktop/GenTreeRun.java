@@ -1,7 +1,7 @@
 package gentree.client.desktop;
 
 import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
-import gentree.client.desktop.configuration.common.GenTreeDefaultProperties;
+import gentree.client.desktop.configuration.GenTreeDefaultProperties;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;

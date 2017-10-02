@@ -1,4 +1,4 @@
-package gentree.client.desktop.configuration.common.enums;
+package gentree.client.desktop.configuration.enums;
 
 /**
  * Created by Martyna SZYMKOWIAK on 19/03/2017.

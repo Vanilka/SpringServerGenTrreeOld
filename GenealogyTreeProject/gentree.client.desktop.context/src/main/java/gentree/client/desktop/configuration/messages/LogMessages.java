@@ -1,4 +1,4 @@
-package gentree.client.desktop.configuration.common.messages;
+package gentree.client.desktop.configuration.messages;
 
 /**
  * Created by Martyna SZYMKOWIAK on 19/03/2017.
