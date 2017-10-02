@@ -7,7 +7,6 @@ import gentree.client.desktop.configuration.common.helper.BorderPaneReloadHelper
 import gentree.client.desktop.configuration.common.messages.AppTitles;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
-import gentree.client.visualization.core.GenTreeDrawingService;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationTypeElement;

@@ -1,6 +1,7 @@
 package gentree.client.desktop.service.responses;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.responses.ServiceResponse;
 import lombok.Getter;
 import lombok.Setter;
 

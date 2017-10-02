@@ -13,7 +13,7 @@ import gentree.client.desktop.domain.enums.Age;
 import gentree.client.desktop.domain.enums.DeathCauses;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.Race;
-import gentree.client.desktop.service.responses.ServiceResponse;
+import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

@@ -9,10 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gentree.client.desktop" />
         <module name="gentree.client.desktop.configuration.common" />
+        <module name="gentree.client.desktop.context" />
         <module name="gentree.client.desktop.domain" />
-        <module name="gentree.client.desktop.service" />
         <module name="gentree.client.visualization" />
-        <module name="gentree.client.visualization.core" />
         <module name="gentree.client.visualization.elements" />
         <module name="gentree.client.visualization.gustave" />
         <module name="gentree.exceptions" />
@@ -22,9 +21,11 @@
       <module name="GenealogyTreeProject" target="1.8" />
       <module name="gentree.client.desktop" target="1.8" />
       <module name="gentree.client.desktop.configuration.common" target="1.8" />
+      <module name="gentree.client.desktop.context" target="1.8" />
       <module name="gentree.client.desktop.domain" target="1.8" />
       <module name="gentree.client.desktop.exception" target="1.8" />
       <module name="gentree.client.desktop.exception_manager" target="1.8" />
+      <module name="gentree.client.desktop.i]]]" target="1.8" />
       <module name="gentree.client.desktop.service" target="1.8" />
       <module name="gentree.client.visualization" target="1.8" />
       <module name="gentree.client.visualization.core" target="1.8" />

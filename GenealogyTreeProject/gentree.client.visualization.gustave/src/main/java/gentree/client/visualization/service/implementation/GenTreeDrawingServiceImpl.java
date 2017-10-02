@@ -1,11 +1,12 @@
 package gentree.client.visualization.service.implementation;
 
+import gentree.client.desktop.configuration.common.messages.LogMessages;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
-import gentree.client.visualization.core.GenTreeDrawingService;
+import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.scene.layout.HBox;

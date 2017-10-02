@@ -7,7 +7,7 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithRelationController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.service.responses.ServiceResponse;
+import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.visualization.elements.FamilyMemberCard;
 import gentree.client.visualization.elements.MemberCard;
 import gentree.client.visualization.elements.RelationTypeCard;

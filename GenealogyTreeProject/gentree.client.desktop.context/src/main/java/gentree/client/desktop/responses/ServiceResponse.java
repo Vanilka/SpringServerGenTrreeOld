@@ -1,9 +1,9 @@
-package gentree.client.desktop.service.responses;
+package gentree.client.desktop.responses;
 
 public abstract class ServiceResponse {
     private ResponseStatus status;
 
-    ServiceResponse(ResponseStatus status) {
+    public ServiceResponse(ResponseStatus status) {
         this.status = status;
     }
 

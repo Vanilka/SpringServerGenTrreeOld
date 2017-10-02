@@ -1,6 +1,7 @@
 package gentree.client.desktop.service.responses;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.desktop.responses.ServiceResponse;
 
 /**
  * Created by Martyna SZYMKOWIAK on 07/07/2017.
