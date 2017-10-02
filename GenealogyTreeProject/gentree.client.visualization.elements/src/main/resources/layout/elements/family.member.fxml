@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.Double?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="familyMember" maxHeight="188.0" maxWidth="133.0" minHeight="188.0" minWidth="133.0" prefHeight="188.0" prefWidth="133.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="familyMember" maxHeight="188.0" maxWidth="133.0" minHeight="188.0" minWidth="133.0" prefHeight="188.0" prefWidth="133.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/layout/style/elementstyle.css" />
     </stylesheets>
@@ -35,5 +37,16 @@
                 <Font size="12.0" />
             </font>
         </Label>
+      <Polygon fx:id="deathCord" fill="BLACK"  stroke="BLACK" strokeType="INSIDE" visible="false">
+        <points>
+          <Double fx:value="0.0"/> <Double fx:value="40.0" />
+
+          <Double fx:value="0.0" /><Double fx:value="60.0" />
+
+            <Double fx:value="60.0" /> <Double fx:value="0.0" />
+
+          <Double fx:value="40.0" /> <Double fx:value="0.0" />
+        </points>
+      </Polygon>
     </children>
 </fx:root>

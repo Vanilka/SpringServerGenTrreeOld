@@ -70,7 +70,7 @@ public class FamilyGroup extends AnchorPane {
      * Function for Loading FXML view
      */
     private void fxmlLoading() {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/layout/tree_elements/family.group.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/layout/elements/family.group.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try {

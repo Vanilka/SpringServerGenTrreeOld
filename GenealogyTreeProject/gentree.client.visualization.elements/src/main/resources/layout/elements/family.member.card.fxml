@@ -8,9 +8,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.shape.Polygon?>
+<?import java.lang.Double?>
 <fx:root fx:id="familyMemberCard" maxHeight="157.0" maxWidth="100.0" minHeight="157.0" minWidth="100.0" prefHeight="157.0" prefWidth="100.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@/layout/style/elementestyle.css" />
+        <URL value="@/layout/style/elementstyle.css" />
     </stylesheets>
     <children>
         <Rectangle fx:id="rectangleFond" arcHeight="20.0" arcWidth="20.0" fill="#266356" height="155.0" layoutX="7.0" stroke="#266558" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="5.0" width="99.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
@@ -35,5 +37,16 @@
                 <Font size="12.0" />
             </font>
         </Label>
+        <Polygon fx:id="deathCord" fill="BLACK"  stroke="BLACK" strokeType="INSIDE" visible="false">
+            <points>
+                <Double fx:value="0.0"/> <Double fx:value="40.0" />
+
+                <Double fx:value="0.0" /><Double fx:value="60.0" />
+
+                <Double fx:value="60.0" /> <Double fx:value="0.0" />
+
+                <Double fx:value="40.0" /> <Double fx:value="0.0" />
+            </points>
+        </Polygon>
     </children>
 </fx:root>

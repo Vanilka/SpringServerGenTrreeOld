@@ -8,9 +8,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
@@ -41,11 +43,16 @@ public class FamilyMemberCard extends AnchorPane {
     @FXML
     protected Rectangle rectangleFond;
 
+    @FXML
+    private Polygon deathCord;
+
+
     private ObjectProperty<Member> member;
     private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
 
     {
         member = new SimpleObjectProperty<>();
+        //deathCord = initPolygon();
 
     }
 
@@ -58,12 +65,20 @@ public class FamilyMemberCard extends AnchorPane {
 
     }
 
+    private Polygon initPolygon() {
+        return  new Polygon(
+                0.0, 40.0,
+                00, 60.0,
+                60.0, 0.0,
+                40.0, 0.0);
+    }
+
     public FamilyMemberCard() {
         this(null);
     }
 
     private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/tree_elements/family.member.card.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/elements/family.member.card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -82,6 +97,7 @@ public class FamilyMemberCard extends AnchorPane {
                 oldValue.getProperties().forEach(p -> p.removeListener(listener));
             }
             newValue.getProperties().forEach(p -> p.addListener(listener));
+
             fillComponents(newValue);
         };
         return simListener;
@@ -100,17 +116,34 @@ public class FamilyMemberCard extends AnchorPane {
             } else {
                 bornameSim.setText("");
             }
-            setImage(member.getPhoto());
+            setImage(member.getPhoto(), !member.isAlive());
+
+
+            deathCord.setVisible(!member.isAlive());
+
         }
     }
 
-    public void setImage(String path) {
+    public void setImage(String path, Boolean shouldBeInGayScale) {
         try {
             photoSim.setImage(new Image(path));
+
+            if(shouldBeInGayScale) {
+                setGrayScaleToImgView(photoSim);
+            } else {
+                photoSim.setEffect(null);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             photoSim.setImage(new Image(ImageFiles.NO_NAME_MALE.toString()));
         }
+    }
+
+
+    public void setGrayScaleToImgView(ImageView view) {
+        ColorAdjust desaturate = new ColorAdjust();
+        desaturate.setSaturation(-1);
+        view.setEffect(desaturate);
     }
 
     public ObjectProperty<Member> memberProperty() {

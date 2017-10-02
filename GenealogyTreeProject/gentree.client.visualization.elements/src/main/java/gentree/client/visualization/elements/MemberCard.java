@@ -51,6 +51,7 @@ public class MemberCard extends AnchorPane {
     public MemberCard(Member member) {
         super();
         initialize();
+
         this.member.addListener(getChangeMemberListener());
         this.member.setValue(member);
         resize(255, 145);
