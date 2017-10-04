@@ -7,8 +7,11 @@ import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
+import gentree.client.visualization.vanilla.element.VMember;
 import gentree.exception.NotUniqueBornRelationException;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
@@ -39,8 +42,44 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         /*
             Find Roots ( simLeft = null and simRight = null
          */
+
+        List<FamilyGroup> groups = findGroups();
+        box.getChildren().addAll(groups);
+
+        groups.forEach(g -> {
+            g.getRootRelation().getChildren().forEach(child -> {
+                g.getContentHbox().getChildren().add(generateMainPane(child));
+
+            });
+        });
     }
 
+    private AnchorPane generateMainPane(Member grain) {
+        AnchorPane mainPane = new AnchorPane();
+        mainPane.getChildren().add(generateMember(grain));
+        return mainPane;
+    }
+
+
+
+    private VMember generateMember(Member m) {
+        return new VMember(m);
+    }
+
+
+    /**
+     * Function creating groups
+     * @return List<FamilyGroup>
+     */
+    private List<FamilyGroup> findGroups() {
+        List<FamilyGroup> result = new ArrayList<>();
+        context.getService().getCurrentFamily().getRelations()
+                .filtered(r -> r.getLeft() == null)
+                .filtered(r -> r.getRight() == null)
+                .forEach(root -> result.add(new FamilyGroup(root, nodeCounter++)));
+
+        return result;
+    }
 
     /**
      * Strong regles :

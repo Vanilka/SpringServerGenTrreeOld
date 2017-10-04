@@ -183,62 +183,40 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private void initRelationElementsPositionListener() {
 
-        relationTypeElement.boundsInLocalProperty().addListener(c -> {
-            relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
-        });
+        relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
 
-        spouseCard.boundsInLocalProperty().addListener(c -> {
-            relationTypeElement.setLayoutY((spouseCard.getHeight() - relationTypeElement.getHeight()) / 2);
+        spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));
+
+        calculateThisRelationPosition();
+
+        childrenBox.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
 
-        childrenBox.boundsInParentProperty().addListener(c -> {
-            calculateRelationElementsPosition();
-        });
-        childrenConnector.getLine().boundsInParentProperty().addListener(c -> {
+        spouseCard.boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
 
-        childrenBox.prefWidthProperty().addListener(observable -> {
+        childrenConnector.getLine().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
 
-        childrenBox.widthProperty().addListener(observable -> {
+        prefWidthProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
 
-        boundsInParentProperty().addListener(observable -> {
-            calculateRelationElementsPosition();
+        spouseCard.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.doubleValue() < 0) {
+                setPrefWidth(getWidth() - newValue.doubleValue() +20);
+            }
         });
-
-        boundsInLocalProperty().addListener(observable -> {
-            calculateRelationElementsPosition();
-        });
-
-        childrenConnector.getLine().parentProperty().addListener((obs, oldValue, newValue) -> {
-            System.out.println("New parent for line" +newValue);
-        });
-
     }
 
     private void calculateRelationElementsPosition() {
         if (children.size() > 0) {
             Line line = childrenConnector.getLine();
             Double offsetRelationType = line.getEndX() - relationTypeElement.getWidth() / 2.0 - MARGIN_LEFT - PADDING_LEFT;
-            Double offsetSpouse = offsetRelationType - SPACE_BETWEEN_OBJECTS - 200;
-
-            if (offsetSpouse < 0) {
-                System.out.println("Offest Spouse " + offsetSpouse);
-                System.out.println("Current prefWidth " + getPrefWidth());
-                Double x = getWidth() - offsetSpouse + 50;
-                System.out.println("New pref width " + x);
-                this.setPrefWidth(x);
-
-            } else {
-                relationTypeElement.setLayoutX(offsetRelationType);
-                spouseCard.setLayoutX(offsetSpouse);
-            }
-
+            relationTypeElement.setLayoutX(offsetRelationType);
             childrenConnector.connectRelationToChildren(relationTypeElement);
 
         } else {
@@ -249,7 +227,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private void calculateThisRelationPosition() {
         thisRelationReference.setManaged(false);
-
         thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(20));
         thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()).add(30));
       /*  thisRelationReference.setLayoutX(relationTypeElement.getLayoutX());

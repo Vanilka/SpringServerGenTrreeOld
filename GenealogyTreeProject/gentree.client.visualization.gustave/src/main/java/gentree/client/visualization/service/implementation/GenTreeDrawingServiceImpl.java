@@ -106,6 +106,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     }
 
+    /**
+     * Function creating groups
+     * @return
+     */
     private List<FamilyGroup> findGroups() {
         List<FamilyGroup> result = new ArrayList<>();
         context.getService().getCurrentFamily().getRelations()

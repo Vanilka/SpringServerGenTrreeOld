@@ -35,23 +35,16 @@ public class SpouseExConnector extends LineConnector {
     }
 
     private void initListeners() {
-        panelRelationEx.getRelationTypeElement().needsLayoutProperty().addListener(ob -> {
+
+        panelRelationEx.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawLine();
         });
 
-        panelRelationEx.getSpouseCard().widthProperty().addListener(ob -> {
+        panelRelationEx.getSpouseCard().boundsInLocalProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawLine();
         });
 
-        panelRelationEx.getSpouseCard().layoutXProperty().addListener(ob -> {
-            drawLine();
-        });
-
-        panelRelationEx.getRelationTypeElement().widthProperty().addListener(ob -> {
-            drawLine();
-        });
-
-        panelRelationEx.getRelationTypeElement().layoutXProperty().addListener(ob -> {
+        panelRelationEx.getRelationTypeElement().boundsInLocalProperty().addListener(ob -> {
             drawLine();
         });
     }

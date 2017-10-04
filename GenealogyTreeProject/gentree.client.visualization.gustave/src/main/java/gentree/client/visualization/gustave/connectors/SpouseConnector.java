@@ -70,49 +70,29 @@ public class SpouseConnector extends LineConnector {
     private void initPanelCurrentListener() {
         panelChild.panelRelationCurrentProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                newValue.getRelation().boundsInLocalProperty().addListener(ob -> {
+                newValue.getRelation().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
                     drawLine();
                 });
 
-                newValue.getRelation().boundsInParentProperty().addListener(ob -> {
+                newValue.getRelation().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
                     drawLine();
                 });
 
-                newValue.getRelation().needsLayoutProperty().addListener(ob -> {
+                newValue.getSpouseCard().boundsInLocalProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
                     drawLine();
                 });
 
-                newValue.getRelation().heightProperty().addListener(ob -> {
-                    drawLine();
-                });
-
-                newValue.getSpouseCard().boundsInLocalProperty().addListener(ob -> {
-                    drawLine();
-                });
-
-                newValue.getSpouseCard().boundsInParentProperty().addListener(ob -> {
-                    drawLine();
-                });
-
-                newValue.getSpouseCard().needsLayoutProperty().addListener(ob -> {
-                    drawLine();
-                });
-
-                newValue.getSpouseCard().heightProperty().addListener(ob -> {
+                newValue.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
                     drawLine();
                 });
             }
         });
 
-        panelChild.getPanelRelationExPane().boundsInLocalProperty().addListener(observable -> {
+        panelChild.getPanelRelationExPane().boundsInLocalProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawSpouseExLine();
         });
 
-        panelChild.getPanelRelationExPane().boundsInParentProperty().addListener(observable -> {
-            drawSpouseExLine();
-        });
-
-        panelChild.getPanelRelationExPane().needsLayoutProperty().addListener(observable -> {
+        panelChild.getPanelRelationExPane().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawSpouseExLine();
         });
     }

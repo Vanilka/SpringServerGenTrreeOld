@@ -61,27 +61,11 @@ public class ParentToChildrenConnector extends LineConnector {
                     for (ChildConnector childConnector : c.getAddedSubList()) {
                         populateFirstAndLastChild();
 
-                        childConnector.getLine().boundsInParentProperty().addListener(observable -> {
+                        childConnector.getLine().boundsInParentProperty().addListener((obs, oldValue, newValue) -> {
                             drawLine();
                         });
 
-                        childConnector.getLine().boundsInLocalProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().startXProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().endXProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().startYProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().endYProperty().addListener(observable -> {
+                        childConnector.getLine().boundsInLocalProperty().addListener((obs, oldValue, newValue) -> {
                             drawLine();
                         });
                     }
@@ -174,7 +158,9 @@ public class ParentToChildrenConnector extends LineConnector {
      * @param startY
      */
     private void drawConnector(Node n, Double startX, Double startY) {
-        subBorderPane.getChildren().remove(withNodeConnector.get());
+        if(subBorderPane.getChildren().contains(withNodeConnector.get())) {
+          subBorderPane.getChildren().remove(withNodeConnector.get());
+        }
 
         Bounds b = getRelativeBounds(n);
         Point2D bottomPoint = getBottomPoint(b);
