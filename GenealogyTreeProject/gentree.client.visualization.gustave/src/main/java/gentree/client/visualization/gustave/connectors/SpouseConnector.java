@@ -154,13 +154,6 @@ public class SpouseConnector extends LineConnector {
         }
     }
 
-    private void setLineCoordinates(Line line, Double startX, Double startY, Double endX, Double endY) {
-        line.setStartX(startX);
-        line.setStartY(startY);
-        line.setEndX(endX);
-        line.setEndY(endY);
-    }
-
 
     private void drawSpouseFond() {
 

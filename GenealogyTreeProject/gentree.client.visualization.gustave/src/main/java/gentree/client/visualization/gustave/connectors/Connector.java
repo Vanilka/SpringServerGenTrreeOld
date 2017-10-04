@@ -2,6 +2,7 @@ package gentree.client.visualization.gustave.connectors;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Line;
 
 import java.util.Observable;
 
@@ -24,6 +25,13 @@ public abstract class Connector {
 
     protected static Point2D getRightPoint(Bounds b) {
         return b == null ? null : new Point2D(b.getMaxX(), b.getMinY() + b.getHeight()/2);
+    }
+
+    protected static void setLineCoordinates(Line line, Double startX, Double startY, Double endX, Double endY) {
+        line.setStartX(startX);
+        line.setStartY(startY);
+        line.setEndX(endX);
+        line.setEndY(endY);
     }
 
 }

@@ -1,7 +1,9 @@
-
 package gentree.client.visualization.gustave.connectors;
 
-import gentree.client.visualization.gustave.panels.*;
+import gentree.client.visualization.gustave.panels.PanelChild;
+import gentree.client.visualization.gustave.panels.PanelRelationCurrent;
+import gentree.client.visualization.gustave.panels.PanelRelationEx;
+import gentree.client.visualization.gustave.panels.SubRelationPane;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -37,14 +39,18 @@ public class ParentToChildrenConnector extends LineConnector {
 
     /**
      * SubRelationPane element is the parent for this Connector
+     *
      * @param subBorderPane
      */
     public ParentToChildrenConnector(SubRelationPane subBorderPane) {
         super();
         this.subBorderPane = subBorderPane;
+        this.subBorderPane.getChildren().add(0, getLine());
+        this.subBorderPane.getChildren().add(1, withNodeConnector.get());
         initLineProperties(withNodeConnector.get());
         initListeners();
     }
+
 
     private void initListeners() {
 
@@ -100,22 +106,17 @@ public class ParentToChildrenConnector extends LineConnector {
     }
 
     /**
-     *  Drawing horizontal line beetween children
+     * Drawing horizontal line beetween children
      */
     private void drawLine() {
         populateFirstAndLastChild();
         if (list.size() > 0) {
-            subBorderPane.getChildren().remove(getLine());
             if (firstChild.get() != null && lastChild.get() != null) {
 
                 Line start = firstChild.get().getLine();
                 Line end = lastChild.get().getLine();
-                getLine().setStartX(start.getEndX());
-                getLine().setStartY(start.getEndY());
-                getLine().setEndX(end.getEndX());
-                getLine().setEndY(end.getEndY());
 
-                subBorderPane.getChildren().add(0, getLine());
+                setLineCoordinates(getLine(),start.getEndX(), start.getEndY(),  end.getEndX(), end.getEndY() );
             }
         }
     }
@@ -139,11 +140,11 @@ public class ParentToChildrenConnector extends LineConnector {
     }
 
     private void connectToLeft(Node n) {
-        drawConnector(n, firstChild.get().getLine().getEndX(), firstChild.get().getLine().getEndY() );
+        drawConnector(n, firstChild.get().getLine().getEndX(), firstChild.get().getLine().getEndY());
     }
 
     private void connectToRight(Node n) {
-        drawConnector(n,lastChild.get().getLine().getEndX(),lastChild.get().getLine().getEndY() );
+        drawConnector(n, lastChild.get().getLine().getEndX(), lastChild.get().getLine().getEndY());
     }
 
     private void connectToCenter(Node n) {
@@ -153,27 +154,20 @@ public class ParentToChildrenConnector extends LineConnector {
 
     /**
      * Drawing line beetween Node and children point
+     *
      * @param n
      * @param startX
      * @param startY
      */
     private void drawConnector(Node n, Double startX, Double startY) {
-        if(subBorderPane.getChildren().contains(withNodeConnector.get())) {
-          subBorderPane.getChildren().remove(withNodeConnector.get());
-        }
 
         Bounds b = getRelativeBounds(n);
         Point2D bottomPoint = getBottomPoint(b);
 
-        withNodeConnector.get().setStartX(startX);
-        withNodeConnector.get().setStartY(startY);
-        withNodeConnector.get().setEndX(bottomPoint.getX());
-        withNodeConnector.get().setEndY(bottomPoint.getY());
+        setLineCoordinates(withNodeConnector.get(), startX, startY, bottomPoint.getX(), bottomPoint.getY());
 
-        subBorderPane.getChildren().add(1, withNodeConnector.get());
         initLineProperties(withNodeConnector.get());
     }
-
 
     protected Bounds getRelativeBounds(Node node) {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
@@ -184,4 +178,5 @@ public class ParentToChildrenConnector extends LineConnector {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
+
 }

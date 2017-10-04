@@ -8,6 +8,7 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.visualization.elements.RelationReference;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -143,8 +144,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         initSpouseListener();
         initThisRelationListener();
         initChildrenListener();
-        initRelationElementsPositionListener();
-        calculateRelationElementsPosition();
+        initElementPositionsListeners();
     }
 
     private void initThisRelationListener() {
@@ -177,18 +177,30 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
                     c.getRemoved().forEach(childrenConnector::removePanelChild);
                 }
             }
-            calculateRelationElementsPosition();
+           // calculateRelationElementsPosition();
         });
     }
 
-    private void initRelationElementsPositionListener() {
+    private void initElementPositionsListeners() {
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
-
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));
 
-        calculateThisRelationPosition();
+        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(20));
+        thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()).add(30));
 
+        relationTypeElement.layoutXProperty().bind(Bindings.when(Bindings.isNotEmpty(children))
+                .then(childrenConnector.getLine().endXProperty()
+                .add(relationTypeElement.widthProperty())
+                .divide(2)
+                .subtract(PADDING_LEFT)
+                .subtract(PADDING_RIGHT))
+        .otherwise(spouseCard.widthProperty().add(SPACE_BETWEEN_OBJECTS)));
+
+        relationTypeElement.layoutXProperty().addListener((observable, oldValue, newValue) -> {
+            childrenConnector.connectRelationToChildren(relationTypeElement);
+        });
+        /*
         childrenBox.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
@@ -204,6 +216,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         prefWidthProperty().addListener((observable, oldValue, newValue) -> {
             calculateRelationElementsPosition();
         });
+*/
 
         spouseCard.layoutXProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.doubleValue() < 0) {
@@ -217,21 +230,12 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             Line line = childrenConnector.getLine();
             Double offsetRelationType = line.getEndX() - relationTypeElement.getWidth() / 2.0 - MARGIN_LEFT - PADDING_LEFT;
             relationTypeElement.setLayoutX(offsetRelationType);
-            childrenConnector.connectRelationToChildren(relationTypeElement);
+
 
         } else {
             relationTypeElement.setLayoutX(spouseCard.getWidth() + SPACE_BETWEEN_OBJECTS);
             this.setPrefWidth(MINIMAL_RELATION_WIDTH);
         }
-    }
-
-    private void calculateThisRelationPosition() {
-        thisRelationReference.setManaged(false);
-        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(20));
-        thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()).add(30));
-      /*  thisRelationReference.setLayoutX(relationTypeElement.getLayoutX());
-        thisRelationReference.setLayoutY(relationTypeElement.getLayoutY() + relationTypeElement.getHeight());*/
-
     }
 }
 

@@ -80,7 +80,6 @@ public class PanelChild extends SubBorderPane {
     }
 
     public PanelChild(Member m, SubBorderPane parent) {
-       // prefWidthProperty().bind(panelRelationExPane.widthProperty().add(panelSinglePane.widthProperty()).add(panelRelationCurrentPane.widthProperty()));
         setPrefSize(200, 200);
         member.setValue(m);
         setParentPane(parent);
@@ -91,11 +90,7 @@ public class PanelChild extends SubBorderPane {
         if(parent != null) {
             this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
-
-
     }
-
-
     /*
         Init Listeners
      */
