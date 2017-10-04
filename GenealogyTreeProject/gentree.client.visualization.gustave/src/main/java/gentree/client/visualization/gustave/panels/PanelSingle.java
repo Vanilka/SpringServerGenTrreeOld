@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -104,8 +105,7 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     }
 
     private void initPane() {
-        setPrefSize(100, 100);
-        pane.setPrefHeight(RELATION_HEIGHT);
+        pane.setPrefSize(180,RELATION_HEIGHT);
         pane.getChildren().addAll(member, thisRelationReference);
     }
 
@@ -146,37 +146,14 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
 
     private void initRelationElementsPositionListener() {
 
-
         thisRelationReference.layoutXProperty().bind(member.layoutXProperty());
         thisRelationReference.layoutYProperty().bind(member.layoutYProperty().add(member.heightProperty()));
 
-        member.layoutXProperty().bind(Bindings.when(Bindings.isNotEmpty(childrenPanels))
-                .then(childrenConnector.getLine().startXProperty()
-                        .add(childrenConnector.getLine().endXProperty())
-                        .subtract(member.widthProperty())
-                        .divide(2)
-                        .subtract(PADDING_LEFT))
-                .otherwise(0.0));
+        member.layoutXProperty().bind(pane.widthProperty().subtract(member.widthProperty()).divide(2));
 
         member.layoutXProperty().addListener((observable, oldValue, newValue) -> {
-            childrenConnector.connectRelationToChildren(member);
+            //childrenConnector.connectRelationToChildren(member);
         });
-
-/*        pane.widthProperty().addListener( (observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-        });
-
-        childrenConnector.getLine().boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-        });
-
-        childrenConnector.getLine().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            calculateRelationElementsPosition();
-        });
-
-        member.boundsInParentProperty().addListener(observable -> {
-           calculateRelationElementsPosition();
-        });*/
     }
 
     private void calculateRelationElementsPosition() {
@@ -199,5 +176,10 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     public void addChild(PanelChild child) {
         childrenPanels.add(child);
         child.setParentPane(this);
+    }
+
+    @Override
+    public Node getConnectionNode() {
+        return member;
     }
 }

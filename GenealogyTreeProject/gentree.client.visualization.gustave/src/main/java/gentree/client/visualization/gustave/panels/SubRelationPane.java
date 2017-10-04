@@ -1,5 +1,8 @@
 package gentree.client.visualization.gustave.panels;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import lombok.Getter;
 
@@ -13,11 +16,11 @@ public abstract class SubRelationPane extends SubBorderPane {
 
     SubRelationPane() {
         childrenBox = new HBox();
-
-        setOnMouseClicked(event -> {
-            System.out.println("clicket on me :" + this.toString());
-        });
     }
 
+
+    public Node getConnectionNode() {
+        return null;
+    }
 
 }

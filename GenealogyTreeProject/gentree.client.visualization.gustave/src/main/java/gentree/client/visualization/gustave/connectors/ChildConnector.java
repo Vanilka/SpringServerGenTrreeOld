@@ -59,6 +59,10 @@ public class ChildConnector extends LineConnector  {
         panelChild.boundsInParentProperty().addListener((obs, oldValue, newValue) -> {
             redrawLine();
         });
+
+        panelChild.getPanelSingle().get().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            redrawLine();
+        });
     }
 
     private void redrawLine() {

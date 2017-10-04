@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class RelationTypeElement extends RelationTypeCard {
 
-    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER__PROPERTY = new SimpleObjectProperty<>();
+    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
 
     {
         init();
@@ -34,16 +34,16 @@ public class RelationTypeElement extends RelationTypeCard {
         dropShadow = new DropShadow();
         initShadow();
 
-        this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
+       // this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
 
-        this.setOnMouseExited(t -> circle.setEffect(null));
+     //   this.setOnMouseExited(t -> circle.setEffect(null));
 
 
-        if(CONTEXT_PROVIDER__PROPERTY.get() != null) {
-            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER__PROPERTY.get().showRelationContextMenu(returnThis(), event));
+        if(CONTEXT_PROVIDER_PROPERTY.get() != null) {
+            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showRelationContextMenu(returnThis(), event));
         }
 
-        CONTEXT_PROVIDER__PROPERTY.addListener((observable, oldValue, newValue) -> {
+        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
             if(newValue == null) {
                 this.setOnContextMenuRequested(null);
             } else {
@@ -66,6 +66,8 @@ public class RelationTypeElement extends RelationTypeCard {
 
 
     public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER__PROPERTY.set(contextProviderProperty);
+        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
     }
+
+
 }
