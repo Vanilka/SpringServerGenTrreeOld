@@ -53,13 +53,104 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScreenMainLeftController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ScreenMainLeftController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainLeftController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1065">
-              <caret line="87" column="19" lean-forward="false" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+            <state relative-caret-position="930">
+              <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GenTreeRun.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/GenTreeRun.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActiveRelationGuard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="34" column="47" lean-forward="false" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Relation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="173" column="21" lean-forward="true" selection-start-line="173" selection-start-column="21" selection-end-line="173" selection-end-column="21" />
+              <folding>
+                <element signature="e#3979#3980#0" expanded="true" />
+                <element signature="e#4056#4057#0" expanded="true" />
+                <element signature="e#4102#4103#0" expanded="true" />
+                <element signature="e#4175#4176#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog.add.spouse.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="57" column="165" lean-forward="false" selection-start-line="57" selection-start-column="165" selection-end-line="57" selection-end-column="165" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog.app.properties.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="40" column="71" lean-forward="false" selection-start-line="40" selection-start-column="71" selection-end-line="40" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog.add.parents.to.member.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.parents.to.member.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RelationContextMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/RelationContextMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gentree_location" pinned="false" current-in-tab="false">
+        <entry file="file://gentree_location">
+          <provider selected="true" editor-type-id="ResourceBundle">
+            <state />
           </provider>
         </entry>
       </file>
@@ -136,11 +227,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/responses/ServiceResponse.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/common/GenTreeDefaultProperties.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/GenTreeDefaultProperties.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/resources/layout/elements/family.member.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/resources/layout/elements/family.member.card.fxml" />
@@ -165,9 +251,7 @@
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelSingle.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationCurrent.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/RelationReference.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddSpouseController.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/LineConnector.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements/src/main/java/gentree/client/visualization/elements/RelationTypeCard.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java" />
@@ -178,7 +262,6 @@
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainRightController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/ElementsMapping.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/TabFamilyInfoController.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainLeftController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/PaneShowInfoSim.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/pane.show.info.relation.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/PaneShowInfoRelation.java" />
@@ -187,6 +270,14 @@
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/tab.family.view.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/messages/Keys.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/TabFamilyViewController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainLeftController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.member.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.parents.to.member.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/RelationContextMenu.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java" />
       </list>
     </option>
   </component>
@@ -312,6 +403,16 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="desktop" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
@@ -852,7 +953,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="596313000" />
+    <option name="totallyTimeSpent" value="598023000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -864,7 +965,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="823" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="823" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -978,36 +1079,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="430" column="0" lean-forward="false" selection-start-line="430" selection-start-column="0" selection-end-line="430" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/InvokeLaterDispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="2896" column="12" lean-forward="false" selection-start-line="2896" selection-start-column="12" selection-end-line="2897" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/Connector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/ParentToChildrenConnector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-192">
@@ -1121,6 +1192,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="51" column="95" lean-forward="false" selection-start-line="51" selection-start-column="95" selection-end-line="51" selection-end-column="95" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,17 +1202,6 @@
           <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.member.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
@@ -1158,17 +1219,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/connectors/LineConnector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
@@ -1181,14 +1231,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="108" column="58" lean-forward="false" selection-start-line="108" selection-start-column="58" selection-end-line="108" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="172" column="68" lean-forward="false" selection-start-line="172" selection-start-column="68" selection-end-line="172" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -1224,14 +1266,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1950">
           <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1457,10 +1491,91 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.member.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="112" column="70" lean-forward="false" selection-start-line="112" selection-start-column="64" selection-end-line="112" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainLeftController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="87" column="19" lean-forward="false" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+        <state relative-caret-position="930">
+          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.parents.to.member.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="40" column="71" lean-forward="false" selection-start-line="40" selection-start-column="71" selection-end-line="40" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="57" column="165" lean-forward="false" selection-start-line="57" selection-start-column="165" selection-end-line="57" selection-end-column="165" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/RelationContextMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ActiveRelationGuard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="34" column="47" lean-forward="false" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="173" column="21" lean-forward="true" selection-start-line="173" selection-start-column="21" selection-end-line="173" selection-end-column="21" />
+          <folding>
+            <element signature="e#3979#3980#0" expanded="true" />
+            <element signature="e#4056#4057#0" expanded="true" />
+            <element signature="e#4102#4103#0" expanded="true" />
+            <element signature="e#4175#4176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/GenTreeRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding />
         </state>
       </provider>

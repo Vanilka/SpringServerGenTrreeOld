@@ -32,6 +32,7 @@ public class ActiveRelationGuard implements Observer {
                 After change an relation type to Active,  auto-change others to inActive
              */
             if (relation.getLeft() != null && relation.getRight() != null && relation.getActive()) {
+                System.out.println("Will filter");
                 relations
                         .filtered(r -> r.getLeft() != null)
                         .filtered(r -> r.getRight() != null)

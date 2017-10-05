@@ -31,7 +31,7 @@ public class RelationContextMenu extends ContextMenu {
     public RelationContextMenu() {
         super();
         initItems();
-        this.getItems().addAll(menuChangeType,itemChangeType, itemAddChildren, itemRemove);
+        this.getItems().addAll(menuChangeType, itemAddChildren, itemRemove);
     }
 
     public void show(RelationTypeElement r, ContextMenuEvent event) {
@@ -40,7 +40,6 @@ public class RelationContextMenu extends ContextMenu {
     }
 
     private void initItems() {
-        initItemChangeType();
         initItemAddChildren();
         initMenuChangeType();
     }
@@ -66,10 +65,6 @@ public class RelationContextMenu extends ContextMenu {
         return item;
     }
 
-    private void initItemChangeType() {
-
-      //itemChangeType.setOnAction(event -> sm.showNewDialog(new DialogAddParentsToMemberController(), relationTypeElement, FilesFXML.DIALOG_ADD_PARENTS_TO_MEMBER));
-    }
     private void initItemAddChildren() {
        itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), relationTypeElement.getRelation().get(), FilesFXML.DIALOG_ADD_CHILDREN));
     }

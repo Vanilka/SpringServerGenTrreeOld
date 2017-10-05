@@ -38,6 +38,6 @@
         <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
                    prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="10.0"/>
         <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
-                   prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="10.0"/>
+                   prefWidth="120.0" styleClass="button" text="%confirm" AnchorPane.bottomAnchor="10.0"/>
     </children>
 </AnchorPane>

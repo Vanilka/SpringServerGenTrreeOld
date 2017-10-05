@@ -170,7 +170,7 @@ public class Relation extends Observable implements Serializable {
     }
 
     public void setActive(boolean active) {
-        this.active.set(!type.equals(RelationType.NEUTRAL) && active);
+        this.active.set(!type.get().equals(RelationType.NEUTRAL) && active);
         invalidate();
     }
 
