@@ -381,7 +381,6 @@ public class GenTreeLocalService implements FamilyService {
             Files.createDirectory(Paths.get(baseDir, filename.replace(PROJECT_FILE_EXTENSION, "")));
             Files.createFile(Paths.get(baseDir, filename));
             projectFilename = filename;
-
             saveProject();
 
 
