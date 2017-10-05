@@ -16,7 +16,9 @@ import java.util.Observable;
 /**
  * Created by Martyna SZYMKOWIAK on 02/07/2017.
  */
-@XmlType(name = "relation")
+
+@XmlType(name = "relation", propOrder = {"id","type", "active", "left", "right", "children"})
+//@XmlType(name = "relation")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Relation extends Observable implements Serializable {
 
@@ -56,7 +58,7 @@ public class Relation extends Observable implements Serializable {
         setLeft(left);
         setRight(right);
         setType(type);
-        setActive(!type.equals(RelationType.NEUTRAL) && active);
+        setActive(active);
         addChildren(children);
     }
 
@@ -153,24 +155,30 @@ public class Relation extends Observable implements Serializable {
     }
 
 
+    @XmlElement(name = "type")
     public RelationType getType() {
         return type.get() == null ? RelationType.NEUTRAL : type.get();
     }
 
     public void setType(RelationType type) {
         this.type.set(type == null ? RelationType.NEUTRAL : type);
+        if(type == RelationType.NEUTRAL) {
+            active.set(false);
+        }
     }
 
     public ObjectProperty<RelationType> typeProperty() {
         return type;
     }
 
+
+    @XmlElement(name = "active")
     public boolean getActive() {
         return active.get();
     }
 
     public void setActive(boolean active) {
-        this.active.set(type.get() != RelationType.NEUTRAL && active);
+        this.active.set(active);
         invalidate();
     }
 
@@ -178,6 +186,7 @@ public class Relation extends Observable implements Serializable {
         return active;
     }
 
+    @XmlTransient
     public Long getReferenceNumber() {
         return referenceNumber.get();
     }

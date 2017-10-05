@@ -101,6 +101,10 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         setMinWidth(Region.USE_PREF_SIZE);
         setMaxWidth(Region.USE_PREF_SIZE);*/
 
+
+        spouseCard.setOnMouseClicked(event -> {
+            System.out.println("Relation reference " +thisRelation.getReferenceNumber());
+        });
     }
 
 

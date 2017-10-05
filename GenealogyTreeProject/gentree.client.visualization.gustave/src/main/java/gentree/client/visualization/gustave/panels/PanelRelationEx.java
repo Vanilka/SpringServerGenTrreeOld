@@ -92,11 +92,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         super();
         initPanes();
         setPrefWidth(MINIMAL_RELATION_WIDTH);
-        spouseCard.setOnMouseClicked(event -> {
-            System.out.println("offest is : " + offset.getValue());
-            System.out.println("PrefSize " + getPrefWidth());
-            System.out.println("Width " + getWidth());
-        });
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);

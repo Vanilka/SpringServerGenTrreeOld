@@ -38,6 +38,10 @@ public class RelationTypeElement extends RelationTypeCard {
 
      //   this.setOnMouseExited(t -> circle.setEffect(null));
 
+        this.setOnMouseClicked(event -> {
+            System.out.println("Relation " +this.getRelation().get() + " -> Has reference   " +this.getRelation().get().getReferenceNumber());
+        });
+
 
         if(CONTEXT_PROVIDER_PROPERTY.get() != null) {
             this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showRelationContextMenu(returnThis(), event));
