@@ -1,13 +1,13 @@
 package gentree.client.visualization.service.implementation;
 
 import gentree.client.desktop.configuration.messages.LogMessages;
-import gentree.client.desktop.service.FamilyContext;
-import gentree.client.visualization.gustave.panels.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
+import gentree.client.visualization.gustave.panels.*;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.scene.layout.HBox;
 import lombok.extern.log4j.Log4j2;
@@ -21,8 +21,8 @@ import java.util.List;
 @Log4j2
 public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
-    private final HBox box;
     private static FamilyContext context;
+    private final HBox box;
     private int nodeCounter;
     private Long idReference;
 
@@ -32,6 +32,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     public GenTreeDrawingServiceImpl(HBox box) {
         this.box = box;
+    }
+
+    public static void setContext(FamilyContext context) {
+        GenTreeDrawingServiceImpl.context = context;
     }
 
     @Override
@@ -94,7 +98,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         }
     }
 
-
     private void populateRelationPanel(Relation relation, SubBorderPane panel) {
 
         relation.getChildren().forEach(c -> {
@@ -108,6 +111,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     /**
      * Function creating groups
+     *
      * @return
      */
     private List<FamilyGroup> findGroups() {
@@ -119,7 +123,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
         return result;
     }
-
 
     /**
      * Function to generating graphical represntation of relation CURRENT
@@ -158,7 +161,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         } else {
             if (relation.getActive() && relation.getType() != RelationType.NEUTRAL) {
                 Relation bornRelation = findBornRelation(other);
-                if(bornRelation != null && !bornRelation.isRoot() && bornRelation.getReferenceNumber() == 0) {
+                if (bornRelation != null && !bornRelation.isRoot() && bornRelation.getReferenceNumber() == 0) {
                     bornRelation.setReferenceNumber(++idReference);
                 }
                 return new PanelRelationCurrent(other, relation, bornRelation);
@@ -178,7 +181,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      * @return
      */
     private boolean isStrong(Relation relation, Member member) {
-        return whoIsStrong(relation).equals(member);
+
+        Member result = whoIsStrong(relation);
+        return result != null && result.equals(member);
     }
 
     /**
@@ -190,22 +195,20 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      * @return
      */
     private Member whoIsStrong(Relation relation) {
+
+        Member response = null;
+
         if (relation.getLeft() != null || relation.getRight() != null) {
             if (relation.getLeft() == null) {
-                return relation.getRight();
+                response = relation.getRight();
             } else if (relation.getRight() == null) {
-                return relation.getLeft();
+                response = relation.getLeft();
             } else if (relation.getActive()) {
-                return relation.getRight();
-            } else {
-                relation.getLeft();
+                response = relation.getRight();
             }
-        } else {
-            return null;
         }
-        return null;
+        return response;
     }
-
 
     private void reset() {
         box.getChildren().clear();
@@ -223,9 +226,5 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             log.error(LogMessages.MSG_ERROR_BORN, m);
             return null;
         }
-    }
-
-    public static void setContext(FamilyContext context) {
-        GenTreeDrawingServiceImpl.context = context;
     }
 }

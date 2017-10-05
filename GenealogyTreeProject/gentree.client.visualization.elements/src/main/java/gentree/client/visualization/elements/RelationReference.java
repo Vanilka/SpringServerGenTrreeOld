@@ -48,10 +48,8 @@ public class RelationReference extends StackPane {
     private void initRelationListener() {
         relation.addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
-                System.out.println("bind relation number");
                 text.textProperty().bind(newValue.referenceNumberProperty().asString());
                 this.visibleProperty().bind(newValue.referenceNumberProperty().greaterThan(0));
-
             } else {
                 this.visibleProperty().unbind();
                 this.setVisible(false);

@@ -174,7 +174,6 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
                         TableCell<Member, String> cell = new TableCell<Member, String>() {
                             @Override
                             protected void updateItem(String item, boolean empty) {
-                                System.out.println(item);
                                 super.updateItem(item, empty);
                                 ImageView imageview = new ImageView();
                                 imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);
