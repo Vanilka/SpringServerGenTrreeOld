@@ -28,4 +28,5 @@ public class LogMessages {
     public static final String MSG_MISSING_PROPERTY = "The property {{}} is missing in config file. The default value will be used";
 
     public static final String MSG_ERROR_LOAD_IMAGE = "Error while load image";
+    public static final String MSG_NO_STRONG_PERSON = "Cannot fins strong person for Relation. Should never happens";
 }

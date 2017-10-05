@@ -183,6 +183,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     private boolean isStrong(Relation relation, Member member) {
 
         Member result = whoIsStrong(relation);
+
         return result != null && result.equals(member);
     }
 
@@ -203,8 +204,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
                 response = relation.getRight();
             } else if (relation.getRight() == null) {
                 response = relation.getLeft();
-            } else if (relation.getActive()) {
+            } else if (relation.getActive() || relation.getType() == RelationType.NEUTRAL) {
                 response = relation.getRight();
+            } else {
+                response = relation.getLeft();
             }
         }
         return response;
