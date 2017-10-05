@@ -34,7 +34,7 @@ public class LineConnector extends Connector {
         line.setStrokeWidth(width);
         line.setStrokeLineJoin(StrokeLineJoin.ROUND);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
-    }
+}
 
     public Line getLine() {
         return line.get();

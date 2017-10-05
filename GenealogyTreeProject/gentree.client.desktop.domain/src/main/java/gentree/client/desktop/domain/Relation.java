@@ -39,7 +39,7 @@ public class Relation extends Observable implements Serializable {
         this.left = new SimpleObjectProperty<>();
         this.right = new SimpleObjectProperty<>();
         this.children = FXCollections.observableArrayList();
-        this.type = new SimpleObjectProperty<>();
+        this.type = new SimpleObjectProperty<>(RelationType.NEUTRAL);
         this.active = new SimpleBooleanProperty();
 
     }
@@ -56,9 +56,8 @@ public class Relation extends Observable implements Serializable {
         setLeft(left);
         setRight(right);
         setType(type);
-        setActive(type.equals(RelationType.NEUTRAL) || active);
+        setActive(!type.equals(RelationType.NEUTRAL) && active);
         addChildren(children);
-
     }
 
 
@@ -171,7 +170,7 @@ public class Relation extends Observable implements Serializable {
     }
 
     public void setActive(boolean active) {
-        this.active.set(active);
+        this.active.set(!type.equals(RelationType.NEUTRAL) && active);
         invalidate();
     }
 

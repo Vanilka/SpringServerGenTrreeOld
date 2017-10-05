@@ -14,6 +14,7 @@ import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.visualization.elements.MemberCard;
 import gentree.exception.NotUniqueBornRelationException;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -57,6 +58,9 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     private JFXButton chooseSpouse;
 
     @FXML
+    private JFXCheckBox checkBoxSetCurrent;
+
+    @FXML
     private JFXCheckBox checkBoxHomoAllowed;
 
     @FXML
@@ -93,7 +97,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     @FXML
     public void confirm(ActionEvent actionEvent) {
 
-        context.getService().addRelation(member.get(), spouse.get(),  relationTypeComboBox.getValue(), true);
+        context.getService().addRelation(member.get(), spouse.get(),  relationTypeComboBox.getValue(), checkBoxSetCurrent.isSelected());
         stage.close();
     }
 
@@ -180,9 +184,19 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
 
     private void initPanes() {
         currentMemberPane.getChildren().add(memberCard);
+
         spousePane.getChildren().add(spouseCard);
+
         checkBoxHomoAllowed.setSelected(config.getBoolean(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO));
         initRelationTypeComboBox();
+
+        checkBoxSetCurrent.disableProperty().bind(Bindings.createBooleanBinding((() -> relationTypeComboBox.getValue().equals(RelationType.NEUTRAL)), relationTypeComboBox.valueProperty()));
+
+        relationTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.equals(RelationType.NEUTRAL)){
+                checkBoxSetCurrent.setSelected(false);
+            }
+        });
     }
 
     private void initRelationTypeComboBox() {

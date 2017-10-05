@@ -1,6 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
+import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
@@ -80,6 +81,8 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
+        this.languageBundle.bind(context.getBundle());
+        addLanguageListener();
 
         gtFamilyMemberTable.setVisible(true);
         gtFamilyRelationTable.setVisible(false);
@@ -131,6 +134,8 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     private void reloadElements() {
         // Nothing to do
+        buttonShowMemberTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
+        buttonShowRelationTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
     }
 
     @FXML
@@ -145,7 +150,7 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     @FXML
     public void showInfoRelation(MouseEvent event) {
         Relation selected = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
-        if(event.getClickCount() == 2 && selected != null) {
+        if (event.getClickCount() == 2 && selected != null) {
             sm.getScreenMainController().showInfoRelation(selected);
         }
     }
@@ -262,7 +267,6 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
                         TableCell<Member, String> cell = new TableCell<Member, String>() {
                             @Override
                             protected void updateItem(String item, boolean empty) {
-                                System.out.println(item);
                                 super.updateItem(item, empty);
                                 ImageView imageview = new ImageView();
                                 imageview.setFitHeight(TABLE_IMAGE_MEMBER_HEIGHT);

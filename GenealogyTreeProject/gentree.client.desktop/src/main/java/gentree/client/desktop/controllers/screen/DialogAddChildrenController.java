@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -41,6 +42,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     private final RelationTypeCard relationType;
     private final ObjectProperty<Relation> relation;
     private final ObservableList<Member> childrenList;
+
     @FXML
     private AnchorPane motherPane;
     @FXML
@@ -53,6 +55,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     private JFXButton buttonConfirm;
     @FXML
     private JFXButton buttonCancel;
+
     private Button addChildButton;
     private Stage stage;
     @FXML
@@ -66,6 +69,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
         motherCard = new MemberCard();
         fatherCard = new MemberCard();
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

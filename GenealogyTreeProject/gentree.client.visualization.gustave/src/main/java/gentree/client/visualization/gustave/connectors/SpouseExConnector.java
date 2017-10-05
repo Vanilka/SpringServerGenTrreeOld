@@ -22,36 +22,28 @@ public class SpouseExConnector extends LineConnector {
         super();
         this.panelRelationEx = panel;
         initLineProperties(getLine());
+
+        panelRelationEx.getChildren().add(0, getLine());
+
         initListeners();
     }
 
     @Override
     protected void initLineProperties(Line line) {
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(10);
+
+        initLineProperties(line, Color.BLACK, 10.0);
         line.setStrokeLineJoin(StrokeLineJoin.ROUND);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
         line.getStrokeDashArray().addAll(2d, 21d);
     }
 
     private void initListeners() {
-        panelRelationEx.getRelationTypeElement().needsLayoutProperty().addListener(ob -> {
+
+        panelRelationEx.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawLine();
         });
 
-        panelRelationEx.getSpouseCard().widthProperty().addListener(ob -> {
-            drawLine();
-        });
-
-        panelRelationEx.getSpouseCard().layoutXProperty().addListener(ob -> {
-            drawLine();
-        });
-
-        panelRelationEx.getRelationTypeElement().widthProperty().addListener(ob -> {
-            drawLine();
-        });
-
-        panelRelationEx.getRelationTypeElement().layoutXProperty().addListener(ob -> {
+        panelRelationEx.getRelationTypeElement().boundsInParentProperty().addListener(ob -> {
             drawLine();
         });
     }
@@ -64,6 +56,7 @@ public class SpouseExConnector extends LineConnector {
                 drawLine(spouse, relationType);
             }
         } catch (Exception e) {
+
         }
 
     }
@@ -75,14 +68,11 @@ public class SpouseExConnector extends LineConnector {
         Bounds relationTypeBounds = getRelativeBounds(relationType);
         Point2D relationTypePoint = getLeftPoint(relationTypeBounds);
 
-        panelRelationEx.getChildren().remove(getLine());
-
         getLine().setStartX(spousePoint.getX());
         getLine().setStartY(spousePoint.getY());
         getLine().setEndX(relationTypePoint.getX());
         getLine().setEndY(relationTypePoint.getY());
 
-        panelRelationEx.getChildren().add(0, getLine());
     }
 
     protected Bounds getRelativeBounds(Node node) {

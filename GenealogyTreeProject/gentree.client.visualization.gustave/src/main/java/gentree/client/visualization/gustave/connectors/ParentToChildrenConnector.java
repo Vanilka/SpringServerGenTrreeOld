@@ -1,6 +1,10 @@
 package gentree.client.visualization.gustave.connectors;
 
-import gentree.client.visualization.gustave.panels.*;
+import gentree.client.visualization.gustave.panels.PanelChild;
+import gentree.client.visualization.gustave.panels.PanelRelationCurrent;
+import gentree.client.visualization.gustave.panels.PanelRelationEx;
+import gentree.client.visualization.gustave.panels.SubRelationPane;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -9,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import lombok.Getter;
 
@@ -27,166 +32,101 @@ public class ParentToChildrenConnector extends LineConnector {
     /*
     *   Child Connectors for children in Sub-Relation-Pane
     */
-    private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
-    private ObjectProperty<ChildConnector> firstChild = new SimpleObjectProperty<>();
-    private ObjectProperty<ChildConnector> lastChild = new SimpleObjectProperty<>();
 
-    @Getter
-    private ObjectProperty<Line> withNodeConnector = new SimpleObjectProperty<>(new Line());
+    private final BetweenChildrenConnector betweenChildrenConnector;
+
 
     /**
      * SubRelationPane element is the parent for this Connector
+     *
      * @param subBorderPane
      */
     public ParentToChildrenConnector(SubRelationPane subBorderPane) {
         super();
         this.subBorderPane = subBorderPane;
-        initLineProperties(withNodeConnector.get());
+        this.subBorderPane.getChildren().add(0, getLine());
+        this.betweenChildrenConnector = new BetweenChildrenConnector(subBorderPane);
         initListeners();
     }
 
+
     private void initListeners() {
-
-        initListListener();
-
-    }
-
-    private void initListListener() {
-        list.addListener((ListChangeListener<ChildConnector>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    populateFirstAndLastChild();
-                    drawLine();
-                    for (ChildConnector childConnector : c.getAddedSubList()) {
-                        populateFirstAndLastChild();
-
-                        childConnector.getLine().boundsInParentProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().boundsInLocalProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().startXProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().endXProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().startYProperty().addListener(observable -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().endYProperty().addListener(observable -> {
-                            drawLine();
-                        });
-                    }
-                }
-                if (c.wasRemoved()) {
-                    c.getRemoved().forEach(ChildConnector::removeLine);
-                }
-            }
+        betweenChildrenConnector.getLine().boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
+            connectRelationToChildren();
         });
+
+        betweenChildrenConnector.getLine().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            connectRelationToChildren();
+        });
+
+        subBorderPane.getConnectionNode().boundsInLocalProperty().addListener((observable -> {
+            connectRelationToChildren();
+        }));
+
+        subBorderPane.getConnectionNode().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            connectRelationToChildren();
+        });
+
+        getLine().visibleProperty().bind(betweenChildrenConnector.isListEmpty().not());
+
+
     }
 
-    private void populateFirstAndLastChild() {
-        if (!list.isEmpty()) {
-            firstChild.setValue(list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).get());
-            lastChild.setValue(list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).get());
-        } else {
-            firstChild.setValue(null);
-            lastChild.setValue(null);
-        }
-    }
 
     public void addPanelChild(PanelChild child) {
-        list.add(new ChildConnector(child, subBorderPane));
+        betweenChildrenConnector.addPanelChild(child);
     }
 
     public void removePanelChild(PanelChild child) {
-        list.removeIf(p -> p.getPanelChild().equals(child));
+        betweenChildrenConnector.removePanelChild(child);
     }
 
-    public void drawChildrenConnectors() {
-        drawLine();
-    }
-
-    /**
-     *  Drawing horizontal line beetween children
-     */
-    private void drawLine() {
-        populateFirstAndLastChild();
-        if (list.size() > 0) {
-            subBorderPane.getChildren().remove(getLine());
-            if (firstChild.get() != null && lastChild.get() != null) {
-
-                Line start = firstChild.get().getLine();
-                Line end = lastChild.get().getLine();
-                getLine().setStartX(start.getEndX());
-                getLine().setStartY(start.getEndY());
-                getLine().setEndX(end.getEndX());
-                getLine().setEndY(end.getEndY());
-
-                subBorderPane.getChildren().add(0, getLine());
-            }
-        }
-    }
 
     /**
      * Drawing line beetween parent/ relation and connection point
      *
-     * @param n
      */
-
-    public void connectRelationToChildren(Node n) {
-        if (list.size() != 0) {
+    private void connectRelationToChildren() {
+        if ( betweenChildrenConnector.isListEmpty().not().get()) {
             if (subBorderPane instanceof PanelRelationCurrent) {
-                connectToLeft(n);
+                connectToLeft();
             } else if (subBorderPane instanceof PanelRelationEx) {
-                connectToRight(n);
+                connectToRight();
             } else {
-                connectToCenter(n);
+                connectToCenter();
             }
         }
     }
 
-    private void connectToLeft(Node n) {
-        drawConnector(n, firstChild.get().getLine().getEndX(), firstChild.get().getLine().getEndY() );
+
+    private void connectToLeft() {
+        drawConnector(subBorderPane.getConnectionNode(), betweenChildrenConnector.getLine().getStartX(), betweenChildrenConnector.getLine().getStartY());
     }
 
-    private void connectToRight(Node n) {
-        drawConnector(n,lastChild.get().getLine().getEndX(),lastChild.get().getLine().getEndY() );
+    private void connectToRight() {
+        drawConnector(subBorderPane.getConnectionNode(), betweenChildrenConnector.getLine().getEndX(), betweenChildrenConnector.getLine().getEndY());
     }
 
-    private void connectToCenter(Node n) {
-            Double middle = (firstChild.get().getLine().getEndX() + lastChild.get().getLine().getEndX()) / 2;
-            drawConnector(n, middle, getLine().getStartY());
+    private void connectToCenter() {
+        Double middle = (betweenChildrenConnector.getLine().getStartX() + betweenChildrenConnector.getLine().getEndX())/2;
+        drawConnector(subBorderPane.getConnectionNode(), middle, betweenChildrenConnector.getLine().getStartY());
     }
+
 
     /**
-     * Drawing line beetween Node and children point
+     * Drawing line between Node and children point
+     *
      * @param n
      * @param startX
      * @param startY
      */
     private void drawConnector(Node n, Double startX, Double startY) {
-        subBorderPane.getChildren().remove(withNodeConnector.get());
 
         Bounds b = getRelativeBounds(n);
         Point2D bottomPoint = getBottomPoint(b);
 
-        withNodeConnector.get().setStartX(startX);
-        withNodeConnector.get().setStartY(startY);
-        withNodeConnector.get().setEndX(bottomPoint.getX());
-        withNodeConnector.get().setEndY(bottomPoint.getY());
-
-        subBorderPane.getChildren().add(1, withNodeConnector.get());
-        initLineProperties(withNodeConnector.get());
+        setLineCoordinates(getLine(), startX, startY, bottomPoint.getX(), bottomPoint.getY());
     }
-
 
     protected Bounds getRelativeBounds(Node node) {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
@@ -197,4 +137,5 @@ public class ParentToChildrenConnector extends LineConnector {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
+
 }

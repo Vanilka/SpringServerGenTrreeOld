@@ -66,4 +66,8 @@ public class Keys {
     public static final String TAB_OPEN_PROJECT = "tab_project_open";
     public static final String TAB_FAMILY_INFO = "tab_family_info";
     public static final String TAB_FAMILY_VIEW = "tab_family_view";
+    public static final String RETURN = "return";
+    public static final String AVATAR = "avatar";
+    public static final String BUTTON_MEMBERS = "button_members";
+    public static final String BUTTON_RELATIONS = "button_relations";
 }

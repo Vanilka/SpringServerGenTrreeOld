@@ -7,12 +7,16 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +31,13 @@ public class RelationTypeCard extends StackPane {
     public static final double HEIGHT = 60;
 
     protected Circle circle;
+
+
+    protected Line line1;
+    protected Line line2;
+
+    protected Group group;
+
     protected ImageView typeImg;
     protected StackPane imageContainer;
     protected DropShadow dropShadow;
@@ -54,8 +65,10 @@ public class RelationTypeCard extends StackPane {
         typeImg = new ImageView();
         imageContainer = new StackPane();
         initCircle();
+        initCroix();
 
-        imageContainer.getChildren().addAll(circle, typeImg);
+        group = new Group(line1, line2);
+        imageContainer.getChildren().addAll(circle, typeImg, group);
         getChildren().add(imageContainer);
         initListeners();
         setAlignment(Pos.CENTER);
@@ -65,6 +78,20 @@ public class RelationTypeCard extends StackPane {
         circle = new Circle(10, 10, 30, Color.grayRgb(23, 0.5));
     }
 
+    private void initCroix() {
+        line1 = new Line(10, 10, 50, 50);
+        line2 = new Line(10, 50, 50, 10);
+        initLineProperties(line1, Color.RED, 4.0);
+        initLineProperties(line2, Color.RED, 4.0);
+    }
+
+
+    protected void initLineProperties(Line line, Color color, Double width) {
+        line.setStroke(color);
+        line.setStrokeWidth(width);
+        line.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        line.setStrokeLineCap(StrokeLineCap.ROUND);
+    }
 
     private void initListeners() {
 
@@ -75,11 +102,18 @@ public class RelationTypeCard extends StackPane {
                         .when(relation.isNull())
                         .then(RelationType.NEUTRAL)
                         .otherwise(newValue.typeProperty()));
+
+                group.visibleProperty().bind(Bindings
+                .when(relationType.isEqualTo(RelationType.NEUTRAL))
+                .then(false)
+                .otherwise(newValue.activeProperty().not()));
+
             } else {
+                group.visibleProperty().unbind();
                 relationType.unbind();
                 relationType.setValue(RelationType.NEUTRAL);
+                group.setVisible(false);
             }
-
         });
 
 

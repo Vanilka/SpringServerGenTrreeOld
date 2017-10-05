@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import lombok.AccessLevel;
@@ -80,10 +81,9 @@ public class PanelChild extends SubBorderPane {
     }
 
     public PanelChild(Member m, SubBorderPane parent) {
-       // prefWidthProperty().bind(panelRelationExPane.widthProperty().add(panelSinglePane.widthProperty()).add(panelRelationCurrentPane.widthProperty()));
-        setPrefSize(200, 200);
         member.setValue(m);
         setParentPane(parent);
+
         setCenter(panelSinglePane);
         setLeft(panelRelationExPane);
         setRight(panelRelationCurrentPane);
@@ -91,11 +91,7 @@ public class PanelChild extends SubBorderPane {
         if(parent != null) {
             this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
-
-
     }
-
-
     /*
         Init Listeners
      */
