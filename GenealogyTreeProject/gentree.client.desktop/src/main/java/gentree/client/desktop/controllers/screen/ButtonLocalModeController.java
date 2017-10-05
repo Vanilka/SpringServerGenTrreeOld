@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLController {
 
+    //TODO  LOCAL / ONLINE MODE IMAGES
 
     @FXML
     private Button buttonik;

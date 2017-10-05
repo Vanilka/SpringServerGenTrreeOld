@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
@@ -80,6 +81,8 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
+        this.languageBundle.bind(context.getBundle());
+        addLanguageListener();
         readOnlyControls = Arrays.asList(simId, simName, simSurname, simBornname);
         initControlsProperties();
         initListeners();
@@ -118,6 +121,26 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
 
 
+     /*
+ *   LISTEN LANGUAGE CHANGES
+ */
+
+    private void addLanguageListener() {
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+    }
+
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+        simName.setPromptText(getValueFromKey(Keys.SIM_NAME));
+        simSurname.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
+        simBornname.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
+        returnButton.setText(getValueFromKey(Keys.RETURN));
+
+
+    }
 
 
     /*

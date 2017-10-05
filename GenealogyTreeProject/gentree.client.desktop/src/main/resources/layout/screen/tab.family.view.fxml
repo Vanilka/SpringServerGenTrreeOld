@@ -55,14 +55,14 @@
                     AnchorPane.rightAnchor="10.0">
             <ToggleButton id="buttonShowMemberTable" fx:id="buttonShowMemberTable"
                           layoutX="23.0" mnemonicParsing="false" prefWidth="114.0"
-                          styleClass="toogleButtonShowTable" text="Members"
+                          styleClass="toogleButtonShowTable" text="%button_members"
                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                           AnchorPane.topAnchor="0.0"/>
 
             <ToggleButton id="buttonShowRelationTable" fx:id="buttonShowRelationTable"
                           layoutX="125.0" layoutY="12.0" mnemonicParsing="false"
                           prefWidth="114.0" styleClass="toogleButtonShowTable"
-                          text="Relations" AnchorPane.bottomAnchor="0.0"
+                          text="%button_relations" AnchorPane.bottomAnchor="0.0"
                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
         </AnchorPane>
     </children>

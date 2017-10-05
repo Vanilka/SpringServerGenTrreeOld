@@ -3,6 +3,7 @@ package gentree.client.desktop.controllers.screen;
 import com.jfoenix.controls.JFXTabPane;
 import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.configuration.messages.Keys;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
@@ -43,8 +44,12 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
+        this.languageBundle.bind(context.getBundle());
         initPanes();
+        addLanguageListener();
+        log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     private void initPanes() {
@@ -66,7 +71,21 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
 
     }
 
+     /*
+     *   LISTEN LANGUAGE CHANGES
+     */
+
+    private void addLanguageListener() {
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+    }
+
     private String getValueFromKey(String key) {
         return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+        familyInfo.setText(getValueFromKey(Keys.TAB_FAMILY_INFO));
+        familyView.setText(getValueFromKey(Keys.TAB_FAMILY_VIEW));
+
     }
 }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
@@ -29,6 +30,8 @@ import java.util.ResourceBundle;
 
 @Log4j2
 public class TabFamilyInfoController implements Initializable, FXMLController, FXMLTab {
+
+    TabFamilyInfoController instance = this;
 
     @FXML
     private AnchorPane screenMainLeftFamilyInfoController;
@@ -67,9 +70,11 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
+        this.languageBundle.bind(context.getBundle());
         initGraphicalElements();
         loadFamily();
         addListener();
+        addLanguageListener();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
@@ -96,10 +101,31 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         });
     }
 
+        /*
+        *   LISTEN LANGUAGE CHANGES
+        */
+
+    private void addLanguageListener() {
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+    }
+
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+       familyName.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+       membersCount.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+       modifyNameButton.setText(getValueFromKey(Keys.MODIFY));
+       addMemberButton.setText(getValueFromKey(Keys.ADD_MEMBER));
+
+    }
 
     @Override
     public void setTabAndTPane(JFXTabPane tabPane, Tab tab) {
         this.tab = tab;
         this.tabPane = tabPane;
     }
+
+
 }

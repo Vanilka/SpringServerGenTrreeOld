@@ -2,6 +2,7 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
@@ -85,6 +86,8 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     private List<? extends Control> readOnlyControls;
 
+    // TODO  Refactor Labels
+
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
@@ -108,6 +111,8 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
 
         this.languageBundle.setValue(resources);
+        this.languageBundle.bind(context.getBundle());
+        addLanguageListener();
 
         readOnlyControls = Arrays.asList(relationId);
         initPanes();
@@ -198,6 +203,26 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         return callback;
     }
 
+
+     /*
+ *   LISTEN LANGUAGE CHANGES
+ */
+
+    private void addLanguageListener() {
+        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+    }
+
+    private String getValueFromKey(String key) {
+        return this.languageBundle.getValue().getString(key);
+    }
+
+    private void reloadElements() {
+        //Todo reload elements after refactor labels
+        simPhotoColumn.setText(getValueFromKey(Keys.AVATAR));
+        simNameColumn.setText(getValueFromKey(Keys.SIM_NAME));
+        simSurnameColumn.setText(getValueFromKey(Keys.SIM_SURNAME));
+        returnButton.setText(getValueFromKey(Keys.RETURN));
+    }
 
 
 

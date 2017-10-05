@@ -68,9 +68,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
         drawingService.startDraw();
     }
 
-    /*
-    *   LISTEN LANGUAGE CHANGES
-    */
+
     public void initRelationListener() {
         context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) observable -> {
             // TODO  Redraw Tree
@@ -78,6 +76,9 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
         });
     }
 
+    /*
+    *   LISTEN LANGUAGE CHANGES
+    */
     private void addLanguageListener() {
         this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
     }

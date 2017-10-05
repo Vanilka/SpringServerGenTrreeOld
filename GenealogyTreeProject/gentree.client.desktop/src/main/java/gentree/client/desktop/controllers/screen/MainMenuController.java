@@ -261,7 +261,6 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
         class LanguageCellFactory implements Callback<ListView<AppLanguage>, ListCell<AppLanguage>> {
             @Override
             public ListCell<AppLanguage> call(ListView<AppLanguage> param) {
-                // TODO Auto-generated method stub
                 return new LanguageCell();
             }
         }
