@@ -217,7 +217,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     }
 
     private void reloadElements() {
-        //Todo reload elements after refactor labels
+        //Todo reload gentree.client.visualization.elements after refactor labels
         simPhotoColumn.setText(getValueFromKey(Keys.AVATAR));
         simNameColumn.setText(getValueFromKey(Keys.SIM_NAME));
         simSurnameColumn.setText(getValueFromKey(Keys.SIM_SURNAME));

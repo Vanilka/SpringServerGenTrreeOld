@@ -14,7 +14,7 @@
  <dependencies>
      <dependency>
          <groupId>genealogytree</groupId>
-         <artifactId>gentree.client.visualization.elements.default</artifactId>
+         <artifactId>gentree.client.visualization.elements.gustave</artifactId>
          <version>1.0-SNAPSHOT</version>
      </dependency>
      <dependency>

@@ -1,0 +1,50 @@
+* {
+    gentree-color1: rgba(57, 92, 119, 0.32);
+    gentree-color2: #c4c0be;
+    gentree-color3: #0188AE;
+    gentree-color4: #0B4F6C;
+}
+
+.transparent-dark {
+    -fx-background-color: gentree-color1;
+}
+
+.pane-padding-30 {
+    -fx-padding: 0px, 40px, 30px, 40px;
+}
+
+#family-group-content {
+    -fx-padding-top: 50px;
+}
+
+.radius-corner-all {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+}
+
+.radius-corner-top {
+    -fx-background-radius: 30 30 0 0;
+}
+
+.pane-header {
+    -fx-background-color: #0188AE;
+    -fx-min-height: 45;
+    -fx-pref-height: 45;
+    -fx-max-height: 45;
+
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 5);
+}
+
+.pane-header:hover {
+/*    -fx-border-width: 0px 0px 3px 0px;
+    -fx-border-style: none none solid none;*/
+ /*   -fx-border-color: linear-gradient(to right, rgba(1, 136, 174, 1) 1%, rgba(204, 218, 221, 1) 19%, rgba(202, 202, 206, 1) 82%, rgba(1, 136, 174, 1) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!
+*/
+}
+
+#content {
+
+}
+
+
+

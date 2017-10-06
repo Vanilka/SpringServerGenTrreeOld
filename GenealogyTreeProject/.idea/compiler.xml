@@ -13,6 +13,7 @@
         <module name="gentree.client.visualization" />
         <module name="gentree.client.visualization.elements" />
         <module name="gentree.client.visualization.elements.default" />
+        <module name="gentree.client.visualization.elements.gustave" />
         <module name="gentree.client.visualization.gustave" />
         <module name="gentree.client.visualization.vanilla" />
         <module name="gentree.exceptions" />
@@ -32,6 +33,7 @@
       <module name="gentree.client.visualization.core" target="1.8" />
       <module name="gentree.client.visualization.elements" target="1.8" />
       <module name="gentree.client.visualization.elements.default" target="1.8" />
+      <module name="gentree.client.visualization.elements.gustave" target="1.8" />
       <module name="gentree.client.visualization.gustave" target="1.8" />
       <module name="gentree.client.visualization.vanilla" target="1.8" />
       <module name="gentree.client.vizualization.gustave" target="1.8" />
