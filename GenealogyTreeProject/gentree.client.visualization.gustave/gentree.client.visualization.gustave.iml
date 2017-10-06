@@ -11,7 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="gentree.client.visualization.elements" />
+    <orderEntry type="module" module-name="gentree.client.visualization.elements.default" />
     <orderEntry type="module" module-name="gentree.client.desktop.domain" />
     <orderEntry type="module" module-name="gentree.exceptions" />
     <orderEntry type="module" module-name="gentree.client.desktop.context" />

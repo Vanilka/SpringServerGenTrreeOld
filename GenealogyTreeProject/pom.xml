@@ -10,7 +10,7 @@
     <modules>
         <module>gentree.client.desktop</module>
         <module>gentree.client.desktop.domain</module>
-        <module>gentree.client.visualization.elements</module>
+        <module>gentree.client.visualization.elements.default</module>
         <module>gentree.exceptions</module>
         <module>gentree.client.visualization.gustave</module>
         <module>gentree.client.desktop.context</module>

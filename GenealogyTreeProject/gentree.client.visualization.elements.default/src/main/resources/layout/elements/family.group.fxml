@@ -22,7 +22,7 @@
                 <DropShadow color="#343937" height="20.63" radius="10.6675" spread="0.14" width="24.04"/>
             </effect>
         </Rectangle>
-        <Rectangle fx:id="bodyNode" arcHeight="20.0" arcWidth="20.0" styleClass="transparent-dark"  smooth="false" stroke="#E1E1E5"
+        <Rectangle fx:id="bodyNode" arcHeight="20.0" arcWidth="20.0" fill="#E1E1E5" smooth="false" stroke="#E1E1E5"
                    strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0"
                    AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
             <effect>
