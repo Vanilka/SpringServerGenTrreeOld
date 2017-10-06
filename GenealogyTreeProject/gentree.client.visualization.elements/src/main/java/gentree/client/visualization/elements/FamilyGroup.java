@@ -116,6 +116,8 @@ public class FamilyGroup extends AnchorPane {
         bodyNodeDark.heightProperty().bind(heightProperty().subtract(OFFSET_FOND_DARK));
         bodyNode.widthProperty().bind(widthProperty().subtract(OFFSET_FOND));
         bodyNode.heightProperty().bind(heightProperty().subtract(OFFSET_FOND));
+
+        content.prefWidth(USE_COMPUTED_SIZE);
     }
 
     /**

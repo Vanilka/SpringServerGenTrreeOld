@@ -46,7 +46,16 @@
                         <JFXButton fx:id="returnButton" text="%return" buttonType="RAISED"
                                    onAction="#returnAction"
                                    prefWidth="100.0"
-                                   layoutX="50" layoutY="450.0"/>
+                                   AnchorPane.leftAnchor="50"
+                                   AnchorPane.rightAnchor="50"
+                                   layoutY="500.0"/>
+
+                        <JFXButton fx:id="modifyButton"  text="%modify" buttonType="RAISED"
+                                   onAction="#modifyAction"
+                                   prefWidth="100.0"
+                                   AnchorPane.leftAnchor="50"
+                                   AnchorPane.rightAnchor="50"
+                                   layoutY="450.0"/>
                     </children>
                 </AnchorPane>
             </content>

@@ -5,8 +5,6 @@ import gentree.client.desktop.domain.enums.RelationType;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -17,10 +15,10 @@ import java.util.Observable;
  * Created by Martyna SZYMKOWIAK on 02/07/2017.
  */
 
-@XmlType(name = "relation", propOrder = {"id","type", "active", "left", "right", "children"})
+@XmlType(name = "relation", propOrder = {"id", "type", "active", "left", "right", "children"})
 //@XmlType(name = "relation")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Relation extends Observable implements Serializable {
+public class Relation extends Observable implements Serializable, Comparable<Relation> {
 
     private static final long serialVersionUID = 7679518429380405561L;
 
@@ -161,10 +159,16 @@ public class Relation extends Observable implements Serializable {
     }
 
     public void setType(RelationType type) {
-        this.type.set(type == null ? RelationType.NEUTRAL : type);
-        if(type == RelationType.NEUTRAL) {
+
+        if (type == null) {
+            type = RelationType.NEUTRAL;
+        }
+
+        this.type.set(type);
+        if (type == RelationType.NEUTRAL) {
             active.set(false);
         }
+        invalidate();
     }
 
     public ObjectProperty<RelationType> typeProperty() {
@@ -191,15 +195,52 @@ public class Relation extends Observable implements Serializable {
         return referenceNumber.get();
     }
 
-    public LongProperty referenceNumberProperty() {
-        return referenceNumber;
-    }
-
     public void setReferenceNumber(long referenceNumber) {
         this.referenceNumber.set(referenceNumber);
     }
 
     public void setReferenceNumber(Long referenceNumber) {
         this.referenceNumber.setValue(referenceNumber);
+    }
+
+    public LongProperty referenceNumberProperty() {
+        return referenceNumber;
+    }
+
+    @Override
+    public int compareTo(Relation o) {
+
+        if (!this.equals(o)) return -1;
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Relation{");
+        sb.append("id=").append(id);
+        sb.append(", referenceNumber=").append(referenceNumber);
+        sb.append(", left=").append(left);
+        sb.append(", right=").append(right);
+        sb.append(", children=").append(children);
+        sb.append(", type=").append(type);
+        sb.append(", active=").append(active);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public String printRelation() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Relation id: ").append(getId()).append(" -> {");
+        sb.append("type = ").append(getType());
+        sb.append("active = ").append(getActive());
+        sb.append(", left ID =").append(getLeft().getId());
+        sb.append(", right ID=").append(getRight().getId());
+        sb.append(", children = {");
+        children.forEach(c -> {
+            sb.append(c.getId()).append(", ");
+        });
+        sb.append("}");
+        sb.append("}");
+        return sb.toString();
     }
 }

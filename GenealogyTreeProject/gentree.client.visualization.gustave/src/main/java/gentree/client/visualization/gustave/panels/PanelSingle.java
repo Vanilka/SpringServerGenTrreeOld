@@ -85,7 +85,6 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         this.member.setMember(m);
         this.thisRelation.setValue(thisRelation);
         setParentPane(parent);
-
         initBorder(Color.BLUE, this);
     }
 
@@ -106,6 +105,8 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     }
 
     private void initPane() {
+        minWidth(USE_PREF_SIZE);
+        maxWidth(USE_PREF_SIZE);
         pane.setPrefSize(180,RELATION_HEIGHT);
         pane.getChildren().addAll(member, thisRelationReference);
     }

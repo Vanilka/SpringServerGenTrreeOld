@@ -25,6 +25,8 @@ public interface FamilyService {
 
     ServiceResponse addMember(Member member);
 
+    ServiceResponse updateMember(Member m);
+
     ServiceResponse addRelation(Relation relation);
 
     ServiceResponse addRelation(Member left, Member right, RelationType type, boolean active);
@@ -34,6 +36,8 @@ public interface FamilyService {
     ServiceResponse updateRelation(Relation relation);
 
     ServiceResponse moveChildFromRelation(Member m, Relation oldRelation, Relation newRelation);
+
+    ServiceResponse removeRelation(Relation r);
 
     Relation findRelation(Member left, Member right);
 

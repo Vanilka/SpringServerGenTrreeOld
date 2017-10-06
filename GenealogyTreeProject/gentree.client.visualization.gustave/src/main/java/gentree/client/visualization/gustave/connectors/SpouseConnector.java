@@ -89,6 +89,10 @@ public class SpouseConnector extends LineConnector {
                     drawLine();
                 });
 
+                newValue.getRelationTypeElement().boundsInParentProperty().addListener((observable1, oldValue1, newValue1) -> {
+                    drawLine();
+                });
+
                 newValue.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
                     drawLine();
                 });
@@ -96,6 +100,10 @@ public class SpouseConnector extends LineConnector {
         });
 
         panelChild.getPanelRelationExPane().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
+            drawSpouseExLine();
+        });
+
+        panelChild.getPanelRelationExPane().boundsInLocalProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
             drawSpouseExLine();
         });
     }

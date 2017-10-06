@@ -130,7 +130,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     @FXML
     public void confirm() {
 
-
         if (currentBornRelation.get().getChildren().size() == 1 && existingRelation.get() == null) {
             currentBornRelation.get().setLeft(mother.get());
             currentBornRelation.get().setRight(father.get());

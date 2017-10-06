@@ -24,7 +24,6 @@ public class ActiveRelationGuard implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UPDATE DETECTED");
         if (o instanceof Relation) {
             Relation relation = (Relation) o;
 
@@ -32,7 +31,6 @@ public class ActiveRelationGuard implements Observer {
                 After change an relation type to Active,  auto-change others to inActive
              */
             if (relation.getLeft() != null && relation.getRight() != null && relation.getActive()) {
-                System.out.println("Will filter");
                 relations
                         .filtered(r -> r.getLeft() != null)
                         .filtered(r -> r.getRight() != null)
@@ -45,6 +43,7 @@ public class ActiveRelationGuard implements Observer {
             /*
                 Redraw tree
              */
+            System.out.println(sm.getGenTreeDrawingService() +" From guardian");
             sm.getGenTreeDrawingService().startDraw();
         }
     }

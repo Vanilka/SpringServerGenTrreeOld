@@ -19,14 +19,10 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import lombok.Getter;
 
 /**
@@ -89,6 +85,7 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     }
 
     public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
+        super();
         initPanes();
         initListeners();
         this.spouse.setValue(spouse);
@@ -97,13 +94,12 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         initBorder(Color.PURPLE, relation);
         initBorder(Color.ROSYBROWN, this);
         initBorder(Color.BLUE, childrenBox);
-/*
-        setMinWidth(Region.USE_PREF_SIZE);
-        setMaxWidth(Region.USE_PREF_SIZE);*/
 
+        minWidth(USE_PREF_SIZE);
+        maxWidth(USE_PREF_SIZE);
 
         spouseCard.setOnMouseClicked(event -> {
-            System.out.println("Relation reference " +thisRelation.getReferenceNumber());
+            System.out.println("Relation reference " + thisRelation.getReferenceNumber());
         });
     }
 
@@ -117,6 +113,8 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         BorderPane.setAlignment(childrenBox, Pos.TOP_RIGHT);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+
+        relation.setPrefHeight(RELATION_HEIGHT);
 
     }
 
@@ -186,13 +184,13 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
          *  Init bindings
          */
         offset.bind(Bindings.when((spouseCard.layoutXProperty().add(spouseCard.widthProperty()).add(10)).greaterThan(relation.widthProperty()))
-        .then(spouseCard.layoutXProperty().add(spouseCard.widthProperty()).add(10).subtract(relation.widthProperty()))
-        .otherwise(0.0));
+                .then(spouseCard.layoutXProperty().add(spouseCard.widthProperty()).add(10).subtract(relation.widthProperty()))
+                .otherwise(0.0));
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(200));
 
-        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty());
+        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(relationTypeElement.widthProperty().subtract(thisRelationReference.widthProperty()).divide(2)));
         thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.prefHeightProperty()));
 
         spouseRelationReference.layoutXProperty().bind(spouseCard.layoutXProperty().add(30));

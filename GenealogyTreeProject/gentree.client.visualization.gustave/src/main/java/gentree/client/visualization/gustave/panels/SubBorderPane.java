@@ -20,6 +20,13 @@ public abstract class SubBorderPane extends BorderPane {
 
     private SubBorderPane parentPane;
 
+    public SubBorderPane() {
+        this.setOnMouseClicked(event -> {
+            System.out.println(this + " Parent " +getBoundsInParent());
+            System.out.println(this + " Local " +getBoundsInLocal());
+        });
+    }
+
     protected void initBorder(Color color, Pane node) {
         node.setBorder(new Border
                 (new BorderStroke(color,

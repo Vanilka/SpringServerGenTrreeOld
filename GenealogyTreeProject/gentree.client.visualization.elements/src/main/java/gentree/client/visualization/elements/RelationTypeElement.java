@@ -33,10 +33,9 @@ public class RelationTypeElement extends RelationTypeCard {
     private void init() {
         dropShadow = new DropShadow();
         initShadow();
+        this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
 
-       // this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
-
-     //   this.setOnMouseExited(t -> circle.setEffect(null));
+        this.setOnMouseExited(t -> circle.setEffect(null));
 
         this.setOnMouseClicked(event -> {
             System.out.println("Relation " +this.getRelation().get() + " -> Has reference   " +this.getRelation().get().getReferenceNumber());

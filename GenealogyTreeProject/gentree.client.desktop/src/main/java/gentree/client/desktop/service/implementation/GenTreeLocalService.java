@@ -9,11 +9,12 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.Gender;
 import gentree.client.desktop.domain.enums.RelationType;
+import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.ActiveRelationGuard;
 import gentree.client.desktop.service.FamilyService;
+import gentree.client.desktop.service.ScreenManager;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.RelationResponse;
-import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
@@ -48,6 +49,7 @@ public class GenTreeLocalService implements FamilyService {
     private final Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
     private ObjectProperty<Family> currentFamily;
     private ActiveRelationGuard guard;
+    private ScreenManager sm = ScreenManager.INSTANCE;
 
     private String projectFilename;
 
@@ -69,6 +71,7 @@ public class GenTreeLocalService implements FamilyService {
         setCurrentFamilyListener();
     }
 
+
     /**
      * Function to adding Member to Family
      *
@@ -84,6 +87,13 @@ public class GenTreeLocalService implements FamilyService {
         }
         getCurrentFamily().addMember(member);
         return new MemberResponse(member);
+    }
+
+    @Override
+    public ServiceResponse updateMember(Member m) {
+        // Nothing to do in Local service
+
+        return new MemberResponse(m);
     }
 
     /**
@@ -116,11 +126,11 @@ public class GenTreeLocalService implements FamilyService {
      * @return
      */
     private Relation mergeRelations(Relation root, Relation merged) {
+        log.trace(LogMessages.MSG_MERGING_RELATIONS, merged, root);
         root.setType(merged.getType());
         root.setActive(merged.getActive());
         merged.getChildren().forEach(root::addChildren);
-
-
+        log.trace(LogMessages.MSG_AFTER_MERGE, root);
         return root;
     }
 
@@ -151,8 +161,14 @@ public class GenTreeLocalService implements FamilyService {
 
     @Override
     public ServiceResponse moveChildFromRelation(Member m, Relation oldRelation, Relation newRelation) {
+
+        if (!getCurrentFamily().getRelations().contains(newRelation)) {
+            addRelation(newRelation);
+        }
+
         oldRelation.getChildren().remove(m);
         newRelation.getChildren().add(m);
+
 
         if ((oldRelation.getLeft() == null || oldRelation.getRight() == null) && oldRelation.getChildren().isEmpty()) {
             getCurrentFamily().getRelations().remove(oldRelation);
@@ -173,6 +189,7 @@ public class GenTreeLocalService implements FamilyService {
 
     /**
      * Move all children from List to Target relation
+     *
      * @param target
      * @param children
      * @return
@@ -207,13 +224,12 @@ public class GenTreeLocalService implements FamilyService {
                 .filtered(r -> r.getRight() == null)
                 .filtered(r -> !r.getChildren().isEmpty())
                 .forEach(root -> rootList.addAll(root.getChildren()));
-
-
         return rootList;
     }
 
     /**
      * Verify if parameter sim is Ascendant of parameter grain
+     *
      * @param grain
      * @param sim
      * @return
@@ -226,6 +242,7 @@ public class GenTreeLocalService implements FamilyService {
 
     /**
      * Verify if parameter sim is Descendant of parameter grain
+     *
      * @param grain
      * @param sim
      * @return
@@ -233,6 +250,27 @@ public class GenTreeLocalService implements FamilyService {
     @Override
     public boolean isDescOf(Member grain, Member sim) {
         return grain != null && sim != null && getCurrentFamily().isDescOf(grain, sim);
+    }
+
+
+    /**
+     * Totaly remove relation from Family
+     *
+     * @param r
+     * @return
+     */
+    @Override
+    public ServiceResponse removeRelation(Relation r) {
+
+        if (r.getChildren().size() > 0) {
+            r.setLeft(null);
+            r.setRight(null);
+            r.setType(null);
+        } else {
+            getCurrentFamily().getRelations().remove(r);
+        }
+
+        return new RelationResponse(r);
     }
 
 
@@ -282,25 +320,15 @@ public class GenTreeLocalService implements FamilyService {
             while (c.next()) {
                 if (c.wasAdded()) {
                     c.getAddedSubList().forEach(relation -> {
-                        guard.addObserverTo(relation);
+                        //  guard.addObserverTo(relation);
                         incrementRelationId(relation);
                         log.info(LogMessages.MSG_RELATION_ADD_NEW, relation);
                     });
-                } else if (c.wasPermutated()) {
-                    for (int i = c.getFrom(); i < c.getTo(); ++i) {
-                        //permutate
-                        System.out.println(" Relation permutated");
-                    }
-                } else if (c.wasUpdated()) {
-                    //update item
-                    System.out.println(" Relation UpdateItem");
-                } else if (c.wasRemoved()) {
-                    System.out.println("Relation removed" + c.getRemoved().toString());
-                } else {
                 }
             }
         });
     }
+
 
     private void incrementMemberId(Member member) {
         if (member.getId() <= 0) {
@@ -427,7 +455,6 @@ public class GenTreeLocalService implements FamilyService {
 
         return filename;
     }
-
 
 
     /**

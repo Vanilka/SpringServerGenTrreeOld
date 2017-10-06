@@ -1,7 +1,7 @@
 package gentree.client.visualization.gustave.panels;
 
-import gentree.client.visualization.gustave.connectors.SpouseConnector;
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.gustave.connectors.SpouseConnector;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -9,8 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -74,6 +74,7 @@ public class PanelChild extends SubBorderPane {
 
         initListeners();
         initPanes();
+
     }
 
     public PanelChild(Member m) {
@@ -81,14 +82,21 @@ public class PanelChild extends SubBorderPane {
     }
 
     public PanelChild(Member m, SubBorderPane parent) {
+        super();
         member.setValue(m);
         setParentPane(parent);
-
         setCenter(panelSinglePane);
         setLeft(panelRelationExPane);
         setRight(panelRelationCurrentPane);
 
-        if(parent != null) {
+        minWidth(USE_PREF_SIZE);
+        maxWidth(USE_PREF_SIZE);
+
+        prefWidthProperty().bind(panelRelationExPane.prefWidthProperty()
+                .add(panelSinglePane.prefWidthProperty())
+                .add(panelRelationCurrentPane.prefWidthProperty()));
+
+        if (parent != null) {
             this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
     }
@@ -105,7 +113,7 @@ public class PanelChild extends SubBorderPane {
     private void initPanelSingleListener() {
         panelSingle.addListener((observable, oldValue, newValue) -> {
             panelSinglePane.getChildren().clear();
-            if(newValue != null) {
+            if (newValue != null) {
                 panelSinglePane.getChildren().add(newValue);
             }
         });
@@ -115,18 +123,18 @@ public class PanelChild extends SubBorderPane {
     private void initRelationCurrentListener() {
         panelRelationCurrent.addListener((observable, oldValue, newValue) -> {
             panelRelationCurrentPane.getChildren().clear();
-            if(newValue != null) {
+            if (newValue != null) {
                 panelRelationCurrentPane.getChildren().add(newValue);
             }
         });
     }
 
     private void initRelationExListener() {
-        panelRelationEx.addListener((ListChangeListener<? super PanelRelationEx>)  c -> {
+        panelRelationEx.addListener((ListChangeListener<? super PanelRelationEx>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     panelRelationExPane.getChildren().addAll(c.getAddedSubList());
-                } else if(c.wasRemoved()) {
+                } else if (c.wasRemoved()) {
                     panelRelationExPane.getChildren().removeAll(c.getRemoved());
                 }
             }
@@ -154,20 +162,20 @@ public class PanelChild extends SubBorderPane {
         return member.get();
     }
 
-    public ReadOnlyObjectProperty<PanelSingle> panelSingleProperty() {
-        return panelSingle;
+    public void setMember(Member member) {
+        this.member.set(member);
     }
 
-    public ReadOnlyObjectProperty<PanelRelationCurrent> panelRelationCurrentProperty() {
-        return panelRelationCurrent;
+    public ReadOnlyObjectProperty<PanelSingle> panelSingleProperty() {
+        return panelSingle;
     }
 
     /*
         Setters
      */
 
-    public void setMember(Member member) {
-        this.member.set(member);
+    public ReadOnlyObjectProperty<PanelRelationCurrent> panelRelationCurrentProperty() {
+        return panelRelationCurrent;
     }
 
     public void setPanelSingle(PanelSingle panelSingle) {

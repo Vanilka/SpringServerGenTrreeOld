@@ -42,6 +42,7 @@ public class RelationContextMenu extends ContextMenu {
     private void initItems() {
         initItemAddChildren();
         initMenuChangeType();
+        initRemoveRelation();
     }
 
     private void initMenuChangeType() {
@@ -70,7 +71,7 @@ public class RelationContextMenu extends ContextMenu {
     }
 
     private void initRemoveRelation() {
-        //itemRemove.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), member.getMember(), FilesFXML.DIALOG_ADD_CHILDREN));
+        itemRemove.setOnAction(event -> context.getService().removeRelation(relationTypeElement.getRelation().get()));
     }
 
 }

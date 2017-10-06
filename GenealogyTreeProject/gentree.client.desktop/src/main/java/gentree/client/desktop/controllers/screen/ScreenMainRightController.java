@@ -3,11 +3,13 @@ package gentree.client.desktop.controllers.screen;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
@@ -65,13 +67,14 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
     public void redrawTree() {
+        System.out.println(drawingService +  "  From Screen Main Right");
         drawingService.startDraw();
     }
 
 
     public void initRelationListener() {
-        context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) observable -> {
-            // TODO  Redraw Tree
+        context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) c -> {
+            // TODO  Redraw Tree optimalization
             redrawTree();
         });
     }

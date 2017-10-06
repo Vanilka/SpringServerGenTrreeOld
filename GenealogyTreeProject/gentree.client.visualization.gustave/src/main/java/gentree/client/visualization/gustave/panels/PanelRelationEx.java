@@ -17,10 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import lombok.Getter;
@@ -42,6 +41,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private final static double PADDING_BOTTOM = 0.0;
 
     private final static double MINIMAL_RELATION_WIDTH = 450.0;
+
     private final static double SPACE_BETWEEN_OBJECTS = 100.0;
 
     private final Pane relation;
@@ -91,23 +91,28 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     public PanelRelationEx(Member spouse, Relation thisRelation, SubBorderPane parent) {
         super();
         initPanes();
-        setPrefWidth(MINIMAL_RELATION_WIDTH);
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
         initBorder(Color.GREEN, this);
         initBorder(Color.FUCHSIA, relation);
         initBorder(Color.ORANGE, childrenBox);
+
+        spouseCard.setOnMouseClicked(event -> {
+            System.out.println("Pref Width: " + getPrefWidth());
+            System.out.println("Offset" + offset.doubleValue());
+            System.out.println("width : " + getWidth());
+        });
     }
 
 
     private void initPanes() {
         initHbox();
-
         this.setCenter(childrenBox);
         this.setTop(relation);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+        relation.setPrefHeight(RELATION_HEIGHT);
     }
 
 
@@ -118,8 +123,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private void initHbox() {
         childrenBox.setSpacing(10);
         childrenBox.setAlignment(Pos.TOP_RIGHT);
-        childrenBox.prefWidthProperty().bind(prefWidthProperty());
-        relation.prefWidthProperty().bind(prefWidthProperty());
+       // childrenBox.prefWidthProperty().bind(prefWidthProperty());
+        //relation.prefWidthProperty().bind(prefWidthProperty());
     }
 
 
@@ -177,26 +182,15 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private void initElementPositionsListeners() {
 
-/*        offset.bind(Bindings.when(spouseCard.layoutXProperty().lessThan(0))
+        offset.bind(Bindings.when(spouseCard.layoutXProperty().lessThan(0))
                 .then(spouseCard.layoutXProperty().multiply(-1))
                 .otherwise(0));
-
-        prefWidthProperty().bind(Bindings.when(Bindings.isNotEmpty(children))
-                .then(Bindings.when(offset.greaterThan(0))
-                        .then(widthProperty().add(offset))
-                        .otherwise(childrenBox.widthProperty().add(PADDING_LEFT).add(PADDING_RIGHT)))
-                .otherwise(MINIMAL_RELATION_WIDTH)
-        );
-
-        offset.addListener((observable, oldValue, newValue) -> {
-            autosize();
-        });*/
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));
 
-        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(20));
-        thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()).add(30));
+        thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(relationTypeElement.widthProperty().subtract(thisRelationReference.widthProperty()).divide(2)));
+        thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()));
 
         relationTypeElement.layoutXProperty().bind(Bindings.when(Bindings.isNotEmpty(children))
                 .then(childrenConnector.getLine().startXProperty()
