@@ -50,6 +50,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         groups.forEach(group -> {
             group.getRootRelation().getChildren().forEach(child -> {
                 PanelChild panelChild = new PanelChild(child, null);
+                panelChild.setFamilyGroup(group);
                 populateChild(panelChild);
                 group.getContentHbox().getChildren().add(panelChild);
             });
@@ -70,7 +71,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         /*
             Panel Single will allways created
          */
-        panelChild.setPanelSingle(new PanelSingle(panelChild.getMember(), null, panelChild));
+        panelChild.setPanelSingle(new PanelSingle(panelChild.getMember(), null));
 
         /*
             Checking relations

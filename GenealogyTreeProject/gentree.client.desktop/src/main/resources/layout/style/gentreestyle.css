@@ -632,3 +632,19 @@
 #childrenFlowPane{
     -fx-padding: 10px 10px 10px 10px;
 }
+
+
+/*
+    Header od Pane
+ */
+#sim-info-header {
+    -fx-background-color: #156f93;
+    -fx-min-height: 30;
+    -fx-pref-height: 30;
+    -fx-max-height: 30;
+    -fx-background-radius: 20 20 0 0;
+}
+
+.header-pane {
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 5);
+}

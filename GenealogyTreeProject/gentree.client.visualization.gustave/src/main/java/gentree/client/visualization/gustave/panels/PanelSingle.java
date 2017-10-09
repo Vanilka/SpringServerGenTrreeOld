@@ -64,29 +64,21 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     }
 
     public PanelSingle() {
-        this(null, null, null);
+        this(null, null);
     }
 
     public PanelSingle(Member m) {
-        this(m, null, null);
-    }
-
-    public PanelSingle(Member m, SubBorderPane parent) {
-        this(m, null, parent);
+        this(m, null);
     }
 
     public PanelSingle(Member m, Relation thisRelation) {
-        this(m, thisRelation, null);
-    }
-
-    public PanelSingle(Member m, Relation thisRelation, SubBorderPane parent) {
         super();
         init();
         this.member.setMember(m);
         this.thisRelation.setValue(thisRelation);
-        setParentPane(parent);
         initBorder(Color.BLUE, this);
     }
+
 
 
     /*
@@ -135,7 +127,10 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
             while (c.next()) {
                 if (c.wasAdded()) {
                     childrenBox.getChildren().addAll(c.getAddedSubList());
-                    c.getAddedSubList().forEach(childrenConnector::addPanelChild);
+                    c.getAddedSubList().forEach(panelChild -> {
+                        panelChild.setParentPane(this);
+                        childrenConnector.addPanelChild(panelChild);
+                    });
                 }
                 if (c.wasRemoved()) {
                     childrenBox.getChildren().removeAll(c.getRemoved());

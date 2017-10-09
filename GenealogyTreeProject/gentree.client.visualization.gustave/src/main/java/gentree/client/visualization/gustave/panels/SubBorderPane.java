@@ -1,5 +1,9 @@
 package gentree.client.visualization.gustave.panels;
 
+import gentree.client.visualization.elements.FamilyGroup;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -14,16 +18,24 @@ import lombok.Setter;
 @Setter
 public abstract class SubBorderPane extends BorderPane {
     /**
-     *  Relation Height =
+     * Relation Height =
      */
     protected final static double RELATION_HEIGHT = 260;
 
-    private SubBorderPane parentPane;
+    private final ObjectProperty<SubBorderPane> parentPane;
+    private final ObjectProperty<FamilyGroup> familyGroup;
+
+
+    {
+        parentPane = new SimpleObjectProperty<>();
+        familyGroup = new SimpleObjectProperty<>();
+    }
 
     public SubBorderPane() {
+        initParentListeners();
         this.setOnMouseClicked(event -> {
-            System.out.println(this + " Parent " +getBoundsInParent());
-            System.out.println(this + " Local " +getBoundsInLocal());
+            System.out.println(this + " Parent " + getParent());
+            System.out.println("Family Group ? " + familyGroup.getValue() == null ? "null" : familyGroup.get());
         });
     }
 
@@ -35,10 +47,47 @@ public abstract class SubBorderPane extends BorderPane {
                         BorderWidths.DEFAULT)));
     }
 
+
     protected Bounds getRelativeBounds(Node node, Node relativeTo) {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
 
+    private void initParentListeners() {
+        parentPane.addListener((observable, oldValue, newValue) -> {
+            if(newValue == null) {
+                familyGroup.unbind();
+                familyGroup.setValue(null);
+            } else {
+                familyGroup.bind(newValue.familyGroupProperty());
+            }
+        });
+    }
+    /*
+     * GETTERS AND SETTERS
+     */
 
+    public SubBorderPane getParentPane() {
+        return parentPane.get();
+    }
+
+    public void setParentPane(SubBorderPane parentPane) {
+        this.parentPane.set(parentPane);
+    }
+
+    public ObjectProperty<SubBorderPane> parentPaneProperty() {
+        return parentPane;
+    }
+
+    public FamilyGroup getFamilyGroup() {
+        return familyGroup.get();
+    }
+
+    public void setFamilyGroup(FamilyGroup familyGroup) {
+        this.familyGroup.set(familyGroup);
+    }
+
+    public ObjectProperty<FamilyGroup> familyGroupProperty() {
+        return familyGroup;
+    }
 }

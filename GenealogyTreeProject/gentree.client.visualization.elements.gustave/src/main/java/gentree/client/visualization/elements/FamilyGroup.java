@@ -1,16 +1,14 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.controls.HeaderPane;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,10 +28,7 @@ public class FamilyGroup extends AnchorPane {
 
 
     @FXML
-    private AnchorPane PANEL_HEADER;
-
-    @FXML
-    private Label nameNode;
+    private HeaderPane PANEL_HEADER;
 
     @FXML
     private AnchorPane content;
@@ -83,10 +78,10 @@ public class FamilyGroup extends AnchorPane {
 
         rootRelation.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
-                nameNode.textProperty().unbind();
+                this.PANEL_HEADER.titleProperty().unbind();
             }
 
-            nameNode.textProperty().bind(Bindings.concat(" (ID: "+idNode,")  ",rootRelation.getValue().getChildren().get(0).surnameProperty()));
+            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: "+idNode,")  ",rootRelation.getValue().getChildren().get(0).surnameProperty()));
         });
 
 

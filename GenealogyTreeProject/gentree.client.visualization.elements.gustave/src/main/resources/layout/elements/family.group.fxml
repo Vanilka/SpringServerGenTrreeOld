@@ -5,6 +5,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <fx:root fx:id="familyGroup"
          styleClass="transparent-dark, pane-padding-30, radius-corner-all"
          type="javafx.scene.layout.AnchorPane"
@@ -14,21 +15,13 @@
         <URL value="@/layout/style/elementstyle.css"/>
     </stylesheets>
     <children>
-        <AnchorPane fx:id="PANEL_HEADER"
+        <HeaderPane fx:id="PANEL_HEADER"
                     id="pane-header"
-                    styleClass="pane-header, radius-corner-top"
-        AnchorPane.topAnchor="0"
-        AnchorPane.rightAnchor="0"
-        AnchorPane.leftAnchor="0">
-            <children>
-                <Label fx:id="nameNode" alignment="CENTER"  layoutY="4.0" text="Label" textFill="WHITE"
-                       textOverrun="CENTER_ELLIPSIS" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="10.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+                    styleClass="pane-header"
+                    AnchorPane.topAnchor="0"
+                    AnchorPane.rightAnchor="0"
+                    AnchorPane.leftAnchor="0"/>
+
         <AnchorPane fx:id="content"
                     id="content"
                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"

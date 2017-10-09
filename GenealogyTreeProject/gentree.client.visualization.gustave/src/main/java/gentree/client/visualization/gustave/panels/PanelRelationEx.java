@@ -81,14 +81,10 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     }
 
     public PanelRelationEx() {
-        this(null, null, null);
+        this(null, null);
     }
 
     public PanelRelationEx(Member spouse, Relation thisRelation) {
-        this(spouse, thisRelation, null);
-    }
-
-    public PanelRelationEx(Member spouse, Relation thisRelation, SubBorderPane parent) {
         super();
         initPanes();
         initListeners();
@@ -170,7 +166,10 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             while (c.next()) {
                 if (c.wasAdded()) {
                     childrenBox.getChildren().addAll(c.getAddedSubList());
-                    c.getAddedSubList().forEach(childrenConnector::addPanelChild);
+                    c.getAddedSubList().forEach(panelChild -> {
+                        panelChild.setParentPane(this);
+                        childrenConnector.addPanelChild(panelChild);
+                    });
                 } else if (c.wasRemoved()) {
                     childrenBox.getChildren().removeAll(c.getRemoved());
                     c.getRemoved().forEach(childrenConnector::removePanelChild);
@@ -185,6 +184,10 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         offset.bind(Bindings.when(spouseCard.layoutXProperty().lessThan(0))
                 .then(spouseCard.layoutXProperty().multiply(-1))
                 .otherwise(0));
+
+        offset.addListener((observable, oldValue, newValue) -> {
+
+        });
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));

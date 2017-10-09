@@ -3,17 +3,16 @@ package gentree.client.desktop.controllers.screen;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
-import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -67,7 +66,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
     public void redrawTree() {
-        System.out.println(drawingService +  "  From Screen Main Right");
+        System.out.println(drawingService + "  From Screen Main Right");
         drawingService.startDraw();
     }
 

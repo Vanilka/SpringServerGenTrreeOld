@@ -26,25 +26,9 @@
     -fx-background-radius: 30 30 0 0;
 }
 
-.pane-header {
-    -fx-background-color: #0188AE;
-    -fx-min-height: 45;
-    -fx-pref-height: 45;
-    -fx-max-height: 45;
 
-    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 5);
-}
 
-.pane-header:hover {
-/*    -fx-border-width: 0px 0px 3px 0px;
-    -fx-border-style: none none solid none;*/
- /*   -fx-border-color: linear-gradient(to right, rgba(1, 136, 174, 1) 1%, rgba(204, 218, 221, 1) 19%, rgba(202, 202, 206, 1) 82%, rgba(1, 136, 174, 1) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!
-*/
-}
 
-#content {
-
-}
 
 
 

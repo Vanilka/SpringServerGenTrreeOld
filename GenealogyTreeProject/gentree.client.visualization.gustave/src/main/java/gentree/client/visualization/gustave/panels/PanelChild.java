@@ -47,7 +47,6 @@ public class PanelChild extends SubBorderPane {
     @Setter(AccessLevel.NONE)
     private final AnchorPane panelRelationCurrentPane;
 
-
     @Getter
     private final HBox panelRelationExPane;
 
@@ -100,20 +99,24 @@ public class PanelChild extends SubBorderPane {
             this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         }
     }
+
     /*
         Init Listeners
      */
 
     private void initListeners() {
+
         initPanelSingleListener();
         initRelationCurrentListener();
         initRelationExListener();
+
     }
 
     private void initPanelSingleListener() {
         panelSingle.addListener((observable, oldValue, newValue) -> {
             panelSinglePane.getChildren().clear();
             if (newValue != null) {
+                newValue.setParentPane(this);
                 panelSinglePane.getChildren().add(newValue);
             }
         });
@@ -124,6 +127,7 @@ public class PanelChild extends SubBorderPane {
         panelRelationCurrent.addListener((observable, oldValue, newValue) -> {
             panelRelationCurrentPane.getChildren().clear();
             if (newValue != null) {
+                newValue.setParentPane(this);
                 panelRelationCurrentPane.getChildren().add(newValue);
             }
         });
@@ -133,6 +137,7 @@ public class PanelChild extends SubBorderPane {
         panelRelationEx.addListener((ListChangeListener<? super PanelRelationEx>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
+                    c.getAddedSubList().forEach(sb -> sb.setParentPane(this));
                     panelRelationExPane.getChildren().addAll(c.getAddedSubList());
                 } else if (c.wasRemoved()) {
                     panelRelationExPane.getChildren().removeAll(c.getRemoved());

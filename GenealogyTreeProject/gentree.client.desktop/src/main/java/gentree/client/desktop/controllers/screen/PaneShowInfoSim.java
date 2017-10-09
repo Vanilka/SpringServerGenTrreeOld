@@ -7,6 +7,7 @@ import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.controls.HeaderPane;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -44,6 +45,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     @Getter
     @Setter
     private AnchorPane paneShowInfoSim;
+
     @FXML
     private AnchorPane contentPane;
     @FXML
@@ -63,6 +65,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     private List<? extends Control> readOnlyControls;
 
     {
+
         member = new SimpleObjectProperty<>();
         modifiable = new SimpleBooleanProperty(false);
 
@@ -76,7 +79,6 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     @FXML
     private void modifyAction(ActionEvent actionEvent) {
         if (modifiable.get()) {
-
             getMember().setName(simName.getText());
             getMember().setSurname(simSurname.getText());
             getMember().setBornname(simBornname.getText());
@@ -92,6 +94,16 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         this.languageBundle.bind(context.getBundle());
+
+
+/*
+        HeaderPane hp = new HeaderPane("Ala ma kota");
+        hp.setMinWidth(200);
+
+        paneShowInfoSim.getChildren().add(0, hp);
+*/
+
+
         addLanguageListener();
         simId.setDisable(false);
         readOnlyControls = Arrays.asList(simName, simSurname, simBornname);

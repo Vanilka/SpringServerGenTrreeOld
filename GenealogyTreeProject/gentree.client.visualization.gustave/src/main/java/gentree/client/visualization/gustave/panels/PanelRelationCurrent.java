@@ -81,10 +81,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     }
 
     public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn) {
-        this(spouse, thisRelation, spouseBorn, null);
-    }
-
-    public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
         super();
         initPanes();
         initListeners();
@@ -101,6 +97,10 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         spouseCard.setOnMouseClicked(event -> {
             System.out.println("Relation reference " + thisRelation.getReferenceNumber());
         });
+    }
+
+    public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
+        this(spouse, thisRelation, spouseBorn);
     }
 
 
@@ -169,7 +169,12 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
             while (c.next()) {
                 if (c.wasAdded()) {
                     childrenBox.getChildren().addAll(c.getAddedSubList());
-                    c.getAddedSubList().forEach(childrenConnector::addPanelChild);
+                    c.getAddedSubList().forEach(panelChild -> {
+                        panelChild.setParentPane(this);
+                        childrenConnector.addPanelChild(panelChild);
+
+
+                    });
                 } else if (c.wasRemoved()) {
                     childrenBox.getChildren().removeAll(c.getRemoved());
                     c.getRemoved().forEach(childrenConnector::removePanelChild);
@@ -186,6 +191,10 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         offset.bind(Bindings.when((spouseCard.layoutXProperty().add(spouseCard.widthProperty()).add(10)).greaterThan(relation.widthProperty()))
                 .then(spouseCard.layoutXProperty().add(spouseCard.widthProperty()).add(10).subtract(relation.widthProperty()))
                 .otherwise(0.0));
+
+        offset.addListener((observable, oldValue, newValue) -> {
+            setPrefWidth(relation.getWidth() + newValue.doubleValue() + 30);
+        });
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(200));
@@ -240,6 +249,10 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     public ObjectProperty<Relation> spouseBornRelationProperty() {
         return spouseBornRelation;
     }
+
+
+
+
 }
 
 
