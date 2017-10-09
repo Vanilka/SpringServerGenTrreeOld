@@ -20,6 +20,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import lombok.Getter;
@@ -62,9 +63,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private final RelationReference thisRelationReference;
     private final ObjectProperty<Relation> spouseBornRelation;
 
-    private final DoubleProperty offset = new SimpleDoubleProperty(0.0);
-
-
     {
         relation = new Pane();
         spouseCard = new FamilyMember();
@@ -93,12 +91,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         initBorder(Color.GREEN, this);
         initBorder(Color.FUCHSIA, relation);
         initBorder(Color.ORANGE, childrenBox);
-
-        spouseCard.setOnMouseClicked(event -> {
-            System.out.println("Pref Width: " + getPrefWidth());
-            System.out.println("Offset" + offset.doubleValue());
-            System.out.println("width : " + getWidth());
-        });
     }
 
 
@@ -107,8 +99,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         this.setCenter(childrenBox);
         this.setTop(relation);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
-        setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
-        relation.setPrefHeight(RELATION_HEIGHT);
+        setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));;
     }
 
 
@@ -119,8 +110,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private void initHbox() {
         childrenBox.setSpacing(10);
         childrenBox.setAlignment(Pos.TOP_RIGHT);
-       // childrenBox.prefWidthProperty().bind(prefWidthProperty());
-        //relation.prefWidthProperty().bind(prefWidthProperty());
     }
 
 
@@ -181,13 +170,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private void initElementPositionsListeners() {
 
-        offset.bind(Bindings.when(spouseCard.layoutXProperty().lessThan(0))
-                .then(spouseCard.layoutXProperty().multiply(-1))
-                .otherwise(0));
-
-        offset.addListener((observable, oldValue, newValue) -> {
-
-        });
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));
@@ -210,5 +192,18 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     public Node getConnectionNode() {
         return relationTypeElement;
     }
+
+
+    @Override
+    protected double computeMinWidth(double height) {
+        Double offset = 0.0;
+        if(spouseCard.getLayoutX() < 0) {
+            offset = (spouseCard.getLayoutX()*(-1)) +20;
+        }
+
+        return super.computeMinWidth(height)+ offset;
+    }
+
+
 }
 
