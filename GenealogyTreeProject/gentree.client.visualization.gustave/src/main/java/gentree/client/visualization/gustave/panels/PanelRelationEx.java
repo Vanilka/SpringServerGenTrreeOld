@@ -196,6 +196,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     @Override
     protected double computeMinWidth(double height) {
+        if(children.isEmpty()) return super.computePrefWidth(height);
         Double offset = 0.0;
         if(spouseCard.getLayoutX() < 0) {
             offset = (spouseCard.getLayoutX()*(-1)) +20;

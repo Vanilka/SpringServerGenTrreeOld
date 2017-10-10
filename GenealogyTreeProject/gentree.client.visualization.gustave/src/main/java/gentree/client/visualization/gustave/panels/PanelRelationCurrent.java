@@ -182,6 +182,8 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         /*
          *  Init bindings
          */
+
+
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(200));
 
@@ -239,15 +241,15 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
 
    @Override
     protected double computePrefWidth(double height) {
+       if(children.isEmpty()) return super.computePrefWidth(height);
+
         Double offset = 0.0;
         Double maxRelationWidth = spouseCard.getLayoutX() + spouseCard.getWidth();
         if(maxRelationWidth > relation.getWidth()) {
-            offset = maxRelationWidth;
+            offset = maxRelationWidth -relation.getWidth() +20;
         }
-        return super.computePrefWidth(height)+offset;
+        return super.computePrefWidth(height) + offset;
     }
-
-
 }
 
 
