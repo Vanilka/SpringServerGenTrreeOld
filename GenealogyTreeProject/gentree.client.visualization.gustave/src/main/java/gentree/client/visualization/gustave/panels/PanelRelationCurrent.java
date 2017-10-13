@@ -8,9 +8,7 @@ import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -183,6 +181,7 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
          *  Init bindings
          */
 
+        childrenBox.prefWidthProperty().bind(relation.widthProperty());
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(200));
@@ -239,17 +238,15 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     }
 
 
-   @Override
+    @Override
     protected double computePrefWidth(double height) {
-       if(children.isEmpty()) return super.computePrefWidth(height);
+        if (children.isEmpty()) return super.computePrefWidth(height);
 
         Double offset = 0.0;
         Double maxRelationWidth = spouseCard.getLayoutX() + spouseCard.getWidth();
-        if(maxRelationWidth > relation.getWidth()) {
-            offset = maxRelationWidth -relation.getWidth() +20;
+        if (maxRelationWidth > relation.getWidth()) {
+            offset = maxRelationWidth - relation.getWidth() + 20;
         }
         return super.computePrefWidth(height) + offset;
     }
 }
-
-

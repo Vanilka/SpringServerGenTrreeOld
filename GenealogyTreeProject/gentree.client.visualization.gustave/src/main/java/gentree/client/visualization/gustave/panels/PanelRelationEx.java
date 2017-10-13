@@ -170,6 +170,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private void initElementPositionsListeners() {
 
+        childrenBox.prefWidthProperty().bind(relation.widthProperty());
 
         relationTypeElement.layoutYProperty().bind(spouseCard.heightProperty().subtract(relationTypeElement.heightProperty()).divide(2));
         spouseCard.layoutXProperty().bind(relationTypeElement.layoutXProperty().subtract(SPACE_BETWEEN_OBJECTS).subtract(spouseCard.widthProperty()));
