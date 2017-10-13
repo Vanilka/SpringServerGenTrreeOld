@@ -11,7 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: genealogytree:gentree.client.visualization.gentree.client.visualization.elements:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="gentree.client.visualization.elements.gustave" />
     <orderEntry type="module" module-name="gentree.client.desktop.domain" />
     <orderEntry type="module" module-name="gentree.exceptions" />
     <orderEntry type="module" module-name="gentree.client.desktop.context" />
