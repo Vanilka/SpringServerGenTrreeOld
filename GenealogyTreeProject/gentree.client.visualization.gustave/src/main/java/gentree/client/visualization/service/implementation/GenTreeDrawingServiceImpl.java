@@ -160,20 +160,24 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         if (other == null) {
             return new PanelSingle(root, relation);
         } else {
+            Relation bornRelationSpouse = findBornRelation(other);
+            if (bornRelationSpouse != null && !bornRelationSpouse.isRoot() && bornRelationSpouse.getReferenceNumber() == 0) {
+                bornRelationSpouse.setReferenceNumber(++idReference);
+            }
+
             if(relation.getChildren().size() > 0 && isStrong(relation, root)) {
                 relation.setReferenceNumber(++idReference);
             }
             if (relation.getActive() && relation.getType() != RelationType.NEUTRAL) {
-                Relation bornRelation = findBornRelation(other);
-                if (bornRelation != null && !bornRelation.isRoot() && bornRelation.getReferenceNumber() == 0) {
-                    bornRelation.setReferenceNumber(++idReference);
-                }
-                return new PanelRelationCurrent(other, relation, bornRelation);
+                return new PanelRelationCurrent(other, relation, bornRelationSpouse);
             } else {
-                return new PanelRelationEx(other, relation);
+                return new PanelRelationEx(other, relation,bornRelationSpouse);
             }
         }
     }
+
+
+
 
     /**
      * Strong regles :

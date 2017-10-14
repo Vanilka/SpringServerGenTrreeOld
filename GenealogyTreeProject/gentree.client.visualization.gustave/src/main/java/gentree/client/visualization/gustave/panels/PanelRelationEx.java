@@ -78,16 +78,22 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         spouseRelationReference = new RelationReference(RelationReference.RelationReferenceType.ASC);
     }
 
+
     public PanelRelationEx() {
         this(null, null);
     }
 
-    public PanelRelationEx(Member spouse, Relation thisRelation) {
+    public PanelRelationEx(Member spouse, Relation thisRelation, Relation spouseBornRelation) {
         super();
         initPanes();
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
+        this.spouseBornRelation.setValue(spouseBornRelation);
+    }
+
+    public PanelRelationEx(Member spouse, Relation thisRelation) {
+       this(spouse, thisRelation, null);
     }
 
 
@@ -185,8 +191,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(relationTypeElement.widthProperty().subtract(thisRelationReference.widthProperty()).divide(2)));
         thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()));
 
-        spouseRelationReference.layoutXProperty().bind(spouseCard.layoutXProperty().add(spouseCard.widthProperty().divide(2)));
-        spouseRelationReference.layoutYProperty().bind(spouseCard.layoutYProperty());
+        spouseRelationReference.layoutXProperty().bind(spouseCard.layoutXProperty().add(spouseCard.widthProperty().subtract(spouseRelationReference.widthProperty()).divide(2)));
+        spouseRelationReference.layoutYProperty().bind(spouseCard.layoutYProperty().subtract(spouseRelationReference.heightProperty()));
 
         relationTypeElement.layoutXProperty().bind(Bindings.when(Bindings.isNotEmpty(children))
                 .then(childrenConnector.getLine().startXProperty()

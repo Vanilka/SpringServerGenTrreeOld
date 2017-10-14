@@ -68,8 +68,8 @@
       <file leaf-file-name="GenTreeDrawingServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="166" column="15" lean-forward="false" selection-start-line="166" selection-start-column="15" selection-end-line="166" selection-end-column="15" />
+            <state relative-caret-position="125">
+              <caret line="167" column="17" lean-forward="false" selection-start-line="167" selection-start-column="17" selection-end-line="167" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -78,9 +78,12 @@
       <file leaf-file-name="PanelRelationEx.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="188" column="84" lean-forward="false" selection-start-line="188" selection-start-column="84" selection-end-line="188" selection-end-column="84" />
-              <folding />
+            <state relative-caret-position="203">
+              <caret line="185" column="57" lean-forward="false" selection-start-line="185" selection-start-column="57" selection-end-line="185" selection-end-column="57" />
+              <folding>
+                <element signature="e#3754#3755#0" expanded="true" />
+                <element signature="e#3801#3802#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -245,7 +248,6 @@
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements.gustave/src/main/java/gentree/client/visualization/elements/FamilyMember.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements.default/src/main/java/gentree/client/visualization/elements/FamilyGroup.java" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/screen.main.right.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ScreenMainRightController.java" />
@@ -274,8 +276,9 @@
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements.default/src/main/java/gentree/client/visualization/elements/controls/skin/HeaderPaneSkin.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements.gustave/src/main/java/gentree/client/visualization/elements/FamilyGroup.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.elements.gustave/src/main/resources/layout/elements/family.group.fxml" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelSingle.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java" />
+        <option value="$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -976,7 +979,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="697094000" />
+    <option name="totallyTimeSpent" value="698470000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1558,6 +1561,17 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="185" column="57" lean-forward="false" selection-start-line="185" selection-start-column="57" selection-end-line="185" selection-end-column="57" />
+          <folding>
+            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#3801#3802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelChild.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1574,14 +1588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelRelationEx.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="188" column="84" lean-forward="false" selection-start-line="188" selection-start-column="84" selection-end-line="188" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/gustave/panels/PanelSingle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="65">
@@ -1592,8 +1598,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.visualization.gustave/src/main/java/gentree/client/visualization/service/implementation/GenTreeDrawingServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="166" column="15" lean-forward="false" selection-start-line="166" selection-start-column="15" selection-end-line="166" selection-end-column="15" />
+        <state relative-caret-position="125">
+          <caret line="167" column="17" lean-forward="false" selection-start-line="167" selection-start-column="17" selection-end-line="167" selection-end-column="52" />
           <folding />
         </state>
       </provider>
