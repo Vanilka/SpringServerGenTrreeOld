@@ -60,6 +60,9 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     private JFXTextField simSurname;
     @FXML
     private JFXTextField simBornname;
+
+    @FXML
+    private HeaderPane HEADER_PANE;
     @FXML
     private ImageView photo;
     private List<? extends Control> readOnlyControls;
@@ -166,6 +169,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
         simBornname.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
         returnButton.setText(getValueFromKey(Keys.RETURN));
         modifyButton.setText(getValueFromKey(modifiable.get()? Keys.CONFIRM : Keys.MODIFY));
+        HEADER_PANE.setTitle(getValueFromKey(Keys.HEADER_INFO_SIM));
     }
 
 

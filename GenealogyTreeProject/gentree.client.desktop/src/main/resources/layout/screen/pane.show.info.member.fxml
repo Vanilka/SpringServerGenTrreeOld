@@ -15,7 +15,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <HeaderPane fx:id="headerPane" id="sim-info-header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        <HeaderPane fx:id="HEADER_PANE" id="sim-info-header"  text="%header_info_sim" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
         <ScrollPane styleClass="transparentPane" minHeight="300" minWidth="200"
                     AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0"
                     AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10">

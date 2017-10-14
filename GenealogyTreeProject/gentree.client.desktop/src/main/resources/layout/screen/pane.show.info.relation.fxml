@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import gentree.client.visualization.controls.HeaderPane?>
+<?import gentree.client.visualization.elements.FamilyMemberCard?>
 <AnchorPane id="paneShowInfoRelation" fx:id="paneShowInfoRelation" prefHeight="509.0" prefWidth="284.0"
             styleClass="contentPane" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
             AnchorPane.topAnchor="30" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1"
@@ -14,17 +16,14 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
+       <HeaderPane fx:id="HEADER_PANE" id="relation-info-header" text="%header_info_relation"  AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
         <AnchorPane fx:id="contentPane"
-                    AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                    AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="0"
         AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
             <children>
-                <Label text="Info Relation: " AnchorPane.leftAnchor="30" AnchorPane.topAnchor="0"/>
-                <VBox fx:id="motherPane" layoutY="20" AnchorPane.leftAnchor="20">
-                    <Label text="mother"/>
-                </VBox>
-                <VBox fx:id="fatherPane"  layoutY="20" AnchorPane.rightAnchor="20">
-                    <Label text="father"/>
-                </VBox>
+                <FamilyMemberCard fx:id="motherCard" layoutY="20" AnchorPane.leftAnchor="10" />
+
+                <FamilyMemberCard fx:id="fatherCard"  layoutY="20" AnchorPane.rightAnchor="10"/>
 
                 <StackPane fx:id="relationTypePane" layoutX="90" layoutY="200"/>
 

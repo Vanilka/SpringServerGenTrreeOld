@@ -8,6 +8,7 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.controls.HeaderPane;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.client.visualization.elements.FamilyMemberCard;
 import gentree.client.visualization.elements.RelationTypeCard;
@@ -53,16 +54,14 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     private AnchorPane contentPane;
 
     @FXML
+    private HeaderPane HEADER_PANE;
+
+    @FXML
     private JFXButton returnButton;
 
     @FXML
     private JFXTextField relationId;
 
-    @FXML
-    private VBox motherPane;
-
-    @FXML
-    private VBox fatherPane;
 
     @FXML
     private StackPane relationTypePane;
@@ -78,8 +77,13 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     private TableColumn<Member, String> simPhotoColumn;
 
 
-    private FamilyMemberCard motherCard;
-    private FamilyMemberCard fatherCard;
+    @FXML
+    private  FamilyMemberCard motherCard;
+
+    @FXML
+    private  FamilyMemberCard fatherCard;
+
+
     private RelationTypeCard relationTypeElement;
 
     private ObjectProperty<Relation> relation;
@@ -124,8 +128,6 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     }
 
     private void initPanes() {
-        motherPane.getChildren().add(motherCard);
-        fatherPane.getChildren().add(fatherCard);
         relationTypePane.getChildren().add(relationTypeElement);
         setCellValueFactory();
     }
@@ -222,6 +224,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         simNameColumn.setText(getValueFromKey(Keys.SIM_NAME));
         simSurnameColumn.setText(getValueFromKey(Keys.SIM_SURNAME));
         returnButton.setText(getValueFromKey(Keys.RETURN));
+        HEADER_PANE.setTitle(getValueFromKey(Keys.HEADER_INF_RELATION));
     }
 
 

@@ -1,13 +1,16 @@
 package gentree.client.visualization.controls;
 
 import gentree.client.visualization.controls.skin.HeaderPaneSkin;
+import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.WritableValue;
 import javafx.css.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
@@ -21,6 +24,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by vanilka on 07/10/2017.
@@ -54,7 +58,7 @@ public class HeaderPane extends Control {
         createDefaultSkin();
     }
 
-    public HeaderPane(String title) {
+    public HeaderPane(@NamedArg("text") String title) {
         initialize();
         this.title.set(title);
         createDefaultSkin();
@@ -73,11 +77,13 @@ public class HeaderPane extends Control {
         return title;
     }
 
-
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
 
     /*
-     *   GETTERS SETTERS
-     */
+         *   GETTERS SETTERS
+         */
     public EventHandler<ActionEvent> getOnAction() {
         return onActionProperty().get();
     }

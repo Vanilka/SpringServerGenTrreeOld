@@ -637,7 +637,7 @@
 /*
     Header od Pane
  */
-#sim-info-header {
+#sim-info-header, #relation-info-header {
     -fx-background-color: #156f93;
     -fx-min-height: 30;
     -fx-pref-height: 30;
