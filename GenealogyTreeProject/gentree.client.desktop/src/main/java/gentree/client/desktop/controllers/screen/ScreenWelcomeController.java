@@ -19,6 +19,10 @@ import java.util.ResourceBundle;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
+ * Show window with choice of mode of application :  <br>
+ *
+ * a) Online <br>
+ * b) OffLine <br>
  */
 @Log4j2
 public class ScreenWelcomeController implements Initializable, FXMLController, FXMLAnchorPane {

@@ -20,7 +20,7 @@ public abstract class SubBorderPane extends BorderPane {
     /**
      * Relation Height =
      */
-    protected final static double RELATION_HEIGHT = 260;
+    protected final static double RELATION_HEIGHT = 220;
 
     private final ObjectProperty<SubBorderPane> parentPane;
     private final ObjectProperty<FamilyGroup> familyGroup;

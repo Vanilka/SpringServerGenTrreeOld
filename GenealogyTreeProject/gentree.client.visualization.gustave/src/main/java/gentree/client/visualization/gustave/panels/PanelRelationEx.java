@@ -34,7 +34,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
     private final static double MARGIN_RIGHT = 0.0;
-    private final static double MARGIN_BOTTOM = 50.0;
+    private final static double MARGIN_BOTTOM = 20.0;
 
     private final static double PADDING_TOP = 10.0;
     private final static double PADDING_LEFT = 10.0;
@@ -88,9 +88,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         initListeners();
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
-        initBorder(Color.GREEN, this);
-        initBorder(Color.FUCHSIA, relation);
-        initBorder(Color.ORANGE, childrenBox);
     }
 
 
@@ -99,7 +96,11 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         this.setCenter(childrenBox);
         this.setTop(relation);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
-        setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));;
+        setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+
+        relation.setMinHeight(RELATION_HEIGHT);
+        relation.setPrefHeight(RELATION_HEIGHT);
+        relation.setMinHeight(RELATION_HEIGHT);
     }
 
 
@@ -127,6 +128,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private void initListeners() {
         initSpouseListener();
         initThisRelationListener();
+        initSpouseBornRelationListener();
         initChildrenListener();
         initElementPositionsListeners();
     }
@@ -139,7 +141,12 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         });
     }
 
+    private void initSpouseBornRelationListener() {
+        spouseBornRelation.addListener((observable, oldValue, newValue) -> {
+            spouseRelationReference.setRelation(newValue);
+        });
 
+    }
     private void initSpouseListener() {
         spouse.addListener((observable, oldValue, newValue) -> {
             relation.getChildren().removeAll();
@@ -178,6 +185,9 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         thisRelationReference.layoutXProperty().bind(relationTypeElement.layoutXProperty().add(relationTypeElement.widthProperty().subtract(thisRelationReference.widthProperty()).divide(2)));
         thisRelationReference.layoutYProperty().bind(relationTypeElement.layoutYProperty().add(relationTypeElement.heightProperty()));
 
+        spouseRelationReference.layoutXProperty().bind(spouseCard.layoutXProperty().add(spouseCard.widthProperty().divide(2)));
+        spouseRelationReference.layoutYProperty().bind(spouseCard.layoutYProperty());
+
         relationTypeElement.layoutXProperty().bind(Bindings.when(Bindings.isNotEmpty(children))
                 .then(childrenConnector.getLine().startXProperty()
                         .subtract(relationTypeElement.widthProperty().divide(2))
@@ -197,7 +207,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     @Override
     protected double computeMinWidth(double height) {
-        if(children.isEmpty()) return super.computePrefWidth(height);
+       if(children.isEmpty()) return super.computePrefWidth(height);
+
         Double offset = 0.0;
         if(spouseCard.getLayoutX() < 0) {
             offset = (spouseCard.getLayoutX()*(-1)) +20;

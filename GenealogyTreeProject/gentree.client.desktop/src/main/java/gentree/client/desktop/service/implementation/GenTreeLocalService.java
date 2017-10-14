@@ -105,6 +105,7 @@ public class GenTreeLocalService implements FamilyService {
     @Override
     public ServiceResponse addRelation(Relation relation) {
         if (relation.getLeft() == null && relation.getRight() == null) {
+            System.out.println("Will ad from this");
             getCurrentFamily().addRelation(relation);
         } else {
             Relation exist = findRelation(relation.getLeft(), relation.getRight());

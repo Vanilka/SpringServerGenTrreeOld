@@ -31,7 +31,7 @@ public class PanelChild extends SubBorderPane {
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
     private final static double MARGIN_RIGHT = 0.0;
-    private final static double MARGIN_BOTTOM = 50.0;
+    private final static double MARGIN_BOTTOM = 20.0;
 
     private final static double PADDING_TOP = 60.0;
     private final static double PADDING_LEFT = 10.0;
@@ -68,9 +68,6 @@ public class PanelChild extends SubBorderPane {
         panelRelationCurrent = new SimpleObjectProperty<>();
         panelRelationEx = FXCollections.observableArrayList();
         spouseConnector = new SpouseConnector(this);
-
-        initBorder(Color.RED, this);
-
         initListeners();
         initPanes();
 

@@ -38,7 +38,7 @@ public class Family implements Serializable {
         version = new SimpleLongProperty();
         id = new SimpleLongProperty();
         name = new SimpleStringProperty();
-        members = FXCollections.observableArrayList(memberCallback());
+        members = FXCollections.observableArrayList();
         relations = FXCollections.observableArrayList(relationCallback());
     }
 

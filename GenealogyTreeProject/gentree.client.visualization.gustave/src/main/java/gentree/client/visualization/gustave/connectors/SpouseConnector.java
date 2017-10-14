@@ -134,7 +134,7 @@ public class SpouseConnector extends LineConnector {
 
         setLineCoordinates(lineRelationToSim, simPoint.getX(), simPoint.getY(), relationTypePointLeft.getX(), relationTypePointLeft.getY());
         setLineCoordinates(getLine(), relationTypePointRight.getX(), relationTypePointRight.getY(), spousePoint.getX(), spousePoint.getY());
-        setLineCoordinates(lineSimConnectSpouse, simPoint.getX(), simPoint.getY(), spouseRightPoint.getX() + 20, spouseRightPoint.getY());
+        setLineCoordinates(lineSimConnectSpouse, simPoint.getX(), simPoint.getY(), spouseRightPoint.getX() + 10, spouseRightPoint.getY());
 
     }
 

@@ -49,7 +49,6 @@ public class FamilyGroup extends AnchorPane {
         this.idNode = id;
         fxmlLoading();
         propertyBinding();
-        initAutoResizing();
         this.rootRelation.set(bean);
 
     }
@@ -84,22 +83,6 @@ public class FamilyGroup extends AnchorPane {
             PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: "+idNode,")  ",rootRelation.getValue().getChildren().get(0).surnameProperty()));
         });
 
-
-    }
-
-    /**
-     * TODO
-     */
-    private void initListener() {
-
-    }
-
-
-
-    /**
-     * Function guard for resizing gentree.client.visualization.elements
-     */
-    private void initAutoResizing() {
 
     }
 

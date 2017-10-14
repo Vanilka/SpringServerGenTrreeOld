@@ -31,7 +31,7 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
     private final static double MARGIN_RIGHT = 0.0;
-    private final static double MARGIN_BOTTOM = 50.0;
+    private final static double MARGIN_BOTTOM = 20.0;
 
     private final static double PADDING_TOP = 10.0;
     private final static double PADDING_LEFT = 10.0;
@@ -84,13 +84,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         this.spouse.setValue(spouse);
         this.thisRelation.setValue(thisRelation);
         this.spouseBornRelation.setValue(spouseBorn);
-        initBorder(Color.PURPLE, relation);
-        initBorder(Color.ROSYBROWN, this);
-        initBorder(Color.BLUE, childrenBox);
-
-        spouseCard.setOnMouseClicked(event -> {
-            System.out.println("Relation reference " + thisRelation.getReferenceNumber());
-        });
     }
 
     public PanelRelationCurrent(Member spouse, Relation thisRelation, Relation spouseBorn, SubBorderPane parent) {
@@ -101,12 +94,17 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     private void initPanes() {
         initHbox();
         initAnchorPanesOffset();
-
         this.setCenter(childrenBox);
         this.setTop(relation);
         BorderPane.setAlignment(childrenBox, Pos.TOP_RIGHT);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(relation, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
+
+
+        relation.setMinHeight(RELATION_HEIGHT);
+        relation.setPrefHeight(RELATION_HEIGHT);
+        relation.setMinHeight(RELATION_HEIGHT);
+
 
     }
 

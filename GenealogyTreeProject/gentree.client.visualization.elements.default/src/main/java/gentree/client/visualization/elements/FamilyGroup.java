@@ -1,13 +1,14 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.controls.HeaderPane;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,17 +26,9 @@ public class FamilyGroup extends AnchorPane {
     private static int MIN_OFFSET_HORIZONTAL = 300;
     private static int MIN_OFFSET_VERTICAL = 200;
 
-    @FXML
-    private Rectangle bodyNode;
 
     @FXML
-    private Rectangle bodyNodeDark;
-
-    @FXML
-    private Rectangle labelFondNode;
-
-    @FXML
-    private Label nameNode;
+    private HeaderPane PANEL_HEADER;
 
     @FXML
     private AnchorPane content;
@@ -45,25 +38,20 @@ public class FamilyGroup extends AnchorPane {
 
     private ObjectProperty<Relation> rootRelation;
 
-    private int idNode;
+    private final int idNode;
 
     {
         rootRelation = new SimpleObjectProperty<>();
     }
 
     public FamilyGroup(Relation bean, int id) {
-        this(bean);
-        this.idNode = id;
-
-    }
-
-    public FamilyGroup(Relation bean) {
         super();
+        this.idNode = id;
         fxmlLoading();
         propertyBinding();
         initAutoResizing();
-
         this.rootRelation.set(bean);
+
     }
 
     /**
@@ -90,10 +78,10 @@ public class FamilyGroup extends AnchorPane {
 
         rootRelation.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
-                nameNode.textProperty().unbind();
+                this.PANEL_HEADER.titleProperty().unbind();
             }
 
-            nameNode.textProperty().bind(rootRelation.getValue().getChildren().get(0).surnameProperty());
+            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: "+idNode,")  ",rootRelation.getValue().getChildren().get(0).surnameProperty()));
         });
 
 
@@ -112,12 +100,7 @@ public class FamilyGroup extends AnchorPane {
      * Function guard for resizing gentree.client.visualization.elements
      */
     private void initAutoResizing() {
-        bodyNodeDark.widthProperty().bind(widthProperty().subtract(OFFSET_FOND_DARK));
-        bodyNodeDark.heightProperty().bind(heightProperty().subtract(OFFSET_FOND_DARK));
-        bodyNode.widthProperty().bind(widthProperty().subtract(OFFSET_FOND));
-        bodyNode.heightProperty().bind(heightProperty().subtract(OFFSET_FOND));
 
-        content.prefWidth(USE_COMPUTED_SIZE);
     }
 
     /**
@@ -142,5 +125,17 @@ public class FamilyGroup extends AnchorPane {
     public void setRootRelation(Relation rootRelation) {
         this.rootRelation.set(rootRelation);
     }
+
+
+    protected void initBorder(Color color, Pane node) {
+        node.setBorder(new Border
+                (new BorderStroke(color,
+                        BorderStrokeStyle.SOLID,
+                        CornerRadii.EMPTY,
+                        new BorderWidths(6))));
+    }
+
+
+
 }
 

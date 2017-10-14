@@ -34,7 +34,6 @@ public class RelationTypeElement extends RelationTypeCard {
         dropShadow = new DropShadow();
         initShadow();
         this.setOnMouseEntered(t -> circle.setEffect(dropShadow));
-
         this.setOnMouseExited(t -> circle.setEffect(null));
 
         this.setOnMouseClicked(event -> {

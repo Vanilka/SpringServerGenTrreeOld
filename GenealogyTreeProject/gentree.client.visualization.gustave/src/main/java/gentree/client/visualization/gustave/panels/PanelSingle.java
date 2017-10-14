@@ -34,7 +34,7 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     private final static double MARGIN_TOP = 0.0;
     private final static double MARGIN_LEFT = 0.0;
     private final static double MARGIN_RIGHT = 0.0;
-    private final static double MARGIN_BOTTOM = 50.0;
+    private final static double MARGIN_BOTTOM = 20.0;
 
     private final static double PADDING_TOP = 10.0;
     private final static double PADDING_LEFT = 10.0;
@@ -76,7 +76,6 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         init();
         this.member.setMember(m);
         this.thisRelation.setValue(thisRelation);
-        initBorder(Color.BLUE, this);
     }
 
 
@@ -101,6 +100,10 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         maxWidth(USE_PREF_SIZE);
         pane.setPrefSize(180,RELATION_HEIGHT);
         pane.getChildren().addAll(member, thisRelationReference);
+
+        pane.setMinHeight(RELATION_HEIGHT);
+        pane.setPrefHeight(RELATION_HEIGHT);
+        pane.setMinHeight(RELATION_HEIGHT);
     }
 
     private void initHbox() {
@@ -147,18 +150,6 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         thisRelationReference.layoutYProperty().bind(member.layoutYProperty().add(member.heightProperty()));
 
         member.layoutXProperty().bind(pane.widthProperty().subtract(member.widthProperty()).divide(2));
-
-        member.layoutXProperty().addListener((observable, oldValue, newValue) -> {
-            //childrenConnector.connectRelationToChildren(member);
-        });
-    }
-
-    private void calculateRelationElementsPosition() {
-        if (childrenPanels.size() > 0) {
-            Line line = childrenConnector.getLine();
-            Double offset = (line.getStartX() + line.getEndX() - member.getWidth()) / 2 - PADDING_LEFT;
-            member.setLayoutX(offset);
-        }
     }
 
 
