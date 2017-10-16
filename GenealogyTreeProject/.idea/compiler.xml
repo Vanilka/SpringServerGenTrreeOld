@@ -28,11 +28,6 @@
       <module name="gentree.client.visualization.gustave" target="1.8" />
       <module name="gentree.client.visualization.vanilla" target="1.8" />
       <module name="gentree.exceptions" target="1.8" />
-      <module name="maven-archiver (1)" target="1.5" />
-      <module name="maven-archiver (2)" target="1.5" />
-      <module name="maven-archiver (3)" target="1.5" />
-      <module name="maven-archiver (4)" target="1.5" />
-      <module name="maven-archiver (5)" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
