@@ -2,7 +2,37 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="gentree.client.desktop" />
+        <module name="gentree.client.desktop.context" />
+        <module name="gentree.client.desktop.domain" />
+        <module name="gentree.client.visualization.elements.default" />
+        <module name="gentree.client.visualization.elements.gustave" />
+        <module name="gentree.client.visualization.gentree.client.visualization.elements.default" />
+        <module name="gentree.client.visualization.gustave" />
+        <module name="gentree.client.visualization.vanilla" />
+        <module name="gentree.exceptions" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gentree" target="1.8" />
+      <module name="gentree.client.desktop" target="1.8" />
+      <module name="gentree.client.desktop.context" target="1.8" />
+      <module name="gentree.client.desktop.domain" target="1.8" />
+      <module name="gentree.client.visualization.elements.default" target="1.8" />
+      <module name="gentree.client.visualization.elements.gustave" target="1.8" />
+      <module name="gentree.client.visualization.gentree.client.visualization.elements.default" target="1.8" />
+      <module name="gentree.client.visualization.gustave" target="1.8" />
+      <module name="gentree.client.visualization.vanilla" target="1.8" />
+      <module name="gentree.exceptions" target="1.8" />
+      <module name="maven-archiver (1)" target="1.5" />
+      <module name="maven-archiver (2)" target="1.5" />
+      <module name="maven-archiver (3)" target="1.5" />
+      <module name="maven-archiver (4)" target="1.5" />
+      <module name="maven-archiver (5)" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gentree.iml" filepath="$PROJECT_DIR$/gentree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.desktop/gentree.client.desktop.iml" filepath="$PROJECT_DIR$/gentree.client.desktop/gentree.client.desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.desktop.context/gentree.client.desktop.context.iml" filepath="$PROJECT_DIR$/gentree.client.desktop.context/gentree.client.desktop.context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.desktop.domain/gentree.client.desktop.domain.iml" filepath="$PROJECT_DIR$/gentree.client.desktop.domain/gentree.client.desktop.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.elements.default/gentree.client.visualization.elements.default.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.elements.default/gentree.client.visualization.elements.default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.elements.gustave/gentree.client.visualization.elements.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.elements.gustave/gentree.client.visualization.elements.gustave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.elements.default/gentree.client.visualization.gentree.client.visualization.elements.default.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.elements.default/gentree.client.visualization.gentree.client.visualization.elements.default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" filepath="$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" />
+    </modules>
+  </component>
+</project>
