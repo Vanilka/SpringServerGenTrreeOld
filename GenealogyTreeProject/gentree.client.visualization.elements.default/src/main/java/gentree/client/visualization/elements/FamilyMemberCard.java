@@ -24,25 +24,18 @@ public class FamilyMemberCard extends AnchorPane {
 
     private final static int MEMBER_WIDTH = 133;
     private final static int MEMBER_HEIGHT = 188;
-
-    @FXML
-    private AnchorPane leafAnchorPane;
-
-    @FXML
-    private Label surnameSim;
-
-    @FXML
-    private Label nameSim;
-
-    @FXML
-    private Label bornameSim;
-
     @FXML
     protected ImageView photoSim;
-
     @FXML
     protected Rectangle rectangleFond;
-
+    @FXML
+    private AnchorPane leafAnchorPane;
+    @FXML
+    private Label surnameSim;
+    @FXML
+    private Label nameSim;
+    @FXML
+    private Label bornameSim;
     @FXML
     private Polygon deathCord;
 
@@ -65,16 +58,16 @@ public class FamilyMemberCard extends AnchorPane {
 
     }
 
+    public FamilyMemberCard() {
+        this(null);
+    }
+
     private Polygon initPolygon() {
-        return  new Polygon(
+        return new Polygon(
                 0.0, 40.0,
                 00, 60.0,
                 60.0, 0.0,
                 40.0, 0.0);
-    }
-
-    public FamilyMemberCard() {
-        this(null);
     }
 
     private void initialize() {
@@ -128,7 +121,7 @@ public class FamilyMemberCard extends AnchorPane {
         try {
             photoSim.setImage(new Image(path));
 
-            if(shouldBeInGayScale) {
+            if (shouldBeInGayScale) {
                 setGrayScaleToImgView(photoSim);
             } else {
                 photoSim.setEffect(null);

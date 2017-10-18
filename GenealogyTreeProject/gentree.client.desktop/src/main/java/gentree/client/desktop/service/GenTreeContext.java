@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 @Getter
 @Setter
 @Log4j2
-public class GenTreeContext implements FamilyContext{
+public class GenTreeContext implements FamilyContext {
 
     public static final GenTreeContext INSTANCE = new GenTreeContext();
 

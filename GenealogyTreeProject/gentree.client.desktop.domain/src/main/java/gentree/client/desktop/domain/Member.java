@@ -1,4 +1,5 @@
 package gentree.client.desktop.domain;
+
 import gentree.client.desktop.configuration.wrappers.LongAdapter;
 import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
 import gentree.client.desktop.domain.enums.Age;
@@ -20,8 +21,8 @@ import java.util.stream.Stream;
 public class Member implements Serializable {
 
     private static final long serialVersionUID = 7165660080715738518L;
-    private static  String DEFAULT_FEMALE_LOCATION = "";
-    private static  String DEFAULT_MALE_LOCATION = "";
+    private static String DEFAULT_FEMALE_LOCATION = "";
+    private static String DEFAULT_MALE_LOCATION = "";
 
     private LongProperty id;
     private StringProperty name;
@@ -72,6 +73,14 @@ public class Member implements Serializable {
     /*
             GETTERS
      */
+
+    public static void setDefaultFemaleLocation(String defaultFemaleLocation) {
+        DEFAULT_FEMALE_LOCATION = defaultFemaleLocation;
+    }
+
+    public static void setDefaultMaleLocation(String defaultMaleLocation) {
+        DEFAULT_MALE_LOCATION = defaultMaleLocation;
+    }
 
     @XmlID
     @XmlJavaTypeAdapter(type = long.class, value = LongAdapter.class)
@@ -155,6 +164,10 @@ public class Member implements Serializable {
         return age;
     }
 
+    /*
+            SETTERS
+     */
+
     public Race getRace() {
         return race.get();
     }
@@ -162,10 +175,6 @@ public class Member implements Serializable {
     public void setRace(Race race) {
         this.race.set(race);
     }
-
-    /*
-            SETTERS
-     */
 
     public ObjectProperty<Race> raceProperty() {
         return race;
@@ -208,14 +217,6 @@ public class Member implements Serializable {
         if (alive) {
             setDeathCause(null);
         }
-    }
-
-    public static void setDefaultFemaleLocation(String defaultFemaleLocation) {
-        DEFAULT_FEMALE_LOCATION = defaultFemaleLocation;
-    }
-
-    public static void setDefaultMaleLocation(String defaultMaleLocation) {
-        DEFAULT_MALE_LOCATION = defaultMaleLocation;
     }
 
     public BooleanProperty aliveProperty() {

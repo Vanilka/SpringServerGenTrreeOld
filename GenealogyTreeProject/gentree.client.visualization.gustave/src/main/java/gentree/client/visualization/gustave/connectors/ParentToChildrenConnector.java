@@ -4,36 +4,24 @@ import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.PanelRelationCurrent;
 import gentree.client.visualization.gustave.panels.PanelRelationEx;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import lombok.Getter;
-
-import java.util.Comparator;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/08/2017.
  */
 public class ParentToChildrenConnector extends LineConnector {
 
-    /*
-    *  Parent pane for this Connector
-    */
-    private SubRelationPane subBorderPane;
+    private final BetweenChildrenConnector betweenChildrenConnector;
 
     /*
     *   Child Connectors for children in Sub-Relation-Pane
     */
-
-    private final BetweenChildrenConnector betweenChildrenConnector;
+    /*
+    *  Parent pane for this Connector
+    */
+    private SubRelationPane subBorderPane;
 
 
     /**
@@ -84,10 +72,9 @@ public class ParentToChildrenConnector extends LineConnector {
 
     /**
      * Drawing line beetween parent/ relation and connection point
-     *
      */
     private void connectRelationToChildren() {
-        if ( betweenChildrenConnector.isListEmpty().not().get()) {
+        if (betweenChildrenConnector.isListEmpty().not().get()) {
             if (subBorderPane instanceof PanelRelationCurrent) {
                 connectToLeft();
             } else if (subBorderPane instanceof PanelRelationEx) {
@@ -108,7 +95,7 @@ public class ParentToChildrenConnector extends LineConnector {
     }
 
     private void connectToCenter() {
-        Double middle = (betweenChildrenConnector.getLine().getStartX() + betweenChildrenConnector.getLine().getEndX())/2;
+        Double middle = (betweenChildrenConnector.getLine().getStartX() + betweenChildrenConnector.getLine().getEndX()) / 2;
         drawConnector(subBorderPane.getConnectionNode(), middle, betweenChildrenConnector.getLine().getStartY());
     }
 

@@ -2,8 +2,6 @@ package gentree.client.visualization.gustave.connectors;
 
 import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -12,12 +10,12 @@ import lombok.Setter;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/08/2017.
- *
+ * <p>
  * Class responsible to drawing Vertical Line from Child
  */
 @Getter
 @Setter
-public class ChildConnector extends LineConnector  {
+public class ChildConnector extends LineConnector {
 
     private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
     private final SubRelationPane subBorderPane;
@@ -68,7 +66,7 @@ public class ChildConnector extends LineConnector  {
     private void redrawLine() {
         Bounds childBounds = getRelativeBounds(panelChild.getPanelSingle().get().getMember());
         Point2D startPoint = getTopPoint(childBounds);
-        Point2D endPoint = new Point2D(startPoint.getX(), startPoint.getY() - CHILD_CONNECTOR_HEIGHT );
+        Point2D endPoint = new Point2D(startPoint.getX(), startPoint.getY() - CHILD_CONNECTOR_HEIGHT);
 
         getLine().setStartX(startPoint.getX());
         getLine().setStartY(startPoint.getY());

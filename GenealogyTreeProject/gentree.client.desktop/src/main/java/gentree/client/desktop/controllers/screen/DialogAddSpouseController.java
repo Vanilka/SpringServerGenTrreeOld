@@ -97,7 +97,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     @FXML
     public void confirm(ActionEvent actionEvent) {
 
-        context.getService().addRelation(member.get(), spouse.get(),  relationTypeComboBox.getValue(), checkBoxSetCurrent.isSelected());
+        context.getService().addRelation(member.get(), spouse.get(), relationTypeComboBox.getValue(), checkBoxSetCurrent.isSelected());
         stage.close();
     }
 
@@ -134,7 +134,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
             /*
                 RemoveLeft
              */
-            if(bornRelation.getLeft() != null) {
+            if (bornRelation.getLeft() != null) {
                 list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
                 list = removeAscends(list, bornRelation.getLeft());
             }
@@ -142,11 +142,10 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
             /*
                 Remove Rightrs
              */
-            if(bornRelation.getRight() != null) {
+            if (bornRelation.getRight() != null) {
                 list = list.filtered(p -> !p.equals(bornRelation.getRight()));
                 list = removeAscends(list, bornRelation.getRight());
             }
-
 
 
         } catch (NotUniqueBornRelationException e) {
@@ -193,7 +192,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
         checkBoxSetCurrent.disableProperty().bind(Bindings.createBooleanBinding((() -> relationTypeComboBox.getValue().equals(RelationType.NEUTRAL)), relationTypeComboBox.valueProperty()));
 
         relationTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.equals(RelationType.NEUTRAL)){
+            if (newValue.equals(RelationType.NEUTRAL)) {
                 checkBoxSetCurrent.setSelected(false);
             }
         });
@@ -232,7 +231,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     private void initSpouseListener() {
         spouse.addListener((observable, oldValue, newValue) -> {
             spouseCard.setMember(newValue);
-            if(newValue == null) {
+            if (newValue == null) {
                 relationTypeComboBox.getSelectionModel().select(RelationType.NEUTRAL);
                 relationTypeComboBox.setDisable(true);
             } else {

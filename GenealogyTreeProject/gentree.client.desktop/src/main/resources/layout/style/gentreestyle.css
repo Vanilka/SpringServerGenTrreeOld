@@ -153,7 +153,7 @@
 }
 
 .dottedPane {
-    -fx-border-color: -gentree-color-8 ;
+    -fx-border-color: -gentree-color-8;
     -fx-border-width: 3px;
     -fx-border-style: dashed;
 }
@@ -607,7 +607,7 @@
 .addElementButton {
     -fx-border-color: rgba(84, 122, 117, 0.69);
     -fx-background-color: rgba(117, 142, 145, 0.81);
-    -fx-background-image:  url("/layout/images/backgrounds/new.png");
+    -fx-background-image: url("/layout/images/backgrounds/new.png");
     -fx-background-size: 50 50;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -629,10 +629,9 @@
     Custom Pane
  */
 
-#childrenFlowPane{
+#childrenFlowPane {
     -fx-padding: 10px 10px 10px 10px;
 }
-
 
 /*
     Header od Pane

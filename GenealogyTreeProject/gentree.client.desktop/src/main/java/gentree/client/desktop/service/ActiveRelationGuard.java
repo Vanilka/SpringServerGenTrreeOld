@@ -43,7 +43,7 @@ public class ActiveRelationGuard implements Observer {
             /*
                 Redraw tree
              */
-            System.out.println(sm.getGenTreeDrawingService() +" From guardian");
+            System.out.println(sm.getGenTreeDrawingService() + " From guardian");
             sm.getGenTreeDrawingService().startDraw();
         }
     }

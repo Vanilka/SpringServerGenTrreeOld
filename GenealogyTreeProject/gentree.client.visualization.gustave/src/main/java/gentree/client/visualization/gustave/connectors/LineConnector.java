@@ -10,9 +10,8 @@ import javafx.scene.shape.StrokeLineJoin;
 
 /**
  * Created by Martyna SZYMKOWIAK on 23/08/2017.
- *
+ * <p>
  * Class to manage Line Connectors.
- *
  */
 public class LineConnector extends Connector {
 
@@ -34,7 +33,7 @@ public class LineConnector extends Connector {
         line.setStrokeWidth(width);
         line.setStrokeLineJoin(StrokeLineJoin.ROUND);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
-}
+    }
 
     public Line getLine() {
         return line.get();

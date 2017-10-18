@@ -9,9 +9,9 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.controls.HeaderPane;
-import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.client.visualization.elements.FamilyMemberCard;
 import gentree.client.visualization.elements.RelationTypeCard;
+import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -24,7 +24,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,10 +77,10 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
 
     @FXML
-    private  FamilyMemberCard motherCard;
+    private FamilyMemberCard motherCard;
 
     @FXML
-    private  FamilyMemberCard fatherCard;
+    private FamilyMemberCard fatherCard;
 
 
     private RelationTypeCard relationTypeElement;
@@ -142,7 +141,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     }
 
     private void populateControls(Relation r) {
-    //TODO populate controls
+        //TODO populate controls
         relationId.setText(Long.toString(r.getId()));
         motherCard.setMember(r.getLeft());
         fatherCard.setMember(r.getRight());
@@ -237,11 +236,11 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         return relation.get();
     }
 
-    public ObjectProperty<Relation> relationProperty() {
-        return relation;
-    }
-
     public void setRelation(Relation relation) {
         this.relation.set(relation);
+    }
+
+    public ObjectProperty<Relation> relationProperty() {
+        return relation;
     }
 }

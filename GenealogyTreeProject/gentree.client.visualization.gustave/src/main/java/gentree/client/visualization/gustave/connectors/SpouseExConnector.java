@@ -52,7 +52,7 @@ public class SpouseExConnector extends LineConnector {
         try {
             FamilyMember spouse = panelRelationEx.getSpouseCard();
             RelationTypeElement relationType = panelRelationEx.getRelationTypeElement();
-            if(spouse != null && relationType != null) {
+            if (spouse != null && relationType != null) {
                 drawLine(spouse, relationType);
             }
         } catch (Exception e) {

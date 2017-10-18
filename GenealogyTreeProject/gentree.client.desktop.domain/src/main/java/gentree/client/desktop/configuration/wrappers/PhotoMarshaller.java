@@ -12,6 +12,11 @@ import java.util.List;
 public class PhotoMarshaller extends XmlAdapter<String, String> {
     private static List<String> ignoredPaths = new ArrayList<>();
 
+    public static void addIgnoredPaths(String... paths) {
+
+        ignoredPaths.addAll(Arrays.asList(paths));
+    }
+
     @Override
     public String unmarshal(String v) throws Exception {
         if (v == null || v.equals("")) {
@@ -27,10 +32,5 @@ public class PhotoMarshaller extends XmlAdapter<String, String> {
         } else {
             return v;
         }
-    }
-
-    public static void addIgnoredPaths(String... paths) {
-
-        ignoredPaths.addAll(Arrays.asList(paths));
     }
 }

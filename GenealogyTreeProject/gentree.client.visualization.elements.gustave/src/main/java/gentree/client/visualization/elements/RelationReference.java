@@ -44,7 +44,7 @@ public class RelationReference extends StackPane {
 
     private void initRelationListener() {
         relation.addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
+            if (newValue != null) {
                 text.textProperty().bind(newValue.referenceNumberProperty().asString());
                 this.visibleProperty().bind(newValue.referenceNumberProperty().greaterThan(0));
             } else {
@@ -116,12 +116,12 @@ public class RelationReference extends StackPane {
         return relation.get();
     }
 
-    public ObjectProperty<Relation> relationProperty() {
-        return relation;
-    }
-
     public void setRelation(Relation relation) {
         this.relation.set(relation);
+    }
+
+    public ObjectProperty<Relation> relationProperty() {
+        return relation;
     }
 
     public enum RelationReferenceType {

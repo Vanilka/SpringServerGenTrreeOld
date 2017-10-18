@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<?import gentree.client.visualization.controls.HeaderPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="paneShowInfoSim" fx:id="paneShowInfoSim"
             styleClass="contentPane" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.PaneShowInfoSim"
@@ -15,7 +15,8 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <HeaderPane fx:id="HEADER_PANE" id="sim-info-header"  text="%header_info_sim" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        <HeaderPane fx:id="HEADER_PANE" id="sim-info-header" text="%header_info_sim" AnchorPane.leftAnchor="0"
+                    AnchorPane.rightAnchor="0"/>
         <ScrollPane styleClass="transparentPane" minHeight="300" minWidth="200"
                     AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0"
                     AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10">
@@ -52,7 +53,7 @@
                                    AnchorPane.rightAnchor="50"
                                    layoutY="500.0"/>
 
-                        <JFXButton fx:id="modifyButton"  text="%modify" buttonType="RAISED"
+                        <JFXButton fx:id="modifyButton" text="%modify" buttonType="RAISED"
                                    onAction="#modifyAction"
                                    prefWidth="100.0"
                                    AnchorPane.leftAnchor="50"

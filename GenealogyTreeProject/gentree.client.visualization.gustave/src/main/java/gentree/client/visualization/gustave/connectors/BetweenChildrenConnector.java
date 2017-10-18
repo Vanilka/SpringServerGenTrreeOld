@@ -3,14 +3,16 @@ package gentree.client.visualization.gustave.connectors;
 import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.shape.Line;
 
 import java.util.Comparator;
-import java.util.Optional;
 
 
 /**
@@ -18,16 +20,14 @@ import java.util.Optional;
  */
 public class BetweenChildrenConnector extends LineConnector {
 
+    private final ReadOnlyBooleanWrapper isEmpty = new ReadOnlyBooleanWrapper();
     /*
     *  Parent pane for this Connector
     */
     private SubRelationPane subBorderPane;
-
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
     private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
     private ObjectProperty<ChildConnector> end = new SimpleObjectProperty<>();
-
-    private final ReadOnlyBooleanWrapper isEmpty = new ReadOnlyBooleanWrapper();
 
     /**
      * SubRelationPane element is the parent for this Connector
@@ -81,7 +81,7 @@ public class BetweenChildrenConnector extends LineConnector {
                 Line startLine = start.get().getLine();
                 Line endLine = end.get().getLine();
 
-                setLineCoordinates(getLine(),startLine.getEndX(), startLine.getEndY(),  endLine.getEndX(), endLine.getEndY() );
+                setLineCoordinates(getLine(), startLine.getEndX(), startLine.getEndY(), endLine.getEndX(), endLine.getEndY());
             }
         }
     }
@@ -94,6 +94,7 @@ public class BetweenChildrenConnector extends LineConnector {
 
 
     }
+
     public void addPanelChild(PanelChild child) {
         list.add(new ChildConnector(child, subBorderPane));
     }

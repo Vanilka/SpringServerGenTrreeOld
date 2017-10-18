@@ -5,18 +5,14 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -98,7 +94,7 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     private void initPane() {
         minWidth(USE_PREF_SIZE);
         maxWidth(USE_PREF_SIZE);
-        pane.setPrefSize(180,RELATION_HEIGHT);
+        pane.setPrefSize(180, RELATION_HEIGHT);
         pane.getChildren().addAll(member, thisRelationReference);
 
         pane.setMinHeight(RELATION_HEIGHT);

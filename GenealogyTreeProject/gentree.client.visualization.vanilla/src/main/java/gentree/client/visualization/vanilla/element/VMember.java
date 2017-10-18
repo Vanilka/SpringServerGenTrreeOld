@@ -12,7 +12,7 @@ public class VMember extends FamilyMember {
 
     {
         maxRight = new SimpleDoubleProperty();
-        maxLeft  = new SimpleDoubleProperty();
+        maxLeft = new SimpleDoubleProperty();
     }
 
     public VMember(Member member) {
@@ -26,30 +26,31 @@ public class VMember extends FamilyMember {
 
     /**
      * Getters and setters
+     *
      * @return
      */
     public double getMaxRight() {
         return maxRight.get();
     }
 
-    public ReadOnlyDoubleProperty maxRightProperty() {
-        return maxRight;
-    }
-
     public void setMaxRight(double maxRight) {
         this.maxRight.set(maxRight);
+    }
+
+    public ReadOnlyDoubleProperty maxRightProperty() {
+        return maxRight;
     }
 
     public double getMaxLeft() {
         return maxLeft.get();
     }
 
-    public ReadOnlyDoubleProperty maxLeftProperty() {
-        return maxLeft;
-    }
-
     public void setMaxLeft(double maxLeft) {
         this.maxLeft.set(maxLeft);
+    }
+
+    public ReadOnlyDoubleProperty maxLeftProperty() {
+        return maxLeft;
     }
 
 

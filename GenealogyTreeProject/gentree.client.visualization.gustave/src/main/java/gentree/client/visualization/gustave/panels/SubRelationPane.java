@@ -1,7 +1,5 @@
 package gentree.client.visualization.gustave.panels;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import lombok.Getter;

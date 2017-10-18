@@ -11,6 +11,14 @@
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" filepath="$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.configuration/gentree.server.configuration.iml" filepath="$PROJECT_DIR$/gentree.server.configuration/gentree.server.configuration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.dispatcher/gentree.server.dispatcher.iml" filepath="$PROJECT_DIR$/gentree.server.dispatcher/gentree.server.dispatcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.dto/gentree.server.dto.iml" filepath="$PROJECT_DIR$/gentree.server.dto/gentree.server.dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.entity/gentree.server.entity.iml" filepath="$PROJECT_DIR$/gentree.server.entity/gentree.server.entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.facade/gentree.server.facade.iml" filepath="$PROJECT_DIR$/gentree.server.facade/gentree.server.facade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.manager.db/gentree.server.manager.db.iml" filepath="$PROJECT_DIR$/gentree.server.manager.db/gentree.server.manager.db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.repository/gentree.server.repository.iml" filepath="$PROJECT_DIR$/gentree.server.repository/gentree.server.repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.server.service/gentree.server.service.iml" filepath="$PROJECT_DIR$/gentree.server.service/gentree.server.service.iml" />
     </modules>
   </component>
 </project>

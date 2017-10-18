@@ -4,27 +4,17 @@ import gentree.client.visualization.controls.skin.HeaderPaneSkin;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.WritableValue;
-import javafx.css.*;
+import javafx.css.CssMetaData;
+import javafx.css.Styleable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
-import javafx.scene.control.SkinBase;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by vanilka on 07/10/2017.
@@ -65,6 +55,10 @@ public class HeaderPane extends Control {
 
     }
 
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
+        return StyleableProperties.cssMetaDataList;
+    }
+
     private void initialize() {
         getStyleClass().add(DEFAULT_CLASS_NAME);
     }
@@ -73,12 +67,12 @@ public class HeaderPane extends Control {
         return title.get();
     }
 
-    public SimpleStringProperty titleProperty() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title.set(title);
+    }
+
+    public SimpleStringProperty titleProperty() {
+        return title;
     }
 
     /*
@@ -96,33 +90,14 @@ public class HeaderPane extends Control {
         return onAction;
     }
 
-
-    /**
-     *  Inner static class Styleable properties
-     */
-    private static class StyleableProperties {
-
-        static {
-            List<CssMetaData<? extends Styleable, ?>> temp
-                    = new ArrayList<>(Control.getClassCssMetaData());
-            Collections.addAll(temp);
-            cssMetaDataList = Collections.unmodifiableList(temp);
-        }
-
-        private static final List<CssMetaData<? extends Styleable, ?>> cssMetaDataList;
-    }
-
     @Override
     protected List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
         return getClassCssMetaData();
     }
 
-    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return StyleableProperties.cssMetaDataList;
-    }
-
     /**
      * Create DefaultSkin override
+     *
      * @return
      */
     @Override
@@ -130,13 +105,28 @@ public class HeaderPane extends Control {
         return new HeaderPaneSkin(this);
     }
 
-
     /**
      * Return default Css
+     *
      * @return
      */
     @Override
     public String getUserAgentStylesheet() {
         return HeaderPane.class.getResource("/layout/style/header-pane.css").toExternalForm();
+    }
+
+    /**
+     * Inner static class Styleable properties
+     */
+    private static class StyleableProperties {
+
+        private static final List<CssMetaData<? extends Styleable, ?>> cssMetaDataList;
+
+        static {
+            List<CssMetaData<? extends Styleable, ?>> temp
+                    = new ArrayList<>(Control.getClassCssMetaData());
+            Collections.addAll(temp);
+            cssMetaDataList = Collections.unmodifiableList(temp);
+        }
     }
 }

@@ -22,6 +22,10 @@ public class FamilyMember extends FamilyMemberCard {
         this(null);
     }
 
+    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
+        CONTEXT_PROVIDER__PROPERTY.set(contextProviderProperty);
+    }
+
     private void initialize() {
         this.setOnMouseEntered(t -> {
             rectangleFond.setStroke(Color.valueOf("#64bf37"));
@@ -32,13 +36,13 @@ public class FamilyMember extends FamilyMemberCard {
             rectangleFond.setStroke(Color.TRANSPARENT);
         });
 
-        if(CONTEXT_PROVIDER__PROPERTY.get() != null) {
+        if (CONTEXT_PROVIDER__PROPERTY.get() != null) {
             this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER__PROPERTY.get().showSimContextMenu(returnThis(), event));
         }
 
 
         CONTEXT_PROVIDER__PROPERTY.addListener((observable, oldValue, newValue) -> {
-            if(newValue == null) {
+            if (newValue == null) {
                 this.setOnContextMenuRequested(null);
             } else {
                 this.setOnContextMenuRequested(event -> newValue.showSimContextMenu(returnThis(), event));
@@ -46,14 +50,7 @@ public class FamilyMember extends FamilyMemberCard {
         });
     }
 
-
-
     private FamilyMember returnThis() {
         return this;
-    }
-
-
-    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER__PROPERTY.set(contextProviderProperty);
     }
 }

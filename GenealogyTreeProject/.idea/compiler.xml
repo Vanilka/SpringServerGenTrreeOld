@@ -15,6 +15,14 @@
         <module name="gentree.client.visualization.gustave" />
         <module name="gentree.client.visualization.vanilla" />
         <module name="gentree.exceptions" />
+        <module name="gentree.server.configuration" />
+        <module name="gentree.server.dispatcher" />
+        <module name="gentree.server.dto" />
+        <module name="gentree.server.entity" />
+        <module name="gentree.server.facade" />
+        <module name="gentree.server.manager.db" />
+        <module name="gentree.server.repository" />
+        <module name="gentree.server.service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,6 +36,16 @@
       <module name="gentree.client.visualization.gustave" target="1.8" />
       <module name="gentree.client.visualization.vanilla" target="1.8" />
       <module name="gentree.exceptions" target="1.8" />
+      <module name="gentree.server.configuration" target="1.8" />
+      <module name="gentree.server.configuration.dto" target="1.8" />
+      <module name="gentree.server.dispatcher" target="1.8" />
+      <module name="gentree.server.dto" target="1.8" />
+      <module name="gentree.server.entity" target="1.8" />
+      <module name="gentree.server.facade" target="1.8" />
+      <module name="gentree.server.manager.db" target="1.8" />
+      <module name="gentree.server.manager.package" target="1.8" />
+      <module name="gentree.server.repository" target="1.8" />
+      <module name="gentree.server.service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

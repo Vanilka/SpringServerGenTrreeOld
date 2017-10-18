@@ -75,24 +75,24 @@ public class AgePane extends Control {
         return simAge.get();
     }
 
-    public ObjectProperty<Age> simAgeProperty() {
-        return simAge;
-    }
-
     public void setSimAge(Age simAge) {
         this.simAge.set(simAge);
+    }
+
+    public ObjectProperty<Age> simAgeProperty() {
+        return simAge;
     }
 
     public boolean isIsModifiable() {
         return isModifiable.get();
     }
 
-    public BooleanProperty isModifiableProperty() {
-        return isModifiable;
-    }
-
     public void setIsModifiable(boolean isModifiable) {
         this.isModifiable.set(isModifiable);
+    }
+
+    public BooleanProperty isModifiableProperty() {
+        return isModifiable;
     }
 }
 

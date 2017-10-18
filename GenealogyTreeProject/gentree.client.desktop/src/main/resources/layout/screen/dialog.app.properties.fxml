@@ -4,7 +4,8 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAppProperties" fx:id="dialogAppProperties" minHeight="400" minWidth="500"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAppProperties" fx:id="dialogAppProperties" minHeight="400"
+            minWidth="500"
             styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAppPropertiesController">
     <stylesheets>

@@ -8,7 +8,6 @@ import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
-import gentree.client.visualization.controls.HeaderPane;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -115,10 +114,10 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     }
 
     private void reloadElements() {
-       familyName.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
-       membersCount.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
-       modifyNameButton.setText(getValueFromKey(Keys.MODIFY));
-       addMemberButton.setText(getValueFromKey(Keys.ADD_MEMBER));
+        familyName.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+        membersCount.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+        modifyNameButton.setText(getValueFromKey(Keys.MODIFY));
+        addMemberButton.setText(getValueFromKey(Keys.ADD_MEMBER));
 
 
     }

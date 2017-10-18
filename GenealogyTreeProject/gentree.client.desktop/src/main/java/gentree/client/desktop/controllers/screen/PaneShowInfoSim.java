@@ -168,7 +168,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
         simSurname.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
         simBornname.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
         returnButton.setText(getValueFromKey(Keys.RETURN));
-        modifyButton.setText(getValueFromKey(modifiable.get()? Keys.CONFIRM : Keys.MODIFY));
+        modifyButton.setText(getValueFromKey(modifiable.get() ? Keys.CONFIRM : Keys.MODIFY));
         HEADER_PANE.setTitle(getValueFromKey(Keys.HEADER_INFO_SIM));
     }
 

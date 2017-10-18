@@ -25,20 +25,14 @@ public class FamilyGroup extends AnchorPane {
     private static double OFFSET_FOND = 30.0;
     private static int MIN_OFFSET_HORIZONTAL = 300;
     private static int MIN_OFFSET_VERTICAL = 200;
-
-
+    private final int idNode;
     @FXML
     private HeaderPane PANEL_HEADER;
-
     @FXML
     private AnchorPane content;
-
     @FXML
     private HBox contentHbox;
-
     private ObjectProperty<Relation> rootRelation;
-
-    private final int idNode;
 
     {
         rootRelation = new SimpleObjectProperty<>();
@@ -81,7 +75,7 @@ public class FamilyGroup extends AnchorPane {
                 this.PANEL_HEADER.titleProperty().unbind();
             }
 
-            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: "+idNode,")  ",rootRelation.getValue().getChildren().get(0).surnameProperty()));
+            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
         });
 
 
@@ -93,7 +87,6 @@ public class FamilyGroup extends AnchorPane {
     private void initListener() {
 
     }
-
 
 
     /**
@@ -134,7 +127,6 @@ public class FamilyGroup extends AnchorPane {
                         CornerRadii.EMPTY,
                         new BorderWidths(6))));
     }
-
 
 
 }

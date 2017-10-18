@@ -6,7 +6,7 @@ import javafx.scene.input.ContextMenuEvent;
 
 public interface ContextProvider {
 
-     void showRelationContextMenu(RelationTypeElement relationTypeElement, ContextMenuEvent event);
+    void showRelationContextMenu(RelationTypeElement relationTypeElement, ContextMenuEvent event);
 
-     void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event);
+    void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event);
 }

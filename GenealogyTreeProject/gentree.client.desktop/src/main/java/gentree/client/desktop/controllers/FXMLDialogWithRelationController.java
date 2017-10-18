@@ -1,6 +1,5 @@
 package gentree.client.desktop.controllers;
 
-import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 
 /**

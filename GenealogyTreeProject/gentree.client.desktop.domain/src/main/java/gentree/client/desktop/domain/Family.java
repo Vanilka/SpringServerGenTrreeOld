@@ -63,7 +63,7 @@ public class Family implements Serializable {
     }
 
     private static Callback<Member, Observable[]> memberCallback() {
-        return (Member m) -> new Observable[] {
+        return (Member m) -> new Observable[]{
                 m.idProperty(),
                 m.nameProperty(),
                 m.surnameProperty(),

@@ -25,7 +25,7 @@ public enum ImageFiles {
 
     @Override
     public String toString() {
-        return  file;
+        return file;
     }
 }
 

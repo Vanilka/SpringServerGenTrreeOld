@@ -3,7 +3,6 @@ package gentree.client.visualization.service.implementation;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
@@ -11,7 +10,6 @@ import gentree.client.visualization.vanilla.element.VMember;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
@@ -23,8 +21,8 @@ import java.util.List;
 @Log4j2
 public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
-    private final HBox box;
     private static FamilyContext context;
+    private final HBox box;
     private int nodeCounter;
     private Long idReference;
 
@@ -34,6 +32,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
     public GenTreeDrawingServiceImpl(HBox box) {
         this.box = box;
+    }
+
+    public static void setContext(FamilyContext context) {
+        GenTreeDrawingServiceImpl.context = context;
     }
 
     @Override
@@ -60,15 +62,13 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         return mainPane;
     }
 
-
-
     private VMember generateMember(Member m) {
         return new VMember(m);
     }
 
-
     /**
      * Function creating groups
+     *
      * @return List<FamilyGroup>
      */
     private List<FamilyGroup> findGroups() {
@@ -119,7 +119,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         return null;
     }
 
-
     private void reset() {
         box.getChildren().clear();
         nodeCounter = 1;
@@ -136,9 +135,5 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             log.error(LogMessages.MSG_ERROR_BORN, m);
             return null;
         }
-    }
-
-    public static void setContext(FamilyContext context) {
-        GenTreeDrawingServiceImpl.context = context;
     }
 }

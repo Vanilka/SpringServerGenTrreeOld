@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAddParentToMember" fx:id="dialogAddParentToMember" minHeight="700"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogAddParentToMember" fx:id="dialogAddParentToMember"
+            minHeight="700"
             minWidth="700" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddParentsToMemberController">
     <stylesheets>
@@ -22,7 +23,7 @@
                         <AnchorPane fx:id="motherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
                                     minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
                         <JFXButton fx:id="chooseMother" onAction="#openChoosingMother" text="Set/Change"/>
-                        <JFXButton fx:id="removeMother" onAction="#removeMother" text="X" />
+                        <JFXButton fx:id="removeMother" onAction="#removeMother" text="X"/>
                     </children>
                 </VBox>
 
@@ -33,7 +34,7 @@
                         <AnchorPane fx:id="fatherPane" maxHeight="145.0" maxWidth="255.0" minHeight="145.0"
                                     minWidth="255.0" prefHeight="145.0" prefWidth="255.0"/>
                         <JFXButton fx:id="chooseFather" onAction="#openChoosingFather" text="Set/Change"/>
-                        <JFXButton fx:id="removeFather" onAction="#removeFather" text="X" />
+                        <JFXButton fx:id="removeFather" onAction="#removeFather" text="X"/>
                     </children>
                 </VBox>
                 <AnchorPane fx:id="relationTypePane"/>

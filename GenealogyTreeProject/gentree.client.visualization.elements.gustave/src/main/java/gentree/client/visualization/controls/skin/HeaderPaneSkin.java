@@ -2,8 +2,6 @@ package gentree.client.visualization.controls.skin;
 
 import gentree.client.visualization.controls.HeaderPane;
 import javafx.beans.InvalidationListener;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
 import javafx.scene.layout.*;

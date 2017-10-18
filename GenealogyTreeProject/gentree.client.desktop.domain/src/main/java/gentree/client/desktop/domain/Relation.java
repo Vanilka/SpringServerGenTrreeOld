@@ -195,12 +195,12 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         return referenceNumber.get();
     }
 
-    public void setReferenceNumber(long referenceNumber) {
-        this.referenceNumber.set(referenceNumber);
-    }
-
     public void setReferenceNumber(Long referenceNumber) {
         this.referenceNumber.setValue(referenceNumber);
+    }
+
+    public void setReferenceNumber(long referenceNumber) {
+        this.referenceNumber.set(referenceNumber);
     }
 
     public LongProperty referenceNumberProperty() {

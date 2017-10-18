@@ -119,8 +119,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
 
-
-
     @FXML
     public void cancel() {
         stage.close();
@@ -172,7 +170,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
             Protection to not set my child as my parent
          */
         list = removeDescends(list, member);
-       // list = removeAscends(list, member);
+        // list = removeAscends(list, member);
 
         return list;
     }
@@ -193,7 +191,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
             /*
                 RemoveLeft
              */
-            if(bornRelation.getLeft() != null) {
+            if (bornRelation.getLeft() != null) {
                 list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
                 list = removeAscends(list, bornRelation.getLeft());
             }
@@ -201,11 +199,10 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
             /*
                 Remove Rightrs
              */
-            if(bornRelation.getRight() != null) {
+            if (bornRelation.getRight() != null) {
                 list = list.filtered(p -> !p.equals(bornRelation.getRight()));
                 list = removeAscends(list, bornRelation.getRight());
             }
-
 
 
         } catch (NotUniqueBornRelationException e) {

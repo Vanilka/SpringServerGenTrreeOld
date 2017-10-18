@@ -70,6 +70,6 @@ public class Keys {
     public static final String AVATAR = "avatar";
     public static final String BUTTON_MEMBERS = "button_members";
     public static final String BUTTON_RELATIONS = "button_relations";
-    public static final String HEADER_INFO_SIM= "header_info_sim";
-    public static final String HEADER_INF_RELATION ="header_info_relation";
+    public static final String HEADER_INFO_SIM = "header_info_sim";
+    public static final String HEADER_INF_RELATION = "header_info_relation";
 }

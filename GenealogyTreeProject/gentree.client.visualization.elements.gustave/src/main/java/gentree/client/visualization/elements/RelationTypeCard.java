@@ -73,6 +73,7 @@ public class RelationTypeCard extends StackPane {
         initListeners();
         setAlignment(Pos.CENTER);
     }
+
     private void initCircle() {
 
         circle = new Circle(10, 10, 30, Color.grayRgb(23, 0.5));
@@ -97,16 +98,16 @@ public class RelationTypeCard extends StackPane {
 
         relation.addListener((observable, oldValue, newValue) -> {
 
-            if(newValue != null) {
+            if (newValue != null) {
                 relationType.bind(Bindings
                         .when(relation.isNull())
                         .then(RelationType.NEUTRAL)
                         .otherwise(newValue.typeProperty()));
 
                 group.visibleProperty().bind(Bindings
-                .when(relationType.isEqualTo(RelationType.NEUTRAL))
-                .then(false)
-                .otherwise(newValue.activeProperty().not()));
+                        .when(relationType.isEqualTo(RelationType.NEUTRAL))
+                        .then(false)
+                        .otherwise(newValue.activeProperty().not()));
 
             } else {
                 group.visibleProperty().unbind();

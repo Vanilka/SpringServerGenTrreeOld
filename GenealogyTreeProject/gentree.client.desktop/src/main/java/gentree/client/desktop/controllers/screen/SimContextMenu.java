@@ -1,9 +1,9 @@
 package gentree.client.desktop.controllers.screen;
 
 import gentree.client.desktop.configuration.enums.FilesFXML;
-import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.visualization.elements.FamilyMember;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
@@ -47,7 +47,7 @@ public class SimContextMenu extends ContextMenu {
     }
 
     private void initItemAddChildren() {
-    //    itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), member.getMember(), FilesFXML.DIALOG_ADD_CHILDREN));
+        //    itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), member.getMember(), FilesFXML.DIALOG_ADD_CHILDREN));
     }
 
 

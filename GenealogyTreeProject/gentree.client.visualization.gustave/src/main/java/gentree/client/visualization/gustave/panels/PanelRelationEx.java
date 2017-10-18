@@ -9,20 +9,15 @@ import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
 import gentree.client.visualization.gustave.connectors.SpouseExConnector;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import lombok.Getter;
 
 /**
@@ -93,7 +88,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     }
 
     public PanelRelationEx(Member spouse, Relation thisRelation) {
-       this(spouse, thisRelation, null);
+        this(spouse, thisRelation, null);
     }
 
 
@@ -153,6 +148,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         });
 
     }
+
     private void initSpouseListener() {
         spouse.addListener((observable, oldValue, newValue) -> {
             relation.getChildren().removeAll();
@@ -213,14 +209,14 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     @Override
     protected double computeMinWidth(double height) {
-       if(children.isEmpty()) return super.computePrefWidth(height);
+        if (children.isEmpty()) return super.computePrefWidth(height);
 
         Double offset = 0.0;
-        if(spouseCard.getLayoutX() < 0) {
-            offset = (spouseCard.getLayoutX()*(-1)) +20;
+        if (spouseCard.getLayoutX() < 0) {
+            offset = (spouseCard.getLayoutX() * (-1)) + 20;
         }
 
-        return super.computeMinWidth(height)+ offset;
+        return super.computeMinWidth(height) + offset;
     }
 
 

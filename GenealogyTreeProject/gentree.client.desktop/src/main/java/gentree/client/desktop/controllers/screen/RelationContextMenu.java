@@ -1,11 +1,11 @@
 package gentree.client.desktop.controllers.screen;
 
 import gentree.client.desktop.configuration.enums.FilesFXML;
-import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
+import gentree.client.visualization.elements.RelationTypeElement;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -67,7 +67,7 @@ public class RelationContextMenu extends ContextMenu {
     }
 
     private void initItemAddChildren() {
-       itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), relationTypeElement.getRelation().get(), FilesFXML.DIALOG_ADD_CHILDREN));
+        itemAddChildren.setOnAction(event -> sm.showNewDialog(new DialogAddChildrenController(), relationTypeElement.getRelation().get(), FilesFXML.DIALOG_ADD_CHILDREN));
     }
 
     private void initRemoveRelation() {

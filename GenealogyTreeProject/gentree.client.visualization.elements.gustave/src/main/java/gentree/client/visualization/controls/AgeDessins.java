@@ -2,8 +2,6 @@ package gentree.client.visualization.controls;
 
 import javafx.scene.shape.Path;
 
-import java.nio.file.Paths;
-
 /**
  * Created by Martyna SZYMKOWIAK on 14/10/2017.
  */
@@ -14,7 +12,6 @@ public class AgeDessins {
 
     private static Path drawAdult() {
         Path p = new Path();
-
 
 
         return p;

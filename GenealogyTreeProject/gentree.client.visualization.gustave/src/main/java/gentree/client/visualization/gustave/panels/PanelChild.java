@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

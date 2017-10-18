@@ -30,6 +30,10 @@ public class RelationTypeElement extends RelationTypeCard {
         super(relation);
     }
 
+    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
+        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
+    }
+
     private void init() {
         dropShadow = new DropShadow();
         initShadow();
@@ -37,23 +41,22 @@ public class RelationTypeElement extends RelationTypeCard {
         this.setOnMouseExited(t -> circle.setEffect(null));
 
         this.setOnMouseClicked(event -> {
-            System.out.println("Relation " +this.getRelation().get() + " -> Has reference   " +this.getRelation().get().getReferenceNumber());
+            System.out.println("Relation " + this.getRelation().get() + " -> Has reference   " + this.getRelation().get().getReferenceNumber());
         });
 
 
-        if(CONTEXT_PROVIDER_PROPERTY.get() != null) {
+        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
             this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showRelationContextMenu(returnThis(), event));
         }
 
         CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
-            if(newValue == null) {
+            if (newValue == null) {
                 this.setOnContextMenuRequested(null);
             } else {
                 this.setOnContextMenuRequested(event -> newValue.showRelationContextMenu(returnThis(), event));
             }
         });
     }
-
 
     private void initShadow() {
         dropShadow.setRadius(10.0f);
@@ -64,11 +67,6 @@ public class RelationTypeElement extends RelationTypeCard {
 
     private RelationTypeElement returnThis() {
         return this;
-    }
-
-
-    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
     }
 
 

@@ -15,6 +15,14 @@
         <module>gentree.client.desktop.context</module>
         <module>gentree.client.visualization.elements.default</module>
         <module>gentree.client.visualization.elements.gustave</module>
+        <module>gentree.server.dispatcher</module>
+        <module>gentree.server.entity</module>
+        <module>gentree.server.repository</module>
+        <module>gentree.server.service</module>
+        <module>gentree.server.facade</module>
+        <module>gentree.server.manager.db</module>
+        <module>gentree.server.configuration</module>
+        <module>gentree.server.dto</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

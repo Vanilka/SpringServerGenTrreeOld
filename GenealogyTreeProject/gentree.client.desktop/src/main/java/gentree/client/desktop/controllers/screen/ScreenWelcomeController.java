@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
  * Show window with choice of mode of application :  <br>
- *
+ * <p>
  * a) Online <br>
  * b) OffLine <br>
  */

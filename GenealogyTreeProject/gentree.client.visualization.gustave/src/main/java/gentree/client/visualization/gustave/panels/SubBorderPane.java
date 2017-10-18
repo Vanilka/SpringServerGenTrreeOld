@@ -1,7 +1,6 @@
 package gentree.client.visualization.gustave.panels;
 
 import gentree.client.visualization.elements.FamilyGroup;
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Bounds;
@@ -55,7 +54,7 @@ public abstract class SubBorderPane extends BorderPane {
 
     private void initParentListeners() {
         parentPane.addListener((observable, oldValue, newValue) -> {
-            if(newValue == null) {
+            if (newValue == null) {
                 familyGroup.unbind();
                 familyGroup.setValue(null);
             } else {

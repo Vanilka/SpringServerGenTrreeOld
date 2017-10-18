@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -142,6 +141,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
 
     /**
      * Verify if parameter sim is Ascendant of parameter grain
+     *
      * @param grain
      * @param sim
      * @return
@@ -159,13 +159,13 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
 
     @FXML
     public void confirm() {
-      ServiceResponse response = context.getService().moveChildrenToNewRelation(relation.get(), childrenList);
+        ServiceResponse response = context.getService().moveChildrenToNewRelation(relation.get(), childrenList);
 
-      if(response.getStatus() == ServiceResponse.ResponseStatus.OK ) {
-          stage.close();
-      } else {
-          //TODO show error
-      }
+        if (response.getStatus() == ServiceResponse.ResponseStatus.OK) {
+            stage.close();
+        } else {
+            //TODO show error
+        }
     }
 
     @Override
