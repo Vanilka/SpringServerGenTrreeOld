@@ -47,7 +47,7 @@ public class GenTreeProperties {
         initConfigurationBuilder();
         readConfigFile();
         checkApplicationFolder();
-      //  readRealmFile();
+        readRealmFile();
     }
 
     private void readConfigFile() {

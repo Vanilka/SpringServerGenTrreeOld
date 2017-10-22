@@ -51,22 +51,36 @@
       <file leaf-file-name="DialogAppPropertiesOnlineController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesOnlineController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="-312">
+              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1799#1800#0" expanded="true" />
-                <element signature="e#1859#1860#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dialog.add.realm.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.realm.fxml">
+      <file leaf-file-name="ScreenManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ScreenManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="17" column="50" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="50" />
+            <state relative-caret-position="330">
+              <caret line="515" column="64" lean-forward="true" selection-start-line="515" selection-start-column="64" selection-end-line="515" selection-end-column="64" />
+              <folding>
+                <element signature="method#configureImageFileChooser#0;class#ScreenManager#0" expanded="false" />
+                <element signature="method#configureXmlFileChooser#0;class#ScreenManager#0" expanded="false" />
+                <element signature="method#reloadScreenWelcomeController#0;class#ScreenManager#0" expanded="false" />
+                <element signature="method#showSimContextMenu#0;class#ScreenManager#0" expanded="false" />
+                <element signature="method#showRelationContextMenu#0;class#ScreenManager#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dialog.app.properties.online.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.online.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="22" column="83" lean-forward="false" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -75,33 +89,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dialog.open.project.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.open.project.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="22" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DialogAddRealmController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DialogAddRealmController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddRealmController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="40" column="40" lean-forward="false" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+            <state relative-caret-position="169">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1261#1262#0" expanded="true" />
-                <element signature="e#1295#1296#0" expanded="true" />
-                <element signature="e#1335#1336#0" expanded="true" />
-                <element signature="e#1369#1370#0" expanded="true" />
-                <element signature="e#1713#1714#0" expanded="true" />
-                <element signature="e#1747#1748#0" expanded="true" />
+                <element signature="e#1633#1634#0" expanded="true" />
+                <element signature="e#1667#1668#0" expanded="true" />
+                <element signature="e#2450#2451#0" expanded="true" />
+                <element signature="e#2484#2485#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DialogAppPropertiesController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2129">
+              <caret line="121" column="23" lean-forward="false" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RootRequestMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/RootRequestMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,22 +128,56 @@
       <file leaf-file-name="Realm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/Realm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-214">
-              <caret line="37" column="7" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+            <state relative-caret-position="0">
+              <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
               <folding>
-                <element signature="e#900#901#0" expanded="true" />
-                <element signature="e#933#934#0" expanded="true" />
-                <element signature="e#977#978#0" expanded="true" />
-                <element signature="e#1004#1005#0" expanded="true" />
-                <element signature="e#1044#1045#0" expanded="true" />
-                <element signature="e#1079#1080#0" expanded="true" />
-                <element signature="e#1113#1114#0" expanded="true" />
-                <element signature="e#1149#1150#0" expanded="true" />
-                <element signature="e#1196#1197#0" expanded="true" />
-                <element signature="e#1226#1227#0" expanded="true" />
-                <element signature="e#1272#1273#0" expanded="true" />
-                <element signature="e#1313#1314#0" expanded="true" />
+                <element signature="e#818#819#0" expanded="true" />
+                <element signature="e#851#852#0" expanded="true" />
+                <element signature="e#891#892#0" expanded="true" />
+                <element signature="e#926#927#0" expanded="true" />
+                <element signature="e#970#971#0" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1049#1050#0" expanded="true" />
+                <element signature="e#1085#1086#0" expanded="true" />
+                <element signature="e#1131#1132#0" expanded="true" />
+                <element signature="e#1172#1173#0" expanded="true" />
+                <element signature="e#1219#1220#0" expanded="true" />
+                <element signature="e#1249#1250#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RealmConfig.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/RealmConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#672#673#0" expanded="true" />
+                <element signature="e#724#725#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FamilyMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/FamilyMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8">
+              <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Family.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Family.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="193" selection-end-column="66" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,8 +190,8 @@
         <option value="Enum" />
         <option value="spring-beans.schema" />
         <option value="FXML File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -168,8 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gentree.server.facade/src/main/java/gentree/server/facade/OwnerFacade.java" />
-        <option value="$PROJECT_DIR$/gentree.server.facade/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.server.entity/src/main/java/gentree/server/domain/entity/OwnerEntity.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop.domain/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.common.configuration/src/main/java/gentree/common/configuration/enums/RelationType.java" />
@@ -202,23 +253,25 @@
         <option value="$PROJECT_DIR$/gentree.server.facade/src/main/java/gentree/server/facade/implementation/FamilyFacadeImpl.java" />
         <option value="$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/OwnerManagementMapper.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/GenTreeContext.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.fxml" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/GenTreeProperties.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/screen.main.right.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/GenTreeRun.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.online.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogRealmAddController.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/Realm.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/RealmConfig.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddSpouseController.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/FilesFXML.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/FXMLDialogWithRealmListControl.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ScreenManager.java" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesOnlineController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/pom.xml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/RestConnectionService.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.realm.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/GenTreeProperties.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/RealmConfig.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/Realm.java" />
         <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddRealmController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.online.fxml" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesOnlineController.java" />
+        <option value="$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ScreenManager.java" />
       </list>
     </option>
   </component>
@@ -391,7 +444,53 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="desktop" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="screen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="traduction" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
@@ -448,6 +547,96 @@
               <item name="desktop" type="462c0819:PsiDirectoryNode" />
               <item name="configuration" type="462c0819:PsiDirectoryNode" />
               <item name="enums" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="desktop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.client.desktop.domain" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="desktop" type="462c0819:PsiDirectoryNode" />
+              <item name="domain" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dispatchers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GenealogyTreeProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GenealogyTreeProject" type="462c0819:PsiDirectoryNode" />
+              <item name="gentree.server.dispatcher" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dispatchers" type="462c0819:PsiDirectoryNode" />
+              <item name="FamilyMapper" type="1a9f42e2:ClassTreeNode" />
             </path>
           </expand>
           <select />
@@ -743,19 +932,19 @@
       <workItem from="1508158752618" duration="9000" />
       <workItem from="1508158805447" duration="6721000" />
       <workItem from="1508177412731" duration="11187000" />
-      <workItem from="1508240556628" duration="48541000" />
+      <workItem from="1508240556628" duration="55752000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66735000" />
+    <option name="totallyTimeSpent" value="73946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="7" y="23" width="1920" height="1102" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.5021552" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30522946" sideWeight="0.50431037" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.49784482" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14601293" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -772,12 +961,12 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.49784482" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30522946" sideWeight="0.49784482" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30522946" sideWeight="0.49568966" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291536" sideWeight="0.49784482" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22144397" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" x="685" y="263" width="550" height="642" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -845,43 +1034,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gentree.server.dto/src/main/java/gentree/server/dto/FamilyDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.server.dto/src/main/java/gentree/server/dto/MemberWithPhotoDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.server.service/src/main/java/gentree/server/service/Implementation/FamilyServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="20" column="38" lean-forward="true" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding>
-            <element signature="e#949#950#0" expanded="false" />
-            <element signature="e#1010#1011#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.server.entity/src/main/java/gentree/server/domain/entity/RelationEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.server.service/src/main/java/gentree/server/service/RelationService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -956,14 +1108,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/FamilyMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="44" column="4" lean-forward="true" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.server.service/src/main/java/gentree/server/service/Implementation/OwnerServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -976,14 +1120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/RootRequestMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1024,14 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1159">
           <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1090,14 +1218,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="130" column="0" lean-forward="true" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
@@ -1107,28 +1227,6 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Family.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/GenTreeProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="49" column="8" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
-          <folding>
-            <element signature="method#readConfigFile#0;class#GenTreeProperties#0" expanded="false" />
-            <element signature="method#storeProperties#0;class#GenTreeProperties#0" expanded="false" />
-            <element signature="method#createNewRealmFile#0;class#GenTreeProperties#0" expanded="false" />
-            <element signature="method#initConfigurationBuilder#0;class#GenTreeProperties#0" expanded="false" />
-            <element signature="method#checkApplicationFolder#0;class#GenTreeProperties#0" expanded="false" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/ButtonLocalModeController.java">
@@ -1190,76 +1288,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/RealmConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
-            <element signature="e#682#683#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.online.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.spouse.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="17" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/Realm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-214">
-          <caret line="37" column="7" lean-forward="true" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-          <folding>
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#977#978#0" expanded="true" />
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1044#1045#0" expanded="true" />
-            <element signature="e#1079#1080#0" expanded="true" />
-            <element signature="e#1113#1114#0" expanded="true" />
-            <element signature="e#1149#1150#0" expanded="true" />
-            <element signature="e#1196#1197#0" expanded="true" />
-            <element signature="e#1226#1227#0" expanded="true" />
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1313#1314#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.open.project.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="22" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.realm.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="17" column="50" lean-forward="false" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="50" />
           <folding />
         </state>
       </provider>
@@ -1288,16 +1320,8 @@
         <state relative-caret-position="120">
           <caret line="8" column="77" lean-forward="false" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ScreenManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1309,30 +1333,194 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesOnlineController.java">
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.open.project.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state relative-caret-position="512">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="22" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="50" column="24" lean-forward="false" selection-start-line="50" selection-start-column="24" selection-end-line="50" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/ws/rs/javax.ws.rs-api/2.1-m03/javax.ws.rs-api-2.1-m03-sources.jar!/javax/ws/rs/client/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="88" column="26" lean-forward="false" selection-start-line="88" selection-start-column="26" selection-end-line="88" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.add.realm.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="30" column="48" lean-forward="false" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/RestConnectionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1799#1800#0" expanded="true" />
-            <element signature="e#1859#1860#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/GenTreeProperties.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1162">
+          <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding>
+            <element signature="method#readConfigFile#0;class#GenTreeProperties#0" expanded="false" />
+            <element signature="method#storeProperties#0;class#GenTreeProperties#0" expanded="false" />
+            <element signature="method#createNewRealmFile#0;class#GenTreeProperties#0" expanded="false" />
+            <element signature="method#initConfigurationBuilder#0;class#GenTreeProperties#0" expanded="false" />
+            <element signature="method#checkApplicationFolder#0;class#GenTreeProperties#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Relation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2372">
+          <caret line="20" column="13" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1109">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.domain/src/main/java/gentree/client/desktop/domain/Family.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="193" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/FamilyMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret line="23" column="14" lean-forward="true" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/RealmConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="18" column="29" lean-forward="false" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#672#673#0" expanded="true" />
+            <element signature="e#724#725#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop.context/src/main/java/gentree/client/desktop/configuration/Realm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+          <folding>
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#851#852#0" expanded="true" />
+            <element signature="e#891#892#0" expanded="true" />
+            <element signature="e#926#927#0" expanded="true" />
+            <element signature="e#970#971#0" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1049#1050#0" expanded="true" />
+            <element signature="e#1085#1086#0" expanded="true" />
+            <element signature="e#1131#1132#0" expanded="true" />
+            <element signature="e#1172#1173#0" expanded="true" />
+            <element signature="e#1219#1220#0" expanded="true" />
+            <element signature="e#1249#1250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.server.dispatcher/src/main/java/gentree/server/dispatchers/RootRequestMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2129">
+          <caret line="121" column="23" lean-forward="false" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAddRealmController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="40" column="40" lean-forward="false" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+        <state relative-caret-position="169">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1261#1262#0" expanded="true" />
-            <element signature="e#1295#1296#0" expanded="true" />
-            <element signature="e#1335#1336#0" expanded="true" />
-            <element signature="e#1369#1370#0" expanded="true" />
-            <element signature="e#1713#1714#0" expanded="true" />
-            <element signature="e#1747#1748#0" expanded="true" />
+            <element signature="e#1633#1634#0" expanded="true" />
+            <element signature="e#1667#1668#0" expanded="true" />
+            <element signature="e#2450#2451#0" expanded="true" />
+            <element signature="e#2484#2485#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/resources/layout/screen/dialog.app.properties.online.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="22" column="83" lean-forward="false" selection-start-line="22" selection-start-column="72" selection-end-line="22" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/controllers/screen/DialogAppPropertiesOnlineController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-312">
+          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gentree.client.desktop/src/main/java/gentree/client/desktop/service/ScreenManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="515" column="64" lean-forward="true" selection-start-line="515" selection-start-column="64" selection-end-line="515" selection-end-column="64" />
+          <folding>
+            <element signature="method#configureImageFileChooser#0;class#ScreenManager#0" expanded="false" />
+            <element signature="method#configureXmlFileChooser#0;class#ScreenManager#0" expanded="false" />
+            <element signature="method#reloadScreenWelcomeController#0;class#ScreenManager#0" expanded="false" />
+            <element signature="method#showSimContextMenu#0;class#ScreenManager#0" expanded="false" />
+            <element signature="method#showRelationContextMenu#0;class#ScreenManager#0" expanded="false" />
           </folding>
         </state>
       </provider>

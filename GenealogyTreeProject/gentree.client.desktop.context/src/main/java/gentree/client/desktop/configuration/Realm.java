@@ -1,27 +1,21 @@
 package gentree.client.desktop.configuration;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/10/2017.
  */
-@Getter
-@Setter
 @XmlType(name = "realm")
 public class Realm {
 
-    @XmlElement
     private final StringProperty name = new SimpleStringProperty();
-
-    @XmlElement
     private final StringProperty address = new SimpleStringProperty();
 
 
@@ -37,27 +31,41 @@ public class Realm {
             GETTERS AND SETTERS
      */
 
+    @XmlAttribute
     public String getName() {
         return name.get();
-    }
-
-    public StringProperty nameProperty() {
-        return name;
     }
 
     public void setName(String name) {
         this.name.set(name);
     }
 
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    @XmlAttribute
     public String getAddress() {
         return address.get();
+    }
+
+    public void setAddress(String address) {
+        this.address.set(address);
     }
 
     public StringProperty addressProperty() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address.set(address);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Realm)) return false;
+
+        Realm that = (Realm) o;
+
+        if (name.getValue() != null ? !name.getValue().equals(that.name.getValue()) : that.name.getValue() != null)
+            return false;
+        return (address.getValue() != null ? !address.getValue().equals(that.address.getValue()) : that.address.getValue() != null);
     }
 }

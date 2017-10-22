@@ -507,8 +507,28 @@ public class ScreenManager implements ContextProvider {
             }
         };
         return callback;
+    }
 
+    public Callback<ListView<Realm>, ListCell<Realm>> getCustomRealmListCell() {
+        Callback<ListView<Realm>, ListCell<Realm>> callback = new Callback<ListView<Realm>, ListCell<Realm>>() {
 
+            @Override
+            public ListCell<Realm> call(ListView<Realm> param) {
+                final ListCell<Realm> realmCell  = new ListCell<Realm>() {
+                    @Override
+                    protected void updateItem(Realm item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(item != null) {
+                            setText(item.getName());
+                        } else  {
+                            setText("");
+                        }
+                    }
+                };
+                return realmCell;
+            }
+        };
+        return callback;
     }
 
     private ImageView setGraphicToImageView(String path, int width, int height) {

@@ -129,7 +129,8 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
 
         GenTreeProperties.INSTANCE.storeProperties();
 
-        if (!GenTreeProperties.INSTANCE.getRealmConfig().equals(dialogAppPropertiesOnlineController.getRealmConfig())) {
+        if (! GenTreeProperties.INSTANCE.getRealmConfig().equals(dialogAppPropertiesOnlineController.getRealmConfig())) {
+            System.out.println("will store new properties");
             GenTreeProperties.INSTANCE.setRealmConfig(dialogAppPropertiesOnlineController.getRealmConfig());
             GenTreeProperties.INSTANCE.storeRealms();
         }

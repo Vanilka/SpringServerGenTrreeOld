@@ -27,8 +27,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXButton fx:id="BUTTON_CANCEL1" onAction="#cancel" prefHeight="30.0" prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" />
-            <Label layoutX="170.0" layoutY="174.0" prefHeight="23.0" prefWidth="233.0" AnchorPane.rightAnchor="50.0">
+            <JFXButton fx:id="TEST_CONNECTION" onAction="#connectionTest" prefHeight="30.0" prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" />
+            <Label fx:id="TEST_CONNECTION_RESULT" layoutX="170.0" layoutY="174.0" prefHeight="23.0" prefWidth="233.0" AnchorPane.rightAnchor="50.0">
                <font>
                   <Font size="18.0" />
                </font>

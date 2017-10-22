@@ -1,12 +1,11 @@
 package gentree.client.desktop.configuration;
 
+import gentree.client.desktop.domain.Member;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/10/2017.
@@ -16,6 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class RealmConfig {
 
     @Getter
+    @XmlElementWrapper(name = "Realms")
+    @XmlElements({@XmlElement(name = "realm", type = Realm.class)})
     private final ObservableList<Realm> realms = FXCollections.observableArrayList();
 
     public RealmConfig() {
