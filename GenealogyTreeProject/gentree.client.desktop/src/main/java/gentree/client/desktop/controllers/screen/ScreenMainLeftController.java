@@ -1,7 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXTabPane;
-import gentree.client.desktop.controllers.FilesFXML;
+import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;

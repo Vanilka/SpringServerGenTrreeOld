@@ -1,0 +1,8 @@
+package gentree.client.desktop.configuration.enums;
+
+/**
+ * Created by Martyna SZYMKOWIAK on 22/10/2017.
+ */
+public class ServerPaths {
+    public static final String LOGIN = "/owner/login";
+}

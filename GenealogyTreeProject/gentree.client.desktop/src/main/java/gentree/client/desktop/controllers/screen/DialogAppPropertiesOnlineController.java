@@ -7,7 +7,7 @@ import gentree.client.desktop.configuration.RealmConfig;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
-import gentree.client.desktop.controllers.FilesFXML;
+import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.service.ScreenManager;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;

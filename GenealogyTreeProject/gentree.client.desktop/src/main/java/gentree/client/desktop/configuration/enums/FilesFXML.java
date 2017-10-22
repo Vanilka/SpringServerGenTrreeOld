@@ -1,4 +1,4 @@
-package gentree.client.desktop.controllers;
+package gentree.client.desktop.configuration.enums;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -20,8 +20,10 @@ public enum FilesFXML {
     SCREEN_MAIN_LEFT_FXML("screen.main.left.fxml"),
     SCREEN_MAIN_LEFT_FAMILY_INFO_FXML("tab.family.info.fxml"),
     SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml"),
+    SCREEN_LOGON_REGISTER_FXML("screen.logon.register.fxml"),
     PANE_SHOW_INFO_MEMBER_FXML("pane.show.info.member.fxml"),
     PANE_SHOW_INFO_RELATION_FXML("pane.show.info.relation.fxml"),
+    PANE_LOGON_FXML("pane.logon.fxml"),
     DIALOG_APP_PROPERTIES("dialog.app.properties.fxml"),
     DIALOG_APP_PROPERTIES_TREE("dialog.app.properties.tree.fxml"),
     DIALOG_APP_PROPERTIES_OTHER("dialog.app.properties.other.fxml"),
