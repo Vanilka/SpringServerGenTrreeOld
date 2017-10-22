@@ -2,20 +2,23 @@ package gentree.client.desktop.service;
 
 import com.jfoenix.controls.JFXTabPane;
 import gentree.client.desktop.configuration.GenTreeProperties;
-import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.configuration.Realm;
 import gentree.client.desktop.configuration.helper.BorderPaneReloadHelper;
 import gentree.client.desktop.configuration.messages.AppTitles;
+import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.screen.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
+import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +34,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -84,6 +88,7 @@ public class ScreenManager implements ContextProvider {
     private SimContextMenu simContextMenu;
     private RelationContextMenu relationContextMenu;
 
+
     private ScreenManager() {
         bpHelper = new BorderPaneReloadHelper();
         LAST_PATH = System.getProperty("user.home");
@@ -91,6 +96,7 @@ public class ScreenManager implements ContextProvider {
 
 
     public void init() {
+        configureStatics();
         initRoot();
         loadFxml(mainFooterController, this.mainWindowBorderPane, FilesFXML.MAIN_FOOTER_FXML, Where.BOTTOM);
         loadFxml(mainMenuController, this.mainWindowBorderPane, FilesFXML.MAIN_MENU_FXML, Where.TOP);
@@ -107,6 +113,20 @@ public class ScreenManager implements ContextProvider {
         this.stage.setMinHeight(750);
         this.stage.setMinWidth(1200);
         this.stage.show();
+    }
+
+
+    /**
+     * Configure Singletons
+     */
+    private void configureStatics() {
+        FamilyMember.setContextProviderProperty(this);
+        RelationTypeElement.setContextProviderProperty(this);
+        PhotoMarshaller.addIgnoredPaths(ImageFiles.GENERIC_FEMALE.toString(),
+                ImageFiles.GENERIC_FEMALE.toString());
+        Member.setDefaultFemaleLocation(ImageFiles.GENERIC_FEMALE.toString());
+        Member.setDefaultMaleLocation(ImageFiles.GENERIC_MALE.toString());
+        GenTreeDrawingServiceImpl.setContext(context);
     }
 
     private void initRoot() {
@@ -176,6 +196,27 @@ public class ScreenManager implements ContextProvider {
     }
 
 
+    public void showNewDialog(FXMLDialogWithRealmListControl controller, ObservableList<Realm> list, FilesFXML fxml) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
+        try {
+            Stage dialogStage = new Stage();
+            AnchorPane dialogwindow = (AnchorPane) loader.load();
+            controller = loader.getController();
+            controller.setList(list);
+            Scene scene = new Scene(dialogwindow);
+            initDialogProperties(dialogStage, Modality.WINDOW_MODAL, this.getStage(), scene, false);
+            controller.setStage(dialogStage);
+            dialogStage.showAndWait();
+
+
+        } catch (Exception ex) {
+            log.error(ex.getMessage());
+            log.error(ex.getCause());
+            ex.printStackTrace();
+        }
+    }
+
+
     public void showNewDialog(FXMLDialogWithMemberController controller, Member member, FilesFXML fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
         try {
@@ -183,11 +224,8 @@ public class ScreenManager implements ContextProvider {
             AnchorPane dialogwindow = (AnchorPane) loader.load();
             controller = loader.getController();
             controller.setFather(member);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
-            dialogStage.setScene(scene);
-            dialogStage.setResizable(false);
+            initDialogProperties(dialogStage, Modality.WINDOW_MODAL, this.getStage(), scene, false);
             controller.setStage(dialogStage);
             dialogStage.showAndWait();
         } catch (Exception ex) {
@@ -197,6 +235,7 @@ public class ScreenManager implements ContextProvider {
         }
     }
 
+
     public void showNewDialog(FXMLDialogWithRelationController controller, Relation r, FilesFXML fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
         try {
@@ -204,11 +243,8 @@ public class ScreenManager implements ContextProvider {
             AnchorPane dialogwindow = (AnchorPane) loader.load();
             controller = loader.getController();
             controller.setRelation(r);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
-            dialogStage.setScene(scene);
-            dialogStage.setResizable(false);
+            initDialogProperties(dialogStage, Modality.WINDOW_MODAL, this.getStage(), scene, false);
             controller.setStage(dialogStage);
             dialogStage.showAndWait();
         } catch (Exception ex) {
@@ -226,11 +262,8 @@ public class ScreenManager implements ContextProvider {
             controller = loader.getController();
             controller.setMember(member);
             controller.setMemberList(list);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(this.getStage());
             Scene scene = new Scene(dialogwindow);
-            dialogStage.setScene(scene);
-            dialogStage.setResizable(false);
+            initDialogProperties(dialogStage, Modality.WINDOW_MODAL, this.getStage(), scene, false);
             controller.setStage(dialogStage);
             dialogStage.showAndWait();
             return controller.getResult();
@@ -243,6 +276,12 @@ public class ScreenManager implements ContextProvider {
         return null;
     }
 
+    private void initDialogProperties(Stage dialogStage, Modality modality, Window owner, Scene scene, boolean resizeable) {
+        dialogStage.initModality(modality);
+        dialogStage.initOwner(owner);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(resizeable);
+    }
 
     public FXMLPane loadFxml(FXMLPane controller, Pane pane, FilesFXML fxml) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());

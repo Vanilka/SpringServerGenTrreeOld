@@ -10,6 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="gentree.exceptions" />
+    <orderEntry type="module" module-name="gentree.common.configuration" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.14" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.12" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.8.1" level="project" />

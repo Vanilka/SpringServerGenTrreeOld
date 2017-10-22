@@ -26,7 +26,8 @@ public class OwnerManagementMapper {
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ResponseEntity<OwnerDTO> login(Authentication auth) {
-        OwnerDTO user = this.ownerFacade.findOwnerByLoginToAuthProcess(auth.getName());
+        OwnerDTO user = this.ownerFacade.findOwnerByLogin(auth.getName());
         return new ResponseEntity<OwnerDTO>(user, HttpStatus.OK);
     }
+
 }

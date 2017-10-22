@@ -1,4 +1,4 @@
-package gentree.client.desktop.configuration.enums;
+package gentree.client.desktop.controllers;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -29,7 +29,8 @@ public enum FilesFXML {
     DIALOG_ADD_PARENTS_TO_MEMBER("dialog.add.parents.to.member.fxml"),
     DIALOG_ADD_SPOUSE_TO_MEMBER("dialog.add.spouse.fxml"),
     DIALOG_CHOOSE_MEMBER("dialog.choose.member.fxml"),
-    DIALOG_ADD_CHILDREN("dialog.add.children.fxml");
+    DIALOG_ADD_CHILDREN("dialog.add.children.fxml"),
+    DIALOG_ADD_REALM("dialog.add.realm.fxml");
 
 
     private final String fxmlPath = "/layout/screen/";

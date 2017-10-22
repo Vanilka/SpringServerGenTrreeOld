@@ -3,42 +3,43 @@ package gentree.server.facade.implementation;
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
 import gentree.server.dto.OwnerDTO;
 import gentree.server.facade.FamilyFacade;
-import gentree.server.facade.converter.ConverterToDAO;
+import gentree.server.facade.converter.ConverterToEntity;
 import gentree.server.facade.converter.ConverterToDTO;
-import gentree.server.service.FamilyService;
-import gentree.server.service.MemberService;
-import gentree.server.service.RelationService;
+import gentree.server.service.*;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
  */
-@Setter
+@Service
 public class FamilyFacadeImpl implements FamilyFacade {
 
     @Autowired
-    FamilyService familyService;
+    ProjectService projectService;
 
     @Autowired
-    MemberService memberService;
-
-    @Autowired
-    RelationService relationService;
+    OwnerService ownerService;
 
     /* ************************************************************
         Family Gestion
     ************************************************************ */
 
     @Override
-    public FamilyDTO addNewFamily(FamilyDTO familyDTO) {
-        if (familyDTO.getOwner() == null) return null;
+    public FamilyDTO addNewFamily(FamilyDTO familyDTO, OwnerDTO ownerDTO) {
 
-        FamilyEntity newFamily = familyService.addNewFamily(ConverterToDAO.INSTANCE.convert(familyDTO));
+        OwnerEntity ownerEntity = ownerService.findOperatorByLogin(ownerDTO.getLogin());
+
+        FamilyEntity newFamily = ConverterToEntity.INSTANCE.convert(familyDTO);
+        newFamily.setOwner(ownerEntity);
+
+        newFamily = projectService.addFamily(newFamily);
 
         return ConverterToDTO.INSTANCE.convert(newFamily);
     }
@@ -46,7 +47,7 @@ public class FamilyFacadeImpl implements FamilyFacade {
     @Override
     public FamilyDTO findFamilyById(Long id) {
 
-        FamilyEntity result = familyService.findFamilyById(id);
+        FamilyEntity result = projectService.findFamilyById(id);
 
         return ConverterToDTO.INSTANCE.convert(result);
     }
@@ -55,9 +56,9 @@ public class FamilyFacadeImpl implements FamilyFacade {
     @Override
     public List<FamilyDTO> findAllFamiliesByOwner(OwnerDTO ownerDTO) {
 
-        OwnerEntity owner = ConverterToDAO.INSTANCE.convert(ownerDTO);
+        OwnerEntity owner = ConverterToEntity.INSTANCE.convert(ownerDTO);
 
-        List<FamilyEntity> list = familyService.findAllByOwner(owner);
+        List<FamilyEntity> list = projectService.findAllFamiliesByOwner(owner);
 
         return ConverterToDTO.INSTANCE.convertFamilyList(list);
     }
@@ -65,6 +66,11 @@ public class FamilyFacadeImpl implements FamilyFacade {
     /* ************************************************************
         Member Gestion
     ************************************************************ */
+
+    @Override
+    public FamilyDTO addNewMember(MemberDTO member) {
+        return null;
+    }
 
     /* ************************************************************
         Relation Gestion

@@ -19,6 +19,13 @@
           <element id="archive" name="gentree.server.configuration-1.0-SNAPSHOT.jar">
             <element id="module-output" name="gentree.server.configuration" />
           </element>
+          <element id="archive" name="gentree.common.configuration-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="gentree.common.configuration" />
+          </element>
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.2" />
+          <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2" />
           <element id="archive" name="gentree.server.service-1.0-SNAPSHOT.jar">
             <element id="module-output" name="gentree.server.service" />
           </element>
@@ -31,9 +38,6 @@
           <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.10" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.2" />
-          <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2" />
           <element id="archive" name="gentree.server.manager.db-1.0-SNAPSHOT.jar">
             <element id="module-output" name="gentree.server.manager.db" />
           </element>
@@ -73,7 +77,6 @@
           <element id="library" level="project" name="Maven: org.atteo:evo-inflector:1.2.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.1" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.0" />

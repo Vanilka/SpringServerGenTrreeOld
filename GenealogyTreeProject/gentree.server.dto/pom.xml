@@ -8,7 +8,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <properties>
+        <spring.version>5.0.0.RELEASE</spring.version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
+        <javax.servlet>4.0.0</javax.servlet>
+        <spring.data.rest.mvc.version>3.0.0.RELEASE</spring.data.rest.mvc.version>
+        <spring.data.jpa>2.0.0.RELEASE</spring.data.jpa>
+        <hibernate.core>5.2.11.Final</hibernate.core>
+        <jackson.core>2.9.2</jackson.core>
+    </properties>
     <artifactId>gentree.server.dto</artifactId>
 <dependencies>
     <dependency>
@@ -16,6 +24,39 @@
         <artifactId>gentree.server.configuration</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+
+    <dependency>
+        <groupId>genealogytree</groupId>
+        <artifactId>gentree.common.configuration</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.core}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.core}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson.core}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-hibernate5</artifactId>
+        <version>${jackson.core}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${jackson.core}</version>
+    </dependency>
+
 </dependencies>
 
 </project>

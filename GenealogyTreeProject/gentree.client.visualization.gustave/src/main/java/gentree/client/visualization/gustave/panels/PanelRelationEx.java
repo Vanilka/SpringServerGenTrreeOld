@@ -2,7 +2,7 @@ package gentree.client.visualization.gustave.panels;
 
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;

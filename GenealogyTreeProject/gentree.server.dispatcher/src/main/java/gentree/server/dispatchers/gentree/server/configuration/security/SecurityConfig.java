@@ -1,6 +1,6 @@
 package gentree.server.dispatchers.gentree.server.configuration.security;
 
-import gentree.server.configuration.enums.RoleEnum;
+import gentree.common.configuration.enums.RoleEnum;
 import gentree.server.configuration.properties.SecurityPathProperties;
 import gentree.server.dispatchers.gentree.server.configuration.security.advice.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @Bean
     public DaoAuthenticationProvider authProvider() {

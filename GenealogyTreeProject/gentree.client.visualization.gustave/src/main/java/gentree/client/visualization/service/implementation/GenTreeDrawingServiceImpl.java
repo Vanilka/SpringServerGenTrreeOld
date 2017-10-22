@@ -3,7 +3,7 @@ package gentree.client.visualization.service.implementation;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;

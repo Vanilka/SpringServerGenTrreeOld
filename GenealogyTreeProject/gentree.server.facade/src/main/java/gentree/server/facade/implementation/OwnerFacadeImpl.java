@@ -3,7 +3,7 @@ package gentree.server.facade.implementation;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.dto.OwnerDTO;
 import gentree.server.facade.OwnerFacade;
-import gentree.server.facade.converter.ConverterToDAO;
+import gentree.server.facade.converter.ConverterToEntity;
 import gentree.server.facade.converter.ConverterToDTO;
 import gentree.server.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class OwnerFacadeImpl implements OwnerFacade {
 
     @Override
     public OwnerDTO addNewOwner(OwnerDTO owner) {
-        OwnerEntity userAdded = ownerService.addNewOwner(ConverterToDAO.INSTANCE.convert(owner));
+        OwnerEntity userAdded = ownerService.addNewOwner(ConverterToEntity.INSTANCE.convert(owner));
         return ConverterToDTO.INSTANCE.convert(userAdded);
     }
 
@@ -34,5 +34,10 @@ public class OwnerFacadeImpl implements OwnerFacade {
     @Override
     public OwnerDTO findOwnerByLoginToAuthProcess(String login) {
         return ConverterToDTO.INSTANCE.convertWithPassword(ownerService.findOperatorByLogin(login));
+    }
+
+    @Override
+    public OwnerDTO findOwnerByLogin(String login) {
+        return ConverterToDTO.INSTANCE.convert(ownerService.findOperatorByLogin(login));
     }
 }

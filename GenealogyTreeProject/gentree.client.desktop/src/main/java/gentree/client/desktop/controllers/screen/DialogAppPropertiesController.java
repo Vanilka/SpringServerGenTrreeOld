@@ -2,7 +2,8 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import gentree.client.desktop.configuration.GenTreeProperties;
-import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.configuration.RealmConfig;
+import gentree.client.desktop.controllers.FilesFXML;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
@@ -32,6 +33,7 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
     private final ToggleGroup group;
     private final HashMap<ToggleButton, AnchorPane> paneMap;
     private final HashMap<String, String> propertiesMap;
+    private final RealmConfig realmConfig = GenTreeProperties.INSTANCE.getRealmConfig();
     @FXML
     public ToggleButton buttonOtherProperties;
     @FXML
@@ -126,6 +128,11 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
         });
 
         GenTreeProperties.INSTANCE.storeProperties();
+
+        if (!GenTreeProperties.INSTANCE.getRealmConfig().equals(dialogAppPropertiesOnlineController.getRealmConfig())) {
+            GenTreeProperties.INSTANCE.setRealmConfig(dialogAppPropertiesOnlineController.getRealmConfig());
+            GenTreeProperties.INSTANCE.storeRealms();
+        }
     }
 
     private void populatePropertiesMap() {

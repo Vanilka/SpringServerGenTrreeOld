@@ -3,7 +3,7 @@ package gentree.client.desktop.service;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.responses.ServiceResponse;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;

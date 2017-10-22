@@ -1,7 +1,7 @@
 package gentree.client.desktop.service;
 
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import javafx.collections.ObservableList;
 
 import java.util.Observable;

@@ -1,4 +1,4 @@
-package gentree.server.configuration.enums;
+package gentree.common.configuration.enums;
 
 /**
  * Created by Martyna SZYMKOWIAK on 16/10/2017.

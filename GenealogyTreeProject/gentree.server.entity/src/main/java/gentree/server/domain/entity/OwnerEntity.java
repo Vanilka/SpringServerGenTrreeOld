@@ -1,6 +1,6 @@
 package gentree.server.domain.entity;
 
-import gentree.server.configuration.enums.RoleEnum;
+import gentree.common.configuration.enums.RoleEnum;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -66,7 +66,7 @@ public class OwnerEntity implements Serializable {
     }
 
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<FamilyEntity> getFamilyList() {
         return familyList;
     }

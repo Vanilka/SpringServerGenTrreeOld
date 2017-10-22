@@ -29,19 +29,8 @@ public class GenTreeRun extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        configureStatics();
         sc.setStage(stage);
         sc.init();
-    }
-
-    private void configureStatics() {
-        FamilyMember.setContextProviderProperty(sc);
-        RelationTypeElement.setContextProviderProperty(sc);
-        PhotoMarshaller.addIgnoredPaths(ImageFiles.GENERIC_FEMALE.toString(),
-                ImageFiles.GENERIC_FEMALE.toString());
-        Member.setDefaultFemaleLocation(ImageFiles.GENERIC_FEMALE.toString());
-        Member.setDefaultMaleLocation(ImageFiles.GENERIC_MALE.toString());
-        GenTreeDrawingServiceImpl.setContext(gtc);
     }
 
 }

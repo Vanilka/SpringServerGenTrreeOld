@@ -1,6 +1,10 @@
 package gentree.server.service.Implementation;
 
+import gentree.server.domain.entity.MemberEntity;
+import gentree.server.domain.entity.RelationEntity;
+import gentree.server.repository.RelationRepository;
 import gentree.server.service.RelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,4 +15,18 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class RelationServiceImpl implements RelationService {
+
+    @Autowired
+    RelationRepository repository;
+
+    @Override
+    public RelationEntity addNewRelation(RelationEntity relation) {
+        return repository.save(relation);
+    }
+
+    @Override
+    public RelationEntity addNewBornRelation(MemberEntity memberEntity) {
+        RelationEntity relationEntity = new RelationEntity(null, null, memberEntity);
+        return relationEntity;
+    }
 }

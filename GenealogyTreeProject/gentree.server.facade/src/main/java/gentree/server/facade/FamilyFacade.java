@@ -1,7 +1,9 @@
 package gentree.server.facade;
 
 import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
 import gentree.server.dto.OwnerDTO;
+import gentree.server.dto.RelationDTO;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public interface FamilyFacade {
     /* ************************************************************
         Family Gestion
     ************************************************************ */
-    FamilyDTO addNewFamily(FamilyDTO familyDTO);
+    FamilyDTO addNewFamily(FamilyDTO familyDTO, OwnerDTO ownerDTO);
 
     FamilyDTO findFamilyById(Long id);
 
@@ -22,6 +24,7 @@ public interface FamilyFacade {
     /* ************************************************************
         Member Gestion
     ************************************************************ */
+    FamilyDTO addNewMember(MemberDTO member);
 
     /* ************************************************************
         Relation Gestion

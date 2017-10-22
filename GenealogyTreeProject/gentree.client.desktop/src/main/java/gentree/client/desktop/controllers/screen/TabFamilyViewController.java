@@ -8,7 +8,7 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

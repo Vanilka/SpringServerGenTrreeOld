@@ -6,7 +6,10 @@ package gentree.exception.configuration;
 public enum ExceptionCauses {
     NOT_UNIQUE_BORN_RELATION("Not unique born relation"),
     ANOTHER_CAUSE("Another Cause"),
-    NOT_FOUND_USER("User not found");
+    NOT_FOUND_USER("User not found"),
+    OPTIMISTIC_LOCK("The row was updated or deleted by another transaction"),
+    LOGIN_PASSWORD_INCORRECT("Login or Password Incorrect"),
+    FAMILY_ACCESS_DENIED("You must be family owner to take this action ");
 
     private String cause;
 

@@ -3,7 +3,7 @@ package gentree.client.desktop.controllers.screen;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.controllers.FilesFXML;
 import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;

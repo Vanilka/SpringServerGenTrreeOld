@@ -1,14 +1,14 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
-import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.controllers.FilesFXML;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.Gender;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.Gender;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.MemberCard;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.binding.Bindings;

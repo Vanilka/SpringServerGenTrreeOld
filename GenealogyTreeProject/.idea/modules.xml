@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.elements.gustave/gentree.client.visualization.elements.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.elements.gustave/gentree.client.visualization.elements.gustave.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.gustave/gentree.client.visualization.gustave.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" filepath="$PROJECT_DIR$/gentree.client.visualization.vanilla/gentree.client.visualization.vanilla.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.common.configuration/gentree.common.configuration.iml" filepath="$PROJECT_DIR$/gentree.common.configuration/gentree.common.configuration.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" filepath="$PROJECT_DIR$/gentree.exceptions/gentree.exceptions.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.server.configuration/gentree.server.configuration.iml" filepath="$PROJECT_DIR$/gentree.server.configuration/gentree.server.configuration.iml" />
       <module fileurl="file://$PROJECT_DIR$/gentree.server.dispatcher/gentree.server.dispatcher.iml" filepath="$PROJECT_DIR$/gentree.server.dispatcher/gentree.server.dispatcher.iml" />

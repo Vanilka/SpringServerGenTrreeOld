@@ -1,6 +1,12 @@
 package gentree.client.desktop.service;
 
 import gentree.client.desktop.configuration.messages.AppTitles;
+import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
+import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.FamilyMember;
+import gentree.client.visualization.elements.RelationTypeElement;
+import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

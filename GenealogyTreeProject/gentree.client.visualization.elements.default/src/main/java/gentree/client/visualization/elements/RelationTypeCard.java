@@ -1,7 +1,7 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.domain.enums.RelationType;
+import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;

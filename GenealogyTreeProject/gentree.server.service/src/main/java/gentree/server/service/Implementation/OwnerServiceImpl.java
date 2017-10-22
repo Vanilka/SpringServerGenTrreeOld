@@ -1,11 +1,12 @@
 package gentree.server.service.Implementation;
 
-import gentree.server.configuration.enums.RoleEnum;
+import gentree.common.configuration.enums.RoleEnum;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.repository.OwnerRepository;
 import gentree.server.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class OwnerServiceImpl implements OwnerService{
 
     @Autowired
     Environment env;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public OwnerEntity addNewOwner(OwnerEntity owner) {
@@ -44,8 +48,8 @@ public class OwnerServiceImpl implements OwnerService{
     private void setDefaultOperators() {
 
         ownerRepository.saveAndFlush(new OwnerEntity
-                ("admin", "123456", RoleEnum.ADMIN));
+                ("admin", passwordEncoder.encode("admin"), RoleEnum.ADMIN));
         ownerRepository.saveAndFlush(new OwnerEntity
-                ("vanilka", "123456", RoleEnum.USER));
+                ("vanilka", passwordEncoder.encode("admin"), RoleEnum.USER));
     }
 }

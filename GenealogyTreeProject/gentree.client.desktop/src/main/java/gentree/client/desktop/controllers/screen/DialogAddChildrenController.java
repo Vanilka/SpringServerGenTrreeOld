@@ -1,7 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
-import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.controllers.FilesFXML;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithRelationController;

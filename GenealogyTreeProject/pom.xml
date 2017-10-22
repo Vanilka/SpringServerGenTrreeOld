@@ -23,6 +23,7 @@
         <module>gentree.server.manager.db</module>
         <module>gentree.server.configuration</module>
         <module>gentree.server.dto</module>
+        <module>gentree.common.configuration</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
