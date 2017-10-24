@@ -1,6 +1,7 @@
 package gentree.server.facade;
 
 import gentree.server.dto.OwnerDTO;
+import gentree.server.dto.OwnerExtendedDTO;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface OwnerFacade {
     List<OwnerDTO> findAllOwners();
     OwnerDTO findOwnerByLoginToAuthProcess(String login);
     OwnerDTO findOwnerByLogin(String login);
+    OwnerExtendedDTO findExtendedOwnerByLogin(String login);
 }

@@ -21,6 +21,7 @@ public enum FilesFXML {
     SCREEN_MAIN_LEFT_FAMILY_INFO_FXML("tab.family.info.fxml"),
     SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML("tab.family.view.fxml"),
     SCREEN_LOGON_REGISTER_FXML("screen.logon.register.fxml"),
+    SCREEN_OPEN_ONLINE_PROJECT_FXML("screen.open.online.project.fxml"),
     PANE_SHOW_INFO_MEMBER_FXML("pane.show.info.member.fxml"),
     PANE_SHOW_INFO_RELATION_FXML("pane.show.info.relation.fxml"),
     PANE_LOGON_FXML("pane.logon.fxml"),

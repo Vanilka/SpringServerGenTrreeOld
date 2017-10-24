@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Observable;
 
 /**
@@ -16,22 +17,21 @@ import java.util.Observable;
  */
 
 @XmlType(name = "relation", propOrder = {"id", "type", "active", "left", "right", "children"})
-//@XmlType(name = "relation")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Relation extends Observable implements Serializable, Comparable<Relation> {
 
     private static final long serialVersionUID = 7679518429380405561L;
 
-    private LongProperty id;
+    private final LongProperty id;
 
     @XmlTransient
-    private LongProperty referenceNumber;
+    private final LongProperty referenceNumber;
 
-    private ObjectProperty<Member> left;
-    private ObjectProperty<Member> right;
-    private ObservableList<Member> children;
-    private ObjectProperty<RelationType> type;
-    private BooleanProperty active;
+    private final ObjectProperty<Member> left;
+    private final ObjectProperty<Member> right;
+    private final ObservableList<Member> children;
+    private final ObjectProperty<RelationType> type;
+    private final BooleanProperty active;
 
     {
         this.id = new SimpleLongProperty();
@@ -45,7 +45,9 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
     }
 
     public Relation() {
-        this(null);
+        setType(RelationType.NEUTRAL);
+        setActive(true);
+
     }
 
     public Relation(Member child) {
@@ -149,7 +151,8 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
     }
 
     public void setChildren(ObservableList<Member> children) {
-        this.children = children;
+        this.children.clear();
+        this.children.addAll(children);
     }
 
 
@@ -195,12 +198,12 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         return referenceNumber.get();
     }
 
-    public void setReferenceNumber(Long referenceNumber) {
-        this.referenceNumber.setValue(referenceNumber);
-    }
-
     public void setReferenceNumber(long referenceNumber) {
         this.referenceNumber.set(referenceNumber);
+    }
+
+    public void setReferenceNumber(Long referenceNumber) {
+        this.referenceNumber.setValue(referenceNumber);
     }
 
     public LongProperty referenceNumberProperty() {
@@ -209,7 +212,6 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
 
     @Override
     public int compareTo(Relation o) {
-
         if (!this.equals(o)) return -1;
         return 0;
     }
@@ -242,5 +244,20 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         sb.append("}");
         sb.append("}");
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof Relation)) return false;
+
+        Relation r = (Relation) obj;
+        return Objects.equals(getId(), r.getId())
+                && Objects.equals(getLeft(), r.getLeft())
+                && Objects.equals(getRight(), r.getRight())
+                && Objects.equals(getType(), r.getType())
+                && getActive() == r.getActive()
+                && Objects.equals(getChildren(), r.getChildren());
     }
 }

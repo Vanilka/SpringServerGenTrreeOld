@@ -6,12 +6,17 @@ import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.MemberDTO;
 import gentree.server.dto.OwnerDTO;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by Martyna SZYMKOWIAK on 16/10/2017.
+ *
+ * Class to Covert DTO objects to Entity.
+ * Validation of null is not prevue at this level. It is realise by ConverterValidator Bean
+ *
  */
-public enum ConverterToEntity {
-    INSTANCE;
+@Component
+public class ConverterToEntity {
 
     /* ************************************************************
         Family Conversion
@@ -23,7 +28,6 @@ public enum ConverterToEntity {
      * @return
      */
     public OwnerEntity convert(OwnerDTO source) {
-        if (source == null) return null;
         OwnerEntity target = new OwnerEntity();
         target.setVersion(source.getVersion());
         target.setId(source.getId());
@@ -33,7 +37,6 @@ public enum ConverterToEntity {
     }
 
     public OwnerEntity convertWithPass(OwnerDTO source) {
-        if (source == null) return null;
         OwnerEntity target = this.convert(source);
         target.setPassword(source.getPassword());
         return target;
@@ -44,7 +47,6 @@ public enum ConverterToEntity {
     ************************************************************ */
 
     public FamilyEntity convert(FamilyDTO source) {
-        if (source == null) return null;
         FamilyEntity target = new FamilyEntity();
         target.setVersion(source.getVersion());
         target.setId(source.getId());
@@ -57,9 +59,7 @@ public enum ConverterToEntity {
     ************************************************************ */
 
     public MemberEntity convert(MemberDTO source) {
-        if (source == null) return null;
         MemberEntity target = new MemberEntity();
-
         target.setVersion(source.getVersion());
         target.setId(source.getId());
         target.setName(source.getName());
@@ -70,6 +70,7 @@ public enum ConverterToEntity {
         target.setRace(source.getRace());
         target.setDeathCauses(source.getDeathCauses());
         target.setGender(source.getGender());
+        target.setFamily(convert(source.getFamily()));
         return target;
     }
 

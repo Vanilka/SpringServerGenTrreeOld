@@ -11,6 +11,7 @@ import javafx.beans.property.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -24,20 +25,23 @@ public class Member implements Serializable {
     private static String DEFAULT_FEMALE_LOCATION = "";
     private static String DEFAULT_MALE_LOCATION = "";
 
-    private LongProperty id;
-    private StringProperty name;
-    private StringProperty surname;
-    private StringProperty bornname;
-    private StringProperty photo;
 
-    private ObjectProperty<Age> age;
-    private ObjectProperty<Race> race;
-    private ObjectProperty<Gender> gender;
-    private ObjectProperty<DeathCauses> deathCause;
-    private BooleanProperty alive;
+    private final LongProperty version;
+    private final LongProperty id;
+    private final StringProperty name;
+    private final StringProperty surname;
+    private final StringProperty bornname;
+    private final StringProperty photo;
+
+    private final ObjectProperty<Age> age;
+    private final ObjectProperty<Race> race;
+    private final ObjectProperty<Gender> gender;
+    private final ObjectProperty<DeathCauses> deathCause;
+    private final BooleanProperty alive;
 
 
     {
+        this.version = new SimpleLongProperty();
         this.id = new SimpleLongProperty();
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
@@ -71,7 +75,7 @@ public class Member implements Serializable {
     }
 
     /*
-            GETTERS
+            GETTERS AND SETTERS
      */
 
     public static void setDefaultFemaleLocation(String defaultFemaleLocation) {
@@ -80,6 +84,19 @@ public class Member implements Serializable {
 
     public static void setDefaultMaleLocation(String defaultMaleLocation) {
         DEFAULT_MALE_LOCATION = defaultMaleLocation;
+    }
+
+    @XmlTransient
+    public long getVersion() {
+        return version.get();
+    }
+
+    public LongProperty versionProperty() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version.set(version);
     }
 
     @XmlID
@@ -164,10 +181,6 @@ public class Member implements Serializable {
         return age;
     }
 
-    /*
-            SETTERS
-     */
-
     public Race getRace() {
         return race.get();
     }
@@ -240,6 +253,27 @@ public class Member implements Serializable {
         return sb.toString();
     }
 
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof Member)) return false;
+
+        Member m = (Member) obj;
+        return getId() == m.getId()
+                && Objects.equals(getName(), m.getName())
+                && Objects.equals(getSurname(), m.getSurname())
+                && Objects.equals(getBornname(), m.getBornname())
+                && Objects.equals(getAge(), m.getAge())
+                && Objects.equals(getGender(), m.getGender())
+                && Objects.equals(getDeathCause(), m.getDeathCause())
+                && Objects.equals(getPhoto(), m.getPhoto())
+                && Objects.equals(getRace(), m.getRace())
+                && isAlive() == m.isAlive();
+    }
 
     public Stream<? extends Property> getProperties() {
         return Stream.of(this.id, this.name, this.surname, this.bornname, this.gender, this.age, this.race, this.deathCause);

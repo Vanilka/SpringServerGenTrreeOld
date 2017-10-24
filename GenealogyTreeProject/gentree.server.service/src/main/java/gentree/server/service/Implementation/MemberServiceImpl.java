@@ -3,6 +3,7 @@ package gentree.server.service.Implementation;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.repository.MemberRepository;
 import gentree.server.service.MemberService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberEntity addNewMember(MemberEntity member) {
-        return memberRepository.saveAndFlush(member);
+        MemberEntity m = memberRepository.saveAndFlush(member);
+        Hibernate.initialize(member.getFamily());
+        System.out.println(member);
+        return m;
     }
 
     @Override

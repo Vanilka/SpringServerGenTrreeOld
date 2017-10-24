@@ -120,6 +120,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
                 toggleAliveButton.isSelected() ? null : comboBoxDeathCause.getSelectionModel().getSelectedItem());
 
         ServiceResponse response = context.getService().addMember(member);
+        System.out.println(response);
 
         if (response.getStatus().equals(ServiceResponse.ResponseStatus.OK)) {
             this.stage.close();

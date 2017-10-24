@@ -5,4 +5,7 @@ package gentree.client.desktop.configuration.enums;
  */
 public class ServerPaths {
     public static final String LOGIN = "/owner/login";
+    public static final String FAMILY = "/family";
+    public static final String MEMBER = "/member";
+    public static final String ADD ="/add";
 }

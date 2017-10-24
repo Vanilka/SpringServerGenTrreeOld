@@ -31,6 +31,8 @@ public class MemberDTO implements Serializable {
     private Race race;
     private Gender gender;
 
+    private FamilyDTO family;
+
 
     /*
         Getters & Setters
@@ -57,5 +59,24 @@ public class MemberDTO implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = (gender == null ? Gender.M : gender);
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MemberDTO{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", bornname='").append(bornname).append('\'');
+        sb.append(", alive=").append(alive);
+        sb.append(", deathCauses=").append(deathCauses);
+        sb.append(", age=").append(age);
+        sb.append(", race=").append(race);
+        sb.append(", gender=").append(gender);
+        sb.append(", family=").append(family);
+        sb.append('}');
+        return sb.toString();
     }
 }

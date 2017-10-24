@@ -7,6 +7,7 @@ import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.responses.ServiceResponse;
@@ -41,15 +42,12 @@ import java.util.List;
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
  */
 @Log4j2
-public class GenTreeLocalService implements FamilyService {
+public class GenTreeLocalService extends GenTreeService implements FamilyService {
 
     private final static String PROJECT_FILE_EXTENSION = ".xml";
     private static final String PREFIX_FILE_ABSOLUTE = "file://";
     private static final String PREFIX_FILE_RELATIVE = "file:";
-    private final Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
-    private ObjectProperty<Family> currentFamily;
     private ActiveRelationGuard guard;
-    private ScreenManager sm = ScreenManager.INSTANCE;
 
     private String projectFilename;
 
@@ -207,52 +205,6 @@ public class GenTreeLocalService implements FamilyService {
         return new RelationResponse(target);
     }
 
-    @Override
-    public Relation findRelation(Member left, Member right) {
-        List<Relation> list = getCurrentFamily().getRelations()
-                .filtered(r -> r.getLeft() != null || r.getRight() != null)
-                .filtered(r -> r.compareLeft(left) && r.compareRight(right));
-        return list.size() == 0 ? null : list.get(0);
-
-    }
-
-    @Override
-    public ObservableList<Member> findAllRootMembers() {
-        ObservableList<Member> rootList = FXCollections.observableArrayList();
-
-        getCurrentFamily().getRelations()
-                .filtered(r -> r.getLeft() == null)
-                .filtered(r -> r.getRight() == null)
-                .filtered(r -> !r.getChildren().isEmpty())
-                .forEach(root -> rootList.addAll(root.getChildren()));
-        return rootList;
-    }
-
-    /**
-     * Verify if parameter sim is Ascendant of parameter grain
-     *
-     * @param grain
-     * @param sim
-     * @return
-     */
-    @Override
-    public boolean isAscOf(Member grain, Member sim) {
-        return grain != null && sim != null && getCurrentFamily().isAscOf(grain, sim);
-    }
-
-
-    /**
-     * Verify if parameter sim is Descendant of parameter grain
-     *
-     * @param grain
-     * @param sim
-     * @return
-     */
-    @Override
-    public boolean isDescOf(Member grain, Member sim) {
-        return grain != null && sim != null && getCurrentFamily().isDescOf(grain, sim);
-    }
-
 
     /**
      * Totaly remove relation from Family
@@ -361,14 +313,9 @@ public class GenTreeLocalService implements FamilyService {
         return ++idRelation;
     }
 
-    @Override
-    public Family getCurrentFamily() {
-        return currentFamily.get();
-    }
-
 
     @Override
-    public void setCurrentFamily(Family currentFamily) {
+    public ServiceResponse setCurrentFamily(Family currentFamily) {
         log.trace(LogMessages.MSG_FAMILY_SERVICE_CURRENT_FAMILY, currentFamily);
         this.currentFamily.set(currentFamily);
 
@@ -381,6 +328,8 @@ public class GenTreeLocalService implements FamilyService {
 
         setMemberListener();
         setRelationListener();
+
+        return new FamilyResponse(currentFamily);
     }
 
     /*
@@ -401,7 +350,7 @@ public class GenTreeLocalService implements FamilyService {
      *
      * @param currentFamily
      */
-    public void createProject(Family currentFamily) {
+    public ServiceResponse createFamily(Family currentFamily) {
         setCurrentFamily(currentFamily);
 
         String filename = generateProjectName(currentFamily.getName());
@@ -412,11 +361,11 @@ public class GenTreeLocalService implements FamilyService {
             projectFilename = filename;
             saveProject();
 
-
         } catch (IOException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
+        return new FamilyResponse(currentFamily);
     }
 
     /**

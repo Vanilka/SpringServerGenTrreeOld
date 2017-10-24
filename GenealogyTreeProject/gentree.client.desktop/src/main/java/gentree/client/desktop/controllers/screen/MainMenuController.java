@@ -106,7 +106,6 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
      */
 
     private void initMenuItemsVisibility() {
-        menuItemCloseProject.setVisible(false);
         menuItemSaveProjectAs.setVisible(false);
         separator_2.setVisible(false);
         separator_3.setVisible(false);
@@ -130,7 +129,6 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     private void changeElementsVisibility(boolean value) {
-        menuItemCloseProject.setVisible(value);
         menuItemSaveProjectAs.setVisible(value);
         separator_2.setVisible(value);
         separator_3.setVisible(value);

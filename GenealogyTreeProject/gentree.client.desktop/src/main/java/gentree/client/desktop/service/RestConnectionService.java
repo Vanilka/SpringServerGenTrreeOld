@@ -2,19 +2,35 @@ package gentree.client.desktop.service;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import gentree.client.desktop.configuration.Realm;
+import gentree.client.desktop.configuration.converters.ConverterDtoToModel;
+import gentree.client.desktop.configuration.converters.ConverterModelToDto;
 import gentree.client.desktop.configuration.enums.ServerPaths;
+import gentree.client.desktop.domain.Family;
+import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Owner;
+import gentree.client.desktop.responses.ServiceResponse;
+import gentree.client.desktop.service.implementation.GenTreeOnlineService;
+import gentree.client.desktop.service.responses.ExceptionResponse;
+import gentree.client.desktop.service.responses.FamilyListResponse;
+import gentree.client.desktop.service.responses.FamilyResponse;
+import gentree.client.desktop.service.responses.MemberWithBornRelationResponse;
+import gentree.exception.ExceptionBean;
+import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
+import gentree.server.dto.NewMemberDTO;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import lombok.Getter;
-import lombok.Setter;
 import org.glassfish.jersey.client.ClientProperties;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 22/10/2017.
@@ -27,11 +43,12 @@ public class RestConnectionService {
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_METHOD = "Basic ";
 
-    private ObjectProperty<Owner> owner = new SimpleObjectProperty<>();
-
-    private  WebTarget webTarget;
+    private final ConverterModelToDto cmd = ConverterModelToDto.INSTANCE;
+    private final ConverterDtoToModel cdm = new ConverterDtoToModel();
     private final Client client;
-   // private final List<Object> providers;
+    private GenTreeOnlineService service;
+    private ObjectProperty<Owner> owner = new SimpleObjectProperty<>();
+    private WebTarget webTarget;
 
     private RestConnectionService() {
         client = ClientBuilder.newClient().register(JacksonJsonProvider.class);
@@ -43,6 +60,18 @@ public class RestConnectionService {
                 5000);
     }
 
+
+    public void registerService(GenTreeOnlineService onlineService) {
+        this.service = onlineService;
+        this.cdm.setService(onlineService);
+    }
+
+    /**
+     * Testing connection with a Realm
+     *
+     * @param URL
+     * @return
+     */
     public boolean testConnection(String URL) {
         boolean result = true;
         WebTarget testWebtarget = client.target(URL);
@@ -55,34 +84,154 @@ public class RestConnectionService {
             result = false;
         }
 
-        return  result;
+        return result;
     }
 
 
+    /**
+     * If Login return True the Web target And Owner will be set.
+     *
+     * @param login
+     * @param password
+     * @param realm
+     * @return
+     */
     public boolean login(String login, String password, Realm realm) {
         boolean result = true;
-        WebTarget canditateWebTarget = client.target(realm.getAddress());
 
-        try {
-            Response response = canditateWebTarget
-                    .path(ServerPaths.LOGIN)
-                    .request(MediaType.APPLICATION_JSON)
-                    .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD + generateToken(login, password))
-                    .post(null);
-            if (response.getStatus() != 200) {
-                System.out.println("NOT OK");
+        Response response = doPost(client.target(realm.getAddress()), ServerPaths.LOGIN, generateToken(login, password), null);
 
-                result = false;
-            } else  {
-                System.out.println("JEST OK");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (response == null || response.getStatus() != 200) {
+            System.out.println("NOT OK");
             result = false;
+        } else {
+            System.out.println("JEST OK");
+            try {
+                owner.setValue(response.readEntity(Owner.class));
+                getOwner().setPassword(password);
+                webTarget = client.target(realm.getAddress());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        return  result;
+        return result;
 
+    }
+
+    /**
+     * Retireve Families
+     *
+     * @return
+     */
+    public ServiceResponse retrieveFamilies() {
+
+        ServiceResponse serviceResponse = null;
+
+        Response response = doGet(ServerPaths.FAMILY);
+
+        if (response.getStatus() == 200) {
+            List<FamilyDTO> list = response.readEntity(new GenericType<List<FamilyDTO>>() {
+            });
+
+            System.out.println("LIST COUNT" + list.size());
+
+            List<Family> resultList = new ArrayList<>();
+            list.forEach(dto -> resultList.add(cdm.convertLazy(dto)));
+            serviceResponse = new FamilyListResponse(resultList);
+        } else {
+            serviceResponse = new ExceptionResponse(response.readEntity(ExceptionBean.class));
+        }
+
+        return serviceResponse;
+    }
+
+
+    public ServiceResponse addFamily(Family f) {
+        ServiceResponse serviceResponse = null;
+        Response response = doPost(ServerPaths.FAMILY.concat(ServerPaths.ADD), Entity.json(cmd.convertLazy(f)));
+
+        if (response.getStatus() == 200) {
+            //Actualy do nothing. Familly List will be retrieved later
+        }
+
+        return serviceResponse;
+    }
+
+    public ServiceResponse retrieveFullFamily(Family f) throws Exception {
+        ServiceResponse serviceResponse = null;
+
+        Response response = doGet(ServerPaths.FAMILY.concat("/").concat(String.valueOf(f.getId())));
+        if (response.getStatus() == 200) {
+            f = cdm.convertFull(response.readEntity(FamilyDTO.class));
+
+            System.out.println("tHIS IS FULL FAMILLY " + f);
+
+            serviceResponse = new FamilyResponse(f);
+        }
+
+        return serviceResponse;
+    }
+
+
+    /* *************************
+        MEMBER MANAGEMENT
+    *************************** */
+
+    public ServiceResponse addNewMember(Member member) {
+        ServiceResponse serviceResponse = null;
+        MemberDTO dto = cmd.convert(member);
+        dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
+
+        Response response = doPost(ServerPaths.MEMBER.concat(ServerPaths.ADD), Entity.json(dto));
+
+        if(response.getStatus() == 200) {
+           NewMemberDTO returnedDTO = response.readEntity(NewMemberDTO.class);
+           Member addedMember = cdm.convert(returnedDTO.getMemberDTO());
+           serviceResponse = new MemberWithBornRelationResponse(addedMember, null);
+
+        }
+        return serviceResponse;
+    }
+
+    /*
+        GET AND POST ACTIONS
+     */
+
+    private Response doGet(String path) {
+        System.out.println("User " + getOwner().getLogin() + " " + getOwner().getPassword());
+        return doGet(webTarget, path, generateToken());
+    }
+
+    private Response doGet(WebTarget target, String path, String token) {
+        Response response = null;
+        System.out.println(token);
+        try {
+            response = target.path(path)
+                    .request(MediaType.APPLICATION_JSON)
+                    .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD.concat(token))
+                    .get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    private Response doPost(String path, Entity entity) {
+        return doPost(webTarget, path, generateToken(), entity);
+    }
+
+    private Response doPost(WebTarget target, String path, String token, Entity entity) {
+        Response response = null;
+        try {
+            response = target.path(path)
+                    .request(MediaType.APPLICATION_JSON)
+                    .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD.concat(token))
+                    .post(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
     public void SetWebTarget(Realm realm) {
@@ -107,14 +256,14 @@ public class RestConnectionService {
      */
 
     public Owner getOwner() {
-        return owner.get();
-    }
-
-    public ObjectProperty<Owner> ownerProperty() {
-        return owner;
+        return owner.getValue();
     }
 
     public void setOwner(Owner owner) {
         this.owner.set(owner);
+    }
+
+    public ObjectProperty<Owner> ownerProperty() {
+        return owner;
     }
 }

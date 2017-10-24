@@ -5,10 +5,13 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import gentree.client.desktop.configuration.GenTreeProperties;
 import gentree.client.desktop.configuration.Realm;
+import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.RestConnectionService;
+import gentree.client.desktop.service.ScreenManager;
+import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -44,7 +47,11 @@ public class PaneLogonController implements Initializable, FXMLController, FXMLA
 
     @FXML
     private void login() {
-        rcs.login(LOGIN_FIELD.getText(), PASSWORD_FIELD.getText(), REALM_BOX.getSelectionModel().getSelectedItem());
+        boolean result = rcs.login(LOGIN_FIELD.getText(), PASSWORD_FIELD.getText(), REALM_BOX.getSelectionModel().getSelectedItem());
+        if (result) {
+            sm.loadFxml(new ScreenOpenOnlineProjectController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_OPEN_ONLINE_PROJECT_FXML, ScreenManager.Where.CENTER);
+        }
+
     }
 
     @FXML

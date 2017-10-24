@@ -20,7 +20,22 @@ public class FamilyDTO implements Serializable{
     private Long version;
     private Long id;
     private String name;
-    private List<MemberDTO> members = new ArrayList<>();
-    private List<RelationDTO> relations = new ArrayList<>();
+    private List<MemberDTO> members;
+    private List<RelationDTO> relations;
 
+    private OwnerDTO owner;
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FamilyDTO{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", members=").append(members);
+        sb.append(", relations=").append(relations);
+        sb.append(", owner=").append(owner);
+        sb.append('}');
+        return sb.toString();
+    }
 }

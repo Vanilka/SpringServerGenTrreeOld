@@ -25,5 +25,6 @@ public class RelationDTO implements Serializable {
     private List<MemberDTO> children;
     private boolean active;
     private RelationType type;
+    private FamilyDTO family;
 
 }

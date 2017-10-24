@@ -26,7 +26,15 @@ public class RelationServiceImpl implements RelationService {
 
     @Override
     public RelationEntity addNewBornRelation(MemberEntity memberEntity) {
-        RelationEntity relationEntity = new RelationEntity(null, null, memberEntity);
+
+        RelationEntity relationEntity = null;
+        try {
+            relationEntity = repository.saveAndFlush(new RelationEntity(null, null, memberEntity, memberEntity.getFamily()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("DONE");
         return relationEntity;
     }
 }

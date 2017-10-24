@@ -8,10 +8,12 @@ import gentree.server.service.FamilyService;
 import gentree.server.service.MemberService;
 import gentree.server.service.ProjectService;
 import gentree.server.service.RelationService;
+import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Wrapper;
 import java.util.List;
 
 /**
@@ -46,6 +48,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public FamilyEntity findFullFamilyById(Long id) {
+
+        return familyService.findFullFamilyById(id);
+    }
+
+    @Override
     public List<FamilyEntity> findAllFamiliesByOwner(OwnerEntity owner) {
         return familyService.findAllByOwner(owner);
     }
@@ -57,13 +65,12 @@ public class ProjectServiceImpl implements ProjectService {
     ************************************************************ */
 
     @Override
-    public MemberEntity addMember(MemberEntity memberEntity) {
-        MemberEntity newMember = memberService.addNewMember(memberEntity);
-        RelationEntity bornRelation = relationService.addNewBornRelation(memberEntity);
-
-        return null;
+    public NewMemberWrapper addMember(MemberEntity memberEntity) {
+        NewMemberWrapper  wrapper = new NewMemberWrapper();
+        wrapper.setMember(memberService.addNewMember(memberEntity));
+        wrapper.setBornRelation(relationService.addNewBornRelation(wrapper.getMember()));
+        return wrapper;
     }
-
 
 
     /* ************************************************************

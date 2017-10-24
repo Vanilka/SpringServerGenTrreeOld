@@ -12,10 +12,11 @@ import java.util.List;
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
  */
 @Entity
-@Table(name = "relation")
+@Table(name = "relations")
 @Setter
 public class RelationEntity implements Serializable {
 
+    private static final long serialVersionUID = 8765417762976233971L;
     private Long version;
     private Long id;
     private FamilyEntity family;
@@ -30,9 +31,10 @@ public class RelationEntity implements Serializable {
     private RelationType type;
 
     public RelationEntity() {
+
     }
 
-    public RelationEntity(MemberEntity left, MemberEntity right, MemberEntity memberEntity) {
+    public RelationEntity(MemberEntity left, MemberEntity right, MemberEntity memberEntity, FamilyEntity family) {
         this.family = family;
         this.left = left;
         this.right = right;
@@ -63,14 +65,14 @@ public class RelationEntity implements Serializable {
     }
 
 
-    @ManyToOne
-    @JoinColumn(name = "left")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "left_id")
     public MemberEntity getLeft() {
         return left;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "right")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "right_id")
     public MemberEntity getRight() {
         return right;
     }
@@ -88,6 +90,25 @@ public class RelationEntity implements Serializable {
 
     @Column(nullable = false)
     public RelationType getType() {
-        return type;
+        return type == null ? RelationType.NEUTRAL : type;
+    }
+
+    public void setType(RelationType type) {
+        this.type = type ==  null ? RelationType.NEUTRAL : type;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("RelationEntity{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", family=").append(family);
+        sb.append(", left=").append(left);
+        sb.append(", right=").append(right);
+        sb.append(", children=").append(children);
+        sb.append(", active=").append(active);
+        sb.append(", type=").append(type);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -120,7 +121,6 @@ public class Family implements Serializable {
     }
 
 
-
     /*
         GETTERS
      */
@@ -144,7 +144,6 @@ public class Family implements Serializable {
                 if (isDescOf(m, sim)) return true;
             }
         }
-
         return false;
     }
 
@@ -208,6 +207,37 @@ public class Family implements Serializable {
 
     public void setRelations(ObservableList<Relation> relations) {
         this.relations = relations;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof Family)) return false;
+        if (obj == this) return true;
+
+        Family f = (Family) obj;
+
+        return Objects.equals(getVersion(), f.getVersion())
+                && Objects.equals(getId(), f.getId())
+                && Objects.equals(getName(), f.getName())
+                && Objects.equals(getMembers(), f.getMembers())
+                && Objects.equals(getRelations(), f.getRelations());
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Family{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", members=").append(members);
+        sb.append(", relations=").append(relations);
+        sb.append(", versionProperty=").append(versionProperty());
+        sb.append(", idProperty=").append(idProperty());
+        sb.append(", nameProperty=").append(nameProperty());
+        sb.append('}');
+        return sb.toString();
     }
 }
 

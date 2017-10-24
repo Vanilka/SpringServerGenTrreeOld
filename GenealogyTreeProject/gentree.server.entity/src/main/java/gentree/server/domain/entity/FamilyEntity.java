@@ -53,7 +53,7 @@ public class FamilyEntity implements Serializable {
         return owner;
     }
 
-    @OneToMany(mappedBy = "family", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "family", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<MemberEntity> getMembers() {
         return members;
     }
@@ -62,6 +62,20 @@ public class FamilyEntity implements Serializable {
     @OneToMany(mappedBy = "family", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<RelationEntity> getRelations() {
         return relations;
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FamilyEntity{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", owner=").append(owner);
+        sb.append(", members=").append(members);
+        sb.append(", relations=").append(relations);
+        sb.append('}');
+        return sb.toString();
     }
 }
 

@@ -69,7 +69,6 @@ public class MemberEntity implements Serializable {
     }
 
 
-
     @Column(nullable = false)
     public boolean isAlive() {
         return alive;
@@ -108,5 +107,24 @@ public class MemberEntity implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = (gender == null ? Gender.M : gender);
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MemberEntity{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", family=").append(family);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", bornname='").append(bornname).append('\'');
+        sb.append(", alive=").append(alive);
+        sb.append(", deathCauses=").append(deathCauses);
+        sb.append(", age=").append(age);
+        sb.append(", race=").append(race);
+        sb.append(", gender=").append(gender);
+        sb.append('}');
+        return sb.toString();
     }
 }

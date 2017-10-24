@@ -15,15 +15,26 @@ import java.util.List;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OwnerDTO implements Serializable {
+public class OwnerDTO  implements Serializable {
 
     private static final long serialVersionUID = 3648409478564178050L;
 
-    private Long version;
-    private Long id;
-    private String login;
-    private String password;
-    private RoleEnum role;
-    private List<FamilyDTO> familyList = new ArrayList<>();
+    protected Long version;
+    protected Long id;
+    protected String login;
+    protected String password;
+    protected RoleEnum role;
 
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("OwnerDTO{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", role=").append(role);
+        sb.append('}');
+        return sb.toString();
+    }
 }

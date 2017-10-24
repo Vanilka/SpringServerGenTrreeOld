@@ -14,5 +14,8 @@ public interface FamilyService {
 
     FamilyEntity findFamilyById(Long id);
 
+    FamilyEntity findFullFamilyById(Long id);
+
     List<FamilyEntity> findAllByOwner(OwnerEntity owner);
+
 }

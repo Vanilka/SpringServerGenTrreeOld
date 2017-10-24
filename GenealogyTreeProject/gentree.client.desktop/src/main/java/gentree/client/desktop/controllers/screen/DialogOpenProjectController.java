@@ -96,23 +96,32 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     @FXML
     public void confirm() {
         if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
-
-            ((GenTreeLocalService) context.getService()).createProject(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
-            sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+            actionNewProject();
 
         } else if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
-
-            Path path = tabOpenExistingProjectController.getSelectedFile();
-            Family family = readFamilyFromXML(path.toFile());
-
-            ((GenTreeLocalService) context.getService()).openProject(family, path.toFile().getName());
-            sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+            actionOpenProject();
         } else {
 
             //To to show error
         }
         this.stage.close();
 
+    }
+
+    private void actionNewProject() {
+        context.getService().createFamily(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
+
+        if (context.getService() instanceof GenTreeLocalService) {
+            sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+        }
+    }
+
+    private void actionOpenProject() {
+        Path path = tabOpenExistingProjectController.getSelectedFile();
+        Family family = readFamilyFromXML(path.toFile());
+
+        ((GenTreeLocalService) context.getService()).openProject(family, path.toFile().getName());
+        sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
     }
 
 
@@ -131,13 +140,24 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
         return customer;
     }
 
-
+    /**
+     * Initialization of Tabs </br>
+     * If Service is GenTreeLocalService the Open existing tab will be initialized
+     */
     private void initTabs() {
+
         tabOpenNewProjectController = (TabOpenNewProjectController) sm.loadFxml(tabOpenNewProjectController, tabPaneOpenProject, tabOpenNewProject, FilesFXML.TAB_OPEN_NEW_PROJECT_FXML, getValueFromKey(Keys.TAB_NEW_PROJECT));
-        tabOpenExistingProjectController = (TabOpenExistingProjectController) sm.loadFxml(tabOpenExistingProjectController, tabPaneOpenProject, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
+
+        if (context.getService() instanceof GenTreeLocalService) {
+            tabOpenExistingProjectController = (TabOpenExistingProjectController) sm.loadFxml(tabOpenExistingProjectController, tabPaneOpenProject, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
+        }
+
         tabPaneOpenProject.getSelectionModel().select(tabOpenNewProject);
     }
 
+    /**
+     * Initialization of Tab listener
+     */
     private void addSelectedTabListener() {
         tabPaneOpenProject.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -152,15 +172,23 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     }
 
     private void addDisableButtonListener() {
-        BooleanBinding disableBinding = Bindings.createBooleanBinding(
-                () -> ((tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)
-                        && tabOpenNewProjectController.getFamilyNameField().getText().isEmpty())
-                        ||
-                        (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)
-                                && tabOpenExistingProjectController.getProjectChooser().getSelectionModel().getSelectedItem() == null)),
-                tabOpenNewProjectController.getFamilyNameField().textProperty(),
-                tabOpenExistingProjectController.getProjectChooser().getSelectionModel().selectedIndexProperty(),
-                tabPaneOpenProject.getSelectionModel().selectedItemProperty());
+        BooleanBinding disableBinding;
+
+        if (context.getService() instanceof GenTreeLocalService) {
+            disableBinding = Bindings.createBooleanBinding(
+                    () -> ((tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)
+                            && tabOpenNewProjectController.getFamilyNameField().getText().isEmpty())
+                            ||
+                            (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)
+                                    && tabOpenExistingProjectController.getProjectChooser().getSelectionModel().getSelectedItem() == null)),
+                    tabOpenNewProjectController.getFamilyNameField().textProperty(),
+                    tabOpenExistingProjectController.getProjectChooser().getSelectionModel().selectedIndexProperty(),
+                    tabPaneOpenProject.getSelectionModel().selectedItemProperty());
+        } else {
+            disableBinding = Bindings.createBooleanBinding(
+                    () -> (tabOpenNewProjectController.getFamilyNameField().getText().isEmpty()),
+                    tabOpenNewProjectController.getFamilyNameField().textProperty());
+        }
         this.buttonConfirm.disableProperty().bind(disableBinding);
     }
 

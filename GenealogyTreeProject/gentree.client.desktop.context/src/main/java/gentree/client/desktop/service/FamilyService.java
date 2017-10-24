@@ -17,11 +17,13 @@ public interface FamilyService {
 
     Family getCurrentFamily();
 
-    void setCurrentFamily(Family family);
+    ServiceResponse setCurrentFamily(Family family);
 
     ReadOnlyObjectProperty<Family> familyProperty();
 
     ObservableList<Member> findAllRootMembers();
+
+    ServiceResponse createFamily(Family f);
 
     ServiceResponse addMember(Member member);
 
