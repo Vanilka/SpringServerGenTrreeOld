@@ -5,9 +5,11 @@ import gentree.client.desktop.configuration.Realm;
 import gentree.client.desktop.configuration.converters.ConverterDtoToModel;
 import gentree.client.desktop.configuration.converters.ConverterModelToDto;
 import gentree.client.desktop.configuration.enums.ServerPaths;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Owner;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import gentree.client.desktop.service.responses.ExceptionResponse;
@@ -20,6 +22,7 @@ import gentree.server.dto.MemberDTO;
 import gentree.server.dto.NewMemberDTO;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import lombok.extern.log4j.Log4j2;
 import org.glassfish.jersey.client.ClientProperties;
 
 import javax.ws.rs.client.Client;
@@ -35,9 +38,10 @@ import java.util.List;
 /**
  * Created by Martyna SZYMKOWIAK on 22/10/2017.
  */
-
+@Log4j2
 public class RestConnectionService {
 
+    public static final String SERVICE_NAME = "RestConnectionService";
     public static final RestConnectionService INSTANCE = new RestConnectionService();
 
     private static final String HEADER_AUTHORIZATION = "Authorization";
@@ -52,18 +56,19 @@ public class RestConnectionService {
 
     private RestConnectionService() {
         client = ClientBuilder.newClient().register(JacksonJsonProvider.class);
+        client.register(log);
         client.property(
                 ClientProperties.CONNECT_TIMEOUT,
                 5000);
         client.property(
                 ClientProperties.READ_TIMEOUT,
                 5000);
+        log.trace(LogMessages.MSG_SERVICE_INITIALIZATION, SERVICE_NAME);
     }
 
 
     public void registerService(GenTreeOnlineService onlineService) {
         this.service = onlineService;
-        this.cdm.setService(onlineService);
     }
 
     /**
@@ -164,9 +169,6 @@ public class RestConnectionService {
         Response response = doGet(ServerPaths.FAMILY.concat("/").concat(String.valueOf(f.getId())));
         if (response.getStatus() == 200) {
             f = cdm.convertFull(response.readEntity(FamilyDTO.class));
-
-            System.out.println("tHIS IS FULL FAMILLY " + f);
-
             serviceResponse = new FamilyResponse(f);
         }
 
@@ -185,10 +187,16 @@ public class RestConnectionService {
 
         Response response = doPost(ServerPaths.MEMBER.concat(ServerPaths.ADD), Entity.json(dto));
 
-        if(response.getStatus() == 200) {
-           NewMemberDTO returnedDTO = response.readEntity(NewMemberDTO.class);
-           Member addedMember = cdm.convert(returnedDTO.getMemberDTO());
-           serviceResponse = new MemberWithBornRelationResponse(addedMember, null);
+        if (response.getStatus() == 200) {
+            try {
+                NewMemberDTO returnedDTO = response.readEntity(NewMemberDTO.class);
+                Member addedMember = cdm.convert(returnedDTO.getMemberDTO());
+                Relation bornRelation = cdm.convertPoor(returnedDTO.getRelationDTO());
+                bornRelation.addChildren(addedMember);
+                serviceResponse = new MemberWithBornRelationResponse(addedMember, bornRelation);
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
 
         }
         return serviceResponse;
@@ -199,7 +207,6 @@ public class RestConnectionService {
      */
 
     private Response doGet(String path) {
-        System.out.println("User " + getOwner().getLogin() + " " + getOwner().getPassword());
         return doGet(webTarget, path, generateToken());
     }
 
@@ -228,6 +235,7 @@ public class RestConnectionService {
                     .request(MediaType.APPLICATION_JSON)
                     .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD.concat(token))
                     .post(entity);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  */
 public class FamilyMember extends FamilyMemberCard {
 
-    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER__PROPERTY = new SimpleObjectProperty<>();
+    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
 
     public FamilyMember(Member member) {
         super(member);
@@ -23,7 +23,7 @@ public class FamilyMember extends FamilyMemberCard {
     }
 
     public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER__PROPERTY.set(contextProviderProperty);
+        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
     }
 
     private void initialize() {
@@ -36,12 +36,12 @@ public class FamilyMember extends FamilyMemberCard {
             rectangleFond.setStroke(Color.TRANSPARENT);
         });
 
-        if (CONTEXT_PROVIDER__PROPERTY.get() != null) {
-            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER__PROPERTY.get().showSimContextMenu(returnThis(), event));
+        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
+            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showSimContextMenu(returnThis(), event));
         }
 
 
-        CONTEXT_PROVIDER__PROPERTY.addListener((observable, oldValue, newValue) -> {
+        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 this.setOnContextMenuRequested(null);
             } else {

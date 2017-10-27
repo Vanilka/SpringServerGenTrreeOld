@@ -1,6 +1,7 @@
-package gentree.client.desktop.controllers.screen;
+package gentree.client.desktop.controllers.contextmenu;
 
 import gentree.client.desktop.configuration.enums.FilesFXML;
+import gentree.client.desktop.controllers.screen.DialogAddChildrenController;
 import gentree.client.desktop.domain.Relation;
 import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.service.GenTreeContext;

@@ -2,9 +2,11 @@ package gentree.server.dispatchers;
 
 import gentree.exception.FamilyAccessDeniedException;
 import gentree.server.domain.entity.RelationEntity;
-import gentree.server.dto.MemberDTO;
+import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerExtendedDTO;
+import gentree.server.dto.RelationDTO;
 import gentree.server.facade.FamilyFacade;
+import gentree.server.facade.OwnerFacade;
 import gentree.server.repository.RelationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Martyna SZYMKOWIAK on 17/10/2017.
@@ -28,6 +31,9 @@ public class RelationMapper {
     FamilyFacade familyFacade;
 
     @Autowired
+    OwnerFacade ownerFacade;
+
+    @Autowired
     RelationRepository repository;
 
 
@@ -37,5 +43,29 @@ public class RelationMapper {
         List<RelationEntity> list = repository.findAll();
 
         return new ResponseEntity<List<RelationEntity>>(list, HttpStatus.OK);
+    }
+
+    /**
+     * Add Relation
+     * @param relation
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
+        if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
+        List<RelationDTO> list = familyFacade.addRelation(relation);
+        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+    }
+
+    private boolean isOwnerOf(RelationDTO r, Authentication auth) {
+        OwnerExtendedDTO owner = this.ownerFacade.findExtendedOwnerByLogin(auth.getName());
+        return (isOwnerOf(owner, r.getFamily()));
+    }
+
+
+    private boolean isOwnerOf(OwnerExtendedDTO owner, FamilyDTO f) {
+        return owner.getFamilyList().stream().filter(family -> Objects.equals(family.getId(), f.getId())).count() > 0;
     }
 }

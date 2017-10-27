@@ -15,7 +15,6 @@
 
 .header-pane .label {
     -fx-padding: 10 20 0 20;
-    -fx-font-style: bold;
     -fx-font-size: 20;
     -fx-text-fill: white;
 }

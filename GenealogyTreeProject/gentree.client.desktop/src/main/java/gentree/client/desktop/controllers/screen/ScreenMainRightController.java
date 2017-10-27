@@ -71,10 +71,10 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
 
     public void initRelationListener() {
-        context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) c -> {
+/*        context.getService().getCurrentFamily().getRelations().addListener((InvalidationListener) c -> {
             // TODO  Redraw Tree optimalization
             redrawTree();
-        });
+        });*/
     }
 
     /*

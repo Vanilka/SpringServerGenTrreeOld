@@ -17,7 +17,7 @@ public interface ProjectService {
 
     NewMemberWrapper addMember(MemberEntity memberEntity);
 
-    RelationEntity addRelation(RelationEntity relationEntity);
+    List<RelationEntity> addRelation(RelationEntity relationEntity);
 
     FamilyEntity findFamilyById(Long id);
 

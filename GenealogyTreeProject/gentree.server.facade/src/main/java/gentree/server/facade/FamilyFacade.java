@@ -25,9 +25,12 @@ public interface FamilyFacade {
     ************************************************************ */
     NewMemberDTO addNewMember(MemberDTO member);
 
+    FamilyDTO deleteMember(MemberDTO m);
+
+
     /* ************************************************************
         Relation Gestion
     ************************************************************ */
-
+    List<RelationDTO> addRelation(RelationDTO relation);
 
 }

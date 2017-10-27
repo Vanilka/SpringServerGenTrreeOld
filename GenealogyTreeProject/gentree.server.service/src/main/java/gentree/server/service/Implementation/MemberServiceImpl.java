@@ -23,7 +23,6 @@ public class MemberServiceImpl implements MemberService {
     public MemberEntity addNewMember(MemberEntity member) {
         MemberEntity m = memberRepository.saveAndFlush(member);
         Hibernate.initialize(member.getFamily());
-        System.out.println(member);
         return m;
     }
 

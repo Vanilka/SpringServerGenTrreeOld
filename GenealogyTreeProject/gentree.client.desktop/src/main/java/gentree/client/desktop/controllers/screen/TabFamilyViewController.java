@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import lombok.Getter;
@@ -137,6 +138,18 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         buttonShowMemberTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
         buttonShowRelationTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
     }
+
+    @FXML
+    private void showSimContextMenu(ContextMenuEvent event) {
+        Member m = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
+        if(m != null)  sm.showSimContextMenu(m, gtFamilyMemberTable, event);
+    }
+
+    @FXML
+    private void showRelationContextMenu(ContextMenuEvent event){
+
+    }
+
 
     @FXML
     public void showInfoMember(MouseEvent event) {

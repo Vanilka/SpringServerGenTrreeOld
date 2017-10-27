@@ -1,31 +1,27 @@
 package gentree.client.desktop.service.implementation;
 
 
-import gentree.client.desktop.configuration.GenTreeProperties;
 import gentree.client.desktop.configuration.enums.PropertiesKeys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.service.responses.FamilyResponse;
-import gentree.common.configuration.enums.Gender;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.ActiveRelationGuard;
 import gentree.client.desktop.service.FamilyService;
-import gentree.client.desktop.service.ScreenManager;
+import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.RelationResponse;
 import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.common.configuration.enums.Gender;
+import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import lombok.Synchronized;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.configuration2.Configuration;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -104,8 +100,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     public ServiceResponse addRelation(Relation relation) {
         if (relation.getLeft() == null && relation.getRight() == null) {
             System.out.println("Will ad from this");
-            getCurrentFamily().addRelation(relation);
+            this.getCurrentFamily().addRelation(relation);
         } else {
+            System.out.println("OR FROM THIS WILL ADD");
             Relation exist = findRelation(relation.getLeft(), relation.getRight());
             if (exist == null) {
                 getCurrentFamily().addRelation(relation);
@@ -243,12 +240,12 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
 
     private void setMemberListener() {
-        getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) c -> {
+        this.getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
                     c.getAddedSubList().forEach(member -> {
-                        log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
                         incrementMemberId(member);
+                        log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
                         addRelation(new Relation(member));
                     });
                 } else if (c.wasPermutated()) {
@@ -268,17 +265,16 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         });
     }
 
-    private void setRelationListener() {
-        getCurrentFamily().getRelations().addListener((ListChangeListener<Relation>) c -> {
+    private void setRelationListener(Family family) {
+        family.getRelations().addListener((ListChangeListener <Relation>) c -> {
             while (c.next()) {
-                if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(relation -> {
-                        //  guard.addObserverTo(relation);
-                        incrementRelationId(relation);
-                        log.info(LogMessages.MSG_RELATION_ADD_NEW, relation);
+                if(c.wasAdded()) {
+                    c.getAddedSubList().forEach(element -> {
+                        incrementRelationId(element);
                     });
                 }
             }
+            sm.getGenTreeDrawingService().startDraw();
         });
     }
 
@@ -295,12 +291,18 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         return ++idMember;
     }
 
+
     private void incrementRelationId(Relation relation) {
         if (relation.getId() <= 0) {
             relation.setId(incrementRelation());
         } else {
             idRelation = idRelation < relation.getId() ? relation.getId() : idRelation;
         }
+        System.out.println("AFTER INCREMENT");
+    }
+
+    private Long incrementRelation() {
+        return ++idRelation;
     }
 
 
@@ -308,10 +310,6 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     /*
         GETTERS
      */
-
-    private Long incrementRelation() {
-        return ++idRelation;
-    }
 
 
     @Override
@@ -327,7 +325,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         }
 
         setMemberListener();
-        setRelationListener();
+        setRelationListener(currentFamily);
 
         return new FamilyResponse(currentFamily);
     }

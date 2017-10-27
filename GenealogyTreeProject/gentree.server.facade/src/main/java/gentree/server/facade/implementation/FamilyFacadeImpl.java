@@ -2,20 +2,18 @@ package gentree.server.facade.implementation;
 
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.OwnerEntity;
-import gentree.server.dto.FamilyDTO;
-import gentree.server.dto.MemberDTO;
-import gentree.server.dto.NewMemberDTO;
-import gentree.server.dto.OwnerDTO;
+import gentree.server.domain.entity.RelationEntity;
+import gentree.server.dto.*;
 import gentree.server.facade.FamilyFacade;
-import gentree.server.facade.converter.ConverterToEntity;
 import gentree.server.facade.converter.ConverterToDTO;
-import gentree.server.service.*;
+import gentree.server.facade.converter.ConverterToEntity;
+import gentree.server.service.validator.RelationValidator;
+import gentree.server.service.OwnerService;
+import gentree.server.service.ProjectService;
 import gentree.server.service.wrappers.NewMemberWrapper;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -36,6 +34,9 @@ public class FamilyFacadeImpl implements FamilyFacade {
 
     @Autowired
     ConverterToEntity converterToEntity;
+
+    @Autowired
+    RelationValidator relationValidator;
 
     /* ************************************************************
         Family Gestion
@@ -95,7 +96,28 @@ public class FamilyFacadeImpl implements FamilyFacade {
         return dto;
     }
 
+    @Override
+    public FamilyDTO deleteMember(MemberDTO m) {
+        //FamilyEntity entity = projectService.deleteMember(converterToEntity.convert(m));
+        return null;
+    }
+
     /* ************************************************************
         Relation Gestion
     ************************************************************ */
+
+    @Override
+    public List<RelationDTO> addRelation(RelationDTO relation) {
+
+        RelationEntity relationEntity = converterToEntity.convert(relation);
+
+        List<RelationEntity> list = projectService.addRelation(relationEntity);
+        return null;
+    }
+
+
+    /* *************************************************************
+            Check
+    ************************************************************** */
+
 }

@@ -1,10 +1,12 @@
 package gentree.server.dispatchers;
 
 import gentree.exception.FamilyAccessDeniedException;
-import gentree.server.dto.*;
+import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
+import gentree.server.dto.NewMemberDTO;
+import gentree.server.dto.OwnerExtendedDTO;
 import gentree.server.facade.FamilyFacade;
 import gentree.server.facade.OwnerFacade;
-import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +31,45 @@ public class MemberMapper {
     @Autowired
     FamilyFacade facade;
 
+
+    /**
+     * Additing Member
+     * @param m
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResponseEntity<NewMemberDTO> addFamily(@RequestBody MemberDTO m, Authentication auth)
             throws FamilyAccessDeniedException {
-        OwnerExtendedDTO owner = this.ownerFacade.findExtendedOwnerByLogin(auth.getName());
 
-        System.out.println("Sended DTO"+m);
-
-        if (!isOwnerOf(owner, m.getFamily())) throw new FamilyAccessDeniedException();
-      //  m.getFamily().setOwner(owner);
+        if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();
         NewMemberDTO dto = facade.addNewMember(m);
-
         return new ResponseEntity<NewMemberDTO>(dto, HttpStatus.OK);
     }
+
+    /**
+     * Delete Member
+     * @param m
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    private ResponseEntity<FamilyDTO> deleteMember(@RequestBody MemberDTO m, Authentication auth) throws FamilyAccessDeniedException {
+
+        if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();
+        FamilyDTO dto = facade.deleteMember(m);
+
+        return new ResponseEntity<FamilyDTO>(dto, HttpStatus.OK);
+    }
+
+
+    private boolean isOwnerOf(MemberDTO m, Authentication auth) {
+        OwnerExtendedDTO owner = this.ownerFacade.findExtendedOwnerByLogin(auth.getName());
+        return (isOwnerOf(owner, m.getFamily()));
+    }
+
 
     private boolean isOwnerOf(OwnerExtendedDTO owner, FamilyDTO f) {
         return owner.getFamilyList().stream().filter(family -> Objects.equals(family.getId(), f.getId())).count() > 0;

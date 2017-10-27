@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
+import lombok.Synchronized;
 import lombok.extern.log4j.Log4j2;
 
 import javax.xml.bind.annotation.*;
@@ -29,19 +30,11 @@ public class Family implements Serializable {
     private static final long serialVersionUID = 1903864641139878342L;
 
 
-    private LongProperty version;
-    private LongProperty id;
-    private StringProperty name;
-    private ObservableList<Member> members;
-    private ObservableList<Relation> relations;
-
-    {
-        version = new SimpleLongProperty();
-        id = new SimpleLongProperty();
-        name = new SimpleStringProperty();
-        members = FXCollections.observableArrayList();
-        relations = FXCollections.observableArrayList(relationCallback());
-    }
+    private LongProperty version = new SimpleLongProperty();
+    private LongProperty id = new SimpleLongProperty();
+    private StringProperty name = new SimpleStringProperty();
+    private ObservableList<Member> members = FXCollections.observableArrayList();
+    private ObservableList<Relation> relations = FXCollections.observableArrayList(relationCallback());
 
     public Family() {
         super();
@@ -52,15 +45,16 @@ public class Family implements Serializable {
         this.name.setValue(name);
     }
 
-    private static Callback<Relation, Observable[]> relationCallback() {
-        return (Relation r) -> new Observable[]{
-                r.idProperty(),
-                r.typeProperty(),
-                r.activeProperty(),
-                r.leftProperty(),
-                r.rightProperty(),
-                r.getChildren()
-        };
+
+    private Callback<Relation, Observable[]> relationCallback() {
+       return r -> new Observable[]{
+              /* r.idProperty(),*/
+               r.typeProperty(),
+               r.activeProperty(),
+               r.leftProperty(),
+               r.rightProperty(),
+               r.getChildren()
+       };
     }
 
     private static Callback<Member, Observable[]> memberCallback() {
@@ -80,6 +74,7 @@ public class Family implements Serializable {
     public void addMember(Member member) {
         this.members.add(member);
     }
+
 
     public void addRelation(Relation relation) {
         this.relations.add(relation);

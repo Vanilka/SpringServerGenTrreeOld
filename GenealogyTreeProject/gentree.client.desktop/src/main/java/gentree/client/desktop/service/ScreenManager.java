@@ -8,6 +8,8 @@ import gentree.client.desktop.configuration.helper.BorderPaneReloadHelper;
 import gentree.client.desktop.configuration.messages.AppTitles;
 import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
 import gentree.client.desktop.controllers.*;
+import gentree.client.desktop.controllers.contextmenu.RelationContextMenu;
+import gentree.client.desktop.controllers.contextmenu.SimContextMenu;
 import gentree.client.desktop.controllers.screen.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
@@ -22,11 +24,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
@@ -434,7 +434,13 @@ public class ScreenManager implements ContextProvider {
     @Override
     public void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event) {
 
-        simContextMenu.show(familyMember, event);
+        simContextMenu.show(familyMember.getMember(),familyMember, event);
+    }
+
+
+    public void showSimContextMenu(Member m , Node node, ContextMenuEvent event) {
+
+        simContextMenu.show(m, node, event);
     }
 
     @Override

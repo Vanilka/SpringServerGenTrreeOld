@@ -9,7 +9,11 @@ public enum ExceptionCauses {
     NOT_FOUND_USER("User not found"),
     OPTIMISTIC_LOCK("The row was updated or deleted by another transaction"),
     LOGIN_PASSWORD_INCORRECT("Login or Password Incorrect"),
-    FAMILY_ACCESS_DENIED("You must be family owner to take this action ");
+    FAMILY_ACCESS_DENIED("You must be family owner to take this action "),
+    INCORRECT_STATUS("Relation has incorrect status"),
+    ASCENDANCE_VIOLATION("Ascendance violation"),
+    DESCENDANCE_VIOLATION("Descendance violation"),
+    TOO_MANY_NULL_FIELDS("Too many null fields");
 
     private String cause;
 

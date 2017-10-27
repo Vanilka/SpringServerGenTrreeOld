@@ -22,7 +22,10 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
 
     private static final long serialVersionUID = 7679518429380405561L;
 
-    private final LongProperty id;
+    @XmlTransient
+    private  LongProperty version;
+
+    private  LongProperty id;
 
     @XmlTransient
     private final LongProperty referenceNumber;
@@ -34,6 +37,7 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
     private final BooleanProperty active;
 
     {
+        this.version = new SimpleLongProperty();
         this.id = new SimpleLongProperty();
         this.referenceNumber = new SimpleLongProperty();
         this.left = new SimpleObjectProperty<>();
@@ -105,12 +109,25 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         GETTERS AND SETTERS
      */
 
+    @XmlTransient
+    public long getVersion() {
+        return version.get();
+    }
+
+    public LongProperty versionProperty() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version.set(version);
+    }
+
     public long getId() {
         return id.get();
     }
 
     public void setId(long id) {
-        this.id.set(id);
+        this.id.setValue(id);
     }
 
     public LongProperty idProperty() {
@@ -209,6 +226,8 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
     public LongProperty referenceNumberProperty() {
         return referenceNumber;
     }
+
+
 
     @Override
     public int compareTo(Relation o) {

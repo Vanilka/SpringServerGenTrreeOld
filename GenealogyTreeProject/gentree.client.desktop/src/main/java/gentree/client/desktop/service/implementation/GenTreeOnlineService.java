@@ -64,6 +64,7 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
 
        if(response instanceof MemberWithBornRelationResponse) {
            getCurrentFamily().getMembers().add(((MemberWithBornRelationResponse) response ).getMember());
+           getCurrentFamily().getRelations().add(((MemberWithBornRelationResponse) response ).getRelation());
        }
 
         return response;

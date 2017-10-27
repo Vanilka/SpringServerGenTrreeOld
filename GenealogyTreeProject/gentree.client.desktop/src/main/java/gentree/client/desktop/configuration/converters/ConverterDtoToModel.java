@@ -1,5 +1,6 @@
 package gentree.client.desktop.configuration.converters;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
@@ -21,9 +22,6 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class ConverterDtoToModel {
-
-    private GenTreeOnlineService service;
-
     /*
          Family Convert
      */
@@ -39,9 +37,7 @@ public class ConverterDtoToModel {
     public Family convertFull(FamilyDTO source) throws Exception {
         Family target = convertLazy(source);
         target.getMembers().addAll(convertMemberList(source.getMembers(), true, target));
-        System.out.println(target.getMembers());
         target.getRelations().addAll(convertRelationList(source.getRelations(), target));
-        System.out.println(target.getRelations());
         return target;
     }
 
@@ -71,10 +67,10 @@ public class ConverterDtoToModel {
         return target;
     }
 
-    public List<Member> convertMemberList(List<MemberDTO> sourceList, boolean convertIfNull, Family family) throws Exception {
+    public List<Member> convertMemberList(List<MemberDTO> sourceList, boolean convertIfNull, Family f_ref) throws Exception {
         List<Member> targetList = new ArrayList<>();
         for (MemberDTO dto : sourceList) {
-            Member candidate = findMemberInListById(dto.getId(), family);
+            Member candidate = findMemberInListById(dto.getId(), f_ref);
 
             if(candidate == null &&  !convertIfNull) throw new Exception("NIE MA POSZUKIWANEGO NA LISCIE");
 
@@ -88,10 +84,20 @@ public class ConverterDtoToModel {
            Relation Convert
      */
 
-    public Relation convert(RelationDTO source, Family f_ref) throws Exception {
+    public Relation convertPoor(RelationDTO source) {
         Relation target = new Relation();
-        target.setRight(source.getRight() == null ? null : findMemberInListById(source.getRight().getId()));
-        target.setLeft( source.getLeft() == null ? null : findMemberInListById(source.getLeft().getId()));
+        target.setActive(source.isActive());
+        target.setType(source.getType());
+        target.setId(source.getId());
+        target.setVersion(source.getVersion());
+        return target;
+    }
+
+    public Relation convert(RelationDTO source, Family f_ref) throws Exception {
+        Relation target = convertPoor(source);
+
+        target.setRight(source.getRight() == null ? null : findMemberInListById(source.getRight().getId(),f_ref));
+        target.setLeft( source.getLeft() == null ? null : findMemberInListById(source.getLeft().getId(), f_ref));
         target.getChildren().addAll(convertMemberList(source.getChildren(), false, f_ref));
         return target;
     }
@@ -103,11 +109,6 @@ public class ConverterDtoToModel {
         }
         return targetList;
     }
-
-    public Member findMemberInListById(Long id) throws Exception {
-        return findMemberInListById(id, getService().getCurrentFamily());
-    }
-
 
     public Member findMemberInListById(Long id, Family f_ref) throws Exception {
         if (f_ref == null) return  null;

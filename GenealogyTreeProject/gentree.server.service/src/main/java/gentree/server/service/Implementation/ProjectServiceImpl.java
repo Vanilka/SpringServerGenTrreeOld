@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public RelationEntity addRelation(RelationEntity relationEntity) {
+    public List<RelationEntity> addRelation(RelationEntity relationEntity) {
         return null;
     }
 }

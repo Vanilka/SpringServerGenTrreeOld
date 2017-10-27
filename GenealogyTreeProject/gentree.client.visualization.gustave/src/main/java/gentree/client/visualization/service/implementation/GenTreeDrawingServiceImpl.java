@@ -3,11 +3,11 @@ package gentree.client.visualization.service.implementation;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
 import gentree.client.visualization.gustave.panels.*;
+import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.scene.layout.HBox;
 import lombok.extern.log4j.Log4j2;
@@ -222,9 +222,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     private void reset() {
         box.getChildren().clear();
         nodeCounter = 1;
-        context.getService().getCurrentFamily().getRelations()
-                .filtered(r -> r.getReferenceNumber() > 0)
-                .forEach(r -> r.setReferenceNumber(null));
+        List<Relation> list = context.getService().getCurrentFamily().getRelations()
+                .filtered(r -> r.getReferenceNumber() > 0);
+        list.forEach(r -> r.setReferenceNumber(null));
         idReference = 0L;
     }
 

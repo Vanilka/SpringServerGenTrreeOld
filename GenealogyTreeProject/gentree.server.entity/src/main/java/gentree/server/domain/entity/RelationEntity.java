@@ -41,6 +41,25 @@ public class RelationEntity implements Serializable {
         this.children.add(memberEntity);
     }
 
+    public boolean compareLeft(Object o) {
+        if (getLeft() == null && o == null) return true;
+        if (getLeft() == null) return false;
+        if (o == null) return false;
+        if (getLeft() == o) return true;
+        MemberEntity other = (MemberEntity) o;
+        return getLeft().equals(other);
+    }
+
+    public boolean compareRight(Object o) {
+        if (getRight() == null && o == null) return true;
+        if (getRight() == null) return false;
+        if (o == null) return false;
+        if (getRight() == o) return true;
+        MemberEntity other = (MemberEntity) o;
+        return getRight().equals(other);
+    }
+
+
     /*
      *  GETTERS
      */
