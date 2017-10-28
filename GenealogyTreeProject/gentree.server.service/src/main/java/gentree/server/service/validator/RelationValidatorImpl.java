@@ -2,7 +2,6 @@ package gentree.server.service.validator;
 
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.AscendanceViolationException;
-import gentree.exception.DescendanceViolationException;
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.RelationEntity;
@@ -45,31 +44,51 @@ public class RelationValidatorImpl implements RelationValidator {
 
 
     private void checkAsc(RelationEntity relation, FamilyEntity family) throws AscendanceViolationException {
-        isAscOf(relation.getLeft(), relation.getRight(), family.getRelations());
-        isAscOf(relation.getRight(), relation.getLeft(), family.getRelations());
+        if (isAscOf(relation.getLeft(), relation.getRight(), family.getRelations()))
+            throw new AscendanceViolationException();
+        if (isAscOf(relation.getRight(), relation.getLeft(), family.getRelations()))
+            throw new AscendanceViolationException();
 
-        if(! relation.getChildren().isEmpty()) {
-            for(MemberEntity child : relation.getChildren()) {
-               // checkAsc(relation.getLeft(), );
+        if (!relation.getChildren().isEmpty()) {
+            for (MemberEntity child : relation.getChildren()) {
+                if (isAscOf(child, relation.getLeft(), family.getRelations()))
+                    throw new AscendanceViolationException();
+                if (isAscOf(child, relation.getRight(), family.getRelations()))
+                    throw new AscendanceViolationException();
             }
         }
 
     }
 
-    private boolean isAscOf(MemberEntity grain, MemberEntity sim, List<RelationEntity> list)
-            throws AscendanceViolationException {
+
+    /**
+     * Function checking if SIM is Ascendance (Parent) of GRAIN
+     *
+     * @param grain
+     * @param sim
+     * @param list
+     * @return true/false
+     */
+    private boolean isAscOf(MemberEntity grain, MemberEntity sim, List<RelationEntity> list) {
         if (grain == null || sim == null) return false;
 
         RelationEntity r = findBornRelation(grain, list);
-        if (r.compareLeft(sim) || isAscOf(r.getLeft(), sim, list)) throw new AscendanceViolationException();
-        if (r.compareRight(sim) || isAscOf(r.getRight(), sim, list)) throw new AscendanceViolationException();
+        if (r == null) return false;   // Maybe should return exception
+        if (r.compareLeft(sim) || isAscOf(r.getLeft(), sim, list)) return true;
+        if (r.compareRight(sim) || isAscOf(r.getRight(), sim, list)) return true;
 
         return false;
     }
 
-
-    private boolean isDescOf(MemberEntity grain, MemberEntity sim, List<RelationEntity> relations)
-            throws DescendanceViolationException {
+    /**
+     * Check if MemberEntity SIM is descendant of GRAIN
+     *
+     * @param grain
+     * @param sim
+     * @param relations
+     * @return true/false
+     */
+    private boolean isDescOf(MemberEntity grain, MemberEntity sim, List<RelationEntity> relations) {
         if (grain == null || sim == null) return false;
 
         List<RelationEntity> list = relations.stream()
@@ -78,10 +97,10 @@ public class RelationValidatorImpl implements RelationValidator {
 
 
         for (RelationEntity r : list) {
-            if (r.getChildren().contains(sim)) throw new DescendanceViolationException();
+            if (r.getChildren().contains(sim)) return true;
 
             for (MemberEntity m : r.getChildren()) {
-                if (isDescOf(m, sim, relations)) throw new DescendanceViolationException();
+                if (isDescOf(m, sim, relations)) return true;
             }
         }
         return false;

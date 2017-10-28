@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "member")
 @Setter
+@Access(value = AccessType.PROPERTY)
 public class MemberEntity implements Serializable {
 
     private static final long serialVersionUID = -2908410045473436618L;
@@ -30,6 +31,10 @@ public class MemberEntity implements Serializable {
     private Age age;
     private Race race;
     private Gender gender;
+
+    private RelationEntity bornRelation;
+
+
 
     /*
      *  GETTERS
@@ -67,7 +72,6 @@ public class MemberEntity implements Serializable {
     public String getBornname() {
         return bornname;
     }
-
 
     @Column(nullable = false)
     public boolean isAlive() {
@@ -109,6 +113,16 @@ public class MemberEntity implements Serializable {
         this.gender = (gender == null ? Gender.M : gender);
     }
 
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bornrelation", referencedColumnName = "id")
+    public RelationEntity getBornRelation() {
+        return bornRelation;
+    }
+
+    public void setBornRelation(RelationEntity bornRelation) {
+        this.bornRelation = bornRelation;
+    }
 
     @Override
     public String toString() {

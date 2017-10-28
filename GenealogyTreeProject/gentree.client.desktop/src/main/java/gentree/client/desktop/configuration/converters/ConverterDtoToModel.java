@@ -1,6 +1,5 @@
 package gentree.client.desktop.configuration.converters;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;

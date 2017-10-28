@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
  */
 @Service
-@Transactional
 public class RelationServiceImpl implements RelationService {
 
     @Autowired

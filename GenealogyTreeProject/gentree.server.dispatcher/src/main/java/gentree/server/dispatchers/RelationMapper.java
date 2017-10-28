@@ -59,6 +59,37 @@ public class RelationMapper {
         return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
     }
 
+    /**
+     * Update Relation
+     * @param relation
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
+    @RequestMapping(value = "update", method = RequestMethod.DELETE)
+    public ResponseEntity<List<RelationDTO>> updateRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
+        if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
+        List<RelationDTO> list = familyFacade.updateRelation(relation);
+        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+    }
+
+
+    /**
+     * Delete Relation
+     * @param relation
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public ResponseEntity<List<RelationDTO>> deleteRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
+        if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
+        List<RelationDTO> list = familyFacade.deleteRelation(relation);
+        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+    }
+
+
+
     private boolean isOwnerOf(RelationDTO r, Authentication auth) {
         OwnerExtendedDTO owner = this.ownerFacade.findExtendedOwnerByLogin(auth.getName());
         return (isOwnerOf(owner, r.getFamily()));

@@ -115,9 +115,21 @@ public class FamilyFacadeImpl implements FamilyFacade {
         return null;
     }
 
+    @Override
+    public List<RelationDTO> updateRelation(RelationDTO relation) {
 
-    /* *************************************************************
-            Check
-    ************************************************************** */
+        RelationEntity relationEntity = converterToEntity.convert(relation);
+        List<RelationEntity> list = projectService.updateRelation(relationEntity);
+
+        return null;
+    }
+
+    @Override
+    public List<RelationDTO> deleteRelation(RelationDTO relation) {
+        RelationEntity relationEntity = converterToEntity.convert(relation);
+        List<RelationEntity> list = projectService.deleteRelation(relationEntity);
+
+        return null;
+    }
 
 }

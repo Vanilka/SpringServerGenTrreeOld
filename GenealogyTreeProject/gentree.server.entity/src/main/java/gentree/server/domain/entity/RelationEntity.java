@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
@@ -43,20 +44,18 @@ public class RelationEntity implements Serializable {
 
     public boolean compareLeft(Object o) {
         if (getLeft() == null && o == null) return true;
-        if (getLeft() == null) return false;
-        if (o == null) return false;
+        if (getLeft() == null || o == null) return false;
         if (getLeft() == o) return true;
         MemberEntity other = (MemberEntity) o;
-        return getLeft().equals(other);
+        return Objects.equals(getLeft().getId(), other.getId());
     }
 
     public boolean compareRight(Object o) {
         if (getRight() == null && o == null) return true;
-        if (getRight() == null) return false;
-        if (o == null) return false;
+        if (getRight() == null || o == null) return false;
         if (getRight() == o) return true;
         MemberEntity other = (MemberEntity) o;
-        return getRight().equals(other);
+        return Objects.equals(getRight().getId(), other.getId());
     }
 
 
@@ -90,14 +89,13 @@ public class RelationEntity implements Serializable {
         return left;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "right_id")
     public MemberEntity getRight() {
         return right;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinColumn(name = "bornrelation_id")
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "bornRelation")
     public List<MemberEntity> getChildren() {
         return children;
     }

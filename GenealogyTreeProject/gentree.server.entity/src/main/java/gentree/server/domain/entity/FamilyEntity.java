@@ -5,7 +5,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
@@ -60,6 +62,7 @@ public class FamilyEntity implements Serializable {
 
 
     @OneToMany(mappedBy = "family", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OrderBy("id")
     public List<RelationEntity> getRelations() {
         return relations;
     }

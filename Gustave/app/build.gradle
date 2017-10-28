@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'maven'
 
 android {
     compileSdkVersion 26
@@ -19,6 +20,10 @@ android {
     }
 }
 
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -26,5 +31,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'org.projectlombok:lombok:1.16.18'
+    compile 'genealogytree:gentree.common.configuration:1.0-SNAPSHOT'
+    compile 'genealogytree:gentree.server.dto:1.0-SNAPSHOT'
     testCompile 'junit:junit:4.12'
 }

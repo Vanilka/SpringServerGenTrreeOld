@@ -8,6 +8,7 @@ import gentree.server.service.FamilyService;
 import gentree.server.service.MemberService;
 import gentree.server.service.ProjectService;
 import gentree.server.service.RelationService;
+import gentree.server.service.validator.RelationValidator;
 import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     RelationService relationService;
+
+    @Autowired
+    RelationValidator relationValidator;
 
 
     /* ************************************************************
@@ -72,6 +76,10 @@ public class ProjectServiceImpl implements ProjectService {
         return wrapper;
     }
 
+    @Override
+    public FamilyEntity deleteMember(MemberEntity memberEntity) {
+        return null;
+    }
 
     /* ************************************************************
         Relation Management
@@ -80,6 +88,22 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<RelationEntity> addRelation(RelationEntity relationEntity) {
+//
+        System.out.println(relationEntity);
+//
+//    FamilyEntity family = findFullFamilyById(relationEntity.getFamily().getId());
+        RelationEntity re = relationService.addNewRelation(relationEntity);
+        System.out.println(re);
+        return null;
+    }
+
+    @Override
+    public List<RelationEntity> updateRelation(RelationEntity relationEntity) {
+        return null;
+    }
+
+    @Override
+    public List<RelationEntity> deleteRelation(RelationEntity relationEntity) {
         return null;
     }
 }

@@ -17,6 +17,8 @@ public interface ProjectService {
 
     NewMemberWrapper addMember(MemberEntity memberEntity);
 
+    FamilyEntity deleteMember(MemberEntity memberEntity);
+
     List<RelationEntity> addRelation(RelationEntity relationEntity);
 
     FamilyEntity findFamilyById(Long id);
@@ -25,4 +27,7 @@ public interface ProjectService {
 
     List<FamilyEntity> findAllFamiliesByOwner(OwnerEntity owner);
 
+    List<RelationEntity> updateRelation(RelationEntity relationEntity);
+
+    List<RelationEntity> deleteRelation(RelationEntity relationEntity);
 }

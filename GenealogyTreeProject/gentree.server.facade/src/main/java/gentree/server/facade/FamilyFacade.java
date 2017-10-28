@@ -33,4 +33,8 @@ public interface FamilyFacade {
     ************************************************************ */
     List<RelationDTO> addRelation(RelationDTO relation);
 
+    List<RelationDTO> updateRelation(RelationDTO relation);
+
+    List<RelationDTO> deleteRelation(RelationDTO relationDTO);
+
 }

@@ -1,4 +1,4 @@
-package mobile.client.gentree.gustave.domain;
+package mobile.client.gentree.gustave.configuration;
 
 /**
  * Created by vanilka on 15/10/2017.

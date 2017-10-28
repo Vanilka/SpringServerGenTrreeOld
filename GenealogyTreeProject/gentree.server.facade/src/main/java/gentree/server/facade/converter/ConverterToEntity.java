@@ -104,9 +104,10 @@ public class ConverterToEntity {
         RelationEntity target = convertLazy(source);
         target.setType(source.getType());
         target.setActive(source.isActive());
+        target.setFamily(convert(source.getFamily()));
         if (source.getLeft() != null) target.setLeft(convertLazy(source.getLeft()));
         if (source.getRight() != null) target.setLeft(convertLazy(source.getRight()));
-        if (!source.getChildren().isEmpty()) target.getChildren().addAll(convertLazyMemberList(source.getChildren()));
+        if (source.getChildren() != null && !source.getChildren().isEmpty()) target.getChildren().addAll(convertLazyMemberList(source.getChildren()));
         return target;
     }
 
