@@ -39,7 +39,6 @@ public class ActiveRelationGuard implements Observer {
                         .filtered(r -> !r.equals(relation))
                         .forEach(r -> r.setActive(false));
             }
-
             /*
                 Redraw tree
              */

@@ -12,14 +12,12 @@ import gentree.client.desktop.domain.Owner;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.implementation.GenTreeOnlineService;
-import gentree.client.desktop.service.responses.ExceptionResponse;
-import gentree.client.desktop.service.responses.FamilyListResponse;
-import gentree.client.desktop.service.responses.FamilyResponse;
-import gentree.client.desktop.service.responses.MemberWithBornRelationResponse;
+import gentree.client.desktop.service.responses.*;
 import gentree.exception.ExceptionBean;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.MemberDTO;
 import gentree.server.dto.NewMemberDTO;
+import gentree.server.dto.RelationDTO;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import lombok.extern.log4j.Log4j2;
@@ -185,6 +183,8 @@ public class RestConnectionService {
         MemberDTO dto = cmd.convert(member);
         dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
 
+        log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
+
         Response response = doPost(ServerPaths.MEMBER.concat(ServerPaths.ADD), Entity.json(dto));
 
         if (response.getStatus() == 200) {
@@ -198,6 +198,25 @@ public class RestConnectionService {
                 e.printStackTrace();
             }
 
+        }
+        return serviceResponse;
+    }
+
+
+    public ServiceResponse deleteMember(Member m) {
+        ServiceResponse serviceResponse = null;
+        MemberDTO dto = cmd.convert(m);
+        dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
+        Response response = doPost(ServerPaths.MEMBER.concat(ServerPaths.DELETE), Entity.json(dto));
+        if (response.getStatus() == 200) {
+            try {
+                if (response.getStatus() == 200) {
+                    Family f = cdm.convertFull(response.readEntity(FamilyDTO.class));
+                    serviceResponse = new FamilyResponse(f);
+                }
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
         }
         return serviceResponse;
     }
@@ -274,4 +293,5 @@ public class RestConnectionService {
     public ObjectProperty<Owner> ownerProperty() {
         return owner;
     }
+
 }

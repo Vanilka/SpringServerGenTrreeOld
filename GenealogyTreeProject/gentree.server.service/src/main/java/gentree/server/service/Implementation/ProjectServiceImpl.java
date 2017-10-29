@@ -71,14 +71,20 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public NewMemberWrapper addMember(MemberEntity memberEntity) {
         NewMemberWrapper  wrapper = new NewMemberWrapper();
-        wrapper.setMember(memberService.addNewMember(memberEntity));
-        wrapper.setBornRelation(relationService.addNewBornRelation(wrapper.getMember()));
+        try {
+            wrapper.setMember(memberService.addNewMember(memberEntity));
+            wrapper.setBornRelation(relationService.addNewBornRelation(wrapper.getMember()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return wrapper;
     }
 
     @Override
     public FamilyEntity deleteMember(MemberEntity memberEntity) {
-        return null;
+        memberService.deleteMember(memberEntity);
+        relationService.removeOrphans(memberEntity.getFamily().getId());
+        return findFullFamilyById(memberEntity.getFamily().getId());
     }
 
     /* ************************************************************
@@ -88,13 +94,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<RelationEntity> addRelation(RelationEntity relationEntity) {
-//
-        System.out.println(relationEntity);
-//
-//    FamilyEntity family = findFullFamilyById(relationEntity.getFamily().getId());
-        RelationEntity re = relationService.addNewRelation(relationEntity);
-        System.out.println(re);
-        return null;
+        RelationEntity added = relationService.addNewRelation(relationEntity);
+        return relationService.findAllRelationsByFamilyId(added.getFamily().getId()) ;
     }
 
     @Override

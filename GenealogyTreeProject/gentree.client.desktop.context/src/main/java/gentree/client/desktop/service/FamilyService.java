@@ -17,6 +17,8 @@ public interface FamilyService {
 
     Family getCurrentFamily();
 
+    ReadOnlyObjectProperty<Family> currentFamilyPropertyI();
+
     ServiceResponse setCurrentFamily(Family family);
 
     ReadOnlyObjectProperty<Family> familyProperty();
@@ -28,6 +30,8 @@ public interface FamilyService {
     ServiceResponse addMember(Member member);
 
     ServiceResponse updateMember(Member m);
+
+    ServiceResponse deleteMember(Member m);
 
     ServiceResponse addRelation(Relation relation);
 

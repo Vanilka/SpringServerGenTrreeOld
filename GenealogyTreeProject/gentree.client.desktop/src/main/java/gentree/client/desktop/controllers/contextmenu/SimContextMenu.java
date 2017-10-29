@@ -59,7 +59,7 @@ public class SimContextMenu extends ContextMenu {
     }
 
     private void initItemDelete() {
-        itemDelete.setOnAction( event -> System.out.println("I wu"));
+        itemDelete.setOnAction( event -> context.getService().deleteMember(member));
     }
 
 }

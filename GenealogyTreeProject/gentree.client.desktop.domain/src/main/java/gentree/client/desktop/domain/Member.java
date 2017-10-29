@@ -256,6 +256,7 @@ public class Member implements Serializable {
 
 
 
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -274,6 +275,7 @@ public class Member implements Serializable {
                 && Objects.equals(getRace(), m.getRace())
                 && isAlive() == m.isAlive();
     }
+
 
     public Stream<? extends Property> getProperties() {
         return Stream.of(this.id, this.name, this.surname, this.bornname, this.gender, this.age, this.race, this.deathCause);

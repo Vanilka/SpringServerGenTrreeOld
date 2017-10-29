@@ -55,7 +55,7 @@ public class MemberMapper {
      * @return
      * @throws FamilyAccessDeniedException
      */
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     private ResponseEntity<FamilyDTO> deleteMember(@RequestBody MemberDTO m, Authentication auth) throws FamilyAccessDeniedException {
 
         if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();

@@ -95,10 +95,13 @@ public class RelationEntity implements Serializable {
         return right;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = {CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "bornRelation")
+    @OneToMany(fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    @JoinColumn(name = "bornrelation_id", insertable=true, updatable = true)
     public List<MemberEntity> getChildren() {
         return children;
     }
+
 
     @Column(nullable = false)
     public boolean isActive() {
@@ -111,7 +114,7 @@ public class RelationEntity implements Serializable {
     }
 
     public void setType(RelationType type) {
-        this.type = type ==  null ? RelationType.NEUTRAL : type;
+        this.type = type == null ? RelationType.NEUTRAL : type;
     }
 
     @Override

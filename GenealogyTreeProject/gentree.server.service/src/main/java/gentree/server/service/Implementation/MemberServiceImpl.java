@@ -8,8 +8,8 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
@@ -22,17 +22,29 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberEntity addNewMember(MemberEntity member) {
- /*       if (member.getBornRelation() == null) {
+/*        if (member.getBornRelation() == null) {
             member.setBornRelation(new RelationEntity(null, null, member, member.getFamily()));
         }*/
-        MemberEntity m = memberRepository.saveAndFlush(member);
-        Hibernate.initialize(member.getFamily());
-        return m;
+        try {
+            member = memberRepository.saveAndFlush(member);
+            System.out.println("Member added" +member);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return member;
     }
 
     @Override
     public MemberEntity deleteMember(MemberEntity member) {
-        return null;
+
+        Optional<MemberEntity>  optional = memberRepository.findById(member.getId());
+
+        System.out.println("Is present ?? " +optional.isPresent());
+
+        optional.ifPresent(memberRepository::delete);
+
+        memberRepository.flush();
+        return member;
     }
 
     @Override

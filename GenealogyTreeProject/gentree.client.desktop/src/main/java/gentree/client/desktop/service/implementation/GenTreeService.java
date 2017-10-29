@@ -43,6 +43,16 @@ public abstract class GenTreeService {
 
     }
 
+
+   protected Relation findRelation(Member left, Member right, Relation excluded) {
+        List<Relation> list = getCurrentFamily().getRelations()
+                .filtered(r -> r != excluded )
+                .filtered(r -> r.getLeft() != null || r.getRight() != null)
+                .filtered(r -> r.compareLeft(left) && r.compareRight(right));
+       return list.size() == 0 ? null : list.get(0);
+    }
+
+
     /**
      * Verify if parameter sim is Ascendant of parameter grain
      *
@@ -70,5 +80,6 @@ public abstract class GenTreeService {
     public Family getCurrentFamily() {
         return currentFamily.get();
     }
+
 
 }

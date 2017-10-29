@@ -20,7 +20,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
-import lombok.Synchronized;
 import lombok.extern.log4j.Log4j2;
 
 import javax.xml.bind.JAXBContext;
@@ -90,6 +89,13 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         return new MemberResponse(m);
     }
 
+
+    @Override
+    public ServiceResponse deleteMember(Member m) {
+        this.getCurrentFamily().getMembers().remove(m);
+        return new MemberResponse(m);
+    }
+
     /**
      * Function to adding Relation beetween Members to Family
      *
@@ -113,7 +119,6 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         return new RelationResponse(relation);
     }
 
-
     /**
      * Function Merging two Relation.
      *
@@ -130,6 +135,11 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         return root;
     }
 
+    private Relation moveChildrenFromTo(Relation from, Relation to) {
+        to.getChildren().addAll(from.getChildren());
+        from.getChildren().clear();
+        return to;
+    }
 
     @Override
     public ServiceResponse addRelation(Member m1, Member m2, RelationType type, boolean active) {
@@ -258,7 +268,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
                     System.out.println("UpdateItem Member");
                 } else if (c.wasRemoved()) {
                     System.out.println("Removed " + c.getRemoved().toArray().toString());
-
+                    c.getRemoved().forEach(this::clearRelationFromDeletedMember);
                 } else {
                 }
             }
@@ -266,9 +276,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     }
 
     private void setRelationListener(Family family) {
-        family.getRelations().addListener((ListChangeListener <Relation>) c -> {
+        family.getRelations().addListener((ListChangeListener<Relation>) c -> {
             while (c.next()) {
-                if(c.wasAdded()) {
+                if (c.wasAdded()) {
                     c.getAddedSubList().forEach(element -> {
                         incrementRelationId(element);
                     });
@@ -330,6 +340,34 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         return new FamilyResponse(currentFamily);
     }
 
+
+    private void clearRelationFromDeletedMember(Member m) {
+        List<Relation> list = getCurrentFamily().getRelations().filtered(r -> (r.compareLeft(m)) || r.compareRight(m) || r.getChildren().contains(m));
+        for (Relation r : list) {
+            if (r.compareLeft(m)) r.setLeft(null);
+            if (r.compareRight(m)) r.setRight(null);
+            r.getChildren().remove(m);
+
+            /*
+                Merging relations
+             */
+            if (r.getLeft() != null || r.getRight() != null) {
+                Relation toMerge = findRelation(r.getLeft(), r.getRight(), r);
+                moveChildrenFromTo(r, toMerge);
+            }
+        }
+        /*
+            Orphan delete
+         */
+        List<Relation> toDelete = getCurrentFamily().getRelations()
+                .filtered(r -> (r.getLeft() == null || r.getRight() == null) && r.getChildren().isEmpty());
+        getCurrentFamily().getRelations().removeAll(toDelete);
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Family> currentFamilyPropertyI() {
+        return currentFamily;
+    }
     /*
         SETTERS
      */

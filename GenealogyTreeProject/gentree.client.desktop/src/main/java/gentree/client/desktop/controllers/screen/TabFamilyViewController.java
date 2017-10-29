@@ -6,6 +6,7 @@ import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
+import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.common.configuration.enums.RelationType;
@@ -13,6 +14,7 @@ import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -96,8 +98,14 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         this.relationTypeColumn.setCellFactory(setRelationTypeCellFactory());
         this.simPhotoColumn.setCellFactory(setPhotoCellFactory());
 
-        setMemberList();
-        setRelationList();
+        context.getService().currentFamilyPropertyI().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+              populateWithFamily(newValue);
+            }
+        });
+
+        populateWithFamily(context.getService().getCurrentFamily());
+
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
@@ -156,13 +164,15 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         Member selected = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2 && selected != null) {
             sm.getScreenMainController().showInfoSim(selected);
-
         }
     }
 
     @FXML
     public void showInfoRelation(MouseEvent event) {
         Relation selected = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
+
+        System.out.println("Selected : " +selected);
+
         if (event.getClickCount() == 2 && selected != null) {
             sm.getScreenMainController().showInfoRelation(selected);
         }
@@ -180,12 +190,17 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     }
 
 
-    private void setMemberList() {
-        this.gtFamilyMemberTable.setItems(context.getService().getCurrentFamily().getMembers());
+    private void setMemberList(ObservableList<Member> list) {
+        this.gtFamilyMemberTable.setItems(list);
     }
 
-    private void setRelationList() {
-        this.gtFamilyRelationTable.setItems(context.getService().getCurrentFamily().getRelations());
+    private void setRelationList(ObservableList<Relation> list) {
+        this.gtFamilyRelationTable.setItems(list);
+    }
+
+    private void populateWithFamily(Family f) {
+        setMemberList(f.getMembers());
+        setRelationList(f.getRelations());
     }
 
     private Callback<TableColumn<Relation, Member>,

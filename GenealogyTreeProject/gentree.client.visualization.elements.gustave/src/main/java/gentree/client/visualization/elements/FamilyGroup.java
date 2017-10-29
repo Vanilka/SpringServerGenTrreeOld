@@ -68,13 +68,11 @@ public class FamilyGroup extends AnchorPane {
      * This function has for role update NODE NAME  when  the name of racine child changes
      */
     private void propertyBinding() {
-
         rootRelation.addListener((observable, oldValue, newValue) -> {
             if (oldValue != null) {
                 this.PANEL_HEADER.titleProperty().unbind();
+                PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
             }
-
-            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
         });
 
 

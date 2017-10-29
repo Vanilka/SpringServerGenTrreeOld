@@ -18,6 +18,7 @@ import java.io.Serializable;
 @Access(value = AccessType.PROPERTY)
 public class MemberEntity implements Serializable {
 
+
     private static final long serialVersionUID = -2908410045473436618L;
 
     private Long version;
@@ -31,8 +32,9 @@ public class MemberEntity implements Serializable {
     private Age age;
     private Race race;
     private Gender gender;
+/*
+    private RelationEntity bornRelation;*/
 
-    private RelationEntity bornRelation;
 
 
 
@@ -114,15 +116,17 @@ public class MemberEntity implements Serializable {
     }
 
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "bornrelation", referencedColumnName = "id")
+/*    @ManyToOne(optional = false,
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
+            targetEntity = RelationEntity.class)
     public RelationEntity getBornRelation() {
         return bornRelation;
-    }
+    }*/
 
-    public void setBornRelation(RelationEntity bornRelation) {
+/*    public void setBornRelation(RelationEntity bornRelation) {
         this.bornRelation = bornRelation;
-    }
+    }*/
 
     @Override
     public String toString() {

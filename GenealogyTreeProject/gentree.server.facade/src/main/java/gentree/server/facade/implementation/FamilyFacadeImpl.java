@@ -44,40 +44,29 @@ public class FamilyFacadeImpl implements FamilyFacade {
 
     @Override
     public FamilyDTO addNewFamily(FamilyDTO familyDTO, OwnerDTO ownerDTO) {
-
         OwnerEntity ownerEntity = ownerService.findOperatorByLogin(ownerDTO.getLogin());
-
         FamilyEntity newFamily = converterToEntity.convert(familyDTO);
         newFamily.setOwner(ownerEntity);
-
         newFamily = projectService.addFamily(newFamily);
-
         return converterToDTO.convertPoor(newFamily);
     }
 
     @Override
     public FamilyDTO findFamilyById(Long id) {
-
         FamilyEntity result = projectService.findFamilyById(id);
-
         return converterToDTO.convert(result);
     }
 
     @Override
     public FamilyDTO findExtendedFamilyById(Long id) {
-
         FamilyEntity result = projectService.findFullFamilyById(id);
-
         return converterToDTO.convertFullFamily(result);
     }
 
     @Override
     public List<FamilyDTO> findAllFamiliesByOwner(OwnerDTO ownerDTO) {
-
         OwnerEntity owner = converterToEntity.convert(ownerDTO);
-
         List<FamilyEntity> list = projectService.findAllFamiliesByOwner(owner);
-
         return converterToDTO.convertFamilyList(list);
     }
 
@@ -87,19 +76,19 @@ public class FamilyFacadeImpl implements FamilyFacade {
 
     @Override
     public NewMemberDTO addNewMember(MemberDTO member) {
+        member.setId(null);
+        member.setVersion(null);
         NewMemberWrapper wrapper = projectService.addMember(converterToEntity.convert(member));
-
         NewMemberDTO dto = new NewMemberDTO();
         dto.setMemberDTO(converterToDTO.convert(wrapper.getMember()));
         dto.setRelationDTO(converterToDTO.convert(wrapper.getBornRelation()));
-
         return dto;
     }
 
     @Override
     public FamilyDTO deleteMember(MemberDTO m) {
-        //FamilyEntity entity = projectService.deleteMember(converterToEntity.convert(m));
-        return null;
+        FamilyEntity entity = projectService.deleteMember(converterToEntity.convert(m));
+        return converterToDTO.convertFullFamily(entity);
     }
 
     /* ************************************************************
@@ -108,28 +97,24 @@ public class FamilyFacadeImpl implements FamilyFacade {
 
     @Override
     public List<RelationDTO> addRelation(RelationDTO relation) {
-
         RelationEntity relationEntity = converterToEntity.convert(relation);
-
         List<RelationEntity> list = projectService.addRelation(relationEntity);
-        return null;
+        List<RelationDTO> target = converterToDTO.convertFullRelationList(list);
+        return target;
     }
 
     @Override
     public List<RelationDTO> updateRelation(RelationDTO relation) {
-
         RelationEntity relationEntity = converterToEntity.convert(relation);
         List<RelationEntity> list = projectService.updateRelation(relationEntity);
-
-        return null;
+        return converterToDTO.convertFullRelationList(list);
     }
 
     @Override
     public List<RelationDTO> deleteRelation(RelationDTO relation) {
         RelationEntity relationEntity = converterToEntity.convert(relation);
         List<RelationEntity> list = projectService.deleteRelation(relationEntity);
-
-        return null;
+        return converterToDTO.convertFullRelationList(list);
     }
 
 }

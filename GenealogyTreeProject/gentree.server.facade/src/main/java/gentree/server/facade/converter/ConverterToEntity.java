@@ -57,6 +57,13 @@ public class ConverterToEntity {
         return target;
     }
 
+    public FamilyEntity convertLazy(FamilyDTO source) {
+        FamilyEntity target = new FamilyEntity();
+        target.setVersion(source.getVersion());
+        target.setId(source.getId());
+        return target;
+    }
+
     /* ************************************************************
         Member Conversion
     ************************************************************ */
@@ -78,7 +85,8 @@ public class ConverterToEntity {
         target.setRace(source.getRace());
         target.setDeathCauses(source.getDeathCauses());
         target.setGender(source.getGender());
-        target.setFamily(convert(source.getFamily()));
+        target.setFamily(convertLazy(source.getFamily()));
+        System.out.println("TARGET ENTITY " + target);
         return target;
     }
 

@@ -117,10 +117,11 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      */
     private List<FamilyGroup> findGroups() {
         List<FamilyGroup> result = new ArrayList<>();
-        context.getService().getCurrentFamily().getRelations()
+       List<Relation>  rootList = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() == null)
-                .filtered(r -> r.getRight() == null)
-                .forEach(root -> result.add(new FamilyGroup(root, nodeCounter++)));
+                .filtered(r -> r.getRight() == null);
+
+      if(! rootList.isEmpty()) rootList.forEach(root -> result.add(new FamilyGroup(root, nodeCounter++)));
 
         return result;
     }

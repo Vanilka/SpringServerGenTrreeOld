@@ -8,9 +8,14 @@ import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLTab;
+import gentree.client.desktop.domain.Family;
 import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -66,14 +71,31 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     @Setter
     private JFXTabPane tabPane;
 
+    private InvalidationListener invalidationListener = new InvalidationListener() {
+        @Override
+        public void invalidated(Observable observable) {
+            membersCount.setText("" + context.getService().getCurrentFamily().getMembers().size());
+        }
+    };
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         this.languageBundle.bind(context.getBundle());
         initGraphicalElements();
-        loadFamily();
-        addListener();
+
+        context.getService().currentFamilyPropertyI().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                loadFamily(newValue);
+            }
+
+            if(oldValue != null) {
+                oldValue.getMembers().removeListener(invalidationListener);
+            }
+        });
+
+        loadFamily(context.getService().getCurrentFamily());
         addLanguageListener();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
@@ -83,22 +105,21 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         sm.showNewDialog(new DialogAddMemberController(), FilesFXML.ADD_MEMBER_DIALOG);
     }
 
-    private void loadFamily() {
-        familyName.setText(context.getService().getCurrentFamily().getName());
+    private void loadFamily(Family f) {
+        familyName.setText(f.getName());
+        membersCount.setText("" + f.getMembers().size());
+        f.getMembers().addListener(invalidationListener);
     }
 
     private void initGraphicalElements() {
         familyName.setEditable(false);
         membersCount.setEditable(false);
         contentVBox.setAlignment(Pos.TOP_CENTER);
-        membersCount.setText("" + context.getService().getCurrentFamily().getMembers().size());
 
     }
 
     private void addListener() {
-        context.getService().getCurrentFamily().getMembers().addListener((InvalidationListener) observable -> {
-            membersCount.setText("" + context.getService().getCurrentFamily().getMembers().size());
-        });
+
     }
 
         /*

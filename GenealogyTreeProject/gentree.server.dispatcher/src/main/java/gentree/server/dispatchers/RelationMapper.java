@@ -39,10 +39,8 @@ public class RelationMapper {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<RelationEntity>> getRelations() {
-
         List<RelationEntity> list = repository.findAll();
-
-        return new ResponseEntity<List<RelationEntity>>(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     /**
@@ -56,7 +54,7 @@ public class RelationMapper {
     public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.addRelation(relation);
-        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     /**
@@ -66,11 +64,11 @@ public class RelationMapper {
      * @return
      * @throws FamilyAccessDeniedException
      */
-    @RequestMapping(value = "update", method = RequestMethod.DELETE)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
     public ResponseEntity<List<RelationDTO>> updateRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.updateRelation(relation);
-        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 
@@ -85,7 +83,7 @@ public class RelationMapper {
     public ResponseEntity<List<RelationDTO>> deleteRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.deleteRelation(relation);
-        return  new ResponseEntity<List<RelationDTO>>(list, HttpStatus. OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 

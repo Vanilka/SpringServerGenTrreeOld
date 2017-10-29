@@ -6,8 +6,10 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.RestConnectionService;
+import gentree.client.desktop.service.responses.FamilyListResponse;
 import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.client.desktop.service.responses.MemberWithBornRelationResponse;
+import gentree.client.desktop.service.responses.RelationListResponse;
 import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
@@ -65,8 +67,19 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
        if(response instanceof MemberWithBornRelationResponse) {
            getCurrentFamily().getMembers().add(((MemberWithBornRelationResponse) response ).getMember());
            getCurrentFamily().getRelations().add(((MemberWithBornRelationResponse) response ).getRelation());
+           sm.getGenTreeDrawingService().startDraw();
        }
 
+        return response;
+    }
+
+    @Override
+    public ServiceResponse deleteMember(Member m) {
+       ServiceResponse response = rcs.deleteMember(m);
+       if(response instanceof FamilyResponse) {
+           setCurrentFamily(((FamilyResponse) response).getFamily());
+           invalidate();
+       }
         return response;
     }
 
@@ -105,5 +118,13 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
         return null;
     }
 
+    @Override
+    public ReadOnlyObjectProperty<Family> currentFamilyPropertyI() {
+        return currentFamily;
+    }
+
+    private void invalidate() {
+        sm.getGenTreeDrawingService().startDraw();
+    }
 
 }

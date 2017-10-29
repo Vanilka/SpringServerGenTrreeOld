@@ -68,6 +68,7 @@ public class ConverterDtoToModel {
 
     public List<Member> convertMemberList(List<MemberDTO> sourceList, boolean convertIfNull, Family f_ref) throws Exception {
         List<Member> targetList = new ArrayList<>();
+        System.out.println("source List " +sourceList);
         for (MemberDTO dto : sourceList) {
             Member candidate = findMemberInListById(dto.getId(), f_ref);
 
@@ -97,7 +98,7 @@ public class ConverterDtoToModel {
 
         target.setRight(source.getRight() == null ? null : findMemberInListById(source.getRight().getId(),f_ref));
         target.setLeft( source.getLeft() == null ? null : findMemberInListById(source.getLeft().getId(), f_ref));
-        target.getChildren().addAll(convertMemberList(source.getChildren(), false, f_ref));
+        if(source.getChildren() != null) target.getChildren().addAll(convertMemberList(source.getChildren(), false, f_ref));
         return target;
     }
 

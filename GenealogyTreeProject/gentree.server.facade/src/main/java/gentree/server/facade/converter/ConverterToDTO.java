@@ -197,7 +197,6 @@ public class ConverterToDTO {
 
     public List<RelationDTO> convertFullRelationList(List<RelationEntity> sourceList) {
         List<RelationDTO> list = new ArrayList<>();
-
         sourceList.forEach(entity -> list.add(convert(entity)));
         return list;
     }
