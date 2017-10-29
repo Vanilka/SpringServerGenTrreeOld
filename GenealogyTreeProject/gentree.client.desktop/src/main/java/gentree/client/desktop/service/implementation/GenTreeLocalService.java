@@ -105,10 +105,8 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse addRelation(Relation relation) {
         if (relation.getLeft() == null && relation.getRight() == null) {
-            System.out.println("Will ad from this");
             this.getCurrentFamily().addRelation(relation);
         } else {
-            System.out.println("OR FROM THIS WILL ADD");
             Relation exist = findRelation(relation.getLeft(), relation.getRight());
             if (exist == null) {
                 getCurrentFamily().addRelation(relation);
@@ -162,6 +160,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse updateRelation(Relation relation) {
         // Nothing to perform if Local Service
+        invalidate();
         return new RelationResponse(relation);
     }
 
@@ -263,14 +262,12 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
                         //permutate
                         System.out.println("permutated");
                     }
-                } else if (c.wasUpdated()) {
-                    //update item
-                    System.out.println("UpdateItem Member");
+                } else if (c.wasUpdated()) { ;
                 } else if (c.wasRemoved()) {
-                    System.out.println("Removed " + c.getRemoved().toArray().toString());
                     c.getRemoved().forEach(this::clearRelationFromDeletedMember);
                 } else {
                 }
+
             }
         });
     }
@@ -353,7 +350,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
              */
             if (r.getLeft() != null || r.getRight() != null) {
                 Relation toMerge = findRelation(r.getLeft(), r.getRight(), r);
-                moveChildrenFromTo(r, toMerge);
+                if( toMerge != null) moveChildrenFromTo(r, toMerge);
             }
         }
         /*
@@ -362,6 +359,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         List<Relation> toDelete = getCurrentFamily().getRelations()
                 .filtered(r -> (r.getLeft() == null || r.getRight() == null) && r.getChildren().isEmpty());
         getCurrentFamily().getRelations().removeAll(toDelete);
+        invalidate();
     }
 
     @Override
@@ -547,6 +545,10 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
                     member.setPhoto(newPath == null ? null : PREFIX_FILE_RELATIVE + newPath);
 
                 });
+    }
+
+    private void invalidate() {
+        sm.getGenTreeDrawingService().startDraw();
     }
 }
 
