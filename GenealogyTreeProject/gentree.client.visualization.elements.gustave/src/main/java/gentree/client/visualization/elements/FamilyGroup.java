@@ -69,9 +69,12 @@ public class FamilyGroup extends AnchorPane {
      */
     private void propertyBinding() {
         rootRelation.addListener((observable, oldValue, newValue) -> {
+            if(newValue != null) {
+                PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
+            }
+
             if (oldValue != null) {
                 this.PANEL_HEADER.titleProperty().unbind();
-                PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
             }
         });
 

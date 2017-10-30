@@ -141,20 +141,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
     @Override
     public ServiceResponse addRelation(Member m1, Member m2, RelationType type, boolean active) {
-        Member left;
-        Member right;
-        /*
-            Left is an user with higher ID
-         */
-        if (m1.getGender() == m2.getGender()) {
-            left = m1.getId() > m2.getId() ? m1 : m2;
-            right = m1.getId() < m2.getId() ? m1 : m2;
-        } else {
-            left = m1.getGender() == Gender.F ? m1 : m2;
-            right = m1.getGender() == Gender.M ? m1 : m2;
-
-        }
-        return addRelation(new Relation(left, right, type, active));
+        return addRelation(createRelationFrom(m1, m2, type, active));
     }
 
     @Override

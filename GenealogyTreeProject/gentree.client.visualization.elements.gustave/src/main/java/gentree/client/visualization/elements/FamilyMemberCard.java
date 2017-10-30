@@ -54,8 +54,8 @@ public class FamilyMemberCard extends AnchorPane {
         initialize();
         this.member.addListener(getChangeMemberListener());
         this.member.setValue(member);
-        resize(MEMBER_WIDTH, MEMBER_HEIGHT);
 
+        resize(MEMBER_WIDTH, MEMBER_HEIGHT);
     }
 
     public FamilyMemberCard() {
@@ -120,7 +120,6 @@ public class FamilyMemberCard extends AnchorPane {
     public void setImage(String path, Boolean shouldBeInGayScale) {
         try {
             photoSim.setImage(new Image(path));
-
             if (shouldBeInGayScale) {
                 setGrayScaleToImgView(photoSim);
             } else {

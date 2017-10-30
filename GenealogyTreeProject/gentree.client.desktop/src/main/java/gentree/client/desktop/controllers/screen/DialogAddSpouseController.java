@@ -10,9 +10,9 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.MemberCard;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
-import gentree.client.visualization.elements.MemberCard;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -113,14 +113,43 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     private ObservableList<Member> generateSpouseList() {
         ObservableList<Member> list = context.getService().getCurrentFamily().getMembers()
                 .filtered(mbr -> !mbr.equals(member.get()))
-                .filtered(mbr -> mbr.getGender() != returnGenderDenied());
+                .filtered(mbr -> mbr.getGender() != returnGenderDenied())
+                .filtered(mbr -> !isAscOf(member.get(), mbr))
+                .filtered(mbr -> !isDescOf(member.get(), mbr));
 
+/*
         list = removeAscends(list, member.get());
         list = removeDescends(list, member.get());
+*/
 
         return list;
     }
 
+
+    /**
+     * Verify that Sim provided is Ascendant of grain
+     *
+     * @param grain
+     * @param sim
+     * @return
+     */
+    private boolean isAscOf(Member grain, Member sim) {
+        return sim != null && context.getService().isAscOf(grain, sim);
+    }
+
+
+    /**
+     * Verify that Sim provided is Descendant of grain
+     *
+     * @param grain
+     * @param sim
+     * @return
+     */
+    private boolean isDescOf(Member grain, Member sim) {
+        return sim != null && context.getService().isDescOf(grain, sim);
+    }
+
+    @Deprecated
     private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
 
         try {
@@ -138,7 +167,6 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
                 list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
                 list = removeAscends(list, bornRelation.getLeft());
             }
-
             /*
                 Remove Rightrs
              */
@@ -146,18 +174,14 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
                 list = list.filtered(p -> !p.equals(bornRelation.getRight()));
                 list = removeAscends(list, bornRelation.getRight());
             }
-
-
         } catch (NotUniqueBornRelationException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
-
-
         return list;
-
     }
 
+    @Deprecated
     private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
         /*
             Find relations that M is father or mother
@@ -183,14 +207,13 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
 
     private void initPanes() {
         currentMemberPane.getChildren().add(memberCard);
-
         spousePane.getChildren().add(spouseCard);
-
         checkBoxHomoAllowed.setSelected(config.getBoolean(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO));
         initRelationTypeComboBox();
-
-        checkBoxSetCurrent.disableProperty().bind(Bindings.createBooleanBinding((() -> relationTypeComboBox.getValue().equals(RelationType.NEUTRAL)), relationTypeComboBox.valueProperty()));
-
+        checkBoxSetCurrent.disableProperty()
+                .bind(Bindings.createBooleanBinding((
+                                () -> relationTypeComboBox.getValue().equals(RelationType.NEUTRAL)),
+                        relationTypeComboBox.valueProperty()));
         relationTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(RelationType.NEUTRAL)) {
                 checkBoxSetCurrent.setSelected(false);
