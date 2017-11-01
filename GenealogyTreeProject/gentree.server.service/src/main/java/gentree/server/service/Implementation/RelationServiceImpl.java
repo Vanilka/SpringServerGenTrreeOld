@@ -1,5 +1,6 @@
 package gentree.server.service.Implementation;
 
+import gentree.common.configuration.enums.RelationType;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.RelationEntity;
 import gentree.server.repository.RelationRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,25 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
+    public RelationEntity deleteRelation(RelationEntity relation) {
+
+        relation = repository.findById(relation.getId()).orElse(null);
+
+        if(relation != null) {
+            if (relation.getChildren() == null || relation.getChildren().isEmpty()) {
+                repository.delete(relation);
+            } else {
+                relation.setLeft(null);
+                relation.setRight(null);
+                relation.setType(RelationType.NEUTRAL);
+                repository.saveAndFlush(relation);
+            }
+        }
+
+        return relation;
+    }
+
+    @Override
     public List<RelationEntity> findAllRelationsByFamilyId(Long id) {
         return repository.findAllByFamilyId(id);
     }
@@ -59,5 +80,8 @@ public class RelationServiceImpl implements RelationService {
         repository.deleteAll(listToDelete);
         repository.flush();
     }
+
+
+
 
 }

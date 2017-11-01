@@ -21,14 +21,10 @@ public class RelationEntity implements Serializable {
     private Long version;
     private Long id;
     private FamilyEntity family;
-
     private MemberEntity left;
     private MemberEntity right;
-
     private List<MemberEntity> children = new ArrayList<>();
-
     private boolean active;
-
     private RelationType type;
 
     public RelationEntity() {

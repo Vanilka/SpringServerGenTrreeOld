@@ -13,4 +13,5 @@ import java.util.List;
 public interface RelationRepository extends JpaRepository<RelationEntity, Long> {
 
     List<RelationEntity> findAllByFamilyId(Long id);
+
 }

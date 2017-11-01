@@ -79,7 +79,7 @@ public class RelationMapper {
      * @return
      * @throws FamilyAccessDeniedException
      */
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public ResponseEntity<List<RelationDTO>> deleteRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.deleteRelation(relation);

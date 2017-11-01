@@ -17,6 +17,9 @@ public interface RelationService {
 
     List<RelationEntity> findAllRelationsByFamilyId(Long id);
 
+    RelationEntity deleteRelation(RelationEntity relation);
+
     void removeOrphans(Long familyID);
+
 
 }

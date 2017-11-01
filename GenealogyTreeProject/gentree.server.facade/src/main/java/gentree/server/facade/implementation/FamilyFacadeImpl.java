@@ -113,8 +113,8 @@ public class FamilyFacadeImpl implements FamilyFacade {
     @Override
     public List<RelationDTO> deleteRelation(RelationDTO relation) {
         RelationEntity relationEntity = converterToEntity.convert(relation);
-        List<RelationEntity> list = projectService.deleteRelation(relationEntity);
-        return converterToDTO.convertFullRelationList(list);
+         projectService.deleteRelation(relationEntity);
+        return converterToDTO.convertFullRelationList(projectService.findFullFamilyById(relation.getFamily().getId()).getRelations());
     }
 
 }

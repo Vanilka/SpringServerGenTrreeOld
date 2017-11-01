@@ -12,7 +12,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <TableView fx:id="family-member-table" onContextMenuRequested="#showSimContextMenu"
+        <TableView fx:id="FAMILY_MEMBER_TABLE" onContextMenuRequested="#showSimContextMenu"
                    onMouseClicked="#showInfoMember" prefHeight="20.0" prefWidth="240.0" AnchorPane.bottomAnchor="50.0"
                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
             <columns>

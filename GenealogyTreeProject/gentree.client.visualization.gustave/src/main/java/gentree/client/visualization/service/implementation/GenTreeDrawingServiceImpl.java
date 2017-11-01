@@ -14,6 +14,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Martyna SZYMKOWIAK on 06/07/2017.
@@ -46,7 +47,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
          */
         List<FamilyGroup> groups = findGroups();
         box.getChildren().addAll(groups);
-
         groups.forEach(group -> {
             group.getRootRelation().getChildren().forEach(child -> {
                 PanelChild panelChild = new PanelChild(child, null);
@@ -117,13 +117,37 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      */
     private List<FamilyGroup> findGroups() {
         List<FamilyGroup> result = new ArrayList<>();
-       List<Relation>  rootList = context.getService().getCurrentFamily().getRelations()
+        List<Relation>  rootList = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() == null)
                 .filtered(r -> r.getRight() == null);
 
-      if(! rootList.isEmpty()) rootList.forEach(root -> result.add(new FamilyGroup(root, nodeCounter++)));
+
+
+      if(! rootList.isEmpty()) rootList.forEach(root ->
+              {
+                  if(shouldBeCreated(root)) result.add(new FamilyGroup(root, nodeCounter++));
+              });
 
         return result;
+    }
+
+    /**
+     * Verify if relation root has relation with others sims and is FORT
+     * @param root
+     * @return
+     */
+    private boolean shouldBeCreated(Relation root) {
+        if(root.getChildren().size() > 1) return true;
+        Member rootSim = root.getChildren().get(0);
+
+        List<Relation> relations = context.getService().getCurrentFamily().getRelations()
+                .filtered(relation -> Objects.equals(relation.getLeft(), rootSim) || Objects.equals(relation.getRight(), rootSim));
+
+        if(relations.isEmpty()) return true;
+        if(relations.size() > 1) return  true;
+        if(isStrong(relations.get(0), rootSim)) return true;
+
+        return false;
     }
 
     /**
@@ -176,7 +200,6 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             }
         }
     }
-
 
     /**
      * Strong regles :

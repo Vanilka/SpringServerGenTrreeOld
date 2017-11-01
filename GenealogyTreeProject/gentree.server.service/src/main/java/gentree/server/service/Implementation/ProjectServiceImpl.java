@@ -104,7 +104,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<RelationEntity> deleteRelation(RelationEntity relationEntity) {
-        return null;
+    public RelationEntity deleteRelation(RelationEntity relationEntity) {
+
+        return relationService.deleteRelation(relationEntity);
     }
 }

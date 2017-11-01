@@ -29,5 +29,6 @@ public interface ProjectService {
 
     List<RelationEntity> updateRelation(RelationEntity relationEntity);
 
-    List<RelationEntity> deleteRelation(RelationEntity relationEntity);
+    RelationEntity deleteRelation(RelationEntity relationEntity);
+
 }
