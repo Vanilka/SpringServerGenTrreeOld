@@ -37,43 +37,43 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
 
 
     @FXML
-    private MenuBar mainBar;
+    private MenuBar MENU_BAR;
 
     @FXML
-    private Menu menuFile;
+    private Menu MENU_FILE;
 
     @FXML
-    private Menu menuProject;
+    private Menu MENU_PROJECT;
 
     @FXML
-    private MenuItem menuItemConnectToServer;
+    private MenuItem MENU_ITEM_CONNECT_TO_SERVER;
 
     @FXML
-    private MenuItem menuItemClose;
+    private MenuItem MENU_ITEM_CLOSE;
 
     @FXML
-    private MenuItem menuItemNewProject;
+    private MenuItem MENU_ITEM_NEW_PROJECT;
 
     @FXML
-    private MenuItem menuItemOpenProject;
+    private MenuItem MENU_ITEM_OPEN_PROJECT;
 
     @FXML
-    private MenuItem menuItemSaveProjectAs;
+    private MenuItem MENU_ITEM_SAVE_PROJECT_AS;
 
     @FXML
-    private MenuItem menuItemExportImage;
+    private MenuItem MENU_ITEM_EXPORT_IMAGE;
 
     @FXML
-    private MenuItem menuItemCloseProject;
+    private MenuItem MENU_ITEM_CLOSE_PROJECT;
 
     @FXML
-    private SeparatorMenuItem separator_1;
+    private SeparatorMenuItem SEPARATOR_1;
 
     @FXML
-    private SeparatorMenuItem separator_2;
+    private SeparatorMenuItem SEPARATOR_2;
 
     @FXML
-    private SeparatorMenuItem separator_3;
+    private SeparatorMenuItem SEPARATOR_3;
 
     @FXML
     private ComboBox<AppLanguage> languageChooser;
@@ -106,9 +106,9 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
      */
 
     private void initMenuItemsVisibility() {
-        menuItemSaveProjectAs.setVisible(false);
-        separator_2.setVisible(false);
-        separator_3.setVisible(false);
+        MENU_ITEM_SAVE_PROJECT_AS.setVisible(false);
+        SEPARATOR_2.setVisible(false);
+        SEPARATOR_3.setVisible(false);
     }
 
     private void initFamilyServiceListener() {
@@ -129,9 +129,9 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     private void changeElementsVisibility(boolean value) {
-        menuItemSaveProjectAs.setVisible(value);
-        separator_2.setVisible(value);
-        separator_3.setVisible(value);
+        MENU_ITEM_SAVE_PROJECT_AS.setVisible(value);
+        SEPARATOR_2.setVisible(value);
+        SEPARATOR_3.setVisible(value);
     }
 
 
@@ -164,13 +164,13 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     private void reloadElements() {
-        this.menuFile.setText(getValueFromKey(Keys.MENU_PROGRAM));
-        this.menuProject.setText(getValueFromKey(Keys.MENU_PROJECT));
-        this.menuItemClose.setText(getValueFromKey(Keys.MENU_PROGRAM_CLOSE));
-        this.menuItemCloseProject.setText(getValueFromKey(Keys.MENU_PROJECT_CLOSE));
-        this.menuItemNewProject.setText(getValueFromKey(Keys.MENU_PROJECT_NEW));
-        this.menuItemOpenProject.setText(getValueFromKey(Keys.MENU_PROJECT_OPEN));
-        this.menuItemSaveProjectAs.setText(getValueFromKey(Keys.MENU_PROJECT_SAVE_AS));
+        this.MENU_FILE.setText(getValueFromKey(Keys.MENU_PROGRAM));
+        this.MENU_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT));
+        this.MENU_ITEM_CLOSE.setText(getValueFromKey(Keys.MENU_PROGRAM_CLOSE));
+        this.MENU_ITEM_CLOSE_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT_CLOSE));
+        this.MENU_ITEM_NEW_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT_NEW));
+        this.MENU_ITEM_OPEN_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT_OPEN));
+        this.MENU_ITEM_SAVE_PROJECT_AS.setText(getValueFromKey(Keys.MENU_PROJECT_SAVE_AS));
 
     }
 

@@ -38,23 +38,23 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     private final ObjectProperty<Member> member = new SimpleObjectProperty<>();
 
     @FXML
-    private TableView<Member> memberTable;
+    private TableView<Member> MEMBER_TABLE;
     @FXML
-    private TableColumn<Member, String> memberPhoto;
+    private TableColumn<Member, String> MEMBER_PHOTO_COLUMN;
     @FXML
-    private TableColumn<Member, String> memberName;
+    private TableColumn<Member, String> MEMBER_NAME_COLUMN;
     @FXML
-    private TableColumn<Member, String> memberSurname;
+    private TableColumn<Member, String> MEMBER_SURNAME_COLUMN;
     @FXML
-    private TableColumn<Member, Age> memberAge;
+    private TableColumn<Member, Age> MEMBER_AGE_COLUMN;
     @FXML
-    private TableColumn<Member, Gender> memberGender;
+    private TableColumn<Member, Gender> MEMBER_GENDER_COLUMN;
     @FXML
-    private ImageView photo;
+    private ImageView PHOTO_IMV;
     @FXML
-    private JFXTextField simName;
+    private JFXTextField SIM_NAME_FIELD;
     @FXML
-    private JFXTextField simSurname;
+    private JFXTextField SIM_SURNAME_FIELD;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -77,12 +77,12 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-        this.memberPhoto.setCellFactory(initPhotoCellFactory());
-        this.memberGender.setCellFactory(initGenderCellFactory());
-        this.memberAge.setCellFactory(initAgeCellFactory());
+        this.MEMBER_PHOTO_COLUMN.setCellFactory(initPhotoCellFactory());
+        this.MEMBER_GENDER_COLUMN.setCellFactory(initGenderCellFactory());
+        this.MEMBER_AGE_COLUMN.setCellFactory(initAgeCellFactory());
         setCellValueFactory();
         initSelectedMemberListener();
-        memberTable.setItems(memberList);
+        MEMBER_TABLE.setItems(memberList);
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
@@ -126,7 +126,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     private void initSelectedMemberListener() {
 
-        memberTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        MEMBER_TABLE.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedMember.setValue(newValue);
             }
@@ -134,9 +134,9 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
         selectedMember.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                photo.setImage(new Image(newValue.getPhoto()));
-                simName.setText(newValue.getName());
-                simSurname.setText(newValue.getSurname());
+                PHOTO_IMV.setImage(new Image(newValue.getPhoto()));
+                SIM_NAME_FIELD.setText(newValue.getName());
+                SIM_SURNAME_FIELD.setText(newValue.getSurname());
             }
         });
 
@@ -144,11 +144,11 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
 
     private void setCellValueFactory() {
-        this.memberPhoto.setCellValueFactory(sm.getPhotoValueFactory());
-        this.memberName.setCellValueFactory(data -> data.getValue().nameProperty());
-        this.memberSurname.setCellValueFactory(data -> data.getValue().surnameProperty());
-        this.memberAge.setCellValueFactory(data -> data.getValue().ageProperty());
-        this.memberGender.setCellValueFactory(data -> data.getValue().genderProperty());
+        this.MEMBER_PHOTO_COLUMN.setCellValueFactory(sm.getPhotoValueFactory());
+        this.MEMBER_NAME_COLUMN.setCellValueFactory(data -> data.getValue().nameProperty());
+        this.MEMBER_SURNAME_COLUMN.setCellValueFactory(data -> data.getValue().surnameProperty());
+        this.MEMBER_AGE_COLUMN.setCellValueFactory(data -> data.getValue().ageProperty());
+        this.MEMBER_GENDER_COLUMN.setCellValueFactory(data -> data.getValue().genderProperty());
     }
 
 

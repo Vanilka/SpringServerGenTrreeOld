@@ -27,7 +27,7 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
     private HashMap<String, String> properties;
 
     @FXML
-    private JFXToggleButton toggleAllowedHomo;
+    private JFXToggleButton TOGGLE_ALLOWED_HOMO;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -43,7 +43,7 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
 
 
     private void populateProperties() {
-        toggleAllowedHomo.setSelected(Boolean.valueOf(properties.get(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO)));
+        TOGGLE_ALLOWED_HOMO.setSelected(Boolean.valueOf(properties.get(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO)));
     }
 
     /*
@@ -54,11 +54,11 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
     }
 
     private void initToggleAllowedHomoListener() {
-        toggleAllowedHomo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+        TOGGLE_ALLOWED_HOMO.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                toggleAllowedHomo.setText("ALLOWED");
+                TOGGLE_ALLOWED_HOMO.setText("ALLOWED");
             } else {
-                toggleAllowedHomo.setText("NOT ALLOWED");
+                TOGGLE_ALLOWED_HOMO.setText("NOT ALLOWED");
             }
             properties.replace(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO, newValue.toString());
         });

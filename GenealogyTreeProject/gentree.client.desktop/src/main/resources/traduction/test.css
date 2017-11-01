@@ -584,12 +584,12 @@
 
 }
 
-#gtFamilyMemberTable {
+#family_member_table {
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
 }
 
-#gtFamilyRelationTable {
+#family_relation_table {
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
 }
@@ -628,7 +628,7 @@
     -fx-background-insets: 0 0 0 0;
 }
 
-#gtFamilyRelationTable .cell {
+#family_relation_table .cell {
 
     -fx-cell-size: 90px;
 }

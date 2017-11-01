@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="paneShowInfoRelation" fx:id="paneShowInfoRelation" prefHeight="509.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="PANE_SHOW_INFO_RELATION" fx:id="PANE_SHOW_INFO_RELATION" prefHeight="509.0"
             prefWidth="284.0" styleClass="contentPane" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20"
             AnchorPane.rightAnchor="20" AnchorPane.topAnchor="30" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.PaneShowInfoRelation">
@@ -27,19 +27,19 @@
 
                 <FamilyMemberCard fx:id="fatherCard" layoutY="20" AnchorPane.rightAnchor="10"/>
 
-                <StackPane fx:id="relationTypePane" layoutX="90" layoutY="200"/>
+                <StackPane fx:id="RELATION_TYPE_PANE" layoutX="90" layoutY="200"/>
 
-                <JFXTextField fx:id="relationId" labelFloat="true" layoutX="20.0" prefHeight="33.0"
+                <JFXTextField fx:id="RELATION_ID_FIELD" labelFloat="true" layoutX="20.0" prefHeight="33.0"
                               prefWidth="20.0" promptText="ID" styleClass="jfx-text-always-focused"
                               AnchorPane.topAnchor="220.0"/>
-                <TableView fx:id="familyMemberTable"
+                <TableView fx:id="FAMILY_MEMBER_TABLE"
                            AnchorPane.topAnchor="260.0"
                            AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0"
                            AnchorPane.rightAnchor="0.0">
                     <columns>
-                        <TableColumn fx:id="simPhotoColumn" maxWidth="60" minWidth="60" text="%avatar"/>
-                        <TableColumn fx:id="simNameColumn" maxWidth="90.0" minWidth="90.0" text="%sim_name"/>
-                        <TableColumn fx:id="simSurnameColumn" maxWidth="90.0" minWidth="90.0"
+                        <TableColumn fx:id="SIM_PHOTO_COLUMN" maxWidth="60" minWidth="60" text="%avatar"/>
+                        <TableColumn fx:id="SIM_NAME_COLUMN" maxWidth="90.0" minWidth="90.0" text="%sim_name"/>
+                        <TableColumn fx:id="SIM_SURNAME_COLUMN" maxWidth="90.0" minWidth="90.0"
                                      text="%sim_surname"/>
                     </columns>
                     <styleClass>

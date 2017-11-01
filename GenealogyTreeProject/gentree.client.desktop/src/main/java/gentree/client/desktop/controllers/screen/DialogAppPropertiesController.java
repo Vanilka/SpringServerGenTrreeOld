@@ -35,23 +35,23 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
     private final HashMap<String, String> propertiesMap;
     private final RealmConfig realmConfig = GenTreeProperties.INSTANCE.getRealmConfig();
     @FXML
-    public ToggleButton buttonOtherProperties;
+    public ToggleButton BUTTON_OTHER_PROPERTIES;
     @FXML
-    public ToggleButton buttonOnlineProperties;
+    public ToggleButton BUTTON_ONLINE_PROPERTIES;
     @FXML
-    public ToggleButton buttonTreeProperties;
+    public ToggleButton BUTTON_TREE_PROPERTIES;
     @FXML
-    public AnchorPane paneTreeProperties;
+    public AnchorPane PANE_TREE_PROPERTIES;
     @FXML
-    public AnchorPane paneOnlineProperties;
+    public AnchorPane PANE_ONLINE_PROPERTIES;
     @FXML
-    public AnchorPane paneOtherProperties;
+    public AnchorPane PANE_OTHER_PROPERTIES;
     @FXML
-    public JFXButton buttonCancel;
+    public JFXButton BUTTON_CANCEL;
     @FXML
-    public JFXButton buttonConfirm;
+    public JFXButton BUTTON_CONFIRM;
     @FXML
-    private BorderPane contentPane;
+    private BorderPane CONTENT_PANE;
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
@@ -91,31 +91,31 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
 
     private void initToggleButtons() {
         toggleButtons = Arrays.asList(
-                buttonOnlineProperties,
-                buttonOtherProperties,
-                buttonTreeProperties
+                BUTTON_ONLINE_PROPERTIES,
+                BUTTON_OTHER_PROPERTIES,
+                BUTTON_TREE_PROPERTIES
         );
     }
 
 
     private void populatePaneMap() {
-        paneMap.put(buttonOnlineProperties, paneOnlineProperties);
-        paneMap.put(buttonOtherProperties, paneOtherProperties);
-        paneMap.put(buttonTreeProperties, paneTreeProperties);
+        paneMap.put(BUTTON_ONLINE_PROPERTIES, PANE_ONLINE_PROPERTIES);
+        paneMap.put(BUTTON_OTHER_PROPERTIES, PANE_OTHER_PROPERTIES);
+        paneMap.put(BUTTON_TREE_PROPERTIES, PANE_TREE_PROPERTIES);
     }
 
     private void initPanes() {
-        dialogAppPropertiesTreeController = (DialogAppPropertiesTreeController) sm.loadFxml(new DialogAppPropertiesTreeController(), paneTreeProperties, FilesFXML.DIALOG_APP_PROPERTIES_TREE);
+        dialogAppPropertiesTreeController = (DialogAppPropertiesTreeController) sm.loadFxml(new DialogAppPropertiesTreeController(), PANE_TREE_PROPERTIES, FilesFXML.DIALOG_APP_PROPERTIES_TREE);
         dialogAppPropertiesTreeController.setProperties(propertiesMap);
-        dialogAppPropertiesOnlineController = (DialogAppPropertiesOnlineController) sm.loadFxml(new DialogAppPropertiesOnlineController(), paneOnlineProperties, FilesFXML.DIALOG_APP_PROPERTIES_ONLINE);
-        dialogAppPropertiesOtherController = (DialogAppPropertiesOtherController) sm.loadFxml(new DialogAppPropertiesOtherController(), paneOtherProperties, FilesFXML.DIALOG_APP_PROPERTIES_OTHER);
+        dialogAppPropertiesOnlineController = (DialogAppPropertiesOnlineController) sm.loadFxml(new DialogAppPropertiesOnlineController(), PANE_ONLINE_PROPERTIES, FilesFXML.DIALOG_APP_PROPERTIES_ONLINE);
+        dialogAppPropertiesOtherController = (DialogAppPropertiesOtherController) sm.loadFxml(new DialogAppPropertiesOtherController(), PANE_OTHER_PROPERTIES, FilesFXML.DIALOG_APP_PROPERTIES_OTHER);
 
 
     }
 
     private void initGroup() {
         toggleButtons.forEach(b -> b.setToggleGroup(group));
-        group.selectToggle(buttonTreeProperties);
+        group.selectToggle(BUTTON_TREE_PROPERTIES);
     }
 
     private void saveProperties() {

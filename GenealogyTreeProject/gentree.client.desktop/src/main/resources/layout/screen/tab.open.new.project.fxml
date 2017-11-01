@@ -11,7 +11,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <JFXTextField fx:id="familyNameField" labelFloat="true"
+        <JFXTextField fx:id="FAMILY_NAME_FIELD" labelFloat="true"
                       layoutX="71.0" layoutY="65.0"
                       maxWidth="268.0" minWidth="268.0"
                       prefHeight="55.0" prefWidth="268.0"

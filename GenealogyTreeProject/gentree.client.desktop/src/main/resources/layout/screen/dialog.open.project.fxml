@@ -11,15 +11,15 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <JFXTabPane fx:id="tabPaneOpenProject"
+        <JFXTabPane fx:id="TAB_PANE_OPEN_PROJECT"
                     styleClass="tabPane"
                     AnchorPane.bottomAnchor="50.0"
                     AnchorPane.leftAnchor="10.0"
                     AnchorPane.rightAnchor="10.0"
                     AnchorPane.topAnchor="10.0"/>
-        <JFXButton fx:id="buttonCancel" onAction="#cancel" styleClass="button" text="%cancel" layoutX="74.0"
+        <JFXButton fx:id="BUTTON_CANCEL" onAction="#cancel" styleClass="button" text="%cancel" layoutX="74.0"
                    layoutY="209.0" prefHeight="30.0" prefWidth="120.0"/>
-        <JFXButton fx:id="buttonConfirm" onAction="#confirm" styleClass="button" text="%create" layoutX="293.0"
+        <JFXButton fx:id="BUTTON_CONFIRM" onAction="#confirm" styleClass="button" text="%create" layoutX="293.0"
                    layoutY="209.0" prefHeight="30.0" prefWidth="120.0"/>
     </children>
 </AnchorPane>

@@ -28,13 +28,13 @@ import java.util.ResourceBundle;
 public class ScreenWelcomeController implements Initializable, FXMLController, FXMLAnchorPane {
 
     @FXML
-    private Pane localProjectPane;
+    private Pane LOCAL_PROJECT_PANE;
 
     @FXML
-    private Pane onlineProjectPane;
+    private Pane ONLINE_PROJECT_PANE;
 
     @FXML
-    private AnchorPane mainAnchorPane;
+    private AnchorPane MAIN_ANCHOR_PANE;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -48,31 +48,31 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
         initLocalProjectPane();
         setListeners();
         addTopOffsetListener();
-        localProjectPane.resize(300, 400);
-        onlineProjectPane.resize(300, 400);
+        LOCAL_PROJECT_PANE.resize(300, 400);
+        ONLINE_PROJECT_PANE.resize(300, 400);
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
     public void addTopOffsetListener() {
 
-        this.mainAnchorPane.heightProperty().addListener(new ChangeListener<Number>() {
+        this.MAIN_ANCHOR_PANE.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double y = (newValue.doubleValue() - localProjectPane.getHeight()) / 2;
-                localProjectPane.setLayoutY(y);
-                onlineProjectPane.setLayoutY(y);
+                double y = (newValue.doubleValue() - LOCAL_PROJECT_PANE.getHeight()) / 2;
+                LOCAL_PROJECT_PANE.setLayoutY(y);
+                ONLINE_PROJECT_PANE.setLayoutY(y);
             }
         });
     }
 
     public void initLocalProjectPane() {
-        sm.loadFxml(new ButtonLocalModeController(), localProjectPane,
+        sm.loadFxml(new ButtonLocalModeController(), LOCAL_PROJECT_PANE,
                 FilesFXML.LOCAL_APP_MODE);
 
     }
 
     public void initOnlineProjectPane() {
-        sm.loadFxml(new ButtonOnlineModeController(), onlineProjectPane,
+        sm.loadFxml(new ButtonOnlineModeController(), ONLINE_PROJECT_PANE,
                 FilesFXML.ONLINE_APP_MODE);
     }
 

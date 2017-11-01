@@ -12,7 +12,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <JFXTabPane fx:id="tabPaneInfo" styleClass="tabPane"
+        <JFXTabPane fx:id="TAB_PANE_INFO" styleClass="tabPane"
                     AnchorPane.topAnchor="0"
                     AnchorPane.bottomAnchor="0"
                     AnchorPane.rightAnchor="0"

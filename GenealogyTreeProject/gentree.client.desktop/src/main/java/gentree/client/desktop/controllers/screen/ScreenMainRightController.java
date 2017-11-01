@@ -5,7 +5,6 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -28,16 +27,16 @@ import java.util.ResourceBundle;
 public class ScreenMainRightController extends AnchorPane implements Initializable, FXMLController, FXMLAnchorPane {
 
     @FXML
-    private ScrollPane treeDrawScrollPane;
+    private ScrollPane TREE_DRAW_SCROLL_PANE;
 
     @FXML
-    private AnchorPane treeDrawAnchorPane;
+    private AnchorPane TREE_DRAW_ANCHOR_PANE;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private HBox genTreeContent;
+    private HBox GEN_TREE_CONTENT;
 
     @Getter
     private GenTreeDrawingService drawingService;
@@ -49,7 +48,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
         this.languageBundle.setValue(resources);
         sm.register(this);
 
-        drawingService = new GenTreeDrawingServiceImpl(genTreeContent);
+        drawingService = new GenTreeDrawingServiceImpl(GEN_TREE_CONTENT);
         sm.register(drawingService);
 
         initRelationListener();
@@ -60,7 +59,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
 
     public WritableImage Image() {
-        WritableImage image = treeDrawAnchorPane.snapshot(new SnapshotParameters(), null);
+        WritableImage image = TREE_DRAW_ANCHOR_PANE.snapshot(new SnapshotParameters(), null);
         return image;
     }
 

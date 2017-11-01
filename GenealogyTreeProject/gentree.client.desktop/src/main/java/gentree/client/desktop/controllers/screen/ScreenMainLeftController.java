@@ -26,7 +26,7 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private JFXTabPane tabPaneInfo;
+    private JFXTabPane TAB_PANE_INFO;
 
 
     private Tab familyInfo;
@@ -55,19 +55,19 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
     private void initPanes() {
         tabFamilyInfoController = (TabFamilyInfoController) sm.loadFxml(
                 new TabFamilyInfoController(),
-                tabPaneInfo,
+                TAB_PANE_INFO,
                 familyInfo,
                 FilesFXML.SCREEN_MAIN_LEFT_FAMILY_INFO_FXML, getValueFromKey(Keys.TAB_FAMILY_INFO));
         tabFamilyInfoController.setScreenMainLeft(this);
 
         tabFamilyViewController = (TabFamilyViewController) sm.loadFxml(
                 new TabFamilyViewController(),
-                tabPaneInfo,
+                TAB_PANE_INFO,
                 familyView,
                 FilesFXML.SCREEN_MAIN_LEFT_FAMILY_VIEW_FXML, getValueFromKey(Keys.TAB_FAMILY_VIEW));
         tabFamilyViewController.setScreenMainLeft(this);
 
-        tabPaneInfo.getSelectionModel().select(familyInfo);
+        TAB_PANE_INFO.getSelectionModel().select(familyInfo);
 
     }
 

@@ -33,10 +33,10 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     private AnchorPane screenMainAnchorPane;
 
     @FXML
-    private AnchorPane screenMainLeft;
+    private AnchorPane SCREEN_MAIN_LEFT;
 
     @FXML
-    private AnchorPane screenMainRight;
+    private AnchorPane SCREEN_MAIN_RIGHT;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -61,29 +61,29 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     private void initPanes() {
         sm.register(this);
 
-        screenMainLeftController = (ScreenMainLeftController) sm.loadFxml(new ScreenMainLeftController(), screenMainLeft, FilesFXML.SCREEN_MAIN_LEFT_FXML);
-        screenMainRightController = (ScreenMainRightController) sm.loadFxml(new ScreenMainRightController(), screenMainRight, FilesFXML.SCREEN_MAIN_RIGHT_FXML);
+        screenMainLeftController = (ScreenMainLeftController) sm.loadFxml(new ScreenMainLeftController(), SCREEN_MAIN_LEFT, FilesFXML.SCREEN_MAIN_LEFT_FXML);
+        screenMainRightController = (ScreenMainRightController) sm.loadFxml(new ScreenMainRightController(), SCREEN_MAIN_RIGHT, FilesFXML.SCREEN_MAIN_RIGHT_FXML);
     }
 
 
     public void showInfoSim(Member member) {
-        screenMainLeft.getChildren().forEach(n -> n.setVisible(false));
+        SCREEN_MAIN_LEFT.getChildren().forEach(n -> n.setVisible(false));
         PaneShowInfoSim paneShowInfoSim = (PaneShowInfoSim) sm.loadAdditionalFxmltoAnchorPane(
-                new PaneShowInfoSim(), screenMainLeft, FilesFXML.PANE_SHOW_INFO_MEMBER_FXML);
+                new PaneShowInfoSim(), SCREEN_MAIN_LEFT, FilesFXML.PANE_SHOW_INFO_MEMBER_FXML);
         paneShowInfoSim.setMember(member);
     }
 
     public void showInfoRelation(Relation relation) {
-        screenMainLeft.getChildren().forEach(n -> n.setVisible(false));
+        SCREEN_MAIN_LEFT.getChildren().forEach(n -> n.setVisible(false));
         PaneShowInfoRelation paneShowInfoRelation = (PaneShowInfoRelation) sm.loadAdditionalFxmltoAnchorPane(
-                new PaneShowInfoSim(), screenMainLeft, FilesFXML.PANE_SHOW_INFO_RELATION_FXML);
+                new PaneShowInfoSim(), SCREEN_MAIN_LEFT, FilesFXML.PANE_SHOW_INFO_RELATION_FXML);
         paneShowInfoRelation.setRelation(relation);
     }
 
 
     public void removeInfoPanel(Node node) {
-        screenMainLeft.getChildren().remove(node);
-        screenMainLeft.getChildren().forEach(n -> n.setVisible(true));
+        SCREEN_MAIN_LEFT.getChildren().remove(node);
+        SCREEN_MAIN_LEFT.getChildren().forEach(n -> n.setVisible(true));
     }
 
 

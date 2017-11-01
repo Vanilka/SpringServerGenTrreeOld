@@ -32,15 +32,11 @@ import java.util.ResourceBundle;
 public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLController {
 
     //TODO  LOCAL / ONLINE MODE IMAGES
+    @FXML
+    private Pane MAIN_PANE;
 
     @FXML
-    private Button buttonik;
-
-    @FXML
-    private Pane mainPane;
-
-    @FXML
-    private Label localApplicationLabel;
+    private Label LOCAL_APPLICATION_LABEL;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -78,7 +74,7 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
     }
 
     private void reloadElements() {
-        this.localApplicationLabel.setText(getValueFromKey(Keys.APPLICATION_CHOICE_LOCAL).toUpperCase());
+        this.LOCAL_APPLICATION_LABEL.setText(getValueFromKey(Keys.APPLICATION_CHOICE_LOCAL).toUpperCase());
     }
 
 

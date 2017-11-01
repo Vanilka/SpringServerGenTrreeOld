@@ -12,15 +12,15 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <ScrollPane fx:id="treeDrawScrollPane" styleClass="transparentPane" AnchorPane.bottomAnchor="0.0"
+        <ScrollPane fx:id="TREE_DRAW_SCROLL_PANE" styleClass="transparentPane" AnchorPane.bottomAnchor="0.0"
                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <AnchorPane fx:id="treeDrawAnchorPane" maxHeight="1.7976931348623157E308"
+                <AnchorPane fx:id="TREE_DRAW_ANCHOR_PANE" maxHeight="1.7976931348623157E308"
                             maxWidth="1.7976931348623157E308"
                             AnchorPane.bottomAnchor="0.0"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <HBox fx:id="genTreeContent" prefHeight="100.0" prefWidth="200.0" styleClass="transparentPane"
+                        <HBox fx:id="GEN_TREE_CONTENT" prefHeight="100.0" prefWidth="200.0" styleClass="transparentPane"
                               spacing="30.0"
                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                               AnchorPane.topAnchor="0.0"/>

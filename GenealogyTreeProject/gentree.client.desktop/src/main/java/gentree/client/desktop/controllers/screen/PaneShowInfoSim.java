@@ -47,19 +47,19 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     private AnchorPane paneShowInfoSim;
 
     @FXML
-    private AnchorPane contentPane;
+    private AnchorPane CONTENT_PANE;
     @FXML
-    private JFXButton returnButton;
+    private JFXButton RETURN_BUTTON;
     @FXML
-    private JFXButton modifyButton;
+    private JFXButton MODIFY_BUTTON;
     @FXML
-    private JFXTextField simId;
+    private JFXTextField SIM_ID_FIELD;
     @FXML
-    private JFXTextField simName;
+    private JFXTextField SIM_NAME_FIELD;
     @FXML
-    private JFXTextField simSurname;
+    private JFXTextField SIM_SURNAME_FIELD;
     @FXML
-    private JFXTextField simBornname;
+    private JFXTextField SIM_BORNNAME_FIELD;
 
     @FXML
     private HeaderPane HEADER_PANE;
@@ -82,9 +82,9 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     @FXML
     private void modifyAction(ActionEvent actionEvent) {
         if (modifiable.get()) {
-            getMember().setName(simName.getText());
-            getMember().setSurname(simSurname.getText());
-            getMember().setBornname(simBornname.getText());
+            getMember().setName(SIM_NAME_FIELD.getText());
+            getMember().setSurname(SIM_SURNAME_FIELD.getText());
+            getMember().setBornname(SIM_BORNNAME_FIELD.getText());
 
             context.getService().updateMember(getMember());
         }
@@ -108,8 +108,8 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
 
         addLanguageListener();
-        simId.setDisable(false);
-        readOnlyControls = Arrays.asList(simName, simSurname, simBornname);
+        SIM_ID_FIELD.setDisable(false);
+        readOnlyControls = Arrays.asList(SIM_NAME_FIELD, SIM_SURNAME_FIELD, SIM_BORNNAME_FIELD);
         setControlsModifiable(false);
         initListeners();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
@@ -125,10 +125,10 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     }
 
     private void populateControls(Member member) {
-        simId.setText(member.getId() > 0 ? Long.toString(member.getId()) : "0");
-        simName.setText(member.getName());
-        simSurname.setText(member.getSurname());
-        simBornname.setText(member.getBornname());
+        SIM_ID_FIELD.setText(member.getId() > 0 ? Long.toString(member.getId()) : "0");
+        SIM_NAME_FIELD.setText(member.getName());
+        SIM_SURNAME_FIELD.setText(member.getSurname());
+        SIM_BORNNAME_FIELD.setText(member.getBornname());
         this.photo.setImage(new Image(member.getPhoto()));
     }
 
@@ -145,7 +145,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
         modifiable.addListener((observable, oldValue, newValue) -> {
             setControlsModifiable(newValue);
-            modifyButton.setText(getValueFromKey(newValue ? Keys.CONFIRM : Keys.MODIFY));
+            MODIFY_BUTTON.setText(getValueFromKey(newValue ? Keys.CONFIRM : Keys.MODIFY));
         });
     }
 
@@ -164,11 +164,11 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     }
 
     private void reloadElements() {
-        simName.setPromptText(getValueFromKey(Keys.SIM_NAME));
-        simSurname.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
-        simBornname.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
-        returnButton.setText(getValueFromKey(Keys.RETURN));
-        modifyButton.setText(getValueFromKey(modifiable.get() ? Keys.CONFIRM : Keys.MODIFY));
+        SIM_NAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_NAME));
+        SIM_SURNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
+        SIM_BORNNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
+        RETURN_BUTTON.setText(getValueFromKey(Keys.RETURN));
+        MODIFY_BUTTON.setText(getValueFromKey(modifiable.get() ? Keys.CONFIRM : Keys.MODIFY));
         HEADER_PANE.setTitle(getValueFromKey(Keys.HEADER_INFO_SIM));
     }
 

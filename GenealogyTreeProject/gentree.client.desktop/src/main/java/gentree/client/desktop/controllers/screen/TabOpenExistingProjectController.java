@@ -43,7 +43,7 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private ComboBox<Path> projectChooser;
+    private ComboBox<Path> PROJECT_CHOICE_COMBOBOX;
 
 
     private Tab tab;
@@ -78,12 +78,12 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
         } catch (IOException e) {
             e.printStackTrace();
         }
-        projectChooser.setItems(list);
+        PROJECT_CHOICE_COMBOBOX.setItems(list);
     }
 
     private void setCellFactoryToProjectComboBox() {
-        projectChooser.setCellFactory(getCustomPathListCallback());
-        projectChooser.setButtonCell(getCustomPathListCallback().call(null));
+        PROJECT_CHOICE_COMBOBOX.setCellFactory(getCustomPathListCallback());
+        PROJECT_CHOICE_COMBOBOX.setButtonCell(getCustomPathListCallback().call(null));
 
     }
 
@@ -110,7 +110,7 @@ public class TabOpenExistingProjectController implements Initializable, FXMLCont
     }
 
     public Path getSelectedFile() {
-        return projectChooser.getSelectionModel().getSelectedItem();
+        return PROJECT_CHOICE_COMBOBOX.getSelectionModel().getSelectedItem();
     }
 
 

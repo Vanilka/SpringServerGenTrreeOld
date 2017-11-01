@@ -43,17 +43,17 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     private final ObservableList<Member> childrenList;
 
     @FXML
-    private AnchorPane motherPane;
+    private AnchorPane MOTHER_PANE;
     @FXML
-    private AnchorPane fatherPane;
+    private AnchorPane FATHER_PANE;
     @FXML
-    private AnchorPane relationTypePane;
+    private AnchorPane RELATION_TYPE_PANE;
     @FXML
-    private FlowPane childrenFlowPane;
+    private FlowPane CHILDREN_FLOW_PANE;
     @FXML
-    private JFXButton buttonConfirm;
+    private JFXButton BUTTON_CONFIRM;
     @FXML
-    private JFXButton buttonCancel;
+    private JFXButton BUTTON_CANCEL;
 
     private Button addChildButton;
     private Stage stage;
@@ -98,16 +98,16 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
 
     private void initPanes() {
         initAddChildButton();
-        childrenFlowPane.getChildren().add(addChildButton);
-        motherPane.getChildren().add(motherCard);
-        fatherPane.getChildren().add(fatherCard);
-        relationTypePane.getChildren().add(relationType);
+        CHILDREN_FLOW_PANE.getChildren().add(addChildButton);
+        MOTHER_PANE.getChildren().add(motherCard);
+        FATHER_PANE.getChildren().add(fatherCard);
+        RELATION_TYPE_PANE.getChildren().add(relationType);
     }
 
     private void addChildToPane(Member m) {
         if (m != null) {
             FamilyMemberCard memberCard = new FamilyMemberCard(m);
-            childrenFlowPane.getChildren().add(memberCard);
+            CHILDREN_FLOW_PANE.getChildren().add(memberCard);
             childrenList.add(m);
         }
     }

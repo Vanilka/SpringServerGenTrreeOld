@@ -13,7 +13,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <Label fx:id="onlineApplicationLabel" layoutX="27.0" layoutY="268.0" prefHeight="100.0" prefWidth="252.0"
+        <Label fx:id="ONLINE_APPLICATION_LABEL" layoutX="27.0" layoutY="268.0" prefHeight="100.0" prefWidth="252.0"
                text="%application_choice_online"
                textAlignment="CENTER">
             <font>

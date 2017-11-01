@@ -29,7 +29,7 @@ public class TabOpenNewProjectController implements Initializable, FXMLControlle
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private JFXTextField familyNameField;
+    private JFXTextField FAMILY_NAME_FIELD;
 
     private Tab tab;
     private JFXTabPane tabPane;

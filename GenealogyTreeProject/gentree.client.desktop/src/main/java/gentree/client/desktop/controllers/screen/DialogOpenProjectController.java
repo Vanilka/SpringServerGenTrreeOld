@@ -39,13 +39,13 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private JFXTabPane tabPaneOpenProject;
+    private JFXTabPane TAB_PANE_OPEN_PROJECT;
 
     @FXML
-    private JFXButton buttonConfirm;
+    private JFXButton BUTTON_CONFIRM;
 
     @FXML
-    private JFXButton buttonCancel;
+    private JFXButton BUTTON_CANCEL;
 
     /*
         Tab Open New Project
@@ -95,10 +95,10 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
     @FXML
     public void confirm() {
-        if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
+        if (TAB_PANE_OPEN_PROJECT.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)) {
             actionNewProject();
 
-        } else if (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
+        } else if (TAB_PANE_OPEN_PROJECT.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)) {
             actionOpenProject();
         } else {
 
@@ -109,7 +109,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     }
 
     private void actionNewProject() {
-        context.getService().createFamily(new Family(tabOpenNewProjectController.getFamilyNameField().getText().trim()));
+        context.getService().createFamily(new Family(tabOpenNewProjectController.getFAMILY_NAME_FIELD().getText().trim()));
 
         if (context.getService() instanceof GenTreeLocalService) {
             sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
@@ -146,25 +146,25 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
      */
     private void initTabs() {
 
-        tabOpenNewProjectController = (TabOpenNewProjectController) sm.loadFxml(tabOpenNewProjectController, tabPaneOpenProject, tabOpenNewProject, FilesFXML.TAB_OPEN_NEW_PROJECT_FXML, getValueFromKey(Keys.TAB_NEW_PROJECT));
+        tabOpenNewProjectController = (TabOpenNewProjectController) sm.loadFxml(tabOpenNewProjectController, TAB_PANE_OPEN_PROJECT, tabOpenNewProject, FilesFXML.TAB_OPEN_NEW_PROJECT_FXML, getValueFromKey(Keys.TAB_NEW_PROJECT));
 
         if (context.getService() instanceof GenTreeLocalService) {
-            tabOpenExistingProjectController = (TabOpenExistingProjectController) sm.loadFxml(tabOpenExistingProjectController, tabPaneOpenProject, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
+            tabOpenExistingProjectController = (TabOpenExistingProjectController) sm.loadFxml(tabOpenExistingProjectController, TAB_PANE_OPEN_PROJECT, tabOpenExistingProject, FilesFXML.TAB_OPEN_EXISTING_PROJECT_FXML, getValueFromKey(Keys.TAB_OPEN_PROJECT));
         }
 
-        tabPaneOpenProject.getSelectionModel().select(tabOpenNewProject);
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().select(tabOpenNewProject);
     }
 
     /**
      * Initialization of Tab listener
      */
     private void addSelectedTabListener() {
-        tabPaneOpenProject.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
             if (newValue.equals(tabOpenNewProject)) {
-                buttonConfirm.setText(getValueFromKey(Keys.CREATE));
+                BUTTON_CONFIRM.setText(getValueFromKey(Keys.CREATE));
             } else if (newValue.equals(tabOpenExistingProject)) {
-                buttonConfirm.setText(getValueFromKey(Keys.OPEN));
+                BUTTON_CONFIRM.setText(getValueFromKey(Keys.OPEN));
             }
 
 
@@ -176,20 +176,20 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
         if (context.getService() instanceof GenTreeLocalService) {
             disableBinding = Bindings.createBooleanBinding(
-                    () -> ((tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)
-                            && tabOpenNewProjectController.getFamilyNameField().getText().isEmpty())
+                    () -> ((TAB_PANE_OPEN_PROJECT.getSelectionModel().getSelectedItem().equals(tabOpenNewProject)
+                            && tabOpenNewProjectController.getFAMILY_NAME_FIELD().getText().isEmpty())
                             ||
-                            (tabPaneOpenProject.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)
-                                    && tabOpenExistingProjectController.getProjectChooser().getSelectionModel().getSelectedItem() == null)),
-                    tabOpenNewProjectController.getFamilyNameField().textProperty(),
-                    tabOpenExistingProjectController.getProjectChooser().getSelectionModel().selectedIndexProperty(),
-                    tabPaneOpenProject.getSelectionModel().selectedItemProperty());
+                            (TAB_PANE_OPEN_PROJECT.getSelectionModel().getSelectedItem().equals(tabOpenExistingProject)
+                                    && tabOpenExistingProjectController.getPROJECT_CHOICE_COMBOBOX().getSelectionModel().getSelectedItem() == null)),
+                    tabOpenNewProjectController.getFAMILY_NAME_FIELD().textProperty(),
+                    tabOpenExistingProjectController.getPROJECT_CHOICE_COMBOBOX().getSelectionModel().selectedIndexProperty(),
+                    TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty());
         } else {
             disableBinding = Bindings.createBooleanBinding(
-                    () -> (tabOpenNewProjectController.getFamilyNameField().getText().isEmpty()),
-                    tabOpenNewProjectController.getFamilyNameField().textProperty());
+                    () -> (tabOpenNewProjectController.getFAMILY_NAME_FIELD().getText().isEmpty()),
+                    tabOpenNewProjectController.getFAMILY_NAME_FIELD().textProperty());
         }
-        this.buttonConfirm.disableProperty().bind(disableBinding);
+        this.BUTTON_CONFIRM.disableProperty().bind(disableBinding);
     }
 
 

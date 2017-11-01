@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="dialogAddMember" styleClass="dialog-pane"
             xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddMemberController">
@@ -16,28 +17,30 @@
         <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="20"
                     AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
             <children>
+                <HeaderPane  styleClass="header-pane-content" text="%label_add_member"
+                             AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
                 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                            AnchorPane.topAnchor="0.0">
+                            AnchorPane.topAnchor="40.0">
                     <children>
                         <Pane maxHeight="170.0" maxWidth="145.0" minHeight="170.0" minWidth="145.0" prefHeight="170.0"
                               prefWidth="145.0" styleClass="imagePane" AnchorPane.leftAnchor="25.0"
                               AnchorPane.topAnchor="25.0">
-                            <ImageView fx:id="photo"
+                            <ImageView fx:id="PHOTO_IMV"
                                        onMouseClicked="#choosePhoto"
                                        fitHeight="150.0" fitWidth="125.0"
                                        layoutX="10" layoutY="10"
                                        pickOnBounds="true" preserveRatio="true"
                             />
                         </Pane>
-                        <JFXTextField fx:id="simName" labelFloat="true" layoutX="200.0" layoutY="35.0" prefHeight="33.0"
+                        <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="35.0" prefHeight="33.0"
                                       prefWidth="193.0" promptText="%sim_name"/>
-                        <JFXTextField fx:id="simSurname" labelFloat="true" layoutX="200.0" layoutY="95.0"
+                        <JFXTextField fx:id="SIM_SURNAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="95.0"
                                       prefHeight="33.0" prefWidth="193.0" promptText="%sim_surname"/>
-                        <JFXTextField fx:id="simBornname" labelFloat="true" layoutX="200.0" layoutY="155.0"
+                        <JFXTextField fx:id="SIM_BORNNAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="155.0"
                                       prefHeight="33.0" prefWidth="193.0" promptText="%sim_born_name"/>
                         <AnchorPane layoutX="22.0" layoutY="205.0">
                             <children>
-                                <ComboBox fx:id="comboBoxAge" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
+                                <ComboBox fx:id="AGE_COMBO_BOX" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
                                           styleClass="combobox"/>
                                 <Label prefHeight="25.0" prefWidth="151.0" text="Age :" styleClass="label1">
                                     <font>
@@ -49,9 +52,9 @@
                         <AnchorPane layoutX="186.0" layoutY="205.0" prefHeight="66.0" prefWidth="256.0">
                             <children>
                                 <Pane layoutY="25.0" prefHeight="41.0" prefWidth="256.0" styleClass="darkPane">
-                                    <JFXRadioButton fx:id="simSexFemale" layoutY="12.0" styleClass="radioButtonFX"
+                                    <JFXRadioButton fx:id="SIM_SEX_FEMALE_CHOICE" layoutY="12.0" styleClass="radioButtonFX"
                                                     text="%sim_sex_f"/>
-                                    <JFXRadioButton fx:id="simSexMale" layoutX="119.0" layoutY="12.0"
+                                    <JFXRadioButton fx:id="SIM_SEX_MALE_CHOICE" layoutX="119.0" layoutY="12.0"
                                                     styleClass="radioButtonFX" text="%sim_sex_m"/>
                                 </Pane>
                                 <Label layoutX="10.0" prefHeight="25.0" prefWidth="151.0" text="Sex: "
@@ -70,7 +73,7 @@
                                         <Font size="14.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="comboBoxRace" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
+                                <ComboBox fx:id="RACE_COMBO_BOX" layoutY="25.0" prefHeight="41.0" prefWidth="151.0"
                                           styleClass="combobox"/>
                             </children>
                         </AnchorPane>
@@ -85,13 +88,13 @@
                                     </font>
                                 </Label>
                                 <Pane layoutY="25.0" prefHeight="50.0" prefWidth="151.0" styleClass="darkPane">
-                                    <JFXToggleButton id="toggleAliveButton" fx:id="toggleAliveButton"
+                                    <JFXToggleButton id="toggleAliveButton" fx:id="ALIVE_TOGGLE_BUTTON"
                                                      prefHeight="50.0" prefWidth="151.0" text="is vivant"
                                                      textFill="#faffd5"/>
                                 </Pane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="paneDeathCause" layoutY="370.0" layoutX="189.0">
+                        <AnchorPane fx:id="DEATH_CAUSE_PANE" layoutY="370.0" layoutX="189.0">
                             <children>
                                 <Label layoutX="10" prefHeight="25.0" prefWidth="151.0" text="Death Cause"
                                        styleClass="label1">
@@ -99,7 +102,7 @@
                                         <Font size="14.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="comboBoxDeathCause" layoutY="25.0" prefHeight="41.0" prefWidth="256.0"
+                                <ComboBox fx:id="DEATH_CAUSE_COMBO_BOX" layoutY="25.0" prefHeight="41.0" prefWidth="256.0"
                                           styleClass="combobox"/>
                             </children>
                         </AnchorPane>
@@ -107,9 +110,9 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
-        <JFXButton fx:id="buttonCancel" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
+        <JFXButton fx:id="BUTTON_CANCEL" buttonType="RAISED" layoutX="100" onAction="#cancel" prefHeight="30.0"
                    prefWidth="120.0" styleClass="button" text="%cancel" AnchorPane.bottomAnchor="30.0"/>
-        <JFXButton fx:id="buttonConfirm" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
+        <JFXButton fx:id="CONFIRM_BUTTON" buttonType="RAISED" layoutX="280" onAction="#confirm" prefHeight="30.0"
                    prefWidth="120.0" styleClass="button" text="%create" AnchorPane.bottomAnchor="30.0"/>
     </children>
 </AnchorPane>

@@ -46,21 +46,21 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
     @FXML
-    private AnchorPane currentMember;
+    private AnchorPane CURRENT_MEMBER_PANE;
     @FXML
-    private AnchorPane motherPane;
+    private AnchorPane MOTHER_PANE;
     @FXML
-    private AnchorPane fatherPane;
+    private AnchorPane FATHER_PANE;
     @FXML
-    private AnchorPane relationTypePane;
+    private AnchorPane RELATION_TYPE_PANE;
     @FXML
-    private JFXButton chooseMother;
+    private JFXButton CHOOSE_MOTHER_BUTTON;
     @FXML
-    private JFXButton chooseFather;
+    private JFXButton CHOOSE_FATHER_BUTTON;
     @FXML
-    private JFXButton buttonConfirm;
+    private JFXButton BUTTON_CONFIRM;
     @FXML
-    private JFXButton buttonCancel;
+    private JFXButton BUTTON_CANCEL;
 
     private Stage stage;
 
@@ -144,9 +144,9 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
     private void initPanes() {
-        currentMember.getChildren().add(currentMemberCard);
-        motherPane.getChildren().add(motherCard);
-        fatherPane.getChildren().add(fatherCard);
+        CURRENT_MEMBER_PANE.getChildren().add(currentMemberCard);
+        MOTHER_PANE.getChildren().add(motherCard);
+        FATHER_PANE.getChildren().add(fatherCard);
     }
 
     private void populateParentFields() {
@@ -284,7 +284,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
         BooleanBinding disableBinding = Bindings.equal(father, currentBornRelation.get().rightProperty())
                 .and(Bindings.equal(mother, currentBornRelation.get().leftProperty()));
 
-        this.buttonConfirm.disableProperty().bind(disableBinding);
+        this.BUTTON_CONFIRM.disableProperty().bind(disableBinding);
     }
 
     private void findRelation(Member mother, Member father) {

@@ -11,11 +11,8 @@ import gentree.client.desktop.controllers.FXMLTab;
 import gentree.client.desktop.domain.Family;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -36,28 +33,28 @@ import java.util.ResourceBundle;
 @Log4j2
 public class TabFamilyInfoController implements Initializable, FXMLController, FXMLTab {
 
-    TabFamilyInfoController instance = this;
-
-    @FXML
-    private AnchorPane screenMainLeftFamilyInfoController;
-
-    @FXML
-    private JFXTextField familyName;
-
-    @FXML
-    private JFXTextField membersCount;
-
-    @FXML
-    private JFXButton modifyNameButton;
-
-    @FXML
-    private JFXButton addMemberButton;
-
-    @FXML
-    private VBox contentVBox;
+   private final TabFamilyInfoController instance = this;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+
+    @FXML
+    private AnchorPane SCREEN_MAIN_LEFT_FAMILY_INFO_PANE;
+
+    @FXML
+    private JFXTextField FAMILY_NAME_FIELD;
+
+    @FXML
+    private JFXTextField MEMBERS_COUNT_FIELD;
+
+    @FXML
+    private JFXButton MODIFY_NAME_BUTTON;
+
+    @FXML
+    private JFXButton ADD_MEMBER_BUTTON;
+
+    @FXML
+    private VBox CONTENT_VBOX;
 
     @Getter
     @Setter
@@ -74,7 +71,7 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     private InvalidationListener invalidationListener = new InvalidationListener() {
         @Override
         public void invalidated(Observable observable) {
-            membersCount.setText("" + context.getService().getCurrentFamily().getMembers().size());
+            MEMBERS_COUNT_FIELD.setText("" + context.getService().getCurrentFamily().getMembers().size());
         }
     };
 
@@ -106,15 +103,15 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     }
 
     private void loadFamily(Family f) {
-        familyName.setText(f.getName());
-        membersCount.setText("" + f.getMembers().size());
+        FAMILY_NAME_FIELD.setText(f.getName());
+        MEMBERS_COUNT_FIELD.setText("" + f.getMembers().size());
         f.getMembers().addListener(invalidationListener);
     }
 
     private void initGraphicalElements() {
-        familyName.setEditable(false);
-        membersCount.setEditable(false);
-        contentVBox.setAlignment(Pos.TOP_CENTER);
+        FAMILY_NAME_FIELD.setEditable(false);
+        MEMBERS_COUNT_FIELD.setEditable(false);
+        CONTENT_VBOX.setAlignment(Pos.TOP_CENTER);
 
     }
 
@@ -135,10 +132,10 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     }
 
     private void reloadElements() {
-        familyName.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
-        membersCount.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
-        modifyNameButton.setText(getValueFromKey(Keys.MODIFY));
-        addMemberButton.setText(getValueFromKey(Keys.ADD_MEMBER));
+        FAMILY_NAME_FIELD.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+        MEMBERS_COUNT_FIELD.setPromptText(getValueFromKey(Keys.PROJECT_MEMBER_NUMBER));
+        MODIFY_NAME_BUTTON.setText(getValueFromKey(Keys.MODIFY));
+        ADD_MEMBER_BUTTON.setText(getValueFromKey(Keys.ADD_MEMBER));
 
 
     }

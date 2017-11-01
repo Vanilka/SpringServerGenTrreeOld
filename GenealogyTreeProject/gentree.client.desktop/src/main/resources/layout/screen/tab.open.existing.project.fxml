@@ -10,7 +10,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <ComboBox fx:id="projectChooser" editable="false" layoutX="71.0" layoutY="65.0" maxWidth="268.0"
+        <ComboBox fx:id="PROJECT_CHOICE_COMBOBOX" editable="false" layoutX="71.0" layoutY="65.0" maxWidth="268.0"
                   minWidth="268.0" prefHeight="55.0" prefWidth="268.0" AnchorPane.bottomAnchor="90.0"
                   AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="60.0"/>
     </children>

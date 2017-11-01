@@ -20,11 +20,11 @@
             <AnchorPane maxWidth="320.0" minWidth="320.0" prefWidth="320.0"
                         AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30"
                         AnchorPane.rightAnchor="10" AnchorPane.leftAnchor="10"
-                        fx:id="screenMainLeft"/>
+                        fx:id="SCREEN_MAIN_LEFT"/>
             <AnchorPane AnchorPane.topAnchor="30"
                         AnchorPane.bottomAnchor="30"
                         AnchorPane.rightAnchor="10"
-                        AnchorPane.leftAnchor="10" fx:id="screenMainRight" styleClass="transparentPane"/>
+                        AnchorPane.leftAnchor="10" fx:id="SCREEN_MAIN_RIGHT" styleClass="transparentPane"/>
 
         </items>
     </SplitPane>

@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 public class MainFooterController implements Initializable, FXMLController, FXMLAnchorPane {
 
     @FXML
-    private Label footerCopyright;
+    private Label FOOTER_COPYRIGHTS;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -36,6 +36,6 @@ public class MainFooterController implements Initializable, FXMLController, FXML
     }
 
     private void initFooter() {
-        this.footerCopyright.setText(AppTitles.APP_FOOTER);
+        this.FOOTER_COPYRIGHTS.setText(AppTitles.APP_FOOTER);
     }
 }

@@ -46,22 +46,22 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     private final MemberCard spouseCard;
 
     @FXML
-    public ComboBox<RelationType> relationTypeComboBox;
+    public ComboBox<RelationType> RELATION_TYPE_COMBO_BOX;
 
     @FXML
-    private AnchorPane currentMemberPane;
+    private AnchorPane CURRENT_MEMBER_PANE;
 
     @FXML
-    private AnchorPane spousePane;
+    private AnchorPane SPOUSE_PANE;
 
     @FXML
-    private JFXButton chooseSpouse;
+    private JFXButton BUTTON_CHOOSE_SPOUSE;
 
     @FXML
-    private JFXCheckBox checkBoxSetCurrent;
+    private JFXCheckBox CHECK_BOX_SET_CURRENT;
 
     @FXML
-    private JFXCheckBox checkBoxHomoAllowed;
+    private JFXCheckBox CHECK_BOX_HOMO_ALLOWED;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -97,7 +97,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     @FXML
     public void confirm(ActionEvent actionEvent) {
 
-        context.getService().addRelation(member.get(), spouse.get(), relationTypeComboBox.getValue(), checkBoxSetCurrent.isSelected());
+        context.getService().addRelation(member.get(), spouse.get(), RELATION_TYPE_COMBO_BOX.getValue(), CHECK_BOX_SET_CURRENT.isSelected());
         stage.close();
     }
 
@@ -206,31 +206,31 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
      */
 
     private void initPanes() {
-        currentMemberPane.getChildren().add(memberCard);
-        spousePane.getChildren().add(spouseCard);
-        checkBoxHomoAllowed.setSelected(config.getBoolean(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO));
+        CURRENT_MEMBER_PANE.getChildren().add(memberCard);
+        SPOUSE_PANE.getChildren().add(spouseCard);
+        CHECK_BOX_HOMO_ALLOWED.setSelected(config.getBoolean(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO));
         initRelationTypeComboBox();
-        checkBoxSetCurrent.disableProperty()
+        CHECK_BOX_SET_CURRENT.disableProperty()
                 .bind(Bindings.createBooleanBinding((
-                                () -> relationTypeComboBox.getValue().equals(RelationType.NEUTRAL)),
-                        relationTypeComboBox.valueProperty()));
-        relationTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+                                () -> RELATION_TYPE_COMBO_BOX.getValue().equals(RelationType.NEUTRAL)),
+                        RELATION_TYPE_COMBO_BOX.valueProperty()));
+        RELATION_TYPE_COMBO_BOX.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(RelationType.NEUTRAL)) {
-                checkBoxSetCurrent.setSelected(false);
+                CHECK_BOX_SET_CURRENT.setSelected(false);
             }
         });
     }
 
     private void initRelationTypeComboBox() {
-        relationTypeComboBox.setCellFactory(sm.getCustomRelationListCell());
-        relationTypeComboBox.setButtonCell(sm.getCustomRelationListCell().call(null));
-        relationTypeComboBox.getItems().addAll(RelationType.values());
-        relationTypeComboBox.getSelectionModel().select(RelationType.NEUTRAL);
-        relationTypeComboBox.setDisable(true);
+        RELATION_TYPE_COMBO_BOX.setCellFactory(sm.getCustomRelationListCell());
+        RELATION_TYPE_COMBO_BOX.setButtonCell(sm.getCustomRelationListCell().call(null));
+        RELATION_TYPE_COMBO_BOX.getItems().addAll(RelationType.values());
+        RELATION_TYPE_COMBO_BOX.getSelectionModel().select(RelationType.NEUTRAL);
+        RELATION_TYPE_COMBO_BOX.setDisable(true);
     }
 
     private Gender returnGenderDenied() {
-        if (checkBoxHomoAllowed.isSelected()) {
+        if (CHECK_BOX_HOMO_ALLOWED.isSelected()) {
             return null;
         }
         return member.get().getGender();
@@ -255,10 +255,10 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
         spouse.addListener((observable, oldValue, newValue) -> {
             spouseCard.setMember(newValue);
             if (newValue == null) {
-                relationTypeComboBox.getSelectionModel().select(RelationType.NEUTRAL);
-                relationTypeComboBox.setDisable(true);
+                RELATION_TYPE_COMBO_BOX.getSelectionModel().select(RelationType.NEUTRAL);
+                RELATION_TYPE_COMBO_BOX.setDisable(true);
             } else {
-                relationTypeComboBox.setDisable(false);
+                RELATION_TYPE_COMBO_BOX.setDisable(false);
             }
         });
     }

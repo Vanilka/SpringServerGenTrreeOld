@@ -48,27 +48,27 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private JFXTabPane gtMainTabPane;
+    private JFXTabPane MAIN_TAB_PANE;
     @FXML
-    private TableView<Member> gtFamilyMemberTable;
+    private TableView<Member> FAMILY_MEMBER_TABLE;
     @FXML
-    private TableColumn<Member, String> simNameColumn;
+    private TableColumn<Member, String> SIM_NAME_COLUMN;
     @FXML
-    private TableColumn<Member, String> simSurnameColumn;
+    private TableColumn<Member, String> SIM_SURNAME_COLUMN;
     @FXML
-    private TableColumn<Member, String> simPhotoColumn;
+    private TableColumn<Member, String> SIM_PHOTO_COLUMN;
     @FXML
-    private TableView<Relation> gtFamilyRelationTable;
+    private TableView<Relation> FAMILY_RELATION_TABLE;
     @FXML
-    private TableColumn<Relation, Member> relationSimLeftColumn;
+    private TableColumn<Relation, Member> RELATION_SIM_LEFT_COLUMN;
     @FXML
-    private TableColumn<Relation, RelationType> relationTypeColumn;
+    private TableColumn<Relation, RelationType> RELATION_TYPE_COLUMN;
     @FXML
-    private TableColumn<Relation, Member> relationSimRightColumn;
+    private TableColumn<Relation, Member> RELATION_SIM_RIGHT_COLUMN;
     @FXML
-    private ToggleButton buttonShowMemberTable;
+    private ToggleButton BUTTON_SHOW_MEMBERS_TABLE;
     @FXML
-    private ToggleButton buttonShowRelationTable;
+    private ToggleButton BUTTON_SHOW_RELATIONS_TABLE;
 
     private ScreenMainLeftController screenMainLeft;
 
@@ -87,16 +87,16 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         this.languageBundle.bind(context.getBundle());
         addLanguageListener();
 
-        gtFamilyMemberTable.setVisible(true);
-        gtFamilyRelationTable.setVisible(false);
+        FAMILY_MEMBER_TABLE.setVisible(true);
+        FAMILY_RELATION_TABLE.setVisible(false);
 
         setButtonToToggleGroup();
         setCellValueFactory();
 
-        this.relationSimLeftColumn.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_LEFT));
-        this.relationSimRightColumn.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_RIGHT));
-        this.relationTypeColumn.setCellFactory(setRelationTypeCellFactory());
-        this.simPhotoColumn.setCellFactory(setPhotoCellFactory());
+        this.RELATION_SIM_LEFT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_LEFT));
+        this.RELATION_SIM_RIGHT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_RIGHT));
+        this.RELATION_TYPE_COLUMN.setCellFactory(setRelationTypeCellFactory());
+        this.SIM_PHOTO_COLUMN.setCellFactory(setPhotoCellFactory());
 
         context.getService().currentFamilyPropertyI().addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
@@ -111,21 +111,21 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     }
 
     private void setButtonToToggleGroup() {
-        buttonShowMemberTable.setToggleGroup(buttonsTableGroup);
-        buttonShowRelationTable.setToggleGroup(buttonsTableGroup);
+        BUTTON_SHOW_MEMBERS_TABLE.setToggleGroup(buttonsTableGroup);
+        BUTTON_SHOW_RELATIONS_TABLE.setToggleGroup(buttonsTableGroup);
 
-        buttonsTableGroup.selectToggle(buttonShowMemberTable);
+        buttonsTableGroup.selectToggle(BUTTON_SHOW_MEMBERS_TABLE);
 
         buttonsTableGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
             if (newValue == null) {
                 buttonsTableGroup.selectToggle(oldValue);
             }
-            if (buttonsTableGroup.getSelectedToggle().equals(buttonShowMemberTable)) {
-                gtFamilyMemberTable.setVisible(true);
-                gtFamilyRelationTable.setVisible(false);
+            if (buttonsTableGroup.getSelectedToggle().equals(BUTTON_SHOW_MEMBERS_TABLE)) {
+                FAMILY_MEMBER_TABLE.setVisible(true);
+                FAMILY_RELATION_TABLE.setVisible(false);
             } else {
-                gtFamilyMemberTable.setVisible(false);
-                gtFamilyRelationTable.setVisible(true);
+                FAMILY_MEMBER_TABLE.setVisible(false);
+                FAMILY_RELATION_TABLE.setVisible(true);
             }
         });
     }
@@ -143,14 +143,14 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     private void reloadElements() {
         // Nothing to do
-        buttonShowMemberTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
-        buttonShowRelationTable.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
+        BUTTON_SHOW_MEMBERS_TABLE.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
+        BUTTON_SHOW_RELATIONS_TABLE.setText(getValueFromKey(Keys.BUTTON_MEMBERS));
     }
 
     @FXML
     private void showSimContextMenu(ContextMenuEvent event) {
-        Member m = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
-        if(m != null)  sm.showSimContextMenu(m, gtFamilyMemberTable, event);
+        Member m = FAMILY_MEMBER_TABLE.getSelectionModel().getSelectedItem();
+        if(m != null)  sm.showSimContextMenu(m, FAMILY_MEMBER_TABLE, event);
     }
 
     @FXML
@@ -161,7 +161,7 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     @FXML
     public void showInfoMember(MouseEvent event) {
-        Member selected = gtFamilyMemberTable.getSelectionModel().getSelectedItem();
+        Member selected = FAMILY_MEMBER_TABLE.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2 && selected != null) {
             sm.getScreenMainController().showInfoSim(selected);
         }
@@ -169,7 +169,7 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
     @FXML
     public void showInfoRelation(MouseEvent event) {
-        Relation selected = gtFamilyRelationTable.getSelectionModel().getSelectedItem();
+        Relation selected = FAMILY_RELATION_TABLE.getSelectionModel().getSelectedItem();
 
         System.out.println("Selected : " +selected);
 
@@ -179,23 +179,23 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     }
 
     private void setCellValueFactory() {
-        this.simNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
-        this.simSurnameColumn.setCellValueFactory(data -> data.getValue().surnameProperty());
-        this.simPhotoColumn.setCellValueFactory(sm.getPhotoValueFactory());
+        this.SIM_NAME_COLUMN.setCellValueFactory(data -> data.getValue().nameProperty());
+        this.SIM_SURNAME_COLUMN.setCellValueFactory(data -> data.getValue().surnameProperty());
+        this.SIM_PHOTO_COLUMN.setCellValueFactory(sm.getPhotoValueFactory());
 
-        this.relationSimLeftColumn.setCellValueFactory(data -> data.getValue().leftProperty());
-        this.relationSimRightColumn.setCellValueFactory(data -> data.getValue().rightProperty());
-        this.relationTypeColumn.setCellValueFactory(data -> data.getValue().typeProperty());
+        this.RELATION_SIM_LEFT_COLUMN.setCellValueFactory(data -> data.getValue().leftProperty());
+        this.RELATION_SIM_RIGHT_COLUMN.setCellValueFactory(data -> data.getValue().rightProperty());
+        this.RELATION_TYPE_COLUMN.setCellValueFactory(data -> data.getValue().typeProperty());
 
     }
 
 
     private void setMemberList(ObservableList<Member> list) {
-        this.gtFamilyMemberTable.setItems(list);
+        this.FAMILY_MEMBER_TABLE.setItems(list);
     }
 
     private void setRelationList(ObservableList<Relation> list) {
-        this.gtFamilyRelationTable.setItems(list);
+        this.FAMILY_RELATION_TABLE.setItems(list);
     }
 
     private void populateWithFamily(Family f) {

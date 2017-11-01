@@ -22,7 +22,7 @@
                                AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
                         <TextArea editable="false" layoutY="46.0" prefHeight="81.0" prefWidth="480.0"
                                   text="Description:" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
-                        <JFXToggleButton fx:id="toggleAllowedHomo" layoutX="21.0" layoutY="136.0" prefHeight="58.0"
+                        <JFXToggleButton fx:id="TOGGLE_ALLOWED_HOMO" layoutX="21.0" layoutY="136.0" prefHeight="58.0"
                                          prefWidth="440.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
                                          AnchorPane.topAnchor="136.0"/>
                     </children>

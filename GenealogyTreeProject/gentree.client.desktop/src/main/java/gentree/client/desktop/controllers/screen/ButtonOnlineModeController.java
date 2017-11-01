@@ -35,7 +35,7 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private Label onlineApplicationLabel;
+    private Label ONLINE_APPLICATION_LABEL;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,7 +63,7 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
     }
 
     private void reloadElements() {
-        this.onlineApplicationLabel.setText(getValueFromKey(Keys.APPLICATION_CHOICE_ONLINE).toUpperCase());
+        this.ONLINE_APPLICATION_LABEL.setText(getValueFromKey(Keys.APPLICATION_CHOICE_ONLINE).toUpperCase());
     }
 
     /*

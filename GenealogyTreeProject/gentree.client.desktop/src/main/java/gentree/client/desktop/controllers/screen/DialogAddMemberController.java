@@ -45,43 +45,43 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
-    private AnchorPane paneDeathCause;
+    private AnchorPane DEATH_CAUSE_PANE;
 
     @FXML
-    private JFXTextField simName;
+    private JFXTextField SIM_NAME_FIELD;
 
     @FXML
-    private JFXTextField simSurname;
+    private JFXTextField SIM_SURNAME_FIELD;
 
     @FXML
-    private JFXTextField simBornname;
+    private JFXTextField SIM_BORNNAME_FIELD;
 
     @FXML
-    private ImageView photo;
+    private ImageView PHOTO_IMV;
 
     @FXML
-    private JFXRadioButton simSexMale;
+    private JFXRadioButton SIM_SEX_MALE_CHOICE;
 
     @FXML
-    private JFXRadioButton simSexFemale;
+    private JFXRadioButton SIM_SEX_FEMALE_CHOICE;
 
     @FXML
-    private ComboBox<Age> comboBoxAge;
+    private ComboBox<Age> AGE_COMBO_BOX;
 
     @FXML
-    private ComboBox<Race> comboBoxRace;
+    private ComboBox<Race> RACE_COMBO_BOX;
 
     @FXML
-    private ComboBox<DeathCauses> comboBoxDeathCause;
+    private ComboBox<DeathCauses> DEATH_CAUSE_COMBO_BOX;
 
     @FXML
-    private JFXToggleButton toggleAliveButton;
+    private JFXToggleButton ALIVE_TOGGLE_BUTTON;
 
     @FXML
-    private JFXButton buttonCancel;
+    private JFXButton BUTTON_CANCEL;
 
     @FXML
-    private JFXButton buttonConfirm;
+    private JFXButton CONFIRM_BUTTON;
 
     private Stage stage;
     private ToggleGroup toggleGroupSex;
@@ -96,7 +96,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
-        photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+        PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
         initListeners();
         createSexToogleGroupe();
         populateAgeComboBox();
@@ -112,12 +112,12 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     public void confirm() {
 
-        Member member = new Member(this.simName.getText(), this.simSurname.getText(), this.simBornname.getText(), path,
-                comboBoxAge.getSelectionModel().getSelectedItem(),
+        Member member = new Member(this.SIM_NAME_FIELD.getText(), this.SIM_SURNAME_FIELD.getText(), this.SIM_BORNNAME_FIELD.getText(), path,
+                AGE_COMBO_BOX.getSelectionModel().getSelectedItem(),
                 (Gender) toggleGroupSex.getSelectedToggle().getUserData(),
-                comboBoxRace.getSelectionModel().getSelectedItem(),
-                toggleAliveButton.isSelected(),
-                toggleAliveButton.isSelected() ? null : comboBoxDeathCause.getSelectionModel().getSelectedItem());
+                RACE_COMBO_BOX.getSelectionModel().getSelectedItem(),
+                ALIVE_TOGGLE_BUTTON.isSelected(),
+                ALIVE_TOGGLE_BUTTON.isSelected() ? null : DEATH_CAUSE_COMBO_BOX.getSelectionModel().getSelectedItem());
 
         ServiceResponse response = context.getService().addMember(member);
         System.out.println(response);
@@ -134,7 +134,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
             if (file != null) {
                 try {
                     path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
-                    this.photo.setImage(new Image(path));
+                    this.PHOTO_IMV.setImage(new Image(path));
                 } catch (Exception e) {
                     log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
                     e.printStackTrace();
@@ -145,26 +145,26 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
 
     private void createSexToogleGroupe() {
-        this.simSexMale.setToggleGroup(this.toggleGroupSex);
-        this.simSexMale.setUserData(Gender.M);
-        this.simSexFemale.setToggleGroup(this.toggleGroupSex);
-        this.simSexFemale.setUserData(Gender.F);
-        this.toggleGroupSex.selectToggle(simSexMale);
+        this.SIM_SEX_MALE_CHOICE.setToggleGroup(this.toggleGroupSex);
+        this.SIM_SEX_MALE_CHOICE.setUserData(Gender.M);
+        this.SIM_SEX_FEMALE_CHOICE.setToggleGroup(this.toggleGroupSex);
+        this.SIM_SEX_FEMALE_CHOICE.setUserData(Gender.F);
+        this.toggleGroupSex.selectToggle(SIM_SEX_MALE_CHOICE);
     }
 
     private void populateAgeComboBox() {
-        comboBoxAge.getItems().addAll(Age.values());
-        comboBoxAge.getSelectionModel().select(Age.YOUNG_ADULT);
+        AGE_COMBO_BOX.getItems().addAll(Age.values());
+        AGE_COMBO_BOX.getSelectionModel().select(Age.YOUNG_ADULT);
     }
 
     private void populateRaceComboBox() {
-        comboBoxRace.getItems().addAll(Race.values());
-        comboBoxRace.getSelectionModel().select(Race.HUMAIN);
+        RACE_COMBO_BOX.getItems().addAll(Race.values());
+        RACE_COMBO_BOX.getSelectionModel().select(Race.HUMAIN);
     }
 
     private void populateDeathCauseComboBox() {
-        comboBoxDeathCause.getItems().addAll(DeathCauses.values());
-        comboBoxDeathCause.getSelectionModel().select(DeathCauses.NATURAL);
+        DEATH_CAUSE_COMBO_BOX.getItems().addAll(DeathCauses.values());
+        DEATH_CAUSE_COMBO_BOX.getSelectionModel().select(DeathCauses.NATURAL);
     }
 
 
@@ -179,27 +179,27 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     }
 
     private void initAliveListener() {
-        toggleAliveButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+        ALIVE_TOGGLE_BUTTON.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                toggleAliveButton.setText("Alive");
-                paneDeathCause.setVisible(false);
+                ALIVE_TOGGLE_BUTTON.setText("Alive");
+                DEATH_CAUSE_PANE.setVisible(false);
 
             } else {
-                toggleAliveButton.setText("Mort");
-                paneDeathCause.setVisible(true);
+                ALIVE_TOGGLE_BUTTON.setText("Mort");
+                DEATH_CAUSE_PANE.setVisible(true);
             }
         });
 
-        toggleAliveButton.setSelected(true);
+        ALIVE_TOGGLE_BUTTON.setSelected(true);
     }
 
     private void initSexListener() {
         toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (path == null) {
                 if (newValue.getUserData().equals(Gender.M)) {
-                    photo.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+                    PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
                 } else {
-                    photo.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
+                    PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
                 }
             }
         });

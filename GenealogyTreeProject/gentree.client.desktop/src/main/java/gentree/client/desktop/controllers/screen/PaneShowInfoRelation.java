@@ -47,33 +47,33 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     @FXML
     @Getter
     @Setter
-    private AnchorPane paneShowInfoRelation;
+    private AnchorPane PANE_SHOW_INFO_RELATION;
 
     @FXML
-    private AnchorPane contentPane;
+    private AnchorPane CONTENT_PANE;
 
     @FXML
     private HeaderPane HEADER_PANE;
 
     @FXML
-    private JFXButton returnButton;
+    private JFXButton RETURN_BUTTON;
 
     @FXML
-    private JFXTextField relationId;
+    private JFXTextField RELATION_ID_FIELD;
 
 
     @FXML
-    private StackPane relationTypePane;
+    private StackPane RELATION_TYPE_PANE;
 
     @FXML
-    private TableView<Member> familyMemberTable;
+    private TableView<Member> FAMILY_MEMBER_TABLE;
 
     @FXML
-    private TableColumn<Member, String> simNameColumn;
+    private TableColumn<Member, String> SIM_NAME_COLUMN;
     @FXML
-    private TableColumn<Member, String> simSurnameColumn;
+    private TableColumn<Member, String> SIM_SURNAME_COLUMN;
     @FXML
-    private TableColumn<Member, String> simPhotoColumn;
+    private TableColumn<Member, String> SIM_PHOTO_COLUMN;
 
 
     @FXML
@@ -105,7 +105,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     @FXML
     private void returnAction() {
-        sm.getScreenMainController().removeInfoPanel(paneShowInfoRelation);
+        sm.getScreenMainController().removeInfoPanel(PANE_SHOW_INFO_RELATION);
     }
 
 
@@ -117,7 +117,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
         this.languageBundle.bind(context.getBundle());
         addLanguageListener();
 
-        readOnlyControls = Arrays.asList(relationId);
+        readOnlyControls = Arrays.asList(RELATION_ID_FIELD);
         initPanes();
         initControlsProperties();
         initListeners();
@@ -127,7 +127,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     }
 
     private void initPanes() {
-        relationTypePane.getChildren().add(relationTypeElement);
+        RELATION_TYPE_PANE.getChildren().add(relationTypeElement);
         setCellValueFactory();
     }
 
@@ -142,18 +142,18 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     private void populateControls(Relation r) {
         //TODO populate controls
-        relationId.setText(Long.toString(r.getId()));
+        RELATION_ID_FIELD.setText(Long.toString(r.getId()));
         motherCard.setMember(r.getLeft());
         fatherCard.setMember(r.getRight());
         relationTypeElement.setRelation(r);
-        familyMemberTable.setItems(r.getChildren());
+        FAMILY_MEMBER_TABLE.setItems(r.getChildren());
     }
 
     private void setCellValueFactory() {
-        this.simNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
-        this.simSurnameColumn.setCellValueFactory(data -> data.getValue().surnameProperty());
-        this.simPhotoColumn.setCellValueFactory(sm.getPhotoValueFactory());
-        this.simPhotoColumn.setCellFactory(setPhotoCellFactory());
+        this.SIM_NAME_COLUMN.setCellValueFactory(data -> data.getValue().nameProperty());
+        this.SIM_SURNAME_COLUMN.setCellValueFactory(data -> data.getValue().surnameProperty());
+        this.SIM_PHOTO_COLUMN.setCellValueFactory(sm.getPhotoValueFactory());
+        this.SIM_PHOTO_COLUMN.setCellFactory(setPhotoCellFactory());
     }
 
     /*
@@ -219,10 +219,10 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     private void reloadElements() {
         //Todo reload gentree.client.visualization.elements after refactor labels
-        simPhotoColumn.setText(getValueFromKey(Keys.AVATAR));
-        simNameColumn.setText(getValueFromKey(Keys.SIM_NAME));
-        simSurnameColumn.setText(getValueFromKey(Keys.SIM_SURNAME));
-        returnButton.setText(getValueFromKey(Keys.RETURN));
+        SIM_PHOTO_COLUMN.setText(getValueFromKey(Keys.AVATAR));
+        SIM_NAME_COLUMN.setText(getValueFromKey(Keys.SIM_NAME));
+        SIM_SURNAME_COLUMN.setText(getValueFromKey(Keys.SIM_SURNAME));
+        RETURN_BUTTON.setText(getValueFromKey(Keys.RETURN));
         HEADER_PANE.setTitle(getValueFromKey(Keys.HEADER_INF_RELATION));
     }
 

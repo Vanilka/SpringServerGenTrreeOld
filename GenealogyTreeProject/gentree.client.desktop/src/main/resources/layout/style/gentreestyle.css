@@ -459,12 +459,12 @@
     -fx-alignment: center;
 }
 
-#gtFamilyMemberTable {
+#family_member_table {
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
 }
 
-#gtFamilyRelationTable {
+#family_relation_table {
     -fx-background-radius: 20 20 20 20;
     -fx-border-radius: 20 20 20 20;
 }
@@ -510,7 +510,7 @@
     -fx-alignment: center;
 }
 
-#gtFamilyRelationTable .cell {
+#family_relation_table .cell {
 
     -fx-cell-size: 90px;
 }
@@ -636,7 +636,7 @@
 /*
     Header od Pane
  */
-#sim-info-header, #relation-info-header {
+#sim-info-header, #relation-info-header, .header-pane-content {
     -fx-background-color: #156f93;
     -fx-min-height: 30;
     -fx-pref-height: 30;
@@ -789,5 +789,4 @@
 #projectsList:focused .table-row-cell:filled:focused:selected,
 #projectsList .table-row-cell:filled:focused:selected {
     -fx-background-color: -gentree-color-2;
-
 }
