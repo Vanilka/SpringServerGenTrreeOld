@@ -145,4 +145,6 @@ public class MemberEntity implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
+
 }

@@ -5,17 +5,17 @@ import gentree.exception.configuration.ExceptionCauses;
 /**
  * Created by Martyna SZYMKOWIAK on 26/10/2017.
  */
-public class TooManyNullFields extends Exception {
+public class TooManyNullFieldsException extends Exception {
 
-    public TooManyNullFields() {
+    public TooManyNullFieldsException() {
         this(ExceptionCauses.TOO_MANY_NULL_FIELDS.toString());
     }
 
-    public TooManyNullFields(String message) {
+    public TooManyNullFieldsException(String message) {
         super(message);
     }
 
-    public TooManyNullFields(String message, Throwable cause) {
+    public TooManyNullFieldsException(String message, Throwable cause) {
         super(message, cause);
     }
 

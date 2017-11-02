@@ -13,11 +13,15 @@ public interface RelationService {
 
     RelationEntity addNewRelation(RelationEntity relation);
 
+    RelationEntity updateRelation(RelationEntity relation);
+
     RelationEntity addNewBornRelation(MemberEntity memberEntity);
 
     List<RelationEntity> findAllRelationsByFamilyId(Long id);
 
     RelationEntity deleteRelation(RelationEntity relation);
+
+    RelationEntity findRelationBysimLeftAndsimRight(MemberEntity simLeft, MemberEntity simRight);
 
     void removeOrphans(Long familyID);
 

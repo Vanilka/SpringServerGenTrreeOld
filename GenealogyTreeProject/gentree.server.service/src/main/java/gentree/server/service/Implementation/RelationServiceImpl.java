@@ -6,6 +6,7 @@ import gentree.server.domain.entity.RelationEntity;
 import gentree.server.repository.RelationRepository;
 import gentree.server.service.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,8 @@ public class RelationServiceImpl implements RelationService {
 
     @Override
     public RelationEntity addNewRelation(RelationEntity relation) {
+
+
         relation = repository.saveAndFlush(relation);
         //Delete nulls
         removeOrphans(relation.getFamily().getId());
@@ -32,15 +35,17 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
+    public RelationEntity updateRelation(RelationEntity relation) {
+        return repository.saveAndFlush(relation);
+    }
+
+    @Override
     public RelationEntity addNewBornRelation(MemberEntity memberEntity) {
 
         RelationEntity relationEntity = null;
         try {
-            System.out.println("Member  : " +memberEntity);
-            System.out.println("MemberEntity family : " +memberEntity.getFamily());
             relationEntity = repository.saveAndFlush(new RelationEntity(null, null, memberEntity, memberEntity.getFamily()));
         } catch (Exception e) {
-            System.out.println("Add  born Relation error");
             e.printStackTrace();
         }
 
@@ -67,6 +72,28 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
+    public RelationEntity findRelationBysimLeftAndsimRight(MemberEntity simLeft, MemberEntity simRight) {
+        List<RelationEntity> list = repository.findByLeftAndRight(simLeft, simRight);
+
+        RelationEntity target;
+
+        if(list == null || list.isEmpty()) return  null;
+
+        if(list.size() > 1) {
+            target = mergingRelationList(list);
+            repository.flush();
+        } else {
+            target = list.get(0);
+        }
+
+        return target;
+    }
+
+
+
+
+
+    @Override
     public List<RelationEntity> findAllRelationsByFamilyId(Long id) {
         return repository.findAllByFamilyId(id);
     }
@@ -81,6 +108,20 @@ public class RelationServiceImpl implements RelationService {
         repository.flush();
     }
 
+    private RelationEntity mergingRelationList(List<RelationEntity> mergingList) {
+        RelationEntity toMerge = mergingList.get(0);
+
+        mergingList.remove(toMerge);
+
+        mergingList.forEach(element -> {
+            element.getChildren().forEach(child -> {
+                if( !toMerge.getChildren().contains(child)) toMerge.getChildren().add(child);
+            });
+        });
+
+        repository.deleteAll(mergingList);
+        return toMerge;
+    }
 
 
 

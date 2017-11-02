@@ -2,12 +2,16 @@ package gentree.server.service.validator;
 
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.AscendanceViolationException;
+import gentree.exception.IncorrectStatusException;
+import gentree.exception.NotExistingMemberException;
+import gentree.exception.TooManyNullFieldsException;
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.RelationEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -16,17 +20,49 @@ import java.util.stream.Collectors;
 @Component
 public class RelationValidatorImpl implements RelationValidator {
 
-    @Override
-    public boolean validate(RelationEntity relation, FamilyEntity family) throws AscendanceViolationException {
-        if (relation == null) return false;
-        if (!checkNulls(relation)) return false;
-        if (!checkStatus(relation)) return false;
 
-        checkAsc(relation, family);
+    /**
+     * Will return true, if relation will pass all check OK. </br>
+     * In case of error will generate exception.  </br>
+     * If you attanding FALSE please refer to <b>validateSimple </b> method
+     *
+     * @param relation
+     * @param family
+     * @return true / exception
+     * @throws AscendanceViolationException
+     * @throws TooManyNullFieldsException
+     * @throws IncorrectStatusException
+     */
+    @Override
+    public boolean validate(RelationEntity relation, FamilyEntity family)
+            throws AscendanceViolationException, TooManyNullFieldsException, IncorrectStatusException, NotExistingMemberException {
+        if (relation == null) throw new NullPointerException();
+        if (!checkNulls(relation)) throw new TooManyNullFieldsException();
+        if (!checkExistingSims(relation, family)) throw new NotExistingMemberException();
+        if (!checkStatus(relation)) throw new IncorrectStatusException();
+        if (!checkAsc(relation, family)) throw new AscendanceViolationException();
 
         return true;
     }
 
+
+    /**
+     * Will return true, if relation will pass all check OK. </br>
+     *
+     * @param relation
+     * @param family
+     * @return true/false
+     */
+    @Override
+    public boolean validateSimple(RelationEntity relation, FamilyEntity family) {
+        if (relation == null) return false;
+        if (!checkNulls(relation)) return false;
+        if (!checkStatus(relation)) return false;
+
+        if (!checkAsc(relation, family)) return false;
+
+        return true;
+    }
 
     private boolean checkNulls(RelationEntity relation) {
         if (relation == null) return false;
@@ -34,6 +70,7 @@ public class RelationValidatorImpl implements RelationValidator {
             return false;
         return true;
     }
+
 
     private boolean checkStatus(RelationEntity relation) {
         if ((relation.getLeft() == null || relation.getRight() == null)
@@ -43,26 +80,36 @@ public class RelationValidatorImpl implements RelationValidator {
     }
 
 
-    private void checkAsc(RelationEntity relation, FamilyEntity family) throws AscendanceViolationException {
-        if (isAscOf(relation.getLeft(), relation.getRight(), family.getRelations()))
-            throw new AscendanceViolationException();
-        if (isAscOf(relation.getRight(), relation.getLeft(), family.getRelations()))
-            throw new AscendanceViolationException();
+    /**
+     * Check Ascendance in relation.  </br>
+     * <p>
+     * False -  relation contains inappropriate connections beetween members </br>
+     * True - relation is OK </br>
+     *
+     * @param relation
+     * @param family
+     * @return true/false
+     */
+    private boolean checkAsc(RelationEntity relation, FamilyEntity family) {
+        if (isAscOf(relation.getLeft(), relation.getRight(), family.getRelations())) return false;
+        if (isAscOf(relation.getRight(), relation.getLeft(), family.getRelations())) return false;
 
         if (!relation.getChildren().isEmpty()) {
             for (MemberEntity child : relation.getChildren()) {
-                if (isAscOf(child, relation.getLeft(), family.getRelations()))
-                    throw new AscendanceViolationException();
-                if (isAscOf(child, relation.getRight(), family.getRelations()))
-                    throw new AscendanceViolationException();
+                if (isAscOf(child, relation.getLeft(), family.getRelations())) return false;
+                if (isAscOf(child, relation.getRight(), family.getRelations())) return false;
             }
         }
+
+        return true;
 
     }
 
 
     /**
      * Function checking if SIM is Ascendance (Parent) of GRAIN
+     * FALSE - Sim is NOT ascendant of GRAIN
+     * TRUE - Sim is ascendant of GRAIN
      *
      * @param grain
      * @param sim
@@ -81,7 +128,9 @@ public class RelationValidatorImpl implements RelationValidator {
     }
 
     /**
-     * Check if MemberEntity SIM is descendant of GRAIN
+     * Check if MemberEntity SIM is descendant of GRAIN </br>
+     * FALSE - sim is NOT descendant of GRAIN </br>
+     * TRUE - SIM is descendant of GRAIN </br>
      *
      * @param grain
      * @param sim
@@ -114,6 +163,24 @@ public class RelationValidatorImpl implements RelationValidator {
         }
 
         return entity;
+    }
+
+
+    private boolean checkExistingSims(RelationEntity relation, FamilyEntity family) {
+        if (relation.getLeft() != null && !simExist(relation.getLeft(), family)) return false;
+        if (relation.getRight() != null && !simExist(relation.getRight(), family)) return false;
+
+        if (relation.getChildren() != null && !relation.getChildren().isEmpty()) {
+            for (MemberEntity child : relation.getChildren()) {
+                if (!simExist(child, family)) return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean simExist(MemberEntity member, FamilyEntity familyEntity) {
+        return familyEntity.getMembers().stream().filter(element -> Objects.equals(element.getId(), member.getId())).count() > 0;
     }
 
 }

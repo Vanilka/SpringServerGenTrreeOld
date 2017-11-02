@@ -13,6 +13,7 @@ public enum ExceptionCauses {
     INCORRECT_STATUS("Relation has incorrect status"),
     ASCENDANCE_VIOLATION("Ascendance violation"),
     DESCENDANCE_VIOLATION("Descendance violation"),
+    NOT_EXISTING_MEMBER("Trying to provide non existing member"),
     TOO_MANY_NULL_FIELDS("Too many null fields");
 
     private String cause;

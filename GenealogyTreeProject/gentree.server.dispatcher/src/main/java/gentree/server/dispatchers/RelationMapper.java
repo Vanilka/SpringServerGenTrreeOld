@@ -1,6 +1,6 @@
 package gentree.server.dispatchers;
 
-import gentree.exception.FamilyAccessDeniedException;
+import gentree.exception.*;
 import gentree.server.domain.entity.RelationEntity;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerExtendedDTO;
@@ -51,7 +51,8 @@ public class RelationMapper {
      * @throws FamilyAccessDeniedException
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
+    public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth)
+            throws FamilyAccessDeniedException, TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.addRelation(relation);
         return new ResponseEntity<>(list, HttpStatus.OK);

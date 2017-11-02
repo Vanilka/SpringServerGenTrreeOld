@@ -1,5 +1,9 @@
 package gentree.server.facade.implementation;
 
+import gentree.exception.AscendanceViolationException;
+import gentree.exception.IncorrectStatusException;
+import gentree.exception.NotExistingMemberException;
+import gentree.exception.TooManyNullFieldsException;
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.domain.entity.RelationEntity;
@@ -96,7 +100,7 @@ public class FamilyFacadeImpl implements FamilyFacade {
     ************************************************************ */
 
     @Override
-    public List<RelationDTO> addRelation(RelationDTO relation) {
+    public List<RelationDTO> addRelation(RelationDTO relation) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException {
         RelationEntity relationEntity = converterToEntity.convert(relation);
         List<RelationEntity> list = projectService.addRelation(relationEntity);
         List<RelationDTO> target = converterToDTO.convertFullRelationList(list);
