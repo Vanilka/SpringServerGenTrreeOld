@@ -12,20 +12,26 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.util.Callback;
 import lombok.extern.log4j.Log4j2;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -35,6 +41,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class MainMenuController implements Initializable, FXMLController, FXMLBorderPane {
 
+    private final SnapshotParameters snapshotParameters = new SnapshotParameters();
 
     @FXML
     private MenuBar MENU_BAR;
@@ -192,9 +199,9 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     @FXML
     public void generateImage() throws IOException, AWTException {
 
-       /* WritableImage image = sm.getPaneGenealogyTreeDrawController().Image();
-        File file = new File("./screen/GenTree" + LocalDateTime.now() + ".png");
-        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);*/
+        WritableImage image = sm.getScreenMainRightController().Image();
+        File file = new File("./GenTree" + LocalDateTime.now() + ".png");
+        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
 
     }
 

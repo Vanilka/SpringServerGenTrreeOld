@@ -5,6 +5,7 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -84,8 +85,8 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         initPane();
         initListeners();
         initHbox();
-        setTop(pane);
         setCenter(childrenBox);
+        setTop(pane);
         this.setPadding(new Insets(PADDING_TOP, PADDING_RIGHT, PADDING_BOTTOM, PADDING_LEFT));
         setMargin(pane, new Insets(MARGIN_TOP, MARGIN_RIGHT, MARGIN_BOTTOM, MARGIN_LEFT));
 
@@ -142,10 +143,12 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
 
     private void initRelationElementsPositionListener() {
 
-        thisRelationReference.layoutXProperty().bind(member.layoutXProperty());
+        thisRelationReference.layoutXProperty().bind(member.layoutXProperty().add((member.widthProperty().subtract(thisRelationReference.widthProperty())).divide(2)));
         thisRelationReference.layoutYProperty().bind(member.layoutYProperty().add(member.heightProperty()));
 
-        member.layoutXProperty().bind(pane.widthProperty().subtract(member.widthProperty()).divide(2));
+        member.layoutXProperty().bind(Bindings.when(Bindings.isEmpty(childrenPanels))
+                .then(pane.widthProperty().subtract(member.widthProperty()).divide(2))
+        .otherwise(childrenConnector.getLine().startXProperty().subtract(member.widthProperty().divide(2)).subtract(PADDING_RIGHT)));
     }
 
 

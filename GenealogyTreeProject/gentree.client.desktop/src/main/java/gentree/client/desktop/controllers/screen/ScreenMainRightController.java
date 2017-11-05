@@ -4,16 +4,15 @@ import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
+import gentree.client.visualization.service.implementation.GenTreeImageGenerator;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
@@ -26,6 +25,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class ScreenMainRightController extends AnchorPane implements Initializable, FXMLController, FXMLAnchorPane {
 
+    private final GenTreeImageGenerator imageGenerator = GenTreeImageGenerator.INSTANCE;
     @FXML
     private ScrollPane TREE_DRAW_SCROLL_PANE;
 
@@ -40,6 +40,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
     @Getter
     private GenTreeDrawingService drawingService;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,9 +59,10 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
 
+
     public WritableImage Image() {
-        WritableImage image = TREE_DRAW_ANCHOR_PANE.snapshot(new SnapshotParameters(), null);
-        return image;
+
+        return imageGenerator.doScreen(TREE_DRAW_ANCHOR_PANE, context.getService().getCurrentFamily().getName());
     }
 
     public void redrawTree() {

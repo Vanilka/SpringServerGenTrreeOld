@@ -9,6 +9,8 @@ import gentree.client.visualization.elements.FamilyGroup;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
 import lombok.extern.log4j.Log4j2;
 
@@ -39,6 +41,12 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         GenTreeDrawingServiceImpl.context = context;
     }
 
+
+    public WritableImage takeScreenshot() {
+        WritableImage image = box.snapshot(new SnapshotParameters(), null);
+        return image;
+    }
+
     @Override
     public void startDraw() {
         reset();
@@ -56,6 +64,7 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             });
         });
     }
+
 
     /**
      * AddRelations for Panel Child
