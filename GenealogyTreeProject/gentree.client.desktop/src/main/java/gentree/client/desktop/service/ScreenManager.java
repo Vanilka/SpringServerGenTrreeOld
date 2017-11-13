@@ -15,6 +15,7 @@ import gentree.client.desktop.controllers.screen.*;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.FamilyMember;
+import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import gentree.client.visualization.elements.configuration.ImageFiles;
@@ -126,6 +127,7 @@ public class ScreenManager implements ContextProvider {
      */
     private void configureStatics() {
         FamilyMember.setContextProviderProperty(this);
+        RelationReference.setContextProviderProperty(this);
         RelationTypeElement.setContextProviderProperty(this);
         PhotoMarshaller.addIgnoredPaths(ImageFiles.GENERIC_FEMALE.toString(),
                 ImageFiles.GENERIC_FEMALE.toString());
@@ -448,6 +450,16 @@ public class ScreenManager implements ContextProvider {
     public void reloadScreenWelcomeController() {
         loadFxml(screenWelcomeController, this.mainWindowBorderPane, FilesFXML.SCREEN_WELCOME_FXML, Where.CENTER);
         context.setService(null);
+    }
+
+    @Override
+    public void showInfoSim(Member member) {
+        getScreenMainController().showInfoSim(member);
+    }
+
+    @Override
+    public void showInfoRelation(Relation relation) {
+        getScreenMainController().showInfoRelation(relation);
     }
 
     @Override

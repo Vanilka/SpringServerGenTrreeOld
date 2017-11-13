@@ -15,11 +15,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -34,7 +36,7 @@ import java.util.ResourceBundle;
  */
 
 @Log4j2
-public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAnchorPane {
+public class PaneShowInfoSim extends Pane implements Initializable, FXMLController, FXMLAnchorPane {
 
     private final ObjectProperty<Member> member;
     private final BooleanProperty modifiable;

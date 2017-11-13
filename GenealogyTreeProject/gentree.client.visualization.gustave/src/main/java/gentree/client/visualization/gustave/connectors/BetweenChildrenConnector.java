@@ -86,8 +86,6 @@ public class BetweenChildrenConnector extends LineConnector {
 
       //  start.bind(Bindings.createObjectBinding(() -> list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
       //  end.bind(Bindings.createObjectBinding(() -> list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
-
-
     }
 
     public void addPanelChild(PanelChild child) {

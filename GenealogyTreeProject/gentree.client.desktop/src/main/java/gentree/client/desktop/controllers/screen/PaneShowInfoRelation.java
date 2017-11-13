@@ -47,7 +47,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     @FXML
     @Getter
     @Setter
-    private AnchorPane PANE_SHOW_INFO_RELATION;
+    private AnchorPane paneShowInfoRelation;
 
     @FXML
     private AnchorPane CONTENT_PANE;
@@ -105,7 +105,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     @FXML
     private void returnAction() {
-        sm.getScreenMainController().removeInfoPanel(PANE_SHOW_INFO_RELATION);
+        sm.getScreenMainController().removeInfoPanel(paneShowInfoRelation);
     }
 
 

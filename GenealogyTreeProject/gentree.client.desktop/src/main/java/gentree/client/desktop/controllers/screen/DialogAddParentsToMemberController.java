@@ -7,9 +7,9 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogWithMemberController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.MemberCard;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
-import gentree.client.visualization.elements.MemberCard;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -172,10 +172,24 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
         list = removeDescends(list, member);
         // list = removeAscends(list, member);
 
+        /*
+            Remove siblings
+         */
+        try {
+            Relation born = context.getService().getCurrentFamily().findBornRelation(member);
+
+            for (Member sibling : born.getChildren()) {
+                list = list.filtered(p -> !p.equals(sibling));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
         return list;
     }
 
 
+    @Deprecated
     private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
 
         try {

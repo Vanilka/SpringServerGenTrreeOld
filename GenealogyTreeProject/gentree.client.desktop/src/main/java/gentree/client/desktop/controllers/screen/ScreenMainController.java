@@ -67,6 +67,7 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
 
 
     public void showInfoSim(Member member) {
+        removerOthersInfoRelationsOrSim();
         SCREEN_MAIN_LEFT.getChildren().forEach(n -> n.setVisible(false));
         PaneShowInfoSim paneShowInfoSim = (PaneShowInfoSim) sm.loadAdditionalFxmltoAnchorPane(
                 new PaneShowInfoSim(), SCREEN_MAIN_LEFT, FilesFXML.PANE_SHOW_INFO_MEMBER_FXML);
@@ -74,10 +75,17 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     }
 
     public void showInfoRelation(Relation relation) {
+        removerOthersInfoRelationsOrSim();
         SCREEN_MAIN_LEFT.getChildren().forEach(n -> n.setVisible(false));
         PaneShowInfoRelation paneShowInfoRelation = (PaneShowInfoRelation) sm.loadAdditionalFxmltoAnchorPane(
                 new PaneShowInfoSim(), SCREEN_MAIN_LEFT, FilesFXML.PANE_SHOW_INFO_RELATION_FXML);
         paneShowInfoRelation.setRelation(relation);
+    }
+
+    private void removerOthersInfoRelationsOrSim() {
+        SCREEN_MAIN_LEFT.getChildren().forEach(System.out::println);
+        SCREEN_MAIN_LEFT.getChildren().removeIf(n -> n.getId().equals("paneShowInfoRelation"));
+        SCREEN_MAIN_LEFT.getChildren().removeIf(n -> n.getId().equals("paneShowInfoSim"));
     }
 
 

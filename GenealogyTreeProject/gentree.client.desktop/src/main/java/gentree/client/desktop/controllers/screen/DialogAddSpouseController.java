@@ -117,11 +117,20 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
                 .filtered(mbr -> !isAscOf(member.get(), mbr))
                 .filtered(mbr -> !isDescOf(member.get(), mbr));
 
+        try {
+            Relation born = context.getService().getCurrentFamily().findBornRelation(member.get());
+
+            for (Member sibling : born.getChildren()) {
+                list = list.filtered(p -> !p.equals(sibling));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
 /*
         list = removeAscends(list, member.get());
         list = removeDescends(list, member.get());
 */
-
         return list;
     }
 

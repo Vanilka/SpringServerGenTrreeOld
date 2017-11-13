@@ -47,13 +47,26 @@ public class RelationTypeElement extends RelationTypeCard {
 
         if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
             this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showRelationContextMenu(returnThis(), event));
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && relation.get() != null) {
+                    CONTEXT_PROVIDER_PROPERTY.get().showInfoRelation(relation.get());
+                }
+            });
+
         }
+
 
         CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
             if (newValue == null) {
                 this.setOnContextMenuRequested(null);
+                this.setOnMouseClicked(null);
             } else {
                 this.setOnContextMenuRequested(event -> newValue.showRelationContextMenu(returnThis(), event));
+                this.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && relation.get() != null) {
+                        newValue.showInfoRelation(relation.get());
+                    }
+                });
             }
         });
     }

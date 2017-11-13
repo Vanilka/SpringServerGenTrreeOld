@@ -1,6 +1,7 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.StackPane;
@@ -12,6 +13,8 @@ import javafx.scene.text.Text;
  * Created by Martyna SZYMKOWIAK on 31/08/2017.
  */
 public class RelationReference extends StackPane {
+
+    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
 
     private static final Color color1 = Color.web("#ED0C44");
     private static final Color border1 = Color.web("#aa0b33");
@@ -35,6 +38,29 @@ public class RelationReference extends StackPane {
         initListeners();
         getChildren().addAll(etiquete, text);
         this.setVisible(false);
+
+        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && relation.get() != null) {
+                    CONTEXT_PROVIDER_PROPERTY.get().showInfoRelation(relation.get());
+                }
+            });
+
+        }
+
+
+        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
+            if (newValue == null) {
+                this.setOnMouseClicked(null);
+            } else {
+                this.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && relation.get() != null) {
+                        newValue.showInfoRelation(relation.get());
+                    }
+                });
+            }
+        });
+
     }
 
     private void initListeners() {
@@ -126,5 +152,9 @@ public class RelationReference extends StackPane {
 
     public enum RelationReferenceType {
         ASC, DSC
+    }
+
+    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
+        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
     }
 }
