@@ -40,8 +40,6 @@ import java.util.ResourceBundle;
 public class DialogAddMemberController implements Initializable, FXMLController, FXMLPane, FXMLDialogController {
 
 
-    private static final String PREFIX_FILE_LOAD = "file://";
-
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     @FXML
@@ -130,16 +128,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     public void choosePhoto(MouseEvent event) {
         if (event.getClickCount() == 2) {
-            File file = sm.openImageFileChooser();
-            if (file != null) {
-                try {
-                    path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
-                    this.PHOTO_IMV.setImage(new Image(path));
-                } catch (Exception e) {
-                    log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
-                    e.printStackTrace();
-                }
-            }
+              path = sm.chooseSimPhoto(PHOTO_IMV);
         }
     }
 
@@ -195,7 +184,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     private void initSexListener() {
         toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (path == null) {
+            if (path == null || path.trim().equals("")) {
                 if (newValue.getUserData().equals(Gender.M)) {
                     PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
                 } else {

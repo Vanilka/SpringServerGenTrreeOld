@@ -32,10 +32,11 @@ public abstract class SubBorderPane extends BorderPane {
 
     public SubBorderPane() {
         initParentListeners();
-        this.setOnMouseClicked(event -> {
+/*
+ this.setOnMouseClicked(event -> {
             System.out.println(this + " Parent " + getParent());
             System.out.println("Family Group ? " + familyGroup.getValue() == null ? "null" : familyGroup.get());
-        });
+        });*/
     }
 
     protected void initBorder(Color color, Pane node) {

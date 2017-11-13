@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +49,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
     @FXML
     private AnchorPane CONTENT_PANE;
+
     @FXML
     private JFXButton RETURN_BUTTON;
     @FXML
@@ -63,14 +65,19 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
     @FXML
     private HeaderPane HEADER_PANE;
+
     @FXML
     private ImageView photo;
+
+    private String path;
+
     private List<? extends Control> readOnlyControls;
 
     {
 
         member = new SimpleObjectProperty<>();
         modifiable = new SimpleBooleanProperty(false);
+        path = null;
 
     }
 
@@ -85,7 +92,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
             getMember().setName(SIM_NAME_FIELD.getText());
             getMember().setSurname(SIM_SURNAME_FIELD.getText());
             getMember().setBornname(SIM_BORNNAME_FIELD.getText());
-
+            getMember().setPhoto(path);
             context.getService().updateMember(getMember());
         }
         modifiable.set(!modifiable.get());
@@ -108,7 +115,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
 
 
         addLanguageListener();
-        SIM_ID_FIELD.setDisable(false);
+        SIM_ID_FIELD.setEditable(false);
         readOnlyControls = Arrays.asList(SIM_NAME_FIELD, SIM_SURNAME_FIELD, SIM_BORNNAME_FIELD);
         setControlsModifiable(false);
         initListeners();
@@ -130,6 +137,13 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
         SIM_SURNAME_FIELD.setText(member.getSurname());
         SIM_BORNNAME_FIELD.setText(member.getBornname());
         this.photo.setImage(new Image(member.getPhoto()));
+    }
+
+
+    public void choosePhoto(MouseEvent event) {
+        if (event.getClickCount() == 2 && modifiable.get()) {
+            path = sm.chooseSimPhoto(photo);
+        }
     }
 
     /*
@@ -164,6 +178,7 @@ public class PaneShowInfoSim implements Initializable, FXMLController, FXMLAncho
     }
 
     private void reloadElements() {
+
         SIM_NAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_NAME));
         SIM_SURNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
         SIM_BORNNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));

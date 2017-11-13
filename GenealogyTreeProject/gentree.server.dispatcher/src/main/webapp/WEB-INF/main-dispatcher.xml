@@ -32,4 +32,11 @@
                      allow-credentials="false"
                      max-age="86400"/>
     </mvc:cors>
+
+    <!--
+          Resolver bean for upload Photos For sim
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="268435456"/>
+    </bean>
 </beans>

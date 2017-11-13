@@ -33,7 +33,7 @@
                               prefWidth="145.0" styleClass="imagePane" AnchorPane.leftAnchor="55.0"
                               AnchorPane.topAnchor="25.0">
                             <ImageView fx:id="photo" fitHeight="150.0" fitWidth="125.0" layoutX="10" layoutY="10"
-                                       pickOnBounds="true" preserveRatio="true"/>
+                                       pickOnBounds="true" preserveRatio="true" onMouseClicked="#choosePhoto"/>
                         </Pane>
 
                         <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" styleClass="jfx-text-always-focused"

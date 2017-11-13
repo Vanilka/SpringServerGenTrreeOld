@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.Comparator;
@@ -26,8 +27,8 @@ public class BetweenChildrenConnector extends LineConnector {
     */
     private SubRelationPane subBorderPane;
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
-    private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
-    private ObjectProperty<ChildConnector> end = new SimpleObjectProperty<>();
+   // private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
+  //  private ObjectProperty<ChildConnector> end = new SimpleObjectProperty<>();
 
     /**
      * SubRelationPane element is the parent for this Connector
@@ -45,7 +46,7 @@ public class BetweenChildrenConnector extends LineConnector {
 
     private void initListeners() {
 
-        initPointListener();
+       // initPointListener();
 
         list.addListener((ListChangeListener<ChildConnector>) c -> {
             while (c.next()) {
@@ -62,7 +63,6 @@ public class BetweenChildrenConnector extends LineConnector {
                     }
                 }
 
-
                 if (c.wasRemoved()) {
                     c.getRemoved().forEach(ChildConnector::removeLine);
                 }
@@ -76,21 +76,16 @@ public class BetweenChildrenConnector extends LineConnector {
 
     private void drawLine() {
         if (list.size() > 0) {
-            if (start.get() != null && start.get() != null) {
-
-                Line startLine = start.get().getLine();
-                Line endLine = end.get().getLine();
-
+                Line startLine = list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).get().getLine();
+                Line endLine = list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).get().getLine();
                 setLineCoordinates(getLine(), startLine.getEndX(), startLine.getEndY(), endLine.getEndX(), endLine.getEndY());
-            }
         }
     }
 
     private void initPointListener() {
 
-        start.bind(Bindings.createObjectBinding(() -> list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
-
-        end.bind(Bindings.createObjectBinding(() -> list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
+      //  start.bind(Bindings.createObjectBinding(() -> list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
+      //  end.bind(Bindings.createObjectBinding(() -> list.stream().max(Comparator.comparingDouble(value -> value.getLine().getStartX())).orElse(null), list));
 
 
     }

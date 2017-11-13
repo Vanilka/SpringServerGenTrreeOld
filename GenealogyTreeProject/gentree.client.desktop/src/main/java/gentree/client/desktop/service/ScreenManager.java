@@ -6,6 +6,7 @@ import gentree.client.desktop.configuration.Realm;
 import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.configuration.helper.BorderPaneReloadHelper;
 import gentree.client.desktop.configuration.messages.AppTitles;
+import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.configuration.wrappers.PhotoMarshaller;
 import gentree.client.desktop.controllers.*;
 import gentree.client.desktop.controllers.contextmenu.RelationContextMenu;
@@ -27,6 +28,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
@@ -54,6 +56,8 @@ import java.util.List;
 @Setter
 @Log4j2
 public class ScreenManager implements ContextProvider {
+
+    private static final String PREFIX_FILE_LOAD = "file://";
 
     public static final ScreenManager INSTANCE = new ScreenManager();
     public static final GenTreeContext context = GenTreeContext.INSTANCE;
@@ -380,6 +384,21 @@ public class ScreenManager implements ContextProvider {
                 .darkStyle()
                 .position(Pos.BOTTOM_RIGHT);
         notificationBuilder.show();
+    }
+
+    public String chooseSimPhoto(ImageView simPhotoView) {
+        File file = openImageFileChooser();
+        String path = "";
+        if (file != null) {
+            try {
+                path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
+                simPhotoView.setImage(new Image(path));
+            } catch (Exception e) {
+                log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
+                e.printStackTrace();
+            }
+        }
+        return path;
     }
 
     public File openImageFileChooser() {

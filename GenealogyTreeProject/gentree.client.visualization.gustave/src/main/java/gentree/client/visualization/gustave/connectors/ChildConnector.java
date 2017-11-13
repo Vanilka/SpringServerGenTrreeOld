@@ -40,7 +40,6 @@ public class ChildConnector extends LineConnector {
         if (panelChild != null && panelChild.getPanelSingle() != null) {
             removeLine();
             subBorderPane.getChildren().add(line.get());
-
         } else {
             removeLine();
         }
@@ -59,6 +58,10 @@ public class ChildConnector extends LineConnector {
         });
 
         panelChild.getPanelSingle().get().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
+            redrawLine();
+        });
+
+        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
             redrawLine();
         });
     }

@@ -102,4 +102,5 @@ public class DBConfig {
         properties.setProperty(DBProperties.PARAM_HIBERNATE_USE_SQL_COMMENTS, hibernate_use_sql);
         return properties;
     }
+
 }
