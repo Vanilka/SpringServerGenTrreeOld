@@ -229,7 +229,6 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         this.currentFamily.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 guard = new ActiveRelationGuard(newValue.getRelations());
-                newValue.getRelations().forEach(element -> guard.addObserverTo(element));
             }
         });
     }
@@ -264,7 +263,13 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
             while (c.next()) {
                 if (c.wasAdded()) {
                     c.getAddedSubList().forEach(element -> {
+                        guard.addObserverTo(element);
                         incrementRelationId(element);
+                    });
+                }
+                if(c.wasRemoved()) {
+                    c.getRemoved().forEach(element -> {
+                        guard.removeObserverFrom(element);
                     });
                 }
             }

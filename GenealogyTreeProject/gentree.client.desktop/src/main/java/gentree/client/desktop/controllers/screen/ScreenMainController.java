@@ -60,7 +60,6 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
 
     private void initPanes() {
         sm.register(this);
-
         screenMainLeftController = (ScreenMainLeftController) sm.loadFxml(new ScreenMainLeftController(), SCREEN_MAIN_LEFT, FilesFXML.SCREEN_MAIN_LEFT_FXML);
         screenMainRightController = (ScreenMainRightController) sm.loadFxml(new ScreenMainRightController(), SCREEN_MAIN_RIGHT, FilesFXML.SCREEN_MAIN_RIGHT_FXML);
     }

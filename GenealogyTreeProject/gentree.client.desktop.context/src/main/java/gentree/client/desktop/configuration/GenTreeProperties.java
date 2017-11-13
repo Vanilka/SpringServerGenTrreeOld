@@ -60,7 +60,8 @@ public class GenTreeProperties {
                 configuration = configs.properties(new File(CONFIG_FILE));
 
             } catch (ConfigurationException ex) {
-                log.error(ex.getMessage());
+                ex.printStackTrace();
+                log.error(ex);
             }
 
             defaultProperties.getMissingProperties(configuration);
@@ -78,8 +79,8 @@ public class GenTreeProperties {
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 realmConfig = (RealmConfig) jaxbUnmarshaller.unmarshal(realmFile);
             } catch (Exception e) {
-                log.error("ERROR");
                 e.printStackTrace();
+                log.error(e);
             }
         }
     }

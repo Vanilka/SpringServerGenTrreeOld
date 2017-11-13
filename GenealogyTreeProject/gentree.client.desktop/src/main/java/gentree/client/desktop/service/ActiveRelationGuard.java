@@ -2,8 +2,10 @@ package gentree.client.desktop.service;
 
 import gentree.client.desktop.domain.Relation;
 import gentree.common.configuration.enums.RelationType;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,6 +22,19 @@ public class ActiveRelationGuard implements Observer {
 
     public ActiveRelationGuard(ObservableList<Relation> relations) {
         this.relations = relations;
+
+        relations.addListener((ListChangeListener<Relation>) c -> {
+            while (c.next()) {
+                if (c.wasAdded()) {
+                    c.getAddedSubList().forEach(relation -> {
+                        this.addObserverTo(relation);
+                        this.runUpdate(relation);
+                    });
+                }
+            }
+        });
+
+        runCheckWithUpdate();
     }
 
     @Override
@@ -30,25 +45,38 @@ public class ActiveRelationGuard implements Observer {
             /*
                 After change an relation type to Active,  auto-change others to inActive
              */
-            if (relation.getLeft() != null && relation.getRight() != null && relation.getActive()) {
-                relations
-                        .filtered(r -> r.getLeft() != null)
-                        .filtered(r -> r.getRight() != null)
-                        .filtered(r -> r.getType() != RelationType.NEUTRAL)
-                        .filtered(r -> (r.getRight().equals(relation.getRight()) || r.getLeft().equals(relation.getLeft())))
-                        .filtered(r -> !r.equals(relation))
-                        .forEach(r -> r.setActive(false));
-            }
+            runUpdate(relation);
             /*
                 Redraw tree
              */
-            System.out.println(sm.getGenTreeDrawingService() + " From guardian");
             sm.getGenTreeDrawingService().startDraw();
         }
     }
 
+
+    private void runUpdate(Relation relation) {
+        if (relation.getLeft() != null && relation.getRight() != null && !relation.getType().equals(RelationType.NEUTRAL) && relation.getActive()) {
+            relations
+                    .filtered(r -> !Objects.equals(r, relation))
+                    .filtered(r -> r.getLeft() != null)
+                    .filtered(r -> r.getRight() != null)
+                    .filtered(r -> r.getType() != RelationType.NEUTRAL)
+                    .filtered(r -> (r.getRight().equals(relation.getRight()) || r.getLeft().equals(relation.getLeft())))
+                    .filtered(r -> !r.equals(relation))
+                    .forEach(r -> r.setActive(false));
+        }
+    }
+
+    private void runCheckWithUpdate() {
+        relations.forEach(this::runUpdate);
+    }
+
     public void addObserverTo(Observable observable) {
         observable.addObserver(this);
+    }
+
+    public void removeObserverFrom(Observable observable) {
+        observable.deleteObserver(this);
     }
 
 

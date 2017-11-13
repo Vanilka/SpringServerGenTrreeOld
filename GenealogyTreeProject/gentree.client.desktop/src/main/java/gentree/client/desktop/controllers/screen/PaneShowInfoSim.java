@@ -138,7 +138,8 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         SIM_NAME_FIELD.setText(member.getName());
         SIM_SURNAME_FIELD.setText(member.getSurname());
         SIM_BORNNAME_FIELD.setText(member.getBornname());
-        this.photo.setImage(new Image(member.getPhoto()));
+        path = member.getPhoto();
+        this.photo.setImage(new Image(path));
     }
 
 
