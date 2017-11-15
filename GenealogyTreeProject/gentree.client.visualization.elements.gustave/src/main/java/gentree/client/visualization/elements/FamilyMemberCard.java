@@ -22,6 +22,8 @@ import java.io.IOException;
  */
 public class FamilyMemberCard extends AnchorPane {
 
+    private final static String pathfxml = "/layout/elements/family.member.card.fxml";
+
     private final static int MEMBER_WIDTH = 133;
     private final static int MEMBER_HEIGHT = 188;
     @FXML
@@ -50,6 +52,10 @@ public class FamilyMemberCard extends AnchorPane {
     }
 
     public FamilyMemberCard(Member member) {
+        this(member, pathfxml);
+    }
+
+    public FamilyMemberCard(Member member, String path) {
         super();
         initialize();
         this.member.addListener(getChangeMemberListener());
@@ -71,7 +77,7 @@ public class FamilyMemberCard extends AnchorPane {
     }
 
     private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/elements/family.member.card.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pathfxml));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

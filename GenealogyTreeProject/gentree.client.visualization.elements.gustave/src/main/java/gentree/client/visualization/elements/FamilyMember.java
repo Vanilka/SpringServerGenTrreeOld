@@ -15,10 +15,11 @@ import javafx.scene.paint.Color;
  */
 public class FamilyMember extends FamilyMemberCard {
 
+    private final static String pathfxml = "/layout/elements/family.member.fxml";
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
 
     public FamilyMember(Member member) {
-        super(member);
+        super(member, pathfxml);
         initialize();
     }
 
