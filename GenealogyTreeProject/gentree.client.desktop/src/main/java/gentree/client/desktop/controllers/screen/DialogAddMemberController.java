@@ -28,7 +28,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -128,7 +127,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     public void choosePhoto(MouseEvent event) {
         if (event.getClickCount() == 2) {
-              path = sm.chooseSimPhoto(PHOTO_IMV);
+              path = sm.setImageIntoImageView(PHOTO_IMV);
         }
     }
 

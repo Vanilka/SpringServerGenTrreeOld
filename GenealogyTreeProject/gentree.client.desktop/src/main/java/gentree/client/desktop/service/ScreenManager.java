@@ -18,8 +18,10 @@ import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.elements.configuration.ContextProvider;
+import gentree.client.visualization.elements.configuration.ElementsConfig;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
+import gentree.common.configuration.enums.Race;
 import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -35,6 +37,8 @@ import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Shape;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -388,20 +392,40 @@ public class ScreenManager implements ContextProvider {
         notificationBuilder.show();
     }
 
-    public String chooseSimPhoto(ImageView simPhotoView) {
+    public String setImageIntoShape(Shape shape) {
         File file = openImageFileChooser();
         String path = "";
         if (file != null) {
             try {
                 path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
-                simPhotoView.setImage(new Image(path));
+                shape.setFill(new ImagePattern(new Image(path), 0, 0, 1, 1, false));
             } catch (Exception e) {
                 log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
                 e.printStackTrace();
+                shape.setFill(new ImagePattern(new Image(ImageFiles.NO_NAME_MALE.toString()), 0, 0, 1, 1, false));
             }
         }
         return path;
     }
+
+
+    public String setImageIntoImageView(ImageView imv) {
+        File file = openImageFileChooser();
+        String path = "";
+        if (file != null) {
+            try {
+                path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
+                imv.setImage(new Image(path));
+            } catch (Exception e) {
+                log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
+                e.printStackTrace();
+                imv.setImage(new Image(ImageFiles.NO_NAME_MALE.toString()));
+            }
+        }
+        return path;
+    }
+
+
 
     public File openImageFileChooser() {
         configureImageFileChooser(imgFileChooser);
@@ -567,6 +591,32 @@ public class ScreenManager implements ContextProvider {
             }
         };
         return callback;
+    }
+
+
+    public Callback<ListView<Race>, ListCell<Race>> getRaceListCell() {
+        Callback<ListView<Race>, ListCell<Race>> callback = new Callback<ListView<Race>, ListCell<Race>>() {
+            @Override
+            public ListCell<Race> call(ListView<Race> param) {
+                final ListCell<Race> raceCell = new ListCell<Race>() {
+                    @Override
+                    public void updateItem(Race item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setGraphic(setGraphicToImageView(ElementsConfig.INSTANCE.getFilePathOfRace(item), 40, 40));
+                            setText("");
+                        } else {
+                            setGraphic(setGraphicToImageView(ImageFiles.HUMAIN.toString(), 40, 40));
+                            setText("");
+                        }
+                    }
+
+                };
+                return raceCell;
+            }
+        };
+        return callback;
+
     }
 
     private ImageView setGraphicToImageView(String path, int width, int height) {

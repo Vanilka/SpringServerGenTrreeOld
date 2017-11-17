@@ -25,9 +25,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.9.2" />
           <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.2" />
-          <element id="archive" name="gentree.server.service-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="gentree.server.service" />
-          </element>
+          <element id="library" level="project" name="Maven: genealogytree:gentree.server.service:1.0-SNAPSHOT" />
           <element id="archive" name="gentree.server.repository-1.0-SNAPSHOT.jar">
             <element id="module-output" name="gentree.server.repository" />
           </element>

@@ -2,26 +2,32 @@ package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.visualization.controls.HeaderPane;
+import gentree.common.configuration.enums.DeathCauses;
+import gentree.common.configuration.enums.Race;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -50,6 +56,8 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     private AnchorPane paneShowInfoSim;
 
     @FXML
+    private AnchorPane DEATH_CAUSES_PANE;
+    @FXML
     private AnchorPane CONTENT_PANE;
 
     @FXML
@@ -64,27 +72,32 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     private JFXTextField SIM_SURNAME_FIELD;
     @FXML
     private JFXTextField SIM_BORNNAME_FIELD;
+    @FXML
+    private ComboBox<Race> SIM_RACE_CB;
+    @FXML
+    private JFXToggleButton TOGGLE_IS_ALIVE;
+    @FXML
+    private ComboBox<DeathCauses> SIM_DEATH_CAUSE;
 
     @FXML
     private HeaderPane HEADER_PANE;
 
     @FXML
-    private ImageView photo;
+    private Circle SIM_PHOTO;
 
     private String path;
 
     private List<? extends Control> readOnlyControls;
 
     {
-
         member = new SimpleObjectProperty<>();
         modifiable = new SimpleBooleanProperty(false);
         path = null;
-
     }
 
     @FXML
     private void returnAction() {
+        cleanListeners();
         sm.getScreenMainController().removeInfoPanel(paneShowInfoSim);
     }
 
@@ -95,6 +108,9 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
             getMember().setSurname(SIM_SURNAME_FIELD.getText());
             getMember().setBornname(SIM_BORNNAME_FIELD.getText());
             getMember().setPhoto(path);
+            getMember().setRace(SIM_RACE_CB.getSelectionModel().getSelectedItem());
+            getMember().setAlive(TOGGLE_IS_ALIVE.isSelected());
+            if(!TOGGLE_IS_ALIVE.isSelected()) getMember().setDeathCause(SIM_DEATH_CAUSE.getSelectionModel().getSelectedItem());
             context.getService().updateMember(getMember());
         }
         modifiable.set(!modifiable.get());
@@ -106,30 +122,37 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
         this.languageBundle.setValue(resources);
         this.languageBundle.bind(context.getBundle());
-
-
-/*
-        HeaderPane hp = new HeaderPane("Ala ma kota");
-        hp.setMinWidth(200);
-
-        paneShowInfoSim.getChildren().add(0, hp);
-*/
-
-
         addLanguageListener();
+
+        populateComboBoxes();
         SIM_ID_FIELD.setEditable(false);
-        readOnlyControls = Arrays.asList(SIM_NAME_FIELD, SIM_SURNAME_FIELD, SIM_BORNNAME_FIELD);
+        readOnlyControls = Arrays.asList(
+                SIM_NAME_FIELD,
+                SIM_SURNAME_FIELD,
+                SIM_BORNNAME_FIELD,
+                SIM_RACE_CB,
+                TOGGLE_IS_ALIVE,
+                SIM_DEATH_CAUSE);
         setControlsModifiable(false);
         initListeners();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
     }
 
+
+    private void populateComboBoxes() {
+        SIM_RACE_CB.setCellFactory(sm.getRaceListCell());
+        SIM_RACE_CB.setButtonCell(sm.getRaceListCell().call(null));
+        SIM_RACE_CB.getItems().addAll(Race.values());
+        SIM_DEATH_CAUSE.getItems().addAll(DeathCauses.values());
+        SIM_DEATH_CAUSE.getSelectionModel().select(DeathCauses.NATURAL);
+    }
+
     private void setControlsModifiable(boolean value) {
         readOnlyControls.forEach(control -> {
-            if (control instanceof JFXTextField) {
-                ((JFXTextField) control).setEditable(value);
-            }
+            if (control instanceof JFXTextField) ((JFXTextField) control).setEditable(value);
+            if (control instanceof JFXToggleButton) ((JFXToggleButton) control).setDisable(!value);
+            if (control instanceof ComboBox) ((ComboBox) control).setDisable(!value);
         });
     }
 
@@ -138,14 +161,17 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         SIM_NAME_FIELD.setText(member.getName());
         SIM_SURNAME_FIELD.setText(member.getSurname());
         SIM_BORNNAME_FIELD.setText(member.getBornname());
+        SIM_RACE_CB.getSelectionModel().select(member.getRace());
         path = member.getPhoto();
-        this.photo.setImage(new Image(path));
+        SIM_PHOTO.setFill(new ImagePattern(new Image(path)));
+        TOGGLE_IS_ALIVE.setSelected(member.isAlive());
+        if(!member.isAlive()) SIM_DEATH_CAUSE.getSelectionModel().select(member.getDeathCause());
     }
 
 
     public void choosePhoto(MouseEvent event) {
         if (event.getClickCount() == 2 && modifiable.get()) {
-            path = sm.chooseSimPhoto(photo);
+            path = sm.setImageIntoShape(SIM_PHOTO);
         }
     }
 
@@ -154,16 +180,34 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
      */
 
     private void initListeners() {
-        member.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                populateControls(newValue);
-            }
-        });
+        member.addListener(this::memberChange);
+        modifiable.addListener(this::modifiableChange);
+        TOGGLE_IS_ALIVE.textProperty().bind(Bindings.when(TOGGLE_IS_ALIVE.selectedProperty()).then("ALIVE")
+                .otherwise("DEAD"));
+        DEATH_CAUSES_PANE.visibleProperty().bind(TOGGLE_IS_ALIVE.selectedProperty().not());
 
-        modifiable.addListener((observable, oldValue, newValue) -> {
-            setControlsModifiable(newValue);
-            MODIFY_BUTTON.setText(getValueFromKey(newValue ? Keys.CONFIRM : Keys.MODIFY));
-        });
+
+    }
+
+    private void cleanListeners() {
+        member.removeListener(this::memberChange);
+        modifiable.removeListener(this::modifiableChange);
+        TOGGLE_IS_ALIVE.textProperty().unbind();
+        DEATH_CAUSES_PANE.visibleProperty().unbind();
+    }
+
+
+    private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (newValue != null) {
+            populateControls(newValue);
+        }
+        if(oldValue != null) {
+        }
+    }
+
+    private void modifiableChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        setControlsModifiable(newValue);
+        MODIFY_BUTTON.setText(getValueFromKey(newValue ? Keys.CONFIRM : Keys.MODIFY));
     }
 
 
@@ -181,7 +225,6 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     }
 
     private void reloadElements() {
-
         SIM_NAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_NAME));
         SIM_SURNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_SURNAME));
         SIM_BORNNAME_FIELD.setPromptText(getValueFromKey(Keys.SIM_BORN_NAME));
