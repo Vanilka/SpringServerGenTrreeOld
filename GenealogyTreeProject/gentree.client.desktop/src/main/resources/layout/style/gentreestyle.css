@@ -298,7 +298,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
 }
 
-#footerCopyright {
+#FOOTER_COPYRIGHTS {
     /*  padding : TOP, RIGHT, BOTTOM, LEFT */
     -fx-alignment: center;
     -fx-text-fill: #E0E4E3;

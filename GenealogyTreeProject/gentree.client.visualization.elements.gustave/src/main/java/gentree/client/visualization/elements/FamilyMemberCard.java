@@ -5,6 +5,7 @@ import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -58,7 +59,7 @@ public class FamilyMemberCard extends AnchorPane {
     public FamilyMemberCard(Member member, String path) {
         super();
         initialize();
-        this.member.addListener(getChangeMemberListener());
+        this.member.addListener(this::memberChange);
         this.member.setValue(member);
 
         resize(MEMBER_WIDTH, MEMBER_HEIGHT);
@@ -88,18 +89,6 @@ public class FamilyMemberCard extends AnchorPane {
             exception.printStackTrace();
             throw new RuntimeException(exception);
         }
-    }
-
-    private ChangeListener<Member> getChangeMemberListener() {
-        ChangeListener<Member> simListener = (observable, oldValue, newValue) -> {
-            if (oldValue != null) {
-                oldValue.getProperties().forEach(p -> p.removeListener(listener));
-            }
-            newValue.getProperties().forEach(p -> p.addListener(listener));
-
-            fillComponents(newValue);
-        };
-        return simListener;
     }
 
     private void fillComponents(Member member) {
@@ -137,6 +126,11 @@ public class FamilyMemberCard extends AnchorPane {
         }
     }
 
+    public void clean() {
+        this.member.removeListener(this::memberChange);
+        this.member.get().getProperties().forEach(p -> p.removeListener(listener));
+    }
+
 
     public void setGrayScaleToImgView(ImageView view) {
         ColorAdjust desaturate = new ColorAdjust();
@@ -160,4 +154,12 @@ public class FamilyMemberCard extends AnchorPane {
         return this;
     }
 
+    private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (oldValue != null) {
+            oldValue.getProperties().forEach(p -> p.removeListener(listener));
+        }
+        newValue.getProperties().forEach(p -> p.addListener(listener));
+
+        fillComponents(newValue);
+    }
 }

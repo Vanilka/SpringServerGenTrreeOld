@@ -4,10 +4,7 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.paint.Color;
 
 /**
@@ -50,23 +47,30 @@ public class FamilyMember extends FamilyMemberCard {
             });
         }
 
-        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                this.setOnContextMenuRequested(null);
-                this.setOnMouseClicked(null);
-            } else {
-                this.setOnContextMenuRequested(event -> newValue.showSimContextMenu(returnThis(), event));
-                this.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && getMember() != null) {
-                        newValue.showInfoSim(getMember());
-                    }
-                });
-            }
-        });
+        CONTEXT_PROVIDER_PROPERTY.addListener(this::contextChanged);
 
+    }
+
+    public void clean() {
+        super.clean();
+        CONTEXT_PROVIDER_PROPERTY.removeListener(this::contextChanged);
     }
 
     private FamilyMember returnThis() {
         return this;
+    }
+
+    private void contextChanged(ObservableValue<? extends ContextProvider> observable, ContextProvider oldValue, ContextProvider newValue) {
+        if (newValue == null) {
+            this.setOnContextMenuRequested(null);
+            this.setOnMouseClicked(null);
+        } else {
+            this.setOnContextMenuRequested(event -> newValue.showSimContextMenu(returnThis(), event));
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && getMember() != null) {
+                    newValue.showInfoSim(getMember());
+                }
+            });
+        }
     }
 }

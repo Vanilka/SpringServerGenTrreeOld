@@ -4,6 +4,7 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -49,52 +50,60 @@ public class RelationReference extends StackPane {
         }
 
 
-        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                this.setOnMouseClicked(null);
-            } else {
-                this.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && relation.get() != null) {
-                        newValue.showInfoRelation(relation.get());
-                    }
-                });
-            }
-        });
+        CONTEXT_PROVIDER_PROPERTY.addListener(this::contextChange);
 
     }
 
     private void initListeners() {
-        initReferenceTypeListener();
-        initRelationListener();
+        relation.addListener(this::relationChange);
+        relationReferenceType.addListener(this::relationTypeChange);
     }
 
-    private void initRelationListener() {
-        relation.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                text.textProperty().bind(newValue.referenceNumberProperty().asString());
-                this.visibleProperty().bind(newValue.referenceNumberProperty().greaterThan(0));
-            } else {
-                this.visibleProperty().unbind();
-                this.setVisible(false);
-                text.textProperty().unbind();
-                text.setText("");
-            }
-        });
+    private void cleanListeners() {
+        relation.removeListener(this::relationChange);
+        relationReferenceType.removeListener(this::relationTypeChange);
+        CONTEXT_PROVIDER_PROPERTY.removeListener(this::contextChange);
+        this.setOnMouseClicked(null);
+
+        text.textProperty().unbind();
+        this.visibleProperty().unbind();
     }
 
-    private void initReferenceTypeListener() {
-        relationReferenceType.addListener((observable, oldValue, newValue) -> {
-            switch (newValue) {
-                case ASC:
-                    drawAsc(etiquete);
-                    break;
-                case DSC:
-                    drawDesc(etiquete);
-                    break;
-                default:
-                    etiquete.getPoints().clear();
-            }
-        });
+    private void relationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (newValue != null) {
+            text.textProperty().bind(newValue.referenceNumberProperty().asString());
+            this.visibleProperty().bind(newValue.referenceNumberProperty().greaterThan(0));
+        } else {
+            this.visibleProperty().unbind();
+            this.setVisible(false);
+            text.textProperty().unbind();
+            text.setText("");
+        }
+    }
+
+    private void relationTypeChange(ObservableValue<? extends RelationReferenceType> observable, RelationReferenceType oldValue, RelationReferenceType newValue) {
+        switch (newValue) {
+            case ASC:
+                drawAsc(etiquete);
+                break;
+            case DSC:
+                drawDesc(etiquete);
+                break;
+            default:
+                etiquete.getPoints().clear();
+        }
+    }
+
+    private void contextChange(ObservableValue<? extends ContextProvider> observable, ContextProvider oldValue, ContextProvider newValue) {
+        if (newValue == null) {
+            this.setOnMouseClicked(null);
+        } else {
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && relation.get() != null) {
+                    newValue.showInfoRelation(relation.get());
+                }
+            });
+        }
     }
 
     private void drawDesc(Polygon polygon) {
@@ -149,6 +158,7 @@ public class RelationReference extends StackPane {
     public ObjectProperty<Relation> relationProperty() {
         return relation;
     }
+
 
     public enum RelationReferenceType {
         ASC, DSC
