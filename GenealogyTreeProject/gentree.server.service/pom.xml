@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>gentree</artifactId>
+        <groupId>genealogytree</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>gentree.server.service</artifactId>
+
+    <properties>
+        <spring.version>5.0.0.RELEASE</spring.version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
+        <javax.servlet>4.0.0</javax.servlet>
+        <spring.data.rest.mvc.version>3.0.0.RELEASE</spring.data.rest.mvc.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.exceptions</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>genealogytree</groupId>
+            <artifactId>gentree.server.repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
