@@ -56,19 +56,20 @@ public class ScreenLoginRegisterController implements Initializable, FXMLControl
     }
 
     public void addTopOffsetListener(AnchorPane pane) {
-        this.SCREEN_LOGON_REGISTER.heightProperty()
-                .addListener((observable, oldValude, newValue) -> {
-                    double y = (newValue.doubleValue() - pane.getHeight()) / 2;
-                    pane.setLayoutY(y);
-                });
+        pane.layoutYProperty().bind(SCREEN_LOGON_REGISTER.heightProperty().subtract(pane.heightProperty().divide(2)));
     }
 
     public void addLeftOffsetListener(AnchorPane pane) {
-        this.SCREEN_LOGON_REGISTER.widthProperty()
-                .addListener((observable, oldValude, newValue) -> {
-                    double x = (newValue.doubleValue() - pane.getWidth()) / 2;
-                    pane.setLayoutX(x);
-                });
+        pane.layoutXProperty().bind(SCREEN_LOGON_REGISTER.widthProperty().subtract(pane.widthProperty().divide(2)));
     }
 
+    public void cleanListeners() {
+        cleanBinding(this.LOGON_FORM);
+        cleanBinding(this.REGISTER_FORM);
+    }
+
+    public void cleanBinding(AnchorPane pane) {
+        pane.layoutYProperty().unbind();
+        pane.layoutXProperty().unbind();
+    }
 }

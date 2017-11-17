@@ -13,6 +13,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -82,16 +83,6 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         this.languageBundle.bind(context.getBundle());
         initGraphicalElements();
 
-        context.getService().currentFamilyPropertyI().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-                loadFamily(newValue);
-            }
-
-            if(oldValue != null) {
-                oldValue.getMembers().removeListener(invalidationListener);
-            }
-        });
-
         loadFamily(context.getService().getCurrentFamily());
         addLanguageListener();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
@@ -119,12 +110,33 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
 
     }
 
+    private void cleanListener() {
+        context.getService().currentFamilyPropertyI().removeListener(this::familyListener);
+        this.languageBundle.removeListener(this::languageChange);
+
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
+    }
+
+
+    private void familyListener(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {
+        if (newValue != null) {
+            loadFamily(newValue);
+        }
+
+        if (oldValue != null) {
+            oldValue.getMembers().removeListener(invalidationListener);
+        }
+    }
+
         /*
         *   LISTEN LANGUAGE CHANGES
         */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChange);
     }
 
     private String getValueFromKey(String key) {
@@ -145,6 +157,4 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         this.tab = tab;
         this.tabPane = tabPane;
     }
-
-
 }

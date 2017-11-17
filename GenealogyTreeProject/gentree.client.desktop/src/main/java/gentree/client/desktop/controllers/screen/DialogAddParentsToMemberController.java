@@ -15,6 +15,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -121,6 +122,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
 
     @FXML
     public void cancel() {
+        cleanListeners();
         stage.close();
     }
 
@@ -139,6 +141,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
                             : existingRelation.get());
         }
 
+        cleanListeners();
         stage.close();
 
     }
@@ -253,43 +256,17 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
      */
 
     private void initListeners() {
-        initMemberListener();
-        initBornRelationListener();
-        initFatherListener();
-        initMotherListener();
+        member.addListener(this::memberChanged);
+        currentBornRelation.addListener(this::bornChanged);
+        mother.addListener(this::motherChanged);
+        father.addListener(this::fatherChange);
     }
 
-
-    private void initMemberListener() {
-        member.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                currentMemberCard.setMember(newValue);
-            }
-        });
-    }
-
-    private void initBornRelationListener() {
-        currentBornRelation.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                populateParentFields();
-                initButtonDisableListener();
-            }
-        });
-    }
-
-    private void initMotherListener() {
-        mother.addListener((observable, oldValue, newValue) -> {
-            motherCard.setMember(newValue);
-            findRelation(newValue, father.get());
-
-        });
-    }
-
-    private void initFatherListener() {
-        father.addListener((observable, oldValue, newValue) -> {
-            fatherCard.setMember(newValue);
-            findRelation(mother.get(), newValue);
-        });
+    private void cleanListeners() {
+        member.removeListener(this::memberChanged);
+        currentBornRelation.removeListener(this::bornChanged);
+        mother.removeListener(this::motherChanged);
+        father.removeListener(this::fatherChange);
     }
 
 
@@ -341,4 +318,26 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
         this.stage = stage;
     }
 
+    private void memberChanged(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (newValue != null) {
+            currentMemberCard.setMember(newValue);
+        }
+    }
+
+    private void bornChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (newValue != null) {
+            populateParentFields();
+            initButtonDisableListener();
+        }
+    }
+
+    private void motherChanged(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        motherCard.setMember(newValue);
+        findRelation(newValue, father.get());
+    }
+
+    private void fatherChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        fatherCard.setMember(newValue);
+        findRelation(mother.get(), newValue);
+    }
 }

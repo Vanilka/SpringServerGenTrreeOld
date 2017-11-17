@@ -13,12 +13,12 @@ import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.RelationResponse;
 import gentree.client.visualization.elements.configuration.ImageFiles;
-import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import lombok.extern.log4j.Log4j2;
 
@@ -88,7 +88,6 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
         return new MemberResponse(m);
     }
-
 
     @Override
     public ServiceResponse deleteMember(Member m) {
@@ -224,57 +223,77 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         LISTENERS
      */
 
-
     private void setCurrentFamilyListener() {
-        this.currentFamily.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                guard = new ActiveRelationGuard(newValue.getRelations());
-            }
-        });
+        this.currentFamily.addListener(this::familyChanged);
     }
 
-
     private void setMemberListener() {
-        this.getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(member -> {
-                        incrementMemberId(member);
-                        log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
-                        addRelation(new Relation(member));
-                    });
-                } else if (c.wasPermutated()) {
-                    for (int i = c.getFrom(); i < c.getTo(); ++i) {
-                        //permutate
-                        System.out.println("permutated");
-                    }
-                } else if (c.wasUpdated()) { ;
-                } else if (c.wasRemoved()) {
-                    c.getRemoved().forEach(this::clearRelationFromDeletedMember);
-                } else {
-                }
-
-            }
-        });
+        this.getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) this::memberListChange);
     }
 
     private void setRelationListener(Family family) {
-        family.getRelations().addListener((ListChangeListener<Relation>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(element -> {
-                        guard.addObserverTo(element);
-                        incrementRelationId(element);
-                    });
+        family.getRelations().addListener(this::relationListChange);
+    }
+
+    private void cleanFamilyListener() {
+        cleanMemberAndRelationListeners(getCurrentFamily());
+        currentFamily.removeListener(this::familyChanged);
+    }
+
+    private void cleanMemberAndRelationListeners(Family family) {
+        family.getRelations().removeListener(this::relationListChange);
+        family.getMembers().removeListener(this::memberListChange);
+    }
+
+    private void familyChanged(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {
+        ActiveRelationGuard olduard = guard;
+
+        if(olduard != null) {
+            olduard.clean();
+        }
+        if (newValue != null) {
+            guard = new ActiveRelationGuard(newValue.getRelations());
+        }
+    }
+
+    private void memberListChange(ListChangeListener.Change<? extends Member> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                c.getAddedSubList().forEach(member -> {
+                    incrementMemberId(member);
+                    log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
+                    addRelation(new Relation(member));
+                });
+            } else if (c.wasPermutated()) {
+                for (int i = c.getFrom(); i < c.getTo(); ++i) {
+                    //permutate
+                    System.out.println("permutated");
                 }
-                if(c.wasRemoved()) {
-                    c.getRemoved().forEach(element -> {
-                        guard.removeObserverFrom(element);
-                    });
-                }
+            } else if (c.wasUpdated()) {
+                ;
+            } else if (c.wasRemoved()) {
+                c.getRemoved().forEach(this::clearRelationFromDeletedMember);
+            } else {
             }
-            sm.getGenTreeDrawingService().startDraw();
-        });
+
+        }
+    }
+
+    private void relationListChange(ListChangeListener.Change<? extends Relation> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                c.getAddedSubList().forEach(element -> {
+                    guard.addObserverTo(element);
+                    incrementRelationId(element);
+                });
+            }
+            if (c.wasRemoved()) {
+                c.getRemoved().forEach(element -> {
+                    guard.removeObserverFrom(element);
+                });
+            }
+        }
+        sm.getGenTreeDrawingService().startDraw();
     }
 
 
@@ -537,6 +556,11 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
                     member.setPhoto(newPath == null ? null : PREFIX_FILE_RELATIVE + newPath);
 
                 });
+    }
+
+    @Override
+    public void clean() {
+
     }
 
     private void invalidate() {

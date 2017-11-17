@@ -9,6 +9,7 @@ import gentree.common.configuration.enums.Age;
 import gentree.common.configuration.enums.Gender;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -89,6 +90,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     @Override
     public void setStage(Stage stage) {
+        cleanListeners();
         this.stage = stage;
 
     }
@@ -96,6 +98,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     @FXML
     public void confirm() {
         result = selectedMember.getValue();
+        cleanListeners();
         stage.close();
 
     }
@@ -125,21 +128,27 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     }*/
 
     private void initSelectedMemberListener() {
+        MEMBER_TABLE.getSelectionModel().selectedItemProperty().addListener(this::selectionChange);
+        selectedMember.addListener(this::memberChange);
+    }
 
-        MEMBER_TABLE.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                selectedMember.setValue(newValue);
-            }
-        });
+    private void cleanListeners() {
+        MEMBER_TABLE.getSelectionModel().selectedItemProperty().removeListener(this::selectionChange);
+        selectedMember.removeListener(this::memberChange);
+    }
 
-        selectedMember.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                PHOTO_IMV.setImage(new Image(newValue.getPhoto()));
-                SIM_NAME_FIELD.setText(newValue.getName());
-                SIM_SURNAME_FIELD.setText(newValue.getSurname());
-            }
-        });
+    private void selectionChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (newValue != null) {
+            selectedMember.setValue(newValue);
+        }
+    }
 
+    private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (newValue != null) {
+            PHOTO_IMV.setImage(new Image(newValue.getPhoto()));
+            SIM_NAME_FIELD.setText(newValue.getName());
+            SIM_SURNAME_FIELD.setText(newValue.getSurname());
+        }
     }
 
 
@@ -236,4 +245,5 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     public void setMemberList(List<Member> list) {
         memberList.addAll(list);
     }
+
 }

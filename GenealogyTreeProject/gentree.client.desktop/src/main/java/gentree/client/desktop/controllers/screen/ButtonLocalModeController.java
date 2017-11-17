@@ -13,9 +13,9 @@ import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLController {
 
     //TODO  LOCAL / ONLINE MODE IMAGES
+    //TODO check possiblity to remove listeners
     @FXML
     private Pane MAIN_PANE;
 
@@ -66,7 +67,11 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
      * LISTEN LANGUAGE CHANGES
     */
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::bundleChange);
+    }
+
+    private void cleanListeners() {
+        this.languageBundle.removeListener(this::bundleChange);
     }
 
     private String getValueFromKey(String key) {
@@ -75,6 +80,10 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
 
     private void reloadElements() {
         this.LOCAL_APPLICATION_LABEL.setText(getValueFromKey(Keys.APPLICATION_CHOICE_LOCAL).toUpperCase());
+    }
+
+    private void bundleChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
 

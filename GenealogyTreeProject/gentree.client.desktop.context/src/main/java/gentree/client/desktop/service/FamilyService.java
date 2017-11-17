@@ -51,4 +51,6 @@ public interface FamilyService {
 
     boolean isDescOf(Member grain, Member sim);
 
+    void  clean();
+
 }

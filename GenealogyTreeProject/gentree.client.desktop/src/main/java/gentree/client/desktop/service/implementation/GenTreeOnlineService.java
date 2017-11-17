@@ -35,7 +35,6 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
     @Override
     public ServiceResponse setCurrentFamily(Family family) {
         ServiceResponse response = null;
-
         try {
             response = rcs.retrieveFullFamily(family);
         } catch (Exception e) {
@@ -127,4 +126,8 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
         sm.getGenTreeDrawingService().startDraw();
     }
 
+    @Override
+    public void clean() {
+
+    }
 }

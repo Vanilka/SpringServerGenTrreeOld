@@ -9,9 +9,11 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -150,32 +152,37 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
      */
 
     private void initListeners() {
-        initActiveButtonListener();
+        group.selectedToggleProperty().addListener(this::selectedChange);
     }
 
-    private void initActiveButtonListener() {
-        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+    private void cleanListeners() {
+        group.selectedToggleProperty().removeListener(this::selectedChange);
+        dialogAppPropertiesOnlineController.cleanListeners();
+        dialogAppPropertiesTreeController.cleanListeners();
+        dialogAppPropertiesOtherController.cleanListeners();
+    }
 
-            if (newValue == null) {
-                group.selectToggle(oldValue);
+    private void selectedChange(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+        if (newValue == null) {
+            group.selectToggle(oldValue);
+        }
+
+        if (newValue != null && paneMap.containsKey(newValue)) {
+            paneMap.get(newValue).setVisible(true);
+            if (paneMap.containsKey(oldValue)) {
+                paneMap.get(oldValue).setVisible(false);
+
             }
-
-            if (newValue != null && paneMap.containsKey(newValue)) {
-                paneMap.get(newValue).setVisible(true);
-                if (paneMap.containsKey(oldValue)) {
-                    paneMap.get(oldValue).setVisible(false);
-
-                }
-            }
-        });
-
+        }
     }
 
     public void cancel(ActionEvent actionEvent) {
+        cleanListeners();
         stage.close();
     }
 
     public void confirm(ActionEvent actionEvent) {
+        cleanListeners();
         saveProperties();
     }
 

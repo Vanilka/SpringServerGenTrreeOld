@@ -17,9 +17,11 @@ import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -104,6 +106,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
 
     public void cancel() {
+        cleanListeners();
         this.stage.close();
     }
 
@@ -120,6 +123,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         System.out.println(response);
 
         if (response.getStatus().equals(ServiceResponse.ResponseStatus.OK)) {
+            cleanListeners();
             this.stage.close();
         }
     }
@@ -166,38 +170,52 @@ public class DialogAddMemberController implements Initializable, FXMLController,
         initSexListener();
     }
 
+    private  void  cleanListeners() {
+        ALIVE_TOGGLE_BUTTON.selectedProperty().removeListener(this::selectedChanged);
+        toggleGroupSex.selectedToggleProperty().removeListener(this::sexChanged);
+        languageBundle.removeListener(this::languageChange);
+    }
+
     private void initAliveListener() {
-        ALIVE_TOGGLE_BUTTON.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                ALIVE_TOGGLE_BUTTON.setText("Alive");
-                DEATH_CAUSE_PANE.setVisible(false);
 
-            } else {
-                ALIVE_TOGGLE_BUTTON.setText("Mort");
-                DEATH_CAUSE_PANE.setVisible(true);
-            }
-        });
-
+        ALIVE_TOGGLE_BUTTON.selectedProperty().addListener(this::selectedChanged);
         ALIVE_TOGGLE_BUTTON.setSelected(true);
     }
 
     private void initSexListener() {
-        toggleGroupSex.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (path == null || path.trim().equals("")) {
-                if (newValue.getUserData().equals(Gender.M)) {
-                    PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
-                } else {
-                    PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
-                }
-            }
-        });
+        toggleGroupSex.selectedToggleProperty().addListener(this::sexChanged);
     }
 
     /*
     *  LISTEN LANGUAGE CHANGES
     */
     private void initLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChange);
+    }
+
+    private void selectedChanged(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        if (newValue) {
+            ALIVE_TOGGLE_BUTTON.setText("Alive");
+            DEATH_CAUSE_PANE.setVisible(false);
+
+        } else {
+            ALIVE_TOGGLE_BUTTON.setText("Mort");
+            DEATH_CAUSE_PANE.setVisible(true);
+        }
+    }
+
+    private void sexChanged(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+        if (path == null || path.trim().equals("")) {
+            if (newValue.getUserData().equals(Gender.M)) {
+                PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_MALE.toString()));
+            } else {
+                PHOTO_IMV.setImage(new Image(ImageFiles.GENERIC_FEMALE.toString()));
+            }
+        }
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
     private String getValueFromKey(String key) {
@@ -212,4 +230,5 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 }

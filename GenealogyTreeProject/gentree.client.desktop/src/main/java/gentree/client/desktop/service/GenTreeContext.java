@@ -30,13 +30,14 @@ public class GenTreeContext implements FamilyContext {
 
     private Locale locale;
     private ObjectProperty<ResourceBundle> bundle = new SimpleObjectProperty<>();
+    private ObjectProperty<ResourceBundle> alertBundle = new SimpleObjectProperty<>();
     private ObjectProperty<FamilyService> service = new SimpleObjectProperty<>();
 
 
     {
 
         locale = new Locale("pl", "PL");
-        bundle.setValue(ResourceBundle.getBundle(AppTitles.PARAM_TRADUCTION_LOCATION, locale));
+        setBundle(locale);
     }
 
     private GenTreeContext() {
@@ -46,14 +47,19 @@ public class GenTreeContext implements FamilyContext {
 
     public void setBundle(Locale locale) {
         this.bundle.setValue(ResourceBundle.getBundle(AppTitles.PARAM_TRADUCTION_LOCATION, locale));
+        this.alertBundle.setValue(ResourceBundle.getBundle(AppTitles.PARAM_ALERT_LOCATION, locale));
     }
 
     public ResourceBundle getBundleValue() {
         return bundle.getValue();
     }
 
+    public String getAlertValueFromKey(String key) {
+        return this.alertBundle.getValue().getString(key);
+    }
+
     /*
-        GETTERS
+        GETTERS & SETTERS
      */
 
     public ReadOnlyObjectProperty<FamilyService> serviceProperty() {
@@ -63,11 +69,9 @@ public class GenTreeContext implements FamilyContext {
     public FamilyService getService() {
         return service.get();
     }
-    /*
-        SETTERS
-     */
 
     public void setService(FamilyService service) {
+
         this.service.set(service);
     }
 

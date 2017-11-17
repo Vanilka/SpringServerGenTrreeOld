@@ -13,6 +13,7 @@ import gentree.client.visualization.elements.MemberCard;
 import gentree.client.visualization.elements.RelationTypeCard;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -80,19 +81,11 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     }
 
     private void initListeners() {
-        initRelationListener();
+        ;relation.addListener(this::relationChange);
     }
 
-    private void initRelationListener() {
-        relation.addListener((observable, oldValue, newValue) -> {
-            childrenList.clear();
-            motherCard.setMember(newValue == null ? null : newValue.getLeft());
-            fatherCard.setMember(newValue == null ? null : newValue.getRight());
-            relationType.setRelation(newValue);
-            if (newValue != null) {
-                newValue.getChildren().forEach(this::addChildToPane);
-            }
-        });
+    private void cleanListeners() {
+        relation.removeListener(this::relationChange);
     }
 
 
@@ -162,6 +155,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
         ServiceResponse response = context.getService().moveChildrenToNewRelation(relation.get(), childrenList);
 
         if (response.getStatus() == ServiceResponse.ResponseStatus.OK) {
+            cleanListeners();
             stage.close();
         } else {
             //TODO show error
@@ -176,5 +170,15 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     @Override
     public void setRelation(Relation relation) {
         this.relation.setValue(relation);
+    }
+
+    private void relationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        childrenList.clear();
+        motherCard.setMember(newValue == null ? null : newValue.getLeft());
+        fatherCard.setMember(newValue == null ? null : newValue.getRight());
+        relationType.setRelation(newValue);
+        if (newValue != null) {
+            newValue.getChildren().forEach(this::addChildToPane);
+        }
     }
 }

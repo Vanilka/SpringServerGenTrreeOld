@@ -15,6 +15,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
@@ -89,7 +90,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
     @FXML
     public void cancel() {
-
+        cleanListeners();
         this.stage.close();
     }
 
@@ -104,6 +105,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
             //To to show error
         }
+        cleanListeners();
         this.stage.close();
 
     }
@@ -159,16 +161,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
      * Initialization of Tab listener
      */
     private void addSelectedTabListener() {
-        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (newValue.equals(tabOpenNewProject)) {
-                BUTTON_CONFIRM.setText(getValueFromKey(Keys.CREATE));
-            } else if (newValue.equals(tabOpenExistingProject)) {
-                BUTTON_CONFIRM.setText(getValueFromKey(Keys.OPEN));
-            }
-
-
-        });
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().addListener(this::selectedTabChanged);
     }
 
     private void addDisableButtonListener() {
@@ -193,11 +186,23 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     }
 
 
+    private void cleanListeners() {
+        this.languageBundle.removeListener(this::languageChange);
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().removeListener(this::selectedTabChanged);
+        BUTTON_CONFIRM.disableProperty().unbind();
+    }
+
+
     /*
      * LISTEN LANGUAGE CHANGES
      */
+
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChange);
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
     private String getValueFromKey(String key) {
@@ -217,4 +222,11 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
         this.stage = stage;
     }
 
+    private void selectedTabChanged(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+        if (newValue.equals(tabOpenNewProject)) {
+            BUTTON_CONFIRM.setText(getValueFromKey(Keys.CREATE));
+        } else if (newValue.equals(tabOpenExistingProject)) {
+            BUTTON_CONFIRM.setText(getValueFromKey(Keys.OPEN));
+        }
+    }
 }

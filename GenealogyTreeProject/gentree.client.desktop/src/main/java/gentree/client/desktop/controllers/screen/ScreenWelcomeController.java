@@ -6,7 +6,6 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,22 +52,10 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
-    public void addTopOffsetListener() {
-
-        this.MAIN_ANCHOR_PANE.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                double y = (newValue.doubleValue() - LOCAL_PROJECT_PANE.getHeight()) / 2;
-                LOCAL_PROJECT_PANE.setLayoutY(y);
-                ONLINE_PROJECT_PANE.setLayoutY(y);
-            }
-        });
-    }
 
     public void initLocalProjectPane() {
         sm.loadFxml(new ButtonLocalModeController(), LOCAL_PROJECT_PANE,
                 FilesFXML.LOCAL_APP_MODE);
-
     }
 
     public void initOnlineProjectPane() {
@@ -76,15 +63,28 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
                 FilesFXML.ONLINE_APP_MODE);
     }
 
-    private void setListeners() {
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
+    public void addTopOffsetListener() {
+        this.MAIN_ANCHOR_PANE.heightProperty().addListener(this::heightChange);
+    }
 
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
+    private void setListeners() {
+        this.languageBundle.addListener(this::languageChange);
+    }
+
+    private void heightChange(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        double y = (newValue.doubleValue() - LOCAL_PROJECT_PANE.getHeight()) / 2;
+        LOCAL_PROJECT_PANE.setLayoutY(y);
+        ONLINE_PROJECT_PANE.setLayoutY(y);
+    }
+
+    private void cleanListeners() {
+        this.MAIN_ANCHOR_PANE.heightProperty().removeListener(this::heightChange);
+        this.languageBundle.removeListener(this::languageChange);
+    }
+
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
     /*
@@ -98,6 +98,7 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
     private void reloadElements() {
 
     }
+
     /*
      ON CLICK ACTIONS
      */

@@ -74,6 +74,10 @@ public class DialogAppPropertiesOnlineController implements Initializable, FXMLC
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
 
+    public void cleanListeners() {
+
+    }
+
     private void initButtonDisableListener() {
         BooleanBinding binding = Bindings.createBooleanBinding(
                 () -> REALM_LIST.getSelectionModel().getSelectedItem() == null,

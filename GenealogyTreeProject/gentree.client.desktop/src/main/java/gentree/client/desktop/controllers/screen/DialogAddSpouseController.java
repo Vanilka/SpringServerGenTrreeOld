@@ -17,6 +17,7 @@ import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,6 +91,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
 
     @FXML
     public void cancel(ActionEvent actionEvent) {
+        cleanListener();
         stage.close();
     }
 
@@ -98,6 +100,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     public void confirm(ActionEvent actionEvent) {
 
         context.getService().addRelation(member.get(), spouse.get(), RELATION_TYPE_COMBO_BOX.getValue(), CHECK_BOX_SET_CURRENT.isSelected());
+        cleanListener();
         stage.close();
     }
 
@@ -116,7 +119,6 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
                 .filtered(mbr -> mbr.getGender() != returnGenderDenied())
                 .filtered(mbr -> !isAscOf(member.get(), mbr))
                 .filtered(mbr -> !isDescOf(member.get(), mbr));
-
         try {
             Relation born = context.getService().getCurrentFamily().findBornRelation(member.get());
 
@@ -158,57 +160,6 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
         return sim != null && context.getService().isDescOf(grain, sim);
     }
 
-    @Deprecated
-    private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
-
-        try {
-            Relation bornRelation = context.getService().getCurrentFamily().findBornRelation(m);
-            /*
-                Remove Sibling
-             */
-            for (Member sibbling : bornRelation.getChildren()) {
-                list = list.filtered(p -> !p.equals(m));
-            }
-            /*
-                RemoveLeft
-             */
-            if (bornRelation.getLeft() != null) {
-                list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
-                list = removeAscends(list, bornRelation.getLeft());
-            }
-            /*
-                Remove Rightrs
-             */
-            if (bornRelation.getRight() != null) {
-                list = list.filtered(p -> !p.equals(bornRelation.getRight()));
-                list = removeAscends(list, bornRelation.getRight());
-            }
-        } catch (NotUniqueBornRelationException e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    @Deprecated
-    private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
-        /*
-            Find relations that M is father or mother
-         */
-        List<Relation> relations = context.getService().getCurrentFamily().getRelations()
-                .filtered(p -> (p.getRight() != null && p.getRight().equals(m))
-                        || (p.getLeft() != null && p.getLeft().equals(m)));
-
-        for (Relation r : relations) {
-            if (r.getChildren() != null && r.getChildren().size() > 0) {
-                for (Member child : r.getChildren()) {
-                    list = list.filtered(q -> !q.equals(child));
-                    removeDescends(list, child);
-                }
-            }
-        }
-        return list;
-    }
 
     /*
         Init Methods
@@ -250,26 +201,28 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
      */
 
     private void initListeners() {
-        initMemberListener();
-        initSpouseListener();
+        member.addListener(this::memberListener);
+        spouse.addListener(this::spouseListener);
+
     }
 
-    private void initMemberListener() {
-        member.addListener((observable, oldValue, newValue) -> {
-            memberCard.setMember(newValue);
-        });
+    private void cleanListener() {
+        member.removeListener(this::memberListener);
+        spouse.removeListener(this::spouseListener);
     }
 
-    private void initSpouseListener() {
-        spouse.addListener((observable, oldValue, newValue) -> {
-            spouseCard.setMember(newValue);
-            if (newValue == null) {
-                RELATION_TYPE_COMBO_BOX.getSelectionModel().select(RelationType.NEUTRAL);
-                RELATION_TYPE_COMBO_BOX.setDisable(true);
-            } else {
-                RELATION_TYPE_COMBO_BOX.setDisable(false);
-            }
-        });
+    private void memberListener(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        memberCard.setMember(newValue);
+    }
+
+    private void spouseListener(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        spouseCard.setMember(newValue);
+        if (newValue == null) {
+            RELATION_TYPE_COMBO_BOX.getSelectionModel().select(RelationType.NEUTRAL);
+            RELATION_TYPE_COMBO_BOX.setDisable(true);
+        } else {
+            RELATION_TYPE_COMBO_BOX.setDisable(false);
+        }
     }
 
 
@@ -281,4 +234,5 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     public void setFather(Member m) {
         this.member.set(m);
     }
+
 }

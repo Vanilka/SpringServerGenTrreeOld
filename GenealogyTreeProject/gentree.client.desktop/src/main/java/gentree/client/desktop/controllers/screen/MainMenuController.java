@@ -6,10 +6,11 @@ import gentree.client.desktop.configuration.messages.Keys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLBorderPane;
 import gentree.client.desktop.controllers.FXMLController;
+import gentree.client.desktop.domain.Family;
+import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -119,20 +120,33 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     private void initFamilyServiceListener() {
-        context.serviceProperty().addListener((obsContext, oldContext, newContext) ->
-        {
-            if (newContext != null) {
-                newContext.familyProperty().addListener((obsFamily, oldFamily, newFamily) -> {
-                    if (newFamily == null) {
-                        changeElementsVisibility(false);
-                    } else {
-                        changeElementsVisibility(true);
-                    }
-                });
-            } else {
-                changeElementsVisibility(false);
-            }
-        });
+        context.serviceProperty().addListener(this::contextChanged);
+    }
+
+    private void cleanListeners() {
+        this.languageChooser.getSelectionModel().selectedItemProperty().removeListener(this::languageselectedChange);
+        this.languageBundle.removeListener(this::languageChange);
+        context.serviceProperty().removeListener(this::contextChanged);
+    }
+
+    private void contextChanged(ObservableValue<? extends FamilyService> obsContext, FamilyService oldContext, FamilyService newContext) {
+        if (newContext != null) {
+            newContext.familyProperty().addListener(this::familyChange);
+        } else {
+            changeElementsVisibility(false);
+        }
+
+        if(oldContext != null) {
+            oldContext.familyProperty().removeListener(this::familyChange);
+        }
+    }
+
+    private void familyChange(ObservableValue<? extends Family> obsFamily, Family oldFamily, Family newFamily) {
+        if (newFamily == null) {
+            changeElementsVisibility(false);
+        } else {
+            changeElementsVisibility(true);
+        }
     }
 
     private void changeElementsVisibility(boolean value) {
@@ -146,23 +160,17 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     * LISTEN LANGUAGE CHANGES
     */
     private void addLanguageListener() {
+        this.languageChooser.getSelectionModel().selectedItemProperty().addListener(this::languageselectedChange);
+        this.languageBundle.addListener(this::languageChange);
+    }
 
-        this.languageChooser.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AppLanguage>() {
-            @Override
-            public void changed(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue,
-                                AppLanguage newValue) {
-                context.setLocale(new Locale(newValue.toString(), newValue.getCountry()));
-                context.setBundle(context.getLocale());
-            }
-        });
+    private  void languageselectedChange(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue, AppLanguage newValue) {
+        context.setLocale(new Locale(newValue.toString(), newValue.getCountry()));
+        context.setBundle(context.getLocale());
+    }
 
-        this.languageBundle.addListener(new ChangeListener<ResourceBundle>() {
-            @Override
-            public void changed(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue,
-                                ResourceBundle newValue) {
-                reloadElements();
-            }
-        });
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
 

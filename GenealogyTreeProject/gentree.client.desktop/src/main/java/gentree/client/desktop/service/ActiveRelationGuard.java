@@ -22,18 +22,7 @@ public class ActiveRelationGuard implements Observer {
 
     public ActiveRelationGuard(ObservableList<Relation> relations) {
         this.relations = relations;
-
-        relations.addListener((ListChangeListener<Relation>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(relation -> {
-                        this.addObserverTo(relation);
-                        this.runUpdate(relation);
-                    });
-                }
-            }
-        });
-
+        relations.addListener((ListChangeListener<Relation>) this::relationListChange);
         runCheckWithUpdate();
     }
 
@@ -79,6 +68,20 @@ public class ActiveRelationGuard implements Observer {
         observable.deleteObserver(this);
     }
 
+    private void relationListChange(ListChangeListener.Change<? extends Relation> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                c.getAddedSubList().forEach(relation -> {
+                    this.addObserverTo(relation);
+                    this.runUpdate(relation);
+                });
+            }
+        }
+    }
 
+    public void clean() {
+        relations.removeListener(this::relationListChange);
+        relations.forEach(this::removeObserverFrom);
+    }
 }
 

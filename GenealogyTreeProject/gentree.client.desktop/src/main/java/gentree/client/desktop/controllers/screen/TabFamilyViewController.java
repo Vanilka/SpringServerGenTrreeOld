@@ -91,23 +91,22 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         FAMILY_RELATION_TABLE.setVisible(false);
 
         setButtonToToggleGroup();
+
         setCellValueFactory();
+        setCellFactory();
 
-        this.RELATION_SIM_LEFT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_LEFT));
-        this.RELATION_SIM_RIGHT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_RIGHT));
-        this.RELATION_TYPE_COLUMN.setCellFactory(setRelationTypeCellFactory());
-        this.SIM_PHOTO_COLUMN.setCellFactory(setPhotoCellFactory());
-
-        context.getService().currentFamilyPropertyI().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-              populateWithFamily(newValue);
-            }
-        });
-
+        context.getService().currentFamilyPropertyI().addListener(this::familyChange);
         populateWithFamily(context.getService().getCurrentFamily());
 
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
 
+    }
+
+    private void setCellFactory() {
+        this.RELATION_SIM_LEFT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_LEFT));
+        this.RELATION_SIM_RIGHT_COLUMN.setCellFactory(setMemberCellFactory(TABLE_RELATION_SIM_RIGHT));
+        this.RELATION_TYPE_COLUMN.setCellFactory(setRelationTypeCellFactory());
+        this.SIM_PHOTO_COLUMN.setCellFactory(setPhotoCellFactory());
     }
 
     private void setButtonToToggleGroup() {
@@ -116,25 +115,47 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
 
         buttonsTableGroup.selectToggle(BUTTON_SHOW_MEMBERS_TABLE);
 
-        buttonsTableGroup.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
-            if (newValue == null) {
-                buttonsTableGroup.selectToggle(oldValue);
-            }
-            if (buttonsTableGroup.getSelectedToggle().equals(BUTTON_SHOW_MEMBERS_TABLE)) {
-                FAMILY_MEMBER_TABLE.setVisible(true);
-                FAMILY_RELATION_TABLE.setVisible(false);
-            } else {
-                FAMILY_MEMBER_TABLE.setVisible(false);
-                FAMILY_RELATION_TABLE.setVisible(true);
-            }
-        });
+        buttonsTableGroup.selectedToggleProperty().addListener(this::selectedButtonChange);
+    }
+
+    /*
+        LISTENERS
+     */
+    private void cleanListeners() {
+        buttonsTableGroup.selectedToggleProperty().removeListener(this::selectedButtonChange);
+        context.getService().currentFamilyPropertyI().removeListener(this::familyChange);
+        this.languageBundle.removeListener(this::languageChanged);
+    }
+
+
+    private void languageChanged(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
+    }
+
+    private void familyChange(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {
+        if (newValue != null) {
+            populateWithFamily(newValue);
+        }
+    }
+
+    private void selectedButtonChange(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+        if (newValue == null) {
+            buttonsTableGroup.selectToggle(oldValue);
+        }
+        if (buttonsTableGroup.getSelectedToggle().equals(BUTTON_SHOW_MEMBERS_TABLE)) {
+            FAMILY_MEMBER_TABLE.setVisible(true);
+            FAMILY_RELATION_TABLE.setVisible(false);
+        } else {
+            FAMILY_MEMBER_TABLE.setVisible(false);
+            FAMILY_RELATION_TABLE.setVisible(true);
+        }
     }
 
     /*
      * LISTEN LANGUAGE CHANGES
      */
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChanged);
     }
 
     private String getValueFromKey(String key) {
@@ -170,9 +191,6 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     @FXML
     public void showInfoRelation(MouseEvent event) {
         Relation selected = FAMILY_RELATION_TABLE.getSelectionModel().getSelectedItem();
-
-        System.out.println("Selected : " +selected);
-
         if (event.getClickCount() == 2 && selected != null) {
             sm.getScreenMainController().showInfoRelation(selected);
         }
@@ -330,4 +348,6 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
         this.tab = tab;
         this.tabPane = tabPane;
     }
+
+
 }

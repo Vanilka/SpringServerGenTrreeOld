@@ -1,6 +1,7 @@
 package gentree.client.desktop.service;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import gentree.client.desktop.configuration.AlertsKeys;
 import gentree.client.desktop.configuration.Realm;
 import gentree.client.desktop.configuration.converters.ConverterDtoToModel;
 import gentree.client.desktop.configuration.converters.ConverterModelToDto;
@@ -41,6 +42,8 @@ public class RestConnectionService {
 
     public static final String SERVICE_NAME = "RestConnectionService";
     public static final RestConnectionService INSTANCE = new RestConnectionService();
+    private static final ScreenManager sm = ScreenManager.INSTANCE;
+    private static final GenTreeContext context = GenTreeContext.INSTANCE;
 
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_METHOD = "Basic ";
@@ -105,7 +108,9 @@ public class RestConnectionService {
         Response response = doPost(client.target(realm.getAddress()), ServerPaths.LOGIN, generateToken(login, password), null);
 
         if (response == null || response.getStatus() != 200) {
-            System.out.println("NOT OK");
+            sm.showError(context.getAlertValueFromKey(AlertsKeys.CONNECTION_ERROR_HEADER),
+                    context.getAlertValueFromKey(AlertsKeys.CONNECTION_ERROR_HEADER),
+                    context.getAlertValueFromKey(AlertsKeys.CONNECTION_ERROR_HEADER));
             result = false;
         } else {
             System.out.println("JEST OK");
@@ -257,6 +262,7 @@ public class RestConnectionService {
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         return response;
     }

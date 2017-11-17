@@ -14,6 +14,7 @@ import gentree.client.visualization.elements.RelationTypeCard;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
@@ -105,6 +106,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
 
     @FXML
     private void returnAction() {
+        cleanListeners();
         sm.getScreenMainController().removeInfoPanel(paneShowInfoRelation);
     }
 
@@ -161,13 +163,23 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
      */
 
     private void initListeners() {
-        relation.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                populateControls(newValue);
-            }
-        });
+        relation.addListener(this::relationChanged);
     }
 
+    private void cleanListeners() {
+        relation.removeListener(this::relationChanged);
+        languageBundle.removeListener(this::languageChange);
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
+    }
+
+    private void relationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (newValue != null) {
+            populateControls(newValue);
+        }
+    }
 
     private Callback<TableColumn<Member, String>,
             TableCell<Member, String>> setPhotoCellFactory() {
@@ -210,7 +222,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
  */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChange);
     }
 
     private String getValueFromKey(String key) {
@@ -243,4 +255,5 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     public ObjectProperty<Relation> relationProperty() {
         return relation;
     }
+
 }

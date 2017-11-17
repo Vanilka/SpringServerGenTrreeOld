@@ -29,4 +29,8 @@ public class DialogAppPropertiesOtherController implements Initializable, FXMLCo
 
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
     }
+
+    public void cleanListeners() {
+
+    }
 }

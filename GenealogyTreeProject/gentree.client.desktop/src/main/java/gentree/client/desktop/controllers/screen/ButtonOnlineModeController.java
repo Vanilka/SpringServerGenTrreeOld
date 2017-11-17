@@ -14,6 +14,7 @@ import gentree.client.desktop.service.ScreenManager;
 import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,6 +31,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class ButtonOnlineModeController implements Initializable, FXMLPane, FXMLController {
 
+    //TODO check possiblity to remove listeners
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -55,7 +57,11 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
      * LISTEN LANGUAGE CHANGES
      */
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChanged);
+    }
+
+    private void removListeners() {
+        this.languageBundle.removeListener(this::languageChanged);
     }
 
     private String getValueFromKey(String key) {
@@ -64,6 +70,10 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
 
     private void reloadElements() {
         this.ONLINE_APPLICATION_LABEL.setText(getValueFromKey(Keys.APPLICATION_CHOICE_ONLINE).toUpperCase());
+    }
+
+    private void languageChanged(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
     /*

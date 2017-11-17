@@ -192,8 +192,13 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     private void cleanListeners() {
         member.removeListener(this::memberChange);
         modifiable.removeListener(this::modifiableChange);
+        languageBundle.removeListener(this::languageChange);
         TOGGLE_IS_ALIVE.textProperty().unbind();
         DEATH_CAUSES_PANE.visibleProperty().unbind();
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 
 
@@ -217,7 +222,7 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
      */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(this::languageChange);
     }
 
     private String getValueFromKey(String key) {

@@ -7,6 +7,7 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import lombok.Getter;
@@ -50,20 +51,21 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
         Listeners
      */
     private void initListeners() {
-        initToggleAllowedHomoListener();
+        TOGGLE_ALLOWED_HOMO.selectedProperty().addListener(this::toogleHomoChange);
     }
 
-    private void initToggleAllowedHomoListener() {
-        TOGGLE_ALLOWED_HOMO.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                TOGGLE_ALLOWED_HOMO.setText("ALLOWED");
-            } else {
-                TOGGLE_ALLOWED_HOMO.setText("NOT ALLOWED");
-            }
-            properties.replace(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO, newValue.toString());
-        });
+    public void cleanListeners() {
+        TOGGLE_ALLOWED_HOMO.selectedProperty().removeListener(this::toogleHomoChange);
     }
 
+    private void toogleHomoChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        if (newValue) {
+            TOGGLE_ALLOWED_HOMO.setText("ALLOWED");
+        } else {
+            TOGGLE_ALLOWED_HOMO.setText("NOT ALLOWED");
+        }
+        properties.replace(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO, newValue.toString());
+    }
 
     /*
         SETTER
@@ -73,4 +75,5 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
         this.properties = properties;
         populateProperties();
     }
+
 }
