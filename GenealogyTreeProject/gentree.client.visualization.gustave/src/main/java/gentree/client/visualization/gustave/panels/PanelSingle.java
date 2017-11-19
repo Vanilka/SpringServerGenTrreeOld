@@ -8,6 +8,8 @@ import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -39,12 +41,20 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     private final static double PADDING_BOTTOM = 0.0;
 
     private final Pane pane;
+
+    /*  ***************
+        Cleanable
+     ***************  */
     private final FamilyMember member;
     private final ObjectProperty<Relation> thisRelation;
-
     private final ObservableList<PanelChild> childrenPanels;
     private final ParentToChildrenConnector childrenConnector;
     private final RelationReference thisRelationReference;
+
+    /* *************** */
+
+    private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChanged;
+    private ChangeListener<? super Relation> thisRelationListener = this::thisRelationChanged;
 
     /*
         Initialization
@@ -108,38 +118,12 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     }
 
     private void initListeners() {
-        initThisRelationListener();
-        initChildrenListener();
+        thisRelation.addListener(thisRelationListener);
+        childrenPanels.addListener(childrenListListener);
+
         initRelationElementsPositionListener();
 
     }
-
-    private void initThisRelationListener() {
-
-        thisRelation.addListener((observable, oldValue, newValue) -> {
-            thisRelationReference.setRelation(newValue);
-        });
-    }
-
-
-    private void initChildrenListener() {
-        childrenPanels.addListener((ListChangeListener<PanelChild>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    childrenBox.getChildren().addAll(c.getAddedSubList());
-                    c.getAddedSubList().forEach(panelChild -> {
-                        panelChild.setParentPane(this);
-                        childrenConnector.addPanelChild(panelChild);
-                    });
-                }
-                if (c.wasRemoved()) {
-                    childrenBox.getChildren().removeAll(c.getRemoved());
-                    c.getAddedSubList().forEach(childrenConnector::removePanelChild);
-                }
-            }
-        });
-    }
-
 
     private void initRelationElementsPositionListener() {
 
@@ -148,7 +132,19 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
 
         member.layoutXProperty().bind(Bindings.when(Bindings.isEmpty(childrenPanels))
                 .then(pane.widthProperty().subtract(member.widthProperty()).divide(2))
-        .otherwise(childrenConnector.getLine().startXProperty().subtract(member.widthProperty().divide(2)).subtract(PADDING_RIGHT)));
+                .otherwise(childrenConnector.getLine().startXProperty().subtract(member.widthProperty().divide(2)).subtract(PADDING_RIGHT)));
+    }
+
+    private void cleanRelationElementsPositionListener() {
+        thisRelationReference.layoutXProperty().unbind();
+        thisRelationReference.layoutYProperty().unbind();
+        member.layoutXProperty().unbind();
+    }
+
+    private void cleanListeners() {
+        thisRelation.removeListener(thisRelationListener);
+        childrenPanels.removeListener(childrenListListener);
+        cleanRelationElementsPositionListener();
     }
 
 
@@ -158,8 +154,14 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         }
     }
 
+    @Override
     public void clean() {
-
+        super.clean();
+        cleanListeners();
+        member.clean();
+        childrenPanels.forEach(PanelChild::clean);
+        childrenConnector.clean();
+        thisRelationReference.clean();
     }
 
 
@@ -172,5 +174,25 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     @Override
     public Node getConnectionNode() {
         return member;
+    }
+
+    private void childrenListChanged(ListChangeListener.Change<? extends PanelChild> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                childrenBox.getChildren().addAll(c.getAddedSubList());
+                c.getAddedSubList().forEach(panelChild -> {
+                    panelChild.setParentPane(this);
+                    childrenConnector.addPanelChild(panelChild);
+                });
+            }
+            if (c.wasRemoved()) {
+                childrenBox.getChildren().removeAll(c.getRemoved());
+                c.getAddedSubList().forEach(childrenConnector::removePanelChild);
+            }
+        }
+    }
+
+    private void thisRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        thisRelationReference.setRelation(newValue);
     }
 }

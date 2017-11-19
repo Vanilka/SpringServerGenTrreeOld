@@ -52,12 +52,12 @@ public class PanelChild extends SubBorderPane {
     private final HBox panelRelationExPane;
 
 
-    private final ObjectProperty<Member> member;
     private final ObjectProperty<PanelSingle> panelSingle;
     private final ObjectProperty<PanelRelationCurrent> panelRelationCurrent;
     private final ObservableList<PanelRelationEx> panelRelationEx;
+    private  SpouseConnector spouseConnector;
 
-    private final SpouseConnector spouseConnector;
+    private final ObjectProperty<Member> member;
     private ChangeListener<? super PanelSingle> panelSingleListener = this::panelSingleChanged;
     private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChanged;
     private ListChangeListener<? super PanelRelationEx> panelRelationExListener = this::panelRelationExChanged;
@@ -132,6 +132,10 @@ public class PanelChild extends SubBorderPane {
     }
 
     private void panelSingleChanged(ObservableValue<? extends PanelSingle> observable, PanelSingle oldValue, PanelSingle newValue) {
+        if(oldValue != null) {
+            oldValue.clean();
+        }
+
         panelSinglePane.getChildren().clear();
         if (newValue != null) {
             newValue.setParentPane(this);
@@ -159,13 +163,27 @@ public class PanelChild extends SubBorderPane {
         panelRelationExPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     }
 
+    public void setElementsNull() {
+        member.setValue(null);
+        panelSingle.setValue(null);
+        panelRelationCurrent.setValue(null);
+        panelRelationEx.clear();
+        spouseConnector = null;
+    }
+
     public void clean() {
         super.clean();
         cleanListeners();
-        panelRelationCurrent.get().clean();
+
+        if(panelRelationCurrent.get() != null) {
+            panelRelationCurrent.get().clean();
+        }
+
         panelSingle.get().clean();
         panelRelationEx.forEach(PanelRelationEx::clean);
         spouseConnector.clean();
+
+        setElementsNull();
     }
 
     /*

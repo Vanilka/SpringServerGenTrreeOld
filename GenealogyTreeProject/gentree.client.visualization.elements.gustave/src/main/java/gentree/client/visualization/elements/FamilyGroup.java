@@ -111,10 +111,14 @@ public class FamilyGroup extends AnchorPane implements AutoCleanable {
     @Override
     public void clean() {
         selfClean();
+        contentHbox.getChildren().forEach(element -> {
+            if(element instanceof AutoCleanable) ((AutoCleanable) element).clean();
+        });
         System.out.println("Content of Familygorup : " +contentHbox.getChildren());
     }
 
     public void selfClean() {
+        PANEL_HEADER.clean();
         rootRelation.removeListener(rootRelationListener);
         PANEL_HEADER.titleProperty().unbind();
     }

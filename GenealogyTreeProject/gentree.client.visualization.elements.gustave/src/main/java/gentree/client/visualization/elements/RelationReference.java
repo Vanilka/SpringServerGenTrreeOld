@@ -72,7 +72,6 @@ public class RelationReference extends StackPane implements AutoCleanable {
         relationReferenceType.removeListener(relationTypeListener);
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnMouseClicked(null);
-
         text.textProperty().unbind();
         this.visibleProperty().unbind();
     }

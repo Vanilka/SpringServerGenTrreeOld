@@ -189,6 +189,7 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     public void clean() {
         super.clean();
         cleanListeners();
+
         spouseCard.clean();
         relationTypeElement.clean();
         children.forEach(PanelChild::clean);

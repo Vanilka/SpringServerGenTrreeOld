@@ -2,6 +2,8 @@ package gentree.client.visualization.gustave.connectors;
 
 import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -20,6 +22,7 @@ public class ChildConnector extends LineConnector {
     private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
     private final SubRelationPane subBorderPane;
     private final PanelChild panelChild;
+    private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
 
 
     public ChildConnector(PanelChild child, SubRelationPane subBorderPane) {
@@ -50,21 +53,23 @@ public class ChildConnector extends LineConnector {
 
     private void initLineListeners() {
 
-        subBorderPane.getChildrenBox().boundsInParentProperty().addListener((obs, oldValue, newValue) -> {
-            redrawLine();
-        });
+        subBorderPane.getChildrenBox().boundsInParentProperty().addListener(boundsListener);
+        panelChild.boundsInParentProperty().addListener(boundsListener);
+        panelChild.getPanelSingle().get().boundsInParentProperty().addListener(boundsListener);
+        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener(boundsListener);
+    }
 
-        panelChild.boundsInParentProperty().addListener((obs, oldValue, newValue) -> {
-            redrawLine();
-        });
+    private void cleanListeners() {
+        subBorderPane.getChildrenBox().boundsInParentProperty().removeListener(boundsListener);
+        panelChild.boundsInParentProperty().removeListener(boundsListener);
+        panelChild.getPanelSingle().get().boundsInParentProperty().removeListener(boundsListener);
+        panelChild.getPanelSingle().get().boundsInLocalProperty().removeListener(boundsListener);
+    }
 
-        panelChild.getPanelSingle().get().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            redrawLine();
-        });
-
-        panelChild.getPanelSingle().get().boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-            redrawLine();
-        });
+    @Override
+    public void clean() {
+        super.clean();
+        cleanListeners();
     }
 
     private void redrawLine() {
@@ -82,5 +87,9 @@ public class ChildConnector extends LineConnector {
         Bounds nodeBoundsInScene = node.localToScene(node.getBoundsInLocal());
         Bounds result = subBorderPane.sceneToLocal(nodeBoundsInScene);
         return result;
+    }
+
+    private void boundsChanged(ObservableValue<? extends Bounds> obs, Bounds oldValue, Bounds newValue) {
+        redrawLine();
     }
 }

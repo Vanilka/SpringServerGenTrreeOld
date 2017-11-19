@@ -1,6 +1,7 @@
 package gentree.client.visualization.controls;
 
 import gentree.client.visualization.controls.skin.HeaderPaneSkin;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by vanilka on 07/10/2017.
  */
-public class HeaderPane extends Control {
+public class HeaderPane extends Control implements AutoCleanable {
 
     private static final String DEFAULT_CLASS_NAME = "header-pane";
 
@@ -53,6 +54,13 @@ public class HeaderPane extends Control {
         this.title.set(title);
         createDefaultSkin();
 
+    }
+
+    @Override
+    public void clean() {
+        if( getSkin() instanceof AutoCleanable) {
+            ((AutoCleanable) getSkin()).clean();
+        }
     }
 
     public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {

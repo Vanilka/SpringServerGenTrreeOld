@@ -4,6 +4,8 @@ import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.PanelRelationCurrent;
 import gentree.client.visualization.gustave.panels.PanelRelationEx;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -22,6 +24,7 @@ public class ParentToChildrenConnector extends LineConnector {
     *  Parent pane for this Connector
     */
     private SubRelationPane subBorderPane;
+    private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
 
 
     /**
@@ -39,27 +42,29 @@ public class ParentToChildrenConnector extends LineConnector {
 
 
     private void initListeners() {
-        betweenChildrenConnector.getLine().boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-            connectRelationToChildren();
-        });
-
-        betweenChildrenConnector.getLine().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            connectRelationToChildren();
-        });
-
-        subBorderPane.getConnectionNode().boundsInLocalProperty().addListener((observable -> {
-            connectRelationToChildren();
-        }));
-
-        subBorderPane.getConnectionNode().boundsInParentProperty().addListener((observable, oldValue, newValue) -> {
-            connectRelationToChildren();
-        });
-
+        betweenChildrenConnector.getLine().boundsInLocalProperty().addListener(boundsListener);
+        betweenChildrenConnector.getLine().boundsInParentProperty().addListener(boundsListener);
+        subBorderPane.getConnectionNode().boundsInLocalProperty().addListener(boundsListener);
+        subBorderPane.getConnectionNode().boundsInParentProperty().addListener(boundsListener);
         getLine().visibleProperty().bind(betweenChildrenConnector.isListEmpty().not());
 
 
     }
 
+    private void cleanListeners() {
+        betweenChildrenConnector.getLine().boundsInLocalProperty().removeListener(boundsListener);
+        betweenChildrenConnector.getLine().boundsInParentProperty().removeListener(boundsListener);
+        subBorderPane.getConnectionNode().boundsInLocalProperty().removeListener(boundsListener);
+        subBorderPane.getConnectionNode().boundsInParentProperty().removeListener(boundsListener);
+        getLine().visibleProperty().unbind();
+    }
+
+
+    @Override
+    public void clean() {
+        super.clean();
+        cleanListeners();
+    }
 
     public void addPanelChild(PanelChild child) {
         betweenChildrenConnector.addPanelChild(child);
@@ -125,4 +130,7 @@ public class ParentToChildrenConnector extends LineConnector {
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
 
+    private void boundsChanged(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+        connectRelationToChildren();
+    }
 }
