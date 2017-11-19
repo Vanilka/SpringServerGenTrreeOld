@@ -13,6 +13,7 @@ import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +44,8 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
 
+    private ChangeListener<ResourceBundle> bundleChangeListener = this::bundleChange;
+
     /**
      * Initializes the controller class.
      */
@@ -67,11 +70,11 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
      * LISTEN LANGUAGE CHANGES
     */
     private void addLanguageListener() {
-        this.languageBundle.addListener(this::bundleChange);
+        this.languageBundle.addListener(bundleChangeListener);
     }
 
     private void cleanListeners() {
-        this.languageBundle.removeListener(this::bundleChange);
+        this.languageBundle.removeListener(bundleChangeListener);
     }
 
     private String getValueFromKey(String key) {

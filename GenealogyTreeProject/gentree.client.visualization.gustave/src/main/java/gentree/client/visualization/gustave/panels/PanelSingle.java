@@ -158,6 +158,10 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         }
     }
 
+    public void clean() {
+
+    }
+
 
     @Override
     public void addChild(PanelChild child) {

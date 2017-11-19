@@ -154,6 +154,9 @@ public class SpouseConnector extends LineConnector {
         }
     }
 
+    public void clean() {
+
+    }
 
     private void drawSpouseFond() {
 

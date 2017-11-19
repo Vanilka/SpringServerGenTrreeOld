@@ -3,14 +3,14 @@ package gentree.client.visualization.gustave.connectors;
 import gentree.client.visualization.gustave.panels.PanelChild;
 import gentree.client.visualization.gustave.panels.SubRelationPane;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
+import javafx.geometry.Bounds;
 import javafx.scene.shape.Line;
 
 import java.util.Comparator;
@@ -27,7 +27,9 @@ public class BetweenChildrenConnector extends LineConnector {
     */
     private SubRelationPane subBorderPane;
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
-   // private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
+    private ListChangeListener<? super ChildConnector> changeListListener = this::childListChange;
+    private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
+    // private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
   //  private ObjectProperty<ChildConnector> end = new SimpleObjectProperty<>();
 
     /**
@@ -48,27 +50,7 @@ public class BetweenChildrenConnector extends LineConnector {
 
        // initPointListener();
 
-        list.addListener((ListChangeListener<ChildConnector>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    for (ChildConnector childConnector : c.getAddedSubList()) {
-
-                        childConnector.getLine().boundsInParentProperty().addListener((obs, oldValue, newValue) -> {
-                            drawLine();
-                        });
-
-                        childConnector.getLine().boundsInLocalProperty().addListener((obs, oldValue, newValue) -> {
-                            drawLine();
-                        });
-                    }
-                }
-
-                if (c.wasRemoved()) {
-                    c.getRemoved().forEach(ChildConnector::removeLine);
-                }
-            }
-        });
-
+        list.addListener(changeListListener);
         getLine().visibleProperty().bind(Bindings.createBooleanBinding(() -> list.size() > 0, list));
 
 
@@ -100,5 +82,28 @@ public class BetweenChildrenConnector extends LineConnector {
         return isEmpty.getReadOnlyProperty();
     }
 
+
+    private void childListChange(ListChangeListener.Change<? extends ChildConnector> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                for (ChildConnector childConnector : c.getAddedSubList()) {
+                    childConnector.getLine().boundsInParentProperty().addListener(boundsListener);
+                    childConnector.getLine().boundsInLocalProperty().addListener(boundsListener);
+                }
+            }
+
+            if (c.wasRemoved()) {
+                c.getRemoved().forEach(element -> {
+                    element.removeLine();
+                    element.getLine().boundsInParentProperty().removeListener(boundsListener);
+                    element.getLine().boundsInLocalProperty().removeListener(boundsListener);
+                });
+            }
+        }
+    }
+
+    private void boundsChanged(ObservableValue<? extends Bounds> obs, Bounds oldValue, Bounds newValue) {
+        drawLine();
+    }
 
 }

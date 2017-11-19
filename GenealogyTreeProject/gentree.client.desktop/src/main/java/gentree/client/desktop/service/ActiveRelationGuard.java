@@ -16,13 +16,14 @@ import java.util.Observer;
 public class ActiveRelationGuard implements Observer {
 
     private final ObservableList<Relation> relations;
+    private final ListChangeListener<? super Relation> relationListListener = this::relationListChange;
     GenTreeContext context = GenTreeContext.INSTANCE;
     ScreenManager sm = ScreenManager.INSTANCE;
 
 
     public ActiveRelationGuard(ObservableList<Relation> relations) {
         this.relations = relations;
-        relations.addListener((ListChangeListener<Relation>) this::relationListChange);
+        relations.addListener(relationListListener);
         runCheckWithUpdate();
     }
 
@@ -80,7 +81,7 @@ public class ActiveRelationGuard implements Observer {
     }
 
     public void clean() {
-        relations.removeListener(this::relationListChange);
+        relations.removeListener(relationListListener);
         relations.forEach(this::removeObserverFrom);
     }
 }

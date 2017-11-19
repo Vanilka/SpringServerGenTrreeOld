@@ -11,6 +11,7 @@ import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
@@ -88,6 +89,10 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+    private ChangeListener<? super AppLanguage> languageSelectedListener = this::languageSelectedChange;
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
+    private ChangeListener<? super FamilyService> serviceListener = this::serviceChanged;
+    private ChangeListener<? super Family> familyListener = this::familyChange;
 
 
     @Override
@@ -120,24 +125,26 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     private void initFamilyServiceListener() {
-        context.serviceProperty().addListener(this::contextChanged);
+        context.serviceProperty().addListener(serviceListener);
     }
 
     private void cleanListeners() {
-        this.languageChooser.getSelectionModel().selectedItemProperty().removeListener(this::languageselectedChange);
-        this.languageBundle.removeListener(this::languageChange);
-        context.serviceProperty().removeListener(this::contextChanged);
+        this.languageChooser.getSelectionModel().selectedItemProperty().removeListener(languageSelectedListener);
+        this.languageBundle.removeListener(languageListener);
+        context.serviceProperty().removeListener(serviceListener);
+        languageBundle.unbind();
+        context.getService().familyProperty().removeListener(familyListener);
     }
 
-    private void contextChanged(ObservableValue<? extends FamilyService> obsContext, FamilyService oldContext, FamilyService newContext) {
+    private void serviceChanged(ObservableValue<? extends FamilyService> obsContext, FamilyService oldContext, FamilyService newContext) {
         if (newContext != null) {
-            newContext.familyProperty().addListener(this::familyChange);
+            newContext.familyProperty().addListener(familyListener);
         } else {
             changeElementsVisibility(false);
         }
 
         if(oldContext != null) {
-            oldContext.familyProperty().removeListener(this::familyChange);
+            oldContext.familyProperty().removeListener(familyListener);
         }
     }
 
@@ -160,11 +167,11 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     * LISTEN LANGUAGE CHANGES
     */
     private void addLanguageListener() {
-        this.languageChooser.getSelectionModel().selectedItemProperty().addListener(this::languageselectedChange);
-        this.languageBundle.addListener(this::languageChange);
+        this.languageChooser.getSelectionModel().selectedItemProperty().addListener(languageSelectedListener);
+        this.languageBundle.addListener(languageListener);
     }
 
-    private  void languageselectedChange(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue, AppLanguage newValue) {
+    private  void languageSelectedChange(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue, AppLanguage newValue) {
         context.setLocale(new Locale(newValue.toString(), newValue.getCountry()));
         context.setBundle(context.getLocale());
     }
@@ -186,7 +193,6 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
         this.MENU_ITEM_NEW_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT_NEW));
         this.MENU_ITEM_OPEN_PROJECT.setText(getValueFromKey(Keys.MENU_PROJECT_OPEN));
         this.MENU_ITEM_SAVE_PROJECT_AS.setText(getValueFromKey(Keys.MENU_PROJECT_SAVE_AS));
-
     }
 
     /*

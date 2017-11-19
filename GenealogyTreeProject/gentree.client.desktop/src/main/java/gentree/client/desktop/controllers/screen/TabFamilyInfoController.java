@@ -13,6 +13,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,6 +76,8 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
             MEMBERS_COUNT_FIELD.setText("" + context.getService().getCurrentFamily().getMembers().size());
         }
     };
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
+    private ChangeListener<? super Family> familyListener = this::familyListener;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,8 +114,8 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
     }
 
     private void cleanListener() {
-        context.getService().currentFamilyPropertyI().removeListener(this::familyListener);
-        this.languageBundle.removeListener(this::languageChange);
+        context.getService().currentFamilyPropertyI().removeListener(familyListener);
+        this.languageBundle.removeListener(languageListener);
 
     }
 
@@ -136,7 +139,7 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener(this::languageChange);
+        this.languageBundle.addListener(languageListener);
     }
 
     private String getValueFromKey(String key) {

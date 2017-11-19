@@ -197,6 +197,12 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
                 .otherwise(spouseCard.widthProperty().add(SPACE_BETWEEN_OBJECTS).add(50)));
     }
 
+
+    public void clean() {
+
+    }
+
+
     public final RelationTypeElement getRelationTypeElement() {
         return relationTypeElement;
     }

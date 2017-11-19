@@ -14,6 +14,7 @@ import gentree.client.desktop.service.ScreenManager;
 import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -39,6 +40,8 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
     @FXML
     private Label ONLINE_APPLICATION_LABEL;
 
+    private ChangeListener<ResourceBundle> bundleChangeListener  = this::languageChanged;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
@@ -56,12 +59,14 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
     /*
      * LISTEN LANGUAGE CHANGES
      */
+
+
     private void addLanguageListener() {
-        this.languageBundle.addListener(this::languageChanged);
+        this.languageBundle.addListener(bundleChangeListener);
     }
 
     private void removListeners() {
-        this.languageBundle.removeListener(this::languageChanged);
+        this.languageBundle.removeListener(bundleChangeListener);
     }
 
     private String getValueFromKey(String key) {

@@ -13,10 +13,10 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.MemberCard;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
-import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -68,6 +68,9 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     private Stage stage;
+    private ChangeListener<Member> memberListener = this::memberListener;
+    private ChangeListener<Member> spouseListener = this::spouseListener;
+    private ChangeListener<? super RelationType> relationTypeListener = this::relationTypeChanged;
 
     {
         member = new SimpleObjectProperty<>();
@@ -174,11 +177,7 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
                 .bind(Bindings.createBooleanBinding((
                                 () -> RELATION_TYPE_COMBO_BOX.getValue().equals(RelationType.NEUTRAL)),
                         RELATION_TYPE_COMBO_BOX.valueProperty()));
-        RELATION_TYPE_COMBO_BOX.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.equals(RelationType.NEUTRAL)) {
-                CHECK_BOX_SET_CURRENT.setSelected(false);
-            }
-        });
+        RELATION_TYPE_COMBO_BOX.valueProperty().addListener(relationTypeListener);
     }
 
     private void initRelationTypeComboBox() {
@@ -201,14 +200,16 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
      */
 
     private void initListeners() {
-        member.addListener(this::memberListener);
-        spouse.addListener(this::spouseListener);
+        member.addListener(memberListener);
+        spouse.addListener(spouseListener);
 
     }
 
     private void cleanListener() {
-        member.removeListener(this::memberListener);
-        spouse.removeListener(this::spouseListener);
+        member.removeListener(memberListener);
+        spouse.removeListener(spouseListener);
+        RELATION_TYPE_COMBO_BOX.valueProperty().removeListener(relationTypeListener);
+        CHECK_BOX_SET_CURRENT.disableProperty().unbind();
     }
 
     private void memberListener(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
@@ -235,4 +236,9 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
         this.member.set(m);
     }
 
+    private void relationTypeChanged(ObservableValue<? extends RelationType> observable, RelationType oldValue, RelationType newValue) {
+        if (newValue.equals(RelationType.NEUTRAL)) {
+            CHECK_BOX_SET_CURRENT.setSelected(false);
+        }
+    }
 }

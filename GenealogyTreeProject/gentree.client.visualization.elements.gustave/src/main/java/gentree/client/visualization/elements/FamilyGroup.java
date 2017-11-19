@@ -2,9 +2,12 @@ package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.controls.HeaderPane;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.*;
@@ -19,7 +22,7 @@ import java.io.IOException;
  */
 @Getter
 @Setter
-public class FamilyGroup extends AnchorPane {
+public class FamilyGroup extends AnchorPane implements AutoCleanable{
 
     private static double OFFSET_FOND_DARK = 10.0;
     private static double OFFSET_FOND = 30.0;
@@ -33,6 +36,7 @@ public class FamilyGroup extends AnchorPane {
     @FXML
     private HBox contentHbox;
     private ObjectProperty<Relation> rootRelation;
+    private ChangeListener<? super Relation> rootRelationListener = this::rootRelationChanged;
 
     {
         rootRelation = new SimpleObjectProperty<>();
@@ -68,17 +72,7 @@ public class FamilyGroup extends AnchorPane {
      * This function has for role update NODE NAME  when  the name of racine child changes
      */
     private void propertyBinding() {
-        rootRelation.addListener((observable, oldValue, newValue) -> {
-            if(newValue != null) {
-                PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
-            }
-
-            if (oldValue != null) {
-                this.PANEL_HEADER.titleProperty().unbind();
-            }
-        });
-
-
+        rootRelation.addListener(rootRelationListener);
     }
 
     /**
@@ -114,5 +108,26 @@ public class FamilyGroup extends AnchorPane {
     }
 
 
+    @Override
+    public void clean() {
+        selfClean();
+        System.out.println("Content of Familygorup : " +contentHbox.getChildren());
+    }
+
+    public void selfClean() {
+        rootRelation.removeListener(rootRelationListener);
+        PANEL_HEADER.titleProperty().unbind();
+    }
+
+
+    private void rootRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (newValue != null) {
+            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
+        }
+
+        if (oldValue != null) {
+            this.PANEL_HEADER.titleProperty().unbind();
+        }
+    }
 }
 

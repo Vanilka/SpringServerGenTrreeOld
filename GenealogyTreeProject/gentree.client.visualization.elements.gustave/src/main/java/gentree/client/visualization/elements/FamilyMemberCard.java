@@ -27,6 +27,7 @@ public class FamilyMemberCard extends AnchorPane {
 
     private final static int MEMBER_WIDTH = 133;
     private final static int MEMBER_HEIGHT = 188;
+
     @FXML
     protected ImageView photoSim;
     @FXML
@@ -44,7 +45,9 @@ public class FamilyMemberCard extends AnchorPane {
 
 
     private ObjectProperty<Member> member;
-    private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
+    private ChangeListener<Object> listener = this::objectChange;
+
+    private ChangeListener<? super Member> memberListener = this::memberChange;
 
     {
         member = new SimpleObjectProperty<>();
@@ -59,7 +62,7 @@ public class FamilyMemberCard extends AnchorPane {
     public FamilyMemberCard(Member member, String path) {
         super();
         initialize();
-        this.member.addListener(this::memberChange);
+        this.member.addListener(memberListener);
         this.member.setValue(member);
 
         resize(MEMBER_WIDTH, MEMBER_HEIGHT);
@@ -127,7 +130,7 @@ public class FamilyMemberCard extends AnchorPane {
     }
 
     public void clean() {
-        this.member.removeListener(this::memberChange);
+        this.member.removeListener(memberListener);
         this.member.get().getProperties().forEach(p -> p.removeListener(listener));
     }
 
@@ -161,5 +164,9 @@ public class FamilyMemberCard extends AnchorPane {
         newValue.getProperties().forEach(p -> p.addListener(listener));
 
         fillComponents(newValue);
+    }
+
+    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue)  {
+        fillComponents(member.get());
     }
 }

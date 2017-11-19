@@ -32,6 +32,7 @@ public class ChildConnector extends LineConnector {
 
 
     public void removeLine() {
+
         subBorderPane.getChildren().remove(getLine());
     }
 

@@ -15,6 +15,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,6 +65,11 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private JFXButton BUTTON_CANCEL;
 
     private Stage stage;
+
+    private ChangeListener<Member> memberChangeListener = this::memberChanged;
+    private ChangeListener<Member> fatherChangeListener = this::motherChanged;
+    private ChangeListener<Member> motherChangeListener = this::fatherChange;
+    private ChangeListener<Relation> bornRelationListener = this::bornChanged;
 
     {
         currentMemberCard = new MemberCard();
@@ -256,17 +262,18 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
      */
 
     private void initListeners() {
-        member.addListener(this::memberChanged);
-        currentBornRelation.addListener(this::bornChanged);
-        mother.addListener(this::motherChanged);
-        father.addListener(this::fatherChange);
+
+        member.addListener(memberChangeListener);
+        currentBornRelation.addListener(bornRelationListener);
+        mother.addListener(motherChangeListener);
+        father.addListener(fatherChangeListener);
     }
 
     private void cleanListeners() {
-        member.removeListener(this::memberChanged);
-        currentBornRelation.removeListener(this::bornChanged);
-        mother.removeListener(this::motherChanged);
-        father.removeListener(this::fatherChange);
+        member.removeListener(memberChangeListener);
+        currentBornRelation.removeListener(bornRelationListener);
+        mother.removeListener(motherChangeListener);
+        father.removeListener(fatherChangeListener);
     }
 
 

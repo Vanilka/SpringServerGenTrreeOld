@@ -5,6 +5,8 @@ import gentree.client.visualization.gustave.connectors.SpouseConnector;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -56,6 +58,9 @@ public class PanelChild extends SubBorderPane {
     private final ObservableList<PanelRelationEx> panelRelationEx;
 
     private final SpouseConnector spouseConnector;
+    private ChangeListener<? super PanelSingle> panelSingleListener = this::panelSingleChanged;
+    private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChanged;
+    private ListChangeListener<? super PanelRelationEx> panelRelationExListener = this::panelRelationExChanged;
 
     {
         panelSinglePane = new AnchorPane();
@@ -101,46 +106,49 @@ public class PanelChild extends SubBorderPane {
      */
 
     private void initListeners() {
+        panelSingle.addListener(panelSingleListener);
+        panelRelationCurrent.addListener(panelRelationCurrentListener);
+        panelRelationEx.addListener(panelRelationExListener);
+    }
 
-        initPanelSingleListener();
-        initRelationCurrentListener();
-        initRelationExListener();
+    private void cleanListeners() {
+        prefWidthProperty().unbind();
+        panelSingle.removeListener(panelSingleListener);
+        panelRelationCurrent.removeListener(panelRelationCurrentListener);
+        panelRelationEx.removeListener(panelRelationExListener);
 
     }
 
-    private void initPanelSingleListener() {
-        panelSingle.addListener((observable, oldValue, newValue) -> {
-            panelSinglePane.getChildren().clear();
-            if (newValue != null) {
-                newValue.setParentPane(this);
-                panelSinglePane.getChildren().add(newValue);
-            }
-        });
+    private void panelRelationCurrentChanged(ObservableValue<? extends PanelRelationCurrent> observable, PanelRelationCurrent oldValue, PanelRelationCurrent newValue) {
+       if(oldValue != null) {
+           oldValue.clean();
+       }
 
+        panelRelationCurrentPane.getChildren().clear();
+        if (newValue != null) {
+            newValue.setParentPane(this);
+            panelRelationCurrentPane.getChildren().add(newValue);
+        }
     }
 
-    private void initRelationCurrentListener() {
-        panelRelationCurrent.addListener((observable, oldValue, newValue) -> {
-            panelRelationCurrentPane.getChildren().clear();
-            if (newValue != null) {
-                newValue.setParentPane(this);
-                panelRelationCurrentPane.getChildren().add(newValue);
-            }
-        });
+    private void panelSingleChanged(ObservableValue<? extends PanelSingle> observable, PanelSingle oldValue, PanelSingle newValue) {
+        panelSinglePane.getChildren().clear();
+        if (newValue != null) {
+            newValue.setParentPane(this);
+            panelSinglePane.getChildren().add(newValue);
+        }
     }
 
-    private void initRelationExListener() {
-        panelRelationEx.addListener((ListChangeListener<? super PanelRelationEx>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    c.getAddedSubList().forEach(sb -> sb.setParentPane(this));
-                    panelRelationExPane.getChildren().addAll(c.getAddedSubList());
-                } else if (c.wasRemoved()) {
-                    panelRelationExPane.getChildren().removeAll(c.getRemoved());
-                }
+    private void panelRelationExChanged(ListChangeListener.Change<? extends PanelRelationEx> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                c.getAddedSubList().forEach(sb -> sb.setParentPane(this));
+                panelRelationExPane.getChildren().addAll(c.getAddedSubList());
+            } else if (c.wasRemoved()) {
+                c.getRemoved().forEach(PanelRelationEx::clean);
+                panelRelationExPane.getChildren().removeAll(c.getRemoved());
             }
-        });
-
+        }
     }
 
     public void addRelationsEx(PanelRelationEx... relations) {
@@ -149,6 +157,14 @@ public class PanelChild extends SubBorderPane {
 
     private void initPanes() {
         panelRelationExPane.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
+
+    public void clean() {
+        cleanListeners();
+        panelRelationCurrent.get().clean();
+        panelSingle.get().clean();
+        panelRelationEx.forEach(PanelRelationEx::clean);
+        spouseConnector.clean();
     }
 
     /*
@@ -188,5 +204,4 @@ public class PanelChild extends SubBorderPane {
         this.panelRelationCurrent.set(panelRelationCurrent);
         panelRelationCurrent.setParentPane(this);
     }
-
 }

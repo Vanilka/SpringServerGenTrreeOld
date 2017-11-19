@@ -5,6 +5,8 @@ import gentree.client.visualization.controls.HeaderPane;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.*;
@@ -33,6 +35,7 @@ public class FamilyGroup extends AnchorPane {
     @FXML
     private HBox contentHbox;
     private ObjectProperty<Relation> rootRelation;
+    private ChangeListener<? super Relation> rootRelationListener = this::rootRelationChange;
 
     {
         rootRelation = new SimpleObjectProperty<>();
@@ -69,23 +72,22 @@ public class FamilyGroup extends AnchorPane {
      * This function has for role update NODE NAME  when  the name of racine child changes
      */
     private void propertyBinding() {
-
-        rootRelation.addListener((observable, oldValue, newValue) -> {
-            if (oldValue != null) {
-                this.PANEL_HEADER.titleProperty().unbind();
-            }
-
-            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
-        });
-
-
+        rootRelation.addListener(rootRelationListener);
     }
+
+
+
 
     /**
      * TODO
      */
     private void initListener() {
 
+    }
+
+    private void cleanListener() {
+        rootRelation.removeListener(rootRelationListener);
+        PANEL_HEADER.titleProperty().unbind();
     }
 
 
@@ -129,5 +131,12 @@ public class FamilyGroup extends AnchorPane {
     }
 
 
+    private void rootRelationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (oldValue != null) {
+            this.PANEL_HEADER.titleProperty().unbind();
+        }
+
+        PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
+    }
 }
 

@@ -15,6 +15,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,6 +62,8 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
     private TabOpenExistingProjectController tabOpenExistingProjectController;
 
     private Stage stage;
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
+    private ChangeListener<? super Tab> selectedTabListener = this::selectedTabChanged;
 
     {
         tabOpenExistingProject = new Tab();
@@ -161,7 +164,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
      * Initialization of Tab listener
      */
     private void addSelectedTabListener() {
-        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().addListener(this::selectedTabChanged);
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().addListener(selectedTabListener);
     }
 
     private void addDisableButtonListener() {
@@ -187,9 +190,10 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
 
 
     private void cleanListeners() {
-        this.languageBundle.removeListener(this::languageChange);
-        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().removeListener(this::selectedTabChanged);
+        this.languageBundle.removeListener(languageListener);
+        TAB_PANE_OPEN_PROJECT.getSelectionModel().selectedItemProperty().removeListener(selectedTabListener);
         BUTTON_CONFIRM.disableProperty().unbind();
+
     }
 
 
@@ -198,7 +202,7 @@ public class DialogOpenProjectController implements Initializable, FXMLControlle
      */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener(this::languageChange);
+        this.languageBundle.addListener(languageListener);
     }
 
     private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {

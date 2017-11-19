@@ -9,6 +9,7 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,6 +64,8 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
 
     private List<ToggleButton> toggleButtons;
     private Stage stage;
+
+    private ChangeListener<? super Toggle> selectedChangeListener = this::selectedChange;
 
     {
         group = new ToggleGroup();
@@ -152,11 +155,11 @@ public class DialogAppPropertiesController implements Initializable, FXMLControl
      */
 
     private void initListeners() {
-        group.selectedToggleProperty().addListener(this::selectedChange);
+        group.selectedToggleProperty().addListener(selectedChangeListener);
     }
 
     private void cleanListeners() {
-        group.selectedToggleProperty().removeListener(this::selectedChange);
+        group.selectedToggleProperty().removeListener(selectedChangeListener);
         dialogAppPropertiesOnlineController.cleanListeners();
         dialogAppPropertiesTreeController.cleanListeners();
         dialogAppPropertiesOtherController.cleanListeners();

@@ -6,6 +6,7 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,6 +38,8 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+    private ChangeListener<? super Number> mainAnchorPaneHeightListener = this::heightChange;
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
 
 
     @Override
@@ -64,11 +67,11 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
     }
 
     public void addTopOffsetListener() {
-        this.MAIN_ANCHOR_PANE.heightProperty().addListener(this::heightChange);
+        this.MAIN_ANCHOR_PANE.heightProperty().addListener(mainAnchorPaneHeightListener);
     }
 
     private void setListeners() {
-        this.languageBundle.addListener(this::languageChange);
+        this.languageBundle.addListener(languageListener);
     }
 
     private void heightChange(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -78,8 +81,8 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
     }
 
     private void cleanListeners() {
-        this.MAIN_ANCHOR_PANE.heightProperty().removeListener(this::heightChange);
-        this.languageBundle.removeListener(this::languageChange);
+        this.MAIN_ANCHOR_PANE.heightProperty().removeListener(mainAnchorPaneHeightListener);
+        this.languageBundle.removeListener(languageListener);
     }
 
 

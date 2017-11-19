@@ -8,6 +8,8 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
@@ -36,6 +38,8 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
      */
     private TabFamilyInfoController tabFamilyInfoController;
     private TabFamilyViewController tabFamilyViewController;
+
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
 
     {
         familyInfo = new Tab();
@@ -71,12 +75,20 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
 
     }
 
+    public void clean() {
+        cleanListeners();
+    }
+
      /*
      *   LISTEN LANGUAGE CHANGES
      */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(languageListener);
+    }
+
+    private void cleanListeners() {
+        this.languageBundle.removeListener(languageListener);
     }
 
     private String getValueFromKey(String key) {
@@ -88,4 +100,9 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
         familyView.setText(getValueFromKey(Keys.TAB_FAMILY_VIEW));
 
     }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
+    }
+
 }

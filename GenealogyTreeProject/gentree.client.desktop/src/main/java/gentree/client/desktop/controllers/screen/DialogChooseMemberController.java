@@ -9,6 +9,7 @@ import gentree.common.configuration.enums.Age;
 import gentree.common.configuration.enums.Gender;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,6 +68,8 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     @Setter
     private Gender notAllowedGender;
+    private ChangeListener<? super Member> selectionMemberListener = this::selectionChange;
+    private ChangeListener<? super Member> memberChangeListener = this::memberChange;
 
 
     {
@@ -128,13 +131,13 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     }*/
 
     private void initSelectedMemberListener() {
-        MEMBER_TABLE.getSelectionModel().selectedItemProperty().addListener(this::selectionChange);
-        selectedMember.addListener(this::memberChange);
+        MEMBER_TABLE.getSelectionModel().selectedItemProperty().addListener(selectionMemberListener);
+        selectedMember.addListener(memberChangeListener);
     }
 
     private void cleanListeners() {
-        MEMBER_TABLE.getSelectionModel().selectedItemProperty().removeListener(this::selectionChange);
-        selectedMember.removeListener(this::memberChange);
+        MEMBER_TABLE.getSelectionModel().selectedItemProperty().removeListener(selectionMemberListener);
+        selectedMember.removeListener(memberChangeListener);
     }
 
     private void selectionChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {

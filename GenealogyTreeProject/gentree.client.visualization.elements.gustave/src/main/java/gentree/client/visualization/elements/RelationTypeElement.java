@@ -1,9 +1,12 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import lombok.Getter;
@@ -14,9 +17,10 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeElement extends RelationTypeCard {
+public class RelationTypeElement extends RelationTypeCard  {
 
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
+    private ChangeListener<? super ContextProvider> contextProviderListener = this::contextProviderChange;
 
     {
         init();
@@ -56,19 +60,7 @@ public class RelationTypeElement extends RelationTypeCard {
         }
 
 
-        CONTEXT_PROVIDER_PROPERTY.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                this.setOnContextMenuRequested(null);
-                this.setOnMouseClicked(null);
-            } else {
-                this.setOnContextMenuRequested(event -> newValue.showRelationContextMenu(returnThis(), event));
-                this.setOnMouseClicked(event -> {
-                    if (event.getClickCount() == 2 && relation.get() != null) {
-                        newValue.showInfoRelation(relation.get());
-                    }
-                });
-            }
-        });
+        CONTEXT_PROVIDER_PROPERTY.addListener(contextProviderListener);
     }
 
     private void initShadow() {
@@ -83,4 +75,23 @@ public class RelationTypeElement extends RelationTypeCard {
     }
 
 
+    private void contextProviderChange(ObservableValue<? extends ContextProvider> observable, ContextProvider oldValue, ContextProvider newValue) {
+        if (newValue == null) {
+            this.setOnContextMenuRequested(null);
+            this.setOnMouseClicked(null);
+        } else {
+            this.setOnContextMenuRequested(event -> newValue.showRelationContextMenu(returnThis(), event));
+            this.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && relation.get() != null) {
+                    newValue.showInfoRelation(relation.get());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+        CONTEXT_PROVIDER_PROPERTY.removeListener(contextProviderListener);
+    }
 }

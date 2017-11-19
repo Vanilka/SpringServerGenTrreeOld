@@ -18,6 +18,7 @@ import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import lombok.extern.log4j.Log4j2;
@@ -48,6 +49,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
     private Long idMember;
     private Long idRelation;
+    private ChangeListener<? super Family> familyListener = this::familyChanged;
+    private ListChangeListener<? super Member> membersListListener = this::memberListChange;
+    private ListChangeListener<? super Relation> relationListListener = this::relationListChange;
 
     /*
         Functions
@@ -224,25 +228,25 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
 
     private void setCurrentFamilyListener() {
-        this.currentFamily.addListener(this::familyChanged);
+        this.currentFamily.addListener(familyListener);
     }
 
     private void setMemberListener() {
-        this.getCurrentFamily().getMembers().addListener((ListChangeListener<Member>) this::memberListChange);
+        this.getCurrentFamily().getMembers().addListener(membersListListener);
     }
 
     private void setRelationListener(Family family) {
-        family.getRelations().addListener(this::relationListChange);
+        family.getRelations().addListener(relationListListener);
     }
 
     private void cleanFamilyListener() {
         cleanMemberAndRelationListeners(getCurrentFamily());
-        currentFamily.removeListener(this::familyChanged);
+        currentFamily.removeListener(familyListener);
     }
 
     private void cleanMemberAndRelationListeners(Family family) {
-        family.getRelations().removeListener(this::relationListChange);
-        family.getMembers().removeListener(this::memberListChange);
+        family.getRelations().removeListener(relationListListener);
+        family.getMembers().removeListener(membersListListener);
     }
 
     private void familyChanged(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {

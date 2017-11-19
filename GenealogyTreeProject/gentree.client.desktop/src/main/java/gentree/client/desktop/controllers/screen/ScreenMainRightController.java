@@ -8,6 +8,8 @@ import gentree.client.visualization.service.implementation.GenTreeImageGenerator
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
@@ -40,6 +42,7 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
     @Getter
     private GenTreeDrawingService drawingService;
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
 
 
     @Override
@@ -82,7 +85,11 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     *   LISTEN LANGUAGE CHANGES
     */
     private void addLanguageListener() {
-        this.languageBundle.addListener((observable, oldValue, newValue) -> reloadElements());
+        this.languageBundle.addListener(languageListener);
+    }
+
+    private void cleanListeners() {
+        this.languageBundle.removeListener(languageListener);
     }
 
     private String getValueFromKey(String key) {
@@ -91,5 +98,9 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
 
     private void reloadElements() {
         // Nothing to do
+    }
+
+    private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
+        reloadElements();
     }
 }

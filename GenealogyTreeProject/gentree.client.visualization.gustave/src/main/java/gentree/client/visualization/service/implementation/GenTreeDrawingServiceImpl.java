@@ -6,9 +6,11 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
+import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
@@ -253,6 +255,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     }
 
     private void reset() {
+       for(Node n : box.getChildren()) {
+           if(n instanceof AutoCleanable)  ((AutoCleanable) n).clean();
+       }
+
         box.getChildren().clear();
         nodeCounter = 1;
         List<Relation> list = context.getService().getCurrentFamily().getRelations()

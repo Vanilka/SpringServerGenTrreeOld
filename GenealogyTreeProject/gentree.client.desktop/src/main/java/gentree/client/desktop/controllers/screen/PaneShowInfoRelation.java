@@ -14,6 +14,7 @@ import gentree.client.visualization.elements.RelationTypeCard;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -95,6 +96,9 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
+    private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
+    private ChangeListener<? super Relation> relationListener= this::relationChanged;
+
 
     {
         motherCard = new FamilyMemberCard();
@@ -114,7 +118,6 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log.trace(LogMessages.MSG_CTRL_INITIALIZATION);
-
         this.languageBundle.setValue(resources);
         this.languageBundle.bind(context.getBundle());
         addLanguageListener();
@@ -163,12 +166,13 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
      */
 
     private void initListeners() {
-        relation.addListener(this::relationChanged);
+        relation.addListener(relationListener);
     }
 
     private void cleanListeners() {
-        relation.removeListener(this::relationChanged);
-        languageBundle.removeListener(this::languageChange);
+        relation.removeListener(relationListener);
+        this.languageBundle.unbind();
+        languageBundle.removeListener(languageListener);
     }
 
     private void languageChange(ObservableValue<? extends ResourceBundle> observable, ResourceBundle oldValue, ResourceBundle newValue) {
@@ -222,7 +226,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
  */
 
     private void addLanguageListener() {
-        this.languageBundle.addListener(this::languageChange);
+        this.languageBundle.addListener(languageListener);
     }
 
     private String getValueFromKey(String key) {

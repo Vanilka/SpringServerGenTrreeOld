@@ -1,9 +1,11 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -13,7 +15,7 @@ import javafx.scene.text.Text;
 /**
  * Created by Martyna SZYMKOWIAK on 31/08/2017.
  */
-public class RelationReference extends StackPane {
+public class RelationReference extends StackPane implements AutoCleanable {
 
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
 
@@ -24,6 +26,11 @@ public class RelationReference extends StackPane {
     private final ObjectProperty<RelationReferenceType> relationReferenceType = new SimpleObjectProperty<>();
     private final ObjectProperty<Relation> relation = new SimpleObjectProperty<>();
     private Text text = new Text();
+
+
+    private ChangeListener<? super ContextProvider> contextListener = this::contextChange;
+    private ChangeListener<? super RelationReferenceType> relationTypeListener = this::relationTypeChange;
+    private ChangeListener<? super Relation> relationListener = this::relationChange;
 
     public RelationReference() {
         this(null);
@@ -50,23 +57,29 @@ public class RelationReference extends StackPane {
         }
 
 
-        CONTEXT_PROVIDER_PROPERTY.addListener(this::contextChange);
+        CONTEXT_PROVIDER_PROPERTY.addListener(contextListener);
 
     }
 
     private void initListeners() {
-        relation.addListener(this::relationChange);
-        relationReferenceType.addListener(this::relationTypeChange);
+        relation.addListener(relationListener);
+        relationReferenceType.addListener(relationTypeListener);
     }
 
+
     private void cleanListeners() {
-        relation.removeListener(this::relationChange);
-        relationReferenceType.removeListener(this::relationTypeChange);
-        CONTEXT_PROVIDER_PROPERTY.removeListener(this::contextChange);
+        relation.removeListener(relationListener);
+        relationReferenceType.removeListener(relationTypeListener);
+        CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnMouseClicked(null);
 
         text.textProperty().unbind();
         this.visibleProperty().unbind();
+    }
+
+    @Override
+    public void clean() {
+        cleanListeners();
     }
 
     private void relationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {

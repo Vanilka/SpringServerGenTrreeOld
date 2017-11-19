@@ -58,4 +58,13 @@ public class HeaderPaneSkin extends SkinBase<HeaderPane> {
                         CornerRadii.EMPTY,
                         BorderWidths.DEFAULT)));
     }
+
+    public void clean() {
+        getSkinnable().widthProperty().removeListener(invalidListener);
+        getSkinnable().heightProperty().removeListener(invalidListener);
+
+        getSkinnable().prefWidthProperty().unbind();
+        getSkinnable().prefHeightProperty().unbind();
+    }
 }
+

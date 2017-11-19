@@ -12,6 +12,7 @@ import gentree.client.desktop.service.responses.FamilyListResponse;
 import gentree.client.desktop.service.responses.FamilyResponse;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,6 +49,8 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
+
+    private ChangeListener<? super Number> familyTableLayoutXListener = this::familyTableLayoutXChange;
 
     @FXML
     private void chooseFamily() {
@@ -109,8 +112,11 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
      */
 
     /*
-*  LISTEN POSITION
-*/
+    *  LISTEN POSITION
+    */
+
+    //TODO REFACTOR
+
     private void addTopOffsetListener(TableView tableView) {
         this.screenOpenOnlineProjectPane.heightProperty()
                 .addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -128,6 +134,7 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
     }
 
     private void addTopOffsetListener(VBox vbox) {
+
         this.screenOpenOnlineProjectPane.heightProperty()
                 .addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
                     double y = (newValue.doubleValue() - vbox.getHeight()) / 2;
@@ -136,9 +143,11 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
     }
 
     private void addLeftOffsetListener() {
-        this.FAMILY_TABLE.layoutXProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-            double x = (newValue.doubleValue() - ROND_BUTTONS_VBOX.getWidth());
-            ROND_BUTTONS_VBOX.setLayoutX(x);
-        });
+        this.FAMILY_TABLE.layoutXProperty().addListener(familyTableLayoutXListener);
+    }
+
+    private void familyTableLayoutXChange(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+        double x = (newValue.doubleValue() - ROND_BUTTONS_VBOX.getWidth());
+        ROND_BUTTONS_VBOX.setLayoutX(x);
     }
 }

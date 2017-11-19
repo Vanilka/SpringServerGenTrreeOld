@@ -7,6 +7,7 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +34,8 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
+    private ChangeListener<? super Boolean> toggleHomoListener = this::toogleHomoChange;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,11 +54,11 @@ public class DialogAppPropertiesTreeController implements Initializable, FXMLCon
         Listeners
      */
     private void initListeners() {
-        TOGGLE_ALLOWED_HOMO.selectedProperty().addListener(this::toogleHomoChange);
+        TOGGLE_ALLOWED_HOMO.selectedProperty().addListener(toggleHomoListener);
     }
 
     public void cleanListeners() {
-        TOGGLE_ALLOWED_HOMO.selectedProperty().removeListener(this::toogleHomoChange);
+        TOGGLE_ALLOWED_HOMO.selectedProperty().removeListener(toggleHomoListener);
     }
 
     private void toogleHomoChange(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

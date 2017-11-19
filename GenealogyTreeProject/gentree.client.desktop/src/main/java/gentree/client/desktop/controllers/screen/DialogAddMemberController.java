@@ -9,14 +9,15 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.controllers.FXMLDialogController;
 import gentree.client.desktop.controllers.FXMLPane;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.responses.ServiceResponse;
+import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.common.configuration.enums.Age;
 import gentree.common.configuration.enums.DeathCauses;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.Race;
-import gentree.client.desktop.responses.ServiceResponse;
-import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -86,6 +87,10 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     private ToggleGroup toggleGroupSex;
     private String path;
 
+    private ChangeListener<Boolean> toogleSelectedListener = this::selectedChanged;
+    private ChangeListener<Toggle> sexChangeListener = this::sexChanged;
+    private ChangeListener<ResourceBundle> languageListener = this::languageChange;
+
     {
         toggleGroupSex = new ToggleGroup();
         path = null;
@@ -131,7 +136,7 @@ public class DialogAddMemberController implements Initializable, FXMLController,
 
     public void choosePhoto(MouseEvent event) {
         if (event.getClickCount() == 2) {
-              path = sm.setImageIntoImageView(PHOTO_IMV);
+            path = sm.setImageIntoImageView(PHOTO_IMV);
         }
     }
 
@@ -165,33 +170,22 @@ public class DialogAddMemberController implements Initializable, FXMLController,
      */
 
     private void initListeners() {
-        initLanguageListener();
-        initAliveListener();
-        initSexListener();
+        this.languageBundle.addListener(this::languageChange);
+        this.ALIVE_TOGGLE_BUTTON.selectedProperty().addListener(toogleSelectedListener);
+        this.ALIVE_TOGGLE_BUTTON.setSelected(true);
+        this.toggleGroupSex.selectedToggleProperty().addListener(sexChangeListener);
     }
 
-    private  void  cleanListeners() {
-        ALIVE_TOGGLE_BUTTON.selectedProperty().removeListener(this::selectedChanged);
-        toggleGroupSex.selectedToggleProperty().removeListener(this::sexChanged);
-        languageBundle.removeListener(this::languageChange);
-    }
-
-    private void initAliveListener() {
-
-        ALIVE_TOGGLE_BUTTON.selectedProperty().addListener(this::selectedChanged);
-        ALIVE_TOGGLE_BUTTON.setSelected(true);
-    }
-
-    private void initSexListener() {
-        toggleGroupSex.selectedToggleProperty().addListener(this::sexChanged);
+    private void cleanListeners() {
+        ALIVE_TOGGLE_BUTTON.selectedProperty().removeListener(toogleSelectedListener);
+        toggleGroupSex.selectedToggleProperty().removeListener(sexChangeListener);
+        languageBundle.removeListener(languageListener);
     }
 
     /*
     *  LISTEN LANGUAGE CHANGES
     */
-    private void initLanguageListener() {
-        this.languageBundle.addListener(this::languageChange);
-    }
+
 
     private void selectedChanged(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
         if (newValue) {

@@ -41,7 +41,9 @@ public class MemberCard extends AnchorPane {
 
 
     private ObjectProperty<Member> member;
-    private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
+    private ChangeListener<Object> listener = this::objectChange;
+
+    private ChangeListener<? super Member> memberListener = this::simChanged;
 
     {
         member = new SimpleObjectProperty<>();
@@ -53,7 +55,7 @@ public class MemberCard extends AnchorPane {
         super();
         initialize();
 
-        this.member.addListener(this::simChanged);
+        this.member.addListener(memberListener);
         this.member.setValue(member);
         resize(255, 145);
 
@@ -77,13 +79,12 @@ public class MemberCard extends AnchorPane {
         }
     }
 
-    private ChangeListener<Member> getChangeMemberListener() {
-        ChangeListener<Member> simListener = this::simChanged;
-        return simListener;
-    }
 
+    private void objectChange(ObservableValue<?> observableValue, Object oldValue, Object newValue) {
+        fillComponents(member.get());
+    }
     public void clean() {
-        member.removeListener(this::simChanged);
+        member.removeListener(memberListener);
         member.get().getProperties().forEach(p -> p.removeListener(listener));
     }
 

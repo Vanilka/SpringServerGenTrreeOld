@@ -13,6 +13,7 @@ import gentree.client.visualization.elements.MemberCard;
 import gentree.client.visualization.elements.RelationTypeCard;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,6 +62,9 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
+
+    private ChangeListener<Relation> relationChangeListener = this::relationChange;
+
     {
         addChildButton = new Button();
         childrenList = FXCollections.observableArrayList();
@@ -81,11 +85,11 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     }
 
     private void initListeners() {
-        ;relation.addListener(this::relationChange);
+        ;relation.addListener(relationChangeListener);
     }
 
     private void cleanListeners() {
-        relation.removeListener(this::relationChange);
+        relation.removeListener(relationChangeListener);
     }
 
 
