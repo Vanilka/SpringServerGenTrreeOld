@@ -3,8 +3,11 @@ package gentree.client.visualization.gustave.connectors;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.panels.PanelChild;
+import gentree.client.visualization.gustave.panels.PanelRelationCurrent;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -24,6 +27,9 @@ public class SpouseConnector extends LineConnector {
     private final Line lineRelationToSim;
     private final Line lineSimConnectAllEx;
     private final Line lineSimConnectSpouse;
+    private ChangeListener<? super Bounds> boundChangeCauseDrawingListener = this::boundChangeCauseDrawing;
+    private ChangeListener<? super Bounds> boundsExListener = this::boundsExChange;
+    private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChange;
 
     public SpouseConnector(PanelChild panelChild) {
         super();
@@ -83,29 +89,26 @@ public class SpouseConnector extends LineConnector {
     }
 
     private void initPanelCurrentListener() {
-        panelChild.panelRelationCurrentProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                newValue.getRelation().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
-                    drawLine();
-                });
+        panelChild.panelRelationCurrentProperty().addListener(panelRelationCurrentListener);
+        panelChild.getPanelRelationExPane().boundsInParentProperty().addListener(boundsExListener);
+        panelChild.getPanelRelationExPane().boundsInLocalProperty().addListener(boundsExListener);
+    }
 
-                newValue.getRelationTypeElement().boundsInParentProperty().addListener((observable1, oldValue1, newValue1) -> {
-                    drawLine();
-                });
 
-                newValue.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
-                    drawLine();
-                });
-            }
-        });
+    @Override
+    public void clean() {
+        super.clean();
+        panelChild.panelRelationCurrentProperty().removeListener(panelRelationCurrentListener);
+        panelChild.getPanelRelationExPane().boundsInParentProperty().removeListener(boundsExListener);
+        panelChild.getPanelRelationExPane().boundsInLocalProperty().removeListener(boundsExListener);
 
-        panelChild.getPanelRelationExPane().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
-            drawSpouseExLine();
-        });
+        if(panelChild.getPanelRelationCurrent().get() != null) {
+            panelChild.getPanelRelationCurrent().get().getRelation().boundsInParentProperty().removeListener(boundChangeCauseDrawingListener);
+            panelChild.getPanelRelationCurrent().get().getRelationTypeElement().boundsInParentProperty().removeListener(boundChangeCauseDrawingListener);
+            panelChild.getPanelRelationCurrent().get().getSpouseCard().boundsInParentProperty().removeListener(boundChangeCauseDrawingListener);
+        }
 
-        panelChild.getPanelRelationExPane().boundsInLocalProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
-            drawSpouseExLine();
-        });
+
     }
 
     private void drawLine() {
@@ -154,9 +157,6 @@ public class SpouseConnector extends LineConnector {
         }
     }
 
-    public void clean() {
-
-    }
 
     private void drawSpouseFond() {
 
@@ -172,4 +172,19 @@ public class SpouseConnector extends LineConnector {
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
 
+    private void boundChangeCauseDrawing(ObservableValue<? extends Bounds> obs, Bounds oldBoundValue, Bounds newBoundValue) {
+        drawLine();
+    }
+
+    private void boundsExChange(ObservableValue<? extends Bounds> obs, Bounds oldBoundValue, Bounds newBoundValue) {
+        drawSpouseExLine();
+    }
+
+    private void panelRelationCurrentChange(ObservableValue<? extends PanelRelationCurrent> observable, PanelRelationCurrent oldValue, PanelRelationCurrent newValue) {
+        if (newValue != null) {
+            newValue.getRelation().boundsInParentProperty().addListener(boundChangeCauseDrawingListener);
+            newValue.getRelationTypeElement().boundsInParentProperty().addListener(boundChangeCauseDrawingListener);
+            newValue.getSpouseCard().boundsInParentProperty().addListener(boundChangeCauseDrawingListener);
+        }
+    }
 }

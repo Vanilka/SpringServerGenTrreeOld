@@ -3,6 +3,8 @@ package gentree.client.visualization.gustave.connectors;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.panels.PanelRelationEx;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
@@ -17,14 +19,13 @@ import javafx.scene.shape.StrokeLineJoin;
 public class SpouseExConnector extends LineConnector {
 
     private PanelRelationEx panelRelationEx;
+    private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
 
     public SpouseExConnector(PanelRelationEx panel) {
         super();
         this.panelRelationEx = panel;
         initLineProperties(getLine());
-
         panelRelationEx.getChildren().add(0, getLine());
-
         initListeners();
     }
 
@@ -39,13 +40,19 @@ public class SpouseExConnector extends LineConnector {
 
     private void initListeners() {
 
-        panelRelationEx.getSpouseCard().boundsInParentProperty().addListener((obs, oldBoundValue, newBoundValue) -> {
-            drawLine();
-        });
+        panelRelationEx.getSpouseCard().boundsInParentProperty().addListener(boundsListener);
+        panelRelationEx.getRelationTypeElement().boundsInParentProperty().addListener(boundsListener);
+    }
 
-        panelRelationEx.getRelationTypeElement().boundsInParentProperty().addListener(ob -> {
-            drawLine();
-        });
+    private void cleanListeners() {
+        panelRelationEx.getSpouseCard().boundsInParentProperty().removeListener(boundsListener);
+        panelRelationEx.getRelationTypeElement().boundsInParentProperty().removeListener(boundsListener);
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+        cleanListeners();
     }
 
     private void drawLine() {
@@ -85,4 +92,7 @@ public class SpouseExConnector extends LineConnector {
         return relativeTo.sceneToLocal(nodeBoundsInScene);
     }
 
+    private void boundsChanged(ObservableValue<? extends Bounds> obs, Bounds oldBoundValue, Bounds newBoundValue) {
+        drawLine();
+    }
 }

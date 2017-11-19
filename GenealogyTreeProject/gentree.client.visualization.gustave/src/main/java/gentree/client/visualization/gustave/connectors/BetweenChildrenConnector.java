@@ -56,6 +56,18 @@ public class BetweenChildrenConnector extends LineConnector {
 
     }
 
+    private void cleanListeners() {
+        list.removeListener(changeListListener);
+        getLine().visibleProperty().unbind();
+
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+        cleanListeners();
+    }
+
     private void drawLine() {
         if (list.size() > 0) {
                 Line startLine = list.stream().min(Comparator.comparingDouble(value -> value.getLine().getStartX())).get().getLine();

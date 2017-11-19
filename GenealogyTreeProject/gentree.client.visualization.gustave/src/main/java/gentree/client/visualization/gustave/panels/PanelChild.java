@@ -160,6 +160,7 @@ public class PanelChild extends SubBorderPane {
     }
 
     public void clean() {
+        super.clean();
         cleanListeners();
         panelRelationCurrent.get().clean();
         panelSingle.get().clean();

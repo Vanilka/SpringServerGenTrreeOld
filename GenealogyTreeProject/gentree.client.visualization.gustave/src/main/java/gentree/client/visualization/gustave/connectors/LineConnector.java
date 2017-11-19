@@ -1,5 +1,6 @@
 package gentree.client.visualization.gustave.connectors;
 
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,7 +14,7 @@ import javafx.scene.shape.StrokeLineJoin;
  * <p>
  * Class to manage Line Connectors.
  */
-public class LineConnector extends Connector {
+public class LineConnector extends Connector implements AutoCleanable {
 
 
     protected ObjectProperty<Line> line;
@@ -43,5 +44,8 @@ public class LineConnector extends Connector {
         return line;
     }
 
+    @Override
+    public void clean() {
 
+    }
 }

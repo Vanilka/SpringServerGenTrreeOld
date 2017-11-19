@@ -2,11 +2,11 @@ package gentree.client.visualization.gustave.panels;
 
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
+import gentree.common.configuration.enums.RelationType;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -199,8 +199,10 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
     }
 
-
+    @Override
     public void clean() {
+        super.clean();
+        cleanListeners();
 
     }
 

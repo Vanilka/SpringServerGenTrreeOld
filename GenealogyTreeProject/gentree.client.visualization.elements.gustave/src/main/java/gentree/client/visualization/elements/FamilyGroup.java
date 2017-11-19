@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 @Getter
 @Setter
-public class FamilyGroup extends AnchorPane implements AutoCleanable{
+public class FamilyGroup extends AnchorPane implements AutoCleanable {
 
     private static double OFFSET_FOND_DARK = 10.0;
     private static double OFFSET_FOND = 30.0;

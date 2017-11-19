@@ -1,8 +1,11 @@
 package gentree.client.visualization.gustave.panels;
 
 import gentree.client.visualization.elements.FamilyGroup;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
@@ -15,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public abstract class SubBorderPane extends BorderPane {
+public abstract class SubBorderPane extends BorderPane implements AutoCleanable {
     /**
      * Relation Height =
      */
@@ -23,6 +26,7 @@ public abstract class SubBorderPane extends BorderPane {
 
     private final ObjectProperty<SubBorderPane> parentPane;
     private final ObjectProperty<FamilyGroup> familyGroup;
+    private ChangeListener<? super SubBorderPane> parentPaneListener = this::parentPaneChanged;
 
 
     {
@@ -54,15 +58,15 @@ public abstract class SubBorderPane extends BorderPane {
     }
 
     private void initParentListeners() {
-        parentPane.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null) {
-                familyGroup.unbind();
-                familyGroup.setValue(null);
-            } else {
-                familyGroup.bind(newValue.familyGroupProperty());
-            }
-        });
+        parentPane.addListener(parentPaneListener);
     }
+
+    @Override
+    public void clean() {
+        parentPane.removeListener(parentPaneListener);
+    }
+
+
     /*
      * GETTERS AND SETTERS
      */
@@ -89,5 +93,18 @@ public abstract class SubBorderPane extends BorderPane {
 
     public ObjectProperty<FamilyGroup> familyGroupProperty() {
         return familyGroup;
+    }
+
+    private void parentPaneChanged(ObservableValue<? extends SubBorderPane> observable, SubBorderPane oldValue, SubBorderPane newValue) {
+        if (oldValue != null) {
+            familyGroup.unbind();
+        }
+
+        if (newValue == null) {
+            familyGroup.unbind();
+            familyGroup.setValue(null);
+        } else {
+            familyGroup.bind(newValue.familyGroupProperty());
+        }
     }
 }

@@ -2,15 +2,17 @@ package gentree.client.visualization.gustave.panels;
 
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
 import gentree.client.visualization.gustave.connectors.SpouseExConnector;
+import gentree.common.configuration.enums.RelationType;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -42,21 +44,31 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
     private final Pane relation;
 
+    /*
+     * CLEANABLE
+     */
     @Getter
     private final FamilyMember spouseCard;
 
     @Getter
     private final RelationTypeElement relationTypeElement;
 
-    private final ObjectProperty<RelationType> relationType;
-    private final ObjectProperty<Member> spouse;
-    private final ObjectProperty<Relation> thisRelation;
     private final ObservableList<PanelChild> children;
     private final ParentToChildrenConnector childrenConnector;
     private final SpouseExConnector spouseExConnector;
     private final RelationReference spouseRelationReference;
     private final RelationReference thisRelationReference;
+
+    /* ******************** */
+
+    private final ObjectProperty<Member> spouse;
+    private final ObjectProperty<Relation> thisRelation;
     private final ObjectProperty<Relation> spouseBornRelation;
+    private final ObjectProperty<RelationType> relationType;
+    private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChange;
+    private ChangeListener<? super Member> spouseListener = this::spuseChanged;
+    private ChangeListener<? super Relation> spouseBornRelationListener = this::spouseBornRelationChanged;
+    private ChangeListener<? super Relation> thisRelationListener = this::thisRelationChanged;
 
     {
         relation = new Pane();
@@ -127,54 +139,11 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
 
     private void initListeners() {
-        initSpouseListener();
-        initThisRelationListener();
-        initSpouseBornRelationListener();
-        initChildrenListener();
+        spouse.addListener(spouseListener);
+        thisRelation.addListener(thisRelationListener);
+        spouseBornRelation.addListener(spouseBornRelationListener);
+        children.addListener(childrenListListener);
         initElementPositionsListeners();
-    }
-
-    private void initThisRelationListener() {
-
-        thisRelation.addListener((observable, oldValue, newValue) -> {
-            relationTypeElement.setRelation(newValue);
-            thisRelationReference.setRelation(newValue);
-        });
-    }
-
-    private void initSpouseBornRelationListener() {
-        spouseBornRelation.addListener((observable, oldValue, newValue) -> {
-            spouseRelationReference.setRelation(newValue);
-        });
-
-    }
-
-    private void initSpouseListener() {
-        spouse.addListener((observable, oldValue, newValue) -> {
-            relation.getChildren().removeAll();
-            if (newValue != null) {
-                spouseCard.setMember(newValue);
-                relation.getChildren().addAll(spouseCard, relationTypeElement, spouseRelationReference, thisRelationReference);
-            }
-        });
-    }
-
-    private void initChildrenListener() {
-        children.addListener((ListChangeListener<PanelChild>) c -> {
-            while (c.next()) {
-                if (c.wasAdded()) {
-                    childrenBox.getChildren().addAll(c.getAddedSubList());
-                    c.getAddedSubList().forEach(panelChild -> {
-                        panelChild.setParentPane(this);
-                        childrenConnector.addPanelChild(panelChild);
-                    });
-                } else if (c.wasRemoved()) {
-                    childrenBox.getChildren().removeAll(c.getRemoved());
-                    c.getRemoved().forEach(childrenConnector::removePanelChild);
-                }
-            }
-            // calculateRelationElementsPosition();
-        });
     }
 
     private void initElementPositionsListeners() {
@@ -197,8 +166,37 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
                 .otherwise(spouseCard.widthProperty().add(SPACE_BETWEEN_OBJECTS).add(50)));
     }
 
+    private void cleanElementPositionListeners() {
+        childrenBox.prefWidthProperty().unbind();
+        relationTypeElement.layoutYProperty().unbind();
+        spouseCard.layoutXProperty().unbind();
+        thisRelationReference.layoutXProperty().unbind();
+        thisRelationReference.layoutYProperty().unbind();
+        spouseRelationReference.layoutXProperty().unbind();
+        spouseRelationReference.layoutYProperty().unbind();
+        relationTypeElement.layoutXProperty().unbind();
+    }
 
+    private void cleanListeners() {
+        spouse.removeListener(spouseListener);
+        thisRelation.removeListener(thisRelationListener);
+        spouseBornRelation.removeListener(spouseBornRelationListener);
+        children.removeListener(childrenListListener);
+        cleanElementPositionListeners();
+    }
+
+    @Override
     public void clean() {
+        super.clean();
+        cleanListeners();
+        spouseCard.clean();
+        relationTypeElement.clean();
+        children.forEach(PanelChild::clean);
+        childrenConnector.clean();
+        spouseExConnector.clean();
+        spouseRelationReference.clean();
+        thisRelationReference.clean();
+
 
     }
 
@@ -226,5 +224,39 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     }
 
 
+    private void childrenListChange(ListChangeListener.Change<? extends PanelChild> c) {
+        while (c.next()) {
+            if (c.wasAdded()) {
+                childrenBox.getChildren().addAll(c.getAddedSubList());
+                c.getAddedSubList().forEach(panelChild -> {
+                    panelChild.setParentPane(this);
+                    childrenConnector.addPanelChild(panelChild);
+                });
+            } else if (c.wasRemoved()) {
+                childrenBox.getChildren().removeAll(c.getRemoved());
+                c.getRemoved().forEach(panelChild -> {
+                    panelChild.clean();
+                    childrenConnector.removePanelChild(panelChild);
+                });
+            }
+        }
+    }
+
+    private void spuseChanged(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        relation.getChildren().removeAll();
+        if (newValue != null) {
+            spouseCard.setMember(newValue);
+            relation.getChildren().addAll(spouseCard, relationTypeElement, spouseRelationReference, thisRelationReference);
+        }
+    }
+
+    private void spouseBornRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        spouseRelationReference.setRelation(newValue);
+    }
+
+    private void thisRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        relationTypeElement.setRelation(newValue);
+        thisRelationReference.setRelation(newValue);
+    }
 }
 
