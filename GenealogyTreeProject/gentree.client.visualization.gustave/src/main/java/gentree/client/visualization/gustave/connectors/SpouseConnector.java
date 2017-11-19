@@ -23,7 +23,7 @@ public class SpouseConnector extends LineConnector {
     private static final Color COLOR_EX = Color.web("#85a2a3");
     private static final Color COLOR_CURRENT = Color.web("#5F9EA0");
 
-    private final PanelChild panelChild;
+    private  PanelChild panelChild;
 
     private final Line lineRelationToSim;
     private final Line lineSimConnectAllEx;
@@ -142,6 +142,10 @@ public class SpouseConnector extends LineConnector {
         lineSimConnectAllEx.visibleProperty().unbind();
         lineSimConnectSpouse.visibleProperty().unbind();
         lineRelationToSim.visibleProperty().unbind();
+        getLine().visibleProperty().unbind();
+
+
+        panelChild = null;
     }
 
     private void drawLine() {

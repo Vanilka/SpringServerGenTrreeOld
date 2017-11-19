@@ -185,6 +185,13 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         cleanElementPositionListeners();
     }
 
+    private void setElementsNull() {
+        spouse.setValue(null);
+        thisRelation.setValue(null);
+        spouseBornRelation.setValue(null);
+        relationType.setValue(null);
+    }
+
     @Override
     public void clean() {
         super.clean();
@@ -197,6 +204,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         spouseExConnector.clean();
         spouseRelationReference.clean();
         thisRelationReference.clean();
+
+        setElementsNull();
 
 
     }

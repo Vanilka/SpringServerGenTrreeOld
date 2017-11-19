@@ -1,6 +1,7 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,7 +22,7 @@ import java.io.IOException;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class FamilyMemberCard extends AnchorPane {
+public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     private final static String pathfxml = "/layout/elements/family.member.card.fxml";
 
@@ -42,6 +43,7 @@ public class FamilyMemberCard extends AnchorPane {
     private Label bornameSim;
     @FXML
     private Polygon deathCord;
+
 
 
     private ObjectProperty<Member> member;
@@ -84,6 +86,8 @@ public class FamilyMemberCard extends AnchorPane {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pathfxml));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
+
 
         try {
             fxmlLoader.load();
@@ -129,10 +133,14 @@ public class FamilyMemberCard extends AnchorPane {
         }
     }
 
+    @Override
     public void clean() {
         this.member.removeListener(memberListener);
         this.member.get().getProperties().forEach(p -> p.removeListener(listener));
+        this.member.setValue(null);
+        photoSim.setImage(null);
     }
+
 
 
     public void setGrayScaleToImgView(ImageView view) {

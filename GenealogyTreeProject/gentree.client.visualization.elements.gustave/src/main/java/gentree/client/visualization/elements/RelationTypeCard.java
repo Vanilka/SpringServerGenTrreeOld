@@ -156,6 +156,11 @@ public class RelationTypeCard extends StackPane  implements AutoCleanable {
     @Override
     public void clean() {
         cleanListeners();
+
+        relation.setValue(null);
+        relationType.setValue(null);
+        typeImg.setImage(null);
+
     }
 
     /*

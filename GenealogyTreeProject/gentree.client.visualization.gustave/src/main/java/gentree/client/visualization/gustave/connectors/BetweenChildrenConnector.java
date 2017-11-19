@@ -27,6 +27,7 @@ public class BetweenChildrenConnector extends LineConnector {
     */
     private SubRelationPane subBorderPane;
     private ObservableList<ChildConnector> list = FXCollections.observableArrayList();
+
     private ListChangeListener<? super ChildConnector> changeListListener = this::childListChange;
     private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
     // private ObjectProperty<ChildConnector> start = new SimpleObjectProperty<>();
@@ -58,7 +59,10 @@ public class BetweenChildrenConnector extends LineConnector {
 
     private void cleanListeners() {
         list.removeListener(changeListListener);
+        isEmpty.unbind();
         getLine().visibleProperty().unbind();
+        list.forEach(ChildConnector::clean);
+        list.clear();
 
     }
 
@@ -66,6 +70,10 @@ public class BetweenChildrenConnector extends LineConnector {
     public void clean() {
         super.clean();
         cleanListeners();
+
+        subBorderPane = null;
+
+
     }
 
     private void drawLine() {

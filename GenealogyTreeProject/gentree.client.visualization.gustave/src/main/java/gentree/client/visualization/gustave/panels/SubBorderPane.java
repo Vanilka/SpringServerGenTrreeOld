@@ -64,6 +64,9 @@ public abstract class SubBorderPane extends BorderPane implements AutoCleanable 
     @Override
     public void clean() {
         parentPane.removeListener(parentPaneListener);
+        familyGroup.unbind();
+        parentPane.setValue(null);
+        familyGroup.setValue(null);
     }
 
 

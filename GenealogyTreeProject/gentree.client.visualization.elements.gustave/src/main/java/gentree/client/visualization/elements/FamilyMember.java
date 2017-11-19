@@ -1,6 +1,7 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class FamilyMember extends FamilyMemberCard {
+public class FamilyMember extends FamilyMemberCard  implements AutoCleanable{
 
     private final static String pathfxml = "/layout/elements/family.member.fxml";
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
@@ -53,10 +54,18 @@ public class FamilyMember extends FamilyMemberCard {
 
     }
 
+    @Override
     public void clean() {
         super.clean();
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
+        this.setOnContextMenuRequested(null);
+        this.setOnContextMenuRequested(null);
+        this.setOnMouseClicked(null);
+        CONTEXT_PROVIDER_PROPERTY.setValue(null);
+        setMember(null);
+
     }
+
 
     private FamilyMember returnThis() {
         return this;

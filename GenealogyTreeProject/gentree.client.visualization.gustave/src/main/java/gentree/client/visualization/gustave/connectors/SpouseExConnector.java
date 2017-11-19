@@ -53,6 +53,8 @@ public class SpouseExConnector extends LineConnector {
     public void clean() {
         super.clean();
         cleanListeners();
+
+        panelRelationEx = null;
     }
 
     private void drawLine() {

@@ -258,13 +258,13 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
        for(Node n : box.getChildren()) {
            if(n instanceof AutoCleanable)  ((AutoCleanable) n).clean();
        }
-
         box.getChildren().clear();
         nodeCounter = 1;
         List<Relation> list = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> r.getReferenceNumber() > 0);
         list.forEach(r -> r.setReferenceNumber(null));
         idReference = 0L;
+        System.gc();
     }
 
     private Relation findBornRelation(Member m) {

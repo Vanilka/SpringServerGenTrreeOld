@@ -21,4 +21,8 @@ public abstract class SubRelationPane extends SubBorderPane {
         return null;
     }
 
+    @Override
+    public void clean() {
+        super.clean();
+    }
 }

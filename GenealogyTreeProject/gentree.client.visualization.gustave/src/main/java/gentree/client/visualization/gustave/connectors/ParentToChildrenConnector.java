@@ -64,6 +64,8 @@ public class ParentToChildrenConnector extends LineConnector {
     public void clean() {
         super.clean();
         cleanListeners();
+
+        subBorderPane = null;
     }
 
     public void addPanelChild(PanelChild child) {

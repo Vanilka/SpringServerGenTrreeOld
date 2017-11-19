@@ -93,5 +93,11 @@ public class RelationTypeElement extends RelationTypeCard  {
     public void clean() {
         super.clean();
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextProviderListener);
+        this.setOnMouseClicked(null);
+        this.setOnContextMenuRequested(null);
+
+        CONTEXT_PROVIDER_PROPERTY.setValue(null);
+        relation.setValue(null);
+        relationType.setValue(null);
     }
 }

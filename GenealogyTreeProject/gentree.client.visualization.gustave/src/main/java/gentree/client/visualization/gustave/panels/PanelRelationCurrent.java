@@ -50,7 +50,7 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     @Getter
     private final RelationTypeElement relationTypeElement;
     private final ObservableList<PanelChild> children;
-    private final ParentToChildrenConnector childrenConnector;
+    private ParentToChildrenConnector childrenConnector;
     private final RelationReference thisRelationReference;
     private final RelationReference spouseRelationReference;
 
@@ -200,6 +200,15 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         return b == null ? null : new Point2D(b.getMinX() + b.getWidth() / 2, b.getMinY() + b.getHeight());
     }
 
+    private void setElementsNull() {
+        relationTypeElement.setRelation(null);
+        children.clear();
+        childrenConnector = null;
+        thisRelation.setValue(null);
+        spouse.setValue(null);
+
+    }
+
     @Override
     public void clean() {
         super.clean();
@@ -210,6 +219,8 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         childrenConnector.clean();
         thisRelationReference.clean();
         spouseRelationReference.clean();
+
+        setElementsNull();
     }
 
 
