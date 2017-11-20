@@ -167,7 +167,7 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
         if (oldValue != null) {
-            oldValue.getProperties().forEach(p -> p.removeListener(listener));
+           oldValue.getProperties().forEach(p -> p.removeListener(listener));
         }
         newValue.getProperties().forEach(p -> p.addListener(listener));
 
