@@ -54,7 +54,6 @@ public class MemberCard extends AnchorPane {
     public MemberCard(Member member) {
         super();
         initialize();
-
         this.member.addListener(memberListener);
         this.member.setValue(member);
         resize(255, 145);
@@ -86,6 +85,8 @@ public class MemberCard extends AnchorPane {
     public void clean() {
         member.removeListener(memberListener);
         member.get().getProperties().forEach(p -> p.removeListener(listener));
+
+        memberListener = null;
     }
 
     private void fillComponents(Member member) {

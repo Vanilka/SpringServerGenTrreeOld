@@ -82,6 +82,10 @@ public class RelationReference extends StackPane implements AutoCleanable {
         cleanListeners();
         setRelation(null);
         setRelationReferenceType(null);
+
+        contextListener = null;
+        relationTypeListener = null;
+        relationListener = null;
     }
 
     private void relationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {

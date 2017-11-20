@@ -99,5 +99,7 @@ public class RelationTypeElement extends RelationTypeCard  {
         CONTEXT_PROVIDER_PROPERTY.setValue(null);
         relation.setValue(null);
         relationType.setValue(null);
+
+        contextProviderListener = null;
     }
 }

@@ -62,10 +62,12 @@ public class ParentToChildrenConnector extends LineConnector {
 
     @Override
     public void clean() {
-        super.clean();
         cleanListeners();
+        super.clean();
 
         subBorderPane = null;
+
+        boundsListener = null;
     }
 
     public void addPanelChild(PanelChild child) {

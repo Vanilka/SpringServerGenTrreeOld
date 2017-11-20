@@ -207,6 +207,11 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
 
         setElementsNull();
 
+        childrenListListener = null;
+        spouseListener = null;
+        spouseBornRelationListener = null;
+        thisRelationListener = null;
+
 
     }
 

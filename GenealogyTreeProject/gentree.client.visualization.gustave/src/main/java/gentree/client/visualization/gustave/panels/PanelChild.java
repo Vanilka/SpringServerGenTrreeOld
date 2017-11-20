@@ -184,6 +184,10 @@ public class PanelChild extends SubBorderPane {
         spouseConnector.clean();
 
         setElementsNull();
+        panelSingleListener = null;
+        panelRelationCurrentListener = null;
+        panelRelationExListener = null;
+
     }
 
     /*

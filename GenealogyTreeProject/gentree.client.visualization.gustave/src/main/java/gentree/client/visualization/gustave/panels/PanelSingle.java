@@ -163,6 +163,9 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         childrenConnector.clean();
         thisRelationReference.clean();
 
+        childrenListListener = null;
+        thisRelationListener = null;
+
     }
 
 

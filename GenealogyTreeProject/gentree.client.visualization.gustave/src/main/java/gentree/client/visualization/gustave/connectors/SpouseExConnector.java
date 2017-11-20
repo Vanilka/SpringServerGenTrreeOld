@@ -51,10 +51,13 @@ public class SpouseExConnector extends LineConnector {
 
     @Override
     public void clean() {
-        super.clean();
+
         cleanListeners();
 
+        super.clean();
+
         panelRelationEx = null;
+        boundsListener = null;
     }
 
     private void drawLine() {

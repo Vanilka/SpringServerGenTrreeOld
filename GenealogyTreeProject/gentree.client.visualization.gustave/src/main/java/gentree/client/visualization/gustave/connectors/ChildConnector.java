@@ -68,11 +68,13 @@ public class ChildConnector extends LineConnector {
 
     @Override
     public void clean() {
-        super.clean();
         cleanListeners();
+        super.clean();
 
         subBorderPane = null;
         panelChild = null;
+
+        boundsListener = null;
     }
 
     private void redrawLine() {

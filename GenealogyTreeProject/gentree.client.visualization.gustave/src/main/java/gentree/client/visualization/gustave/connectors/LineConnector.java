@@ -46,6 +46,6 @@ public class LineConnector extends Connector implements AutoCleanable {
 
     @Override
     public void clean() {
-
+        line.setValue(null);
     }
 }

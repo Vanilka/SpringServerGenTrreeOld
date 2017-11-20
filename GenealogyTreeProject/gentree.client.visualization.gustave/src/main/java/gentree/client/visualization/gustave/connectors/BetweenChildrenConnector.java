@@ -68,10 +68,13 @@ public class BetweenChildrenConnector extends LineConnector {
 
     @Override
     public void clean() {
-        super.clean();
         cleanListeners();
+        super.clean();
 
         subBorderPane = null;
+
+        changeListListener = null;
+        boundsListener = null;
 
 
     }

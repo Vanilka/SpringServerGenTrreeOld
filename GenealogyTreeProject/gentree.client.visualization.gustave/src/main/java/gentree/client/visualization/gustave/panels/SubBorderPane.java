@@ -67,6 +67,8 @@ public abstract class SubBorderPane extends BorderPane implements AutoCleanable 
         familyGroup.unbind();
         parentPane.setValue(null);
         familyGroup.setValue(null);
+
+        parentPaneListener = null;
     }
 
 

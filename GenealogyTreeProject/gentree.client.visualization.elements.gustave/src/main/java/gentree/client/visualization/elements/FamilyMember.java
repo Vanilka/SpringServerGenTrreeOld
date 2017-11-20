@@ -64,6 +64,8 @@ public class FamilyMember extends FamilyMemberCard  implements AutoCleanable{
         CONTEXT_PROVIDER_PROPERTY.setValue(null);
         setMember(null);
 
+        contextListener = null;
+
     }
 
 

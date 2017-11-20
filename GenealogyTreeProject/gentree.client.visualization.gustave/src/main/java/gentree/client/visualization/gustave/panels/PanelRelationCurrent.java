@@ -50,15 +50,13 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     @Getter
     private final RelationTypeElement relationTypeElement;
     private final ObservableList<PanelChild> children;
-    private ParentToChildrenConnector childrenConnector;
     private final RelationReference thisRelationReference;
     private final RelationReference spouseRelationReference;
-
     private final ObjectProperty<Relation> spouseBornRelation;
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
     private final ObjectProperty<Relation> thisRelation;
-
+    private ParentToChildrenConnector childrenConnector;
     private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChanged;
     private ChangeListener<? super Relation> spouseBornRelationListener = this::spouseBordRelationChanged;
     private ChangeListener<? super Relation> thisRelationListener = this::thisRelationChanged;
@@ -221,6 +219,11 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         spouseRelationReference.clean();
 
         setElementsNull();
+
+        childrenListListener = null;
+        spouseBornRelationListener = null;
+        thisRelationListener = null;
+        spouseListener = null;
     }
 
 

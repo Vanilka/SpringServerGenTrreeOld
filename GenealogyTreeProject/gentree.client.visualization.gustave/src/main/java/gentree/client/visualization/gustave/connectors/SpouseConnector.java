@@ -120,7 +120,6 @@ public class SpouseConnector extends LineConnector {
 
     @Override
     public void clean() {
-        super.clean();
         panelChild.panelSingleProperty().removeListener(panelSingleListener);
         if (panelChild.getPanelSingle().get() != null) {
             panelChild.getPanelSingle().get().boundsInParentProperty().removeListener(boundChangeCauseDrawingListener);
@@ -144,8 +143,15 @@ public class SpouseConnector extends LineConnector {
         lineRelationToSim.visibleProperty().unbind();
         getLine().visibleProperty().unbind();
 
+        super.clean();
 
         panelChild = null;
+
+        boundChangeCauseDrawingListener = null;
+        boundsExListener = null;
+        panelRelationCurrentListener = null;
+        panelSingleListener = null;
+
     }
 
     private void drawLine() {
