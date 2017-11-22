@@ -94,8 +94,8 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
 
     @FXML
     public void cancel(ActionEvent actionEvent) {
-        cleanListener();
         stage.close();
+        cleanListener();
     }
 
 
@@ -103,8 +103,8 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     public void confirm(ActionEvent actionEvent) {
 
         context.getService().addRelation(member.get(), spouse.get(), RELATION_TYPE_COMBO_BOX.getValue(), CHECK_BOX_SET_CURRENT.isSelected());
-        cleanListener();
         stage.close();
+        cleanListener();
     }
 
     @FXML

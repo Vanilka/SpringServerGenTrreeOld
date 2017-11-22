@@ -62,8 +62,10 @@ public class ChildConnector extends LineConnector {
     private void cleanListeners() {
         subBorderPane.getChildrenBox().boundsInParentProperty().removeListener(boundsListener);
         panelChild.boundsInParentProperty().removeListener(boundsListener);
-        panelChild.getPanelSingle().get().boundsInParentProperty().removeListener(boundsListener);
-        panelChild.getPanelSingle().get().boundsInLocalProperty().removeListener(boundsListener);
+        if(panelChild.getPanelSingle().get() != null) {
+            panelChild.getPanelSingle().get().boundsInParentProperty().removeListener(boundsListener);
+            panelChild.getPanelSingle().get().boundsInLocalProperty().removeListener(boundsListener);
+        }
     }
 
     @Override

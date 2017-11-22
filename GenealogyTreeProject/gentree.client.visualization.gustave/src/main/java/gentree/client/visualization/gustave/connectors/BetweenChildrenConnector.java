@@ -77,6 +77,7 @@ public class BetweenChildrenConnector extends LineConnector {
         boundsListener = null;
 
 
+
     }
 
     private void drawLine() {
@@ -120,6 +121,7 @@ public class BetweenChildrenConnector extends LineConnector {
                     element.removeLine();
                     element.getLine().boundsInParentProperty().removeListener(boundsListener);
                     element.getLine().boundsInLocalProperty().removeListener(boundsListener);
+                    element.clean();
                 });
             }
         }

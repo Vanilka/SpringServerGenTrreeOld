@@ -68,6 +68,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     @Setter
     private Gender notAllowedGender;
+
     private ChangeListener<? super Member> selectionMemberListener = this::selectionChange;
     private ChangeListener<? super Member> memberChangeListener = this::memberChange;
 
@@ -93,7 +94,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
 
     @Override
     public void setStage(Stage stage) {
-        cleanListeners();
+
         this.stage = stage;
 
     }
@@ -101,8 +102,8 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     @FXML
     public void confirm() {
         result = selectedMember.getValue();
-        cleanListeners();
         stage.close();
+       cleanListeners();
 
     }
 
@@ -110,6 +111,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     public void cancel() {
 
         stage.close();
+        cleanListeners();
     }
 
     /*

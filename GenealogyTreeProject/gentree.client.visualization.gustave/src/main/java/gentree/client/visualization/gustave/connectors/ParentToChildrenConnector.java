@@ -15,7 +15,7 @@ import javafx.scene.Node;
  */
 public class ParentToChildrenConnector extends LineConnector {
 
-    private final BetweenChildrenConnector betweenChildrenConnector;
+    private  BetweenChildrenConnector betweenChildrenConnector;
 
     /*
     *   Child Connectors for children in Sub-Relation-Pane
@@ -64,9 +64,9 @@ public class ParentToChildrenConnector extends LineConnector {
     public void clean() {
         cleanListeners();
         super.clean();
-
+        betweenChildrenConnector.clean();
+        betweenChildrenConnector = null;
         subBorderPane = null;
-
         boundsListener = null;
     }
 

@@ -82,7 +82,6 @@ public class ScreenMainController implements Initializable, FXMLController, FXML
     }
 
     private void removerOthersInfoRelationsOrSim() {
-        SCREEN_MAIN_LEFT.getChildren().forEach(System.out::println);
         SCREEN_MAIN_LEFT.getChildren().removeIf(n -> n.getId().equals("paneShowInfoRelation"));
         SCREEN_MAIN_LEFT.getChildren().removeIf(n -> n.getId().equals("paneShowInfoSim"));
     }
