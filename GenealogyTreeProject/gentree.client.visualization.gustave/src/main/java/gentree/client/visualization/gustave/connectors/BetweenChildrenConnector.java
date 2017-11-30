@@ -121,7 +121,7 @@ public class BetweenChildrenConnector extends LineConnector {
                     element.removeLine();
                     element.getLine().boundsInParentProperty().removeListener(boundsListener);
                     element.getLine().boundsInLocalProperty().removeListener(boundsListener);
-                    element.clean();
+                   // element.clean();
                 });
             }
         }

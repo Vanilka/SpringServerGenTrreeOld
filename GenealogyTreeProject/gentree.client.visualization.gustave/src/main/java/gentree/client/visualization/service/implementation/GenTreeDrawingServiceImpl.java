@@ -255,9 +255,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     }
 
     private void reset() {
-       for(Node n : box.getChildren()) {
+/*       for(Node n : box.getChildren()) {
            if(n instanceof AutoCleanable)  ((AutoCleanable) n).clean();
-       }
+       }*/
         box.getChildren().clear();
         nodeCounter = 1;
         List<Relation> list = context.getService().getCurrentFamily().getRelations()

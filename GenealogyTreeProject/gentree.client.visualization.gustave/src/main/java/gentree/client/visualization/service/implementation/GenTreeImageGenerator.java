@@ -1,9 +1,11 @@
 package gentree.client.visualization.service.implementation;
 
+import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
@@ -34,6 +36,12 @@ public class GenTreeImageGenerator {
         imagePane.setTop(headerPane);
         imagePane.setCenter(content);
         imagePane.autosize();
+
+        imagePane.setStyle(
+                "-fx-background-image: url(" +
+                        "'layout/images/backgrounds/gentreebackground.jpg');" +
+                        "-fx-background-size: cover;"
+        );
 
     }
 

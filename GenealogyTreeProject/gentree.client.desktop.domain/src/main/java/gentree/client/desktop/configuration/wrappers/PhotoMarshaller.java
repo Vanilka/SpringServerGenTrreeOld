@@ -13,7 +13,6 @@ public class PhotoMarshaller extends XmlAdapter<String, String> {
     private static List<String> ignoredPaths = new ArrayList<>();
 
     public static void addIgnoredPaths(String... paths) {
-
         ignoredPaths.addAll(Arrays.asList(paths));
     }
 

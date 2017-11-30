@@ -149,7 +149,7 @@ public class PanelChild extends SubBorderPane {
                 c.getAddedSubList().forEach(sb -> sb.setParentPane(this));
                 panelRelationExPane.getChildren().addAll(c.getAddedSubList());
             } else if (c.wasRemoved()) {
-                c.getRemoved().forEach(PanelRelationEx::clean);
+              //  c.getRemoved().forEach(PanelRelationEx::clean);
                 panelRelationExPane.getChildren().removeAll(c.getRemoved());
             }
         }

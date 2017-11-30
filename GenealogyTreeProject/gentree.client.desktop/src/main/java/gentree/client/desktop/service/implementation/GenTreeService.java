@@ -41,6 +41,8 @@ public abstract class GenTreeService {
         List<Relation> list = getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() != null || r.getRight() != null)
                 .filtered(r -> r.compareLeft(left) && r.compareRight(right));
+        System.out.println("Found similar relations : " +list.size());
+
         return list.size() == 0 ? null : list.get(0);
 
     }

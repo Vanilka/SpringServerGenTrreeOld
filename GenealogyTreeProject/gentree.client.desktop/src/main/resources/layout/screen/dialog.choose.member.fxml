@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400"
             minWidth="500"
             styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
@@ -19,7 +20,8 @@
         <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0"
                     AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <children>
-                <Label layoutY="10.0" text="SELECTED MEMBER"/>
+                <HeaderPane  styleClass="header-pane-content" text="%label_choose_member"
+                             AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
                 <AnchorPane layoutY="40">
                     <children>
                         <Pane maxHeight="170.0" maxWidth="145.0" minHeight="129.0" minWidth="106.0" prefHeight="129.0"

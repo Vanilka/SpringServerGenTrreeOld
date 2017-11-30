@@ -89,7 +89,11 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse updateMember(Member m) {
         // Nothing to do in Local service
-
+        if(needCopy(m.getPhoto())) {
+            System.out.println("needBe coppied");
+           String coppied = copyPhoto(m.getPhoto());
+            m.setPhoto(coppied == null ? null : PREFIX_FILE_RELATIVE + coppied);
+        }
         return new MemberResponse(m);
     }
 
@@ -475,6 +479,12 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         }
     }
 
+
+    public String copyPhoto(String path) {
+        return copyPhoto(config.getString(PropertiesKeys.PARAM_DIR_IMAGE_NAME), path);
+
+    }
+
     /**
      * Copy Member photo to parentPane folder
      *
@@ -489,6 +499,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
             File file = new File(result.toString());
             path = Paths.get(file.getParent(), file.getName()).toString();
         } catch (Exception e) {
+            System.out.println("Cannot copy photo");
             e.printStackTrace();
             return null;
         }

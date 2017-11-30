@@ -67,8 +67,8 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     private Stage stage;
 
     private ChangeListener<Member> memberChangeListener = this::memberChanged;
-    private ChangeListener<Member> fatherChangeListener = this::motherChanged;
-    private ChangeListener<Member> motherChangeListener = this::fatherChange;
+    private ChangeListener<Member> fatherChangeListener = this::fatherChange;
+    private ChangeListener<Member> motherChangeListener = this::motherChanged;
     private ChangeListener<Relation> bornRelationListener = this::bornChanged;
 
     {
@@ -198,46 +198,6 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
 
-    @Deprecated
-    private ObservableList<Member> removeAscends(ObservableList<Member> list, Member m) {
-
-        try {
-            Relation bornRelation = context.getService().getCurrentFamily().findBornRelation(m);
-
-            /*
-                Remove Sibling
-             */
-            for (Member sibbling : bornRelation.getChildren()) {
-                list = list.filtered(p -> !p.equals(m));
-            }
-
-            /*
-                RemoveLeft
-             */
-            if (bornRelation.getLeft() != null) {
-                list = list.filtered(p -> !p.equals(bornRelation.getLeft()));
-                list = removeAscends(list, bornRelation.getLeft());
-            }
-
-            /*
-                Remove Rightrs
-             */
-            if (bornRelation.getRight() != null) {
-                list = list.filtered(p -> !p.equals(bornRelation.getRight()));
-                list = removeAscends(list, bornRelation.getRight());
-            }
-
-
-        } catch (NotUniqueBornRelationException e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        }
-
-
-        return list;
-
-    }
-
     private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
         /*
             Find relations that M is father or mother
@@ -339,6 +299,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
     private void motherChanged(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+
         motherCard.setMember(newValue);
         findRelation(newValue, father.get());
     }

@@ -139,7 +139,6 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
         this.member.get().getProperties().forEach(p -> p.removeListener(listener));
         this.member.setValue(null);
         photoSim.setImage(null);
-
         memberListener = null;
     }
 

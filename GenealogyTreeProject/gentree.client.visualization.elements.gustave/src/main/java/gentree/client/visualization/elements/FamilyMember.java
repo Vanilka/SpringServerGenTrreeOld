@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class FamilyMember extends FamilyMemberCard  implements AutoCleanable{
+public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
 
     private final static String pathfxml = "/layout/elements/family.member.fxml";
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
@@ -56,15 +56,13 @@ public class FamilyMember extends FamilyMemberCard  implements AutoCleanable{
 
     @Override
     public void clean() {
-/*        super.clean();
+        System.out.println("CLEAN Family Member" +getMember());
+        super.clean();
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnContextMenuRequested(null);
-        this.setOnContextMenuRequested(null);
         this.setOnMouseClicked(null);
-        CONTEXT_PROVIDER_PROPERTY.setValue(null);
         setMember(null);
-
-        contextListener = null;*/
+        contextListener = null;
 
     }
 
