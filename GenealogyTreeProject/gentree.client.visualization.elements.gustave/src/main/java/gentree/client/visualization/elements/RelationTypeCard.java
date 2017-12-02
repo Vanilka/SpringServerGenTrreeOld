@@ -78,6 +78,8 @@ public class RelationTypeCard extends StackPane  implements AutoCleanable {
         getChildren().add(imageContainer);
         initListeners();
         setAlignment(Pos.CENTER);
+        typeImg.setFitWidth(40);
+        typeImg.setFitHeight(40);
     }
 
     private void initCircle() {

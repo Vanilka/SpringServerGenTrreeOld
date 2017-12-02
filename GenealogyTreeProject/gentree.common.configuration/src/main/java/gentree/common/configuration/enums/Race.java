@@ -17,5 +17,6 @@ public enum Race {
     FAIRY,
     IM_FRIEND,
     MERMAID,
+    MUMMY,
     HYBRID
 }

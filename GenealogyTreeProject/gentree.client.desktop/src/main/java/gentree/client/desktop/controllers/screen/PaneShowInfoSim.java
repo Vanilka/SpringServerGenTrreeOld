@@ -9,7 +9,9 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.visualization.controls.HeaderPane;
+import gentree.common.configuration.enums.Age;
 import gentree.common.configuration.enums.DeathCauses;
+import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.Race;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -25,8 +27,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import lombok.Getter;
@@ -36,6 +38,7 @@ import lombok.extern.log4j.Log4j2;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -55,11 +58,12 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     @Getter
     @Setter
     private AnchorPane paneShowInfoSim;
-
     @FXML
     private AnchorPane DEATH_CAUSES_PANE;
     @FXML
     private AnchorPane CONTENT_PANE;
+    @FXML
+    private AnchorPane AVATAR_PANE;
 
     @FXML
     private JFXButton RETURN_BUTTON;
@@ -76,13 +80,15 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     @FXML
     private ComboBox<Race> SIM_RACE_CB;
     @FXML
+    private  ComboBox<Age> SIM_AGE_CB;
+    @FXML
+    private ComboBox<Gender> SIM_SEX_CB;
+    @FXML
     private JFXToggleButton TOGGLE_IS_ALIVE;
     @FXML
     private ComboBox<DeathCauses> SIM_DEATH_CAUSE;
-
     @FXML
     private HeaderPane HEADER_PANE;
-
     @FXML
     private Circle SIM_PHOTO;
 
@@ -114,12 +120,13 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
             getMember().setPhoto(path);
             getMember().setRace(SIM_RACE_CB.getSelectionModel().getSelectedItem());
             getMember().setAlive(TOGGLE_IS_ALIVE.isSelected());
+            getMember().setAge(SIM_AGE_CB.getSelectionModel().getSelectedItem());
+            getMember().setGender(SIM_SEX_CB.getSelectionModel().getSelectedItem());
             if(!TOGGLE_IS_ALIVE.isSelected()) getMember().setDeathCause(SIM_DEATH_CAUSE.getSelectionModel().getSelectedItem());
             context.getService().updateMember(getMember());
         }
         modifiable.set(!modifiable.get());
-
-    }
+   }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -136,11 +143,12 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
                 SIM_BORNNAME_FIELD,
                 SIM_RACE_CB,
                 TOGGLE_IS_ALIVE,
-                SIM_DEATH_CAUSE);
+                SIM_DEATH_CAUSE,
+                SIM_AGE_CB,
+                SIM_SEX_CB);
         setControlsModifiable(false);
         initListeners();
         log.trace(LogMessages.MSG_CTRL_INITIALIZED);
-
     }
 
 
@@ -150,6 +158,12 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         SIM_RACE_CB.getItems().addAll(Race.values());
         SIM_DEATH_CAUSE.getItems().addAll(DeathCauses.values());
         SIM_DEATH_CAUSE.getSelectionModel().select(DeathCauses.NATURAL);
+        SIM_AGE_CB.setCellFactory(sm.getAgeListCell());
+        SIM_AGE_CB.setButtonCell(sm.getAgeListCell().call(null));
+        SIM_AGE_CB.getItems().addAll(Age.values());
+        SIM_SEX_CB.setCellFactory(sm.getGenderListCell());
+        SIM_SEX_CB.setButtonCell(sm.getGenderListCell().call(null));
+        SIM_SEX_CB.getItems().addAll(Gender.values());
     }
 
     private void setControlsModifiable(boolean value) {
@@ -169,6 +183,8 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         path = member.getPhoto();
         SIM_PHOTO.setFill(new ImagePattern(new Image(path)));
         TOGGLE_IS_ALIVE.setSelected(member.isAlive());
+        SIM_AGE_CB.getSelectionModel().select(member.getAge());
+        SIM_SEX_CB.getSelectionModel().select(member.getGender());
         if(!member.isAlive()) SIM_DEATH_CAUSE.getSelectionModel().select(member.getDeathCause());
     }
 
@@ -189,8 +205,6 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         TOGGLE_IS_ALIVE.textProperty().bind(Bindings.when(TOGGLE_IS_ALIVE.selectedProperty()).then("ALIVE")
                 .otherwise("DEAD"));
         DEATH_CAUSES_PANE.visibleProperty().bind(TOGGLE_IS_ALIVE.selectedProperty().not());
-
-
     }
 
     private void cleanListeners() {

@@ -1,5 +1,7 @@
 package gentree.client.visualization.elements.configuration;
 
+import gentree.common.configuration.enums.Age;
+import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.Race;
 import javafx.scene.paint.Color;
 
@@ -13,10 +15,12 @@ public class ElementsConfig {
 
     private final HashMap<Race, Color> raceConfigurator = new HashMap<>();
     private final HashMap<Race, ImageFiles> raceImage = new HashMap<>();
+    private final HashMap<Age, ImageFiles> ageImage = new HashMap<>();
 
     private ElementsConfig() {
         initMap();
         initRaceImageMap();
+        initAgeImageMap();
     }
 
     private void initMap() {
@@ -40,22 +44,40 @@ public class ElementsConfig {
         raceImage.put(Race.ZOMBI, ImageFiles.ZOMBI);
         raceImage.put(Race.VEGE, ImageFiles.VEGE);
         raceImage.put(Race.VAMPIRE, ImageFiles.VAMPIRE);
+        raceImage.put(Race.MUMMY, ImageFiles.MUMMY);
     }
 
+    private void initAgeImageMap() {
+        ageImage.put(Age.BABY, ImageFiles.BABY);
+        ageImage.put(Age.TOODLER, ImageFiles.TOODLER);
+        ageImage.put(Age.CHILD, ImageFiles.CHILD);
+        ageImage.put(Age.ADO, ImageFiles.ADO);
+        ageImage.put(Age.YOUNG_ADULT, ImageFiles.YOUNG_ADULT);
+        ageImage.put(Age.ADULT, ImageFiles.ADULT);
+        ageImage.put(Age.SENIOR, ImageFiles.SENIOR);
+    }
 
 
     public String getFilePathOfRace(Race race) {
-        if(raceImage.containsKey(race)) return raceImage.get(race).toString();
+        if (raceImage.containsKey(race)) return raceImage.get(race).toString();
         return raceImage.get(Race.HUMAIN).toString();
     }
 
+    public String getFilePathOfAge(Age age) {
+        if (ageImage.containsKey(age)) return ageImage.get(age).toString();
+        return ageImage.get(Age.YOUNG_ADULT).toString();
+    }
+
     public Color findColor(Race race) {
-        if(raceConfigurator.containsKey(race)) {
+        if (raceConfigurator.containsKey(race)) {
             return raceConfigurator.get(race);
         }
         return Color.GREEN;
     }
 
 
-
+    public String getFlePathOfGender(Gender item) {
+        if(item == Gender.F) return ImageFiles.GENDER_FEMALE.toString();
+        return ImageFiles.GENDER_MALE.toString();
+    }
 }

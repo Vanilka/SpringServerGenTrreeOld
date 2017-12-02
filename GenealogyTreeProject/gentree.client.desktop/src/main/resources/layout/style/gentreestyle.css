@@ -573,7 +573,7 @@
 }
 
 
-#sim_race_combo_box {
+.circle_cb {
 
     -fx-padding: 0, 0, 0, 0 !important;
     -fx-background-radius: 30, 30, 30, 30;
@@ -584,7 +584,7 @@
 }
 
 
-#sim_race_combo_box .list-cell {
+.circle_cb .list-cell {
     -fx-padding: 7, 7, 7, 7 !important;
 }
 

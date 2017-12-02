@@ -14,6 +14,8 @@ public enum ImageFiles {
     RELATION_FIANCE("backgrounds/fiance.png"),
     NEW_ADDITION("backgrounds/new.png"),
     RELATION_LOVE("backgrounds/love.png"),
+    GENDER_FEMALE("backgrounds/female.png"),
+    GENDER_MALE("backgrounds/male.png"),
     HUMAIN("races/sim.png"),
     VAMPIRE("races/Vampire.png"),
     VEGE("races/plant.png"),
@@ -26,8 +28,16 @@ public enum ImageFiles {
     WHITCH("races/which.png"),
     FAIRY("races/fairy.png"),
     IM_FRIEND("races/imfriend.png"),
+    MUMMY("races/Mummy.png"),
     MERMAID("races/Mermaid.png"),
-    HYBRID("races/hybrid.png");
+    HYBRID("races/hybrid.png"),
+    BABY("ages/baby.png"),
+    TOODLER("ages/toodler.png"),
+    CHILD("ages/childhood.png"),
+    ADO("ages/ado.png"),
+    YOUNG_ADULT("ages/joung_adult.png"),
+    ADULT("ages/adult.png"),
+    SENIOR("ages/senior.png");
 
     private final String path = "/layout/images/";
     private String file;

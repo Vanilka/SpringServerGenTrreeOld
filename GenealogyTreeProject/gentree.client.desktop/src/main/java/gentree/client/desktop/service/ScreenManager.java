@@ -21,6 +21,8 @@ import gentree.client.visualization.elements.configuration.ContextProvider;
 import gentree.client.visualization.elements.configuration.ElementsConfig;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
+import gentree.common.configuration.enums.Age;
+import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.Race;
 import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -625,6 +627,56 @@ public class ScreenManager implements ContextProvider {
 
                 };
                 return raceCell;
+            }
+        };
+        return callback;
+
+    }
+
+    public Callback<ListView<Age>, ListCell<Age>> getAgeListCell() {
+        Callback<ListView<Age>, ListCell<Age>> callback = new Callback<ListView<Age>, ListCell<Age>>() {
+            @Override
+            public ListCell<Age> call(ListView<Age> param) {
+                final ListCell<Age> ageCell = new ListCell<Age>() {
+                    @Override
+                    public void updateItem(Age item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setGraphic(setGraphicToImageView(ElementsConfig.INSTANCE.getFilePathOfAge(item), 30, 40));
+                            setText("");
+                        } else {
+                            setGraphic(setGraphicToImageView(ImageFiles.HUMAIN.toString(), 30, 40));
+                            setText("");
+                        }
+                    }
+
+                };
+                return ageCell;
+            }
+        };
+        return callback;
+
+    }
+
+    public Callback<ListView<Gender>, ListCell<Gender>> getGenderListCell() {
+        Callback<ListView<Gender>, ListCell<Gender>> callback = new Callback<ListView<Gender>, ListCell<Gender>>() {
+            @Override
+            public ListCell<Gender> call(ListView<Gender> param) {
+                final ListCell<Gender> genderCell = new ListCell<Gender>() {
+                    @Override
+                    public void updateItem(Gender item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setGraphic(setGraphicToImageView(ElementsConfig.INSTANCE.getFlePathOfGender(item), 30, 30));
+                            setText("");
+                        } else {
+                            setGraphic(setGraphicToImageView(ImageFiles.HUMAIN.toString(), 30, 30));
+                            setText("");
+                        }
+                    }
+
+                };
+                return genderCell;
             }
         };
         return callback;
