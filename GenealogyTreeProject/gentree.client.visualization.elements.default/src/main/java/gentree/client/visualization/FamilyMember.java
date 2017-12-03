@@ -1,6 +1,7 @@
-package gentree.client.visualization.elements;
+package gentree.client.visualization;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.FamilyMemberCard;
 import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
@@ -32,9 +33,14 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     }
 
     private void initialize() {
-        this.setOnMouseEntered(t -> rectangleFond.setStroke(Color.valueOf("#64bf37")));
+        this.setOnMouseEntered(t -> {
+            rectangleFond.setStroke(Color.valueOf("#64bf37"));
+        });
 
-        this.setOnMouseExited(t -> rectangleFond.setStroke(Color.TRANSPARENT));
+        this.setOnMouseExited(t -> {
+
+            rectangleFond.setStroke(Color.TRANSPARENT);
+        });
 
         if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
             this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showSimContextMenu(returnThis(), event));
@@ -62,7 +68,7 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     }
 
 
-    private FamilyMember returnThis() {
+    private gentree.client.visualization.elements.FamilyMember returnThis() {
         return this;
     }
 

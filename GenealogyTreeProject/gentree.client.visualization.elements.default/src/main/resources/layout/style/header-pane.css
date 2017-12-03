@@ -1,0 +1,21 @@
+.header-pane {
+    -fx-skin: "gentree.client.visualization.controls.skin.HeaderPaneSkin";
+
+}
+
+.header-pane {
+    -fx-background-color: #0188AE;
+
+    -fx-border-radius: 30 30 0 0;
+    -fx-background-radius: 30 30 0 0;
+
+    -fx-pref-height: 40px;
+
+}
+
+.header-pane .label {
+    -fx-padding: 10 20 0 20;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
