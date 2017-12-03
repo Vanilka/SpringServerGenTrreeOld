@@ -20,7 +20,7 @@
                 <DropShadow blurType="TWO_PASS_BOX" height="14.93" width="27.07" />
             </effect>
         </Rectangle>
-        <Rectangle fill="#8fb8abd9" height="94.0" layoutX="11.0" layoutY="7.0" stroke="#266558" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="78.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="7.0" />
+        <Rectangle fx:id="rectanglePhotoFond" fill="#8fb8abd9" height="94.0" layoutX="11.0" layoutY="7.0" stroke="#266558" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="78.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="7.0" />
         <ImageView fx:id="photoSim" fitHeight="79.0" fitWidth="66.0" layoutX="17.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="nameSim" layoutX="11.0" layoutY="105.0" prefHeight="15.0" prefWidth="78.0" text="name" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0">
             <font>

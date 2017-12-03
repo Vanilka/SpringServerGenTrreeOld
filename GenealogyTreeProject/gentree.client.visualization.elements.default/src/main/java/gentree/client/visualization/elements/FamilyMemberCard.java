@@ -1,10 +1,12 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -12,18 +14,23 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
  */
-public class FamilyMemberCard extends AnchorPane {
+public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
+
+    private final static String pathfxml = "/layout/elements/family.member.card.fxml";
 
     private final static int MEMBER_WIDTH = 133;
     private final static int MEMBER_HEIGHT = 188;
+
     @FXML
     protected ImageView photoSim;
     @FXML
@@ -40,8 +47,11 @@ public class FamilyMemberCard extends AnchorPane {
     private Polygon deathCord;
 
 
+
     private ObjectProperty<Member> member;
-    private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
+    private ChangeListener<Object> listener = this::objectChange;
+
+    private ChangeListener<? super Member> memberListener = this::memberChange;
 
     {
         member = new SimpleObjectProperty<>();
@@ -50,12 +60,15 @@ public class FamilyMemberCard extends AnchorPane {
     }
 
     public FamilyMemberCard(Member member) {
+        this(member, pathfxml);
+    }
+
+    public FamilyMemberCard(Member member, String path) {
         super();
-        initialize();
-        this.member.addListener(getChangeMemberListener());
+        initialize(path);
+        this.member.addListener(memberListener);
         this.member.setValue(member);
         resize(MEMBER_WIDTH, MEMBER_HEIGHT);
-
     }
 
     public FamilyMemberCard() {
@@ -70,11 +83,10 @@ public class FamilyMemberCard extends AnchorPane {
                 40.0, 0.0);
     }
 
-    private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/elements/family.member.card.fxml"));
+    private void initialize(String path) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
             fillComponents(null);
@@ -84,19 +96,7 @@ public class FamilyMemberCard extends AnchorPane {
         }
     }
 
-    private ChangeListener<Member> getChangeMemberListener() {
-        ChangeListener<Member> simListener = (observable, oldValue, newValue) -> {
-            if (oldValue != null) {
-                oldValue.getProperties().forEach(p -> p.removeListener(listener));
-            }
-            newValue.getProperties().forEach(p -> p.addListener(listener));
-
-            fillComponents(newValue);
-        };
-        return simListener;
-    }
-
-    private void fillComponents(Member member) {
+    protected void fillComponents(Member member) {
         if (member == null) {
             nameSim.setText("???");
             surnameSim.setText("???");
@@ -113,14 +113,12 @@ public class FamilyMemberCard extends AnchorPane {
 
 
             deathCord.setVisible(!member.isAlive());
-
         }
     }
 
     public void setImage(String path, Boolean shouldBeInGayScale) {
         try {
             photoSim.setImage(new Image(path));
-
             if (shouldBeInGayScale) {
                 setGrayScaleToImgView(photoSim);
             } else {
@@ -131,6 +129,16 @@ public class FamilyMemberCard extends AnchorPane {
             photoSim.setImage(new Image(ImageFiles.NO_NAME_MALE.toString()));
         }
     }
+
+    @Override
+    public void clean() {
+        this.member.removeListener(memberListener);
+        this.member.get().getProperties().forEach(p -> p.removeListener(listener));
+        this.member.setValue(null);
+        photoSim.setImage(null);
+        memberListener = null;
+    }
+
 
 
     public void setGrayScaleToImgView(ImageView view) {
@@ -155,4 +163,22 @@ public class FamilyMemberCard extends AnchorPane {
         return this;
     }
 
+    private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (oldValue != null) {
+           oldValue.getProperties().forEach(p -> p.removeListener(listener));
+        }
+        newValue.getProperties().forEach(p -> p.addListener(listener));
+
+        fillComponents(newValue);
+    }
+
+    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue)  {
+        fillComponents(member.get());
+    }
+
+    protected static void fillShapeWithBackgroundd(Shape shape, String imgPath) {
+        Image img = new Image(imgPath);
+        shape.setFill(new ImagePattern(img));
+
+    }
 }

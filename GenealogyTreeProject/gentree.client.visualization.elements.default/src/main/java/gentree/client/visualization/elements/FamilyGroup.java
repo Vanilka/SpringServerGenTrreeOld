@@ -2,6 +2,7 @@ package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.controls.HeaderPane;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,7 +22,7 @@ import java.io.IOException;
  */
 @Getter
 @Setter
-public class FamilyGroup extends AnchorPane {
+public class FamilyGroup extends AnchorPane implements AutoCleanable {
 
     private static double OFFSET_FOND_DARK = 10.0;
     private static double OFFSET_FOND = 30.0;
@@ -35,7 +36,7 @@ public class FamilyGroup extends AnchorPane {
     @FXML
     private HBox contentHbox;
     private ObjectProperty<Relation> rootRelation;
-    private ChangeListener<? super Relation> rootRelationListener = this::rootRelationChange;
+    private ChangeListener<? super Relation> rootRelationListener = this::rootRelationChanged;
 
     {
         rootRelation = new SimpleObjectProperty<>();
@@ -46,7 +47,6 @@ public class FamilyGroup extends AnchorPane {
         this.idNode = id;
         fxmlLoading();
         propertyBinding();
-        initAutoResizing();
         this.rootRelation.set(bean);
 
     }
@@ -73,29 +73,6 @@ public class FamilyGroup extends AnchorPane {
      */
     private void propertyBinding() {
         rootRelation.addListener(rootRelationListener);
-    }
-
-
-
-
-    /**
-     * TODO
-     */
-    private void initListener() {
-
-    }
-
-    private void cleanListener() {
-        rootRelation.removeListener(rootRelationListener);
-        PANEL_HEADER.titleProperty().unbind();
-    }
-
-
-    /**
-     * Function guard for resizing gentree.client.visualization.elements
-     */
-    private void initAutoResizing() {
-
     }
 
     /**
@@ -131,12 +108,26 @@ public class FamilyGroup extends AnchorPane {
     }
 
 
-    private void rootRelationChange(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+    @Override
+    public void clean() {
+
+    }
+
+    public void selfClean() {
+        PANEL_HEADER.clean();
+        rootRelation.removeListener(rootRelationListener);
+        PANEL_HEADER.titleProperty().unbind();
+    }
+
+
+    private void rootRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
+        if (newValue != null) {
+            PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
+        }
+
         if (oldValue != null) {
             this.PANEL_HEADER.titleProperty().unbind();
         }
-
-        PANEL_HEADER.titleProperty().bind(Bindings.concat(" (ID: " + idNode, ")  ", rootRelation.getValue().getChildren().get(0).surnameProperty()));
     }
 }
 

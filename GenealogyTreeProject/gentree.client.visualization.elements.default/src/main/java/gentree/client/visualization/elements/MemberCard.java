@@ -5,6 +5,7 @@ import gentree.client.visualization.elements.configuration.ImageFiles;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -40,7 +41,9 @@ public class MemberCard extends AnchorPane {
 
 
     private ObjectProperty<Member> member;
-    private ChangeListener<Object> listener = ((obs, oldValue, newValue) -> fillComponents(member.get()));
+    private ChangeListener<Object> listener = this::objectChange;
+
+    private ChangeListener<? super Member> memberListener = this::simChanged;
 
     {
         member = new SimpleObjectProperty<>();
@@ -51,8 +54,7 @@ public class MemberCard extends AnchorPane {
     public MemberCard(Member member) {
         super();
         initialize();
-
-        this.member.addListener(getChangeMemberListener());
+        this.member.addListener(memberListener);
         this.member.setValue(member);
         resize(255, 145);
 
@@ -76,17 +78,15 @@ public class MemberCard extends AnchorPane {
         }
     }
 
-    private ChangeListener<Member> getChangeMemberListener() {
-        ChangeListener<Member> simListener = (observable, oldValue, newValue) -> {
-            if (oldValue != null) {
-                oldValue.getProperties().forEach(p -> p.removeListener(listener));
-            }
-            if (newValue != null) {
-                newValue.getProperties().forEach(p -> p.addListener(listener));
-            }
-            fillComponents(newValue);
-        };
-        return simListener;
+
+    private void objectChange(ObservableValue<?> observableValue, Object oldValue, Object newValue) {
+        fillComponents(member.get());
+    }
+    public void clean() {
+        member.removeListener(memberListener);
+        member.get().getProperties().forEach(p -> p.removeListener(listener));
+
+        memberListener = null;
     }
 
     private void fillComponents(Member member) {
@@ -131,5 +131,14 @@ public class MemberCard extends AnchorPane {
         return this;
     }
 
+    private void simChanged(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
+        if (oldValue != null) {
+            oldValue.getProperties().forEach(p -> p.removeListener(listener));
+        }
+        if (newValue != null) {
+            newValue.getProperties().forEach(p -> p.addListener(listener));
+        }
+        fillComponents(newValue);
+    }
 }
 

@@ -1,6 +1,8 @@
 package gentree.client.visualization.controls;
 
 import gentree.client.visualization.controls.skin.HeaderPaneSkin;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
+import javafx.beans.NamedArg;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * Created by vanilka on 07/10/2017.
  */
-public class HeaderPane extends Control {
+public class HeaderPane extends Control implements AutoCleanable {
 
     private static final String DEFAULT_CLASS_NAME = "header-pane";
 
@@ -44,19 +46,21 @@ public class HeaderPane extends Control {
 
     public HeaderPane() {
         initialize();
-        createDefaultSkin();
     }
 
-    public HeaderPane(String title) {
+    public HeaderPane(@NamedArg("text") String title) {
         initialize();
         this.title.set(title);
-        createDefaultSkin();
-
     }
 
-    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return StyleableProperties.cssMetaDataList;
+    @Override
+    public void clean() {
+        if( getSkin() instanceof AutoCleanable) {
+            ((AutoCleanable) getSkin()).clean();
+        }
     }
+
+
 
     private void initialize() {
         getStyleClass().add(DEFAULT_CLASS_NAME);
@@ -66,13 +70,17 @@ public class HeaderPane extends Control {
         return title.get();
     }
 
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
     public SimpleStringProperty titleProperty() {
         return title;
     }
 
     /*
-     *   GETTERS SETTERS
-     */
+         *   GETTERS SETTERS
+         */
     public EventHandler<ActionEvent> getOnAction() {
         return onActionProperty().get();
     }
@@ -85,6 +93,10 @@ public class HeaderPane extends Control {
         return onAction;
     }
 
+    /**
+     * Get Control CSS Metadata
+     * @return
+     */
     @Override
     protected List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
         return getClassCssMetaData();
@@ -108,6 +120,14 @@ public class HeaderPane extends Control {
     @Override
     public String getUserAgentStylesheet() {
         return HeaderPane.class.getResource("/layout/style/header-pane.css").toExternalForm();
+    }
+
+    /**
+     * Returnt Class css Metadata
+     * @return
+     */
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
+        return StyleableProperties.cssMetaDataList;
     }
 
     /**

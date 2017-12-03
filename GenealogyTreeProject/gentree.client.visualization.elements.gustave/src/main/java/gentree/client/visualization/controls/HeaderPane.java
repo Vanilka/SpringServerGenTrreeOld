@@ -46,14 +46,11 @@ public class HeaderPane extends Control implements AutoCleanable {
 
     public HeaderPane() {
         initialize();
-        createDefaultSkin();
     }
 
     public HeaderPane(@NamedArg("text") String title) {
         initialize();
         this.title.set(title);
-        createDefaultSkin();
-
     }
 
     @Override
@@ -63,9 +60,7 @@ public class HeaderPane extends Control implements AutoCleanable {
         }
     }
 
-    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return StyleableProperties.cssMetaDataList;
-    }
+
 
     private void initialize() {
         getStyleClass().add(DEFAULT_CLASS_NAME);
@@ -98,6 +93,10 @@ public class HeaderPane extends Control implements AutoCleanable {
         return onAction;
     }
 
+    /**
+     * Get Control CSS Metadata
+     * @return
+     */
     @Override
     protected List<CssMetaData<? extends Styleable, ?>> getControlCssMetaData() {
         return getClassCssMetaData();
@@ -121,6 +120,14 @@ public class HeaderPane extends Control implements AutoCleanable {
     @Override
     public String getUserAgentStylesheet() {
         return HeaderPane.class.getResource("/layout/style/header-pane.css").toExternalForm();
+    }
+
+    /**
+     * Returnt Class css Metadata
+     * @return
+     */
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
+        return StyleableProperties.cssMetaDataList;
     }
 
     /**

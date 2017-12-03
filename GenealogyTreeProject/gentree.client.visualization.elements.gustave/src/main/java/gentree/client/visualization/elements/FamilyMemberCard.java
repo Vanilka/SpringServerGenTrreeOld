@@ -14,8 +14,10 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.io.IOException;
 
@@ -34,6 +36,11 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
     @FXML
     protected Rectangle rectangleFond;
     @FXML
+    protected Rectangle rectanglePhotoFond;
+
+    private Rectangle clip;
+
+    @FXML
     private AnchorPane leafAnchorPane;
     @FXML
     private Label surnameSim;
@@ -45,7 +52,6 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
     private Polygon deathCord;
 
 
-
     private ObjectProperty<Member> member;
     private ChangeListener<Object> listener = this::objectChange;
 
@@ -53,6 +59,7 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     {
         member = new SimpleObjectProperty<>();
+        clip = new Rectangle();
         //deathCord = initPolygon();
 
     }
@@ -63,15 +70,20 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     public FamilyMemberCard(Member member, String path) {
         super();
-        initialize();
+        initialize(path);
         this.member.addListener(memberListener);
         this.member.setValue(member);
-
         resize(MEMBER_WIDTH, MEMBER_HEIGHT);
     }
 
     public FamilyMemberCard() {
         this(null);
+    }
+
+    protected static void fillShapeWithBackgroundd(Shape shape, String imgPath) {
+        Image img = new Image(imgPath);
+        shape.setFill(new ImagePattern(img));
+
     }
 
     private Polygon initPolygon() {
@@ -82,13 +94,10 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
                 40.0, 0.0);
     }
 
-    private void initialize() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pathfxml));
+    private void initialize(String path) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
-
-
         try {
             fxmlLoader.load();
             fillComponents(null);
@@ -96,9 +105,10 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
             exception.printStackTrace();
             throw new RuntimeException(exception);
         }
+        initClip();
     }
 
-    private void fillComponents(Member member) {
+    protected void fillComponents(Member member) {
         if (member == null) {
             nameSim.setText("???");
             surnameSim.setText("???");
@@ -112,10 +122,7 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
                 bornameSim.setText("");
             }
             setImage(member.getPhoto(), !member.isAlive());
-
-
             deathCord.setVisible(!member.isAlive());
-
         }
     }
 
@@ -131,6 +138,13 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
             e.printStackTrace();
             photoSim.setImage(new Image(ImageFiles.NO_NAME_MALE.toString()));
         }
+
+        Rectangle clip = new Rectangle(
+                photoSim.getFitWidth(), photoSim.getFitHeight()
+        );
+
+
+
     }
 
     @Override
@@ -142,7 +156,13 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
         memberListener = null;
     }
 
-
+    private void initClip() {
+        clip.widthProperty().bind(photoSim.fitWidthProperty());
+        clip.heightProperty().bind(photoSim.fitHeightProperty());
+        clip.setArcWidth(200);
+        clip.setArcHeight(200);
+        photoSim.setClip(clip);
+    }
 
     public void setGrayScaleToImgView(ImageView view) {
         ColorAdjust desaturate = new ColorAdjust();
@@ -168,14 +188,14 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
         if (oldValue != null) {
-           oldValue.getProperties().forEach(p -> p.removeListener(listener));
+            oldValue.getProperties().forEach(p -> p.removeListener(listener));
         }
         newValue.getProperties().forEach(p -> p.addListener(listener));
 
         fillComponents(newValue);
     }
 
-    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue)  {
+    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue) {
         fillComponents(member.get());
     }
 }

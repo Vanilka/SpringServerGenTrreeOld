@@ -1,0 +1,17 @@
+.circle-embleme {
+    -fx-skin: "gentree.client.visualization.controls.skin.CircleEmblemeSkin";
+}
+
+.circle-embleme {
+    -fx-pref-height: 35;
+    -fx-pref-width: 35;
+
+    -fx-border-radius: 30 30 30 30;
+    -fx-background-radius: 30 30 30 30;
+
+    -fx-background-color: #808888;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+}
+

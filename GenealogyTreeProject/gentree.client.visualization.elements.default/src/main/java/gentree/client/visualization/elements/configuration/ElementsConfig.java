@@ -1,6 +1,5 @@
-package gentree.client.visualization.configuration;
+package gentree.client.visualization.elements.configuration;
 
-import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.common.configuration.enums.Age;
 import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.Race;

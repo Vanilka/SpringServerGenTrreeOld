@@ -1,6 +1,7 @@
 package gentree.client.visualization.controls.skin;
 
 import gentree.client.visualization.controls.HeaderPane;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import javafx.beans.InvalidationListener;
 import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
@@ -11,7 +12,7 @@ import lombok.Getter;
 /**
  * Created by vanilka on 08/10/2017.
  */
-public class HeaderPaneSkin extends SkinBase<HeaderPane> {
+public class HeaderPaneSkin extends SkinBase<HeaderPane>  implements AutoCleanable{
 
     private final Color default_color = Color.web("#0188AE");
 
@@ -59,6 +60,7 @@ public class HeaderPaneSkin extends SkinBase<HeaderPane> {
                         BorderWidths.DEFAULT)));
     }
 
+    @Override
     public void clean() {
         getSkinnable().widthProperty().removeListener(invalidListener);
         getSkinnable().heightProperty().removeListener(invalidListener);
@@ -67,4 +69,3 @@ public class HeaderPaneSkin extends SkinBase<HeaderPane> {
         getSkinnable().prefHeightProperty().unbind();
     }
 }
-

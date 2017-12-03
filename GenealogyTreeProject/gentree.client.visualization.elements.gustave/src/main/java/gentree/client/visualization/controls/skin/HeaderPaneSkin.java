@@ -62,7 +62,6 @@ public class HeaderPaneSkin extends SkinBase<HeaderPane>  implements AutoCleanab
 
     @Override
     public void clean() {
-        System.out.println("clean Header Pane");
         getSkinnable().widthProperty().removeListener(invalidListener);
         getSkinnable().heightProperty().removeListener(invalidListener);
 
