@@ -1,9 +1,6 @@
 package gentree.server.facade.converter;
 
-import gentree.server.domain.entity.FamilyEntity;
-import gentree.server.domain.entity.MemberEntity;
-import gentree.server.domain.entity.OwnerEntity;
-import gentree.server.domain.entity.RelationEntity;
+import gentree.server.domain.entity.*;
 import gentree.server.dto.*;
 import org.springframework.stereotype.Component;
 
@@ -142,6 +139,24 @@ public class ConverterToDTO {
         return target;
     }
 
+    public MemberWithPhotoDTO convertWithPhoto(MemberEntity source) {
+        MemberWithPhotoDTO target = new MemberWithPhotoDTO();
+        target.setVersion(source.getVersion());
+        target.setId(source.getId());
+        target.setName(source.getName());
+        target.setSurname(source.getSurname());
+        target.setBornname(source.getBornname());
+        target.setAlive(source.isAlive());
+        target.setAge(source.getAge());
+        target.setRace(source.getRace());
+        target.setDeathCauses(source.getDeathCauses());
+        target.setGender(source.getGender());
+        if(source.getPhoto() != null) {
+            target.setPhotoDTO(convert(source.getPhoto()));
+        }
+        return  target;
+    }
+
     public MemberDTO convertLazy(MemberEntity source) {
         MemberDTO target = new MemberDTO();
         target.setVersion(source.getVersion());
@@ -200,4 +215,15 @@ public class ConverterToDTO {
         sourceList.forEach(entity -> list.add(convert(entity)));
         return list;
     }
+
+
+    public PhotoDTO convert(PhotoEntity source) {
+        PhotoDTO target = new PhotoDTO();
+        target.setId(source.getId());
+        target.setVersion(source.getVersion());
+        target.setName(source.getPhoto());
+        target.setEncodedPicture(source.getEncodedStringPhoto());
+        return target;
+    }
+
 }

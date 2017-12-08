@@ -17,6 +17,7 @@ public class GenTreeDefaultProperties {
 
     private static final String DEFAULT_DIR_IMAGE_NAME = "photo";
     private static final String DEFAULT_DIR_PROJECT_NAME = "projects";
+    private static final String DEFAULT_DIR_ONLINE_TEMP = "onlinetemp";
     private static final String DEFAULT_DIR_LOG = "logs";
     private static final String DEFAULT_ALLOW_HOMO_VALUE = "false";
 
@@ -32,6 +33,7 @@ public class GenTreeDefaultProperties {
         return Arrays.asList(
                 PropertiesKeys.PARAM_DIR_IMAGE_NAME,
                 PropertiesKeys.PARAM_DIR_LOG,
+                PropertiesKeys.PARAM_DIR_ONLINE_TEMP,
                 PropertiesKeys.PARAM_DIR_PROJECT_NAME);
     }
 
@@ -57,6 +59,7 @@ public class GenTreeDefaultProperties {
     private void populateDefaultMap() {
         defaults.put(PropertiesKeys.PARAM_DIR_IMAGE_NAME, DEFAULT_DIR_IMAGE_NAME);
         defaults.put(PropertiesKeys.PARAM_DIR_PROJECT_NAME, DEFAULT_DIR_PROJECT_NAME);
+        defaults.put(PropertiesKeys.PARAM_DIR_ONLINE_TEMP, DEFAULT_DIR_ONLINE_TEMP);
         defaults.put(PropertiesKeys.PARAM_DIR_LOG, DEFAULT_DIR_LOG);
         defaults.put(PropertiesKeys.PARAM_DEFAULT_ALLOW_HOMO, DEFAULT_ALLOW_HOMO_VALUE);
     }

@@ -4,14 +4,8 @@ import gentree.exception.AscendanceViolationException;
 import gentree.exception.IncorrectStatusException;
 import gentree.exception.NotExistingMemberException;
 import gentree.exception.TooManyNullFieldsException;
-import gentree.server.domain.entity.FamilyEntity;
-import gentree.server.domain.entity.MemberEntity;
-import gentree.server.domain.entity.OwnerEntity;
-import gentree.server.domain.entity.RelationEntity;
-import gentree.server.service.FamilyService;
-import gentree.server.service.MemberService;
-import gentree.server.service.ProjectService;
-import gentree.server.service.RelationService;
+import gentree.server.domain.entity.*;
+import gentree.server.service.*;
 import gentree.server.service.validator.RelationValidator;
 import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +27,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    PhotoService photoService;
 
     @Autowired
     RelationService relationService;
@@ -82,6 +79,16 @@ public class ProjectServiceImpl implements ProjectService {
             e.printStackTrace();
         }
         return wrapper;
+    }
+
+
+    @Override
+    public MemberEntity updateMember(MemberEntity memberEntity) {
+        if(memberEntity.getPhoto() != null) {
+          PhotoEntity ph = photoService.persistPhoto(memberEntity.getPhoto());
+          memberEntity.setPhoto(ph);
+        }
+        return memberService.updateMember(memberEntity);
     }
 
     @Override

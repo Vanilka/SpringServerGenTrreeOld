@@ -4,10 +4,7 @@ import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.domain.entity.RelationEntity;
-import gentree.server.dto.FamilyDTO;
-import gentree.server.dto.MemberDTO;
-import gentree.server.dto.OwnerDTO;
-import gentree.server.dto.RelationDTO;
+import gentree.server.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -89,6 +86,7 @@ public class ConverterToEntity {
         System.out.println("TARGET ENTITY " + target);
         return target;
     }
+
 
     public List<MemberEntity> convertLazyMemberList(List<MemberDTO>  sourceList) {
         List<MemberEntity> targetList = new ArrayList<>();

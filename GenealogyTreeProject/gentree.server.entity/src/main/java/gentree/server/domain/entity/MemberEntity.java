@@ -32,6 +32,7 @@ public class MemberEntity implements Serializable {
     private Age age;
     private Race race;
     private Gender gender;
+    private PhotoEntity photo;
 /*
     private RelationEntity bornRelation;*/
 
@@ -115,8 +116,16 @@ public class MemberEntity implements Serializable {
         this.gender = (gender == null ? Gender.M : gender);
     }
 
+    @OneToOne(mappedBy = "owner")
+    public PhotoEntity getPhoto() {
+        return photo;
+    }
 
-/*    @ManyToOne(optional = false,
+    public void setPhoto(PhotoEntity photo) {
+        this.photo = photo;
+    }
+
+    /*    @ManyToOne(optional = false,
             fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE, CascadeType.PERSIST},
             targetEntity = RelationEntity.class)

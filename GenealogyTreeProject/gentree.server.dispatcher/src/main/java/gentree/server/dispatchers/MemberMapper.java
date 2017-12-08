@@ -1,10 +1,7 @@
 package gentree.server.dispatchers;
 
 import gentree.exception.FamilyAccessDeniedException;
-import gentree.server.dto.FamilyDTO;
-import gentree.server.dto.MemberDTO;
-import gentree.server.dto.NewMemberDTO;
-import gentree.server.dto.OwnerExtendedDTO;
+import gentree.server.dto.*;
 import gentree.server.facade.FamilyFacade;
 import gentree.server.facade.OwnerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +37,33 @@ public class MemberMapper {
      * @throws FamilyAccessDeniedException
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public ResponseEntity<NewMemberDTO> addFamily(@RequestBody MemberDTO m, Authentication auth)
+    public ResponseEntity<NewMemberDTO> addNewMember(@RequestBody MemberDTO m, Authentication auth)
             throws FamilyAccessDeniedException {
 
         if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();
         NewMemberDTO dto = facade.addNewMember(m);
         return new ResponseEntity<NewMemberDTO>(dto, HttpStatus.OK);
     }
+
+
+    /**
+     * Additing Member
+     * @param m
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ResponseEntity<MemberWithPhotoDTO> updateMember(@RequestBody MemberWithPhotoDTO m, Authentication auth)
+            throws FamilyAccessDeniedException {
+
+        if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();
+        MemberWithPhotoDTO dto = facade.updateMember(m);
+        return new ResponseEntity<MemberWithPhotoDTO>(dto, HttpStatus.OK);
+    }
+
+
+
 
     /**
      * Delete Member

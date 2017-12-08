@@ -4,16 +4,15 @@ import gentree.exception.AscendanceViolationException;
 import gentree.exception.IncorrectStatusException;
 import gentree.exception.NotExistingMemberException;
 import gentree.exception.TooManyNullFieldsException;
-import gentree.server.domain.entity.FamilyEntity;
-import gentree.server.domain.entity.OwnerEntity;
-import gentree.server.domain.entity.RelationEntity;
+import gentree.server.domain.entity.*;
 import gentree.server.dto.*;
 import gentree.server.facade.FamilyFacade;
 import gentree.server.facade.converter.ConverterToDTO;
 import gentree.server.facade.converter.ConverterToEntity;
-import gentree.server.service.validator.RelationValidator;
 import gentree.server.service.OwnerService;
+import gentree.server.service.PhotoService;
 import gentree.server.service.ProjectService;
+import gentree.server.service.validator.RelationValidator;
 import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +28,9 @@ public class FamilyFacadeImpl implements FamilyFacade {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    PhotoService photoService;
 
     @Autowired
     OwnerService ownerService;
@@ -90,6 +92,20 @@ public class FamilyFacadeImpl implements FamilyFacade {
     }
 
     @Override
+    public MemberWithPhotoDTO updateMember(MemberWithPhotoDTO member) {
+        MemberEntity memberEntity = converterToEntity.convert(member);
+
+        if (member.getPhotoDTO() != null) {
+            PhotoEntity photoEntity = new PhotoEntity();
+            photoEntity.setOwner(converterToEntity.convertLazy(member));
+            photoEntity.setEncodedStringPhoto(member.getPhotoDTO().getEncodedPicture());
+            memberEntity.setPhoto(photoEntity);
+        }
+        memberEntity = projectService.updateMember(memberEntity);
+        return converterToDTO.convertWithPhoto(memberEntity);
+    }
+
+    @Override
     public FamilyDTO deleteMember(MemberDTO m) {
         FamilyEntity entity = projectService.deleteMember(converterToEntity.convert(m));
         return converterToDTO.convertFullFamily(entity);
@@ -117,7 +133,7 @@ public class FamilyFacadeImpl implements FamilyFacade {
     @Override
     public List<RelationDTO> deleteRelation(RelationDTO relation) {
         RelationEntity relationEntity = converterToEntity.convert(relation);
-         projectService.deleteRelation(relationEntity);
+        projectService.deleteRelation(relationEntity);
         return converterToDTO.convertFullRelationList(projectService.findFullFamilyById(relation.getFamily().getId()).getRelations());
     }
 

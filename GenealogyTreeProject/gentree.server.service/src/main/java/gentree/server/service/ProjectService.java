@@ -21,6 +21,8 @@ public interface ProjectService {
 
     NewMemberWrapper addMember(MemberEntity memberEntity);
 
+    MemberEntity updateMember(MemberEntity memberEntity);
+
     FamilyEntity deleteMember(MemberEntity memberEntity);
 
     List<RelationEntity> addRelation(RelationEntity relationEntity) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException;

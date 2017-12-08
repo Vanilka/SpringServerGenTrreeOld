@@ -15,10 +15,7 @@ import gentree.client.desktop.responses.ServiceResponse;
 import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import gentree.client.desktop.service.responses.*;
 import gentree.exception.ExceptionBean;
-import gentree.server.dto.FamilyDTO;
-import gentree.server.dto.MemberDTO;
-import gentree.server.dto.NewMemberDTO;
-import gentree.server.dto.RelationDTO;
+import gentree.server.dto.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import lombok.extern.log4j.Log4j2;
@@ -48,7 +45,7 @@ public class RestConnectionService {
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_METHOD = "Basic ";
 
-    private final ConverterModelToDto cmd = ConverterModelToDto.INSTANCE;
+    private final ConverterModelToDto cmd = new ConverterModelToDto();
     private final ConverterDtoToModel cdm = new ConverterDtoToModel();
     private final Client client;
     private GenTreeOnlineService service;
@@ -205,6 +202,29 @@ public class RestConnectionService {
 
         }
         return serviceResponse;
+    }
+
+    public ServiceResponse updateMember(Member member) {
+        ServiceResponse serviceResponse = null;
+        MemberWithPhotoDTO dto = cmd.convertFull(member);
+        dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
+        log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
+
+       Response response = doPost(ServerPaths.MEMBER.concat(ServerPaths.UPDATE), Entity.json(dto));
+
+        if (response.getStatus() == 200) {
+            try {
+                MemberWithPhotoDTO returnedDTO = response.readEntity(MemberWithPhotoDTO.class);
+                System.out.println("Returned DTO is  :" +returnedDTO);
+                cdm.convertTo(member, returnedDTO);
+                serviceResponse = new MemberResponse(member);
+
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
+
+        }
+      return  serviceResponse;
     }
 
 

@@ -29,6 +29,8 @@ public interface FamilyFacade {
     ************************************************************ */
     NewMemberDTO addNewMember(MemberDTO member);
 
+    MemberWithPhotoDTO updateMember(MemberWithPhotoDTO member);
+
     FamilyDTO deleteMember(MemberDTO m);
 
 

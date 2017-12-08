@@ -314,7 +314,7 @@ public class ScreenManager implements ContextProvider {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
         try {
             anchor.getChildren().clear();
-            anchor.getChildren().addAll((AnchorPane) loader.load());
+             anchor.getChildren().addAll((AnchorPane) loader.load());
             controller = loader.getController();
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -400,11 +400,11 @@ public class ScreenManager implements ContextProvider {
         if (file != null) {
             try {
                 path = PREFIX_FILE_LOAD.concat(file.getCanonicalPath());
-                shape.setFill(new ImagePattern(new Image(path), 0, 0, 1, 1, false));
+                shape.setFill(new ImagePattern(new Image(path)));
             } catch (Exception e) {
                 log.error(LogMessages.MSG_ERROR_LOAD_IMAGE);
                 e.printStackTrace();
-                shape.setFill(new ImagePattern(new Image(ImageFiles.NO_NAME_MALE.toString()), 0, 0, 1, 1, false));
+                shape.setFill(new ImagePattern(new Image(ImageFiles.NO_NAME_MALE.toString())));
             }
         }
         return path;

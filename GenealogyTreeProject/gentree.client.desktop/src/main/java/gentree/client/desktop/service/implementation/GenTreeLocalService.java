@@ -12,7 +12,6 @@ import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.RelationResponse;
-import gentree.client.visualization.elements.configuration.ImageFiles;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
 import javafx.beans.property.ObjectProperty;
@@ -27,11 +26,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,12 +35,11 @@ import java.util.List;
 @Log4j2
 public class GenTreeLocalService extends GenTreeService implements FamilyService {
 
-    private final static String PROJECT_FILE_EXTENSION = ".xml";
-    private static final String PREFIX_FILE_ABSOLUTE = "file://";
-    private static final String PREFIX_FILE_RELATIVE = "file:";
-    private ActiveRelationGuard guard;
 
-    private String projectFilename;
+    private ActiveRelationGuard guard;
+    private ProjectsLocalFilesService ps = new ProjectsLocalFilesService();
+
+   // private String projectFilename;
 
     private Long idMember;
     private Long idRelation;
@@ -78,9 +72,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse addMember(Member member) {
         log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
-        if (!isGenericPhoto(member.getPhoto())) {
-            String newPhotoPath = copyPhoto(config.getString(PropertiesKeys.PARAM_DIR_IMAGE_NAME), member.getPhoto());
-            member.setPhoto(newPhotoPath == null ? null : PREFIX_FILE_RELATIVE + newPhotoPath);
+        if (!ps.isGenericPhoto(member.getPhoto())) {
+            String newPhotoPath = ps.copyPhoto(member.getPhoto());
+            member.setPhoto(newPhotoPath == null ? null : ps.generateNewPathForImage(newPhotoPath));
         }
         getCurrentFamily().addMember(member);
         return new MemberResponse(member);
@@ -89,10 +83,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse updateMember(Member m) {
         // Nothing to do in Local service
-        if(needCopy(m.getPhoto())) {
-            System.out.println("needBe coppied");
-           String coppied = copyPhoto(m.getPhoto());
-            m.setPhoto(coppied == null ? null : PREFIX_FILE_RELATIVE + coppied);
+        if (ps.needCopy(m.getPhoto())) {
+            String coppied = ps.copyPhoto(m.getPhoto());
+            m.setPhoto(coppied == null ? null : ps.generateNewPathForImage(coppied));
         }
         return new MemberResponse(m);
     }
@@ -256,7 +249,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     private void familyChanged(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {
         ActiveRelationGuard olduard = guard;
 
-        if(olduard != null) {
+        if (olduard != null) {
             olduard.clean();
         }
         if (newValue != null) {
@@ -369,7 +362,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
              */
             if (r.getLeft() != null || r.getRight() != null) {
                 Relation toMerge = findRelation(r.getLeft(), r.getRight(), r);
-                if( toMerge != null) moveChildrenFromTo(r, toMerge);
+                if (toMerge != null) moveChildrenFromTo(r, toMerge);
             }
         }
         /*
@@ -405,21 +398,16 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
     public ServiceResponse createFamily(Family currentFamily) {
         setCurrentFamily(currentFamily);
-
-        String filename = generateProjectName(currentFamily.getName());
-        String baseDir = config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME);
         try {
-            Files.createDirectory(Paths.get(baseDir, filename.replace(PROJECT_FILE_EXTENSION, "")));
-            Files.createFile(Paths.get(baseDir, filename));
-            projectFilename = filename;
+            ps.generateLocalProjectFiles(currentFamily);
             saveProject();
-
         } catch (IOException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
         return new FamilyResponse(currentFamily);
     }
+
 
     /**
      * Open existing family
@@ -429,34 +417,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
     public void openProject(Family currentFamily, String filename) {
         setCurrentFamily(currentFamily);
-        this.projectFilename = filename;
-
-    }
-
-    /**
-     * Generete projectname for new Family.
-     * If name already exist, increment number.
-     *
-     * @param name
-     * @return
-     */
-    private String generateProjectName(String name) {
-        name = name.replaceAll("[^a-zA-Z0-9]+", "");
-
-        String baseDir = config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME);
-        String filename = name + PROJECT_FILE_EXTENSION;
-
-        if (Files.exists(Paths.get(baseDir, filename))) {
-            String template = "%s%d.xml";
-            int i = 0;
-            do {
-                i++;
-                filename = String.format(template, name, i);
-                ;
-            } while (Files.exists(Paths.get(baseDir, String.format(template, name, i))));
-        }
-
-        return filename;
+        ps.setProjectFilename(filename);
     }
 
 
@@ -465,113 +426,20 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
     public void saveProject() {
 
-        copyImagesToTargetProject(getCurrentFamily());
+        ps.copyImagesToTargetProject(getCurrentFamily());
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Family.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(getCurrentFamily(), new File(
-                    config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME), projectFilename));
+                    config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME), ps.getProjectFilename()));
         } catch (Exception e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
     }
 
-
-    public String copyPhoto(String path) {
-        return copyPhoto(config.getString(PropertiesKeys.PARAM_DIR_IMAGE_NAME), path);
-
-    }
-
-    /**
-     * Copy Member photo to parentPane folder
-     *
-     * @param parent
-     * @param path
-     * @return
-     */
-    private String copyPhoto(String parent, String path) {
-        path = path.replace(PREFIX_FILE_ABSOLUTE, "").replace(PREFIX_FILE_RELATIVE, "");
-        try {
-            Path result = Files.copy(Paths.get(path), Paths.get(parent, Long.toString((new Date()).getTime())));
-            File file = new File(result.toString());
-            path = Paths.get(file.getParent(), file.getName()).toString();
-        } catch (Exception e) {
-            System.out.println("Cannot copy photo");
-            e.printStackTrace();
-            return null;
-        }
-        return path;
-    }
-
-    /**
-     * Move photo to parentPane folder
-     *
-     * @param parent
-     * @param path
-     * @return
-     */
-    private String movePhoto(String parent, String path) {
-        path = path.replace(PREFIX_FILE_ABSOLUTE, "").replace(PREFIX_FILE_RELATIVE, "");
-        try {
-            Path source = Paths.get(path);
-            Path target = Paths.get(parent, source.getFileName().toString());
-            Path result = Files.move(source, target);
-            File file = new File(result.toString());
-            path = Paths.get(file.getParent(), file.getName()).toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return path;
-    }
-
-    /**
-     * Verify is photo generic
-     *
-     * @param s
-     * @return
-     */
-    private boolean isGenericPhoto(String s) {
-        return (s.equals(ImageFiles.GENERIC_FEMALE.toString()) || s.equals(ImageFiles.GENERIC_MALE.toString()));
-    }
-
-    /**
-     * Verifiy necessity of copy photo
-     *
-     * @param s
-     * @return
-     */
-
-    private boolean needCopy(String s) {
-        boolean result = !isGenericPhoto(s)
-                && (s.contains(PREFIX_FILE_RELATIVE)
-                && !s.contains(config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME))
-                && !s.contains(projectFilename.replace(PROJECT_FILE_EXTENSION, "")))
-                || s.contains(PREFIX_FILE_ABSOLUTE);
-        return result;
-    }
-
-
-    /**
-     * While save file, copy / move photos to target project folder
-     *
-     * @param family
-     */
-    private void copyImagesToTargetProject(Family family) {
-        family.getMembers()
-                .filtered(m -> needCopy(m.getPhoto()))
-                .forEach(member -> {
-                    String newPath = movePhoto(Paths.get(
-                            config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME),
-                            projectFilename.replace(PROJECT_FILE_EXTENSION, "")).toString(),
-                            member.getPhoto());
-                    member.setPhoto(newPath == null ? null : PREFIX_FILE_RELATIVE + newPath);
-
-                });
-    }
 
     @Override
     public void clean() {

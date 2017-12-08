@@ -10,6 +10,7 @@ import java.util.List;
 public interface MemberService {
 
     MemberEntity addNewMember(MemberEntity member);
+    MemberEntity updateMember(MemberEntity member);
     MemberEntity deleteMember(MemberEntity member);
 
     MemberEntity findMemberById(Long id);

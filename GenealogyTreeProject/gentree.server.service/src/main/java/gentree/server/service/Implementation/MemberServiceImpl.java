@@ -35,6 +35,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberEntity updateMember(MemberEntity member) {
+        try {
+             member = memberRepository.saveAndFlush(member);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return member;
+    }
+
+    @Override
     public MemberEntity deleteMember(MemberEntity member) {
 
         Optional<MemberEntity>  optional = memberRepository.findById(member.getId());

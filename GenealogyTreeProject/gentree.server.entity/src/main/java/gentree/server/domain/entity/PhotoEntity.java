@@ -22,6 +22,8 @@ public class PhotoEntity implements Serializable {
     private String photo;
     private MemberEntity owner;
 
+    private String encodedStringPhoto;
+
     @Version
     public Long getVersion() {
         return version;
@@ -39,10 +41,18 @@ public class PhotoEntity implements Serializable {
     }
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id", nullable=false )
     public MemberEntity getOwner() {
         return owner;
     }
 
+    @Transient
+    public String getEncodedStringPhoto() {
+        return encodedStringPhoto;
+    }
+
+    public void setEncodedStringPhoto(String encodedStringPhoto) {
+        this.encodedStringPhoto = encodedStringPhoto;
+    }
 }

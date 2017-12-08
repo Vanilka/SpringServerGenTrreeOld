@@ -6,48 +6,66 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
 import java.util.Properties;
 
 /**
  * Created by Martyna SZYMKOWIAK on 07/11/2017.
  */
 @Configuration
-@PropertySource(value="classpath:gentree.properties")
+@PropertySource(value = "classpath:gentree.properties")
 public class LoadConfiguration {
 
     @Autowired
     Environment env;
 
-    private String value_filesystem_photo;
+    private String value_filesystem_main;
+    private String value_directory_photo;
+
 
     @PostConstruct
-    public  void loadConfig() {
-        value_filesystem_photo = env.getProperty(GenTreeProperties.PROP_FILESYSTEM_PHOTO);
-
+    public void loadConfig() throws IOException {
+        value_filesystem_main = env.getProperty(GenTreeProperties.PROP_FILESYSTEM_MAIN);
+        value_directory_photo = env.getProperty(GenTreeProperties.PROP_DIRECTORY_IMG);
         checkFileSystem();
     }
 
+    /**
+     * Check File system storing images on server
+     * @throws IOException
+     */
+    private void checkFileSystem() throws IOException {
 
-    private void checkFileSystem() {
-        File directory = new File(value_filesystem_photo);
-        if(directory.exists() && directory.isDirectory()) {
-            System.out.println("IS oK");
-        } else  {
-            System.out.println("IS NOT OK");
+        Path main = Paths.get(value_filesystem_main);
+        if (!checkDirectory(main)) {
+
+        } else {
+            checkOrCreate(main.resolve(value_directory_photo));
+        }
+    }
+
+    Properties gentreeProperties() {
+        Properties properties = new Properties();
+        properties.setProperty(GenTreeProperties.PROP_FILESYSTEM_MAIN, value_filesystem_main);
+        properties.setProperty(GenTreeProperties.PROP_DIRECTORY_IMG, value_directory_photo);
+        return properties;
+    }
+
+    private void checkOrCreate(Path p) throws IOException {
+        System.out.println("check or create " +p.toAbsolutePath());
+        if (!checkDirectory(p)) {
+            System.out.println("directory " +p.toAbsolutePath() + " not exist and will be created");
+            Files.createDirectory(p);
+        } else {
+            System.out.println("check directory ok");
         }
     }
 
 
-    Properties gentreeProperties() {
-        Properties properties = new Properties();
-        properties.setProperty(GenTreeProperties.PROP_FILESYSTEM_PHOTO, value_filesystem_photo);
-        return properties;
+    private static boolean checkDirectory(Path path) {
+        return Files.exists(path) && Files.isDirectory(path);
     }
-
 }

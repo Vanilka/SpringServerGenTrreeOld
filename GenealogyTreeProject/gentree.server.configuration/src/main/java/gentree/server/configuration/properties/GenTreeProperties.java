@@ -5,5 +5,6 @@ package gentree.server.configuration.properties;
  */
 public class GenTreeProperties {
 
-    public static final String PROP_FILESYSTEM_PHOTO = "gentree.filesystem.photo";
+    public static final String PROP_FILESYSTEM_MAIN = "gentree.filesystem.main";
+    public static final String PROP_DIRECTORY_IMG = "gentree.directory.photos";
 }
