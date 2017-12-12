@@ -3,7 +3,6 @@ package gentree.client.desktop.configuration.converters;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.implementation.ProjectsOnlineFilesService;
-import gentree.server.configuration.properties.GenTreeProperties;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.MemberDTO;
 import gentree.server.dto.MemberWithPhotoDTO;

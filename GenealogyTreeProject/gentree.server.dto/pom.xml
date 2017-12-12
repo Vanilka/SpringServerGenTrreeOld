@@ -21,12 +21,6 @@
 <dependencies>
     <dependency>
         <groupId>genealogytree</groupId>
-        <artifactId>gentree.server.configuration</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-        <groupId>genealogytree</groupId>
         <artifactId>gentree.common.configuration</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>

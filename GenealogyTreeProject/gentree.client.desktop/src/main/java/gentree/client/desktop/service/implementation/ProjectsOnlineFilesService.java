@@ -5,7 +5,6 @@ import gentree.client.desktop.configuration.enums.PropertiesKeys;
 import gentree.client.visualization.elements.configuration.ImageFiles;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.configuration2.Configuration;
-import org.springframework.security.access.method.P;
 
 import java.io.*;
 import java.nio.file.Files;
