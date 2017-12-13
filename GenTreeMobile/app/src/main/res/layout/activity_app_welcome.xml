@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="mobile.client.gentree.gentreemobile.AppWelcome" tools:layout_editor_absoluteY="81dp"
+        tools:context="mobile.client.gentree.gentreemobile.screen.AppWelcome" tools:layout_editor_absoluteY="81dp"
         tools:layout_editor_absoluteX="0dp">
 
 
@@ -37,10 +37,10 @@
             android:id="@+id/loginButton"
             android:onClick="connect" tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
             tools:layout_constraintBottom_creator="1" android:layout_marginStart="28dp"
-            app:layout_constraintBottom_toBottomOf="@+id/errorLabel" android:layout_marginEnd="28dp"
-            app:layout_constraintRight_toRightOf="@+id/errorLabel" android:layout_marginTop="57dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="57dp"
             app:layout_constraintTop_toBottomOf="@+id/passwordField" tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="54dp" app:layout_constraintLeft_toLeftOf="@+id/errorLabel"/>
+            tools:layout_editor_absoluteX="97dp"/>
     <TextView
             android:text="@string/label_login"
             android:layout_width="wrap_content"
@@ -55,12 +55,5 @@
             android:layout_height="wrap_content" android:id="@+id/LabelPass"
             tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toTopOf="@+id/passwordField"
             tools:layout_constraintLeft_creator="1" app:layout_constraintLeft_toLeftOf="@+id/passwordField"/>
-    <TextView
-            android:text="TextView"
-            android:layout_width="281dp"
-            android:layout_height="43dp" android:id="@+id/errorLabel"
-            tools:layout_constraintRight_creator="1" tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="34dp"
-            app:layout_constraintRight_toRightOf="parent" android:layout_marginBottom="90dp"/>
 
 </android.support.constraint.ConstraintLayout>
