@@ -42,10 +42,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:design:26+'
+    compile 'com.android.support:design:26.+'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile ('genealogytree:gentree.server.dto:1.0-SNAPSHOT')
+    compile 'genealogytree:gentree.server.dto:1.0-SNAPSHOT'
+    compile 'genealogytree:gentree.exceptions:1.0-SNAPSHOT'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     testCompile 'junit:junit:4.12'

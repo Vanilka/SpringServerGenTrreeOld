@@ -14,7 +14,6 @@ import mobile.client.gentree.gentreemobile.rest.tasks.LoginTask;
 
 public class AppWelcome extends AppCompatActivity {
 
-    LoginTask lt = new LoginTask();
     private EditText loginField;
     private EditText passwordField;
     private Button loginButton;
@@ -37,13 +36,17 @@ public class AppWelcome extends AppCompatActivity {
         String password = passwordField.getText().toString();
 
         if (LoginHelper.isNotEmpty(login) && LoginHelper.isNotEmpty(password)) {
-            Snackbar.make(view, "Login OK", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-            lt.execute("admin", "admin");
+            doLogin(view, login, password);
         } else {
             Snackbar.make(view, "ERROR OCCURED", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
 
         }
+    }
+
+    private void doLogin(View view, String login, String password) {
+        LoginTask lt = new LoginTask(view);
+        lt.execute(login, password);
+
     }
 }
