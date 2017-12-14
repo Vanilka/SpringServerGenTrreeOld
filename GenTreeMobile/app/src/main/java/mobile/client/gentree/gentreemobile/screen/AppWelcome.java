@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import mobile.client.gentree.gentreemobile.R;
 import mobile.client.gentree.gentreemobile.configuration.utilities.LoginHelper;
+import mobile.client.gentree.gentreemobile.rest.tasks.LoginTask;
 
 public class AppWelcome extends AppCompatActivity {
 
+    LoginTask lt = new LoginTask();
     private EditText loginField;
     private EditText passwordField;
     private Button loginButton;
@@ -37,7 +39,7 @@ public class AppWelcome extends AppCompatActivity {
         if (LoginHelper.isNotEmpty(login) && LoginHelper.isNotEmpty(password)) {
             Snackbar.make(view, "Login OK", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            
+            lt.execute("admin", "admin");
         } else {
             Snackbar.make(view, "ERROR OCCURED", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();

@@ -16,6 +16,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        dexOptions
+                {
+                    javaMaxHeapSize "2g" // set it to 4g will bring unable to start JavaVirtualMachine
+                    preDexLibraries = false
+                }
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    configurations {
+        all*.exclude group: 'javax.xml.bind', module: 'jaxb-api'
+        all*.exclude group: 'com.fasterxml.jackson.datatype', module: 'jackson-datatype-jsr310'
+        all*.exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
     }
 }
 
@@ -27,5 +45,8 @@ dependencies {
     compile 'com.android.support:design:26+'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile ('genealogytree:gentree.server.dto:1.0-SNAPSHOT')
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     testCompile 'junit:junit:4.12'
 }
