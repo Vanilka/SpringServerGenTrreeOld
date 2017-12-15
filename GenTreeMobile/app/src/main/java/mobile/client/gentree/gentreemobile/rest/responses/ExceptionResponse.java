@@ -7,7 +7,6 @@ import gentree.exception.ExceptionBean;
  */
 public class ExceptionResponse extends ServerResponse {
 
-
         private ExceptionBean exception;
 
         public ExceptionResponse() {

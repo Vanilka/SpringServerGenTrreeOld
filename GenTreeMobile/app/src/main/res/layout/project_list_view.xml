@@ -7,6 +7,11 @@
         tools:showIn="@layout/activity_project_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screen.ProjectListActivity">
+        tools:context="mobile.client.gentree.gentreemobile.screen.ProjectListActivity">
 
+    <ListView
+            android:id="@+id/projectListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    />
 </android.support.v4.widget.NestedScrollView>
