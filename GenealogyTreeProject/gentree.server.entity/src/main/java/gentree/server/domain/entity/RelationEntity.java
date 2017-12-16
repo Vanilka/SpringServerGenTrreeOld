@@ -79,21 +79,31 @@ public class RelationEntity implements Serializable {
     }
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "left_id")
     public MemberEntity getLeft() {
         return left;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public void setLeft(MemberEntity left) {
+        if (compareLeft(left)) return;
+        this.left = left;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "right_id")
     public MemberEntity getRight() {
         return right;
     }
 
-    @OneToMany(fetch = FetchType.EAGER,
+    public void setRight(MemberEntity right) {
+        if(compareRight(right)) return;
+        this.right = right;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,
             orphanRemoval = true)
-    @JoinColumn(name = "bornrelation_id", insertable=true, updatable = true)
+    @JoinColumn(name = "bornrelation_id", insertable = true, updatable = true)
     public List<MemberEntity> getChildren() {
         return children;
     }

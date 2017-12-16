@@ -7,6 +7,7 @@ import gentree.server.repository.FamilyRepository;
 import gentree.server.service.FamilyService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -43,6 +44,11 @@ public class FamilyServiceImpl implements FamilyService {
         Hibernate.initialize(entity.getOwner());
         Hibernate.initialize(entity.getMembers());
         Hibernate.initialize(entity.getRelations());
+        entity.getRelations().forEach(relationEntity -> {
+            Hibernate.initialize(relationEntity.getChildren());
+        });
+
+
         return  entity;
     }
 

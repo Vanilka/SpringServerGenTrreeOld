@@ -4,7 +4,10 @@ import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.domain.entity.RelationEntity;
-import gentree.server.dto.*;
+import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
+import gentree.server.dto.OwnerDTO;
+import gentree.server.dto.RelationDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -84,12 +87,12 @@ public class ConverterToEntity {
         target.setGender(source.getGender());
         target.setFamily(convertLazy(source.getFamily()));
 
-        System.out.println("TARGET ENTITY " + target);
+
         return target;
     }
 
 
-    public List<MemberEntity> convertLazyMemberList(List<MemberDTO>  sourceList) {
+    public List<MemberEntity> convertLazyMemberList(List<MemberDTO> sourceList) {
         List<MemberEntity> targetList = new ArrayList<>();
         sourceList.forEach(child -> targetList.add(convertLazy(child)));
         return targetList;
@@ -113,8 +116,9 @@ public class ConverterToEntity {
         target.setActive(source.isActive());
         target.setFamily(convert(source.getFamily()));
         if (source.getLeft() != null) target.setLeft(convertLazy(source.getLeft()));
-        if (source.getRight() != null) target.setLeft(convertLazy(source.getRight()));
-        if (source.getChildren() != null && !source.getChildren().isEmpty()) target.getChildren().addAll(convertLazyMemberList(source.getChildren()));
+        if (source.getRight() != null) target.setRight(convertLazy(source.getRight()));
+        if (source.getChildren() != null && !source.getChildren().isEmpty())
+            target.getChildren().addAll(convertLazyMemberList(source.getChildren()));
         return target;
     }
 

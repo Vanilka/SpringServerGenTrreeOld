@@ -89,8 +89,6 @@ public class FamilyFacadeImpl implements FamilyFacade {
         NewMemberWrapper wrapper = projectService.addMember(converterToEntity.convert(member));
 
         if (member.getPhotoDTO() != null) {
-            member.setId(wrapper.getMember().getId());
-            member.setVersion(wrapper.getMember().getVersion());
             PhotoEntity photoEntity = new PhotoEntity();
             photoEntity.setOwner(wrapper.getMember());
             photoEntity.setEncodedStringPhoto(member.getPhotoDTO().getEncodedPicture());

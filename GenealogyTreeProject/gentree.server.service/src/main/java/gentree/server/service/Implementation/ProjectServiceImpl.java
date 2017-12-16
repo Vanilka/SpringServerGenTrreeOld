@@ -116,15 +116,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<RelationEntity> addRelation(RelationEntity relationEntity)
             throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException {
-
-
         FamilyEntity familyEntity = familyService.findFamilyById(relationEntity.getFamily().getId());
 
         /*
            Validate relation
          */
         relationValidator.validate(relationEntity, familyEntity);
-
 
         RelationEntity target;
 
@@ -177,5 +174,9 @@ public class ProjectServiceImpl implements ProjectService {
         return relationService.updateRelation(existing);
 
     }
+
+    private MemberEntity findInList(List<MemberEntity> list, MemberEntity entity) {
+      return   list.stream().filter(member -> Objects.equals(member.getId(), entity.getId())).findAny().orElse(null);
+   }
 
 }

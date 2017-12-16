@@ -27,6 +27,7 @@ public class RelationServiceImpl implements RelationService {
     @Override
     public RelationEntity addNewRelation(RelationEntity relation) {
 
+        System.out.println("Relation to persist : " +relation);
 
         relation = repository.saveAndFlush(relation);
         //Delete nulls
