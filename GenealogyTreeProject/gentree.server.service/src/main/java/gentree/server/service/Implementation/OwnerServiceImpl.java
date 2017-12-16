@@ -4,6 +4,7 @@ import gentree.common.configuration.enums.RoleEnum;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.repository.OwnerRepository;
 import gentree.server.service.OwnerService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,7 +42,9 @@ public class OwnerServiceImpl implements OwnerService{
 
     @Override
     public OwnerEntity findOperatorByLogin(String login) {
-        return ownerRepository.findByLogin(login);
+        OwnerEntity ownerEntity = ownerRepository.findByLogin(login);
+        Hibernate.initialize(ownerEntity.getFamilyList());
+        return ownerEntity;
     }
 
     @PostConstruct

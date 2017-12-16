@@ -206,7 +206,7 @@ public class RestConnectionService {
 
     public ServiceResponse updateMember(Member member) {
         ServiceResponse serviceResponse = null;
-        MemberWithPhotoDTO dto = cmd.convertFull(member);
+        MemberDTO dto = cmd.convert(member);
         dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
         log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
 
@@ -214,7 +214,7 @@ public class RestConnectionService {
 
         if (response.getStatus() == 200) {
             try {
-                MemberWithPhotoDTO returnedDTO = response.readEntity(MemberWithPhotoDTO.class);
+                MemberDTO returnedDTO = response.readEntity(MemberDTO.class);
                 System.out.println("Returned DTO is  :" +returnedDTO);
                 cdm.convertTo(member, returnedDTO);
                 serviceResponse = new MemberResponse(member);

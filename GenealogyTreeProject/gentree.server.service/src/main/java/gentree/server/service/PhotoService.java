@@ -1,5 +1,6 @@
 package gentree.server.service;
 
+import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.PhotoEntity;
 
 /**
@@ -8,5 +9,9 @@ import gentree.server.domain.entity.PhotoEntity;
 public interface PhotoService {
 
     PhotoEntity persistPhoto(PhotoEntity entity);
+
+    PhotoEntity retrievePhoto(MemberEntity memberEntity);
+
+    void populateEncodedPhoto(MemberEntity memberEntity);
 
 }

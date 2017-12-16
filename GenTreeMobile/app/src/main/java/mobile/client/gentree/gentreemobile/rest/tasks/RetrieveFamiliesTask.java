@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gentree.exception.ExceptionBean;
@@ -15,6 +14,7 @@ import mobile.client.gentree.gentreemobile.configuration.utilities.ServerUrl;
 import mobile.client.gentree.gentreemobile.rest.responses.ExceptionResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.FamilyListResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.ServerResponse;
+import mobile.client.gentree.gentreemobile.screen.controls.CustomListView;
 import mobile.client.gentree.gentreemobile.screen.adapters.FamilyListAdapter;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +30,7 @@ import java.util.List;
 public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerResponse> {
 
     private ServerResponse serverResponse;
-    private ListView listView;
+    private CustomListView listView;
     private Context context;
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -38,7 +38,7 @@ public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerRespons
 
     private OwnerDTO currentOwner;
 
-    public RetrieveFamiliesTask(OwnerDTO owner, ListView view) {
+    public RetrieveFamiliesTask(OwnerDTO owner, CustomListView view) {
         this.currentOwner = owner;
         this.listView = view;
         this.context = view.getContext();
@@ -63,7 +63,7 @@ public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerRespons
         super.onPostExecute(serverResponse);
 
         if (serverResponse.getStatus() == ServerResponse.ResponseStatus.OK) {
-            ArrayList<FamilyDTO> list = new ArrayList<>(((FamilyListResponse) serverResponse).getFamilyList());
+          ArrayList<FamilyDTO> list = new ArrayList<>(((FamilyListResponse) serverResponse).getFamilyList());
             ArrayAdapter<FamilyDTO> adapter = new FamilyListAdapter(context, list);
             listView.setAdapter(adapter);
         } else {

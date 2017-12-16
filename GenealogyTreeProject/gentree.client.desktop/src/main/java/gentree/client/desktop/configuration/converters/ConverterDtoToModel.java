@@ -3,19 +3,15 @@ package gentree.client.desktop.configuration.converters;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import gentree.client.desktop.service.implementation.ProjectsOnlineFilesService;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.MemberDTO;
-import gentree.server.dto.MemberWithPhotoDTO;
 import gentree.server.dto.RelationDTO;
-import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 24/10/2017.
@@ -55,6 +51,7 @@ public class ConverterDtoToModel {
         return target;
     }
 
+
     public Member convert(MemberDTO source) {
         Member target = convertLazy(source);
         target.setId(source.getId());
@@ -66,6 +63,10 @@ public class ConverterDtoToModel {
         target.setAlive(source.isAlive());
         target.setDeathCause(source.getDeathCauses());
         target.setRace(source.getRace());
+        if(source.getPhotoDTO() != null) {
+            String path =  ps.decodePicture(source.getPhotoDTO().getEncodedPicture(), source.getPhotoDTO().getName());
+            target.setPhoto(path);
+        }
         return target;
     }
 
@@ -125,7 +126,7 @@ public class ConverterDtoToModel {
         return filtered.stream().findFirst().orElse(null);
     }
 
-    public void convertTo(Member target, MemberWithPhotoDTO source) {
+    public void convertTo(Member target, MemberDTO source) {
         target.setId(source.getId());
         target.setName(source.getName());
         target.setSurname(source.getSurname());

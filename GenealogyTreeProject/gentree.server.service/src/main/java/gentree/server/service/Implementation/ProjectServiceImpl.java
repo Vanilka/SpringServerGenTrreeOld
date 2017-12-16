@@ -54,8 +54,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public FamilyEntity findFullFamilyById(Long id) {
-
-        return familyService.findFullFamilyById(id);
+        FamilyEntity family = familyService.findFullFamilyById(id);
+        for(MemberEntity m : family.getMembers()) {
+            photoService.populateEncodedPhoto(m);
+        }
+        return family ;
     }
 
     @Override
@@ -84,9 +87,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public MemberEntity updateMember(MemberEntity memberEntity) {
-        if(memberEntity.getPhoto() != null) {
-          PhotoEntity ph = photoService.persistPhoto(memberEntity.getPhoto());
-          memberEntity.setPhoto(ph);
+        if (memberEntity.getPhoto() != null) {
+            PhotoEntity ph = photoService.persistPhoto(memberEntity.getPhoto());
+            memberEntity.setPhoto(ph);
         }
         return memberService.updateMember(memberEntity);
     }
@@ -96,6 +99,13 @@ public class ProjectServiceImpl implements ProjectService {
         memberService.deleteMember(memberEntity);
         relationService.removeOrphans(memberEntity.getFamily().getId());
         return findFullFamilyById(memberEntity.getFamily().getId());
+    }
+
+    @Override
+    public MemberEntity getMemberById(Long id) {
+        MemberEntity memberEntity = memberService.findMemberById(id);
+        memberEntity.setPhoto(photoService.retrievePhoto(memberEntity));
+        return memberEntity;
     }
 
     /* ************************************************************
@@ -149,6 +159,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * For two relation with same  Member Left and Member Right merge Children
+     *
      * @param existing
      * @param candidate
      * @return relation

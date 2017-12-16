@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -45,6 +42,13 @@ public class MemberMapper {
         return new ResponseEntity<NewMemberDTO>(dto, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ResponseEntity<MemberDTO> retrieveMember(@PathVariable Long id, Authentication auth)  throws FamilyAccessDeniedException{
+
+        MemberDTO dto = facade.getMemberById(id);
+        return new ResponseEntity<MemberDTO>(dto, HttpStatus.OK);
+    }
+
 
     /**
      * Additing Member
@@ -54,12 +58,12 @@ public class MemberMapper {
      * @throws FamilyAccessDeniedException
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public ResponseEntity<MemberWithPhotoDTO> updateMember(@RequestBody MemberWithPhotoDTO m, Authentication auth)
+    public ResponseEntity<MemberDTO> updateMember(@RequestBody MemberDTO m, Authentication auth)
             throws FamilyAccessDeniedException {
 
         if (!isOwnerOf(m, auth)) throw new FamilyAccessDeniedException();
-        MemberWithPhotoDTO dto = facade.updateMember(m);
-        return new ResponseEntity<MemberWithPhotoDTO>(dto, HttpStatus.OK);
+        MemberDTO dto = facade.updateMember(m);
+        return new ResponseEntity<MemberDTO>(dto, HttpStatus.OK);
     }
 
 

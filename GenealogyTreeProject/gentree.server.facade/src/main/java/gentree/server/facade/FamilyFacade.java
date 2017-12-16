@@ -29,7 +29,7 @@ public interface FamilyFacade {
     ************************************************************ */
     NewMemberDTO addNewMember(MemberDTO member);
 
-    MemberWithPhotoDTO updateMember(MemberWithPhotoDTO member);
+    MemberDTO updateMember(MemberDTO member);
 
     FamilyDTO deleteMember(MemberDTO m);
 
@@ -43,4 +43,6 @@ public interface FamilyFacade {
 
     List<RelationDTO> deleteRelation(RelationDTO relationDTO);
 
+    MemberDTO getMemberById(Long id);
 }
+

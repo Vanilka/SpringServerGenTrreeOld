@@ -16,4 +16,5 @@ public interface MemberService {
     MemberEntity findMemberById(Long id);
     List<MemberEntity> findMembersByFamilyId(Long id);
 
+
 }

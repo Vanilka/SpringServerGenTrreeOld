@@ -1,21 +1,22 @@
 package mobile.client.gentree.gentreemobile.screen;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ListView;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gentree.server.dto.OwnerExtendedDTO;
 import mobile.client.gentree.gentreemobile.R;
 import mobile.client.gentree.gentreemobile.configuration.utilities.BundleParams;
 import mobile.client.gentree.gentreemobile.rest.tasks.RetrieveFamiliesTask;
+import mobile.client.gentree.gentreemobile.screen.controls.CustomListView;
 
 public class ProjectListActivity extends AppCompatActivity {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    private ListView projectListView;
+    private CustomListView projectListView;
 
     private OwnerExtendedDTO currentOwner;
 
@@ -37,9 +38,6 @@ public class ProjectListActivity extends AppCompatActivity {
         try {
             currentOwner = objectMapper.readValue(string, OwnerExtendedDTO.class);
             new RetrieveFamiliesTask(currentOwner, projectListView).execute();
-            /*            ArrayAdapter<OwnerExtendedDTO> adapter = new ArrayAdapter<OwnerExtendedDTO>(this,
-                    android.R.layout.simple_list_item_1, (OwnerExtendedDTO[]) currentOwner.getFamilyList().toArray());
-            projectListView.setAdapter(adapter);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,9 +45,9 @@ public class ProjectListActivity extends AppCompatActivity {
 
 
     private void initialize() {
-        projectListView = (ListView) findViewById(R.id.projectListView);
+        projectListView = (CustomListView) findViewById(R.id.projectListView);
 
-
+        projectListView.setHeader("Families");
     }
 
 }

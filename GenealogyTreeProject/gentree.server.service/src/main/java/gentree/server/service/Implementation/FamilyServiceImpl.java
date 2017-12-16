@@ -1,6 +1,7 @@
 package gentree.server.service.Implementation;
 
 import gentree.server.domain.entity.FamilyEntity;
+import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.repository.FamilyRepository;
 import gentree.server.service.FamilyService;
@@ -31,7 +32,8 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Override
     public FamilyEntity findFamilyById(Long id) {
-        return familyRepository.findFamilyById(id);
+        FamilyEntity entity = familyRepository.findFamilyById(id);
+        return entity;
     }
 
     @Override

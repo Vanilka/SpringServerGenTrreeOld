@@ -86,13 +86,13 @@ public class FamilyFacadeImpl implements FamilyFacade {
         member.setVersion(null);
         NewMemberWrapper wrapper = projectService.addMember(converterToEntity.convert(member));
         NewMemberDTO dto = new NewMemberDTO();
-        dto.setMemberDTO(converterToDTO.convert(wrapper.getMember()));
+        dto.setMemberDTO(converterToDTO.convertWithPhoto(wrapper.getMember()));
         dto.setRelationDTO(converterToDTO.convert(wrapper.getBornRelation()));
         return dto;
     }
 
     @Override
-    public MemberWithPhotoDTO updateMember(MemberWithPhotoDTO member) {
+    public MemberDTO updateMember(MemberDTO member) {
         MemberEntity memberEntity = converterToEntity.convert(member);
 
         if (member.getPhotoDTO() != null) {
@@ -110,6 +110,13 @@ public class FamilyFacadeImpl implements FamilyFacade {
         FamilyEntity entity = projectService.deleteMember(converterToEntity.convert(m));
         return converterToDTO.convertFullFamily(entity);
     }
+
+    @Override
+    public MemberDTO getMemberById(Long id) {
+
+      return converterToDTO.convertWithPhoto(projectService.getMemberById(id));
+    }
+
 
     /* ************************************************************
         Relation Gestion

@@ -66,7 +66,7 @@ public class OwnerEntity implements Serializable {
     }
 
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<FamilyEntity> getFamilyList() {
         return familyList;
     }

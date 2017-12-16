@@ -30,6 +30,7 @@ public class MemberDTO implements Serializable {
     private Age age;
     private Race race;
     private Gender gender;
+    private PhotoDTO photoDTO;
 
     private FamilyDTO family;
 

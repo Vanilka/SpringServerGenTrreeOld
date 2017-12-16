@@ -96,7 +96,7 @@ public class ConverterToDTO {
 
     public FamilyDTO convertFullFamily(FamilyEntity source) {
         FamilyDTO target = convert(source);
-        target.setMembers(convertMemberList(source.getMembers()));
+        target.setMembers(convertMemberWithPhotoList(source.getMembers()));
         target.setRelations(convertFullRelationList(source.getRelations()));
         return target;
     }
@@ -139,18 +139,8 @@ public class ConverterToDTO {
         return target;
     }
 
-    public MemberWithPhotoDTO convertWithPhoto(MemberEntity source) {
-        MemberWithPhotoDTO target = new MemberWithPhotoDTO();
-        target.setVersion(source.getVersion());
-        target.setId(source.getId());
-        target.setName(source.getName());
-        target.setSurname(source.getSurname());
-        target.setBornname(source.getBornname());
-        target.setAlive(source.isAlive());
-        target.setAge(source.getAge());
-        target.setRace(source.getRace());
-        target.setDeathCauses(source.getDeathCauses());
-        target.setGender(source.getGender());
+    public MemberDTO convertWithPhoto(MemberEntity source) {
+        MemberDTO target = convertPoor(source);
         if(source.getPhoto() != null) {
             target.setPhotoDTO(convert(source.getPhoto()));
         }
@@ -181,6 +171,12 @@ public class ConverterToDTO {
     public List<MemberDTO> convertMemberList(List<MemberEntity> sourceList) {
         List<MemberDTO> list = new ArrayList<>();
         sourceList.forEach(entity -> list.add(convertPoor(entity)));
+        return list;
+    }
+
+    public List<MemberDTO> convertMemberWithPhotoList(List<MemberEntity> sourceList) {
+        List<MemberDTO> list = new ArrayList<>();
+        sourceList.forEach(entity -> list.add(convertWithPhoto(entity)));
         return list;
     }
 

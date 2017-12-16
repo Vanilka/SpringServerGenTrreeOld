@@ -25,6 +25,8 @@ public interface ProjectService {
 
     FamilyEntity deleteMember(MemberEntity memberEntity);
 
+    MemberEntity getMemberById(Long id);
+
     List<RelationEntity> addRelation(RelationEntity relationEntity) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException;
 
     FamilyEntity findFamilyById(Long id);

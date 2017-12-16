@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context="mobile.client.gentree.gentreemobile.screen.ProjectListActivity">
 
-    <ListView
+    <mobile.client.gentree.gentreemobile.screen.controls.CustomListView
             android:id="@+id/projectListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
