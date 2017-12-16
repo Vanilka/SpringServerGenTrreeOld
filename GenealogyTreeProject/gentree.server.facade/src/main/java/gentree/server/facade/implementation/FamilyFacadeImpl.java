@@ -17,6 +17,7 @@ import gentree.server.service.wrappers.NewMemberWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 /**
@@ -84,7 +85,19 @@ public class FamilyFacadeImpl implements FamilyFacade {
     public NewMemberDTO addNewMember(MemberDTO member) {
         member.setId(null);
         member.setVersion(null);
+
         NewMemberWrapper wrapper = projectService.addMember(converterToEntity.convert(member));
+
+        if (member.getPhotoDTO() != null) {
+            member.setId(wrapper.getMember().getId());
+            member.setVersion(wrapper.getMember().getVersion());
+            PhotoEntity photoEntity = new PhotoEntity();
+            photoEntity.setOwner(wrapper.getMember());
+            photoEntity.setEncodedStringPhoto(member.getPhotoDTO().getEncodedPicture());
+            photoEntity = photoService.persistPhoto(photoEntity);
+            wrapper.getMember().setPhoto(photoEntity);
+        }
+
         NewMemberDTO dto = new NewMemberDTO();
         dto.setMemberDTO(converterToDTO.convertWithPhoto(wrapper.getMember()));
         dto.setRelationDTO(converterToDTO.convert(wrapper.getBornRelation()));
