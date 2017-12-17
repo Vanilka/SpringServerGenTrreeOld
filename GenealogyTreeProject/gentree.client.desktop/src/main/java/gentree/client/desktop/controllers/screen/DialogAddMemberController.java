@@ -183,8 +183,8 @@ public class DialogAddMemberController implements Initializable, FXMLController,
     }
 
     /*
-    *  LISTEN LANGUAGE CHANGES
-    */
+     *  LISTEN LANGUAGE CHANGES
+     */
 
 
     private void selectedChanged(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

@@ -1,7 +1,6 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
-import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeElement extends RelationTypeCard  {
+public class RelationTypeElement extends RelationTypeCard {
 
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
     private ChangeListener<? super ContextProvider> contextProviderListener = this::contextProviderChange;

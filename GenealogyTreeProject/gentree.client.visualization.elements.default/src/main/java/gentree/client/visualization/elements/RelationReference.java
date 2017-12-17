@@ -1,7 +1,6 @@
 package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
-
 import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.elements.configuration.ContextProvider;
 import javafx.beans.property.ObjectProperty;
@@ -42,6 +41,10 @@ public class RelationReference extends StackPane implements AutoCleanable {
         this.relationReferenceType.setValue(type);
     }
 
+    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
+        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
+    }
+
     private void init() {
         initColors();
         initListeners();
@@ -66,7 +69,6 @@ public class RelationReference extends StackPane implements AutoCleanable {
         relation.addListener(relationListener);
         relationReferenceType.addListener(relationTypeListener);
     }
-
 
     private void cleanListeners() {
         relation.removeListener(relationListener);
@@ -150,16 +152,16 @@ public class RelationReference extends StackPane implements AutoCleanable {
         );
     }
 
+
+    /*
+        Getters && Setters
+     */
+
     private void initColors() {
         etiquete.setFill(color1);
         etiquete.setStrokeWidth(5);
         etiquete.setStroke(border2);
     }
-
-
-    /*
-        Getters && Setters
-     */
 
     public RelationReferenceType getRelationReferenceType() {
         return relationReferenceType.get();
@@ -181,12 +183,7 @@ public class RelationReference extends StackPane implements AutoCleanable {
         return relation;
     }
 
-
     public enum RelationReferenceType {
         ASC, DSC
-    }
-
-    public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
     }
 }

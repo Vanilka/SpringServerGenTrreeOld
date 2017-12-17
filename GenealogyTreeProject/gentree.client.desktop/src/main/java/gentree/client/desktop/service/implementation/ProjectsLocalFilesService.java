@@ -3,7 +3,6 @@ package gentree.client.desktop.service.implementation;
 import gentree.client.desktop.configuration.GenTreeProperties;
 import gentree.client.desktop.configuration.enums.PropertiesKeys;
 import gentree.client.desktop.domain.Family;
-import gentree.client.visualization.elements.configuration.ImageFiles;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -17,20 +16,14 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 /**
- *
  * Created by vanilka on 05/12/2017.
- *
+ * <p>
  * Projects to gestion of Files in Local Service
  */
 @Log4j2
-public class ProjectsLocalFilesService {
+public class ProjectsLocalFilesService extends ProjectsFilesService {
 
     private final Configuration config = GenTreeProperties.INSTANCE.getConfiguration();
-
-    private final static String PROJECT_FILE_EXTENSION = ".xml";
-    private static final String PREFIX_FILE_ABSOLUTE = "file://";
-    private static final String PREFIX_FILE_RELATIVE = "file:";
-
 
     @Setter
     @Getter
@@ -82,15 +75,6 @@ public class ProjectsLocalFilesService {
         return path;
     }
 
-    /**
-     * Verify is photo generic
-     *
-     * @param s
-     * @return
-     */
-    public boolean isGenericPhoto(String s) {
-        return (s.equals(ImageFiles.GENERIC_FEMALE.toString()) || s.equals(ImageFiles.GENERIC_MALE.toString()));
-    }
 
     /**
      * Verifiy necessity of copy photo
@@ -146,7 +130,7 @@ public class ProjectsLocalFilesService {
         String filename = name + PROJECT_FILE_EXTENSION;
 
         if (Files.exists(Paths.get(baseDir, filename))) {
-            String template = "%s%d.xml";
+            String template = "%setWebTarget%d.xml";
             int i = 0;
             do {
                 i++;
@@ -157,11 +141,17 @@ public class ProjectsLocalFilesService {
         return filename;
     }
 
+    /**
+     * Function generating Project Directories and necessaire files
+     *
+     * @param currentFamily
+     * @throws IOException
+     */
     public void generateLocalProjectFiles(Family currentFamily) throws IOException {
         String filename = generateProjectName(currentFamily.getName());
         String baseDir = config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME);
-            Files.createDirectory(Paths.get(baseDir, filename.replace(PROJECT_FILE_EXTENSION, "")));
-            Files.createFile(Paths.get(baseDir, filename));
-            projectFilename = filename;
+        Files.createDirectory(Paths.get(baseDir, filename.replace(PROJECT_FILE_EXTENSION, "")));
+        Files.createFile(Paths.get(baseDir, filename));
+        projectFilename = filename;
     }
 }

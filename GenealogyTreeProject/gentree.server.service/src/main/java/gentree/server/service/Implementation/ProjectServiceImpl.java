@@ -1,5 +1,6 @@
 package gentree.server.service.Implementation;
 
+import gentree.common.configuration.enums.RelationType;
 import gentree.exception.AscendanceViolationException;
 import gentree.exception.IncorrectStatusException;
 import gentree.exception.NotExistingMemberException;
@@ -55,10 +56,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public FamilyEntity findFullFamilyById(Long id) {
         FamilyEntity family = familyService.findFullFamilyById(id);
-        for(MemberEntity m : family.getMembers()) {
+        for (MemberEntity m : family.getMembers()) {
             photoService.populateEncodedPhoto(m);
         }
-        return family ;
+        return family;
     }
 
     @Override
@@ -131,10 +132,9 @@ public class ProjectServiceImpl implements ProjectService {
         RelationEntity existing = relationService.findRelationBysimLeftAndsimRight(relationEntity.getLeft(), relationEntity.getRight());
 
         if (existing != null) {
-
             target = mergeChildrenAndStatus(existing, relationEntity);
-
         } else {
+            updateOtherRelationToFalse(familyEntity, relationEntity);
             target = relationService.addNewRelation(relationEntity);
         }
 
@@ -176,7 +176,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     private MemberEntity findInList(List<MemberEntity> list, MemberEntity entity) {
-      return   list.stream().filter(member -> Objects.equals(member.getId(), entity.getId())).findAny().orElse(null);
-   }
+        return list.stream().filter(member -> Objects.equals(member.getId(), entity.getId())).findAny().orElse(null);
+    }
+
+    private void updateOtherRelationToFalse(FamilyEntity family, RelationEntity entity) {
+        if (entity.isActive()) {
+            family.getRelations().stream()
+                    .filter(r -> r.getLeft() != null && r.getRight() != null && r.getType() != RelationType.NEUTRAL)
+                    .filter(r -> r.compareLeft(entity.getLeft())
+                            || r.compareLeft(entity.getRight())
+                            || r.compareRight(entity.getRight())
+                            || r.compareRight(entity.getLeft()))
+                    .forEach(r -> r.setActive(false));
+        }
+    }
 
 }

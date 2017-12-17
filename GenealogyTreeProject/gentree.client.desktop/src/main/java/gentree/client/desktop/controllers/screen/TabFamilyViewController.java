@@ -9,8 +9,8 @@ import gentree.client.desktop.controllers.FXMLTab;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -175,11 +175,11 @@ public class TabFamilyViewController implements Initializable, FXMLController, F
     @FXML
     private void showSimContextMenu(ContextMenuEvent event) {
         Member m = FAMILY_MEMBER_TABLE.getSelectionModel().getSelectedItem();
-        if(m != null)  sm.showSimContextMenu(m, FAMILY_MEMBER_TABLE, event);
+        if (m != null) sm.showSimContextMenu(m, FAMILY_MEMBER_TABLE, event);
     }
 
     @FXML
-    private void showRelationContextMenu(ContextMenuEvent event){
+    private void showRelationContextMenu(ContextMenuEvent event) {
 
     }
 

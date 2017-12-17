@@ -9,6 +9,7 @@ import gentree.client.desktop.service.RestConnectionService;
 import gentree.client.desktop.service.responses.FamilyResponse;
 import gentree.client.desktop.service.responses.MemberResponse;
 import gentree.client.desktop.service.responses.MemberWithBornRelationResponse;
+import gentree.client.desktop.service.responses.RelationListResponse;
 import gentree.common.configuration.enums.RelationType;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
@@ -83,7 +84,7 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
     @Override
     public ServiceResponse updateMember(Member m) {
         ServiceResponse response = rcs.updateMember(m);
-        if(response instanceof MemberResponse) {
+        if (response instanceof MemberResponse) {
 
         }
         return response;
@@ -91,12 +92,18 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
 
     @Override
     public ServiceResponse addRelation(Relation relation) {
+        ServiceResponse response = rcs.addRelation(relation);
+        if(response instanceof RelationListResponse) {
+            getCurrentFamily().getRelations().clear();
+            getCurrentFamily().getRelations().addAll(((RelationListResponse) response).getList());
+            invalidate();
+        }
         return null;
     }
 
     @Override
     public ServiceResponse addRelation(Member left, Member right, RelationType type, boolean active) {
-        return null;
+        return addRelation(createRelationFrom(left, right, type, active));
     }
 
     @Override

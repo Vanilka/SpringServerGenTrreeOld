@@ -12,7 +12,7 @@ import lombok.Getter;
 /**
  * Created by vanilka on 08/10/2017.
  */
-public class HeaderPaneSkin extends SkinBase<HeaderPane>  implements AutoCleanable{
+public class HeaderPaneSkin extends SkinBase<HeaderPane> implements AutoCleanable {
 
     private final Color default_color = Color.web("#0188AE");
 

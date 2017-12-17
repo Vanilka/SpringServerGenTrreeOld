@@ -65,10 +65,10 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
     private final ObjectProperty<Relation> thisRelation;
     private final ObjectProperty<Relation> spouseBornRelation;
     private final ObjectProperty<RelationType> relationType;
-    private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChange;
     private ChangeListener<? super Member> spouseListener = this::spuseChanged;
     private ChangeListener<? super Relation> spouseBornRelationListener = this::spouseBornRelationChanged;
     private ChangeListener<? super Relation> thisRelationListener = this::thisRelationChanged;
+    private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChange;
 
     {
         relation = new Pane();

@@ -1,7 +1,10 @@
 package gentree.server.dispatchers;
 
 import gentree.exception.FamilyAccessDeniedException;
-import gentree.server.dto.*;
+import gentree.server.dto.FamilyDTO;
+import gentree.server.dto.MemberDTO;
+import gentree.server.dto.NewMemberDTO;
+import gentree.server.dto.OwnerExtendedDTO;
 import gentree.server.facade.FamilyFacade;
 import gentree.server.facade.OwnerFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,7 @@ public class MemberMapper {
 
     /**
      * Additing Member
+     *
      * @param m
      * @param auth
      * @return
@@ -43,7 +47,7 @@ public class MemberMapper {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResponseEntity<MemberDTO> retrieveMember(@PathVariable Long id, Authentication auth)  throws FamilyAccessDeniedException{
+    public ResponseEntity<MemberDTO> retrieveMember(@PathVariable Long id, Authentication auth) throws FamilyAccessDeniedException {
 
         MemberDTO dto = facade.getMemberById(id);
         return new ResponseEntity<MemberDTO>(dto, HttpStatus.OK);
@@ -52,6 +56,7 @@ public class MemberMapper {
 
     /**
      * Additing Member
+     *
      * @param m
      * @param auth
      * @return
@@ -67,10 +72,9 @@ public class MemberMapper {
     }
 
 
-
-
     /**
      * Delete Member
+     *
      * @param m
      * @param auth
      * @return

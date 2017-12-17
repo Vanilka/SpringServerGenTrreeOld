@@ -11,7 +11,6 @@ import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.RestConnectionService;
 import gentree.client.desktop.service.ScreenManager;
-import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
@@ -49,6 +48,7 @@ public class PaneLogonController implements Initializable, FXMLController, FXMLA
     private void login() {
         boolean result = rcs.login(LOGIN_FIELD.getText(), PASSWORD_FIELD.getText(), REALM_BOX.getSelectionModel().getSelectedItem());
         if (result) {
+            System.out.println("wull load Online FXML");
             sm.loadFxml(new ScreenOpenOnlineProjectController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_OPEN_ONLINE_PROJECT_FXML, ScreenManager.Where.CENTER);
         }
 

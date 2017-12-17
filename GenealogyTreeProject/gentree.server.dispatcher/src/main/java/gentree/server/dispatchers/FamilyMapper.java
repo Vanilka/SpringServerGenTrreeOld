@@ -60,9 +60,9 @@ public class FamilyMapper {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<FamilyDTO> findFullFamily(@PathVariable Long id,Authentication auth) throws FamilyAccessDeniedException {
+    public ResponseEntity<FamilyDTO> findFullFamily(@PathVariable Long id, Authentication auth) throws FamilyAccessDeniedException {
         OwnerExtendedDTO owner = ownerFacade.findExtendedOwnerByLogin(auth.getName());
-        if(! isOwnerOf(owner, id)) throw new FamilyAccessDeniedException();
+        if (!isOwnerOf(owner, id)) throw new FamilyAccessDeniedException();
 
         FamilyDTO family = familyFacade.findExtendedFamilyById(id);
 

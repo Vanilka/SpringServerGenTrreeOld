@@ -1,7 +1,6 @@
 package gentree.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import gentree.common.configuration.enums.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 

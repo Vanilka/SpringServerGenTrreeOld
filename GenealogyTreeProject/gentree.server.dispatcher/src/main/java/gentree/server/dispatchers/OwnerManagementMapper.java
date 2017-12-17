@@ -21,14 +21,14 @@ public class OwnerManagementMapper {
     OwnerFacade ownerFacade;
 
     /**
-     *  Authenticate into application
+     * Authenticate into application
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ResponseEntity<OwnerDTO> login(Authentication auth) {
 
         OwnerDTO user = this.ownerFacade.findOwnerByLogin(auth.getName());
 
-        return new ResponseEntity<OwnerDTO>( user, HttpStatus.OK);
+        return new ResponseEntity<OwnerDTO>(user, HttpStatus.OK);
     }
 
 }

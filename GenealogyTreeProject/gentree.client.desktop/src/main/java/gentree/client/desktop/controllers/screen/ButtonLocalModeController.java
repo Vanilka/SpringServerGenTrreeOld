@@ -68,7 +68,7 @@ public class ButtonLocalModeController implements Initializable, FXMLPane, FXMLC
 
     /*
      * LISTEN LANGUAGE CHANGES
-    */
+     */
     private void addLanguageListener() {
         this.languageBundle.addListener(bundleChangeListener);
     }

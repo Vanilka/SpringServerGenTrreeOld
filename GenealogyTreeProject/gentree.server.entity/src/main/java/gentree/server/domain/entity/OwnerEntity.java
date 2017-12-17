@@ -26,12 +26,14 @@ public class OwnerEntity implements Serializable {
     private List<FamilyEntity> familyList = new ArrayList<>();
 
 
-   public OwnerEntity() {}
-   public OwnerEntity(String login, String password, RoleEnum role) {
-       this.login = login;
-       this.password = password;
-       this.role = role;
-   }
+    public OwnerEntity() {
+    }
+
+    public OwnerEntity(String login, String password, RoleEnum role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
     /*
         GETTERS AND SETTERS
      */

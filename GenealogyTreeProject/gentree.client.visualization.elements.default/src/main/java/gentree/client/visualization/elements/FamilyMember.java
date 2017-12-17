@@ -82,7 +82,7 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
 
     @Override
     public void clean() {
-        System.out.println("CLEAN Family Member" +getMember());
+        System.out.println("CLEAN Family Member" + getMember());
         super.clean();
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnContextMenuRequested(null);

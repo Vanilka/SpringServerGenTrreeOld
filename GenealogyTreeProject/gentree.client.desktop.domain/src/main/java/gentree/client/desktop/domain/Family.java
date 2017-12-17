@@ -9,7 +9,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
-import lombok.Synchronized;
 import lombok.extern.log4j.Log4j2;
 
 import javax.xml.bind.annotation.*;
@@ -45,18 +44,6 @@ public class Family implements Serializable {
         this.name.setValue(name);
     }
 
-
-    private Callback<Relation, Observable[]> relationCallback() {
-       return r -> new Observable[]{
-              /* r.idProperty(),*/
-               r.typeProperty(),
-               r.activeProperty(),
-               r.leftProperty(),
-               r.rightProperty(),
-               r.getChildren()
-       };
-    }
-
     private static Callback<Member, Observable[]> memberCallback() {
         return (Member m) -> new Observable[]{
                 m.idProperty(),
@@ -68,6 +55,17 @@ public class Family implements Serializable {
                 m.ageProperty(),
                 m.genderProperty(),
                 m.photoProperty()
+        };
+    }
+
+    private Callback<Relation, Observable[]> relationCallback() {
+        return r -> new Observable[]{
+                /* r.idProperty(),*/
+                r.typeProperty(),
+                r.activeProperty(),
+                r.leftProperty(),
+                r.rightProperty(),
+                r.getChildren()
         };
     }
 

@@ -55,12 +55,11 @@ public class PanelChild extends SubBorderPane {
     private final ObjectProperty<PanelSingle> panelSingle;
     private final ObjectProperty<PanelRelationCurrent> panelRelationCurrent;
     private final ObservableList<PanelRelationEx> panelRelationEx;
-    private  SpouseConnector spouseConnector;
-
     private final ObjectProperty<Member> member;
-    private ChangeListener<? super PanelSingle> panelSingleListener = this::panelSingleChanged;
-    private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChanged;
+    private SpouseConnector spouseConnector;
     private ListChangeListener<? super PanelRelationEx> panelRelationExListener = this::panelRelationExChanged;
+    private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChanged;
+    private ChangeListener<? super PanelSingle> panelSingleListener = this::panelSingleChanged;
 
     {
         panelSinglePane = new AnchorPane();
@@ -120,9 +119,9 @@ public class PanelChild extends SubBorderPane {
     }
 
     private void panelRelationCurrentChanged(ObservableValue<? extends PanelRelationCurrent> observable, PanelRelationCurrent oldValue, PanelRelationCurrent newValue) {
-       if(oldValue != null) {
-           oldValue.clean();
-       }
+        if (oldValue != null) {
+            oldValue.clean();
+        }
 
         panelRelationCurrentPane.getChildren().clear();
         if (newValue != null) {
@@ -132,7 +131,7 @@ public class PanelChild extends SubBorderPane {
     }
 
     private void panelSingleChanged(ObservableValue<? extends PanelSingle> observable, PanelSingle oldValue, PanelSingle newValue) {
-        if(oldValue != null) {
+        if (oldValue != null) {
             oldValue.clean();
         }
 
@@ -149,7 +148,7 @@ public class PanelChild extends SubBorderPane {
                 c.getAddedSubList().forEach(sb -> sb.setParentPane(this));
                 panelRelationExPane.getChildren().addAll(c.getAddedSubList());
             } else if (c.wasRemoved()) {
-              //  c.getRemoved().forEach(PanelRelationEx::clean);
+                //  c.getRemoved().forEach(PanelRelationEx::clean);
                 panelRelationExPane.getChildren().removeAll(c.getRemoved());
             }
         }
@@ -175,7 +174,7 @@ public class PanelChild extends SubBorderPane {
         super.clean();
         cleanListeners();
 
-        if(panelRelationCurrent.get() != null) {
+        if (panelRelationCurrent.get() != null) {
             panelRelationCurrent.get().clean();
         }
 

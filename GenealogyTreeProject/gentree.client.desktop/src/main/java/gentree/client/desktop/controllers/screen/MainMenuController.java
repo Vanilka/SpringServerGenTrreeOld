@@ -91,9 +91,8 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
     private ChangeListener<? super AppLanguage> languageSelectedListener = this::languageSelectedChange;
     private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
-    private ChangeListener<? super FamilyService> serviceListener = this::serviceChanged;
     private ChangeListener<? super Family> familyListener = this::familyChange;
-
+    private ChangeListener<? super FamilyService> serviceListener = this::serviceChanged;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -143,7 +142,7 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
             changeElementsVisibility(false);
         }
 
-        if(oldContext != null) {
+        if (oldContext != null) {
             oldContext.familyProperty().removeListener(familyListener);
         }
     }
@@ -164,14 +163,14 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
 
 
     /*
-    * LISTEN LANGUAGE CHANGES
-    */
+     * LISTEN LANGUAGE CHANGES
+     */
     private void addLanguageListener() {
         this.languageChooser.getSelectionModel().selectedItemProperty().addListener(languageSelectedListener);
         this.languageBundle.addListener(languageListener);
     }
 
-    private  void languageSelectedChange(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue, AppLanguage newValue) {
+    private void languageSelectedChange(ObservableValue<? extends AppLanguage> observable, AppLanguage oldValue, AppLanguage newValue) {
         context.setLocale(new Locale(newValue.toString(), newValue.getCountry()));
         context.setBundle(context.getLocale());
     }

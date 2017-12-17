@@ -54,12 +54,12 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
 
     @FXML
     private void chooseFamily() {
-     if(FAMILY_TABLE.getSelectionModel().getSelectedItem() != null) {
-         ServiceResponse response = context.getService().setCurrentFamily(FAMILY_TABLE.getSelectionModel().getSelectedItem());
-         if(response instanceof FamilyResponse) {
-             sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
-         }
-     }
+        if (FAMILY_TABLE.getSelectionModel().getSelectedItem() != null) {
+            ServiceResponse response = context.getService().setCurrentFamily(FAMILY_TABLE.getSelectionModel().getSelectedItem());
+            if (response instanceof FamilyResponse) {
+                sm.loadFxml(new ScreenMainController(), sm.getMainWindowBorderPane(), FilesFXML.SCREEN_MAIN_FXML, ScreenManager.Where.CENTER);
+            }
+        }
     }
 
     @FXML
@@ -100,6 +100,8 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
             FAMILY_TABLE.getItems().addAll(response.getList());
 
             System.out.println(FAMILY_TABLE.getItems());
+        } else {
+            System.out.println("ERROR POPOULATE LIST");
         }
     }
 
@@ -112,8 +114,8 @@ public class ScreenOpenOnlineProjectController implements Initializable, FXMLCon
      */
 
     /*
-    *  LISTEN POSITION
-    */
+     *  LISTEN POSITION
+     */
 
     //TODO REFACTOR
 

@@ -6,10 +6,8 @@ import gentree.client.desktop.controllers.screen.DialogAddSpouseController;
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.service.GenTreeContext;
 import gentree.client.desktop.service.ScreenManager;
-import gentree.client.visualization.elements.FamilyMember;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Control;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 
@@ -30,10 +28,10 @@ public class SimContextMenu extends ContextMenu {
     public SimContextMenu() {
         super();
         initItems();
-        this.getItems().addAll(itemAddParents, itemAddSiblings, itemAddChildren,itemDelete);
+        this.getItems().addAll(itemAddParents, itemAddSiblings, itemAddChildren, itemDelete);
     }
 
-    public void show(Member m, Node node , ContextMenuEvent event) {
+    public void show(Member m, Node node, ContextMenuEvent event) {
         member = m;
         show(node, event.getScreenX(), event.getScreenY());
 
@@ -59,7 +57,7 @@ public class SimContextMenu extends ContextMenu {
     }
 
     private void initItemDelete() {
-        itemDelete.setOnAction( event -> context.getService().deleteMember(member));
+        itemDelete.setOnAction(event -> context.getService().deleteMember(member));
     }
 
 }

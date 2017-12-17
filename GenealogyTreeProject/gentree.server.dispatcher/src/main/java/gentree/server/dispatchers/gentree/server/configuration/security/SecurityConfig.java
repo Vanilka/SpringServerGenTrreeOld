@@ -22,7 +22,6 @@ import javax.sql.DataSource;
 /**
  * Created by Martyna SZYMKOWIAK on 17/10/2017.
  * Provide a Security Configuration
- *
  */
 @Configuration
 @EnableWebSecurity
@@ -37,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Bean responsible to encoding passwords
+     *
      * @return
      */
     @Bean

@@ -20,8 +20,8 @@ import lombok.Setter;
 public class ChildConnector extends LineConnector {
 
     private static final Double CHILD_CONNECTOR_HEIGHT = 100.0;
-    private  SubRelationPane subBorderPane;
-    private  PanelChild panelChild;
+    private SubRelationPane subBorderPane;
+    private PanelChild panelChild;
     private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
 
 
@@ -62,7 +62,7 @@ public class ChildConnector extends LineConnector {
     private void cleanListeners() {
         subBorderPane.getChildrenBox().boundsInParentProperty().removeListener(boundsListener);
         panelChild.boundsInParentProperty().removeListener(boundsListener);
-        if(panelChild.getPanelSingle().get() != null) {
+        if (panelChild.getPanelSingle().get() != null) {
             panelChild.getPanelSingle().get().boundsInParentProperty().removeListener(boundsListener);
             panelChild.getPanelSingle().get().boundsInLocalProperty().removeListener(boundsListener);
         }

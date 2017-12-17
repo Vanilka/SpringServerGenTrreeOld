@@ -56,11 +56,11 @@ public class ScreenLoginRegisterController implements Initializable, FXMLControl
     }
 
     public void addTopOffsetListener(AnchorPane pane) {
-       // pane.layoutYProperty().bind(SCREEN_LOGON_REGISTER.heightProperty().subtract(pane.heightProperty().divide(2)));
+        // pane.layoutYProperty().bind(SCREEN_LOGON_REGISTER.heightProperty().subtract(pane.heightProperty().divide(2)));
     }
 
     public void addLeftOffsetListener(AnchorPane pane) {
-       //pane.layoutXProperty().bind(SCREEN_LOGON_REGISTER.widthProperty().subtract(pane.widthProperty().divide(2)));
+        //pane.layoutXProperty().bind(SCREEN_LOGON_REGISTER.widthProperty().subtract(pane.widthProperty().divide(2)));
     }
 
     public void cleanListeners() {
@@ -69,7 +69,7 @@ public class ScreenLoginRegisterController implements Initializable, FXMLControl
     }
 
     public void cleanBinding(AnchorPane pane) {
-      //  pane.layoutYProperty().unbind();
-    //    pane.layoutXProperty().unbind();
+        //  pane.layoutYProperty().unbind();
+        //    pane.layoutXProperty().unbind();
     }
 }

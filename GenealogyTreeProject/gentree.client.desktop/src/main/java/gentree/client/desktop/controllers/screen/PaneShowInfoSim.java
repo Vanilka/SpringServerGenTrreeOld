@@ -27,8 +27,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import lombok.Getter;
@@ -38,7 +38,6 @@ import lombok.extern.log4j.Log4j2;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -80,7 +79,7 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
     @FXML
     private ComboBox<Race> SIM_RACE_CB;
     @FXML
-    private  ComboBox<Age> SIM_AGE_CB;
+    private ComboBox<Age> SIM_AGE_CB;
     @FXML
     private ComboBox<Gender> SIM_SEX_CB;
     @FXML
@@ -122,11 +121,12 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
             getMember().setAlive(TOGGLE_IS_ALIVE.isSelected());
             getMember().setAge(SIM_AGE_CB.getSelectionModel().getSelectedItem());
             getMember().setGender(SIM_SEX_CB.getSelectionModel().getSelectedItem());
-            if(!TOGGLE_IS_ALIVE.isSelected()) getMember().setDeathCause(SIM_DEATH_CAUSE.getSelectionModel().getSelectedItem());
+            if (!TOGGLE_IS_ALIVE.isSelected())
+                getMember().setDeathCause(SIM_DEATH_CAUSE.getSelectionModel().getSelectedItem());
             context.getService().updateMember(getMember());
         }
         modifiable.set(!modifiable.get());
-   }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -185,7 +185,7 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         TOGGLE_IS_ALIVE.setSelected(member.isAlive());
         SIM_AGE_CB.getSelectionModel().select(member.getAge());
         SIM_SEX_CB.getSelectionModel().select(member.getGender());
-        if(!member.isAlive()) SIM_DEATH_CAUSE.getSelectionModel().select(member.getDeathCause());
+        if (!member.isAlive()) SIM_DEATH_CAUSE.getSelectionModel().select(member.getDeathCause());
     }
 
 
@@ -224,7 +224,7 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
         if (newValue != null) {
             populateControls(newValue);
         }
-        if(oldValue != null) {
+        if (oldValue != null) {
         }
     }
 
@@ -235,7 +235,7 @@ public class PaneShowInfoSim extends Pane implements Initializable, FXMLControll
 
 
 
-     /*
+    /*
      *   LISTEN LANGUAGE CHANGES
      */
 

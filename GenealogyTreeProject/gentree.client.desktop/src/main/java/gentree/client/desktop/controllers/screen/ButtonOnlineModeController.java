@@ -40,7 +40,7 @@ public class ButtonOnlineModeController implements Initializable, FXMLPane, FXML
     @FXML
     private Label ONLINE_APPLICATION_LABEL;
 
-    private ChangeListener<ResourceBundle> bundleChangeListener  = this::languageChanged;
+    private ChangeListener<ResourceBundle> bundleChangeListener = this::languageChanged;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

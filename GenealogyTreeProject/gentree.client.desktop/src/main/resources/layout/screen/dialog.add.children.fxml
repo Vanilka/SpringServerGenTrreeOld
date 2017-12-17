@@ -18,7 +18,7 @@
         <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="20"
                     AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
             <children>
-                <HeaderPane  styleClass="header-pane-content" text="%label_add_children"
+                <HeaderPane styleClass="header-pane-content" text="%label_add_children"
                             AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
                 <VBox alignment="TOP_CENTER" layoutX="40.0" layoutY="40.0">
                     <children>

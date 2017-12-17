@@ -25,6 +25,9 @@ public class LoadConfiguration {
     private String value_filesystem_main;
     private String value_directory_photo;
 
+    private static boolean checkDirectory(Path path) {
+        return Files.exists(path) && Files.isDirectory(path);
+    }
 
     @PostConstruct
     public void loadConfig() throws IOException {
@@ -35,6 +38,7 @@ public class LoadConfiguration {
 
     /**
      * Check File system storing images on server
+     *
      * @throws IOException
      */
     private void checkFileSystem() throws IOException {
@@ -55,17 +59,12 @@ public class LoadConfiguration {
     }
 
     private void checkOrCreate(Path p) throws IOException {
-        System.out.println("check or create " +p.toAbsolutePath());
+        System.out.println("check or create " + p.toAbsolutePath());
         if (!checkDirectory(p)) {
-            System.out.println("directory " +p.toAbsolutePath() + " not exist and will be created");
+            System.out.println("directory " + p.toAbsolutePath() + " not exist and will be created");
             Files.createDirectory(p);
         } else {
             System.out.println("check directory ok");
         }
-    }
-
-
-    private static boolean checkDirectory(Path path) {
-        return Files.exists(path) && Files.isDirectory(path);
     }
 }

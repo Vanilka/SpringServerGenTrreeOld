@@ -42,7 +42,7 @@ public class PhotoEntity implements Serializable {
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable=false )
+    @JoinColumn(name = "member_id", nullable = false)
     public MemberEntity getOwner() {
         return owner;
     }

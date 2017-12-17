@@ -22,12 +22,10 @@ public class SpouseConnector extends LineConnector {
 
     private static final Color COLOR_EX = Color.web("#85a2a3");
     private static final Color COLOR_CURRENT = Color.web("#5F9EA0");
-
-    private  PanelChild panelChild;
-
     private final Line lineRelationToSim;
     private final Line lineSimConnectAllEx;
     private final Line lineSimConnectSpouse;
+    private PanelChild panelChild;
     private ChangeListener<? super Bounds> boundChangeCauseDrawingListener = this::boundChangeCauseDrawing;
     private ChangeListener<? super Bounds> boundsExListener = this::boundsExChange;
     private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChange;
@@ -114,8 +112,6 @@ public class SpouseConnector extends LineConnector {
             newValue.getMember().boundsInParentProperty().addListener(boundChangeCauseDrawingListener);
         }
     }
-
-
 
 
     @Override

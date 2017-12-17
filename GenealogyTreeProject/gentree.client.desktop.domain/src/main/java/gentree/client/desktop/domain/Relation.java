@@ -21,20 +21,16 @@ import java.util.Observable;
 public class Relation extends Observable implements Serializable, Comparable<Relation> {
 
     private static final long serialVersionUID = 7679518429380405561L;
-
-    @XmlTransient
-    private  LongProperty version;
-
-    private  LongProperty id;
-
     @XmlTransient
     private final LongProperty referenceNumber;
-
     private final ObjectProperty<Member> left;
     private final ObjectProperty<Member> right;
     private final ObservableList<Member> children;
     private final ObjectProperty<RelationType> type;
     private final BooleanProperty active;
+    @XmlTransient
+    private LongProperty version;
+    private LongProperty id;
 
     {
         this.version = new SimpleLongProperty();
@@ -114,12 +110,12 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         return version.get();
     }
 
-    public LongProperty versionProperty() {
-        return version;
-    }
-
     public void setVersion(long version) {
         this.version.set(version);
+    }
+
+    public LongProperty versionProperty() {
+        return version;
     }
 
     public long getId() {
@@ -215,18 +211,17 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         return referenceNumber.get();
     }
 
-    public void setReferenceNumber(long referenceNumber) {
-        this.referenceNumber.set(referenceNumber);
-    }
-
     public void setReferenceNumber(Long referenceNumber) {
         this.referenceNumber.setValue(referenceNumber);
+    }
+
+    public void setReferenceNumber(long referenceNumber) {
+        this.referenceNumber.set(referenceNumber);
     }
 
     public LongProperty referenceNumberProperty() {
         return referenceNumber;
     }
-
 
 
     @Override

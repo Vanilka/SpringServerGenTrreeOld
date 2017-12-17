@@ -141,10 +141,10 @@ public class ConverterToDTO {
 
     public MemberDTO convertWithPhoto(MemberEntity source) {
         MemberDTO target = convertPoor(source);
-        if(source.getPhoto() != null) {
+        if (source.getPhoto() != null) {
             target.setPhotoDTO(convert(source.getPhoto()));
         }
-        return  target;
+        return target;
     }
 
     public MemberDTO convertLazy(MemberEntity source) {

@@ -97,7 +97,7 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
 
     private ChangeListener<? super ResourceBundle> languageListener = this::languageChange;
-    private ChangeListener<? super Relation> relationListener= this::relationChanged;
+    private ChangeListener<? super Relation> relationListener = this::relationChanged;
 
 
     {
@@ -221,9 +221,9 @@ public class PaneShowInfoRelation implements Initializable, FXMLController, FXML
     }
 
 
-     /*
- *   LISTEN LANGUAGE CHANGES
- */
+    /*
+     *   LISTEN LANGUAGE CHANGES
+     */
 
     private void addLanguageListener() {
         this.languageBundle.addListener(languageListener);

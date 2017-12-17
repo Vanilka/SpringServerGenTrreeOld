@@ -77,7 +77,7 @@ public class ElementsConfig {
 
 
     public String getFlePathOfGender(Gender item) {
-        if(item == Gender.F) return ImageFiles.GENDER_FEMALE.toString();
+        if (item == Gender.F) return ImageFiles.GENDER_FEMALE.toString();
         return ImageFiles.GENDER_MALE.toString();
     }
 }

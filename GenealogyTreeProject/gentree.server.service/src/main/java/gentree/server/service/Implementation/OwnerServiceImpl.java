@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class OwnerServiceImpl implements OwnerService{
+public class OwnerServiceImpl implements OwnerService {
 
     @Autowired
     OwnerRepository ownerRepository;

@@ -3,12 +3,11 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
-
-<?import javafx.scene.control.ComboBox?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.PaneLogonController"
             styleClass="contentPane"
@@ -17,7 +16,7 @@
         <URL value="@/layout/style/gentreestyle.css"/>
     </stylesheets>
     <children>
-        <ComboBox fx:id="REALM_BOX" />
+        <ComboBox fx:id="REALM_BOX"/>
         <JFXPasswordField fx:id="PASSWORD_FIELD" labelFloat="true" layoutX="38.0" layoutY="152.0"
                           maxWidth="224.0" minWidth="224.0" prefHeight="48.0" prefWidth="224.0"
                           promptText="%logon_form_password" styleClass="cretentialFIeld">

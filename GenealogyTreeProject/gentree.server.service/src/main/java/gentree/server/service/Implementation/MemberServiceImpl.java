@@ -1,10 +1,8 @@
 package gentree.server.service.Implementation;
 
 import gentree.server.domain.entity.MemberEntity;
-import gentree.server.domain.entity.RelationEntity;
 import gentree.server.repository.MemberRepository;
 import gentree.server.service.MemberService;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
         }*/
         try {
             member = memberRepository.saveAndFlush(member);
-            System.out.println("Member added" +member);
+            System.out.println("Member added" + member);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,7 +35,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberEntity updateMember(MemberEntity member) {
         try {
-             member = memberRepository.saveAndFlush(member);
+            member = memberRepository.saveAndFlush(member);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -48,9 +46,9 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberEntity deleteMember(MemberEntity member) {
 
-        Optional<MemberEntity>  optional = memberRepository.findById(member.getId());
+        Optional<MemberEntity> optional = memberRepository.findById(member.getId());
 
-        System.out.println("Is present ?? " +optional.isPresent());
+        System.out.println("Is present ?? " + optional.isPresent());
 
         optional.ifPresent(memberRepository::delete);
 

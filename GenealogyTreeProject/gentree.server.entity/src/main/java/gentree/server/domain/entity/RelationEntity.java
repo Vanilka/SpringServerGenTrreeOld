@@ -97,7 +97,7 @@ public class RelationEntity implements Serializable {
     }
 
     public void setRight(MemberEntity right) {
-        if(compareRight(right)) return;
+        if (compareRight(right)) return;
         this.right = right;
     }
 

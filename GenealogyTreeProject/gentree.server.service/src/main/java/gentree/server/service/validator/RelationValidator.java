@@ -14,6 +14,7 @@ public interface RelationValidator {
 
     /**
      * Check if Relation can be added to Family
+     *
      * @param relation
      * @param family
      * @return

@@ -8,5 +8,5 @@ import javafx.collections.ObservableList;
  */
 public interface FXMLDialogWithRealmListControl extends FXMLDialogController {
 
-     void setList(ObservableList<Realm> list);
+    void setList(ObservableList<Realm> list);
 }

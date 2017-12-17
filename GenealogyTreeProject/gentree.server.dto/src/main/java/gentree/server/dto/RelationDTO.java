@@ -27,4 +27,19 @@ public class RelationDTO implements Serializable {
     private RelationType type;
     private FamilyDTO family;
 
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("RelationDTO{");
+        sb.append("version=").append(version);
+        sb.append(", id=").append(id);
+        sb.append(", left=").append(left);
+        sb.append(", right=").append(right);
+        sb.append(", children=").append(children);
+        sb.append(", active=").append(active);
+        sb.append(", type=").append(type);
+        sb.append(", family=").append(family);
+        sb.append('}');
+        return sb.toString();
+    }
 }

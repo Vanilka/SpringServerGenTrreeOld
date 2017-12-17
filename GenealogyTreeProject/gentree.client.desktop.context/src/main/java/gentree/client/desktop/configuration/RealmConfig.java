@@ -1,6 +1,5 @@
 package gentree.client.desktop.configuration;
 
-import gentree.client.desktop.domain.Member;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;

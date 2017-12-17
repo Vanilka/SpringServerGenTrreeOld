@@ -29,24 +29,24 @@ public class Owner implements Serializable {
         return version.get();
     }
 
-    public LongProperty versionProperty() {
-        return version;
-    }
-
     public void setVersion(long version) {
         this.version.set(version);
+    }
+
+    public LongProperty versionProperty() {
+        return version;
     }
 
     public long getId() {
         return id.get();
     }
 
-    public LongProperty idProperty() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id.set(id);
+    }
+
+    public LongProperty idProperty() {
+        return id;
     }
 
     public String getLogin() {

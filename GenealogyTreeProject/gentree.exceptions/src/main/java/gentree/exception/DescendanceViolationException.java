@@ -8,22 +8,21 @@ import gentree.exception.configuration.ExceptionCauses;
 public class DescendanceViolationException extends Exception {
 
 
-        public DescendanceViolationException() {
-            this(ExceptionCauses.DESCENDANCE_VIOLATION.toString());
-        }
+    public DescendanceViolationException() {
+        this(ExceptionCauses.DESCENDANCE_VIOLATION.toString());
+    }
 
-        public DescendanceViolationException(String message) {
-            super(message);
-        }
+    public DescendanceViolationException(String message) {
+        super(message);
+    }
 
-        public DescendanceViolationException(String message, Throwable cause) {
-            super(message, cause);
-        }
+    public DescendanceViolationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-        public DescendanceViolationException(Throwable cause) {
-            super(cause);
-        }
-
+    public DescendanceViolationException(Throwable cause) {
+        super(cause);
+    }
 
 
 }

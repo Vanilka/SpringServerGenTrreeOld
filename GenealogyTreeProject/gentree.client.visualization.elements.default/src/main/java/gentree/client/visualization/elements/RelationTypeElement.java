@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeElement extends RelationTypeCard  {
+public class RelationTypeElement extends RelationTypeCard {
 
     private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
     private ChangeListener<? super ContextProvider> contextProviderListener = this::contextProviderChange;

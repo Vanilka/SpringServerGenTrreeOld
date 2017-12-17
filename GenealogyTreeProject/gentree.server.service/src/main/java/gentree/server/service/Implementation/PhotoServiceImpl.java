@@ -82,7 +82,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public void populateEncodedPhoto(MemberEntity memberEntity) {
-        if(memberEntity.getPhoto() != null) {
+        if (memberEntity.getPhoto() != null) {
             memberEntity.getPhoto().setEncodedStringPhoto(encoderImage(memberEntity.getPhoto().getPhoto()));
         }
     }

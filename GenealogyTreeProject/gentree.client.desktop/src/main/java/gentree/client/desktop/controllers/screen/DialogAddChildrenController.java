@@ -85,7 +85,8 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     }
 
     private void initListeners() {
-        ;relation.addListener(relationChangeListener);
+        ;
+        relation.addListener(relationChangeListener);
     }
 
     private void cleanListeners() {

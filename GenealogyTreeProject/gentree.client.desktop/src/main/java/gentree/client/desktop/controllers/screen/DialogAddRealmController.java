@@ -68,7 +68,7 @@ public class DialogAddRealmController implements Initializable, FXMLDialogWithRe
 
     @FXML
     private void connectionTest() {
-        if(restConnectionService.testConnection(SERVER_ADDRESS_FIELD.getText())) {
+        if (restConnectionService.testConnection(SERVER_ADDRESS_FIELD.getText())) {
             TEST_CONNECTION_RESULT.setText("OK");
         } else {
             TEST_CONNECTION_RESULT.setText("NOT OK");
@@ -96,7 +96,7 @@ public class DialogAddRealmController implements Initializable, FXMLDialogWithRe
     }
 
     private void initServerPropertiesEmptyBinding() {
-        serverPropertiesEmptyBinding =  Bindings.createBooleanBinding(
+        serverPropertiesEmptyBinding = Bindings.createBooleanBinding(
                 () -> (SERVER_ADDRESS_FIELD.getText().isEmpty() || SERVER_NAME_FIELD.getText().isEmpty()),
                 SERVER_ADDRESS_FIELD.textProperty(),
                 SERVER_NAME_FIELD.textProperty());

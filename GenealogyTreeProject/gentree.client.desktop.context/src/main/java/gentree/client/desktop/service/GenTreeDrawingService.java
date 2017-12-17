@@ -1,6 +1,5 @@
 package gentree.client.desktop.service;
 
-import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 
 /**
@@ -10,5 +9,5 @@ public interface GenTreeDrawingService {
 
     void startDraw();
 
-   WritableImage takeScreenshot();
+    WritableImage takeScreenshot();
 }

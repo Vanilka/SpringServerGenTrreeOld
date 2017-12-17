@@ -144,7 +144,6 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
         );
 
 
-
     }
 
     @Override

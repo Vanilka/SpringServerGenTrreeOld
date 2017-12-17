@@ -32,6 +32,15 @@ public class CircleEmbleme extends Control implements AutoCleanable {
 
     }
 
+    /**
+     * Returnt Class css Metadata
+     *
+     * @return
+     */
+    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
+        return StyleableProperties.cssMetaDataList;
+    }
+
     @Override
     public void clean() {
 
@@ -41,9 +50,9 @@ public class CircleEmbleme extends Control implements AutoCleanable {
         getStyleClass().add(DEFAULT_CLASS_NAME);
     }
 
-
     /**
      * Get Control Css metadata
+     *
      * @return
      */
     @Override
@@ -71,22 +80,10 @@ public class CircleEmbleme extends Control implements AutoCleanable {
         return CircleEmbleme.class.getResource("/layout/style/circle-embleme.css").toExternalForm();
     }
 
-    /**
-     * Returnt Class css Metadata
-     * @return
-     */
-    public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
-        return StyleableProperties.cssMetaDataList;
-    }
-
 
     /*
         GETTERS AND SETTERS
      */
-
-    public void setImgPath(String imgPath) {
-        this.imgPath.set(imgPath);
-    }
 
     public SimpleStringProperty imgPathProperty() {
         return imgPath;
@@ -96,6 +93,9 @@ public class CircleEmbleme extends Control implements AutoCleanable {
         return imgPath.get();
     }
 
+    public void setImgPath(String imgPath) {
+        this.imgPath.set(imgPath);
+    }
 
     /**
      * Inner static class Styleable properties

@@ -25,7 +25,6 @@ public abstract class GenTreeService {
     protected ScreenManager sm = ScreenManager.INSTANCE;
 
 
-
     public ObservableList<Member> findAllRootMembers() {
         ObservableList<Member> rootList = FXCollections.observableArrayList();
 
@@ -41,19 +40,19 @@ public abstract class GenTreeService {
         List<Relation> list = getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() != null || r.getRight() != null)
                 .filtered(r -> r.compareLeft(left) && r.compareRight(right));
-        System.out.println("Found similar relations : " +list.size());
+        System.out.println("Found similar relations : " + list.size());
 
         return list.size() == 0 ? null : list.get(0);
 
     }
 
 
-   protected Relation findRelation(Member left, Member right, Relation excluded) {
+    protected Relation findRelation(Member left, Member right, Relation excluded) {
         List<Relation> list = getCurrentFamily().getRelations()
-                .filtered(r -> r != excluded )
+                .filtered(r -> r != excluded)
                 .filtered(r -> r.getLeft() != null || r.getRight() != null)
                 .filtered(r -> r.compareLeft(left) && r.compareRight(right));
-       return list.size() == 0 ? null : list.get(0);
+        return list.size() == 0 ? null : list.get(0);
     }
 
 
@@ -84,6 +83,7 @@ public abstract class GenTreeService {
     /**
      * Function to create relation from composant.
      * The role of this function is decide which member between 2 provided will be Left or Right
+     *
      * @param m1
      * @param m2
      * @param type
@@ -94,15 +94,15 @@ public abstract class GenTreeService {
         Member left = null;
         Member right = null;
 
-        if(m1 == null || m2 == null) {
-           if(m1 != null) {
-               if(m1.getGender() == Gender.F) left = m1;
-               if(m1.getGender() == Gender.M) right = m1;
-           } else if(m2 != null) {
-               if(m2.getGender() == Gender.F) left = m2;
-               if(m2.getGender() == Gender.M) right = m2;
-           }
-           type = RelationType.NEUTRAL;
+        if (m1 == null || m2 == null) {
+            if (m1 != null) {
+                if (m1.getGender() == Gender.F) left = m1;
+                if (m1.getGender() == Gender.M) right = m1;
+            } else if (m2 != null) {
+                if (m2.getGender() == Gender.F) left = m2;
+                if (m2.getGender() == Gender.M) right = m2;
+            }
+            type = RelationType.NEUTRAL;
         } else {
 
         /*

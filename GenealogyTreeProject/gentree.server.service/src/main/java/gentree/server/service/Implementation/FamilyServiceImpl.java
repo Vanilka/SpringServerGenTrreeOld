@@ -1,16 +1,13 @@
 package gentree.server.service.Implementation;
 
 import gentree.server.domain.entity.FamilyEntity;
-import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.OwnerEntity;
 import gentree.server.repository.FamilyRepository;
 import gentree.server.service.FamilyService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -49,7 +46,7 @@ public class FamilyServiceImpl implements FamilyService {
         });
 
 
-        return  entity;
+        return entity;
     }
 
     @Override
@@ -60,9 +57,6 @@ public class FamilyServiceImpl implements FamilyService {
         /* **********************************************
          Member Gestion
      ********************************************** */
-
-
-
 
 
 }

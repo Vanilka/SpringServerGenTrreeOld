@@ -91,12 +91,12 @@ public class Member implements Serializable {
         return version.get();
     }
 
-    public LongProperty versionProperty() {
-        return version;
-    }
-
     public void setVersion(long version) {
         this.version.set(version);
+    }
+
+    public LongProperty versionProperty() {
+        return version;
     }
 
     @XmlID
@@ -252,9 +252,6 @@ public class Member implements Serializable {
         sb.append('}');
         return sb.toString();
     }
-
-
-
 
 
     @Override

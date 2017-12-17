@@ -2,13 +2,16 @@ package gentree.client.desktop.configuration.converters;
 
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.domain.Member;
+import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.implementation.ProjectsOnlineFilesService;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.MemberDTO;
 import gentree.server.dto.PhotoDTO;
+import gentree.server.dto.RelationDTO;
 
 /**
  * Created by Martyna SZYMKOWIAK on 24/10/2017.
+ * Class  to convert DTO objects from objects used by this JavaFX Client to REST API
  */
 public class ConverterModelToDto {
 
@@ -35,11 +38,26 @@ public class ConverterModelToDto {
         dto.setAlive(member.isAlive());
         dto.setDeathCauses(member.getDeathCause());
 
-        if(ps.needCopy(member.getPhoto())) {
+        if (ps.needCopy(member.getPhoto())) {
             dto.setPhotoDTO(new PhotoDTO(ps.encodePicture(member.getPhoto())));
         }
         return dto;
     }
 
+    public RelationDTO convert(Relation relation) {
+        RelationDTO dto = new RelationDTO();
+        dto.setLeft(convertLazy(relation.getLeft()));
+        dto.setRight(convertLazy(relation.getRight()));
+        dto.setType(relation.getType());
+        dto.setActive(relation.getActive());
+        return dto;
+    }
+
+    public MemberDTO convertLazy(Member m) {
+        MemberDTO dto = new MemberDTO();
+        dto.setVersion(m.getVersion());
+        dto.setId(m.getId());
+        return dto;
+    }
 
 }

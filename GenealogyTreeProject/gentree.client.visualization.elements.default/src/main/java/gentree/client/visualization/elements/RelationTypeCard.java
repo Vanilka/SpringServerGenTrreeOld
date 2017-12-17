@@ -28,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeCard extends StackPane  implements AutoCleanable {
+public class RelationTypeCard extends StackPane implements AutoCleanable {
 
     public static final double WIDTH = 60;
     public static final double HEIGHT = 60;

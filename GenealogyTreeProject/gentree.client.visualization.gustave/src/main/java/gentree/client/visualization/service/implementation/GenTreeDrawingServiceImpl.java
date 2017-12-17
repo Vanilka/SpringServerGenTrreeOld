@@ -6,11 +6,9 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
-import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotUniqueBornRelationException;
-import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.HBox;
@@ -128,35 +126,35 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      */
     private List<FamilyGroup> findGroups() {
         List<FamilyGroup> result = new ArrayList<>();
-        List<Relation>  rootList = context.getService().getCurrentFamily().getRelations()
+        List<Relation> rootList = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> r.getLeft() == null)
                 .filtered(r -> r.getRight() == null);
 
 
-
-      if(! rootList.isEmpty()) rootList.forEach(root ->
-              {
-                  if(shouldBeCreated(root)) result.add(new FamilyGroup(root, nodeCounter++));
-              });
+        if (!rootList.isEmpty()) rootList.forEach(root ->
+        {
+            if (shouldBeCreated(root)) result.add(new FamilyGroup(root, nodeCounter++));
+        });
 
         return result;
     }
 
     /**
      * Verify if relation root has relation with others sims and is FORT
+     *
      * @param root
      * @return
      */
     private boolean shouldBeCreated(Relation root) {
-        if(root.getChildren().size() > 1) return true;
+        if (root.getChildren().size() > 1) return true;
         Member rootSim = root.getChildren().get(0);
 
         List<Relation> relations = context.getService().getCurrentFamily().getRelations()
                 .filtered(relation -> Objects.equals(relation.getLeft(), rootSim) || Objects.equals(relation.getRight(), rootSim));
 
-        if(relations.isEmpty()) return true;
-        if(relations.size() > 1) return  true;
-        if(isStrong(relations.get(0), rootSim)) return true;
+        if (relations.isEmpty()) return true;
+        if (relations.size() > 1) return true;
+        if (isStrong(relations.get(0), rootSim)) return true;
 
         return false;
     }

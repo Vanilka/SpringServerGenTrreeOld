@@ -47,7 +47,6 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
     private Polygon deathCord;
 
 
-
     private ObjectProperty<Member> member;
     private ChangeListener<Object> listener = this::objectChange;
 
@@ -73,6 +72,12 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     public FamilyMemberCard() {
         this(null);
+    }
+
+    protected static void fillShapeWithBackgroundd(Shape shape, String imgPath) {
+        Image img = new Image(imgPath);
+        shape.setFill(new ImagePattern(img));
+
     }
 
     private Polygon initPolygon() {
@@ -139,8 +144,6 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
         memberListener = null;
     }
 
-
-
     public void setGrayScaleToImgView(ImageView view) {
         ColorAdjust desaturate = new ColorAdjust();
         desaturate.setSaturation(-1);
@@ -165,20 +168,14 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
 
     private void memberChange(ObservableValue<? extends Member> observable, Member oldValue, Member newValue) {
         if (oldValue != null) {
-           oldValue.getProperties().forEach(p -> p.removeListener(listener));
+            oldValue.getProperties().forEach(p -> p.removeListener(listener));
         }
         newValue.getProperties().forEach(p -> p.addListener(listener));
 
         fillComponents(newValue);
     }
 
-    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue)  {
+    private void objectChange(ObservableValue<?> obs, Object oldValue, Object newValue) {
         fillComponents(member.get());
-    }
-
-    protected static void fillShapeWithBackgroundd(Shape shape, String imgPath) {
-        Image img = new Image(imgPath);
-        shape.setFill(new ImagePattern(img));
-
     }
 }

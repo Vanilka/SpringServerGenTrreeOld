@@ -2,8 +2,8 @@ package gentree.client.visualization.elements;
 
 import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.configuration.AutoCleanable;
-import gentree.common.configuration.enums.RelationType;
 import gentree.client.visualization.elements.configuration.ImageFiles;
+import gentree.common.configuration.enums.RelationType;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class RelationTypeCard extends StackPane  implements AutoCleanable {
+public class RelationTypeCard extends StackPane implements AutoCleanable {
 
     public static final double WIDTH = 60;
     public static final double HEIGHT = 60;

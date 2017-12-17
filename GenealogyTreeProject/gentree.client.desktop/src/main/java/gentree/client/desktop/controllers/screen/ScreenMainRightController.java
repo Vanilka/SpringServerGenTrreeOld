@@ -4,8 +4,8 @@ import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLAnchorPane;
 import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.service.GenTreeDrawingService;
-import gentree.client.visualization.service.implementation.GenTreeImageGenerator;
 import gentree.client.visualization.service.implementation.GenTreeDrawingServiceImpl;
+import gentree.client.visualization.service.implementation.GenTreeImageGenerator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -14,7 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
@@ -62,7 +63,6 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
 
-
     public WritableImage Image() {
 
         return imageGenerator.doScreen(TREE_DRAW_ANCHOR_PANE, context.getService().getCurrentFamily().getName());
@@ -82,8 +82,8 @@ public class ScreenMainRightController extends AnchorPane implements Initializab
     }
 
     /*
-    *   LISTEN LANGUAGE CHANGES
-    */
+     *   LISTEN LANGUAGE CHANGES
+     */
     private void addLanguageListener() {
         this.languageBundle.addListener(languageListener);
     }

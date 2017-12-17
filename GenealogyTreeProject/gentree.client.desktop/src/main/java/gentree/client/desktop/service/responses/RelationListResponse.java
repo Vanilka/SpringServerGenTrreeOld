@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Martyna SZYMKOWIAK on 29/10/2017.
  */
 @Getter
-public class RelationListResponse extends ServiceResponse{
+public class RelationListResponse extends ServiceResponse {
 
     List<Relation> list = new ArrayList<>();
 

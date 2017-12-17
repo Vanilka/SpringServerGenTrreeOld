@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by Martyna SZYMKOWIAK on 24/10/2017.
+ * Class  to convert DTO objects from REST API to  objects used by this JavaFX Client
  */
 @Getter
 @Setter
@@ -63,8 +64,8 @@ public class ConverterDtoToModel {
         target.setAlive(source.isAlive());
         target.setDeathCause(source.getDeathCauses());
         target.setRace(source.getRace());
-        if(source.getPhotoDTO() != null) {
-            String path =  ps.decodePicture(source.getPhotoDTO().getEncodedPicture(), source.getPhotoDTO().getName());
+        if (source.getPhotoDTO() != null) {
+            String path = ps.decodePicture(source.getPhotoDTO().getEncodedPicture(), source.getPhotoDTO().getName());
             target.setPhoto(path);
         }
         return target;
@@ -72,11 +73,11 @@ public class ConverterDtoToModel {
 
     public List<Member> convertMemberList(List<MemberDTO> sourceList, boolean convertIfNull, Family f_ref) throws Exception {
         List<Member> targetList = new ArrayList<>();
-        System.out.println("source List " +sourceList);
+        System.out.println("source List " + sourceList);
         for (MemberDTO dto : sourceList) {
             Member candidate = findMemberInListById(dto.getId(), f_ref);
 
-            if(candidate == null &&  !convertIfNull) throw new Exception("NIE MA POSZUKIWANEGO NA LISCIE");
+            if (candidate == null && !convertIfNull) throw new Exception("NIE MA POSZUKIWANEGO NA LISCIE");
 
             targetList.add(candidate == null ? convert(dto) : candidate);
         }
@@ -100,9 +101,10 @@ public class ConverterDtoToModel {
     public Relation convert(RelationDTO source, Family f_ref) throws Exception {
         Relation target = convertPoor(source);
 
-        target.setRight(source.getRight() == null ? null : findMemberInListById(source.getRight().getId(),f_ref));
-        target.setLeft( source.getLeft() == null ? null : findMemberInListById(source.getLeft().getId(), f_ref));
-        if(source.getChildren() != null) target.getChildren().addAll(convertMemberList(source.getChildren(), false, f_ref));
+        target.setRight(source.getRight() == null ? null : findMemberInListById(source.getRight().getId(), f_ref));
+        target.setLeft(source.getLeft() == null ? null : findMemberInListById(source.getLeft().getId(), f_ref));
+        if (source.getChildren() != null)
+            target.getChildren().addAll(convertMemberList(source.getChildren(), false, f_ref));
         return target;
     }
 
@@ -115,10 +117,10 @@ public class ConverterDtoToModel {
     }
 
     public Member findMemberInListById(Long id, Family f_ref) throws Exception {
-        if (f_ref == null) return  null;
+        if (f_ref == null) return null;
 
         List<Member> filtered = f_ref.getMembers().filtered(m -> m.getId() == id);
-        if(filtered.size() > 1) {
+        if (filtered.size() > 1) {
             //Should NEVER Happen ID is UNIQUE in DB.
             throw new Exception("NOT UNIQIE ID");
 
@@ -137,8 +139,8 @@ public class ConverterDtoToModel {
         target.setDeathCause(source.getDeathCauses());
         target.setRace(source.getRace());
 
-        if(source.getPhotoDTO()!= null || source.getPhotoDTO().getName() != null) {
-           target.setPhoto(ps.decodePicture(source.getPhotoDTO().getEncodedPicture(), source.getPhotoDTO().getName()));
+        if (source.getPhotoDTO() != null || source.getPhotoDTO().getName() != null) {
+            target.setPhoto(ps.decodePicture(source.getPhotoDTO().getEncodedPicture(), source.getPhotoDTO().getName()));
         }
     }
 }

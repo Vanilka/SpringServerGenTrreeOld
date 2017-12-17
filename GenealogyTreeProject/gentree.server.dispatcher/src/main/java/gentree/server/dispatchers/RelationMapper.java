@@ -45,6 +45,7 @@ public class RelationMapper {
 
     /**
      * Add Relation
+     *
      * @param relation
      * @param auth
      * @return
@@ -60,6 +61,7 @@ public class RelationMapper {
 
     /**
      * Update Relation
+     *
      * @param relation
      * @param auth
      * @return
@@ -75,6 +77,7 @@ public class RelationMapper {
 
     /**
      * Delete Relation
+     *
      * @param relation
      * @param auth
      * @return
@@ -86,7 +89,6 @@ public class RelationMapper {
         List<RelationDTO> list = familyFacade.deleteRelation(relation);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
 
 
     private boolean isOwnerOf(RelationDTO r, Authentication auth) {

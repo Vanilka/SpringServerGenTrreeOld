@@ -15,14 +15,14 @@ import javafx.scene.Node;
  */
 public class ParentToChildrenConnector extends LineConnector {
 
-    private  BetweenChildrenConnector betweenChildrenConnector;
+    private BetweenChildrenConnector betweenChildrenConnector;
 
     /*
-    *   Child Connectors for children in Sub-Relation-Pane
-    */
+     *   Child Connectors for children in Sub-Relation-Pane
+     */
     /*
-    *  Parent pane for this Connector
-    */
+     *  Parent pane for this Connector
+     */
     private SubRelationPane subBorderPane;
     private ChangeListener<? super Bounds> boundsListener = this::boundsChanged;
 

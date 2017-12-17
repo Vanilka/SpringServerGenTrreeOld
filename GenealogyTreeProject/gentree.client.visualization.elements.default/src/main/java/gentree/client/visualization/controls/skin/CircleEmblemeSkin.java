@@ -58,7 +58,7 @@ public class CircleEmblemeSkin extends SkinBase<CircleEmbleme> implements AutoCl
         getSkinnable().imgPathProperty().addListener(pathListener);
     }
 
-    private void  initSizeListeners() {
+    private void initSizeListeners() {
         getSkinnable().widthProperty().addListener(invalidListener);
         getSkinnable().heightProperty().addListener(invalidListener);
 

@@ -6,13 +6,9 @@ import gentree.server.domain.entity.RelationEntity;
 import gentree.server.repository.RelationRepository;
 import gentree.server.service.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +23,7 @@ public class RelationServiceImpl implements RelationService {
     @Override
     public RelationEntity addNewRelation(RelationEntity relation) {
 
-        System.out.println("Relation to persist : " +relation);
+        System.out.println("Relation to persist : " + relation);
 
         relation = repository.saveAndFlush(relation);
         //Delete nulls
@@ -58,7 +54,7 @@ public class RelationServiceImpl implements RelationService {
 
         relation = repository.findById(relation.getId()).orElse(null);
 
-        if(relation != null) {
+        if (relation != null) {
             if (relation.getChildren() == null || relation.getChildren().isEmpty()) {
                 repository.delete(relation);
             } else {
@@ -78,9 +74,9 @@ public class RelationServiceImpl implements RelationService {
 
         RelationEntity target;
 
-        if(list == null || list.isEmpty()) return  null;
+        if (list == null || list.isEmpty()) return null;
 
-        if(list.size() > 1) {
+        if (list.size() > 1) {
             target = mergingRelationList(list);
             repository.flush();
         } else {
@@ -89,9 +85,6 @@ public class RelationServiceImpl implements RelationService {
 
         return target;
     }
-
-
-
 
 
     @Override
@@ -116,14 +109,13 @@ public class RelationServiceImpl implements RelationService {
 
         mergingList.forEach(element -> {
             element.getChildren().forEach(child -> {
-                if( !toMerge.getChildren().contains(child)) toMerge.getChildren().add(child);
+                if (!toMerge.getChildren().contains(child)) toMerge.getChildren().add(child);
             });
         });
 
         repository.deleteAll(mergingList);
         return toMerge;
     }
-
 
 
 }

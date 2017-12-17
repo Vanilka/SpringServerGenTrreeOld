@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
 @Log4j2
 public class TabFamilyInfoController implements Initializable, FXMLController, FXMLTab {
 
-   private final TabFamilyInfoController instance = this;
+    private final TabFamilyInfoController instance = this;
 
     @FXML
     private ObjectProperty<ResourceBundle> languageBundle = new SimpleObjectProperty<>();
@@ -134,9 +134,9 @@ public class TabFamilyInfoController implements Initializable, FXMLController, F
         }
     }
 
-        /*
-        *   LISTEN LANGUAGE CHANGES
-        */
+    /*
+     *   LISTEN LANGUAGE CHANGES
+     */
 
     private void addLanguageListener() {
         this.languageBundle.addListener(languageListener);

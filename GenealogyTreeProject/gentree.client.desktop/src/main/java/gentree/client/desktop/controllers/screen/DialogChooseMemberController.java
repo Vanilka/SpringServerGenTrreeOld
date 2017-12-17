@@ -103,7 +103,7 @@ public class DialogChooseMemberController implements Initializable, FXMLControll
     public void confirm() {
         result = selectedMember.getValue();
         stage.close();
-       cleanListeners();
+        cleanListeners();
 
     }
 

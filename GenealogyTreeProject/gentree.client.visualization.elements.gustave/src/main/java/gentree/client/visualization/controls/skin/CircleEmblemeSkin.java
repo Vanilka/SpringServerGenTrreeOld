@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import lombok.Getter;
 
 
@@ -59,7 +58,7 @@ public class CircleEmblemeSkin extends SkinBase<CircleEmbleme> implements AutoCl
         getSkinnable().imgPathProperty().addListener(pathListener);
     }
 
-    private void  initSizeListeners() {
+    private void initSizeListeners() {
         getSkinnable().widthProperty().addListener(invalidListener);
         getSkinnable().heightProperty().addListener(invalidListener);
 

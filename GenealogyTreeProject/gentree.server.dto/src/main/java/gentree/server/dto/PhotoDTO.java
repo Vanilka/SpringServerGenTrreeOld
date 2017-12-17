@@ -21,9 +21,11 @@ public class PhotoDTO implements Serializable {
     private String name;
     private String encodedPicture;
 
-    public PhotoDTO() {}
+    public PhotoDTO() {
+    }
+
     public PhotoDTO(String encodedPicture) {
-    this.encodedPicture = encodedPicture;
+        this.encodedPicture = encodedPicture;
     }
 
 
@@ -33,7 +35,7 @@ public class PhotoDTO implements Serializable {
         sb.append("version=").append(version);
         sb.append(", id=").append(id);
         sb.append(", name='").append(name).append('\'');
-        if(encodedPicture != null) {
+        if (encodedPicture != null) {
             sb.append(", encodedPicture='").append("(..)").append('\'');
         }
         sb.append('}');

@@ -12,8 +12,12 @@ public interface OwnerFacade {
 
 
     OwnerDTO addNewOwner(OwnerDTO owner);
+
     List<OwnerDTO> findAllOwners();
+
     OwnerDTO findOwnerByLoginToAuthProcess(String login);
+
     OwnerDTO findOwnerByLogin(String login);
+
     OwnerExtendedDTO findExtendedOwnerByLogin(String login);
 }

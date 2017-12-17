@@ -2,13 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<?import gentree.client.visualization.controls.HeaderPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dialogChooseMember" fx:id="dialogChooseMember" minHeight="400"
             minWidth="500"
             styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.131"
@@ -20,8 +20,8 @@
         <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0"
                     AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <children>
-                <HeaderPane  styleClass="header-pane-content" text="%label_choose_member"
-                             AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+                <HeaderPane styleClass="header-pane-content" text="%label_choose_member"
+                            AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
                 <AnchorPane layoutY="40">
                     <children>
                         <Pane maxHeight="170.0" maxWidth="145.0" minHeight="129.0" minWidth="106.0" prefHeight="129.0"
@@ -30,7 +30,8 @@
                             <ImageView fx:id="PHOTO_IMV" fitHeight="115.0" fitWidth="86.0" layoutX="10" layoutY="7.0"
                                        pickOnBounds="true" preserveRatio="true"/>
                         </Pane>
-                        <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" layoutX="176.0" layoutY="45.0" prefHeight="33.0"
+                        <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" layoutX="176.0" layoutY="45.0"
+                                      prefHeight="33.0"
                                       prefWidth="193.0" promptText="%sim_name"/>
                         <JFXTextField fx:id="SIM_SURNAME_FIELD" labelFloat="true" layoutX="176.0" layoutY="110.0"
                                       prefHeight="33.0" prefWidth="193.0" promptText="%sim_surname"/>

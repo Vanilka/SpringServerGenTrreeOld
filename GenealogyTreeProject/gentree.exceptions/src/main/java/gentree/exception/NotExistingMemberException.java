@@ -5,7 +5,7 @@ import gentree.exception.configuration.ExceptionCauses;
 /**
  * Created by Martyna SZYMKOWIAK on 02/11/2017.
  */
-public class NotExistingMemberException extends Exception{
+public class NotExistingMemberException extends Exception {
 
 
     public NotExistingMemberException() {

@@ -79,7 +79,7 @@ public class ScreenMainLeftController implements Initializable, FXMLController, 
         cleanListeners();
     }
 
-     /*
+    /*
      *   LISTEN LANGUAGE CHANGES
      */
 

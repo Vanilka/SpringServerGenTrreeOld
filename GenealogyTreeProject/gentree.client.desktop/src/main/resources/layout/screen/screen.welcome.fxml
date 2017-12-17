@@ -16,6 +16,7 @@
     <children>
         <Pane id="LocalProjectPane" fx:id="LOCAL_PROJECT_PANE" prefHeight="400" prefWidth="300" styleClass="projectPane"
               AnchorPane.leftAnchor="60.0"/>
-        <Pane id="OnlineProjectPane" fx:id="ONLINE_PROJECT_PANE" styleClass="projectPane" AnchorPane.rightAnchor="60.0"/>
+        <Pane id="OnlineProjectPane" fx:id="ONLINE_PROJECT_PANE" styleClass="projectPane"
+              AnchorPane.rightAnchor="60.0"/>
     </children>
 </AnchorPane>

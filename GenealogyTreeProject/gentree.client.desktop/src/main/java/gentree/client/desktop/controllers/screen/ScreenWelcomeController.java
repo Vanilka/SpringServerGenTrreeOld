@@ -91,8 +91,8 @@ public class ScreenWelcomeController implements Initializable, FXMLController, F
     }
 
     /*
-    * LISTEN LANGUAGE CHANGES
-    */
+     * LISTEN LANGUAGE CHANGES
+     */
 
     private String getValueFromKey(String key) {
         return this.languageBundle.getValue().getString(key);

@@ -5,7 +5,7 @@ import gentree.exception.configuration.ExceptionCauses;
 /**
  * Created by Martyna SZYMKOWIAK on 02/11/2017.
  */
-public class IncorrectStatusException  extends Exception {
+public class IncorrectStatusException extends Exception {
 
     public IncorrectStatusException() {
         this(ExceptionCauses.NOT_EXISTING_MEMBER.toString());

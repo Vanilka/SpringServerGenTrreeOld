@@ -82,6 +82,7 @@ public class MemberCard extends AnchorPane {
     private void objectChange(ObservableValue<?> observableValue, Object oldValue, Object newValue) {
         fillComponents(member.get());
     }
+
     public void clean() {
         member.removeListener(memberListener);
         member.get().getProperties().forEach(p -> p.removeListener(listener));

@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<AnchorPane id="familyView" fx:id="familyView" styleClass="" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="20"
-            AnchorPane.rightAnchor="20" AnchorPane.topAnchor="30" xmlns="http://javafx.com/javafx/8.0.131"
-            xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="familyView" fx:id="familyView" styleClass="" AnchorPane.bottomAnchor="30"
+            AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="30"
+            xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.TabFamilyViewController">
     <stylesheets>
         <URL value="@/layout/style/gentreestyle.css"/>
@@ -50,7 +50,8 @@
                           text="%button_members" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                           AnchorPane.topAnchor="0.0"/>
 
-            <ToggleButton id="BUTTON_SHOW_RELATIONS_TABLE" fx:id="BUTTON_SHOW_RELATIONS_TABLE" layoutX="125.0" layoutY="12.0"
+            <ToggleButton id="BUTTON_SHOW_RELATIONS_TABLE" fx:id="BUTTON_SHOW_RELATIONS_TABLE" layoutX="125.0"
+                          layoutY="12.0"
                           mnemonicParsing="false" prefWidth="114.0" styleClass="toogleButtonShowTable"
                           text="%button_relations" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
                           AnchorPane.topAnchor="0.0"/>

@@ -64,12 +64,10 @@ import java.util.List;
 @Log4j2
 public class ScreenManager implements ContextProvider {
 
-    private static final String PREFIX_FILE_LOAD = "file://";
-
     public static final ScreenManager INSTANCE = new ScreenManager();
     public static final GenTreeContext context = GenTreeContext.INSTANCE;
     public static final GenTreeProperties properties = GenTreeProperties.INSTANCE;
-
+    private static final String PREFIX_FILE_LOAD = "file://";
     private static final FileChooser imgFileChooser = new FileChooser();
     private static final FileChooser xmlFileChooser = new FileChooser();
     private static String LAST_PATH;
@@ -181,6 +179,7 @@ public class ScreenManager implements ContextProvider {
         } catch (Exception ex) {
             log.error(ex.getMessage());
             log.error(ex.getCause());
+            ex.printStackTrace();
         }
 
     }
@@ -314,7 +313,7 @@ public class ScreenManager implements ContextProvider {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml.toString()), context.getBundleValue());
         try {
             anchor.getChildren().clear();
-             anchor.getChildren().addAll((AnchorPane) loader.load());
+            anchor.getChildren().addAll((AnchorPane) loader.load());
             controller = loader.getController();
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -428,7 +427,6 @@ public class ScreenManager implements ContextProvider {
     }
 
 
-
     public File openImageFileChooser() {
         configureImageFileChooser(imgFileChooser);
         File file = imgFileChooser.showOpenDialog(stage);
@@ -491,11 +489,11 @@ public class ScreenManager implements ContextProvider {
     @Override
     public void showSimContextMenu(FamilyMember familyMember, ContextMenuEvent event) {
 
-        simContextMenu.show(familyMember.getMember(),familyMember, event);
+        simContextMenu.show(familyMember.getMember(), familyMember, event);
     }
 
 
-    public void showSimContextMenu(Member m , Node node, ContextMenuEvent event) {
+    public void showSimContextMenu(Member m, Node node, ContextMenuEvent event) {
 
         simContextMenu.show(m, node, event);
     }
@@ -590,13 +588,13 @@ public class ScreenManager implements ContextProvider {
 
             @Override
             public ListCell<Realm> call(ListView<Realm> param) {
-                final ListCell<Realm> realmCell  = new ListCell<Realm>() {
+                final ListCell<Realm> realmCell = new ListCell<Realm>() {
                     @Override
                     protected void updateItem(Realm item, boolean empty) {
                         super.updateItem(item, empty);
-                        if(item != null) {
+                        if (item != null) {
                             setText(item.getName());
-                        } else  {
+                        } else {
                             setText("");
                         }
                     }

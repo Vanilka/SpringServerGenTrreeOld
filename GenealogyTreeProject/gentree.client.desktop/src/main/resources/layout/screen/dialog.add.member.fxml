@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import gentree.client.visualization.controls.HeaderPane?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
-<?import gentree.client.visualization.controls.HeaderPane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="dialogAddMember" styleClass="dialog-pane"
             xmlns="http://javafx.com/javafx/8.0.131"
             fx:controller="gentree.client.desktop.controllers.screen.DialogAddMemberController">
@@ -17,8 +17,8 @@
         <AnchorPane styleClass="contentPane" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="20"
                     AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
             <children>
-                <HeaderPane  styleClass="header-pane-content" text="%label_add_member"
-                             AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+                <HeaderPane styleClass="header-pane-content" text="%label_add_member"
+                            AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
                 <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                             AnchorPane.topAnchor="40.0">
                     <children>
@@ -32,7 +32,8 @@
                                        pickOnBounds="true" preserveRatio="true"
                             />
                         </Pane>
-                        <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="35.0" prefHeight="33.0"
+                        <JFXTextField fx:id="SIM_NAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="35.0"
+                                      prefHeight="33.0"
                                       prefWidth="193.0" promptText="%sim_name"/>
                         <JFXTextField fx:id="SIM_SURNAME_FIELD" labelFloat="true" layoutX="200.0" layoutY="95.0"
                                       prefHeight="33.0" prefWidth="193.0" promptText="%sim_surname"/>
@@ -52,7 +53,8 @@
                         <AnchorPane layoutX="186.0" layoutY="205.0" prefHeight="66.0" prefWidth="256.0">
                             <children>
                                 <Pane layoutY="25.0" prefHeight="41.0" prefWidth="256.0" styleClass="darkPane">
-                                    <JFXRadioButton fx:id="SIM_SEX_FEMALE_CHOICE" layoutY="12.0" styleClass="radioButtonFX"
+                                    <JFXRadioButton fx:id="SIM_SEX_FEMALE_CHOICE" layoutY="12.0"
+                                                    styleClass="radioButtonFX"
                                                     text="%sim_sex_f"/>
                                     <JFXRadioButton fx:id="SIM_SEX_MALE_CHOICE" layoutX="119.0" layoutY="12.0"
                                                     styleClass="radioButtonFX" text="%sim_sex_m"/>
@@ -102,7 +104,8 @@
                                         <Font size="14.0"/>
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="DEATH_CAUSE_COMBO_BOX" layoutY="25.0" prefHeight="41.0" prefWidth="256.0"
+                                <ComboBox fx:id="DEATH_CAUSE_COMBO_BOX" layoutY="25.0" prefHeight="41.0"
+                                          prefWidth="256.0"
                                           styleClass="combobox"/>
                             </children>
                         </AnchorPane>

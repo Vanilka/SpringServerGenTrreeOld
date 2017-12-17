@@ -7,8 +7,8 @@ public class ServerPaths {
     public static final String LOGIN = "/owner/login";
     public static final String FAMILY = "/family";
     public static final String MEMBER = "/member";
-    public static final String ADD ="/add";
+    public static final String RELATION = "/relations";
+    public static final String ADD = "/add";
     public static final String UPDATE = "/update";
-
-    public static final String DELETE ="/delete";
+    public static final String DELETE = "/delete";
 }
