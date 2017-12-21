@@ -2,6 +2,7 @@ package gentree.server.service.Implementation;
 
 import gentree.common.configuration.enums.RoleEnum;
 import gentree.server.domain.entity.OwnerEntity;
+import gentree.server.manager.db.DBProperties;
 import gentree.server.repository.OwnerRepository;
 import gentree.server.service.OwnerService;
 import org.hibernate.Hibernate;
@@ -45,14 +46,16 @@ public class OwnerServiceImpl implements OwnerService {
         OwnerEntity ownerEntity = ownerRepository.findByLogin(login);
         Hibernate.initialize(ownerEntity.getFamilyList());
         return ownerEntity;
+
     }
 
     @PostConstruct
     private void setDefaultOperators() {
-
-        ownerRepository.saveAndFlush(new OwnerEntity
-                ("admin", passwordEncoder.encode("admin"), RoleEnum.ADMIN));
-        ownerRepository.saveAndFlush(new OwnerEntity
-                ("vanilka", passwordEncoder.encode("admin"), RoleEnum.USER));
+        if(env.getProperty(DBProperties.PARAM_HIBERNATE_HBM2DDL_AUTO).contains("create")) {
+            ownerRepository.saveAndFlush(new OwnerEntity
+                    ("admin", passwordEncoder.encode("admin"), RoleEnum.ADMIN));
+            ownerRepository.saveAndFlush(new OwnerEntity
+                    ("vanilka", passwordEncoder.encode("admin"), RoleEnum.USER));
+        }
     }
 }

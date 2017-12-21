@@ -1,6 +1,8 @@
 package mobile.client.gentree.gentreemobile.configuration;
 
 import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -17,18 +19,18 @@ import static java.util.Arrays.*;
  */
 public class GenTreeRestTemplate extends RestTemplate {
 
+    private ClientHttpRequestFactory getClientHttpRequestFactory() {
+        int timeout = 5000;
+        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory =
+                new HttpComponentsClientHttpRequestFactory();
+        clientHttpRequestFactory.setConnectTimeout(timeout);
+        return clientHttpRequestFactory;
+    }
+
     public GenTreeRestTemplate() {
-            super();
-         //   this.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             this.getMessageConverters().add(new StringHttpMessageConverter());
             this.setErrorHandler(new GenTreeResponseErrorHandler());
-/*        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        //Add the Jackson Message converter
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        // Note: here we are making this converter to process any kind of response,
-        // not only application/*json, which is the default behaviour
-        converter.setSupportedMediaTypes(Arrays.asList(MediaType.ALL));
-        messageConverters.add(converter);
-        this.setMessageConverters(messageConverters);*/
+            this.setRequestFactory(getClientHttpRequestFactory());
+
     }
 }

@@ -1,6 +1,7 @@
 package mobile.client.gentree.gentreemobile.rest.tasks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -8,10 +9,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import gentree.exception.ExceptionBean;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerDTO;
+import mobile.client.gentree.gentreemobile.configuration.utilities.BundleParams;
 import mobile.client.gentree.gentreemobile.configuration.utilities.ServerUrl;
 import mobile.client.gentree.gentreemobile.rest.responses.ExceptionResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.FamilyResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.ServerResponse;
+import mobile.client.gentree.gentreemobile.screen.ProjectListActivity;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -75,6 +78,19 @@ public class RetrieveFullFamilyTask extends RestTask {
         } else {
             ExceptionBean exceptionBean = objectMapper.readValue(entity.getBody(), ExceptionBean.class);
             this.serverResponse = new ExceptionResponse(exceptionBean);
+        }
+    }
+
+
+    private void openProjectViewActivity(OwnerDTO currentOwner, FamilyDTO familyDTO) {
+        try {
+            String userJson = objectMapper.writeValueAsString(currentOwner);
+            Intent intent = new Intent(context, ProjectListActivity.class);
+            intent.putExtra(BundleParams.CURRENT_USER, userJson);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Snackbar.make(view, "conversion error", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 

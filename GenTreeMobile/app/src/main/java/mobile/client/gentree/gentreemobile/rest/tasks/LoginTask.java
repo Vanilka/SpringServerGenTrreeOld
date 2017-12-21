@@ -15,9 +15,12 @@ import mobile.client.gentree.gentreemobile.rest.responses.ServerResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.UserResponse;
 import mobile.client.gentree.gentreemobile.screen.ProjectListActivity;
 import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequest;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
+import java.net.URI;
 
 /**
  * Created by vanilka on 13/12/2017.
@@ -86,8 +89,10 @@ public class LoginTask extends RestTask {
      * @throws IOException
      */
     private void doPost(HttpEntity httpEntity) throws IOException {
+        System.out.println("do post");
         ResponseEntity<String> entity = restTemplate.exchange(ServerUrl.URL_LOGIN, HttpMethod.POST, httpEntity, String.class);
 
+        System.out.println("Repsonse recieved");
         if (entity.getStatusCode() == HttpStatus.OK) {
             OwnerExtendedDTO ownerDTO = objectMapper.readValue(entity.getBody(), OwnerExtendedDTO.class);
             ownerDTO.setPassword(password);

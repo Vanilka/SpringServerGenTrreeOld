@@ -76,16 +76,4 @@ public class RetrieveFamiliesTask extends RestTask {
             this.serverResponse = new ExceptionResponse(exceptionBean);
         }
     }
-
-    private void openProjectViewActivity(OwnerDTO currentOwner, FamilyDTO familyDTO) {
-        try {
-            String userJson = objectMapper.writeValueAsString(currentOwner);
-            Intent intent = new Intent(context, ProjectListActivity.class);
-            intent.putExtra(BundleParams.CURRENT_USER, userJson);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            Snackbar.make(listView, "conversion error", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
-    }
 }
