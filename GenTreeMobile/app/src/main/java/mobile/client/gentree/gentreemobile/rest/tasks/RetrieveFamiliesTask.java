@@ -1,48 +1,41 @@
 package mobile.client.gentree.gentreemobile.rest.tasks;
 
-import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.widget.ArrayAdapter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import gentree.exception.ExceptionBean;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerDTO;
-import mobile.client.gentree.gentreemobile.configuration.GenTreeRestTemplate;
+import mobile.client.gentree.gentreemobile.configuration.utilities.BundleParams;
 import mobile.client.gentree.gentreemobile.configuration.utilities.ServerUrl;
 import mobile.client.gentree.gentreemobile.rest.responses.ExceptionResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.FamilyListResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.ServerResponse;
-import mobile.client.gentree.gentreemobile.screen.controls.CustomListView;
 import mobile.client.gentree.gentreemobile.screen.adapters.FamilyListAdapter;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
+import mobile.client.gentree.gentreemobile.screen.controls.CustomFamilyListView;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by vanilka on 15/12/2017.
  */
-public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerResponse> {
+public class RetrieveFamiliesTask extends RestTask {
 
-    private ServerResponse serverResponse;
-    private CustomListView listView;
-    private Context context;
-
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private RestTemplate restTemplate = new GenTreeRestTemplate();
-
+    private CustomFamilyListView listView;
     private OwnerDTO currentOwner;
 
-    public RetrieveFamiliesTask(OwnerDTO owner, CustomListView view) {
+    public RetrieveFamiliesTask(OwnerDTO owner, CustomFamilyListView view) {
         this.currentOwner = owner;
         this.listView = view;
         this.context = view.getContext();
-        System.out.println("Context from retrieve Families " +  view.getContext());
+        System.out.println("Context from retrieve Families " + view.getContext());
 
     }
 
@@ -63,7 +56,7 @@ public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerRespons
         super.onPostExecute(serverResponse);
 
         if (serverResponse.getStatus() == ServerResponse.ResponseStatus.OK) {
-          ArrayList<FamilyDTO> list = new ArrayList<>(((FamilyListResponse) serverResponse).getFamilyList());
+            ArrayList<FamilyDTO> list = new ArrayList<>(((FamilyListResponse) serverResponse).getFamilyList());
             ArrayAdapter<FamilyDTO> adapter = new FamilyListAdapter(context, list);
             listView.setAdapter(adapter);
         } else {
@@ -73,7 +66,6 @@ public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerRespons
     }
 
     private void doGet(HttpEntity httpEntity) throws IOException {
-
         ResponseEntity<String> entity = restTemplate.exchange(ServerUrl.URL_GET_FAMILIES, HttpMethod.GET, httpEntity, String.class);
         if (entity.getStatusCode() == HttpStatus.OK) {
             List<FamilyDTO> familyList = objectMapper.readValue(entity.getBody(), new TypeReference<List<FamilyDTO>>() {
@@ -83,15 +75,17 @@ public class RetrieveFamiliesTask extends AsyncTask<Void, Integer, ServerRespons
             ExceptionBean exceptionBean = objectMapper.readValue(entity.getBody(), ExceptionBean.class);
             this.serverResponse = new ExceptionResponse(exceptionBean);
         }
-
     }
 
-    private HttpEntity generateHttpEntity(String login, String password) {
-        HttpAuthentication authHeader = new HttpBasicAuthentication(login, password);
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.setAuthorization(authHeader);
-        requestHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        HttpEntity<?> httpEntity = new HttpEntity<Object>(null, requestHeaders);
-        return httpEntity;
+    private void openProjectViewActivity(OwnerDTO currentOwner, FamilyDTO familyDTO) {
+        try {
+            String userJson = objectMapper.writeValueAsString(currentOwner);
+            Intent intent = new Intent(context, ProjectListActivity.class);
+            intent.putExtra(BundleParams.CURRENT_USER, userJson);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Snackbar.make(listView, "conversion error", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 }

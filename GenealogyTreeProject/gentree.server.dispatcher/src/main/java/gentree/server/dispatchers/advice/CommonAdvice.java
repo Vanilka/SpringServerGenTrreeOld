@@ -1,4 +1,4 @@
-package gentree.server.dispatchers.gentree.server.configuration.security.advice;
+package gentree.server.dispatchers.advice;
 
 import gentree.exception.ExceptionBean;
 import gentree.exception.configuration.ExceptionCauses;

@@ -1,6 +1,7 @@
 package gentree.client.desktop.service.implementation;
 
 
+import gentree.client.desktop.configuration.ErrorMessages;
 import gentree.client.desktop.configuration.enums.PropertiesKeys;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.domain.Family;
@@ -26,6 +27,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
 
@@ -71,7 +74,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
     @Override
     public ServiceResponse addMember(Member member) {
-        log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
+        log.trace(LogMessages.MSG_PARAMETER_PASSED_TO_FUNCTION, Thread.currentThread().getStackTrace()[1].getMethodName(), member);
         if (!ps.isGenericPhoto(member.getPhoto())) {
             String newPhotoPath = ps.copyPhoto(member.getPhoto());
             member.setPhoto(newPhotoPath == null ? null : ps.generateNewPathForImage(newPhotoPath));
@@ -83,6 +86,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     @Override
     public ServiceResponse updateMember(Member m) {
         // Nothing to do in Local service
+        log.trace(LogMessages.MSG_PARAMETER_PASSED_TO_FUNCTION, Thread.currentThread().getStackTrace()[1].getMethodName(), m);
         if (ps.needCopy(m.getPhoto())) {
             String coppied = ps.copyPhoto(m.getPhoto());
             m.setPhoto(coppied == null ? null : ps.generateNewPathForImage(coppied));
@@ -92,6 +96,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
     @Override
     public ServiceResponse deleteMember(Member m) {
+        log.trace(LogMessages.MSG_PARAMETER_PASSED_TO_FUNCTION, Thread.currentThread().getStackTrace()[1].getMethodName(), m);
         this.getCurrentFamily().getMembers().remove(m);
         return new MemberResponse(m);
     }
@@ -104,6 +109,7 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      */
     @Override
     public ServiceResponse addRelation(Relation relation) {
+        log.trace(LogMessages.MSG_PARAMETER_PASSED_TO_FUNCTION, Thread.currentThread().getStackTrace()[1].getMethodName(), relation);
         if (relation.getLeft() == null && relation.getRight() == null) {
             this.getCurrentFamily().addRelation(relation);
         } else {
@@ -247,10 +253,10 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
     }
 
     private void familyChanged(ObservableValue<? extends Family> observable, Family oldValue, Family newValue) {
-        ActiveRelationGuard olduard = guard;
+        ActiveRelationGuard oldGuard = guard;
 
-        if (olduard != null) {
-            olduard.clean();
+        if (oldGuard != null) {
+            oldGuard.clean();
         }
         if (newValue != null) {
             guard = new ActiveRelationGuard(newValue.getRelations());
@@ -262,21 +268,16 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
             if (c.wasAdded()) {
                 c.getAddedSubList().forEach(member -> {
                     incrementMemberId(member);
-                    log.info(LogMessages.MSG_MEMBER_ADD_NEW, member);
+                    log.info(LogMessages.MSG_MEMBER_ADDED, member);
                     addRelation(new Relation(member));
                 });
-            } else if (c.wasPermutated()) {
-                for (int i = c.getFrom(); i < c.getTo(); ++i) {
-                    //permutate
-                    System.out.println("permutated");
-                }
-            } else if (c.wasUpdated()) {
-                ;
             } else if (c.wasRemoved()) {
-                c.getRemoved().forEach(this::clearRelationFromDeletedMember);
-            } else {
-            }
+                c.getRemoved().forEach(element -> {
+                    clearRelationFromDeletedMember(element);
+                    log.info(LogMessages.MSG_MEMBER_REMOVED, element);
+                });
 
+            }
         }
     }
 
@@ -286,11 +287,13 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
                 c.getAddedSubList().forEach(element -> {
                     guard.addObserverTo(element);
                     incrementRelationId(element);
+                    log.info(LogMessages.MSG_RELATION_ADDED, element);
                 });
             }
             if (c.wasRemoved()) {
                 c.getRemoved().forEach(element -> {
                     guard.removeObserverFrom(element);
+                    log.info(LogMessages.MSG_RELATION_REMOVED, element);
                 });
             }
         }
@@ -317,7 +320,6 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
         } else {
             idRelation = idRelation < relation.getId() ? relation.getId() : idRelation;
         }
-        System.out.println("AFTER INCREMENT");
     }
 
     private Long incrementRelation() {
@@ -397,13 +399,15 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      * @param currentFamily
      */
     public ServiceResponse createFamily(Family currentFamily) {
+        log.trace(LogMessages.MSG_PARAMETER_PASSED_TO_FUNCTION, Thread.currentThread().getStackTrace()[1].getMethodName(), currentFamily);
         setCurrentFamily(currentFamily);
         try {
             ps.generateLocalProjectFiles(currentFamily);
             saveProject();
         } catch (IOException e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
+            log.error(LogMessages.MSG_ERROR_CREATE_FAMILY, e);
+            sm.showError(ErrorMessages.TITLE_ERROR_CREATE_FAMILY, String.format(ErrorMessages.HEADER_ERROR_CREATE_FAMILY, currentFamily.getName()), e.getMessage());
+
         }
         return new FamilyResponse(currentFamily);
     }
@@ -425,17 +429,20 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
      * Marchalling project to XML file
      */
     public void saveProject() {
-
         ps.copyImagesToTargetProject(getCurrentFamily());
+
+        Path p = Paths.get(config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME)).resolve(ps.getProjectFilename());
+        log.trace(LogMessages.MSG_SAVE_PROJECT_LOCAL, p);
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(Family.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             // output pretty printed
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            jaxbMarshaller.marshal(getCurrentFamily(), new File(
-                    config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME), ps.getProjectFilename()));
+            jaxbMarshaller.marshal(getCurrentFamily(), new File(p.toUri()));
+            log.trace(LogMessages.MSG_CONFIRM_SAVE_PROJECT_LOCAL, p);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(LogMessages.MSG_ERROR_SAVE_FAMILY, p,  e.getMessage());
+            sm.showError(ErrorMessages.TITLE_ERROR_SAVE, ErrorMessages.HEADER_ERROR_SAVE, e.getMessage());
             e.printStackTrace();
         }
     }

@@ -6,6 +6,7 @@ import gentree.server.dto.OwnerDTO;
 import gentree.server.dto.OwnerExtendedDTO;
 import gentree.server.facade.FamilyFacade;
 import gentree.server.facade.OwnerFacade;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/family")
+@Log4j2
 public class FamilyMapper {
 
     @Autowired
@@ -59,6 +61,14 @@ public class FamilyMapper {
     }
 
 
+    /**
+     * RETRIEVE FULL FAMILY OF CONNECTED USER
+     *
+     * @param id
+     * @param auth
+     * @return
+     * @throws FamilyAccessDeniedException
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<FamilyDTO> findFullFamily(@PathVariable Long id, Authentication auth) throws FamilyAccessDeniedException {
         OwnerExtendedDTO owner = ownerFacade.findExtendedOwnerByLogin(auth.getName());

@@ -118,7 +118,6 @@ public abstract class GenTreeService {
             }
         }
         return new Relation(left, right, type, active);
-
     }
 
     public Family getCurrentFamily() {

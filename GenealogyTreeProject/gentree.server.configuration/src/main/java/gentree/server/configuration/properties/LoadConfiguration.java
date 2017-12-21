@@ -2,6 +2,7 @@ package gentree.server.configuration.properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
@@ -16,6 +17,7 @@ import java.util.Properties;
  * Created by Martyna SZYMKOWIAK on 07/11/2017.
  */
 @Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @PropertySource(value = "classpath:gentree.properties")
 public class LoadConfiguration {
 

@@ -6,7 +6,8 @@ import android.os.Parcelable;
 /**
  * Created by vanilka on 14/12/2017.
  */
-public abstract class ServerResponse  {
+public abstract class ServerResponse
+{
     private ResponseStatus status;
 
     public ServerResponse(ResponseStatus status) {

@@ -1,8 +1,8 @@
-package gentree.server.dispatchers.gentree.server.configuration.security;
+package gentree.server.configuration.security;
 
+import gentree.server.dispatchers.advice.CustomAccessDeniedHandler;
 import gentree.common.configuration.enums.RoleEnum;
 import gentree.server.configuration.properties.SecurityPathProperties;
-import gentree.server.dispatchers.gentree.server.configuration.security.advice.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

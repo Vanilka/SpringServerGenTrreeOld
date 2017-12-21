@@ -136,15 +136,22 @@ public class ConnectionService {
 
     public Response doGet(WebTarget target, String path, String token) {
         Response response = null;
-        System.out.println(token);
+        printLogHeaderRestExchange();
+        log.info(LogMessages.MSG_SERVER_ACCESS_PATH, target.getUri().resolve(path));
+        log.info(LogMessages.DELIMITER_MIDDLE);
         try {
             response = target.path(path)
                     .request(MediaType.APPLICATION_JSON)
                     .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD.concat(token))
                     .get();
+            response.bufferEntity();
+            log.info(LogMessages.MSG_SERVER_RETURNED_RESPONE,response.getStatus(), response.readEntity(String.class));
         } catch (Exception e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
+
+        printLogFooterRestExchange();
         return response;
     }
 
@@ -154,17 +161,31 @@ public class ConnectionService {
     }
 
     public Response doPost(WebTarget target, String path, String token, Entity entity) {
+
+        printLogHeaderRestExchange();
+        log.info(LogMessages.MSG_POST_REQUEST);
+        log.info(LogMessages.MSG_SERVER_ACCESS_PATH, target.getUri().resolve(path));
+        log.info(LogMessages.DELIMITER_MIDDLE);
+        log.info(LogMessages.MSG_POST_REQUEST_CONTENT);
+        log.info(LogMessages.DELIMITER_MIDDLE);
+
         Response response = null;
         try {
             response = target.path(path)
                     .request(MediaType.APPLICATION_JSON)
                     .header(HEADER_AUTHORIZATION, AUTHORIZATION_METHOD.concat(token))
                     .post(entity);
-
+            response.bufferEntity();
+            log.info(LogMessages.MSG_SERVER_RETURNED_RESPONE,response.getStatus(), response.readEntity(String.class));
         } catch (Exception e) {
             e.printStackTrace();
-
+            log.error(e.getMessage());
         }
+
+
+
+        printLogFooterRestExchange();
+
         return response;
     }
 
@@ -193,6 +214,15 @@ public class ConnectionService {
 
     public void setWebTarget(Realm realm) {
         webTarget = client.target(realm.getAddress());
+    }
+
+
+    protected void printLogHeaderRestExchange() {
+
+    }
+
+    protected void printLogFooterRestExchange() {
+
     }
 
 }

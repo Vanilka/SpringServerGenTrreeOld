@@ -26,26 +26,39 @@ public class RelationConnectionTask extends ConnectionTask {
     }
 
     public ServiceResponse addRelation(Relation relation) {
-        ServiceResponse serviceResponse = null;
         RelationDTO dto = cmd.convert(relation);
         dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
-        log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
 
         Response response = cs.doPost(ServerPaths.RELATION.concat(ServerPaths.ADD), Entity.json(dto));
 
+       return attendRelationListResponse(response);
+
+    }
+
+    public  ServiceResponse removeRelation(Relation r) {
+        ServiceResponse serviceResponse = null;
+
+        RelationDTO dto = cmd.convertLazy(r);
+        dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
+        Response response = cs.doPost(ServerPaths.RELATION.concat(ServerPaths.DELETE), Entity.json(dto));
+        serviceResponse = attendRelationListResponse(response);
+        return serviceResponse;
+    }
+
+    private ServiceResponse attendRelationListResponse(Response response) {
+        ServiceResponse serviceResponse = null;
         if (response.getStatus() == 200) {
             try {
                 List<RelationDTO> returnedDTO = response.readEntity(new GenericType<List<RelationDTO>>(){});
-                System.out.println("Returned DTO is  :" + returnedDTO);
                 List<Relation> relations = cdm.convertRelationList(returnedDTO, service.getCurrentFamily());
                 serviceResponse = new RelationListResponse(relations);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         return serviceResponse;
     }
+
 
 }

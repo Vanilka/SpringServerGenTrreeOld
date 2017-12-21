@@ -1,5 +1,6 @@
 package gentree.server.service.Implementation;
 
+import gentree.common.configuration.enums.Gender;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.AscendanceViolationException;
 import gentree.exception.IncorrectStatusException;
@@ -124,19 +125,28 @@ public class ProjectServiceImpl implements ProjectService {
          */
         relationValidator.validate(relationEntity, familyEntity);
 
-        RelationEntity target;
+        relationEntity = setMembersToCorrectPlace(relationEntity);
 
         /*
          * Verify Existing
          */
-        RelationEntity existing = relationService.findRelationBysimLeftAndsimRight(relationEntity.getLeft(), relationEntity.getRight());
+        RelationEntity existing = relationService.findRelationBysimLeftAndsimRight
+                (relationEntity.getLeft(),
+                relationEntity.getRight());
 
+
+        /*
+            Prepare target
+         */
+        RelationEntity target = existing == null ?
+                relationService.addNewRelation(relationEntity) : mergeChildrenAndStatus(existing, relationEntity);
+
+/*
         if (existing != null) {
             target = mergeChildrenAndStatus(existing, relationEntity);
         } else {
-            updateOtherRelationToFalse(familyEntity, relationEntity);
             target = relationService.addNewRelation(relationEntity);
-        }
+        }*/
 
 
         return relationService.findAllRelationsByFamilyId(target.getFamily().getId());
@@ -179,16 +189,38 @@ public class ProjectServiceImpl implements ProjectService {
         return list.stream().filter(member -> Objects.equals(member.getId(), entity.getId())).findAny().orElse(null);
     }
 
-    private void updateOtherRelationToFalse(FamilyEntity family, RelationEntity entity) {
-        if (entity.isActive()) {
-            family.getRelations().stream()
-                    .filter(r -> r.getLeft() != null && r.getRight() != null && r.getType() != RelationType.NEUTRAL)
-                    .filter(r -> r.compareLeft(entity.getLeft())
-                            || r.compareLeft(entity.getRight())
-                            || r.compareRight(entity.getRight())
-                            || r.compareRight(entity.getLeft()))
-                    .forEach(r -> r.setActive(false));
+
+    protected RelationEntity setMembersToCorrectPlace(RelationEntity relationEntity) {
+
+        MemberEntity candidateLeft = memberService.findMemberById(relationEntity.getLeft().getId());
+        MemberEntity candidateRight = memberService.findMemberById(relationEntity.getRight().getId());
+
+
+        if (candidateLeft == null || candidateRight == null) {
+            if (candidateLeft != null) {
+                if (candidateLeft.getGender() == Gender.F) relationEntity.setLeft(candidateLeft);
+                if (candidateLeft.getGender() == Gender.M) relationEntity.setRight(candidateLeft);
+            } else if (candidateRight != null) {
+                if (candidateRight.getGender() == Gender.F) relationEntity.setLeft(candidateRight);
+                if (candidateRight.getGender() == Gender.M) relationEntity.setRight(candidateRight);
+            }
+            relationEntity.setType(RelationType.NEUTRAL);
+        } else {
+
+        /*
+            Left is an user with higher ID
+         */
+            if (candidateLeft.getGender() == candidateRight.getGender()) {
+                relationEntity.setLeft(candidateLeft.getId() > candidateRight.getId() ? candidateLeft : candidateRight);
+                relationEntity.setRight(candidateLeft.getId() < candidateRight.getId() ? candidateLeft : candidateRight);
+            } else {
+                relationEntity.setLeft(candidateLeft.getGender() == Gender.F ? candidateLeft : candidateRight);
+                relationEntity.setRight(candidateLeft.getGender() == Gender.M ? candidateLeft : candidateRight);
+            }
         }
+        return relationEntity;
     }
+
+
 
 }

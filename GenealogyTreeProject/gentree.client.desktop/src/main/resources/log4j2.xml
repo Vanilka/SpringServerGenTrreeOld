@@ -2,9 +2,10 @@
 <Configuration status="DEBUG" packages="">
     <Appenders>
         <File name="logApp" fileName="logs/app.log">
-            <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-            </PatternLayout>
+                <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %-40.40logger{1.} : %msg%n"/>
+        </File>
+        <File name="serviceLog" fileName="logs/service.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %-30.30logger{1.} : %msg%n"/>
         </File>
         <File name="errorLog" fileName="logs/error.log">
             <PatternLayout>
@@ -18,10 +19,13 @@
     <Loggers>
         <Logger name="gentree" level="TRACE">
             <appender-ref ref="Console" level="TRACE"/>
+            <AppenderRef ref="logApp" level="TRACE"/>
+        </Logger>
+        <Logger name="gentree.client.desktop.service" level="TRACE">
+            <AppenderRef ref="serviceLog" level="INFO"/>
         </Logger>
         <Root level="debug">
-            <AppenderRef ref="errorLog" level="error"/>
-            <AppenderRef ref="logApp" level="info"/>
+            <AppenderRef ref="errorLog" level="ERROR"/>
         </Root>
     </Loggers>
 </Configuration>

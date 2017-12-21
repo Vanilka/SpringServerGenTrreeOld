@@ -73,7 +73,6 @@ public class RestConnectionService {
         return fct.retrieveFamilies();
     }
 
-
     public ServiceResponse addFamily(Family f) {
         return fct.addFamily(f);
     }
@@ -96,7 +95,6 @@ public class RestConnectionService {
         return mct.updateMember(member);
     }
 
-
     public ServiceResponse deleteMember(Member m) {
         return mct.deleteMember(m);
     }
@@ -109,9 +107,13 @@ public class RestConnectionService {
         return rct.addRelation(relation);
     }
 
+    public ServiceResponse removeRelation(Relation r) {
+        return rct.removeRelation(r);
+    }
 
     public void setWebTarget(Realm realm) {
         connectionService.setWebTarget(realm);
     }
+
 
 }

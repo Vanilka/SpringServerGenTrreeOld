@@ -1,6 +1,7 @@
 package gentree.client.desktop.controllers.screen;
 
 import com.jfoenix.controls.JFXButton;
+import gentree.client.desktop.configuration.ErrorMessages;
 import gentree.client.desktop.configuration.enums.FilesFXML;
 import gentree.client.desktop.configuration.messages.LogMessages;
 import gentree.client.desktop.controllers.FXMLController;
@@ -163,7 +164,7 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
             cleanListeners();
             stage.close();
         } else {
-            //TODO show error
+            sm.showError(ErrorMessages.HEADER_ERROR_ADD_CHILDREN, ErrorMessages.TITLE_ERROR_ADD_CHILDREN, response.toString());
         }
     }
 

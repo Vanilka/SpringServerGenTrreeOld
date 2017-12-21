@@ -333,11 +333,11 @@ public class ScreenManager implements ContextProvider {
             tabPane.getSelectionModel().select(tab);
             controller.setTabAndTPane(tabPane, tab);
 
-
         } catch (IOException ex) {
             ex.printStackTrace();
             log.error(ex.getMessage());
             log.error(ex.getCause());
+
 
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -355,12 +355,7 @@ public class ScreenManager implements ContextProvider {
             controller = loader.getController();
             controller.setTabAndTPane(tabPane, tab);
 
-        } catch (IOException ex) {
-            log.error(ex.getMessage());
-            log.error(ex.getCause());
-            ex.printStackTrace();
-
-        } catch (Exception ex) {
+        }  catch (Exception ex) {
             log.error(ex.getMessage());
             log.error(ex.getCause());
             ex.printStackTrace();

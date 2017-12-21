@@ -123,6 +123,7 @@ public class GenTreeOnlineService extends GenTreeService implements FamilyServic
 
     @Override
     public ServiceResponse removeRelation(Relation r) {
+        ServiceResponse response = rcs.removeRelation(r);
         return null;
     }
 

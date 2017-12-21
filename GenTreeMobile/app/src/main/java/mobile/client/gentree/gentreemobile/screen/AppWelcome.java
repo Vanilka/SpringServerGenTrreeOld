@@ -45,8 +45,8 @@ public class AppWelcome extends AppCompatActivity {
     }
 
     private void doLogin(View view, String login, String password) {
-        LoginTask lt = new LoginTask(view);
-        lt.execute(login, password);
+        LoginTask lt = new LoginTask(view, login, password);
+        lt.execute();
 
     }
 }

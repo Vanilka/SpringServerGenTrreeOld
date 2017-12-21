@@ -1,10 +1,8 @@
 package mobile.client.gentree.gentreemobile.rest.tasks;
 
-import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
-import com.fasterxml.jackson.core.type.TypeReference;
 import gentree.exception.ExceptionBean;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerDTO;
@@ -19,20 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
- * Created by vanilka on 15/12/2017.
+ * Created by vanilka on 21/12/2017.
  */
-public class RetrieveFullFamilyTask extends RestTask {
-
-
+public class ReloadFullFamilyTask extends RestTask {
     private View view;
 
     private OwnerDTO currentOwner;
     private FamilyDTO family;
 
-    public RetrieveFullFamilyTask(View view, OwnerDTO ownerDTO, FamilyDTO familyDTO) {
+    public ReloadFullFamilyTask(View view, OwnerDTO ownerDTO, FamilyDTO familyDTO) {
         this.family = familyDTO;
         this.currentOwner = ownerDTO;
         this.view = view;
@@ -77,5 +72,4 @@ public class RetrieveFullFamilyTask extends RestTask {
             this.serverResponse = new ExceptionResponse(exceptionBean);
         }
     }
-
 }

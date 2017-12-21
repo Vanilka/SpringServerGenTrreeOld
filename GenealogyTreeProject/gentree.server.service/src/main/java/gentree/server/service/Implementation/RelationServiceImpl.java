@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +25,7 @@ public class RelationServiceImpl implements RelationService {
     public RelationEntity addNewRelation(RelationEntity relation) {
 
         System.out.println("Relation to persist : " + relation);
-
+        updateOtherRelationToFalse(relation);
         relation = repository.saveAndFlush(relation);
         //Delete nulls
         removeOrphans(relation.getFamily().getId());
@@ -115,6 +116,20 @@ public class RelationServiceImpl implements RelationService {
 
         repository.deleteAll(mergingList);
         return toMerge;
+    }
+
+    private void updateOtherRelationToFalse(RelationEntity entity) {
+
+        if (entity.isActive() && !Objects.equals(entity.getType(), RelationType.NEUTRAL)) {
+            List<RelationEntity> relationList = repository.findAllByFamilyId(entity.getFamily().getId());
+            relationList.stream()
+                    .filter(r -> r.getLeft() != null && r.getRight() != null && r.getType() != RelationType.NEUTRAL)
+                    .filter(r -> r.compareLeft(entity.getLeft())
+                            || r.compareLeft(entity.getRight())
+                            || r.compareRight(entity.getRight())
+                            || r.compareRight(entity.getLeft()))
+                    .forEach(r -> r.setActive(false));
+        }
     }
 
 

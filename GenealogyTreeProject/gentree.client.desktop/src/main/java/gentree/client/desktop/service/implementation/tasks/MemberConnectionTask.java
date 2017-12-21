@@ -32,8 +32,6 @@ public class MemberConnectionTask extends ConnectionTask {
         MemberDTO dto = cmd.convert(member);
         dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
 
-        log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
-
         Response response = cs.doPost(ServerPaths.MEMBER.concat(ServerPaths.ADD), Entity.json(dto));
 
         if (response.getStatus() == 200) {
@@ -55,14 +53,14 @@ public class MemberConnectionTask extends ConnectionTask {
         ServiceResponse serviceResponse = null;
         MemberDTO dto = cmd.convert(member);
         dto.setFamily(cmd.convertLazy(service.getCurrentFamily()));
-        log.info(LogMessages.MSG_POST_REQUEST, Entity.json(dto));
-
         Response response = cs.doPost(ServerPaths.MEMBER.concat(ServerPaths.UPDATE), Entity.json(dto));
+        response.bufferEntity();
+
+        log.info(LogMessages.MSG_SERVER_RETURNED_RESPONE, response.getStatus(), response.getEntity());
 
         if (response.getStatus() == 200) {
             try {
                 MemberDTO returnedDTO = response.readEntity(MemberDTO.class);
-                System.out.println("Returned DTO is  :" + returnedDTO);
                 cdm.convertTo(member, returnedDTO);
                 serviceResponse = new MemberResponse(member);
 

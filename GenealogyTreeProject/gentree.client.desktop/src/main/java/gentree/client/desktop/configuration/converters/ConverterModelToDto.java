@@ -60,4 +60,11 @@ public class ConverterModelToDto {
         return dto;
     }
 
+    public RelationDTO convertLazy(Relation m) {
+        RelationDTO dto = new RelationDTO();
+        dto.setVersion(m.getVersion());
+        dto.setId(m.getId());
+        return dto;
+    }
+
 }

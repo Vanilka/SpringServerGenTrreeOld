@@ -9,6 +9,7 @@ import gentree.client.desktop.controllers.FXMLController;
 import gentree.client.desktop.domain.Family;
 import gentree.client.desktop.service.FamilyService;
 import gentree.client.desktop.service.implementation.GenTreeLocalService;
+import gentree.client.desktop.service.implementation.GenTreeOnlineService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -138,8 +139,15 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     private void serviceChanged(ObservableValue<? extends FamilyService> obsContext, FamilyService oldContext, FamilyService newContext) {
         if (newContext != null) {
             newContext.familyProperty().addListener(familyListener);
+            if(newContext instanceof GenTreeOnlineService) {
+                MENU_ITEM_SAVE_PROJECT_AS.setVisible(false);
+            } else {
+                MENU_ITEM_SAVE_PROJECT_AS.setVisible(true);
+            }
+
         } else {
             changeElementsVisibility(false);
+
         }
 
         if (oldContext != null) {
@@ -220,6 +228,7 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
 
     @FXML
     public void saveToXML() {
+        if(context.getService() instanceof GenTreeLocalService)
         ((GenTreeLocalService) context.getService()).saveProject();
     }
 

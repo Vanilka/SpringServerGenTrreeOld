@@ -11,26 +11,26 @@ import mobile.client.gentree.gentreemobile.R;
 /**
  * Created by vanilka on 15/12/2017.
  */
-public class CustomListView extends ListView {
+public class CustomFamilyListView extends ListView {
 
    private ViewGroup header;
 
-    public CustomListView(Context context) {
+    public CustomFamilyListView(Context context) {
         super(context);
         init();
     }
 
-    public CustomListView(Context context, AttributeSet attrs) {
+    public CustomFamilyListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public CustomListView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomFamilyListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public CustomListView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomFamilyListView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
