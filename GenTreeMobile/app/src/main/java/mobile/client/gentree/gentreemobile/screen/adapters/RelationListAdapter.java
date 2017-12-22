@@ -55,6 +55,7 @@ public class RelationListAdapter extends ArrayAdapter<RelationDTO> {
         }
 
         ImageView photoType = (ImageView) convertView.findViewById(R.id.photoType);
+        System.out.println("Relation Type Is  :  " +relationDTO.getType());
         setTypePhoto(photoType, relationDTO.getType());
 
         return convertView;
@@ -72,16 +73,13 @@ public class RelationListAdapter extends ArrayAdapter<RelationDTO> {
         }
     }
 
-    private void setTypePhoto(ImageView imageView, RelationType type) {
+    private void setTypePhoto(ImageView imageView, RelationType relationType) {
         int intType;
 
-        switch (type) {
-            case LOVE:
-                intType = R.drawable.type_love;
-            case FIANCE:
-                intType = R.drawable.type_fiance;
-            case MARRIED:
-                intType = R.drawable.type_maried;
+        switch (relationType) {
+            case LOVE: intType = R.drawable.type_love; break;
+            case FIANCE: intType = R.drawable.type_fiance; break;
+            case MARRIED: intType = R.drawable.type_maried; break;
             default:
                 intType = R.drawable.type_neutral;
         }
