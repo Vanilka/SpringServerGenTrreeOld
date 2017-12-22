@@ -47,9 +47,6 @@ public class OwnerService {
         MemberDTO target = memberDTO;
         for(int i =0; i < family.getMembers().size(); i++) {
 
-            System.out.println("From family : " +family.getMembers().get(i));
-            System.out.println("Parameter : " +memberDTO);
-
            if(Objects.equals(family.getMembers().get(i).getId(), memberDTO.getId())) {
                  target = family.getMembers().get(i);
                  i = family.getMembers().size();
