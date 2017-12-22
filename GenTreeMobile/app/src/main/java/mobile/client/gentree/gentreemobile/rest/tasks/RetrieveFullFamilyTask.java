@@ -14,6 +14,7 @@ import mobile.client.gentree.gentreemobile.configuration.utilities.ServerUrl;
 import mobile.client.gentree.gentreemobile.rest.responses.ExceptionResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.FamilyResponse;
 import mobile.client.gentree.gentreemobile.rest.responses.ServerResponse;
+import mobile.client.gentree.gentreemobile.screen.FamilyView;
 import mobile.client.gentree.gentreemobile.screen.ProjectListActivity;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -63,6 +64,7 @@ public class RetrieveFullFamilyTask extends RestTask {
 
         if(serverResponse.getStatus() == ServerResponse.ResponseStatus.OK) {
             System.out.println("Retrieved Familly : " + ((FamilyResponse) serverResponse).getFamily());
+            openProjectViewActivity(currentOwner, ((FamilyResponse) serverResponse).getFamily());
         } else {
             Snackbar.make(view, "Error while retrieve family", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
@@ -85,8 +87,10 @@ public class RetrieveFullFamilyTask extends RestTask {
     private void openProjectViewActivity(OwnerDTO currentOwner, FamilyDTO familyDTO) {
         try {
             String userJson = objectMapper.writeValueAsString(currentOwner);
-            Intent intent = new Intent(context, ProjectListActivity.class);
+            String familyJson = objectMapper.writeValueAsString(familyDTO);
+            Intent intent = new Intent(context, FamilyView.class);
             intent.putExtra(BundleParams.CURRENT_USER, userJson);
+            intent.putExtra(BundleParams.CURRENT_FAMILY, familyJson);
             context.startActivity(intent);
         } catch (Exception e) {
             Snackbar.make(view, "conversion error", Snackbar.LENGTH_LONG)

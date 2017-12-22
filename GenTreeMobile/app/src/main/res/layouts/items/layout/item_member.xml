@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="81dp"
+        tools:layout_editor_absoluteX="0dp">
+
     <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name" />
-    <TextView
-            android:id="@+id/surname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="surname" />
+            android:text="name"
+            tools:layout_editor_absoluteY="55dp"
+            tools:layout_editor_absoluteX="124dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/simPhoto"/>
+
     <TextView
             android:id="@+id/borname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="borname" />
-</LinearLayout>
+            android:text="borname"
+            tools:layout_editor_absoluteY="38dp"
+            tools:layout_editor_absoluteX="75dp"
+            android:layout_alignBottom="@+id/simPhoto"
+            android:layout_alignStart="@+id/surname"
+            android:layout_marginBottom="10dp"/>
+
+    <TextView
+            android:id="@+id/surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="surname"
+            tools:layout_editor_absoluteY="90dp"
+            tools:layout_editor_absoluteX="124dp"
+            android:layout_below="@+id/name"
+            android:layout_alignStart="@+id/name"
+            android:layout_marginTop="13dp"/>
+
+    <ImageView
+            app:srcCompat="@drawable/generic_male"
+            android:id="@+id/simPhoto"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="32dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
+</RelativeLayout>
