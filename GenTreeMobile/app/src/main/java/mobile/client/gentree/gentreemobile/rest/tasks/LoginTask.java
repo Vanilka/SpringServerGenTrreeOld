@@ -8,6 +8,7 @@ import android.view.View;
 import gentree.exception.ExceptionBean;
 import gentree.server.dto.OwnerDTO;
 import gentree.server.dto.OwnerExtendedDTO;
+import mobile.client.gentree.gentreemobile.configuration.OwnerService;
 import mobile.client.gentree.gentreemobile.configuration.utilities.BundleParams;
 import mobile.client.gentree.gentreemobile.configuration.utilities.ServerUrl;
 import mobile.client.gentree.gentreemobile.rest.responses.ExceptionResponse;
@@ -27,9 +28,7 @@ import java.net.URI;
  */
 public class LoginTask extends RestTask {
 
-
     private View view;
-
     private String login;
     private String password;
 
@@ -63,18 +62,17 @@ public class LoginTask extends RestTask {
         if (serverResponse.getStatus() == ServerResponse.ResponseStatus.OK) {
             Snackbar.make(view, "Login OK", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            openProjectListActivity(((UserResponse) serverResponse).getOwner());
+            ownerService.setOwner(((UserResponse) serverResponse).getOwner());
+            openProjectListActivity();
         } else {
             Snackbar.make(view, "Login Not possible", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
     }
 
-    private void openProjectListActivity(OwnerDTO currentOwner) {
+    private void openProjectListActivity() {
         try {
-            String userJson = objectMapper.writeValueAsString(currentOwner);
             Intent intent = new Intent(context, ProjectListActivity.class);
-            intent.putExtra(BundleParams.CURRENT_USER, userJson);
             context.startActivity(intent);
         } catch (Exception e) {
             Snackbar.make(view, "conversion error", Snackbar.LENGTH_LONG)

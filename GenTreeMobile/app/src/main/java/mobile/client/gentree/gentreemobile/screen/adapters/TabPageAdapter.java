@@ -21,9 +21,10 @@ public class TabPageAdapter extends FragmentPagerAdapter {
     private final List<FragmentWrapper> tabList = new ArrayList<>();
 
     @Getter
-    private final MemberListFragment membersFragment = new MemberListFragment();
-    @Setter
-    private final RelationListFragment relationsFragment = new RelationListFragment();
+    private final MemberListFragment membersFragment = MemberListFragment.newInstance(this);
+
+    @Getter
+    private final RelationListFragment relationsFragment = RelationListFragment.newInstance(this);
 
 
     public TabPageAdapter(FragmentManager fm) {

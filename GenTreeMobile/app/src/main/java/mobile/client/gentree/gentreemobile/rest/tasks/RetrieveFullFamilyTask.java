@@ -33,12 +33,10 @@ public class RetrieveFullFamilyTask extends RestTask {
 
     private View view;
 
-    private OwnerDTO currentOwner;
     private FamilyDTO family;
 
-    public RetrieveFullFamilyTask(View view, OwnerDTO ownerDTO, FamilyDTO familyDTO) {
+    public RetrieveFullFamilyTask(View view, FamilyDTO familyDTO) {
         this.family = familyDTO;
-        this.currentOwner = ownerDTO;
         this.view = view;
         this.context = view.getContext();
     }
@@ -46,7 +44,7 @@ public class RetrieveFullFamilyTask extends RestTask {
     @Override
     protected ServerResponse doInBackground(Void... voids) {
         try {
-            doGet(generateHttpEntity(currentOwner.getLogin(), currentOwner.getPassword()));
+            doGet(generateHttpEntity(ownerService.getOwner().getLogin(), ownerService.getOwner().getPassword()));
         } catch (HttpClientErrorException e) {
             System.out.println("error message : " + e.getMessage());
             serverResponse = new ExceptionResponse();
@@ -64,7 +62,8 @@ public class RetrieveFullFamilyTask extends RestTask {
 
         if(serverResponse.getStatus() == ServerResponse.ResponseStatus.OK) {
             System.out.println("Retrieved Familly : " + ((FamilyResponse) serverResponse).getFamily());
-            openProjectViewActivity(currentOwner, ((FamilyResponse) serverResponse).getFamily());
+            ownerService.setFamily(((FamilyResponse) serverResponse).getFamily());
+            openProjectViewActivity();
         } else {
             Snackbar.make(view, "Error while retrieve family", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
@@ -84,13 +83,9 @@ public class RetrieveFullFamilyTask extends RestTask {
     }
 
 
-    private void openProjectViewActivity(OwnerDTO currentOwner, FamilyDTO familyDTO) {
+    private void openProjectViewActivity() {
         try {
-            String userJson = objectMapper.writeValueAsString(currentOwner);
-            String familyJson = objectMapper.writeValueAsString(familyDTO);
             Intent intent = new Intent(context, FamilyView.class);
-            intent.putExtra(BundleParams.CURRENT_USER, userJson);
-            intent.putExtra(BundleParams.CURRENT_FAMILY, familyJson);
             context.startActivity(intent);
         } catch (Exception e) {
             Snackbar.make(view, "conversion error", Snackbar.LENGTH_LONG)

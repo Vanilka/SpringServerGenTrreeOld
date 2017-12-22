@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import gentree.server.dto.FamilyDTO;
 import gentree.server.dto.OwnerExtendedDTO;
 import mobile.client.gentree.gentreemobile.R;
+import mobile.client.gentree.gentreemobile.configuration.OwnerService;
 import mobile.client.gentree.gentreemobile.configuration.utilities.BundleParams;
 import mobile.client.gentree.gentreemobile.rest.tasks.RetrieveFamiliesTask;
 import mobile.client.gentree.gentreemobile.rest.tasks.RetrieveFullFamilyTask;
@@ -15,11 +16,12 @@ import mobile.client.gentree.gentreemobile.screen.controls.CustomFamilyListView;
 
 public class ProjectListActivity extends AppCompatActivity {
 
+    private final OwnerService ownerService = OwnerService.INSTANCE;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private CustomFamilyListView projectListView;
 
-    private OwnerExtendedDTO currentOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +30,13 @@ public class ProjectListActivity extends AppCompatActivity {
 
         initialize();
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle.getString(BundleParams.CURRENT_USER) != null) {
-            readCurrentUser(bundle.getString(BundleParams.CURRENT_USER));
-        }
+        readCurrentUser();
     }
 
 
-    private void readCurrentUser(String string) {
+    private void readCurrentUser() {
         try {
-            currentOwner = objectMapper.readValue(string, OwnerExtendedDTO.class);
-            new RetrieveFamiliesTask(currentOwner, projectListView).execute();
+            new RetrieveFamiliesTask(ownerService.getOwner(), projectListView).execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +50,7 @@ public class ProjectListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final FamilyDTO family = (FamilyDTO)adapterView.getItemAtPosition(i);
-                new RetrieveFullFamilyTask(projectListView, currentOwner, family).execute();
+                new RetrieveFullFamilyTask(projectListView, family).execute();
             }
         });
     }

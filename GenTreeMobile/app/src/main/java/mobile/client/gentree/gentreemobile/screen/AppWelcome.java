@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import mobile.client.gentree.gentreemobile.R;
+import mobile.client.gentree.gentreemobile.configuration.OwnerService;
 import mobile.client.gentree.gentreemobile.configuration.utilities.LoginHelper;
 import mobile.client.gentree.gentreemobile.rest.tasks.LoginTask;
 

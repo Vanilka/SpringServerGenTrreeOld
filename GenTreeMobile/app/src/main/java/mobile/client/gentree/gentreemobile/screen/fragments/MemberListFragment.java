@@ -9,8 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import gentree.server.dto.MemberDTO;
+import lombok.Getter;
+import lombok.Setter;
 import mobile.client.gentree.gentreemobile.R;
 import mobile.client.gentree.gentreemobile.screen.adapters.MemberListAdapter;
+import mobile.client.gentree.gentreemobile.screen.adapters.TabPageAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +26,17 @@ public class MemberListFragment extends Fragment {
     private final ArrayList<MemberDTO> members = new ArrayList<>();
     private ListView memberListView;
 
+    @Getter
+    @Setter
+    private TabPageAdapter tabPageAdapter;
+
 
     public MemberListFragment() {
     }
 
-    public static MemberListFragment newInstance() {
+    public static MemberListFragment newInstance(TabPageAdapter tabPageAdapter) {
         MemberListFragment fragment = new MemberListFragment();
+        fragment.setTabPageAdapter(tabPageAdapter);
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
