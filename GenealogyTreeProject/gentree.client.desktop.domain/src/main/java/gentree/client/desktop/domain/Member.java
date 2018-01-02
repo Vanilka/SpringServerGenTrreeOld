@@ -275,6 +275,6 @@ public class Member implements Serializable {
 
 
     public Stream<? extends Property> getProperties() {
-        return Stream.of(this.id, this.name, this.surname, this.bornname, this.gender, this.age, this.race, this.deathCause);
+        return Stream.of(this.id, this.name, this.surname, this.photo,  this.bornname, this.gender, this.age, this.race, this.deathCause);
     }
 }

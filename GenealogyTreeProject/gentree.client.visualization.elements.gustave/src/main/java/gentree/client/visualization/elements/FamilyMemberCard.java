@@ -139,9 +139,9 @@ public class FamilyMemberCard extends AnchorPane implements AutoCleanable {
             photoSim.setImage(new Image(ImageFiles.NO_NAME_MALE.toString()));
         }
 
-        Rectangle clip = new Rectangle(
+/*        Rectangle clip = new Rectangle(
                 photoSim.getFitWidth(), photoSim.getFitHeight()
-        );
+        );*/
 
 
     }
