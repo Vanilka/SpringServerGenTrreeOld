@@ -28,6 +28,10 @@ public class Member implements Serializable {
 
     private final LongProperty version;
     private final LongProperty id;
+
+    @XmlTransient
+    private final LongProperty nodeReferenceNumber;
+
     private final StringProperty name;
     private final StringProperty surname;
     private final StringProperty bornname;
@@ -43,6 +47,7 @@ public class Member implements Serializable {
     {
         this.version = new SimpleLongProperty();
         this.id = new SimpleLongProperty();
+        this.nodeReferenceNumber = new SimpleLongProperty();
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
         this.bornname = new SimpleStringProperty();
@@ -111,6 +116,19 @@ public class Member implements Serializable {
 
     public LongProperty idProperty() {
         return id;
+    }
+
+    @XmlTransient
+    public long getNodeReferenceNumber() {
+        return nodeReferenceNumber.get();
+    }
+
+    public LongProperty nodeReferenceNumberProperty() {
+        return nodeReferenceNumber;
+    }
+
+    public void setNodeReferenceNumber(long nodeReferenceNumber) {
+        this.nodeReferenceNumber.set(nodeReferenceNumber);
     }
 
     public String getName() {

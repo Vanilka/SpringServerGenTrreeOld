@@ -2,6 +2,7 @@ package gentree.client.visualization.gustave.panels;
 
 import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
+import gentree.client.visualization.elements.FamilyGroup;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
@@ -56,6 +57,7 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     private ListChangeListener<? super PanelChild> childrenListListener = this::childrenListChanged;
     private ChangeListener<? super Relation> thisRelationListener = this::thisRelationChanged;
 
+
     /*
         Initialization
      */
@@ -84,7 +86,6 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
         this.member.setMember(m);
         this.thisRelation.setValue(thisRelation);
     }
-
 
 
     /*
@@ -191,7 +192,10 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
             }
             if (c.wasRemoved()) {
                 childrenBox.getChildren().removeAll(c.getRemoved());
-                c.getAddedSubList().forEach(childrenConnector::removePanelChild);
+                c.getRemoved().forEach(panelChild -> {
+                    childrenConnector.removePanelChild(panelChild);
+                    panelChild.clean();
+                });
             }
         }
     }
@@ -199,4 +203,5 @@ public class PanelSingle extends SubRelationPane implements RelationPane {
     private void thisRelationChanged(ObservableValue<? extends Relation> observable, Relation oldValue, Relation newValue) {
         thisRelationReference.setRelation(newValue);
     }
+
 }

@@ -1,6 +1,8 @@
 package gentree.client.visualization.gustave.panels;
 
 import gentree.client.desktop.domain.Member;
+import gentree.client.visualization.elements.FamilyGroup;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.gustave.connectors.SpouseConnector;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -54,12 +56,15 @@ public class PanelChild extends SubBorderPane {
 
     private final ObjectProperty<PanelSingle> panelSingle;
     private final ObjectProperty<PanelRelationCurrent> panelRelationCurrent;
-    private final ObservableList<PanelRelationEx> panelRelationEx;
+    private final ObservableList<PanelRelationEx> panelRelationExList;
     private final ObjectProperty<Member> member;
     private SpouseConnector spouseConnector;
+
+
     private ListChangeListener<? super PanelRelationEx> panelRelationExListener = this::panelRelationExChanged;
     private ChangeListener<? super PanelRelationCurrent> panelRelationCurrentListener = this::panelRelationCurrentChanged;
     private ChangeListener<? super PanelSingle> panelSingleListener = this::panelSingleChanged;
+    private ChangeListener<? super FamilyGroup> familyGroupListener = this::familyGroupChanged;
 
     {
         panelSinglePane = new AnchorPane();
@@ -69,7 +74,7 @@ public class PanelChild extends SubBorderPane {
         member = new SimpleObjectProperty<>();
         panelSingle = new SimpleObjectProperty<>();
         panelRelationCurrent = new SimpleObjectProperty<>();
-        panelRelationEx = FXCollections.observableArrayList();
+        panelRelationExList = FXCollections.observableArrayList();
         spouseConnector = new SpouseConnector(this);
         initListeners();
         initPanes();
@@ -107,14 +112,16 @@ public class PanelChild extends SubBorderPane {
     private void initListeners() {
         panelSingle.addListener(panelSingleListener);
         panelRelationCurrent.addListener(panelRelationCurrentListener);
-        panelRelationEx.addListener(panelRelationExListener);
+        panelRelationExList.addListener(panelRelationExListener);
+        familyGroupProperty().addListener(familyGroupListener);
     }
 
     private void cleanListeners() {
         prefWidthProperty().unbind();
         panelSingle.removeListener(panelSingleListener);
         panelRelationCurrent.removeListener(panelRelationCurrentListener);
-        panelRelationEx.removeListener(panelRelationExListener);
+        panelRelationExList.removeListener(panelRelationExListener);
+        familyGroupProperty().removeListener(familyGroupListener);
 
     }
 
@@ -150,12 +157,15 @@ public class PanelChild extends SubBorderPane {
             } else if (c.wasRemoved()) {
                 //  c.getRemoved().forEach(PanelRelationEx::clean);
                 panelRelationExPane.getChildren().removeAll(c.getRemoved());
+                c.getRemoved().forEach(removed -> {
+                    if(removed instanceof AutoCleanable) ((AutoCleanable) removed).clean();
+                });
             }
         }
     }
 
     public void addRelationsEx(PanelRelationEx... relations) {
-        panelRelationEx.addAll(relations);
+        panelRelationExList.addAll(relations);
     }
 
     private void initPanes() {
@@ -166,7 +176,7 @@ public class PanelChild extends SubBorderPane {
         member.setValue(null);
         panelSingle.setValue(null);
         panelRelationCurrent.setValue(null);
-        panelRelationEx.clear();
+        panelRelationExList.clear();
         spouseConnector = null;
     }
 
@@ -179,7 +189,7 @@ public class PanelChild extends SubBorderPane {
         }
 
         panelSingle.get().clean();
-        panelRelationEx.forEach(PanelRelationEx::clean);
+        panelRelationExList.clear();
         spouseConnector.clean();
 
         setElementsNull();
@@ -225,5 +235,11 @@ public class PanelChild extends SubBorderPane {
     public void setPanelRelationCurrent(PanelRelationCurrent panelRelationCurrent) {
         this.panelRelationCurrent.set(panelRelationCurrent);
         panelRelationCurrent.setParentPane(this);
+    }
+
+    private  void familyGroupChanged(ObservableValue<? extends FamilyGroup> observable, FamilyGroup oldValue, FamilyGroup newValue) {
+        if(getMember() != null && newValue != null) {
+            getMember().setNodeReferenceNumber(newValue.getIdNode());
+        }
     }
 }

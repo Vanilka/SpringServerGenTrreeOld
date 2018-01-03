@@ -103,7 +103,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         this(spouse, thisRelation, null);
     }
 
-
     private void initPanes() {
         initHbox();
         this.setCenter(childrenBox);
@@ -115,7 +114,6 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
         relation.setPrefHeight(RELATION_HEIGHT);
         relation.setMinHeight(RELATION_HEIGHT);
     }
-
 
     private void initAnchorPanesOffset() {
         relation.setMinWidth(MINIMAL_RELATION_WIDTH);
@@ -250,8 +248,8 @@ public class PanelRelationEx extends SubRelationPane implements RelationPane {
             } else if (c.wasRemoved()) {
                 childrenBox.getChildren().removeAll(c.getRemoved());
                 c.getRemoved().forEach(panelChild -> {
-                    panelChild.clean();
                     childrenConnector.removePanelChild(panelChild);
+                    panelChild.clean();
                 });
             }
         }

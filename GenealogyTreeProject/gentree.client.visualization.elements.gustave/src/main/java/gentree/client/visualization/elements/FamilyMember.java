@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -60,12 +61,8 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
         this.setOnMouseExited(this::mouseExitedEvent);
 
         if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
-            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showSimContextMenu(returnThis(), event));
-            this.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && getMember() != null) {
-                    CONTEXT_PROVIDER_PROPERTY.get().showInfoSim(getMember());
-                }
-            });
+            this.setOnContextMenuRequested(this::handleContextMenuRequest);
+            this.setOnMouseClicked(this::HandleMouseClicked);
         }
 
         CONTEXT_PROVIDER_PROPERTY.addListener(contextListener);
@@ -88,7 +85,6 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
 
     @Override
     public void clean() {
-        System.out.println("CLEAN Family Member" + getMember());
         super.clean();
         CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnContextMenuRequested(null);
@@ -128,5 +124,15 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     private void setStrokeColor(Color color) {
         rectangleFond.setStroke(color);
         rectanglePhotoFond.setStroke(color);
+    }
+
+    private void HandleMouseClicked(MouseEvent event) {
+        if (event.getClickCount() == 2 && getMember() != null) {
+            CONTEXT_PROVIDER_PROPERTY.get().showInfoSim(getMember());
+        }
+    }
+
+    private void handleContextMenuRequest(ContextMenuEvent event) {
+        CONTEXT_PROVIDER_PROPERTY.get().showSimContextMenu(returnThis(), event);
     }
 }

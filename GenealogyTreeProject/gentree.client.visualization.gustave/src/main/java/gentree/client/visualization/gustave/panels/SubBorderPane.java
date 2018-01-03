@@ -36,11 +36,6 @@ public abstract class SubBorderPane extends BorderPane implements AutoCleanable 
 
     public SubBorderPane() {
         initParentListeners();
-/*
- this.setOnMouseClicked(event -> {
-            System.out.println(this + " Parent " + getParent());
-            System.out.println("Family Group ? " + familyGroup.getValue() == null ? "null" : familyGroup.get());
-        });*/
     }
 
     protected void initBorder(Color color, Pane node) {
@@ -67,7 +62,6 @@ public abstract class SubBorderPane extends BorderPane implements AutoCleanable 
         familyGroup.unbind();
         parentPane.setValue(null);
         familyGroup.setValue(null);
-
         parentPaneListener = null;
     }
 
@@ -103,6 +97,7 @@ public abstract class SubBorderPane extends BorderPane implements AutoCleanable 
     private void parentPaneChanged(ObservableValue<? extends SubBorderPane> observable, SubBorderPane oldValue, SubBorderPane newValue) {
         if (oldValue != null) {
             familyGroup.unbind();
+            familyGroup.setValue(null);
         }
 
         if (newValue == null) {

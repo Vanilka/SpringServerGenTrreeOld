@@ -22,15 +22,17 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
 
     private static final long serialVersionUID = 7679518429380405561L;
     @XmlTransient
+    private LongProperty version;
+    private LongProperty id;
+    @XmlTransient
     private final LongProperty referenceNumber;
+
     private final ObjectProperty<Member> left;
     private final ObjectProperty<Member> right;
     private final ObservableList<Member> children;
     private final ObjectProperty<RelationType> type;
     private final BooleanProperty active;
-    @XmlTransient
-    private LongProperty version;
-    private LongProperty id;
+
 
     {
         this.version = new SimpleLongProperty();
@@ -41,6 +43,7 @@ public class Relation extends Observable implements Serializable, Comparable<Rel
         this.children = FXCollections.observableArrayList();
         this.type = new SimpleObjectProperty<>(RelationType.NEUTRAL);
         this.active = new SimpleBooleanProperty();
+
 
     }
 

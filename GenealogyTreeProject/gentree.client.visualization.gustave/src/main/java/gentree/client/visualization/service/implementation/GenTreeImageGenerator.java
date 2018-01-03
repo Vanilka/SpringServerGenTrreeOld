@@ -32,16 +32,19 @@ public class GenTreeImageGenerator {
     private GenTreeImageGenerator() {
         initHeader();
         initParameters();
+    }
+
+    private void generateImagePane() {
+        imagePane = null;
+        imagePane = new BorderPane();
         imagePane.setTop(headerPane);
         imagePane.setCenter(content);
         imagePane.autosize();
-
         imagePane.setStyle(
                 "-fx-background-image: url(" +
                         "'layout/images/backgrounds/gentreebackground.jpg');" +
                         "-fx-background-size: cover;"
         );
-
     }
 
     private void initParameters() {
@@ -60,10 +63,10 @@ public class GenTreeImageGenerator {
     }
 
     public WritableImage doScreen(Node nodeContent, String text) {
-
         this.title.setText(text);
         content.getChildren().clear();
         content.getChildren().add(new ImageView(nodeContent.snapshot(snapshotParameters, null)));
+        generateImagePane();
         Scene scene = new Scene(imagePane);
         return scene.snapshot(null);
     }

@@ -218,7 +218,7 @@ public class MainMenuController implements Initializable, FXMLController, FXMLBo
     }
 
     @FXML
-    public void generateImage() throws IOException, AWTException {
+    public void generateImage() throws IOException {
 
         WritableImage image = sm.getScreenMainRightController().Image();
         File file = new File("./GenTree" + LocalDateTime.now() + ".png");

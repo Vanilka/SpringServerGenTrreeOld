@@ -5,6 +5,7 @@ import gentree.client.desktop.domain.Member;
 import gentree.client.desktop.domain.Relation;
 import gentree.client.desktop.service.FamilyContext;
 import gentree.client.desktop.service.GenTreeDrawingService;
+import gentree.client.visualization.CleanTask;
 import gentree.client.visualization.elements.FamilyGroup;
 import gentree.client.visualization.gustave.panels.*;
 import gentree.common.configuration.enums.RelationType;
@@ -17,6 +18,8 @@ import lombok.extern.log4j.Log4j2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 06/07/2017.
@@ -253,10 +256,9 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     }
 
     private void reset() {
-/*       for(Node n : box.getChildren()) {
-           if(n instanceof AutoCleanable)  ((AutoCleanable) n).clean();
-       }*/
-        box.getChildren().clear();
+
+        cleanGenTree();
+
         nodeCounter = 1;
         List<Relation> list = context.getService().getCurrentFamily().getRelations()
                 .filtered(r -> r.getReferenceNumber() > 0);
@@ -272,5 +274,11 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
             log.error(LogMessages.MSG_ERROR_BORN, m);
             return null;
         }
+    }
+
+    private void cleanGenTree() {
+        ExecutorService executor = Executors.newFixedThreadPool(4);
+        box.getChildren().forEach(n -> executor.submit(new CleanTask(n)));
+        box.getChildren().clear();
     }
 }

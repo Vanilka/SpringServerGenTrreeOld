@@ -46,7 +46,7 @@ public class SpouseConnector extends LineConnector {
 
     private void initLines() {
         BooleanBinding exEmpty = Bindings.createBooleanBinding(() ->
-                panelChild.getPanelRelationEx().isEmpty(), panelChild.getPanelRelationEx());
+                panelChild.getPanelRelationExList().isEmpty(), panelChild.getPanelRelationExList());
 
         BooleanBinding currentEmpty = Bindings.createBooleanBinding(() ->
                 panelChild.getPanelRelationCurrent().get() == null, panelChild.getPanelRelationCurrent());

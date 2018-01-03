@@ -5,6 +5,7 @@ import gentree.client.desktop.domain.Relation;
 import gentree.client.visualization.elements.FamilyMember;
 import gentree.client.visualization.elements.RelationReference;
 import gentree.client.visualization.elements.RelationTypeElement;
+import gentree.client.visualization.elements.configuration.AutoCleanable;
 import gentree.client.visualization.gustave.connectors.ParentToChildrenConnector;
 import gentree.common.configuration.enums.RelationType;
 import javafx.beans.binding.Bindings;
@@ -52,6 +53,8 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
     private final ObservableList<PanelChild> children;
     private final RelationReference thisRelationReference;
     private final RelationReference spouseRelationReference;
+
+
     private final ObjectProperty<Relation> spouseBornRelation;
     private final ObjectProperty<RelationType> relationType;
     private final ObjectProperty<Member> spouse;
@@ -132,7 +135,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
         initElementsPositionListeners();
     }
 
-
     private void initElementsPositionListeners() {
 
         /*
@@ -156,7 +158,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
                         .subtract(PADDING_LEFT))
                 .otherwise(100));
     }
-
 
     private void cleanListeners() {
         spouse.removeListener(spouseListener);
@@ -264,12 +265,13 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
                 c.getAddedSubList().forEach(panelChild -> {
                     panelChild.setParentPane(this);
                     childrenConnector.addPanelChild(panelChild);
-
-
                 });
             } else if (c.wasRemoved()) {
                 childrenBox.getChildren().removeAll(c.getRemoved());
-                c.getRemoved().forEach(childrenConnector::removePanelChild);
+                c.getRemoved().forEach(panelChild -> {
+                    childrenConnector.removePanelChild(panelChild);
+                    panelChild.clean();
+                });
             }
         }
     }
@@ -290,4 +292,6 @@ public class PanelRelationCurrent extends SubRelationPane implements RelationPan
             relation.getChildren().addAll(relationTypeElement, spouseCard, spouseRelationReference, thisRelationReference);
         }
     }
+
+
 }
