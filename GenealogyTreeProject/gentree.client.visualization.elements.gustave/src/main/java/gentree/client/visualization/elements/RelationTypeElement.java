@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class RelationTypeElement extends RelationTypeCard {
 
-    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
+    private static ContextProvider CONTEXT_PROVIDER_PROPERTY;
     private ChangeListener<? super ContextProvider> contextProviderListener = this::contextProviderChange;
 
     {
@@ -34,7 +34,7 @@ public class RelationTypeElement extends RelationTypeCard {
     }
 
     public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
+        CONTEXT_PROVIDER_PROPERTY = contextProviderProperty;
     }
 
     private void init() {
@@ -48,18 +48,15 @@ public class RelationTypeElement extends RelationTypeCard {
         });
 
 
-        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
-            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.get().showRelationContextMenu(returnThis(), event));
+        if (CONTEXT_PROVIDER_PROPERTY != null) {
+            this.setOnContextMenuRequested(event -> CONTEXT_PROVIDER_PROPERTY.showRelationContextMenu(returnThis(), event));
             this.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && relation.get() != null) {
-                    CONTEXT_PROVIDER_PROPERTY.get().showInfoRelation(relation.get());
+                    CONTEXT_PROVIDER_PROPERTY.showInfoRelation(relation.get());
                 }
             });
 
         }
-
-
-        CONTEXT_PROVIDER_PROPERTY.addListener(contextProviderListener);
     }
 
     private void initShadow() {
@@ -91,11 +88,8 @@ public class RelationTypeElement extends RelationTypeCard {
     @Override
     public void clean() {
         super.clean();
-        CONTEXT_PROVIDER_PROPERTY.removeListener(contextProviderListener);
         this.setOnMouseClicked(null);
         this.setOnContextMenuRequested(null);
-
-        CONTEXT_PROVIDER_PROPERTY.setValue(null);
         relation.setValue(null);
         relationType.setValue(null);
 

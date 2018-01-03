@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
  */
 public class RelationReference extends StackPane implements AutoCleanable {
 
-    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
+    private static ContextProvider CONTEXT_PROVIDER_PROPERTY;
 
     private static final Color color1 = Color.web("#ED0C44");
     private static final Color border1 = Color.web("#aa0b33");
@@ -42,7 +42,7 @@ public class RelationReference extends StackPane implements AutoCleanable {
     }
 
     public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
+        CONTEXT_PROVIDER_PROPERTY = contextProviderProperty;
     }
 
     private void init() {
@@ -51,18 +51,14 @@ public class RelationReference extends StackPane implements AutoCleanable {
         getChildren().addAll(etiquete, text);
         this.setVisible(false);
 
-        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
+        if (CONTEXT_PROVIDER_PROPERTY != null) {
             this.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && relation.get() != null) {
-                    CONTEXT_PROVIDER_PROPERTY.get().showInfoRelation(relation.get());
+                    CONTEXT_PROVIDER_PROPERTY.showInfoRelation(relation.get());
                 }
             });
 
         }
-
-
-        CONTEXT_PROVIDER_PROPERTY.addListener(contextListener);
-
     }
 
     private void initListeners() {
@@ -73,7 +69,6 @@ public class RelationReference extends StackPane implements AutoCleanable {
     private void cleanListeners() {
         relation.removeListener(relationListener);
         relationReferenceType.removeListener(relationTypeListener);
-        CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnMouseClicked(null);
 
         text.textProperty().unbind();

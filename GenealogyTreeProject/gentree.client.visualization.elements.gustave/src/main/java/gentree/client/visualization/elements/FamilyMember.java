@@ -26,7 +26,7 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     private final static int MEMBER_HEIGHT = 220;
     private final static ElementsConfig ec = ElementsConfig.INSTANCE;
     private final static String pathfxml = "/layout/elements/family.member.fxml";
-    private static final ObjectProperty<ContextProvider> CONTEXT_PROVIDER_PROPERTY = new SimpleObjectProperty<>();
+    private static ContextProvider CONTEXT_PROVIDER_PROPERTY;
     private ChangeListener<? super ContextProvider> contextListener = this::contextChanged;
 
 
@@ -51,7 +51,7 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     }
 
     public static void setContextProviderProperty(ContextProvider contextProviderProperty) {
-        CONTEXT_PROVIDER_PROPERTY.set(contextProviderProperty);
+        CONTEXT_PROVIDER_PROPERTY = contextProviderProperty;
     }
 
     private void initialize() {
@@ -60,12 +60,10 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
 
         this.setOnMouseExited(this::mouseExitedEvent);
 
-        if (CONTEXT_PROVIDER_PROPERTY.get() != null) {
+        if (CONTEXT_PROVIDER_PROPERTY != null) {
             this.setOnContextMenuRequested(this::handleContextMenuRequest);
             this.setOnMouseClicked(this::HandleMouseClicked);
         }
-
-        CONTEXT_PROVIDER_PROPERTY.addListener(contextListener);
     }
 
 
@@ -86,9 +84,10 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
     @Override
     public void clean() {
         super.clean();
-        CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
+       // CONTEXT_PROVIDER_PROPERTY.removeListener(contextListener);
         this.setOnContextMenuRequested(null);
         this.setOnMouseClicked(null);
+
         setMember(null);
         contextListener = null;
 
@@ -128,11 +127,11 @@ public class FamilyMember extends FamilyMemberCard implements AutoCleanable {
 
     private void HandleMouseClicked(MouseEvent event) {
         if (event.getClickCount() == 2 && getMember() != null) {
-            CONTEXT_PROVIDER_PROPERTY.get().showInfoSim(getMember());
+            CONTEXT_PROVIDER_PROPERTY.showInfoSim(getMember());
         }
     }
 
     private void handleContextMenuRequest(ContextMenuEvent event) {
-        CONTEXT_PROVIDER_PROPERTY.get().showSimContextMenu(returnThis(), event);
+        CONTEXT_PROVIDER_PROPERTY.showSimContextMenu(returnThis(), event);
     }
 }
