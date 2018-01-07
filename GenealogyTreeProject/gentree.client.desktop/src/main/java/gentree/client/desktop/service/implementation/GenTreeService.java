@@ -13,7 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.configuration2.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 22/10/2017.
@@ -25,21 +27,23 @@ public abstract class GenTreeService {
     protected ScreenManager sm = ScreenManager.INSTANCE;
 
 
-    public ObservableList<Member> findAllRootMembers() {
-        ObservableList<Member> rootList = FXCollections.observableArrayList();
+    public List<Member> findAllRootMembers() {
+        List<Member> rootList = new ArrayList<>();
 
-        getCurrentFamily().getRelations()
-                .filtered(r -> r.getLeft() == null)
-                .filtered(r -> r.getRight() == null)
-                .filtered(r -> !r.getChildren().isEmpty())
+        getCurrentFamily().getRelations().stream()
+                .filter(r -> r.getLeft() == null)
+                .filter(r -> r.getRight() == null)
+                .filter(r -> !r.getChildren().isEmpty())
                 .forEach(root -> rootList.addAll(root.getChildren()));
         return rootList;
     }
 
     public Relation findRelation(Member left, Member right) {
         List<Relation> list = getCurrentFamily().getRelations()
-                .filtered(r -> r.getLeft() != null || r.getRight() != null)
-                .filtered(r -> r.compareLeft(left) && r.compareRight(right));
+                .stream()
+                .filter(r -> r.getLeft() != null || r.getRight() != null)
+                .filter(r -> r.compareLeft(left) && r.compareRight(right))
+                .collect(Collectors.toList());
         System.out.println("Found similar relations : " + list.size());
 
         return list.size() == 0 ? null : list.get(0);
@@ -49,9 +53,11 @@ public abstract class GenTreeService {
 
     protected Relation findRelation(Member left, Member right, Relation excluded) {
         List<Relation> list = getCurrentFamily().getRelations()
-                .filtered(r -> r != excluded)
-                .filtered(r -> r.getLeft() != null || r.getRight() != null)
-                .filtered(r -> r.compareLeft(left) && r.compareRight(right));
+                .stream()
+                .filter(r -> r != excluded)
+                .filter(r -> r.getLeft() != null || r.getRight() != null)
+                .filter(r -> r.compareLeft(left) && r.compareRight(right))
+                .collect(Collectors.toList());
         return list.size() == 0 ? null : list.get(0);
     }
 

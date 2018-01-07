@@ -31,6 +31,7 @@ import org.apache.commons.configuration2.Configuration;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 30/07/2017.
@@ -116,17 +117,18 @@ public class DialogAddSpouseController implements Initializable, FXMLController,
     }
 
 
-    private ObservableList<Member> generateSpouseList() {
-        ObservableList<Member> list = context.getService().getCurrentFamily().getMembers()
-                .filtered(mbr -> !mbr.equals(member.get()))
-                .filtered(mbr -> mbr.getGender() != returnGenderDenied())
-                .filtered(mbr -> !isAscOf(member.get(), mbr))
-                .filtered(mbr -> !isDescOf(member.get(), mbr));
+    private List<Member> generateSpouseList() {
+        List<Member> list = context.getService().getCurrentFamily().getMembers().stream()
+                .filter(mbr -> !mbr.equals(member.get()))
+                .filter(mbr -> mbr.getGender() != returnGenderDenied())
+                .filter(mbr -> !isAscOf(member.get(), mbr))
+                .filter(mbr -> !isDescOf(member.get(), mbr))
+                .collect(Collectors.toList());
         try {
             Relation born = context.getService().getCurrentFamily().findBornRelation(member.get());
 
             for (Member sibling : born.getChildren()) {
-                list = list.filtered(p -> !p.equals(sibling));
+                list = list.stream().filter(p -> !p.equals(sibling)).collect(Collectors.toList());
             }
         } catch (Exception e) {
             log.error(e.getMessage());

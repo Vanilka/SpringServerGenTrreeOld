@@ -8,6 +8,7 @@ import gentree.client.desktop.service.GenTreeDrawingService;
 import gentree.client.visualization.elements.FamilyGroup;
 import gentree.client.visualization.vanilla.element.VMember;
 import gentree.exception.NotUniqueBornRelationException;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import lombok.extern.log4j.Log4j2;
@@ -54,6 +55,11 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
             });
         });
+    }
+
+    @Override
+    public WritableImage takeScreenshot() {
+        return null;
     }
 
     private AnchorPane generateMainPane(Member grain) {

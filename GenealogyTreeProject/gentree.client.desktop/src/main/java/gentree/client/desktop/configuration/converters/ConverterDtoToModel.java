@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 24/10/2017.
@@ -119,7 +120,7 @@ public class ConverterDtoToModel {
     public Member findMemberInListById(Long id, Family f_ref) throws Exception {
         if (f_ref == null) return null;
 
-        List<Member> filtered = f_ref.getMembers().filtered(m -> m.getId() == id);
+        List<Member> filtered = f_ref.getMembers().stream().filter(m -> m.getId() == id).collect(Collectors.toList());
         if (filtered.size() > 1) {
             //Should NEVER Happen ID is UNIQUE in DB.
             throw new Exception("NOT UNIQIE ID");

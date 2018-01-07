@@ -23,7 +23,7 @@ public interface FamilyService {
 
     ReadOnlyObjectProperty<Family> familyProperty();
 
-    ObservableList<Member> findAllRootMembers();
+    List<Member> findAllRootMembers();
 
     ServiceResponse createFamily(Family f);
 

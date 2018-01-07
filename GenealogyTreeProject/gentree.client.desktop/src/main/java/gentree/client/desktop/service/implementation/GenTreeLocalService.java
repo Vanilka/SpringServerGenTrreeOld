@@ -31,6 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 01/07/2017.
@@ -353,7 +354,11 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
 
 
     private void clearRelationFromDeletedMember(Member m) {
-        List<Relation> list = getCurrentFamily().getRelations().filtered(r -> (r.compareLeft(m)) || r.compareRight(m) || r.getChildren().contains(m));
+        List<Relation> list = getCurrentFamily().getRelations()
+                .stream()
+                .filter(r -> (r.compareLeft(m)) || r.compareRight(m) || r.getChildren().contains(m))
+                .collect(Collectors.toList());
+
         for (Relation r : list) {
             if (r.compareLeft(m)) r.setLeft(null);
             if (r.compareRight(m)) r.setRight(null);
@@ -371,7 +376,9 @@ public class GenTreeLocalService extends GenTreeService implements FamilyService
             Orphan delete
          */
         List<Relation> toDelete = getCurrentFamily().getRelations()
-                .filtered(r -> (r.getLeft() == null || r.getRight() == null) && r.getChildren().isEmpty());
+                .stream()
+                .filter(r -> (r.getLeft() == null || r.getRight() == null) && r.getChildren().isEmpty())
+                .collect(Collectors.toList());
         getCurrentFamily().getRelations().removeAll(toDelete);
         invalidate();
     }

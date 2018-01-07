@@ -98,8 +98,8 @@ public class ProjectsLocalFilesService extends ProjectsFilesService {
      * @param family
      */
     public void copyImagesToTargetProject(Family family) {
-        family.getMembers()
-                .filtered(m -> needCopy(m.getPhoto()))
+        family.getMembers().stream()
+                .filter(m -> needCopy(m.getPhoto()))
                 .forEach(member -> {
                     String newPath = movePhoto(Paths.get(
                             config.getString(PropertiesKeys.PARAM_DIR_PROJECT_NAME),

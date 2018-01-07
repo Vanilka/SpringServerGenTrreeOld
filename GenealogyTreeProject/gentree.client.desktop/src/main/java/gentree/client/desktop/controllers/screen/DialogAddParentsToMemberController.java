@@ -28,6 +28,7 @@ import lombok.extern.log4j.Log4j2;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 20/07/2017.
@@ -171,9 +172,10 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
      * @return
      */
     private List<Member> generateList(Member member, Gender gender) {
-        ObservableList<Member> list = context.getService().getCurrentFamily().getMembers()
-                .filtered(m -> !m.equals(member))
-                .filtered(m -> m.getGender() != gender);
+        List<Member> list = context.getService().getCurrentFamily().getMembers().stream()
+                .filter(m -> !m.equals(member))
+                .filter(m -> m.getGender() != gender)
+                .collect(Collectors.toList());
 
         /*
             Protection to not set my child as my parent
@@ -188,7 +190,7 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
             Relation born = context.getService().getCurrentFamily().findBornRelation(member);
 
             for (Member sibling : born.getChildren()) {
-                list = list.filtered(p -> !p.equals(sibling));
+                list = list.stream().filter(p -> !p.equals(sibling)).collect(Collectors.toList());
             }
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -198,18 +200,19 @@ public class DialogAddParentsToMemberController implements Initializable, FXMLCo
     }
 
 
-    private ObservableList<Member> removeDescends(ObservableList<Member> list, Member m) {
+    private List<Member> removeDescends(List<Member> list, Member m) {
         /*
             Find relations that M is father or mother
          */
         List<Relation> relations = context.getService().getCurrentFamily().getRelations()
-                .filtered(p -> (p.getRight() != null && p.getRight().equals(m))
-                        || (p.getLeft() != null && p.getLeft().equals(m)));
+                .stream()
+                .filter(p -> (p.getRight() != null && p.getRight().equals(m))
+                        || (p.getLeft() != null && p.getLeft().equals(m))).collect(Collectors.toList());
 
         for (Relation r : relations) {
             if (r.getChildren() != null && r.getChildren().size() > 0) {
                 for (Member child : r.getChildren()) {
-                    list = list.filtered(q -> !q.equals(child));
+                    list = list.stream().filter(q -> !q.equals(child)).collect(Collectors.toList());
                     removeDescends(list, child);
                 }
             }

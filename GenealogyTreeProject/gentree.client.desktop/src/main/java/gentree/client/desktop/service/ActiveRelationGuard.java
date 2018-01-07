@@ -52,13 +52,13 @@ public class ActiveRelationGuard implements Observer {
             LogMessages.printHeader(log, LogMessages.MSG_LABEL_UPDATE_GUARD);
             log.info(LogMessages.MSG_RELATION_ADDED_CAUSE, relation);
             log.info(LogMessages.DELIMITER_MIDDLE);
-            relations
-                    .filtered(r -> !Objects.equals(r, relation))
-                    .filtered(r -> r.getLeft() != null)
-                    .filtered(r -> r.getRight() != null)
-                    .filtered(r -> r.getType() != RelationType.NEUTRAL)
-                    .filtered(r -> (r.getRight().equals(relation.getRight()) || r.getLeft().equals(relation.getLeft())))
-                    .filtered(r -> !r.equals(relation))
+            relations.stream()
+                    .filter(r -> !Objects.equals(r, relation))
+                    .filter(r -> r.getLeft() != null)
+                    .filter(r -> r.getRight() != null)
+                    .filter(r -> r.getType() != RelationType.NEUTRAL)
+                    .filter(r -> (r.getRight().equals(relation.getRight()) || r.getLeft().equals(relation.getLeft())))
+                    .filter(r -> !r.equals(relation))
                     .forEach(r ->  {
                         r.setActive(false);
                         log.info(LogMessages.MSG_RELATION_UPDATE, r.getId());

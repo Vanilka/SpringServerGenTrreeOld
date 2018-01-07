@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 /**
@@ -79,7 +80,9 @@ public class Family implements Serializable {
     }
 
     public Relation findBornRelation(Member m) throws NotUniqueBornRelationException {
-        List<Relation> list = relations.filtered(relation -> relation.getChildren().contains(m));
+        List<Relation> list = relations.stream()
+                .filter(relation -> relation.getChildren().contains(m))
+                .collect(Collectors.toList());
 
         if (list.isEmpty()) {
             return null;
@@ -128,7 +131,10 @@ public class Family implements Serializable {
     public boolean isDescOf(Member grain, Member sim) {
         if (grain == null || sim == null) return false;
 
-        List<Relation> list = relations.filtered(r -> r.compareLeft(grain) || r.compareRight(grain));
+        List<Relation> list = relations
+                .stream()
+                .filter(r -> r.compareLeft(grain) || r.compareRight(grain))
+                .collect(Collectors.toList());
 
         for (Relation r : list) {
             if (r.getChildren().contains(sim)) return true;

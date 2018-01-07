@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 06/07/2017.
@@ -76,8 +77,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
      */
     private void populateChild(PanelChild panelChild) {
         List<Relation> relationsList = context.getService().getCurrentFamily().getRelations()
-                .filtered(r -> (r.getLeft() != null && r.getLeft().equals(panelChild.getMember()))
-                        || (r.getRight() != null && r.getRight().equals(panelChild.getMember())));
+                .stream()
+                .filter(r -> (r.getLeft() != null && r.getLeft().equals(panelChild.getMember()))
+                        || (r.getRight() != null && r.getRight().equals(panelChild.getMember())))
+                .collect(Collectors.toList());
 
 
         /*
@@ -130,8 +133,10 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
     private List<FamilyGroup> findGroups() {
         List<FamilyGroup> result = new ArrayList<>();
         List<Relation> rootList = context.getService().getCurrentFamily().getRelations()
-                .filtered(r -> r.getLeft() == null)
-                .filtered(r -> r.getRight() == null);
+                .stream()
+                .filter(r -> r.getLeft() == null)
+                .filter(r -> r.getRight() == null)
+                .collect(Collectors.toList());
 
 
         if (!rootList.isEmpty()) rootList.forEach(root ->
@@ -152,8 +157,8 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
         if (root.getChildren().size() > 1) return true;
         Member rootSim = root.getChildren().get(0);
 
-        List<Relation> relations = context.getService().getCurrentFamily().getRelations()
-                .filtered(relation -> Objects.equals(relation.getLeft(), rootSim) || Objects.equals(relation.getRight(), rootSim));
+        List<Relation> relations = context.getService().getCurrentFamily().getRelations().stream()
+                .filter(relation -> Objects.equals(relation.getLeft(), rootSim) || Objects.equals(relation.getRight(), rootSim)).collect(Collectors.toList());
 
         if (relations.isEmpty()) return true;
         if (relations.size() > 1) return true;
@@ -261,7 +266,8 @@ public class GenTreeDrawingServiceImpl implements GenTreeDrawingService {
 
         nodeCounter = 1;
         List<Relation> list = context.getService().getCurrentFamily().getRelations()
-                .filtered(r -> r.getReferenceNumber() > 0);
+                .stream()
+                .filter(r -> r.getReferenceNumber() > 0).collect(Collectors.toList());
         list.forEach(r -> r.setReferenceNumber(null));
         idReference = 0L;
         System.gc();

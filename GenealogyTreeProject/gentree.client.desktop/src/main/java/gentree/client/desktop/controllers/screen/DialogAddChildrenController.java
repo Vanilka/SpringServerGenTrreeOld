@@ -30,6 +30,7 @@ import lombok.extern.log4j.Log4j2;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Created by Martyna SZYMKOWIAK on 07/08/2017.
@@ -130,12 +131,13 @@ public class DialogAddChildrenController implements Initializable, FXMLControlle
     }
 
     private List<Member> generateList() {
-        return context.getService().findAllRootMembers()
-                .filtered(c -> !c.equals(relation.get().getLeft()))
-                .filtered(c -> !c.equals(relation.get().getRight()))
-                .filtered(c -> !childrenList.contains(c))
-                .filtered(c -> !isAscOf(relation.get().getLeft(), c))
-                .filtered(c -> !isAscOf(relation.get().getRight(), c));
+        return context.getService().findAllRootMembers().stream()
+                .filter(c -> !c.equals(relation.get().getLeft()))
+                .filter(c -> !c.equals(relation.get().getRight()))
+                .filter(c -> !childrenList.contains(c))
+                .filter(c -> !isAscOf(relation.get().getLeft(), c))
+                .filter(c -> !isAscOf(relation.get().getRight(), c))
+                .collect(Collectors.toList());
     }
 
     /**
