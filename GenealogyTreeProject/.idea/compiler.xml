@@ -10,32 +10,45 @@
         <module name="gentree.client.desktop" />
         <module name="gentree.client.desktop.context" />
         <module name="gentree.client.desktop.domain" />
-        <module name="gentree.client.visualization" />
-        <module name="gentree.client.visualization.elements" />
+        <module name="gentree.client.visualization.elements.default" />
+        <module name="gentree.client.visualization.elements.gustave" />
+        <module name="gentree.client.visualization.gentree.client.visualization.elements.default" />
         <module name="gentree.client.visualization.gustave" />
         <module name="gentree.client.visualization.vanilla" />
+        <module name="gentree.common.configuration" />
         <module name="gentree.exceptions" />
+        <module name="gentree.server.configuration" />
+        <module name="gentree.server.dispatcher" />
+        <module name="gentree.server.dto" />
+        <module name="gentree.server.entity" />
+        <module name="gentree.server.facade" />
+        <module name="gentree.server.manager.db" />
+        <module name="gentree.server.repository" />
+        <module name="gentree.server.service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="GenealogyTreeProject" target="1.8" />
+      <module name="gentree" target="1.8" />
       <module name="gentree.client.desktop" target="1.8" />
-      <module name="gentree.client.desktop.configuration.common" target="1.8" />
       <module name="gentree.client.desktop.context" target="1.8" />
       <module name="gentree.client.desktop.domain" target="1.8" />
-      <module name="gentree.client.desktop.exception" target="1.8" />
-      <module name="gentree.client.desktop.exception_manager" target="1.8" />
-      <module name="gentree.client.desktop.i]]]" target="1.8" />
-      <module name="gentree.client.desktop.service" target="1.8" />
-      <module name="gentree.client.visualization" target="1.8" />
-      <module name="gentree.client.visualization.core" target="1.8" />
-      <module name="gentree.client.visualization.elements" target="1.8" />
+      <module name="gentree.client.visualization.elements.default" target="1.8" />
+      <module name="gentree.client.visualization.elements.gustave" target="1.8" />
+      <module name="gentree.client.visualization.gentree.client.visualization.elements.default" target="1.8" />
       <module name="gentree.client.visualization.gustave" target="1.8" />
       <module name="gentree.client.visualization.vanilla" target="1.8" />
-      <module name="gentree.client.vizualization.gustave" target="1.8" />
-      <module name="gentree.desktop.client.exceptions" target="1.8" />
+      <module name="gentree.common.configuration" target="1.8" />
       <module name="gentree.exceptions" target="1.8" />
-      <module name="gentree.visualization.gustave" target="1.8" />
+      <module name="gentree.server.configuration" target="1.8" />
+      <module name="gentree.server.configuration.dto" target="1.8" />
+      <module name="gentree.server.dispatcher" target="1.8" />
+      <module name="gentree.server.dto" target="1.8" />
+      <module name="gentree.server.entity" target="1.8" />
+      <module name="gentree.server.facade" target="1.8" />
+      <module name="gentree.server.manager.db" target="1.8" />
+      <module name="gentree.server.manager.package" target="1.8" />
+      <module name="gentree.server.repository" target="1.8" />
+      <module name="gentree.server.service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

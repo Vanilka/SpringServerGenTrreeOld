@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gentree.server.dispatcher:war">
+    <output-path>$PROJECT_DIR$/gentree.server.dispatcher/target</output-path>
+    <root id="archive" name="gentree.server.dispatcher-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="gentree.server.dispatcher:war exploded" />
+    </root>
+  </artifact>
+</component>

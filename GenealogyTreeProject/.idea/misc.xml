@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/gentree.server.dispatcher" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop/pom.xml" />
         <option value="$PROJECT_DIR$/gentree.client.visualization.vanilla/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/gentree.client.desktop.exception/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.exception_manager/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.i]]]/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.desktop.service/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.visualization.core/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.client.vizualization.gustave/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.desktop.client.exceptions/pom.xml" />
-        <option value="$PROJECT_DIR$/gentree.visualization.gustave/pom.xml" />
+        <option value="$PROJECT_DIR$/gentree.server.configuration.dto/pom.xml" />
+        <option value="$PROJECT_DIR$/gentree.server.manager.package/pom.xml" />
       </set>
     </option>
   </component>
