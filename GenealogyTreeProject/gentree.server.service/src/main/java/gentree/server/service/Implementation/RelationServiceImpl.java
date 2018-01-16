@@ -1,10 +1,13 @@
 package gentree.server.service.Implementation;
 
+import com.sun.tools.corba.se.idl.constExpr.Equal;
 import gentree.common.configuration.enums.RelationType;
+import gentree.exception.NotExistingRelationException;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.RelationEntity;
 import gentree.server.repository.RelationRepository;
 import gentree.server.service.RelationService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +36,12 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
-    public RelationEntity updateRelation(RelationEntity relation) {
-        return repository.saveAndFlush(relation);
+    public RelationEntity updateRelation(RelationEntity relation) throws NotExistingRelationException {
+        if(!repository.existsById(relation.getId())) throw new NotExistingRelationException();
+        updateOtherRelationToFalse(relation);
+        relation = repository.saveAndFlush(relation);
+        removeOrphans(relation.getFamily().getId());
+        return relation;
     }
 
     @Override
@@ -70,7 +77,7 @@ public class RelationServiceImpl implements RelationService {
     }
 
     @Override
-    public RelationEntity findRelationBysimLeftAndsimRight(MemberEntity simLeft, MemberEntity simRight) {
+    public RelationEntity findRelationBySimLeftAndSimRight(MemberEntity simLeft, MemberEntity simRight) {
         List<RelationEntity> list = repository.findByLeftAndRight(simLeft, simRight);
 
         RelationEntity target;
@@ -87,10 +94,18 @@ public class RelationServiceImpl implements RelationService {
         return target;
     }
 
+    @Override
+    public RelationEntity findRelationById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 
     @Override
     public List<RelationEntity> findAllRelationsByFamilyId(Long id) {
-        return repository.findAllByFamilyId(id);
+        List<RelationEntity> list = repository.findAllByFamilyId(id);
+        list.forEach(element -> {
+            element.getChildren().forEach(Hibernate::initialize);
+        });
+        return list;
     }
 
     @Override
@@ -123,6 +138,7 @@ public class RelationServiceImpl implements RelationService {
         if (entity.isActive() && !Objects.equals(entity.getType(), RelationType.NEUTRAL)) {
             List<RelationEntity> relationList = repository.findAllByFamilyId(entity.getFamily().getId());
             relationList.stream()
+                    .filter(r -> !Objects.equals(entity, r))
                     .filter(r -> r.getLeft() != null && r.getRight() != null && r.getType() != RelationType.NEUTRAL)
                     .filter(r -> r.compareLeft(entity.getLeft())
                             || r.compareLeft(entity.getRight())

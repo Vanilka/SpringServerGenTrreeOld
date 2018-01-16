@@ -1,9 +1,6 @@
 package gentree.server.service;
 
-import gentree.exception.AscendanceViolationException;
-import gentree.exception.IncorrectStatusException;
-import gentree.exception.NotExistingMemberException;
-import gentree.exception.TooManyNullFieldsException;
+import gentree.exception.*;
 import gentree.server.domain.entity.FamilyEntity;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.OwnerEntity;
@@ -27,7 +24,7 @@ public interface ProjectService {
 
     MemberEntity getMemberById(Long id);
 
-    List<RelationEntity> addRelation(RelationEntity relationEntity) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException;
+    List<RelationEntity> addRelation(RelationEntity relationEntity) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException, NotExistingRelationException;
 
     FamilyEntity findFamilyById(Long id);
 
@@ -35,7 +32,7 @@ public interface ProjectService {
 
     List<FamilyEntity> findAllFamiliesByOwner(OwnerEntity owner);
 
-    List<RelationEntity> updateRelation(RelationEntity relationEntity);
+    List<RelationEntity> updateRelation(RelationEntity relationEntity) throws NotExistingRelationException;
 
     RelationEntity deleteRelation(RelationEntity relationEntity);
 

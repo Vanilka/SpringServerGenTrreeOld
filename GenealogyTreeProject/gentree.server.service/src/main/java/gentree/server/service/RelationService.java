@@ -1,5 +1,6 @@
 package gentree.server.service;
 
+import gentree.exception.NotExistingRelationException;
 import gentree.server.domain.entity.MemberEntity;
 import gentree.server.domain.entity.RelationEntity;
 
@@ -12,7 +13,7 @@ public interface RelationService {
 
     RelationEntity addNewRelation(RelationEntity relation);
 
-    RelationEntity updateRelation(RelationEntity relation);
+    RelationEntity updateRelation(RelationEntity relation) throws NotExistingRelationException;
 
     RelationEntity addNewBornRelation(MemberEntity memberEntity);
 
@@ -20,7 +21,9 @@ public interface RelationService {
 
     RelationEntity deleteRelation(RelationEntity relation);
 
-    RelationEntity findRelationBysimLeftAndsimRight(MemberEntity simLeft, MemberEntity simRight);
+    RelationEntity findRelationBySimLeftAndSimRight(MemberEntity simLeft, MemberEntity simRight);
+
+    RelationEntity findRelationById(Long id);
 
     void removeOrphans(Long familyID);
 

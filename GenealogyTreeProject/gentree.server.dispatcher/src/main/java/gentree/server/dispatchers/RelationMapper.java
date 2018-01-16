@@ -53,7 +53,7 @@ public class RelationMapper {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth)
-            throws FamilyAccessDeniedException, TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException {
+            throws FamilyAccessDeniedException, TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException, NotExistingRelationException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.addRelation(relation);
         return new ResponseEntity<>(list, HttpStatus.OK);
@@ -68,7 +68,7 @@ public class RelationMapper {
      * @throws FamilyAccessDeniedException
      */
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public ResponseEntity<List<RelationDTO>> updateRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
+    public ResponseEntity<List<RelationDTO>> updateRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException, NotExistingRelationException {
         if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
         List<RelationDTO> list = familyFacade.updateRelation(relation);
         return new ResponseEntity<>(list, HttpStatus.OK);
