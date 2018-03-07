@@ -41,5 +41,7 @@ public interface FamilyFacade {
     List<RelationDTO> deleteRelation(RelationDTO relationDTO);
 
     MemberDTO getMemberById(Long id);
+
+    FamilyDTO updateFamily(FamilyDTO temp, OwnerDTO ownerDTO);
 }
 

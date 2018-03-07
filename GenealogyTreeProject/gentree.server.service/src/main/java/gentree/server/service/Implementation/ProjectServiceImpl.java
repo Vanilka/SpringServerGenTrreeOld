@@ -62,6 +62,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public FamilyEntity updateFamily(FamilyEntity family) {
+         return familyService.updateFamily( family);
+
+    }
+
+    @Override
     public List<FamilyEntity> findAllFamiliesByOwner(OwnerEntity owner) {
         return familyService.findAllByOwner(owner);
     }

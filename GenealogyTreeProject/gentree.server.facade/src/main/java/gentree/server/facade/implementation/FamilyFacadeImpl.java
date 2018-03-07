@@ -54,6 +54,16 @@ public class FamilyFacadeImpl implements FamilyFacade {
         return converterToDTO.convertPoor(newFamily);
     }
 
+
+    @Override
+    public FamilyDTO updateFamily(FamilyDTO temp, OwnerDTO ownerDTO) {
+        OwnerEntity ownerEntity = ownerService.findOperatorByLogin(ownerDTO.getLogin());
+        FamilyEntity family = converterToEntity.convert(temp);
+        family.setOwner(ownerEntity);
+        family = projectService.updateFamily(family);
+        return converterToDTO.convertPoor(family);
+    }
+
     @Override
     public FamilyDTO findFamilyById(Long id) {
         FamilyEntity result = projectService.findFamilyById(id);
@@ -141,7 +151,8 @@ public class FamilyFacadeImpl implements FamilyFacade {
     public List<RelationDTO> updateRelation(RelationDTO relation) throws NotExistingRelationException {
         RelationEntity relationEntity = converterToEntity.convert(relation);
         List<RelationEntity> list = projectService.updateRelation(relationEntity);
-        return converterToDTO.convertFullRelationList(list);
+        List<RelationDTO> target = converterToDTO.convertFullRelationList(list);
+        return target;
     }
 
     @Override

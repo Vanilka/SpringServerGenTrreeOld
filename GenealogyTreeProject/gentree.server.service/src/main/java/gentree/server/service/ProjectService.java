@@ -36,4 +36,5 @@ public interface ProjectService {
 
     RelationEntity deleteRelation(RelationEntity relationEntity);
 
+    FamilyEntity updateFamily(FamilyEntity family);
 }

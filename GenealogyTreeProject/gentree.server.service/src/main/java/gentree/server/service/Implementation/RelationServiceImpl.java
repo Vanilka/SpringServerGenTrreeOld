@@ -1,6 +1,5 @@
 package gentree.server.service.Implementation;
 
-import com.sun.tools.corba.se.idl.constExpr.Equal;
 import gentree.common.configuration.enums.RelationType;
 import gentree.exception.NotExistingRelationException;
 import gentree.server.domain.entity.MemberEntity;
