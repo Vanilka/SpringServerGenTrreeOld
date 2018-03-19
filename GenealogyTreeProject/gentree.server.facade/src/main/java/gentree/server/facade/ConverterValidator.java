@@ -15,11 +15,6 @@ import javax.annotation.PostConstruct;
 @Component
 public class ConverterValidator {
 
-    @PostConstruct
-    public void hallow() {
-        System.out.println("IM WORKING !");
-    }
-
     @Pointcut("execution(* gentree.server.facade.converter.ConverterToEntity.convert*(..))")
     private void convertionMethod() {
     }

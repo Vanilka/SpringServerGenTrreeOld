@@ -14,6 +14,7 @@ public enum ExceptionCauses {
     ASCENDANCE_VIOLATION("Ascendance violation"),
     DESCENDANCE_VIOLATION("Descendance violation"),
     NOT_EXISTING_MEMBER("Trying to provide non existing member"),
+    NOT_EXISTING_RELATION("Trying to provide non existing relation"),
     TOO_MANY_NULL_FIELDS("Too many null fields");
 
     private String cause;

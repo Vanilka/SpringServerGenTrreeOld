@@ -53,6 +53,7 @@ public class CommonAdvice {
         return new ResponseEntity<ExceptionBean>(exceptionBean, HttpStatus.LOCKED);
     }
 
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionBean> handleException(Exception e) {
         System.out.println("Error Handle");

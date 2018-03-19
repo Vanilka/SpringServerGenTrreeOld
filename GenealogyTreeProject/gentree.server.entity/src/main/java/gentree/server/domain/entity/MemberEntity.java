@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
@@ -156,4 +157,28 @@ public class MemberEntity implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MemberEntity)) return false;
+        MemberEntity that = (MemberEntity) o;
+        return alive == that.alive &&
+                Objects.equals(version, that.version) &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(family, that.family) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(bornname, that.bornname) &&
+                deathCauses == that.deathCauses &&
+                age == that.age &&
+                race == that.race &&
+                gender == that.gender &&
+                Objects.equals(photo, that.photo);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(version, id, family, name, surname, bornname, alive, deathCauses, age, race, gender, photo);
+    }
 }

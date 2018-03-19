@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelationDTO implements Serializable {
+public class RelationDTO implements Serializable, FamilyInjectable {
 
     private static final long serialVersionUID = 6259752712327969219L;
 

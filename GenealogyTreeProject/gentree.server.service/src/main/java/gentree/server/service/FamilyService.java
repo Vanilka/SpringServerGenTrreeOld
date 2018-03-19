@@ -18,4 +18,5 @@ public interface FamilyService {
 
     List<FamilyEntity> findAllByOwner(OwnerEntity owner);
 
+    FamilyEntity updateFamily(FamilyEntity family);
 }

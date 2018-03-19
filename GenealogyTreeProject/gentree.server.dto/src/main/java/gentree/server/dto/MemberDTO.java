@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MemberDTO implements Serializable {
+public class MemberDTO implements Serializable, FamilyInjectable {
 
     private static final long serialVersionUID = 4679095765884538078L;
 

@@ -8,13 +8,7 @@
     <artifactId>gentree</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>gentree.client.desktop</module>
-        <module>gentree.client.desktop.domain</module>
         <module>gentree.exceptions</module>
-        <module>gentree.client.visualization.gustave</module>
-        <module>gentree.client.desktop.context</module>
-        <module>gentree.client.visualization.elements.default</module>
-        <module>gentree.client.visualization.elements.gustave</module>
         <module>gentree.server.dispatcher</module>
         <module>gentree.server.entity</module>
         <module>gentree.server.repository</module>
@@ -37,11 +31,6 @@
             <version>1.16.14</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.2.12</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>

@@ -45,6 +45,13 @@ public class FamilyMapper {
         return new ResponseEntity<FamilyDTO>(family, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ResponseEntity<FamilyDTO> updateFamily(@RequestBody FamilyDTO temp, Authentication auth) {
+        OwnerDTO ownerDTO = ownerFacade.findOwnerByLogin(auth.getName());
+        FamilyDTO family = familyFacade.updateFamily(temp, ownerDTO);
+        return new ResponseEntity<FamilyDTO>(family, HttpStatus.OK);
+    }
+
     /**
      * RETRIEVE ALL FAMILIES OF CONNECTED USER
      *

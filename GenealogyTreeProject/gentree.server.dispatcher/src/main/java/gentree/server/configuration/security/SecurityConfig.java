@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(SecurityPathProperties.PATH_PATTERN_FAMILY).authenticated()
                 .antMatchers(SecurityPathProperties.PATH_PATTERN_MEMBER).authenticated()
                 .antMatchers(SecurityPathProperties.PATH_PATTERN_RELATION).authenticated()
-                .antMatchers("/login/").authenticated()
+                .antMatchers(SecurityPathProperties.PATH_PATTERN_LOGIN).authenticated()
                 .and().httpBasic().realmName(SecurityPathProperties.REALM).authenticationEntryPoint(getBasicAuthEntryPoint())
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);

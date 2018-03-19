@@ -202,7 +202,7 @@ public class ConverterToDTO {
         target.setFamily(convertLazy(source.getFamily()));
         if (source.getLeft() != null) target.setLeft(convertLazy(source.getLeft()));
         if (source.getRight() != null) target.setRight(convertLazy(source.getRight()));
-        if (!source.getChildren().isEmpty()) target.setChildren(convertMemberList(source.getChildren()));
+        if (!(source.getChildren() == null) && !source.getChildren().isEmpty()) target.setChildren(convertMemberList(source.getChildren()));
         return target;
     }
 

@@ -1,9 +1,6 @@
 package gentree.server.facade;
 
-import gentree.exception.AscendanceViolationException;
-import gentree.exception.IncorrectStatusException;
-import gentree.exception.NotExistingMemberException;
-import gentree.exception.TooManyNullFieldsException;
+import gentree.exception.*;
 import gentree.server.dto.*;
 
 import java.util.List;
@@ -37,12 +34,14 @@ public interface FamilyFacade {
     /* ************************************************************
         Relation Gestion
     ************************************************************ */
-    List<RelationDTO> addRelation(RelationDTO relation) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException;
+    List<RelationDTO> addRelation(RelationDTO relation) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException, NotExistingRelationException;
 
-    List<RelationDTO> updateRelation(RelationDTO relation);
+    List<RelationDTO> updateRelation(RelationDTO relation) throws NotExistingRelationException;
 
     List<RelationDTO> deleteRelation(RelationDTO relationDTO);
 
     MemberDTO getMemberById(Long id);
+
+    FamilyDTO updateFamily(FamilyDTO temp, OwnerDTO ownerDTO);
 }
 

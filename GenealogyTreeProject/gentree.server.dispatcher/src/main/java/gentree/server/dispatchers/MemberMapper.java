@@ -99,4 +99,7 @@ public class MemberMapper {
     private boolean isOwnerOf(OwnerExtendedDTO owner, FamilyDTO f) {
         return owner.getFamilyList().stream().filter(family -> Objects.equals(family.getId(), f.getId())).count() > 0;
     }
+
+
+
 }

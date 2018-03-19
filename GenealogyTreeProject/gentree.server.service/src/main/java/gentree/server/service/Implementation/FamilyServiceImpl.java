@@ -35,6 +35,14 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
+    public FamilyEntity updateFamily(FamilyEntity family) {
+        FamilyEntity entity = familyRepository.findFamilyById(family.getId());
+        entity.setName(family.getName());
+        familyRepository.saveAndFlush(entity);
+        return entity;
+    }
+
+    @Override
     public FamilyEntity findFullFamilyById(Long id) {
 
         FamilyEntity entity = familyRepository.findFamilyById(id);
