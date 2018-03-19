@@ -101,8 +101,7 @@ public class RelationEntity implements Serializable {
         this.right = right;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,
-            orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "bornrelation_id", insertable = true, updatable = true)
     public List<MemberEntity> getChildren() {
         return children;
@@ -136,5 +135,22 @@ public class RelationEntity implements Serializable {
         sb.append(", type=").append(type);
         sb.append('}');
         return sb.toString();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RelationEntity)) return false;
+        RelationEntity that = (RelationEntity) o;
+        return Objects.equals(version, that.version) &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(left, that.left) &&
+                Objects.equals(right, that.right);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(version, id, left, right);
     }
 }

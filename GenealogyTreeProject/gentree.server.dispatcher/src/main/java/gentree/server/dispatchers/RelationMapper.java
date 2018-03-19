@@ -54,8 +54,12 @@ public class RelationMapper {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResponseEntity<List<RelationDTO>> addRelation(@RequestBody RelationDTO relation, Authentication auth)
             throws FamilyAccessDeniedException, TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException, NotExistingRelationException {
-        if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
-        List<RelationDTO> list = familyFacade.addRelation(relation);
+        List<RelationDTO> list = null;
+        if (!isOwnerOf(relation, auth)) {
+            throw new FamilyAccessDeniedException();
+        } else {
+           list = familyFacade.addRelation(relation);
+        }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -85,8 +89,12 @@ public class RelationMapper {
      */
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public ResponseEntity<List<RelationDTO>> deleteRelation(@RequestBody RelationDTO relation, Authentication auth) throws FamilyAccessDeniedException {
-        if (!isOwnerOf(relation, auth)) throw new FamilyAccessDeniedException();
-        List<RelationDTO> list = familyFacade.deleteRelation(relation);
+        List<RelationDTO> list = null;
+        if (!isOwnerOf(relation, auth)) {
+            throw new FamilyAccessDeniedException();
+        } else {
+            list = familyFacade.deleteRelation(relation);
+        }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

@@ -10,6 +10,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -36,10 +37,11 @@ public class RelationServiceImpl implements RelationService {
 
     @Override
     public RelationEntity updateRelation(RelationEntity relation) throws NotExistingRelationException {
-        if(!repository.existsById(relation.getId())) throw new NotExistingRelationException();
+        if (!repository.existsById(relation.getId())) throw new NotExistingRelationException();
         updateOtherRelationToFalse(relation);
         relation = repository.saveAndFlush(relation);
-        removeOrphans(relation.getFamily().getId());
+        System.out.println("remove orphans");
+        //removeOrphans(relation.getFamily().getId());
         return relation;
     }
 
@@ -63,17 +65,21 @@ public class RelationServiceImpl implements RelationService {
 
         if (relation != null) {
             if (relation.getChildren() == null || relation.getChildren().isEmpty()) {
+                System.out.println("relation children are null");
                 repository.delete(relation);
+
             } else {
                 relation.setLeft(null);
                 relation.setRight(null);
                 relation.setType(RelationType.NEUTRAL);
-                repository.saveAndFlush(relation);
+                System.out.println("children are not null");
+                repository.save(relation);
             }
         }
-
+        repository.flush();
         return relation;
     }
+
 
     @Override
     public RelationEntity findRelationBySimLeftAndSimRight(MemberEntity simLeft, MemberEntity simRight) {
@@ -85,12 +91,23 @@ public class RelationServiceImpl implements RelationService {
 
         if (list.size() > 1) {
             target = mergingRelationList(list);
-            repository.flush();
+             repository.flush();
         } else {
             target = list.get(0);
+
         }
 
         return target;
+    }
+
+    @Override
+    public void forcedeleteRelation(RelationEntity relation) {
+        relation = repository.findById(relation.getId()).orElse(null);
+
+        if (relation != null) {
+            repository.delete(relation);
+            repository.flush();
+        }
     }
 
     @Override
@@ -113,8 +130,15 @@ public class RelationServiceImpl implements RelationService {
                 .stream()
                 .filter(r -> (r.getLeft() == null || r.getRight() == null))
                 .filter(r -> r.getChildren() == null || r.getChildren().isEmpty()).collect(Collectors.toList());
+        System.out.println(listToDelete);
         repository.deleteAll(listToDelete);
         repository.flush();
+    }
+
+
+    @Override
+    public List<RelationEntity> findBornRelations(MemberEntity child) {
+        return repository.findBornRelatons(child);
     }
 
     private RelationEntity mergingRelationList(List<RelationEntity> mergingList) {
@@ -147,5 +171,8 @@ public class RelationServiceImpl implements RelationService {
         }
     }
 
-
+    @Override
+    public void saveandflush() {
+        repository.flush();
+    }
 }

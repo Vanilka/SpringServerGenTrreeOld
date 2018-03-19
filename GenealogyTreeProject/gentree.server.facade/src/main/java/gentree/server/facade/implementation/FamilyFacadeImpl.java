@@ -143,6 +143,7 @@ public class FamilyFacadeImpl implements FamilyFacade {
     public List<RelationDTO> addRelation(RelationDTO relation) throws TooManyNullFieldsException, AscendanceViolationException, IncorrectStatusException, NotExistingMemberException, NotExistingRelationException {
         RelationEntity relationEntity = converterToEntity.convert(relation);
         List<RelationEntity> list = projectService.addRelation(relationEntity);
+
         List<RelationDTO> target = converterToDTO.convertFullRelationList(list);
         return target;
     }

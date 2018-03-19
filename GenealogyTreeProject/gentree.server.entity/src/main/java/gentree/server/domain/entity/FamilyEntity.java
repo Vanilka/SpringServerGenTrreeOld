@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Martyna SZYMKOWIAK on 18/10/2017.
@@ -53,13 +54,13 @@ public class FamilyEntity implements Serializable {
         return owner;
     }
 
-    @OneToMany(mappedBy = "family", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "family", fetch = FetchType.LAZY)
     public List<MemberEntity> getMembers() {
         return members;
     }
 
 
-    @OneToMany(mappedBy = "family", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "family", fetch = FetchType.LAZY)
     @OrderBy("id")
     public List<RelationEntity> getRelations() {
         return relations;
@@ -78,5 +79,23 @@ public class FamilyEntity implements Serializable {
         sb.append('}');
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FamilyEntity)) return false;
+        FamilyEntity that = (FamilyEntity) o;
+        return Objects.equals(version, that.version) &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(owner, that.owner);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(version, id, name, owner);
+    }
 }
+
 

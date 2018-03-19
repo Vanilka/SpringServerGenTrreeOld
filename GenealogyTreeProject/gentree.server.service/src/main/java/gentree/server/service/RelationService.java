@@ -28,4 +28,9 @@ public interface RelationService {
     void removeOrphans(Long familyID);
 
 
+    List<RelationEntity> findBornRelations(MemberEntity child);
+
+    void saveandflush();
+
+    void forcedeleteRelation(RelationEntity relation);
 }

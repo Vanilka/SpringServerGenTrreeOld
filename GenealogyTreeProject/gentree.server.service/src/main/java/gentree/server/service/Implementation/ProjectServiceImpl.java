@@ -63,7 +63,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public FamilyEntity updateFamily(FamilyEntity family) {
-         return familyService.updateFamily( family);
+        return familyService.updateFamily(family);
 
     }
 
@@ -131,12 +131,23 @@ public class ProjectServiceImpl implements ProjectService {
 
         relationEntity = setMembersToCorrectPlace(relationEntity);
 
+
+        /*
+            Foreach children
+         */
+        // relationService
+
+
         /*
          * Verify Existing
+         *
          */
+
         RelationEntity existing = relationService.findRelationBySimLeftAndSimRight
                 (relationEntity.getLeft(),
-                relationEntity.getRight());
+                        relationEntity.getRight());
+        // System.out.println("Existing is : " +existing);
+
 
 
         /*
@@ -145,7 +156,7 @@ public class ProjectServiceImpl implements ProjectService {
         RelationEntity target = existing == null ?
                 relationService.addNewRelation(relationEntity) : mergeChildrenAndStatus(existing, relationEntity);
 
-
+        relationService.saveandflush();
         return relationService.findAllRelationsByFamilyId(target.getFamily().getId());
     }
 
@@ -183,14 +194,33 @@ public class ProjectServiceImpl implements ProjectService {
         existing.setActive(candidate.isActive());
 
         if (candidate.getChildren() != null && !candidate.getChildren().isEmpty()) {
-            candidate.getChildren().forEach(child -> {
-                if ((existing.getChildren().stream().filter(c -> Objects.equals(child.getId(), c.getId())).count() == 0))
+            for (MemberEntity child : candidate.getChildren()) {
+                if ((existing.getChildren().stream().noneMatch(c -> Objects.equals(child.getId(), c.getId())))) {
+                    removeChildFromCurrentBornRelationAndRemoveIt(child);
                     existing.getChildren().add(child);
-            });
+                    relationService.saveandflush();
+                }
+            }
+        } else {
         }
+
         return relationService.updateRelation(existing);
 
     }
+
+    private void removeChildFromCurrentBornRelationAndRemoveIt(MemberEntity child) throws NotExistingRelationException {
+        List<RelationEntity> list = relationService.findBornRelations(child);
+        for (RelationEntity relation : list) {
+            if ((relation.getLeft() != null && relation.getRight() != null) || relation.getChildren().size() > 1) {
+                relation.getChildren().remove(child);
+                relationService.updateRelation(relation);
+            } else {
+                relationService.forcedeleteRelation(relation);
+            }
+        }
+        relationService.saveandflush();
+    }
+
 
     private MemberEntity findInList(List<MemberEntity> list, MemberEntity entity) {
         return list.stream().filter(member -> Objects.equals(member.getId(), entity.getId())).findAny().orElse(null);
@@ -199,8 +229,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     protected RelationEntity setMembersToCorrectPlace(RelationEntity relationEntity) {
 
-        MemberEntity candidateLeft = memberService.findMemberById(relationEntity.getLeft().getId());
-        MemberEntity candidateRight = memberService.findMemberById(relationEntity.getRight().getId());
+        MemberEntity candidateLeft = relationEntity.getLeft() == null ? null : memberService.findMemberById(relationEntity.getLeft().getId());
+        MemberEntity candidateRight = relationEntity.getRight() == null ? null : memberService.findMemberById(relationEntity.getRight().getId());
 
 
         if (candidateLeft == null || candidateRight == null) {
@@ -227,7 +257,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return relationEntity;
     }
-
 
 
 }
