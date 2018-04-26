@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/base/gentree.v4.base.iml" filepath="$PROJECT_DIR$/base/gentree.v4.base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/gentree.v4.common.iml" filepath="$PROJECT_DIR$/common/gentree.v4.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/domain/gentree.v4.domain.iml" filepath="$PROJECT_DIR$/domain/gentree.v4.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gentree.v4.project.iml" filepath="$PROJECT_DIR$/gentree.v4.project.iml" />
+    </modules>
+  </component>
+</project>
